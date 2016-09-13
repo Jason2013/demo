@@ -1,0 +1,10 @@
+add_executable(case04
+    main.cpp
+    Tests.h
+    Tests.cpp
+    TestBase.h
+    Test1.h
+    Test1.cpp
+    Test2.h
+    Test2.cpp
+)
