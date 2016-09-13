@@ -24,7 +24,7 @@
     <ClCompile Include="Test2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tests.cpp">
+    <ClCompile Include="BenchApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,10 +35,10 @@
     <ClInclude Include="Test2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TestBase.h">
+    <ClInclude Include="BaseTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tests.h">
+    <ClInclude Include="BenchApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

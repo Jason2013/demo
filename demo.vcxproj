@@ -97,16 +97,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BenchApp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Test1.cpp" />
     <ClCompile Include="Test2.cpp" />
-    <ClCompile Include="Tests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseTest.h" />
+    <ClInclude Include="BenchApp.h" />
     <ClInclude Include="Test1.h" />
     <ClInclude Include="Test2.h" />
-    <ClInclude Include="TestBase.h" />
-    <ClInclude Include="Tests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

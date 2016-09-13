@@ -1,20 +1,18 @@
 #include <iostream>
 #include <memory>
-#include "Tests.h"
-#include "TestBase.h"
+#include "BenchApp.h"
+#include "BaseTest.h"
 
 int main()
 {
-    auto& factories = Tests::instance()->getNames();
+    auto& factories = GetBenchApp()->getTestFactories();
 
-    std::cout << factories.size() << std::endl;
-    for (auto & name : factories)
+    std::cout << "test count = " << factories.size() << std::endl;
+    for (auto & item : factories)
     {
-        std::cout << name.first << std::endl;
+        std::cout << "test name = " << item.first << std::endl;
+        std::unique_ptr<BaseTest> pt(item.second());
     }
-
-    std::unique_ptr<TestBase> p1(factories["Test1"]());
-    std::unique_ptr<TestBase> p2(factories["Test2"]());
 
     return 0;
 }
