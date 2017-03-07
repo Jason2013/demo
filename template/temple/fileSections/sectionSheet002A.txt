@@ -1,0 +1,60 @@
+ <Worksheet ss:Name="Cross-API_Comparison">
+  <Table ss:ExpandedColumnCount="%d" ss:ExpandedRowCount="%010d" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s63" ss:DefaultRowHeight="15">
+   <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="63"/>
+   <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="273"/>
+   <Column ss:StyleID="s63" ss:Hidden="1" ss:AutoFitWidth="0" ss:Span="2"/>
+   <Column ss:Index="6" ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="63"
+    ss:Span="5"/>
+   <Row ss:StyleID="Default">
+    <Cell ss:StyleID="s84"/>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s84"/>
+    <Cell ss:StyleID="s84"/>
+    <Cell ss:StyleID="s84"/>
+    <Cell ss:StyleID="s84"/>
+    <Cell ss:StyleID="s84"/>
+    <Cell ss:StyleID="s84"/>
+    <Cell ss:StyleID="s84"/>
+    <Cell ss:StyleID="s84"/>
+    <Cell ss:StyleID="s84"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="45" ss:StyleID="Default">
+    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s89"><Data ss:Type="String">API</Data></Cell>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s87"><Data ss:Type="String">DX11</Data></Cell>
+    <Cell ss:StyleID="s87"><Data ss:Type="String">DX12&#10;vs&#10;DX11</Data></Cell>
+    <Cell ss:StyleID="s87"><Data ss:Type="String">DX12</Data></Cell>
+    <Cell ss:StyleID="s87"><Data ss:Type="String">Vulkan&#10;vs&#10;DX12</Data></Cell>
+    <Cell ss:StyleID="s87"><Data ss:Type="String">Vulkan</Data></Cell>
+    <Cell ss:StyleID="s87"><Data ss:Type="String">Vulkan&#10;vs&#10;DX11</Data></Cell>
+   </Row>
+   <Row ss:StyleID="Default">
+    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s89"><Data ss:Type="String">Driver</Data></Cell>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s88"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s88"/>
+    <Cell ss:StyleID="s88"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s88"/>
+    <Cell ss:StyleID="s88"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s88"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="0" ss:Hidden="1" ss:StyleID="Default">
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+   </Row>

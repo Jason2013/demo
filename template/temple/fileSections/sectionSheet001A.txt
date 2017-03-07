@@ -1,0 +1,167 @@
+ <Worksheet ss:Name="%s">
+  <Table ss:ExpandedColumnCount="12" ss:ExpandedRowCount="%010d" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s63" ss:DefaultRowHeight="15">
+   <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="78.75"/>
+   <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="262.5"/>
+   <Column ss:StyleID="s63" ss:Hidden="1" ss:AutoFitWidth="0" ss:Span="2"/>
+   <Column ss:Index="6" ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="120.75"/>
+   <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="52.5"/>
+   <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="120.75"/>
+   <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="52.5"/>
+   <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="120.75"/>
+   <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="52.5"/>
+   <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="120.75"/>
+   <Row ss:StyleID="Default">
+    <Cell ss:StyleID="s73"/>
+    <Cell ss:StyleID="s73"/>
+    <Cell ss:StyleID="s62"/>
+    <Cell ss:StyleID="s62"/>
+    <Cell ss:StyleID="s62"/>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Current</Data></Cell>
+    <Cell ss:StyleID="s62"/>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Previous1</Data></Cell>
+    <Cell ss:StyleID="s62"/>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Previous2</Data></Cell>
+    <Cell ss:StyleID="s62"/>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Previous3</Data></Cell>
+   </Row>
+   <Row ss:StyleID="Default">
+    <Cell ss:StyleID="s75"/>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">Base Driver Version</Data></Cell>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+   </Row>
+   <Row ss:StyleID="Default">
+    <Cell ss:StyleID="s75"/>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">Base Driver Date</Data></Cell>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s66"/>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"/>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"/>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"/>
+   </Row>
+   <Row ss:StyleID="Default">
+    <Cell ss:StyleID="s75"/>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">Date</Data></Cell>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+   </Row>
+   <Row ss:StyleID="Default">
+    <Cell ss:StyleID="s75"/>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">Time</Data></Cell>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+   </Row>
+   <Row ss:StyleID="Default">
+    <Cell ss:StyleID="s75"/>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">GPU Core Clock</Data></Cell>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s68"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s68"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s68"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+   </Row>
+   <Row ss:StyleID="Default">
+    <Cell ss:StyleID="s75"/>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">GPU Memory Clock</Data></Cell>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">vs</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">vs</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">vs</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+   </Row>
+   <Row ss:StyleID="Default">
+    <Cell ss:StyleID="s75"/>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">GPU Memory</Data></Cell>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">Previous1</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">Previous2</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">Previous3</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+   </Row>
+   <Row ss:StyleID="Default">
+    <Cell ss:StyleID="s75"/>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">CPU</Data></Cell>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+   </Row>
+   <Row ss:StyleID="Default">
+    <Cell ss:StyleID="s75"/>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">Staging Build</Data></Cell>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s66"/>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"/>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"/>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"/>
+   </Row>
+   <Row ss:StyleID="Default">
+    <Cell ss:StyleID="s75"/>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">Driver</Data></Cell>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">%s</Data></Cell>
+   </Row>

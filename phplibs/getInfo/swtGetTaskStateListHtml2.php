@@ -1,0 +1,141 @@
+<?php
+
+include_once "../generalLibs/dopdo.php";
+include_once "../configuration/swtMISConst.php";
+include_once "../configuration/swtConfig.php";
+include_once "../generalLibs/genfuncs.php";
+include_once "../generalLibs/code01.php";
+
+//$dayBack = intval($_POST["dayBack"]);
+$pageID = intval($_POST["pageID"]);
+$reportType = intval($_POST["reportType"]);
+$pageItemNum = 20;
+//$allReportsDir = "../allReports";
+
+$returnMsg = array();
+$returnMsg["htmlCode"] = "";
+
+$db = new CPdoMySQL();
+
+if ($db->getError() != null)
+{
+    $returnMsg["errorCode"] = 0;
+    $returnMsg["errorMsg"] = "can't reach mysql server";
+    echo json_encode($returnMsg);
+    return;
+}
+
+$params1 = array();
+$sql1 = "SELECT COUNT(*) " .
+        "FROM mis_table_batch_list ";
+if ($db->QueryDB($sql1, $params1) == null)
+{
+    $returnMsg["errorCode"] = 0;
+    $returnMsg["errorMsg"] = "query mysql table failed #1, line: " . __LINE__;
+    echo json_encode($returnMsg);
+    return;
+}
+$row1 = $db->fetchRow();
+if ($row1 == false)
+{
+    $returnMsg["errorCode"] = 0;
+    $returnMsg["errorMsg"] = "query mysql table failed #1, line: " . __LINE__;
+    echo json_encode($returnMsg);
+    return;
+}
+$batchNum = $row1[0];
+
+$itemStart = $pageID * $pageItemNum;
+$itemEnd = $itemStart + $pageItemNum;
+$itemEnd = $itemEnd > $batchNum ? $batchNum : $itemEnd;
+//$itemStart = intval($itemEnd / $pageItemNum) * $pageItemNum;
+
+$params1 = array($itemStart, ($itemEnd - $itemStart));
+$sql1 = "";
+if ($reportType == 0)
+{
+    $sql1 = "SELECT t0.*, t1.path_name " .
+            "FROM mis_table_batch_list t0 " .
+            "LEFT JOIN mis_table_path_info t1 " .
+            "USING (path_id) " .
+            "ORDER BY t0.insert_time DESC LIMIT ?, ?";
+}
+else if ($reportType == 1)
+{
+    $params1 = array();
+    $sql1 = "SELECT t0.*, t1.path_name " .
+            "FROM mis_table_batch_list t0 " .
+            "LEFT JOIN mis_table_path_info t1 " .
+            "USING (path_id) " .
+            "ORDER BY t0.insert_time ASC";
+}
+if ($db->QueryDB($sql1, $params1) == null)
+{
+    $returnMsg["errorCode"] = 0;
+    $returnMsg["errorMsg"] = "query mysql table failed #1, line: " . __LINE__ . ", itemStart: " . $itemStart;
+    echo json_encode($returnMsg);
+    return;
+}
+
+$batchIDList = array();
+$batchInsertTimeList = array();
+$batchStateList = array();
+$batchStateNameList = array();
+$logPathNameList = array();
+
+while ($row1 = $db->fetchRow())
+{
+    array_push($batchIDList, $row1[0]);
+    array_push($batchInsertTimeList, $row1[1]);
+    array_push($batchStateList, $row1[2]);
+    array_push($logPathNameList, $row1[5]);
+    $t1 = "not clear";
+    if ($row1[2] < count($swtTestBatchStateString))
+    {
+        $t1 = $swtTestBatchStateString[$row1[2]];
+    }
+    array_push($batchStateNameList, $t1);
+}
+
+if (count($batchIDList) == 0)
+{
+    $returnMsg["errorCode"] = 2;
+    $returnMsg["errorMsg"] = "no records found";
+    $returnMsg["batchNum"] = $batchNum;
+    $returnMsg["itemStart"] = $itemStart;
+    $returnMsg["itemEnd"] = $itemEnd;
+    echo json_encode($returnMsg);
+    return;
+}
+
+$batchHasReportList = array();
+foreach ($batchIDList as $tmpID)
+{
+    $t1 = $allReportsDir . "/batch" . $tmpID;
+    if (file_exists($t1))
+    {
+        array_push($batchHasReportList, 1);
+    }
+    else
+    {
+        array_push($batchHasReportList, 0);
+    }
+}
+
+$returnMsg["errorCode"] = 1;
+$returnMsg["errorMsg"] = "query success";
+//$returnMsg["htmlCode"] = $htmlCode;
+$returnMsg["batchIDList"] = $batchIDList;
+$returnMsg["batchHasReportList"] = $batchHasReportList;
+$returnMsg["batchNum"] = $batchNum;
+$returnMsg["itemStart"] = $itemStart;
+$returnMsg["itemEnd"] = $itemEnd;
+$returnMsg["pageItemNum"] = $pageItemNum;
+$returnMsg["batchInsertTimeList"] = $batchInsertTimeList;
+$returnMsg["batchStateList"] = $batchStateList;
+$returnMsg["batchStateNameList"] = $batchStateNameList;
+$returnMsg["logPathNameList"] = $logPathNameList;
+
+echo json_encode($returnMsg);
+
+?>

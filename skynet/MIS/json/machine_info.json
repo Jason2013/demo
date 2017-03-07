@@ -1,0 +1,12 @@
+{
+"machineName":   "rokeyTestMachine001",
+"videoCardName": "Baffin XT",
+"cpuName":       "Intel Core i7 6700",
+"systemName":    "Win10 64 bit",
+"memoryName":    "16 GB",
+"chipsetName":   "B85-PRO GAMER",
+"mainLineName":  "16.20",
+"sClockName":    "1000",
+"mClockName":    "1500",
+"gpuMemName":    "4GB/GDDR5"
+}

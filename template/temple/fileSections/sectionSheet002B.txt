@@ -1,0 +1,36 @@
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.30000000000000004"/>
+    <Footer x:Margin="0.30000000000000004"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.70000000000000007"
+     x:Right="0.70000000000000007" x:Top="0.75"/>
+   </PageSetup>
+   <Print>
+    <FitWidth>0</FitWidth>
+    <FitHeight>0</FitHeight>
+    <ValidPrinterInfo/>
+    <PaperSizeIndex>0</PaperSizeIndex>
+    <NoOrientation/>
+    <VerticalResolution>0</VerticalResolution>
+    <NumberofCopies>0</NumberofCopies>
+   </Print>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <ConditionalFormatting xmlns="urn:schemas-microsoft-com:office:excel">
+   <Range>R6C7:R1000000C7,R6C9:R1000000C9,R6C11:R1000000C11</Range>
+   <Condition>
+    <Qualifier>LessOrEqual</Qualifier>
+    <Value1>-0.03</Value1>
+    <Format Style='color:windowtext;font-weight:700;background:red;mso-pattern:
+     black none'/>
+   </Condition>
+   <Condition>
+    <Qualifier>Between</Qualifier>
+    <Value1>0.03</Value1>
+    <Value2>1000</Value2>
+    <Format Style='background:lime;mso-pattern:black none'/>
+   </Condition>
+  </ConditionalFormatting>
+ </Worksheet>

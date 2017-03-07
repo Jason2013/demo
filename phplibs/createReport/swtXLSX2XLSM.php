@@ -1,0 +1,184 @@
+<?php
+
+include_once "../configuration/swtConfig.php";
+include_once "../generalLibs/genfuncs.php";
+
+$batchID = intval($_POST["batchID"]);
+$fileID = intval($_POST["fileID"]);
+$reportType = intval($_POST["reportType"]);
+$curReportFolder = intval($_POST["curReportFolder"]);
+
+$returnMsg = array();
+$returnMsg["errorCode"] = 1;
+$returnMsg["errorMsg"] = "convert report success";
+
+$reportFolder = $allReportsDir . "/batch" . $batchID;
+if ($reportType == 0)
+{
+    $curReportFolder = sprintf("%05d", $curReportFolder);
+    $batchFolder = $downloadReportDir . "/batch" . $batchID;
+
+    $reportFolder = $batchFolder . "/" . $curReportFolder;
+}
+$returnMsg["reportFolder"] = $reportFolder;
+$oldReportXLSXList = glob($reportFolder . "/*.xlsx");
+$oldReportXMLList = glob($reportFolder . "/*.xml");
+
+if ($fileID < count($oldReportXLSXList))
+{
+    // zip one by one file
+    $tmpPath = $oldReportXLSXList[$fileID];
+    $n1 = strlen($tmpPath);
+    $t1 = substr($tmpPath, 0, $n1 - 4);
+    //$filename = $t1 . "xlsx";
+    $filename2 = $t1 . "xlsm";
+    
+    $tmpFileName = basename($tmpPath);
+    $tmpFileNameSection = explode("_", $tmpFileName);
+    $tmpCardName = "";
+    $tmpSysName = "";
+    if (count($tmpFileNameSection) >= 2)
+    {
+        $tmpCardName = $tmpFileNameSection[0];
+        $tmpSysName = $tmpFileNameSection[1];
+    }
+
+    $tmpVBAConfigPath = $reportFolder . "/" . $tmpFileNameSection[0] .
+                        "_" . $tmpFileNameSection[1] . "/" . $swtTempVBAConfigJsonName;
+    $tmpVBAPath = $reportFolder . "/" . $swtTempVBAName;
+    
+    $isFlatData = strpos($tmpFileName, "(FlatData)");
+    if ($isFlatData !== false)
+    {
+        // flat data
+        try
+        {
+            $excel = new COM("Excel.Application");
+            
+            $workBook = $excel->WorkBooks->Open("" . __dir__ . "/" . $tmpPath);
+            
+            $t2 = file_get_contents("../../vbaLibs/flatData01.vba");
+            
+            file_put_contents($tmpVBAPath, $t2);
+            
+            $workBook->VBProject->VBComponents->Item(1)->CodeModule->AddFromFile(__dir__ . "\\" . $tmpVBAPath);
+            
+            $excel->Run("ThisWorkbook.flatData01");
+            
+            $excel->ActiveWorkbook->Sheets(1)->Activate();
+            
+            $excel->ActiveWorkbook->SaveAs("" . __dir__ . "/" . $filename2, 52);
+            $excel->ActiveWorkbook->Close();
+
+            $excel->WorkBooks->Close();
+            $excel->Quit();
+            
+            unlink($tmpVBAPath);
+
+        }
+        catch (Exception $e)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = $e->getMessage();
+            
+            echo json_encode($returnMsg);
+            return;
+        }
+    }
+    else
+    {
+        // main report
+        try
+        {
+            //echo $tmpVBAConfigPath;
+            if (file_exists($tmpVBAConfigPath))
+            {
+                // add graph
+                $excel = new COM("Excel.Application");
+                
+                $workBook = $excel->WorkBooks->Open("" . __dir__ . "/" . $tmpPath);
+                
+                $t1 = file_get_contents($tmpVBAConfigPath);
+                $vbaConfig = json_decode($t1);
+                
+                $t2 = file_get_contents("../../vbaLibs/createGraph01.vba");
+                
+                $tmpArea = explode(",", $vbaConfig->graphDataArea);
+                
+                $tmpRange = array();
+                $t4 = "";
+                if (count($tmpArea) == 1)
+                {
+                    $t4 = "destSheet.Range(\"" . $tmpArea[0] . "\")";
+                }
+                else
+                {
+                    for ($i = 0; $i < count($tmpArea); $i++)
+                    {
+                        $t3 = "destSheet.Range(\"" . $tmpArea[$i] . "\")";
+                        array_push($tmpRange, $t3);
+                    }
+                    $t4 = implode(",", $tmpRange);
+                    $t4 = "Application.Union(" . $t4 . ")";
+                }
+                // $vbaConfig->graphDataArea
+                $t2 = sprintf($t2, $t4, $tmpCardName);
+                file_put_contents($tmpVBAPath, $t2);
+                
+                $workBook->VBProject->VBComponents->Item(1)->CodeModule->AddFromFile(__dir__ . "\\" . $tmpVBAPath);
+                
+                $excel->Run("ThisWorkbook.createGraph01");
+                
+                $excel->ActiveWorkbook->Sheets(1)->Activate();
+                
+                $excel->ActiveWorkbook->SaveAs("" . __dir__ . "/" . $filename2, 52);
+                $excel->ActiveWorkbook->Close();
+
+                $excel->WorkBooks->Close();
+                $excel->Quit();
+                
+                unlink($tmpVBAConfigPath);
+                unlink($tmpVBAPath);
+            }
+        }
+        catch (Exception $e)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = $e->getMessage();
+            
+            echo json_encode($returnMsg);
+            return;
+        }
+    }
+    
+    $returnMsg["errorCode"] = 2;
+    $returnMsg["errorMsg"] = "generating Graphs: (" . ($fileID + 1) . " / " . count($oldReportXLSXList) . ")";
+}
+
+if (($fileID + 1) >= count($oldReportXLSXList))
+{
+    foreach ($oldReportXLSXList as $tmpPath)
+    {
+        unlink($tmpPath);
+    }
+    
+    $tmpFolderList = glob($reportFolder . "/*");
+    foreach ($tmpFolderList as $tmpPath)
+    {
+        if (is_dir($tmpPath))
+        {
+            // delete temp runlog.txt
+            swtDelFileTree($tmpPath);
+        }
+    }
+    
+    // zip finished
+    $returnMsg["errorCode"] = 1;
+    $returnMsg["errorMsg"] = "convert report success";
+    
+}
+
+echo json_encode($returnMsg);
+return;
+
+?>

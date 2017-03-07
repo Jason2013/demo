@@ -1,0 +1,123 @@
+body { text-align: center; background-size: 100%; background-color: #e0e0e0; }
+/*
+body { text-align: center; background: url(../images/bg01.jpg) top center; background-repeat: repeat-y; background-size: 100%; }
+*/
+
+
+a:link{text-decoration:none ; color:#303030;}
+a:visited {text-decoration:none ; color:#303030;}
+a:hover {text-decoration:underline ; color:#F0A010;}
+a:active {text-decoration:underline ; color:#F0A010;}
+
+.link01 a:link{text-decoration:none ; color:#E0E0E0;}
+.link01 a:visited {text-decoration:none ; color:#E0E0E0;}
+.link01 a:hover {text-decoration:none ; color:#FF7F7F;}
+.link01 a:active {text-decoration:none ; color:#FF7F7F;}
+
+.link02 a:link{text-decoration:none ; color:#303030;}
+.link02 a:visited {text-decoration:none ; color:#303030;}
+.link02 a:hover {text-decoration:underline ; color:#000000;}
+.link02 a:active {text-decoration:underline ; color:#000000;}
+
+.link03 a:link{ color: #000000;}
+.link03 a:visited { color: #000000;}
+.link03 a:hover { color: #ffffff;}
+.link03 a:active { color: #ffffff;}
+
+.link04 a:link{ color: #0000ff; font-weight: bold; }
+.link04 a:visited { color: #0000ff; font-weight: bold; }
+.link04 a:hover { color: #0000ff; font-weight: bold; }
+.link04 a:active { color: #0000ff; font-weight: bold; }
+
+.roundCorner { -moz-border-radius: 10px;      /* Gecko browsers */
+               -webkit-border-radius: 10px;   /* Webkit browsers */
+                border-radius: 10px;          /* W3C syntax */
+             }
+             
+.roundCorner01 { -moz-border-radius: 3px;      /* Gecko browsers */
+                 -webkit-border-radius: 3px;   /* Webkit browsers */
+                  border-radius: 3px;          /* W3C syntax */
+               }
+               
+.roundCorner02 { -moz-border-radius: 5px;      /* Gecko browsers */
+                 -webkit-border-radius: 5px;   /* Webkit browsers */
+                  border-radius: 5px;          /* W3C syntax */
+               }
+
+.button01 {color:#303030; background-color: #5050ff; width: 150px; text-align: center; color: #ffffff; cursor: default; }
+.button01:hover {color:#000000; background-color: #8080ff; color: #ffffff; cursor: default; }
+.button01:active {color:#000000; background-color: #0000ff; color: #ffffff; cursor: default; }
+
+.button02 {color:#303030; background-color: #ff5050; width: 150px; text-align: center; color: #ffffff; }
+.button02:hover {color:#000000; background-color: #ff8080; color: #ffffff; }
+.button02:active {color:#000000; background-color: #ff0000; color: #ffffff; }
+
+.button03 {color:#303030; background-color: #30f030; width: 150px; text-align: center; color: #ffffff; }
+.button03:hover {color:#000000; background-color: #60f060; color: #ffffff; }
+.button03:active {color:#000000; background-color: #00f000; color: #ffffff; }
+
+h1, h2 { color: #000000; margin:0; padding: 0 4px 0 4px; font-size: 14px; font-weight: normal; line-height:32px; }
+
+
+.mainBodyFrame { position: relative; margin: 0 auto; width: 100%; min-width: 1420px; min-height: 800px; _height: 800px; font-size: 14px; text-align: left; background-image: url(../images/colorbar01.jpg); background-repeat: repeat-x;}
+.pageTitle { position: relative; margin: 0 auto; width: 100%; min-width: 100%; background-color: #c0c0c0; background-image: url(../images/waterdrops02.jpg); background-repeat: repeat-x; }
+.pageHeader { position: relative; width: 100%; background-image: url(../images/menubar01.jpg); background-repeat: repeat-y; background-size: 100%; min-height: 2px; _height: 2px;}
+.pageHeaderItem { position: relative; width: 120px; padding: 0 8px 0 8px; color: #e0e0e0; min-height: 30px; _height: 30px; line-height: 30px; text-align: center; }
+.pageHeaderItem:hover { background-color: #808080; color: #ffffff; }
+.pageHeaderItem:active { background-color: #808080; color: #ffffff; }
+.pageLeftBar { position: relative; width: 12%; background-color: #f0f0ff; float: left; display:inline; }
+.pageLeftBar2 { position: relative; width: 12%; float: left; display:inline; }
+.pageMiddleSpace { position: relative; width: 0.5%; float: left; display:inline; }
+.pageRightPart { position: relative; width: 86%; padding: 0 8px 0 8px; background-color: #ffffff; float: right; display:inline; }
+.pageArticleTitle { text-align: center; }
+.pageArticleContent { text-align: left; padding: 0 0 0 4px; float: left; word-break: break-all; }
+.pageArticleContent01 { text-align: left; padding: 0 0 0 0; clear: both; }
+.machineItem { position: relative; width: 120px; float: left; display:inline; }
+.machineInfo { position: absolute; display: none; margin:0; padding: 0 0 0 4px; z-index: 999; left: 120px; top: 0px; background-color: #a0a0a0; white-space: nowrap; }
+.machineListInfo { position: absolute; display: none; margin:0; padding: 0 0 0 4px; z-index: 999; left: 120px; top: 0px; background-color: #ffc000; white-space: nowrap; font-size: 16px;}
+.hiddenObj {display: none;}
+.driverSlotTemple01 {font-size: 20px; margin:0; padding: 0 8px 0 8px; background-color: #e0e0e0; }
+.driverSlotTemple02 {font-size: 20px; background-color: #fff000; width: 300px;}
+.driverSlotTemple02a {font-size: 20px; background-color: #fff000; width: 200px;}
+.driverSlotTemple03 {font-size: 20px; color: #ff0000; }
+.driverSlotTemple04 {font-size: 20px; white-space: nowrap; }
+.uploadDialog01 {}
+.pageArticleSubject01 {font-size: 26px; margin:0; padding: 0 8px 0 8px; background-color: #c0c0c0; }
+.pageBottom01 { position: relative; white-space: nowrap; float: left; display:inline; }
+.pageLeftAccordion { width: 100%; padding: 4px 0 4px 0; font-size: 14px; }
+.pageLeftAccordionTitle { padding: 0 0 0 4px; font-size: 18px; line-height: 24px; text-decoration: none; color: #ffffff; clear: both; background-image: url(../images/menubar03.gif); background-repeat: repeat-y; background-size: 100%; white-space: nowrap; cursor: pointer; } /*#404040*/
+.pageLeftAccordionTitle:hover { color: #ffffff; background-image: url(../images/menubar04.gif); background-repeat: repeat-y; background-size: 100%; cursor: pointer; } /*#808080*/
+.pageLeftAccordionTitle:active { color: #ffffff; background-image: url(../images/menubar04.gif); background-repeat: repeat-y; background-size: 100%; cursor: pointer; }
+.pageLeftAccordionBar { padding: 0 0 0 4px; font-size: 18px; line-height: 24px; text-decoration: none; color: #000000; background-color:#c0c0c0; clear: both; cursor: pointer; }
+.pageLeftAccordionBar:hover { background-color: #606060; color: #ffffff; cursor: pointer; }
+.pageLeftAccordionBar:active { background-color: #606060; color: #ffffff; cursor: pointer; }
+.pageLeftAccordionBackGround { background-color:#ffffff; clear: both; }
+.graphMoveButton { float: left; padding: 0 8px 0 8px; }
+.graphMoveCanvas { float: left; }
+.graphMoveCanvasEnd { clear: both; }
+.btnRefreshAll { float: left; margin: 10px 0 0 0; }
+.btnNeedResfresh { position: absolute; z-index: 2000; color: #ff0000; font-size: 20px;}
+.textStyle01 { color: #0000ff; font-weight: bold; }
+.textStyle02 { color: #900090; }
+.textStyle03 { color: #009000; }
+.textStyle04 { background-color: #80f080; width: 120px; }
+.textStyle05 { color: #0000a0; font-size: 18px; text-decoration:underline; }
+.textStyle06 { color: #000000; font-weight: bold; }
+.textStyle07 { color: #c08080; font-weight: bold; }
+.textStyle08 { color: #0000ff; font-weight: bold; }
+.textStyle09 { color: #ff0000; font-weight: bold; }
+.tableCellStyle01 { vertical-align: text-top; }
+.chartContainerFrame {
+    position: relative;
+}
+.chartContainerDownloadLayer {
+    position: absolute;
+    left:     0px;
+    top:      0px;
+    width:    100%;
+    z-index:  10;
+    text-align:  right;
+    font-weight: bold;
+    font-size:   18px;
+}
+

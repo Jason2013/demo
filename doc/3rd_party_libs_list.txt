@@ -1,0 +1,20 @@
+i. canvasjs
+path: \jslibs\canvasjs
+license: For non-commercial purposes you can use the software for free
+
+ii. jpagination
+path: \jslibs\jpagination
+license: This plugin is licensed under the GPL v2
+
+iii. jquery-cookie
+path: \jslibs\jquery-cookie
+license: MIT-LICENSE
+
+iv. jquery-ui
+path: \jslibs\jquery-ui
+license: Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software
+
+v. simple_calendar
+path: \jslibs\simple_calendar
+license: Public Domain
