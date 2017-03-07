@@ -1217,6 +1217,7 @@ class CGenReport
                                     if ($tmpMinRate == 0)
                                     {
                                         $t5 = sprintf("TestCaseId,\tCaseName,\t%s,\t%%,\t%s&#10;" .
+                                                      "&#10;" .
                                                       "%d,\t%s,\t%d,\t%d%%,\t%d",
                                                       $v[$i * 2 + 38], $v[$i * 2 + 37],
                                                       $v[$i * 8 + 17], $v[$i * 8 + 18],
@@ -1226,7 +1227,8 @@ class CGenReport
                                     else if ($tmpMaxRate == 0)
                                     {
                                         $t5 = sprintf("TestCaseId,\tCaseName,\t%s,\t%%,\t%s&#10;" .
-                                                      "%d,\t%s,\t%d,\t%d%%,\t%d",
+                                                      "%d,\t%s,\t%d,\t%d%%,\t%d" .
+                                                      "&#10;",
                                                       $v[$i * 2 + 38], $v[$i * 2 + 37],
                                                       $v[$i * 8 + 13], $v[$i * 8 + 14],
                                                       $v[$i * 8 + 16], $tmpMinRate, $v[$i * 8 + 15]);
