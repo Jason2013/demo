@@ -26,15 +26,4 @@ if %localcl%==%servercl% (
     copy /y ".\*.txt" "..\default"
 )
 
-xcopy /s /e /h /y "\\gfxbench\Skynet\drivers"
-
-xcopy /s /e /h /y "\\gfxbench\Skynet\drivers" "C:\MIS\drivers"
-
-:SetupDriver
-echo "Replacing DXX driver"
-FindGPUDriver64.exe -noPrompt C:\MIS\drivers\atidxx64.dll
-
-echo "Replacing Vulkan driver"
-FindGPUDriver64.exe -noPrompt C:\MIS\drivers\amdvlk64.dll
-
 
