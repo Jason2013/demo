@@ -437,3 +437,13 @@
    <Font ss:FontName="Calibri" x:CharSet="134" ss:Color="#000000" ss:Bold="1"/>
    <Interior ss:Color="#00FF00" ss:Pattern="Solid"/>
   </Style>
+  <Style ss:ID="s100">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:CharSet="134" ss:Color="#969696" ss:Bold="1"/>
+  </Style>

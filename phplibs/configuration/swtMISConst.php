@@ -32,15 +32,29 @@ $swtClientMachineConfigurationNames = array("machineName",
 $swtUmdNameList = array("DX11", "DX12", "Vulkan");
 $swtUmdStandardOrder = array("Vulkan", "DX12", "DX11");
 
+$swtSheetColumnIDList = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", 
+                              "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+                              "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM", 
+                              "AN", "AO", "AP", "AQ", "AR", "AS", "AT", "AU", "AV", "AW", "AX", "AY", "AZ", 
+                              "BA", "BB", "BC", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BK", "BL", "BM",
+                              "BN", "BO", "BP", "BQ", "BR", "BS", "BT", "BU", "BV", "BW", "BX", "BY", "BZ");
+
 define("graphDataStartLineID", "7");
 define("graphDataStartCloumnID", "R");
 define("graphDataEndCloumnID", "U");
+define("graphDataStartCloumnIDIndex", 17);
+define("graphDataEndCloumnIDIndex", 20);
 define("graphDataStartCloumnIDCompare", "AB");
-$graphDataStartCloumnIDCompareList = array("AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM");
 define("graphDataEndCloumnIDCompare", "AH");
+define("graphDataStartCloumnIDCompareIndex", 27);
+define("graphDataEndCloumnIDCompareIndex", 33);
+$graphDataStartCloumnIDCompareList = array("AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM",
+                                           "AN", "AO", "AP", "AQ", "AR", "AS", "AT", "AU", "AV", "AW", "AX", "AY", "AZ",
+                                           "BA", "BB", "BC", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BK", "BL", "BM");
+
 
 $ubuntuCheckWord = "ubuntu";
 
-$swtStartStyleID = 100;
+$swtStartStyleID = 101;
 
 ?>

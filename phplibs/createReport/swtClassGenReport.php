@@ -1138,7 +1138,7 @@ class CGenReport
                         
                         $t1 .= "<Row ss:StyleID=\"Default\">\n";
                         $t1 .= "<Cell ss:MergeDown=\"1\" ss:StyleID=\"s93\"><Data ss:Type=\"String\">" . $k . "</Data></Cell>\n";
-                        $t7 = "<Row ss:StyleID=\"Default\" ss:Height=\"50\">\n";
+                        $t7 = "<Row ss:StyleID=\"Default\" ss:Height=\"30\">\n";
                         $t6 = "<Row ss:StyleID=\"Default\" >\n";
                         $t4 = "";
                         
@@ -1216,33 +1216,33 @@ class CGenReport
                                     // if not even
                                     if ($tmpMinRate == 0)
                                     {
-                                        $t5 = sprintf("TestCaseId,\tCaseName,\t%s,\t%%,\t%s&#10;" .
+                                        $t5 = sprintf(//"TestCaseId,\tCaseName,\t%s,\t%%,\t%s&#10;" .
                                                       "&#10;" .
-                                                      "%d,\t%s,\t%d,\t%d%%,\t%d",
-                                                      $v[$i * 2 + 38], $v[$i * 2 + 37],
+                                                      "#%d,\t%s,\t%d,\t%d%%,\t%d",
+                                                      //$v[$i * 2 + 38], $v[$i * 2 + 37],
                                                       $v[$i * 8 + 17], $v[$i * 8 + 18],
-                                                      $v[$i * 8 + 20], $tmpMaxRate, $v[$i * 8 + 19]);
+                                                      $v[$i * 8 + 19], $tmpMaxRate, $v[$i * 8 + 20]);
 
                                     }
                                     else if ($tmpMaxRate == 0)
                                     {
-                                        $t5 = sprintf("TestCaseId,\tCaseName,\t%s,\t%%,\t%s&#10;" .
-                                                      "%d,\t%s,\t%d,\t%d%%,\t%d" .
+                                        $t5 = sprintf(//"TestCaseId,\tCaseName,\t%s,\t%%,\t%s&#10;" .
+                                                      "#%d,\t%s,\t%d,\t%d%%,\t%d" .
                                                       "&#10;",
-                                                      $v[$i * 2 + 38], $v[$i * 2 + 37],
+                                                      //$v[$i * 2 + 38], $v[$i * 2 + 37],
                                                       $v[$i * 8 + 13], $v[$i * 8 + 14],
-                                                      $v[$i * 8 + 16], $tmpMinRate, $v[$i * 8 + 15]);
+                                                      $v[$i * 8 + 15], $tmpMinRate, $v[$i * 8 + 16]);
                                     }
                                     else
                                     {
-                                        $t5 = sprintf("TestCaseId,\tCaseName,\t%s,\t%%,\t%s&#10;" .
-                                                      "%d,\t%s,\t%d,\t%d%%,\t%d&#10;" .
-                                                      "%d,\t%s,\t%d,\t%d%%,\t%d",
-                                                      $v[$i * 2 + 38], $v[$i * 2 + 37],
+                                        $t5 = sprintf(//"TestCaseId,\tCaseName,\t%s,\t%%,\t%s&#10;" .
+                                                      "#%d,\t%s,\t%d,\t%d%%,\t%d&#10;" .
+                                                      "#%d,\t%s,\t%d,\t%d%%,\t%d",
+                                                      //$v[$i * 2 + 38], $v[$i * 2 + 37],
                                                       $v[$i * 8 + 13], $v[$i * 8 + 14],
-                                                      $v[$i * 8 + 16], $tmpMinRate, $v[$i * 8 + 15],
+                                                      $v[$i * 8 + 15], $tmpMinRate, $v[$i * 8 + 16],
                                                       $v[$i * 8 + 17], $v[$i * 8 + 18],
-                                                      $v[$i * 8 + 20], $tmpMaxRate, $v[$i * 8 + 19]);
+                                                      $v[$i * 8 + 19], $tmpMaxRate, $v[$i * 8 + 20]);
                                     }
                                 }
                             }
@@ -1250,7 +1250,7 @@ class CGenReport
                             $t1 .= "<Cell ss:StyleID=\"" . $t3 . "\"><Data ss:Type=\"String\">" . $t2 . "</Data></Cell>\n";
                             
                             $t4 .= "<Cell ss:Index=\"" . (2 + $i) . 
-                                   "\" ss:StyleID=\"s94\"><Data ss:Type=\"String\">" . $t5 . 
+                                   "\" ss:StyleID=\"s100\"><Data ss:Type=\"String\">" . $t5 . 
                                    "</Data></Cell>\n";
                             if (strlen($t5) > 0)
                             {
