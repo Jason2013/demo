@@ -259,6 +259,7 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName)
         $tmpPathName = dirname(__FILE__) . "/" . $tmpFileName;
         $tmpPathName = str_replace("\\", "/", $tmpPathName);
         
+        // INSERT INTO TABLE (a,c) VALUES (1,3),(1,7) ON DUPLICATE KEY UPDATE c=VALUES(c);
         $sql1 = "LOAD DATA LOCAL INFILE \"" . $tmpPathName . "\" IGNORE INTO TABLE mis_table_test_info " .
                 "FIELDS TERMINATED BY ',' " .
                 "LINES TERMINATED BY '\n' (test_name, test_type);";
@@ -318,12 +319,12 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName)
                 "WHERE t0.sub_name=t1.test_name AND t1.test_type=\"2\" " .
                 "ORDER BY t0.data_id ASC);";
                 
-        $sql1 = "REPLACE INTO " . $tableName01 . " " .
-                "(result_id, sub_id, data_value, test_case_id) " .
-                "(SELECT t0.result_id, t1.test_id, t0.data_value, t0.test_case_id " .
-                "FROM tmp_table_test_data1 t0, mis_table_test_info t1 " .
-                "WHERE t0.sub_name=t1.test_name AND t1.test_type=\"2\" " .
-                "ORDER BY t0.data_id ASC);";
+        //$sql1 = "REPLACE INTO " . $tableName01 . " " .
+        //        "(result_id, sub_id, data_value, test_case_id) " .
+        //        "(SELECT t0.result_id, t1.test_id, t0.data_value, t0.test_case_id " .
+        //        "FROM tmp_table_test_data1 t0, mis_table_test_info t1 " .
+        //        "WHERE t0.sub_name=t1.test_name AND t1.test_type=\"2\" " .
+        //        "ORDER BY t0.data_id ASC);";
                 
         if ($db->QueryDBNoResult($sql1) == null)
         {
@@ -381,6 +382,7 @@ function swtParseLogFile($_pathName, $_machineID)
     $umdIDMap = array();
     $tableName01 = "";
     $dataKeyAPI = -1;
+    $testCaseIDKeyAPI = -1;
 
     $feedSubTestNameString = "";
     $feedSubTestDataString = "";
@@ -417,6 +419,7 @@ function swtParseLogFile($_pathName, $_machineID)
             // if this line is title line of each test
             $testName = $tmpName;
             $dataKeyAPI = array_search("API", $data);
+            $testCaseIDKeyAPI = array_search("TestCaseId#", $data);
             $tmpTestID++;
             $tmpSubTestID = 0;
             
@@ -605,7 +608,7 @@ function swtParseLogFile($_pathName, $_machineID)
             {
                 $subTestName = $data[1];
                 $dataValue = $data[2];
-                $testCaseID = $data[3];
+                $testCaseID = $data[$testCaseIDKeyAPI];
 
                 if ($dataKeyAPI !== false)
                 {
