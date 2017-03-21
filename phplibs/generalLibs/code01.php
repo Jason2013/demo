@@ -120,12 +120,13 @@ array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_environment
                                      // 10 m_clock
                                      // 11 gpu_mem
 
-                                                             
+//array_push($db_create_table01, "ALTER TABLE mis_table_test_info ADD test_filter VARCHAR(128)");
 // mis_table_test_info 1
 array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_test_info " .
                                "( test_id INT UNSIGNED AUTO_INCREMENT, " .
                                "  test_name VARCHAR(128), " . // test name
                                "  test_type INT UNSIGNED," .
+                               "  test_filter VARCHAR(128), " .
                                "  PRIMARY KEY (test_id), " .
                                "  UNIQUE (test_name, test_type) " .
                                " )"); // 0 for test name,     like DepthClear
@@ -218,6 +219,7 @@ array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_upload_info
                                "  insert_time DATETIME )");
 
 //array_push($db_create_table01, "DROP TABLE IF EXISTS mis_table_test_subject_list");
+//array_push($db_create_table01, "ALTER TABLE mis_table_test_subject_list ADD filter_num INT UNSIGNED");
 // mis_table_test_subject_list 11
 array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_test_subject_list " .
                                "( list_id INT UNSIGNED AUTO_INCREMENT, " .
@@ -225,6 +227,7 @@ array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_test_subjec
                                "  test_id INT UNSIGNED, " .  // test name
                                "  subject_id INT UNSIGNED, " .  // sub test subject
                                "  unit_id INT UNSIGNED, " .
+                               "  filter_num INT UNSIGNED, " .
                                "  PRIMARY KEY (list_id), " .
                                "  UNIQUE (batch_id, test_id, subject_id, unit_id) " .
                                ")");  // unit name

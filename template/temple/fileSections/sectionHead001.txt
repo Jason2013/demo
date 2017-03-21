@@ -445,5 +445,5 @@
     <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
     <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
    </Borders>
-   <Font ss:FontName="Calibri" x:CharSet="134" ss:Color="#969696" ss:Bold="1"/>
+   <Font ss:FontName="Calibri" x:CharSet="134" ss:Color="#969696" ss:Bold="1" ss:Size="8" />
   </Style>

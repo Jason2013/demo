@@ -21,8 +21,10 @@ $curTestID = intval($_POST["curTestID"]);
 $nextSubTestID = intval($_POST["nextSubTestID"]);
 $curFileLineNum = intval($_POST["curFileLineNum"]);
 
-$targetLogFileName = "test_results.txt";
-$targetLogFileName2 = "test_results.csv";
+//$targetLogFileName = "test_results.txt";
+//$targetLogFileName2 = "test_results.csv";
+$targetLogFileName = "test_results_for_analysis.txt";
+$targetLogFileName2 = "test_results_for_analysis.csv";
 $machineInfoFileName = "machine_info.json";
 $defaultInfoFileName = "default_info.json";
 $changeListJsonTag = "changeList";
@@ -259,10 +261,7 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName)
         $tmpPathName = dirname(__FILE__) . "/" . $tmpFileName;
         $tmpPathName = str_replace("\\", "/", $tmpPathName);
         
-        // INSERT INTO TABLE (a,c) VALUES (1,3),(1,7) ON DUPLICATE KEY UPDATE c=VALUES(c);
-        $sql1 = "LOAD DATA LOCAL INFILE \"" . $tmpPathName . "\" IGNORE INTO TABLE mis_table_test_info " .
-                "FIELDS TERMINATED BY ',' " .
-                "LINES TERMINATED BY '\n' (test_name, test_type);";
+        $sql1 = "CREATE TEMPORARY TABLE IF NOT EXISTS tmp_table_test_data2 LIKE mis_table_test_info;";
         if ($db->QueryDBNoResult($sql1) == null)
         {
             $returnMsg["errorCode"] = 0;
@@ -271,6 +270,53 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName)
             $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
             return -1;
         }
+
+        $sql1 = "DELETE FROM tmp_table_test_data2;";
+        if ($db->QueryDBNoResult($sql1) == null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+            return -1;
+        }
+        
+        // INSERT INTO TABLE (a,c) VALUES (1,3),(1,7) ON DUPLICATE KEY UPDATE c=VALUES(c);
+        $sql1 = "LOAD DATA LOCAL INFILE \"" . $tmpPathName . "\" REPLACE INTO TABLE tmp_table_test_data2 " .
+                "FIELDS TERMINATED BY ',' " .
+                "LINES TERMINATED BY '\n' (test_name, test_type, test_filter);";
+        if ($db->QueryDBNoResult($sql1) == null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["sql1"] = $sql1;
+            $returnMsg["tmpPathName"] = $tmpPathName;
+            $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+            return -1;
+        }
+        
+        //$sql1 = "INSERT INTO mis_table_test_info " .
+        //        "SELECT * FROM tmp_table_test_data2 " .
+        //        "ON DUPLICATE KEY UPDATE test_filter = VALUES(test_filter);";
+        $sql1 = "INSERT INTO mis_table_test_info (test_name, test_type, test_filter) " .
+                "SELECT test_name, test_type, test_filter FROM tmp_table_test_data2 " .
+                "ON DUPLICATE KEY UPDATE test_filter = VALUES(test_filter);";
+        if ($db->QueryDBNoResult($sql1) == null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["sql1"] = $sql1;
+            $returnMsg["tmpPathName"] = $tmpPathName;
+            $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+            return -1;
+        }
+        
+        $sql1 = "DROP TEMPORARY TABLE tmp_table_test_data2;";
+        if ($db->QueryDBNoResult($sql1) == null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["sql1"] = $sql1;
+            $returnMsg["tmpPathName"] = $tmpPathName;
+            $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+            return -1;
+        }
+        
         unlink($tmpFileName);
     }
     
@@ -383,6 +429,8 @@ function swtParseLogFile($_pathName, $_machineID)
     $tableName01 = "";
     $dataKeyAPI = -1;
     $testCaseIDKeyAPI = -1;
+    $dataKeyDataColumnID = -1;
+    $subTestNameFilterNum = 0;
 
     $feedSubTestNameString = "";
     $feedSubTestDataString = "";
@@ -423,6 +471,38 @@ function swtParseLogFile($_pathName, $_machineID)
             $tmpTestID++;
             $tmpSubTestID = 0;
             
+            for ($i = 1; $i < count($data); $i++)
+            {
+                $tmpPos = strpos($data[$i], "/");
+                if ($tmpPos !== false)
+                {
+                    // data column id
+                    $dataKeyDataColumnID = $i;
+                    $subTestNameFilterNum = $dataKeyDataColumnID - 1;
+                    
+                    $returnMsg["testName"] = $testName;
+                    $returnMsg["dataKeyDataColumnID"] = $dataKeyDataColumnID;
+                    $returnMsg["subTestNameFilterNum"] = $subTestNameFilterNum;
+                    break;
+                }
+                else if ($data[$i] == "FPS") // randomsphere
+                {
+                    // data column id
+                    $dataKeyDataColumnID = $i;
+                    $subTestNameFilterNum = $dataKeyDataColumnID - 1;
+                    
+                    $returnMsg["testName"] = $testName;
+                    $returnMsg["dataKeyDataColumnID"] = $dataKeyDataColumnID;
+                    $returnMsg["subTestNameFilterNum"] = $subTestNameFilterNum;
+                    break;
+                }
+            }
+            if ($dataKeyDataColumnID == -1)
+            {
+                $returnMsg["data"] = $data;
+                $returnMsg["_pathName"] = $_pathName;
+            }
+            
             if (($tmpTestID - 1) >= $curTestID)
             {
                 // if this line is start of each test
@@ -439,14 +519,30 @@ function swtParseLogFile($_pathName, $_machineID)
                 }
                 $tableName01 = $db_mis_table_name_string001 . cleaninput($testName, 256);
 
-                $subTestSubject = $data[1];
-                $unitSubject = $data[2];
+                $tmpNameList = array();
+                for ($i = 1; $i < $dataKeyDataColumnID; $i++)
+                {
+                    if (strlen($data[$i]) == 0)
+                    {
+                        continue;
+                    }
+                    array_push($tmpNameList, $data[$i]);
+                }
+                
+                $subTestSubject = implode("_", $tmpNameList);
+                $subTestSubjectFilter = implode("|", $tmpNameList);
+                $unitSubject = $data[$dataKeyDataColumnID];
+                
+                //$subTestSubject = $data[1];
+                //$unitSubject = $data[2];
                 // insert testName, subTestSubject, unitSubject
-                $testNameInsertSQL = "INSERT IGNORE INTO mis_table_test_info " .
-                                     "(test_name, test_type) VALUES ";
-                $testNameInsertSQL .= "(?, \"0\"), ";
-                $testNameInsertSQL .= "(?, \"1\"), ";
-                $testNameInsertSQL .= "(?, \"3\");";
+                $testNameInsertSQL = "INSERT INTO mis_table_test_info " .
+                                     "(test_name, test_type, test_filter) " .
+                                     "VALUES ";
+                $testNameInsertSQL .= "(?, \"0\", \"\"), ";
+                $testNameInsertSQL .= "(?, \"1\", \"". $subTestSubjectFilter ."\"), ";
+                $testNameInsertSQL .= "(?, \"3\", \"\") ";
+                $testNameInsertSQL .= "ON DUPLICATE KEY UPDATE test_filter = VALUES(test_filter);";
                 
                 $sql1 = $testNameInsertSQL;
                 $params1 = array($testName, $subTestSubject, $unitSubject);
@@ -518,14 +614,14 @@ function swtParseLogFile($_pathName, $_machineID)
                 {
                     // new test name for this batch
                     $testSubjectListInsertSQL = "INSERT IGNORE INTO mis_table_test_subject_list " .
-                                                "(batch_id, test_id, subject_id, unit_id) VALUES " .
+                                                "(batch_id, test_id, subject_id, unit_id, filter_num) VALUES " .
                                                 "(?, " .
                                                 " (SELECT test_id FROM mis_table_test_info WHERE test_name=? LIMIT 1), " .
                                                 " (SELECT test_id FROM mis_table_test_info WHERE test_name=? LIMIT 1), " .
-                                                " (SELECT test_id FROM mis_table_test_info WHERE test_name=? LIMIT 1));";
+                                                " (SELECT test_id FROM mis_table_test_info WHERE test_name=? LIMIT 1), ?);";
                                                  
                     $sql1 = $testSubjectListInsertSQL;
-                    $params1 = array($batchID, $testName, $subTestSubject, $unitSubject);
+                    $params1 = array($batchID, $testName, $subTestSubject, $unitSubject, $subTestNameFilterNum);
                     if ($db->QueryDB($sql1, $params1) == null)
                     {
                         fclose($handle);
@@ -606,13 +702,36 @@ function swtParseLogFile($_pathName, $_machineID)
             if ((strlen($testName) > 0)    &&
                 ($batchID != -1))
             {
-                $subTestName = $data[1];
-                $dataValue = $data[2];
-                $testCaseID = $data[$testCaseIDKeyAPI];
+                //$subTestName = $data[1];
+                //$dataValue = $data[2];
+                //$subTestName = $data[1];
+                //$dataValue = $data[$dataKeyDataColumnID];
+                //$testCaseID = $data[$testCaseIDKeyAPI];
+                
+                $tmpNameList = array();
+                for ($i = 1; $i < $dataKeyDataColumnID; $i++)
+                {
+                    if (strlen($data[$i]) == 0)
+                    {
+                        continue;
+                    }
+                    array_push($tmpNameList, $data[$i]);
+                }
+                
+                $subTestName = implode("_", $tmpNameList);
+                $subTestFilterName = implode("|", $tmpNameList);
 
                 if ($dataKeyAPI !== false)
                 {
                     $umdName = $data[$dataKeyAPI];
+                }
+                if ($testCaseIDKeyAPI !== -1)
+                {
+                    $testCaseID = $data[$testCaseIDKeyAPI];
+                }
+                if ($dataKeyDataColumnID !== -1)
+                {
+                    $dataValue = $data[$dataKeyDataColumnID];
                 }
                 if (strlen($umdName) == 0)
                 {
@@ -676,7 +795,7 @@ function swtParseLogFile($_pathName, $_machineID)
                     {
                         //$dataRow++;
                         
-                        $feedSubTestNameString .= "\"" . $subTestName . "\",2\n";
+                        $feedSubTestNameString .= "\"" . $subTestName . "\",2," . $subTestFilterName . "\n";
 
                         $feedSubTestDataString .= "" . $resultIDList[$tmpKey] . ",\"" . $subTestName . "\"," .
                                                   $dataValue . ", " . $testCaseID . "\n";

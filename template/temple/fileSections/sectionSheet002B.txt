@@ -19,7 +19,7 @@
    <ProtectScenarios>False</ProtectScenarios>
   </WorksheetOptions>
   <ConditionalFormatting xmlns="urn:schemas-microsoft-com:office:excel">
-   <Range>R6C7:R1000000C7,R6C9:R1000000C9,R6C11:R1000000C11</Range>
+   <Range>R6C%d:R1000000C%d,R6C%d:R1000000C%d,R6C%d:R1000000C%d</Range>
    <Condition>
     <Qualifier>LessOrEqual</Qualifier>
     <Value1>-0.03</Value1>

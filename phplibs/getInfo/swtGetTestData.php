@@ -83,9 +83,9 @@ $unitNameList = array();
 while ($row1 = $db->fetchRow())
 {
     array_push($testIDList, $row1[2]);
-    array_push($testNameList, $row1[5]);
-    array_push($subjectNameList, $row1[6]);
-    array_push($unitNameList, $row1[7]);
+    array_push($testNameList, $row1[6]);
+    array_push($subjectNameList, $row1[7]);
+    array_push($unitNameList, $row1[8]);
 }
 
 /*

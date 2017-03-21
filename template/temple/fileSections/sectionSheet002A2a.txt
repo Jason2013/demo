@@ -1,0 +1,53 @@
+ <Worksheet ss:Name="Cross-API_Comparison">
+  <Table ss:ExpandedRowCount="%010d" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s63" ss:DefaultRowHeight="15">
+   <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="60"/>
+   <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="60"/>
+   <Column ss:Index="%d" ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="60"
+    ss:Span="11"/>
+   <Row ss:StyleID="Default">
+    <Cell ss:StyleID="s84"/>
+    <Cell ss:StyleID="s84" ss:MergeAcross="%d" ><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:Index="%d" ss:MergeAcross="2" ss:StyleID="s84" ><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:Index="%d" ss:MergeAcross="2" ss:StyleID="s84"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:Index="%d" ss:MergeAcross="2" ss:StyleID="s84"><Data ss:Type="String">%s</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="45" ss:StyleID="Default">
+    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s89" ss:MergeAcross="%d" ><Data ss:Type="String">API</Data></Cell>
+    <Cell ss:StyleID="s87" ><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s87"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s87"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s87"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s87"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s87"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s87"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s87"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s87"><Data ss:Type="String">%s</Data></Cell>
+   </Row>
+   <Row ss:StyleID="Default">
+    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s89" ss:MergeAcross="%d" ><Data ss:Type="String">Driver</Data></Cell>
+    <Cell ss:StyleID="s88" ><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s88"/>
+    <Cell ss:StyleID="s88"/>
+    <Cell ss:StyleID="s88"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s88"/>
+    <Cell ss:StyleID="s88"/>
+    <Cell ss:StyleID="s88"><Data ss:Type="String">%s</Data></Cell>
+    <Cell ss:StyleID="s88"/>
+    <Cell ss:StyleID="s88"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="0" ss:Hidden="1" ss:StyleID="Default">
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86" ss:MergeAcross="%d" />
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+    <Cell ss:StyleID="s86"/>
+   </Row>

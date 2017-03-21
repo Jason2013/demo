@@ -125,6 +125,9 @@ if ($returnSet === null)
 $testNameList = $returnSet["testNameList"];
 $subjectNameList = $returnSet["subjectNameList"];
 $unitNameList = $returnSet["unitNameList"];
+$subjectNameFilterNumMax = $returnSet["subjectNameFilterNumMax"];
+$subjectNameFilterNumList = $returnSet["subjectNameFilterNumList"];
+$subjectFilterNameList = $returnSet["subjectFilterNameList"];
 
 if ($curTestPos >= count($testNameList))
 {
@@ -506,6 +509,7 @@ else
     $lineNum = $returnSet["lineNum"];
     $standardSubTestIDList = $returnSet["standardSubTestIDList"];
     $standardSubTestNameList = $returnSet["standardSubTestNameList"];
+    $standardSubTestFilterNameList = $returnSet["standardSubTestFilterNameList"];
     $standardTestCaseIDList = $returnSet["standardTestCaseIDList"];
 
     

@@ -667,6 +667,7 @@ function swtDelBatchesDirect(_startBatchID, _endBatchID)
         var json = eval("(" + data + ")");
 
         alert(json.errorMsg);
+        location.reload(true);
         if (json.errorCode == "1")
         {
             //alert(json.errorMsg);
