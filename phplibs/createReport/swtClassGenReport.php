@@ -2167,7 +2167,7 @@ class CGenReport
             
             
             $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + 3) . "\"><Data ss:Type=\"String\">" .
-                           "testCaseID</Data></Cell>\n";
+                           "TestCaseID</Data></Cell>\n";
             for ($i = 0; $i < count($subjectFilterNameList[$_curTestPos]); $i++)
             {
                 $tmpList[$i + 1] = " <Cell ss:StyleID=\"s" . ($startStyleID + 3) . "\"><Data ss:Type=\"String\">" .
@@ -2496,7 +2496,7 @@ class CGenReport
             
             $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"/>\n");
             
-            $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"><Data ss:Type=\"String\">" .
+            $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"><Data ss:Type=\"Number\">" .
                            $testCaseID .
                            "</Data></Cell>\n";
             for ($i = 0; $i < count($subTestFilterNameList); $i++)
@@ -2818,7 +2818,7 @@ class CGenReport
                 
                 $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"/>\n");
                 
-                $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"><Data ss:Type=\"String\">" .
+                $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"><Data ss:Type=\"Number\">" .
                                "" . $standardTestCaseIDList[$n1] . "</Data></Cell>\n";
                 for ($i = 0; $i < count($standardSubTestFilterNameList[$n1]); $i++)
                 {
