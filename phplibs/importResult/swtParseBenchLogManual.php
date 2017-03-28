@@ -659,6 +659,11 @@ function swtParseLogFile($_pathName, $_machineID)
         {
             continue;
         }
+        if ($num <= $dataKeyAPI)
+        {
+            // invalid line column num
+            continue;
+        }
         for ($i = 0; $i < count($data); $i++)
         {
             $data[$i] = trim($data[$i]);

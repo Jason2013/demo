@@ -56,6 +56,11 @@ $graphDataStartCloumnIDCompareList = array("AB", "AC", "AD", "AE", "AF", "AG", "
 
 $ubuntuCheckWord = "ubuntu";
 
-$swtStartStyleID = 101;
+$swtStartStyleID = 117;
+define("reportStyleRedStart", 101);
+define("reportStyleRedNum", 8);
+define("reportStyleGreenStart", 109);
+define("reportStyleGreenNum", 8);
+define("maxAverageStyleRate", 100);
 
 ?>

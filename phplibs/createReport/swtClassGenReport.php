@@ -1191,6 +1191,11 @@ class CGenReport
                             $tmpUpRate = intval($tmpSum == 0 ? 0 : $tmpUp * 100.0 / $tmpSum);
                             $tmpDownRate = intval($tmpSum == 0 ? 0 : $tmpDown * 100.0 / $tmpSum);
                             
+                            $lossRateSum = $v[$i * 4 + 43];
+                            $lossRateNum = $v[$i * 4 + 43 + 1];
+                            $gainRateSum = $v[$i * 4 + 43 + 2];
+                            $gainRateNum = $v[$i * 4 + 43 + 3];
+                            
                             $t2 = "Even";
                             $isEven = true;
                             // grey font
@@ -1226,12 +1231,54 @@ class CGenReport
                                 {
                                     // all down, font red
                                     $t3 = "s98";
+                                    $n3 = $lossRateNum == 0 ? 0 : round(($lossRateSum * 100) / $lossRateNum);
+                                    $n4 = $gainRateNum == 0 ? 0 : round(($gainRateSum * 100) / $gainRateNum);
+                                    $n5 = abs($n3 + $n4);
+                                    $n5 = $n5 > maxAverageStyleRate ? maxAverageStyleRate : $n5;
+                                    $n6 = intval($n5 / maxAverageStyleRate * (reportStyleRedNum - 1));
+                                    $n7 = intval(reportStyleRedStart) + $n6;
+                                    $t3 = "s" . $n7;
                                 }
                                 else if (($tmpMinRate > $tmpLmtMinRate) &&
                                          ($tmpMaxRate > $tmpLmtMaxRate))
                                 {
                                     // all up, font green
                                     $t3 = "s99";
+                                    $n3 = $lossRateNum == 0 ? 0 : round(($lossRateSum * 100) / $lossRateNum);
+                                    $n4 = $gainRateNum == 0 ? 0 : round(($gainRateSum * 100) / $gainRateNum);
+                                    $n5 = abs($n3 + $n4);
+                                    $n5 = $n5 > maxAverageStyleRate ? maxAverageStyleRate : $n5;
+                                    $n6 = intval($n5 / maxAverageStyleRate * (reportStyleGreenNum - 1));
+                                    $n7 = intval(reportStyleGreenStart) + $n6;
+                                    $t3 = "s" . $n7;
+                                }
+                                else if ($isEven == false)
+                                {
+                                    // not even, not N/A, not pure gain or loss
+                                    $n3 = $lossRateNum == 0 ? 0 : round(($lossRateSum * 100) / $lossRateNum);
+                                    $n4 = $gainRateNum == 0 ? 0 : round(($gainRateSum * 100) / $gainRateNum);
+                                    $n5 = abs($n3 + $n4);
+                                    $n8 = ($n3 + $n4);
+                                    $n5 = $n5 > maxAverageStyleRate ? maxAverageStyleRate : $n5;
+                                    if ($n8 > 0)
+                                    {
+                                        // gain green
+                                        $n6 = intval($n5 / maxAverageStyleRate * (reportStyleGreenNum - 1));
+                                        $n7 = intval(reportStyleGreenStart) + $n6;
+                                        $t3 = "s" . $n7;
+                                    }
+                                    else if ($n8 == 0)
+                                    {
+                                        // black
+                                        $t3 = "s94";
+                                    }
+                                    else
+                                    {
+                                        // loss red
+                                        $n6 = intval($n5 / maxAverageStyleRate * (reportStyleRedNum - 1));
+                                        $n7 = intval(reportStyleRedStart) + $n6;
+                                        $t3 = "s" . $n7;
+                                    }
                                 }
                                 
                                 if ($isEven == true)
@@ -1637,7 +1684,10 @@ class CGenReport
                                                   -1, "", 0, 0,
                                                   "", "",
                                                   "", "",
-                                                  "", "");
+                                                  "", "",
+                                                  0, 0, 0, 0,
+                                                  0, 0, 0, 0,
+                                                  0, 0, 0, 0);
                     }
                     $t1 = json_encode($tmpObj);
                     
@@ -2986,6 +3036,26 @@ class CGenReport
                     $tmpVal[10] = (($rateVal[2] < $tmpVariation[0]) && ($rateVal[2] != -1)) ? ($tmpVal[10] + 1) : $tmpVal[10];
                     $tmpVal[11] = (($rateVal[2] > $tmpVariation[1]) && ($rateVal[2] != -1)) ? ($tmpVal[11] + 1) : $tmpVal[11];
                     
+                    $lossRateSum = array($tmpVal[43], $tmpVal[47], $tmpVal[51]);
+                    $lossRateNum = array($tmpVal[44], $tmpVal[48], $tmpVal[52]);
+                    $gainRateSum = array($tmpVal[45], $tmpVal[49], $tmpVal[53]);
+                    $gainRateNum = array($tmpVal[46], $tmpVal[50], $tmpVal[54]);
+                    
+                    for ($i = 0; $i < 3; $i++)
+                    {
+                        if ($rateVal[$i] < $tmpVariation[0])
+                        {
+                            // less than -3%
+                            $lossRateSum[$i] += ($rateVal[$i] - $tmpVariation[0]);
+                            $lossRateNum[$i]++;
+                        }
+                        else if ($rateVal[$i] > $tmpVariation[1])
+                        {
+                            // greater than 3%
+                            $gainRateSum[$i] += ($rateVal[$i] - $tmpVariation[1]);
+                            $gainRateNum[$i]++;
+                        }
+                    }
                     
                     $finalRateVal = array(min($rateVal2[0], $tmpVal[0]), max($rateVal2[1], $tmpVal[1]),
                                           min($rateVal2[2], $tmpVal[2]), max($rateVal2[3], $tmpVal[3]),
@@ -3050,7 +3120,10 @@ class CGenReport
                                                     $tmpVal[33], $tmpVal[34], $tmpVal[35], $tmpVal[36],
                                                     $cmpPartName[0], $cmpPartName[1],
                                                     $cmpPartName[2], $cmpPartName[3],
-                                                    $cmpPartName[4], $cmpPartName[5]);
+                                                    $cmpPartName[4], $cmpPartName[5],
+                                                    $lossRateSum[0], $lossRateNum[0], $gainRateSum[0], $gainRateNum[0],
+                                                    $lossRateSum[1], $lossRateNum[1], $gainRateSum[1], $gainRateNum[1],
+                                                    $lossRateSum[2], $lossRateNum[2], $gainRateSum[2], $gainRateNum[2]);
                 }
                 else
                 {
@@ -3066,7 +3139,11 @@ class CGenReport
                                                     -1, "", 0, 0,
                                                     "", "", // cmp 2 part name, like Vega10 vs Fiji XT, DX12 vs DX11
                                                     "", "",
-                                                    "", "");
+                                                    "", "",
+                                                    // lossRateSum, lossNum, gainRateSum, gainNum
+                                                    0, 0, 0, 0,
+                                                    0, 0, 0, 0,
+                                                    0, 0, 0, 0);
                 }
                 
                 $t1 .= $t3;
