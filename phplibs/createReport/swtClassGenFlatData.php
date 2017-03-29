@@ -574,6 +574,7 @@ class CGenReportFlatData
         
         $curTestName = "";
         $testCaseIDPos = -1;
+        $testColumnNum = 0;
         while($dataSet = fgetcsv($_srcFileHandle, 0, ","))
         {
             $tmpDataSet = $dataSet;
@@ -595,6 +596,8 @@ class CGenReportFlatData
                     $curTestName = $tmpSrcTestName;
                     $testCaseIDPos = array_search($testCaseIDColumnName, $dataSet);
                     $isTitleLine = true;
+                    
+                    $testColumnNum = $dataSetSize;
                     
                     if ($_isComp == false)
                     {
@@ -632,6 +635,11 @@ class CGenReportFlatData
             if ($dataSetSize < 3)
             {
                 // skip empty line
+                continue;
+            }
+            if ($dataSetSize < $testColumnNum)
+            {
+                // invalid line
                 continue;
             }
             
