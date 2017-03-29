@@ -121,8 +121,19 @@ if ($fileID < count($oldReportXLSXList))
                     $t4 = implode(",", $tmpRange);
                     $t4 = "Application.Union(" . $t4 . ")";
                 }
+                // dropArea
+                $codePiece1 = "";
+                for ($i = 0; $i < count($vbaConfig->dropArea); $i++)
+                {
+                    if (strlen($vbaConfig->dropArea[$i]) > 0)
+                    {
+                        $codePiece1 .= "    Columns(\"" . $vbaConfig->dropArea[$i] . "\").Select\n" .
+                                       "    Selection.Delete Shift:=xlToLeft\n";
+                    }
+                }
+                
                 // $vbaConfig->graphDataArea
-                $t2 = sprintf($t2, $t4, $tmpCardName);
+                $t2 = sprintf($t2, $t4, $tmpCardName, $codePiece1);
                 file_put_contents($tmpVBAPath, $t2);
                 
                 $workBook->VBProject->VBComponents->Item(1)->CodeModule->AddFromFile(__dir__ . "\\" . $tmpVBAPath);

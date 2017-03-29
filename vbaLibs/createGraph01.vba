@@ -67,5 +67,6 @@ Public Sub createGraph01()
     Selection.TickLabels.Font.Size = 11
     Selection.TickLabels.Font.Bold = msoTrue
     
-
+    %s
+    
 End Sub

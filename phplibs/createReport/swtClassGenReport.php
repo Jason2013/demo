@@ -2640,6 +2640,7 @@ class CGenReport
         global $graphDataStartCloumnIDCompareList;
         global $jsonFileName;
         global $reportTemplateDir;
+        global $subTestUmdDataMaskList;
 
         $db = $_db;
         $tempFileHandle = $_tempFileHandle;
@@ -2692,6 +2693,56 @@ class CGenReport
         
         $tmpJson = array();
         $tmpJson["graphDataArea"] = $graphDataArea;
+        // use DX11, DX12, vulkan mask of Alu as overall mask
+        // subTestUmdDataMaskList[0]
+        $tmpMask = $subTestUmdDataMaskList[0];
+        $dropArea = array();
+        if ($_cmpStartResultID != -1)
+        {
+            // comp with other card
+            
+        }
+        else
+        {
+            // not comp
+            if ($tmpMask == 110)
+            {
+                // DX11 missing
+                array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 7] . ":" .
+                                      $swtSheetColumnIDList[$subjectNameFilterNumMax + 7]);
+                array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 2] . ":" .
+                                      $swtSheetColumnIDList[$subjectNameFilterNumMax + 3]);
+            }
+            else if ($tmpMask == 100)
+            {
+                // DX11, DX12 missing
+                array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 7] . ":" .
+                                      $swtSheetColumnIDList[$subjectNameFilterNumMax + 7]);
+                array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 2] . ":" .
+                                      $swtSheetColumnIDList[$subjectNameFilterNumMax + 5]);
+            }
+            else if ($tmpMask == 11)
+            {
+                // vulkan missing
+                array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 5] . ":" .
+                                      $swtSheetColumnIDList[$subjectNameFilterNumMax + 7]);
+            }
+            else if ($tmpMask == 10)
+            {
+                // DX11, vulkan missing
+                array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 5] . ":" .
+                                      $swtSheetColumnIDList[$subjectNameFilterNumMax + 7]);
+                array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 2] . ":" .
+                                      $swtSheetColumnIDList[$subjectNameFilterNumMax + 3]);
+            }
+            else if ($tmpMask == 1)
+            {
+                // DX12, vulkan missing
+                array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 3] . ":" .
+                                      $swtSheetColumnIDList[$subjectNameFilterNumMax + 7]);
+            }
+        }
+        $tmpJson["dropArea"] = $dropArea;
         $t1 = json_encode($tmpJson);
         
         $tmpdestPath = $reportFolder . "/" . $curCardName . "_" . $tmpSysName . "/" . $swtTempVBAConfigJsonName;
