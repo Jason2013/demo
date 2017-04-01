@@ -1875,11 +1875,18 @@ class CGenReport
                 $t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">DX12-" . $_cmpCardName . "</Data></Cell>\n";
                 $t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">VULKAN-" . $_cmpCardName . "</Data></Cell>\n";
                 $t1 .= " <Cell ss:Index=\"" . (29 + $subjectNameFilterNumMax) . "\" ss:StyleID=\"Default\"/>\n";
+                //$t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">DX11-" . $_curCardName . $addCurSysName . "</Data></Cell>\n";
+                //$t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">DX12-" . $_curCardName . $addCurSysName . "</Data></Cell>\n";
+                //$t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">VULKAN-" . $_curCardName . $addCurSysName . "</Data></Cell>\n";
+                //$t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">DX11-" . $_cmpCardName . $addCmpSysName . "</Data></Cell>\n";
+                //$t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">DX12-" . $_cmpCardName . $addCmpSysName . "</Data></Cell>\n";
+                //$t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">VULKAN-" . $_cmpCardName . $addCmpSysName . "</Data></Cell>\n";
+                
                 $t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">DX11-" . $_curCardName . $addCurSysName . "</Data></Cell>\n";
-                $t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">DX12-" . $_curCardName . $addCurSysName . "</Data></Cell>\n";
-                $t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">VULKAN-" . $_curCardName . $addCurSysName . "</Data></Cell>\n";
                 $t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">DX11-" . $_cmpCardName . $addCmpSysName . "</Data></Cell>\n";
+                $t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">DX12-" . $_curCardName . $addCurSysName . "</Data></Cell>\n";
                 $t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">DX12-" . $_cmpCardName . $addCmpSysName . "</Data></Cell>\n";
+                $t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">VULKAN-" . $_curCardName . $addCurSysName . "</Data></Cell>\n";
                 $t1 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">VULKAN-" . $_cmpCardName . $addCmpSysName . "</Data></Cell>\n";
             }
             else
@@ -2017,33 +2024,54 @@ class CGenReport
                     $t1 .= $tmpVal[5];
                            
 
+                    //$tmpValHas[0] = " <Cell ss:StyleID=\"Default\" " .
+                    //                "ss:Formula=\"=RC[-9]/RC[-" . (9 - $startIndex) .
+                    //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                    //$tmpValHas[1] = " <Cell ss:StyleID=\"Default\" " .
+                    //                "ss:Formula=\"=RC[-9]/RC[-" . (10 - $startIndex) .
+                    //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                    //$tmpValHas[2] = " <Cell ss:StyleID=\"Default\" " .
+                    //                "ss:Formula=\"=RC[-9]/RC[-" . (11 - $startIndex) .
+                    //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                    //$tmpValHas[3] = " <Cell ss:StyleID=\"Default\" " .
+                    //                "ss:Formula=\"=RC[-8]/RC[-" . (12 - $startIndex) .
+                    //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                    //$tmpValHas[4] = " <Cell ss:StyleID=\"Default\" " .
+                    //                "ss:Formula=\"=RC[-8]/RC[-" . (13 - $startIndex) .
+                    //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                    //$tmpValHas[5] = " <Cell ss:StyleID=\"Default\" " .
+                    //                "ss:Formula=\"=RC[-8]/RC[-" . (14 - $startIndex) .
+                    //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                                    
+                                    
                     $tmpValHas[0] = " <Cell ss:StyleID=\"Default\" " .
                                     "ss:Formula=\"=RC[-9]/RC[-" . (9 - $startIndex) .
                                     "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
                     $tmpValHas[1] = " <Cell ss:StyleID=\"Default\" " .
-                                    "ss:Formula=\"=RC[-9]/RC[-" . (10 - $startIndex) .
+                                    "ss:Formula=\"=RC[-6]/RC[-" . (10 - $startIndex) .
                                     "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
                     $tmpValHas[2] = " <Cell ss:StyleID=\"Default\" " .
-                                    "ss:Formula=\"=RC[-9]/RC[-" . (11 - $startIndex) .
+                                    "ss:Formula=\"=RC[-10]/RC[-" . (11 - $startIndex) .
                                     "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
                     $tmpValHas[3] = " <Cell ss:StyleID=\"Default\" " .
-                                    "ss:Formula=\"=RC[-8]/RC[-" . (12 - $startIndex) .
+                                    "ss:Formula=\"=RC[-7]/RC[-" . (12 - $startIndex) .
                                     "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
                     $tmpValHas[4] = " <Cell ss:StyleID=\"Default\" " .
-                                    "ss:Formula=\"=RC[-8]/RC[-" . (13 - $startIndex) .
+                                    "ss:Formula=\"=RC[-11]/RC[-" . (13 - $startIndex) .
                                     "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
                     $tmpValHas[5] = " <Cell ss:StyleID=\"Default\" " .
                                     "ss:Formula=\"=RC[-8]/RC[-" . (14 - $startIndex) .
                                     "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
                     
                     
-                    for ($j = 0; $j < $reportUmdNum; $j++)
+                    for ($k = 0; $k < $reportUmdNum; $k++)
                     {
+                        $j = $k * 2;
                         $tmpVal[$j] = "<Cell ss:StyleID=\"Default\"></Cell>\n";
-                        $tmpVal[$reportUmdNum + $j] = "<Cell ss:StyleID=\"Default\"></Cell>\n";
+                        $tmpVal[$j + 1] = "<Cell ss:StyleID=\"Default\"></Cell>\n";
                         // cur card
-                        if (($resultUmdOrder[$j] != -1) &&
-                            ($resultUmdOrder[$reportUmdNum + $j] != -1))
+                        if (($resultUmdOrder[$k] != -1) &&
+                            ($resultUmdOrder[$k + $reportUmdNum] != -1))
                         {
                             // this column has data, needs be shown in Graph
                             $averageColumnHasVal[$j] = true;
@@ -2052,13 +2080,13 @@ class CGenReport
                         }
                         
                         // cmp card
-                        if (($resultUmdOrder[$j] != -1) &&
-                            ($resultUmdOrder[$reportUmdNum + $j] != -1))
+                        if (($resultUmdOrder[$k] != -1) &&
+                            ($resultUmdOrder[$k + $reportUmdNum] != -1))
                         {
                             // this column has data, needs be shown in Graph
-                            $averageColumnHasVal[$reportUmdNum + $j] = true;
+                            $averageColumnHasVal[$j + 1] = true;
                             
-                            $tmpVal[$reportUmdNum + $j] = $tmpValHas[$reportUmdNum + $j];
+                            $tmpVal[$j + 1] = $tmpValHas[$j + 1];
                         }
                     }
                       
@@ -3080,10 +3108,10 @@ class CGenReport
                         $tmpVariation = $variationJson[$testName];
                     }
                     // get test case up / down num for each test
-                    $tmpVal[6] = (($rateVal[0] < $tmpVariation[0]) && ($rateVal[0] != -1)) ? ($tmpVal[6] + 1) : $tmpVal[6];
-                    $tmpVal[7] = (($rateVal[0] > $tmpVariation[1]) && ($rateVal[0] != -1)) ? ($tmpVal[7] + 1) : $tmpVal[7];
-                    $tmpVal[8] = (($rateVal[1] < $tmpVariation[0]) && ($rateVal[1] != -1)) ? ($tmpVal[8] + 1) : $tmpVal[8];
-                    $tmpVal[9] = (($rateVal[1] > $tmpVariation[1]) && ($rateVal[1] != -1)) ? ($tmpVal[9] + 1) : $tmpVal[9];
+                    $tmpVal[6] = (($rateVal[0] < $tmpVariation[0]) && ($rateVal[0] !=  -1)) ? ($tmpVal[6] + 1) : $tmpVal[6];
+                    $tmpVal[7] = (($rateVal[0] > $tmpVariation[1]) && ($rateVal[0] !=  -1)) ? ($tmpVal[7] + 1) : $tmpVal[7];
+                    $tmpVal[8] = (($rateVal[1] < $tmpVariation[0]) && ($rateVal[1] !=  -1)) ? ($tmpVal[8] + 1) : $tmpVal[8];
+                    $tmpVal[9] = (($rateVal[1] > $tmpVariation[1]) && ($rateVal[1] !=  -1)) ? ($tmpVal[9] + 1) : $tmpVal[9];
                     $tmpVal[10] = (($rateVal[2] < $tmpVariation[0]) && ($rateVal[2] != -1)) ? ($tmpVal[10] + 1) : $tmpVal[10];
                     $tmpVal[11] = (($rateVal[2] > $tmpVariation[1]) && ($rateVal[2] != -1)) ? ($tmpVal[11] + 1) : $tmpVal[11];
                     
@@ -3094,6 +3122,10 @@ class CGenReport
                     
                     for ($i = 0; $i < 3; $i++)
                     {
+                        if ($rateVal[$i] == -1)
+                        {
+                            continue;
+                        }
                         if ($rateVal[$i] < $tmpVariation[0])
                         {
                             // less than -3%
