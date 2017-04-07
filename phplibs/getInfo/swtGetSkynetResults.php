@@ -57,7 +57,8 @@ foreach ($dateFolderList as $tmpFolder)
                 array_push($resultsTree[$i], $folderTimeName);
                 
                 $t1 = "";
-                $tmpFilePath2 = $tmpSubFolder . "/test_results.txt";
+                //$tmpFilePath2 = $tmpSubFolder . "/test_results.txt";
+                $tmpFilePath2 = $tmpSubFolder . "/test_results_for_analysis.txt";
                 
                 if (file_exists($tmpFilePath2))
                 {
