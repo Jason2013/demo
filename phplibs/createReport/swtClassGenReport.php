@@ -2680,10 +2680,17 @@ class CGenReport
                          graphDataStartLineID . ":" . 
                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 21] .
                          (intval(graphDataStartLineID) + count($graphCells) - 1);
+                         
+        $graphDataAreaNoBlank = $graphDataArea;
         
         if ($_cmpStartResultID != -1)
         {
             $hasBlank = array_search(false, $_averageColumnHasVal);
+            
+            $graphDataAreaNoBlank = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 28] .
+                                    graphDataStartLineIDCompare . ":" . 
+                                    $swtSheetColumnIDList[$subjectNameFilterNumMax + 34] .
+                                    (intval(graphDataStartLineIDCompare) + count($graphCells) - 1);
             
             if ($hasBlank === false)
             {
@@ -2721,6 +2728,7 @@ class CGenReport
         
         $tmpJson = array();
         $tmpJson["graphDataArea"] = $graphDataArea;
+        $tmpJson["graphDataAreaNoBlank"] = $graphDataAreaNoBlank;
         // use DX11, DX12, vulkan mask of Alu as overall mask
         // subTestUmdDataMaskList[0]
         $tmpMask = $subTestUmdDataMaskList[0];

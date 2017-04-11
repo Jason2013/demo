@@ -133,7 +133,7 @@ if ($fileID < count($oldReportXLSXList))
                 }
                 
                 // $vbaConfig->graphDataArea
-                $t2 = sprintf($t2, $t4, $tmpCardName, $codePiece1);
+                $t2 = sprintf($t2, $t4, $tmpCardName, $vbaConfig->graphDataAreaNoBlank, $codePiece1);
                 file_put_contents($tmpVBAPath, $t2);
                 
                 $workBook->VBProject->VBComponents->Item(1)->CodeModule->AddFromFile(__dir__ . "\\" . $tmpVBAPath);
