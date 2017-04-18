@@ -1922,7 +1922,7 @@ class CGenReport
                     if (intval($cmpSubTestNumList[$i]) == 0)
                     {
                         // skip blank test in graph
-                        continue;
+                        //continue;
                     }
                 }
 
