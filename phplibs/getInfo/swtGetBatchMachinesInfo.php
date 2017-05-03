@@ -7,6 +7,7 @@ include_once "../configuration/swtConfig.php";
 include_once "../server/swtHeartBeatFuncs.php";
 include_once "../generalLibs/genfuncs.php";
 include_once "../generalLibs/code01.php";
+include_once "../userManage/swtUserManager.php";
 
 $returnMsg = array();
 $returnMsg["errorCode"] = 1;
@@ -21,14 +22,42 @@ if ($db->getError() != null)
     return;
 }
 
+$userChecker = new CUserManger();
+
+if ($userChecker->isUser() == false)
+{
+    // not a user
+    $returnMsg["errorCode"] = 0;
+    $returnMsg["errorMsg"] = "you need to login";
+    echo json_encode($returnMsg);
+    return;
+}
+
 $params1 = array();
-$sql1 = "SELECT batch_id FROM mis_table_batch_list " .
-        "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") ORDER BY insert_time DESC LIMIT 1";
-        //"WHERE batch_state=\"1\" AND batch_group=\"1\" ORDER BY insert_time DESC LIMIT 1";
+$sql1 = "";
+if ($userChecker->isManager())
+{
+    // manager login
+    $params1 = array();
+    $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
+            "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") ORDER BY insert_time DESC LIMIT 1";
+            //"WHERE batch_state=\"1\" AND batch_group=\"1\" ORDER BY insert_time DESC LIMIT 1";
+}
+else
+{
+    $userID = $userChecker->getUserID();
+    $params1 = array($userID);
+    $sql1 = "SELECT t0.batch_id FROM mis_table_user_batch_info t0 " .
+            "WHERE t0.user_id = ? AND t0.batch_id IN (SELECT t1.batch_id FROM mis_table_batch_list t1 " .
+            "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
+            "ORDER BY t0.batch_id DESC LIMIT 1";
+}
 if ($db->QueryDB($sql1, $params1) == null)
 {
     $returnMsg["errorCode"] = 0;
     $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+    $returnMsg["userID"] = $userID;
+    $returnMsg["sql1"] = $sql1;
     echo json_encode($returnMsg);
     return;
 }

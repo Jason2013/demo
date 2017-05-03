@@ -7,6 +7,7 @@ include_once "../configuration/swtConfig.php";
 include_once "../server/swtHeartBeatFuncs.php";
 include_once "../generalLibs/genfuncs.php";
 include_once "../generalLibs/code01.php";
+include_once "../userManage/swtUserManager.php";
 
 class CGenReport
 {
@@ -219,22 +220,56 @@ class CGenReport
         {
             $b1 = $this->checkBatchValid($_db, $_batchID);
         }
+        
+        $userChecker = new CUserManger();
 
         $params1 = array();
-        if ($b1 == false)
+        $sql1 = "";
+        
+        if ($userChecker->isManager())
         {
-            // if not assign current batch id
-            $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
-                    "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") ORDER BY insert_time DESC LIMIT " . $historyBatchMaxNum;
+            // manager login
+            if ($b1 == false)
+            {
+                // if not assign current batch id
+                $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
+                        "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") ORDER BY insert_time DESC LIMIT " . $historyBatchMaxNum;
+            }
+            else
+            {
+                // if assign current batch id
+                $params1 = array($_batchID);
+                $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
+                        "WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") " .
+                        "ORDER BY insert_time DESC LIMIT " . $historyBatchMaxNum;
+            }
         }
         else
         {
-            // if assign current batch id
-            $params1 = array($_batchID);
-            $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
-                    "WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") " .
-                    "ORDER BY insert_time DESC LIMIT " . $historyBatchMaxNum;
+            // outside user
+            $userID = $userChecker->getUserID();
+            if ($b1 == false)
+            {
+                // if not assign current batch id
+                $params1 = array($userID);
+                $sql1 = "SELECT t0.batch_id FROM mis_table_user_batch_info t0 " .
+                        "WHERE t0.user_id = ? AND t0.batch_id IN " .
+                        "(SELECT t1.batch_id FROM mis_table_batch_list t1 " .
+                        "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
+                        "ORDER BY t0.batch_id DESC LIMIT " . $historyBatchMaxNum . "";
+            }
+            else
+            {
+                // if assign current batch id
+                $params1 = array($userID, $_batchID);
+                $sql1 = "SELECT t0.batch_id FROM mis_table_user_batch_info t0 " .
+                        "WHERE t0.user_id = ? AND t0.batch_id <= ? AND t0.batch_id IN " .
+                        "(SELECT t1.batch_id FROM mis_table_batch_list t1 " .
+                        "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
+                        "ORDER BY t0.batch_id DESC LIMIT " . $historyBatchMaxNum . "";
+            }
         }
+
         
         if ($db->QueryDB($sql1, $params1) == null)
         {
@@ -306,7 +341,7 @@ class CGenReport
         $db = $_db;
         $params1 = array($_batchID);
         $sql1 = "SELECT COUNT(*) FROM mis_table_batch_list " .
-                "WHERE batch_id=? AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\")";
+                "WHERE batch_id=? AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\" OR batch_group=\"0\")";
         if ($db->QueryDB($sql1, $params1) == null)
         {
             $returnMsg["errorCode"] = 0;

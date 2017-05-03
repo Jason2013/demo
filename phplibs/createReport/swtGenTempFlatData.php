@@ -71,7 +71,8 @@ if ($returnSet == false)
 }
 $batchID = $returnSet["batchID"];
 $pathName = $returnSet["pathName"];
-
+$returnMsg["batchID"] = $batchID;
+$returnMsg["pathName"] = $pathName;
 $returnSet = $flatDataGen->getReportFolder($batchID,
                                            $reportType,
                                            $curReportFolder);

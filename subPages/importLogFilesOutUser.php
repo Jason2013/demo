@@ -21,16 +21,6 @@ $html1->outPageBodyStart();
         <table>
         <tr>
             <td>
-                report Type:&nbsp&nbsp&nbsp
-            </td>
-            <td>
-                <input type="radio" name="reportGroup" value="routineReport" checked="checked">routine report (shown in Graphs)
-                <br>
-                <input type="radio" name="reportGroup" value="tempReport">temp report (not shown in Graphs)
-            </td>
-        </tr>
-        <tr>
-            <td>
                 target batch ID:&nbsp&nbsp&nbsp
             </td>
             <td>
@@ -56,9 +46,16 @@ $html1->outPageBodyStart();
             </td>
         </tr>
         </table>
-        <p>like: \\oglserver\Incoming\Davy\deletable\benchMax\2016-03-29-man</p>
+        
+        <p><span style="background-color: #FFFF00;">folder name</span> must be a windows server folder can be accessed by our server.</p>
+        <p><span style="background-color: #FFFF00;">username</span> & <span style="background-color: #FFFF00;">password</span> are your AMD domain username & password,</p>
+        <p>they are used to enable our server to access above result folder.</p>
+        
+        <p>like: <span style="background-color: #FFFF00;">\\oglserver\Incoming\Davy\deletable\benchMax\2016-03-29-man</span></p>
+        <p>please <span style="background-color: #FF0000; color: #FFFFFF;">don't close this page in process of importing result!</span></p>
+        
         <p>finishing percent: <div id="finishPercentBar" >0%</div></p>
-        <div id="" class="button01 roundCorner" onclick="swtSubmitTestResultsMannual2('inputFolderName', 'finishPercentBar', 'inputUsername', 'inputPassword', 'selBatchID');" onselectstart="return false;" style="float: left;">
+        <div id="" class="button01 roundCorner" onclick="swtSubmitTestResultsMannualOutUser('inputFolderName', 'finishPercentBar', 'inputUsername', 'inputPassword', 'selBatchID');" onselectstart="return false;" style="float: left;">
         import
         </div>
         <div style="float: left;">&nbsp&nbsp</div>
@@ -86,7 +83,7 @@ var t3 = $.cookie('benchMaxPassword');
 $("#inputUsername").val(t2);
 $("#inputPassword").val(t3);
 
-swtGetShortBatchIDList("targetBatchID");
+swtGetShortBatchIDListOutUser("targetBatchID");
 
 </script>
 

@@ -28,7 +28,7 @@ if ($batchNum == -1)
     $params1 = array($batchGroup, $batchState);
     $sql1 = "SELECT * " .
             "FROM mis_table_batch_list " .
-            "WHERE batch_group = ? AND batch_state = ? AND batch_group=\"1\" " .
+            "WHERE batch_group = ? AND batch_state = ? " .
             "ORDER BY insert_time DESC";
 }
 else
@@ -36,7 +36,7 @@ else
     $params1 = array($batchGroup, $batchState, $batchNum);
     $sql1 = "SELECT * " .
             "FROM mis_table_batch_list " .
-            "WHERE batch_group = ? AND batch_state = ? AND batch_group=\"1\" " .
+            "WHERE batch_group = ? AND batch_state = ? " .
             "ORDER BY insert_time DESC LIMIT ?";
 }
 

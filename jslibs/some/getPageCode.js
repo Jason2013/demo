@@ -194,12 +194,14 @@ function swtGetTodayTaskListHtml(_tagName, _dayBack)
     });
 }
 
-function swtGetTodayTaskListHtml2(_tagName, _pageTag, _pageID)
+var swtBatchListPageID = 0;
+function swtGetTodayTaskListHtml2(_tagName, _pageTag, _pageID, _batchGroup)
 {
     $.post("../phplibs/getInfo/swtGetTaskStateListHtml2.php", 
     {
         pageID:     _pageID,
-        reportType: 0
+        reportType: 0,
+        batchGroup: _batchGroup
     }, 
     function(data,status) 
     {
@@ -213,6 +215,8 @@ function swtGetTodayTaskListHtml2(_tagName, _pageTag, _pageID)
         t2 += "<td>batch ID&nbsp&nbsp&nbsp";
         t2 += "</td>";
         t2 += "<td>state&nbsp&nbsp&nbsp";
+        t2 += "</td>";
+        t2 += "<td>group&nbsp&nbsp&nbsp";
         t2 += "</td>";
         t2 += "<td>insert time&nbsp&nbsp&nbsp";
         t2 += "</td>";
@@ -246,7 +250,7 @@ function swtGetTodayTaskListHtml2(_tagName, _pageTag, _pageID)
                     t5 = "checked=\"checked\"";
                 }
                 
-                var t4 = "background-color: #00ff00;";
+                var t4 = "background-color: #80ff00;";
                 if (json.batchStateList[i] == 0)
                 {
                     t4 = "background-color: #ffa000;";
@@ -264,6 +268,8 @@ function swtGetTodayTaskListHtml2(_tagName, _pageTag, _pageID)
                       "&nbsp#&nbsp" + json.batchIDList[i] + "&nbsp&nbsp&nbsp";
                 t2 += "</td>";
                 t2 += "<td style=\"" + t4 + "\">" + json.batchStateNameList[i] + "&nbsp&nbsp&nbsp";
+                t2 += "</td>";
+                t2 += "<td style=\"" + t4 + "\">" + json.batchGroupNameList[i] + "&nbsp&nbsp&nbsp";
                 t2 += "</td>";
                 t2 += "<td>" + json.batchInsertTimeList[i] + "&nbsp&nbsp&nbsp";
                 t2 += "</td>";
@@ -295,7 +301,9 @@ function swtGetTodayTaskListHtml2(_tagName, _pageTag, _pageID)
                 //$("#Searchresult").empty().append(new_content); //装载对应分页的内容
                 
                 swtBatchListPageID = page_index;
-                //alert(page_index);
+                
+                //swtGetTodayTaskListHtml2(_tagName, _pageTag, _pageID, _batchGroup);
+                
                 return false;
             }
             

@@ -38,9 +38,9 @@ $html1->outPageBodyNext();
     
 <script>
 
-
-swtGetTodayTaskListHtml2('pageContent01', 'pageBottom01', swtBatchListPageID, -1);
-setInterval("swtGetTodayTaskListHtml2('pageContent01', 'pageBottom01', swtBatchListPageID, -1)", 1000);
+//var swtBatchListPageID = 0;
+swtGetTodayTaskListHtml2('pageContent01', 'pageBottom01', swtBatchListPageID, 0);
+setInterval("swtGetTodayTaskListHtml2('pageContent01', 'pageBottom01', swtBatchListPageID, 0)", 1000);
 
 
 
@@ -48,7 +48,6 @@ setInterval("swtGetTodayTaskListHtml2('pageContent01', 'pageBottom01', swtBatchL
 
 <p>&nbsp</p>
 <p>&nbsp</p>
-
 
 <?php
 

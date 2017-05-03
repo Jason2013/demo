@@ -15,6 +15,8 @@ $html1->outPageBodyStart();
 
 </div>
 <div id="pageContent01" class = "">
+    <p>if you are an outside user, please login with the <span style="background-color: #FFFF00;">username you like<span>,</p>
+    <p>and <span style="background-color: #FFFF00;">123</span> as password, thank you for using our service.</p>
     <p>username: <input type="text" id="userName" name="userName" value="<?php echo $html1->userName; ?>" /></p>
     <p>password: <input type="text" id="passWord" name="passWord" /></p>
     <p><input type="submit" value="Submit" onclick="swtUserLogIn('userName', 'passWord');" /></p>

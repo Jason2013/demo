@@ -25,6 +25,24 @@ if ($userChecker->tryLogIn() == false)
     return;
 }
 
+if ($userChecker->isUser() == false)
+{
+    $returnMsg["errorCode"] = 0;
+    $returnMsg["errorMsg"] = "you need log in";
+    echo json_encode($returnMsg);
+    return;
+}
+
+if (($startBatchID != $endBatchID) &&
+    ($userChecker->isManager() == false))
+{
+    // not a manager can't del more than 1 batch
+    $returnMsg["errorCode"] = 0;
+    $returnMsg["errorMsg"] = "you don't have enough right";
+    echo json_encode($returnMsg);
+    return;
+}
+
 $db = new CPdoMySQL();
 if ($db->getError() != null)
 {
@@ -32,6 +50,40 @@ if ($db->getError() != null)
     $returnMsg["errorMsg"] = "can't reach mysql server, line: " . __LINE__;
     echo json_encode($returnMsg);
     return;
+}
+
+$userID = $userChecker->getUserID();
+
+if (($startBatchID == $endBatchID) &&
+    ($userChecker->isManager() == false))
+{
+    $params1 = array($userID, $startBatchID);
+    $sql1 = "SELECT COUNT(*) FROM mis_table_user_batch_info " .
+            "WHERE user_id = ? AND batch_id = ?";
+            
+    if ($db->QueryDB($sql1, $params1) == null)
+    {
+        $returnMsg["errorCode"] = 0;
+        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+        echo json_encode($returnMsg);
+        return;
+    }
+    $row1 = $db->fetchRow();
+    if ($row1 == false)
+    {
+        $returnMsg["errorCode"] = 0;
+        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+        echo json_encode($returnMsg);
+        return;
+    }
+    $userNum = intval($row1[0]);
+    if ($userNum == 0)
+    {
+        $returnMsg["errorCode"] = 0;
+        $returnMsg["errorMsg"] = "you don't have the right";
+        echo json_encode($returnMsg);
+        return;
+    }
 }
 
 $logPathList = array();
@@ -139,6 +191,18 @@ foreach ($batchIDList as $batchID)
 
 $params1 = array($startBatchID, $endBatchID);
 $sql1 = "DELETE FROM mis_table_batch_list " .
+        "WHERE batch_id>=? AND batch_id<=?";
+if ($db->QueryDB($sql1, $params1) == null)
+{
+    $returnMsg["errorCode"] = 0;
+    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+    echo json_encode($returnMsg);
+    return;
+}
+
+// delete batch_id records for outside users
+$params1 = array($startBatchID, $endBatchID);
+$sql1 = "DELETE FROM mis_table_user_batch_info " .
         "WHERE batch_id>=? AND batch_id<=?";
 if ($db->QueryDB($sql1, $params1) == null)
 {

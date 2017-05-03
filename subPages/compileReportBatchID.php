@@ -27,6 +27,9 @@ $html1->outPageBodyStart();
         </p>
         <p>like: 193</p>
         -->
+        
+        <p>please <span style="background-color: #FF0000; color: #FFFFFF;">don't close this page in process of generating report!</span></p>
+        
         <p>finishing percent: <div id="finishPercentBar" >0%</div></p>
         <div id="" class="button01 roundCorner" onclick="swtGenerateRoutineReport('finishPercentBar', 'reportList', 0, -1);" onselectstart="return false;" style="float: left;">
         generate

@@ -51,6 +51,10 @@ $swtTestBatchStateString = array("submitted",
                                  "skipped",
                                  "time out",
                                  "reserved");
+                                 
+$swtTestBatchGroupString = array("out user",
+                                 "routine report",
+                                 "temp report");
 
 // show tables like 'mis_table_data_test_%'
 // show columns from tablename
@@ -252,6 +256,25 @@ array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_result_file
                                "  test_list TEXT,            " .
                                "  insert_time DATETIME )");
                                
+// mis_table_user_info
+array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_user_info " .
+                               "( user_id INT UNSIGNED AUTO_INCREMENT, " .
+                               "  user_name VARCHAR(128), " .
+                               "  pass_word VARCHAR(64), " .
+                               "  nick_name VARCHAR(128), " .
+                               "  user_type INT UNSIGNED, " .
+                               "  create_time DATETIME, " .
+                               "  login_time DATETIME, " .
+                               "  login_ip VARCHAR(64), " .
+                               "  PRIMARY KEY (user_id) " .
+                               ")");
+                               
+// mis_table_user_batch_info
+array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_user_batch_info " .
+                               "( info_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, " .
+                               "  user_id INT UNSIGNED, " .
+                               "  batch_id INT UNSIGNED, " .
+                               "  insert_time DATETIME )");  
                                
 //array_push($db_create_table01, "CREATE INDEX idx_env_name ON mis_table_environment_info (env_name);");
                                

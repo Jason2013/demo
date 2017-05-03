@@ -29,6 +29,17 @@ function swtSubmitTestResultsMannual2(_inputTagName,
 {
     var t5 = $("input[name='reportGroup']:checked").val();
     
+    var reportGroupName = $("input[name='reportGroup']:checked").val();
+    var reportGroup = 1;
+    if (reportGroupName == "routineReport")
+    {
+        reportGroup = 1;
+    }
+    else if (reportGroupName == "tempReport")
+    {
+        reportGroup = 2;
+    }
+    
     $("#" + _percentTagName).html("copying files: 0%");
     var t1 = $("#" + _inputTagName).val();
     if (t1.length == 0)
@@ -50,7 +61,42 @@ function swtSubmitTestResultsMannual2(_inputTagName,
                          "",
                          0,
                          "",
-                         "");
+                         "",
+                         reportGroup);
+}
+
+function swtSubmitTestResultsMannualOutUser(_inputTagName,
+                                      _percentTagName,
+                                      _usernameTagName,
+                                      _passwordTagName,
+                                      _targetTagName)
+{
+    // for outside users
+    var reportGroup = 0;
+    
+    $("#" + _percentTagName).html("copying files: 0% (importing is started...)");
+    var t1 = $("#" + _inputTagName).val();
+    if (t1.length == 0)
+    {
+        alert("please fill in folder name");
+        return;
+    }
+    var t2 = $("#" + _usernameTagName).val();
+    var t3 = $("#" + _passwordTagName).val();
+    var t4 = $("#" + _targetTagName).val();
+    $.cookie('benchMaxUsername', t2);
+    $.cookie('benchMaxPassword', t3);
+    swtDoCopyResultFiles(_inputTagName,
+                         _percentTagName,
+                         t4, // batch ID
+                         t1,
+                         t2,
+                         t3,
+                         "",
+                         0,
+                         "",
+                         "",
+                         reportGroup);
 }
 
 function swtDoCopyResultFiles(_inputTagName,
@@ -62,7 +108,8 @@ function swtDoCopyResultFiles(_inputTagName,
                               _allFileListString,
                               _fileID,
                               _parentFolder,
-                              _parentFolderOnly)
+                              _parentFolderOnly,
+                              _reportGroup)
 {
     $.post("../phplibs/getInfo/swtGetFolderAllFileNames.php", 
     {
@@ -100,7 +147,8 @@ function swtDoCopyResultFiles(_inputTagName,
                                        0,
                                        0,
                                        0,
-                                       _batchID);
+                                       _batchID,
+                                       _reportGroup);
             }
             else
             {
@@ -113,7 +161,8 @@ function swtDoCopyResultFiles(_inputTagName,
                                      json.allFileListString,
                                      json.fileID,
                                      json.parentFolder,
-                                     json.parentFolderOnly);
+                                     json.parentFolderOnly,
+                                     _reportGroup);
                 if (json.fileID <= json.fileNum)
                 {
                     $("#" + _percentTagName).html("copying files: " + ((json.fileID / json.fileNum) * 100.0 ).toFixed(1) + "%");
@@ -136,18 +185,19 @@ function swtDoSubmitTestResults(_inputTagName,
                                 _resultFileNum,
                                 _curTestID,
                                 _nextSubTestID,
-                                _batchID)
+                                _batchID,
+                                _reportGroup)
 {
-    var reportGroupName = $("input[name='reportGroup']:checked").val();
-    var reportGroup = 1;
-    if (reportGroupName == "routineReport")
-    {
-        reportGroup = 1;
-    }
-    else if (reportGroupName == "tempReport")
-    {
-        reportGroup = 2;
-    }
+    //var reportGroupName = $("input[name='reportGroup']:checked").val();
+    //var reportGroup = 1;
+    //if (reportGroupName == "routineReport")
+    //{
+    //    reportGroup = 1;
+    //}
+    //else if (reportGroupName == "tempReport")
+    //{
+    //    reportGroup = 2;
+    //}
     
     //alert(reportGroup);
     
@@ -161,7 +211,7 @@ function swtDoSubmitTestResults(_inputTagName,
         curTestID:        _curTestID,
         nextSubTestID:    _nextSubTestID,
         batchID:          _batchID,
-        reportGroup:      reportGroup
+        reportGroup:      _reportGroup
     }, 
     function(data,status) 
     {
@@ -191,7 +241,8 @@ function swtDoSubmitTestResults(_inputTagName,
                                        json.resultFileNum,
                                        json.curTestID,
                                        json.nextSubTestID,
-                                       json.batchID);
+                                       json.batchID,
+                                       _reportGroup);
                 if (parseInt(_resultFileNum) > 0)
                 {
                     var resultFileNum = parseFloat(_resultFileNum);
@@ -221,7 +272,7 @@ function swtDoSubmitTestResults(_inputTagName,
 
 function swtGenerateRoutineReport(_percentTagName, _reportListTag, _reportType, _batchID)
 {
-    $("#" + _percentTagName).html("0%");
+    $("#" + _percentTagName).html("0% (generating is started...)");
     
     $("#" + _reportListTag).html("");
 
@@ -827,6 +878,43 @@ function swtGetShortBatchIDList(_comboTag)
             t1 += "</select>";
             
             $("#" + _comboTag).html(t1);
+        }
+    });
+}
+
+function swtGetShortBatchIDListOutUser(_comboTag)
+{
+    $.post("../phplibs/getInfo/swtGetBatchIDListOutUser.php", 
+    {
+        batchGroup:          1,
+        batchState:          1,
+        batchNum:            10
+    }, 
+    function(data,status) 
+    {
+        console.log(data);
+        var json = eval("(" + data + ")");
+
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            //alert(json.errorMsg);
+
+            var t1 = "<select id=\"selBatchID\" name=\"selBatchID\">";
+            t1 += "<option value=\"-1\" checked=\"checked\">create new batch</option>";
+            
+            for (var i = 0; i < json.batchIDList.length; i++)
+            {
+                t1 += "<option value=\"" + json.batchIDList[i] + "\">" + json.batchIDList[i] + "</option>";
+            }
+            
+            t1 += "</select>";
+            
+            $("#" + _comboTag).html(t1);
+        }
+        else
+        {
+            alert(json.errorMsg);
         }
     });
 }

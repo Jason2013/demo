@@ -73,7 +73,9 @@ class CSwtHtmlTemple
         echo "    <h3>Administration</h3>\n";
         echo "    <div>\n";
         
-        if ($this->userLoged)
+        $userChecker = new CUserManger();
+        
+        if ($userChecker->isManager())
         {
             //echo "        <a href=\"" . $this->pagePrePath . "subPages/newTask.php\">new task</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/batchList.php\">batch list</a>\n";
@@ -81,6 +83,14 @@ class CSwtHtmlTemple
             echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFilesSkynet.php\">impt skynet res</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportBatchID.php\">routine report</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportAll.php\">generate all reports</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/userLogOut.php\">logout</a>\n";
+        }
+        else if ($userChecker->isUser())
+        {
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/batchListOutUser.php\">batch list</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFilesOutUser.php\">import results</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportBatchID.php\">generate report</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/helpForOutUser.php\">help center</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/userLogOut.php\">logout</a>\n";
         }
         else

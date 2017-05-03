@@ -2,6 +2,8 @@
 
 include_once __dir__ . "/../../config/siteInfo.php";
 include_once __dir__ . "/../generalLibs/code01.php";
+include_once __dir__ . "/../generalLibs/dopdo.php";
+include_once __dir__ . "/../generalLibs/genfuncs.php";
 
 class CUserManger
 {
@@ -34,9 +36,107 @@ class CUserManger
             {
                 if (strcmp($swtSiteAuthInfo[intval($key) + 1], $_passWord) == 0)
                 {
-                    return true;
+                    return 1;
                 }
             }
+        }
+        if (count($tmpKeys) > 0)
+        {
+            // invalid manager password
+            return false;
+        }
+        
+        $returnMsg = array();
+        $returnMsg["errorCode"] = 1;
+        $returnMsg["errorMsg"] = "query MySQL success";
+        
+        // not manager
+        $db = new CPdoMySQL();
+        if ($db->getError() != null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "can't reach mysql server, line: " . __LINE__;
+            //echo json_encode($returnMsg);
+            return false;
+        }
+        
+        $userName = cleaninput($_userName, 128);
+        $passWord = md5($_passWord);
+        
+        $params1 = array($userName);
+        $sql1 = "SELECT COUNT(*) FROM mis_table_user_info " .
+                "WHERE user_name = ?";
+
+        if ($db->QueryDB($sql1, $params1) == null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+            return false;
+        }
+        
+        $row1 = $db->fetchRow();
+        if ($row1 == false)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+            return false;
+        }
+        
+        if (intval($row1[0]) == 0)
+        {
+            // new user
+            $params1 = array($userName, md5("123"), "2");
+            $sql1 = "INSERT INTO mis_table_user_info " .
+                    "(user_name, pass_word, user_type, create_time, login_time) " .
+                    "VALUES (?, ?, ?, NOW(), NOW())";
+                    
+            if ($db->QueryDB($sql1, $params1) == null)
+            {
+                $returnMsg["errorCode"] = 0;
+                $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                return false;
+            }
+        }
+        
+        $params1 = array($userName, $passWord);
+        $sql1 = "SELECT COUNT(*) FROM mis_table_user_info " .
+                "WHERE user_name = ? AND pass_word = ?";
+
+        if ($db->QueryDB($sql1, $params1) == null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+            return false;
+        }
+        
+        $row1 = $db->fetchRow();
+        if ($row1 == false)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+            return false;
+        }
+        
+        if (intval($row1[0]) > 0)
+        {
+            // login success
+            // update login time
+            $params1 = array($userName);
+            $sql1 = "UPDATE mis_table_user_info " .
+                    "SET login_time = NOW() " .
+                    "WHERE user_name = ?";
+            
+            if ($db->QueryDB($sql1, $params1) == null)
+            {
+                $returnMsg["errorCode"] = 0;
+                $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                return false;
+            }
+            
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "possibly password wrong";
+            
+            return true;
         }
         
         return false;
@@ -44,20 +144,34 @@ class CUserManger
     
 	public function logIn($_userName, $_passWord)
 	{
-        if ($this->checkUserInfo($_userName, $_passWord) == false)
+        $tmpResult = $this->checkUserInfo($_userName, $_passWord);
+        if ($tmpResult == false)
         {
             return false;
         }
+        else if ($tmpResult === 1)
+        {
+            // is site manager
+            $this->doManagerLogIn($_userName, $_passWord);
+            return true;
+        }
+        // is common user
         $this->doLogIn($_userName, $_passWord);
         return true;
     }
     
 	public function tryLogIn()
 	{
-        if (isset($_SESSION["managerLoged"]) && ($_SESSION["managerLoged"] == true))
+        //if (isset($_SESSION["managerLoged"]) && ($_SESSION["managerLoged"] == true))
+        //{
+        //    return true;
+        //}
+        
+        if ($this->isUser())
         {
             return true;
         }
+        
         $userName = isset($_COOKIE["userName"]) ? $_COOKIE["userName"] : "";
         $passWord = isset($_COOKIE["passWord"]) ? $_COOKIE["passWord"] : "";
         
@@ -68,6 +182,117 @@ class CUserManger
         }
         
         return $this->logIn($userName, $passWord);
+    }
+    
+	public function isManager()
+	{
+        if (isset($_SESSION["managerLoged"]) && ($_SESSION["managerLoged"] == true))
+        {
+            return true;
+        }
+        return false;
+    }
+    
+	public function isUser()
+	{
+        if (isset($_SESSION["userLoged"]) && ($_SESSION["userLoged"] == true))
+        {
+            return true;
+        }
+        return false;
+    }
+    
+	public function getUserName()
+	{
+        if ($this->isUser() == false)
+        {
+            return "";
+        }
+        if (isset($_SESSION["userName"]))
+        {
+            if (strlen($_SESSION["userName"]) > 0)
+            {
+                return $_SESSION["userName"];
+            }
+        }
+        if (isset($_COOKIE["userName"]))
+        {
+            if (strlen($_COOKIE["userName"]) > 0)
+            {
+                return $_COOKIE["userName"];
+            }
+        }
+        return "";
+    }
+    
+	public function getPassWord()
+	{
+        if ($this->isUser() == false)
+        {
+            return "";
+        }
+        if (isset($_SESSION["passWord"]))
+        {
+            if (strlen($_SESSION["passWord"]) > 0)
+            {
+                return $_SESSION["passWord"];
+            }
+        }
+        if (isset($_COOKIE["passWord"]))
+        {
+            if (strlen($_COOKIE["passWord"]) > 0)
+            {
+                return $_COOKIE["passWord"];
+            }
+        }
+        return "";
+    }
+    
+	public function getUserID()
+	{
+        if ($this->isUser() == false)
+        {
+            return -1;
+        }
+        $userName = $this->getUserName();
+        $passWord = $this->getPassWord();
+        
+        $returnMsg = array();
+        $returnMsg["errorCode"] = 1;
+        $returnMsg["errorMsg"] = "query MySQL success";
+        
+        // not manager
+        $db = new CPdoMySQL();
+        if ($db->getError() != null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "can't reach mysql server, line: " . __LINE__;
+            //echo json_encode($returnMsg);
+            return -1;
+        }
+        
+        $userName = cleaninput($userName, 128);
+        $passWord = md5($passWord);
+        
+        $params1 = array($userName, $passWord);
+        $sql1 = "SELECT user_id FROM mis_table_user_info " .
+                "WHERE user_name = ? AND pass_word = ?";
+
+        if ($db->QueryDB($sql1, $params1) == null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+            return -1;
+        }
+        
+        $row1 = $db->fetchRow();
+        if ($row1 == false)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "invalid username or password";
+            return -1;
+        }
+        return intval($row1[0]);
     }
     
 	public function getSessionOrCookieInfo($_valName)
@@ -86,11 +311,22 @@ class CUserManger
         return $valCont;
     }
     
-	public function doLogIn($_userName, $_passWord)
+	public function doManagerLogIn($_userName, $_passWord)
 	{
         $_SESSION["userName"] = $_userName;
         $_SESSION["passWord"] = $_passWord;
         $_SESSION["managerLoged"] = true;
+        $_SESSION["userLoged"] = true;
+        setcookie("userName", $_userName, time() + 3600 * 24 * 365, "/");
+        setcookie("passWord", $_passWord, time() + 3600 * 24 * 365, "/");
+    }
+    
+	public function doLogIn($_userName, $_passWord)
+	{
+        $_SESSION["userName"] = $_userName;
+        $_SESSION["passWord"] = $_passWord;
+        $_SESSION["managerLoged"] = false;
+        $_SESSION["userLoged"] = true;
         setcookie("userName", $_userName, time() + 3600 * 24 * 365, "/");
         setcookie("passWord", $_passWord, time() + 3600 * 24 * 365, "/");
     }
@@ -100,6 +336,7 @@ class CUserManger
         //$_SESSION["userName"] = "";
         $_SESSION["passWord"] = "";
         $_SESSION["managerLoged"] = false;
+        $_SESSION["userLoged"] = false;
         //setcookie("userName", "", time() - 3600, "./");
         setcookie("passWord", "", time() - 3600, "/");
     }

@@ -5,15 +5,21 @@ include_once "../configuration/swtMISConst.php";
 include_once "../configuration/swtConfig.php";
 include_once "../generalLibs/genfuncs.php";
 include_once "../generalLibs/code01.php";
+include_once "../userManage/swtUserManager.php";
 
 //$dayBack = intval($_POST["dayBack"]);
 $pageID = intval($_POST["pageID"]);
 $reportType = intval($_POST["reportType"]);
+$batchGroup = intval($_POST["batchGroup"]);
+
 $pageItemNum = 20;
 //$allReportsDir = "../allReports";
 
 $returnMsg = array();
 $returnMsg["htmlCode"] = "";
+
+$userChecker = new CUserManger();
+$userID = $userChecker->getUserID();
 
 $db = new CPdoMySQL();
 
@@ -25,15 +31,32 @@ if ($db->getError() != null)
     return;
 }
 
-$params1 = array();
-$sql1 = "SELECT COUNT(*) " .
-        "FROM mis_table_batch_list ";
-if ($db->QueryDB($sql1, $params1) == null)
+if ($userChecker->isManager())
 {
-    $returnMsg["errorCode"] = 0;
-    $returnMsg["errorMsg"] = "query mysql table failed #1, line: " . __LINE__;
-    echo json_encode($returnMsg);
-    return;
+    $params1 = array();
+    $sql1 = "SELECT COUNT(*) " .
+            "FROM mis_table_batch_list";
+    if ($db->QueryDB($sql1, $params1) == null)
+    {
+        $returnMsg["errorCode"] = 0;
+        $returnMsg["errorMsg"] = "query mysql table failed #1, line: " . __LINE__;
+        echo json_encode($returnMsg);
+        return;
+    }
+}
+else
+{
+    $params1 = array($userID);
+    $sql1 = "SELECT COUNT(*) " .
+            "FROM mis_table_user_batch_info t0 " .
+            "WHERE t0.user_id = ? AND t0.batch_id IN (SELECT t1.batch_id FROM mis_table_batch_list t1 ORDER BY t1.batch_id DESC)";
+    if ($db->QueryDB($sql1, $params1) == null)
+    {
+        $returnMsg["errorCode"] = 0;
+        $returnMsg["errorMsg"] = "query mysql table failed #1, line: " . __LINE__;
+        echo json_encode($returnMsg);
+        return;
+    }
 }
 $row1 = $db->fetchRow();
 if ($row1 == false)
@@ -50,15 +73,35 @@ $itemEnd = $itemStart + $pageItemNum;
 $itemEnd = $itemEnd > $batchNum ? $batchNum : $itemEnd;
 //$itemStart = intval($itemEnd / $pageItemNum) * $pageItemNum;
 
-$params1 = array($itemStart, ($itemEnd - $itemStart));
+
+
+$params1 = array();
 $sql1 = "";
 if ($reportType == 0)
 {
-    $sql1 = "SELECT t0.*, t1.path_name " .
-            "FROM mis_table_batch_list t0 " .
-            "LEFT JOIN mis_table_path_info t1 " .
-            "USING (path_id) " .
-            "ORDER BY t0.insert_time DESC LIMIT ?, ?";
+    if ($batchGroup == -1)
+    {
+        // all batches
+        $params1 = array($itemStart, ($itemEnd - $itemStart));
+        $sql1 = "SELECT t0.*, t1.path_name " .
+                "FROM mis_table_batch_list t0 " .
+                "LEFT JOIN mis_table_path_info t1 " .
+                "USING (path_id) " .
+                "ORDER BY t0.insert_time DESC LIMIT ?, ?";
+    }
+    else
+    {
+        // not all batches
+        // if batch_group == 0, for outside users
+        $params1 = array($batchGroup, $userID, $itemStart, ($itemEnd - $itemStart));
+        $sql1 = "SELECT t0.*, t1.path_name " .
+                "FROM mis_table_batch_list t0 " .
+                "LEFT JOIN mis_table_path_info t1 " .
+                "USING (path_id) " .
+                "WHERE t0.batch_group = ? AND " .
+                "t0.batch_id IN (SELECT t2.batch_id FROM mis_table_user_batch_info t2 WHERE t2.user_id = ? ORDER BY t2.batch_id DESC) " .
+                "ORDER BY t0.insert_time DESC LIMIT ?, ?";
+    }
 }
 else if ($reportType == 1)
 {
@@ -81,6 +124,7 @@ $batchIDList = array();
 $batchInsertTimeList = array();
 $batchStateList = array();
 $batchStateNameList = array();
+$batchGroupNameList = array();
 $logPathNameList = array();
 
 while ($row1 = $db->fetchRow())
@@ -88,6 +132,7 @@ while ($row1 = $db->fetchRow())
     array_push($batchIDList, $row1[0]);
     array_push($batchInsertTimeList, $row1[1]);
     array_push($batchStateList, $row1[2]);
+    //array_push($batchGroupNameList, $row1[3]);
     array_push($logPathNameList, $row1[5]);
     $t1 = "not clear";
     if ($row1[2] < count($swtTestBatchStateString))
@@ -95,6 +140,12 @@ while ($row1 = $db->fetchRow())
         $t1 = $swtTestBatchStateString[$row1[2]];
     }
     array_push($batchStateNameList, $t1);
+    
+    if ($row1[3] < count($swtTestBatchGroupString))
+    {
+        $t1 = $swtTestBatchGroupString[$row1[3]];
+    }
+    array_push($batchGroupNameList, $t1);
 }
 
 if (count($batchIDList) == 0)
@@ -134,6 +185,7 @@ $returnMsg["pageItemNum"] = $pageItemNum;
 $returnMsg["batchInsertTimeList"] = $batchInsertTimeList;
 $returnMsg["batchStateList"] = $batchStateList;
 $returnMsg["batchStateNameList"] = $batchStateNameList;
+$returnMsg["batchGroupNameList"] = $batchGroupNameList;
 $returnMsg["logPathNameList"] = $logPathNameList;
 
 echo json_encode($returnMsg);

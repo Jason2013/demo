@@ -7,6 +7,7 @@ include_once "../configuration/swtConfig.php";
 include_once "../server/swtHeartBeatFuncs.php";
 include_once "../generalLibs/genfuncs.php";
 include_once "../generalLibs/code01.php";
+include_once "../userManage/swtUserManager.php";
 
 class CGenReportFlatData
 {
@@ -31,31 +32,71 @@ class CGenReportFlatData
         $batchID = $_batchID;
         $pathID = -1;
         $pathName = "";
+        
+        $userChecker = new CUserManger();
+        
         if ($batchID == -1)
         {
-            $params1 = array();
-            $sql1 = "SELECT t0.*, t1.* FROM mis_table_batch_list t0 " .
-                    "LEFT JOIN mis_table_path_info t1 " .
-                    "USING (path_id) " .
-                    "WHERE t0.batch_state=\"1\" AND (t0.batch_group=\"1\" OR t0.batch_group=\"2\") ORDER BY t0.insert_time DESC LIMIT 1";
-            if ($db->QueryDB($sql1, $params1) == null)
+            if ($userChecker->isManager())
             {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
-                echo json_encode($returnMsg);
-                return false;
+                // manager login
+                $params1 = array();
+                $sql1 = "SELECT t0.*, t1.* FROM mis_table_batch_list t0 " .
+                        "LEFT JOIN mis_table_path_info t1 " .
+                        "USING (path_id) " .
+                        "WHERE t0.batch_state=\"1\" AND (t0.batch_group=\"1\" OR t0.batch_group=\"2\") ORDER BY t0.insert_time DESC LIMIT 1";
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return false;
+                }
+                $row1 = $db->fetchRow();
+                if ($row1 == false)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "no result availabe in database, line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return false;
+                }
+                $batchID = $row1[0];
+                $pathID = $row1[4];
+                $pathName = $row1[6];
             }
-            $row1 = $db->fetchRow();
-            if ($row1 == false)
+            else
             {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "no result availabe in database, line: " . __LINE__;
-                echo json_encode($returnMsg);
-                return false;
+                // outside user login
+                $userID = $userChecker->getUserID();
+                $params1 = array($userID);
+                
+                $sql1 = "SELECT t0.batch_id, t1.path_id, t2.path_name FROM mis_table_user_batch_info t0 " .
+                        "LEFT JOIN mis_table_batch_list t1 " .
+                        "USING (batch_id) " .
+                        "LEFT JOIN mis_table_path_info t2 " .
+                        "ON (t1.path_id = t2.path_id) " .
+                        "WHERE t0.user_id = ? AND t0.batch_id IN " .
+                        "(SELECT t3.batch_id FROM mis_table_batch_list t3 WHERE t3.batch_state = \"1\" AND t3.batch_group = \"0\") " .
+                        "ORDER BY t0.batch_id DESC LIMIT 1";
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return false;
+                }
+                $row1 = $db->fetchRow();
+                if ($row1 == false)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "no result availabe in database, line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return false;
+                }
+                $batchID = $row1[0];
+                $pathID = $row1[1];
+                $pathName = $row1[2];
             }
-            $batchID = $row1[0];
-            $pathID = $row1[4];
-            $pathName = $row1[6];
         }
         else
         {
