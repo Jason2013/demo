@@ -147,17 +147,52 @@ foreach ($batchIDList as $tmpBatchID)
     }
 
     $i = 0;
+    $umdIndex = 0;
+    $cardIndex = -1;
+    $curCardID = -1;
+    $curSysID = -1;
+    $umdNum = count($umdNameList);
     while ($row1 = $db->fetchRow())
     {
+        $tmpMachineID = intval($row1[1]);
+        
+        $tmpCardID = intval($row1[10]);
+        $tmpSysID = intval($row1[12]);
         $tmpDriverName = $row1[21];
         
-        // if this machine has umd less than DX11, DX12, Vulkan
-        $tmpIndex = array_search($tmpDriverName, $umdNameList);
-        if ($tmpIndex == (count($umdNameList) - 1))
+        if ($umdIndex == 0)
         {
-            if ($i != $tmpIndex)
+            $curCardID = $tmpCardID;
+            $curSysID = $tmpSysID;
+            $cardIndex++;
+            // hold enough space
+            for ($j = 0; $j < $umdNum; $j++)
             {
-                for ($j = 0; $j < ($tmpIndex - $i); $j++)
+                array_push($tmpResultIDList, PHP_INT_MAX);
+                array_push($tmpMachineIDList, PHP_INT_MAX);
+                array_push($tmpCardIDList, $row1[10]);
+                array_push($tmpCardNameList, $row1[20]);
+                array_push($tmpDriverNameList, $umdNameList[$j]);
+                array_push($tmpChangeListNumList, PHP_INT_MAX);
+                array_push($tmpCpuNameList, "");
+                array_push($tmpSysNameList, $row1[23]);
+                array_push($tmpMainLineNameList, "");
+                array_push($tmpResultTimeList, "");
+            }
+        }
+        else
+        {
+            if (($curCardID != $tmpCardID) ||
+                ($curSysID  != $tmpSysID))
+            {
+                // next card
+                // e.g. tmpCardNameList:   jan26, jan31
+                //      tmpDriverNameList: DX12, DX12
+                $curCardID = $tmpCardID;
+                $curSysID = $tmpSysID;
+                $cardIndex++;
+                // hold enough space
+                for ($j = 0; $j < $umdNum; $j++)
                 {
                     array_push($tmpResultIDList, PHP_INT_MAX);
                     array_push($tmpMachineIDList, PHP_INT_MAX);
@@ -170,25 +205,78 @@ foreach ($batchIDList as $tmpBatchID)
                     array_push($tmpMainLineNameList, "");
                     array_push($tmpResultTimeList, "");
                 }
-                $i = $tmpIndex;
+                $umdIndex = 0;
             }
         }
-        $i++;
-        if ($i >= count($umdNameList))
+
+        $tmpIndex = array_search($tmpDriverName, $umdNameList);
+        if ($tmpIndex !== false)
         {
-            $i = 0;
+            $n1 = $cardIndex * $umdNum + $tmpIndex;
+            $tmpResultIDList[$n1] = $row1[0];
+            $tmpMachineIDList[$n1] = $row1[1];
+            $tmpCardIDList[$n1] = $row1[10];
+            $tmpCardNameList[$n1] = $row1[20];
+            $tmpDriverNameList[$n1] = $row1[21];
+            $tmpChangeListNumList[$n1] = $row1[4];
+            $tmpCpuNameList[$n1] = $row1[22];
+            $tmpSysNameList[$n1] = $row1[23];
+            $tmpMainLineNameList[$n1] = $row1[24];
+            $tmpResultTimeList[$n1] = $row1[7];
+        }
+        if ($umdIndex != $tmpIndex)
+        {
+            $umdIndex = $tmpIndex;
         }
         
-        array_push($tmpResultIDList, $row1[0]);
-        array_push($tmpMachineIDList, $row1[1]);
-        array_push($tmpCardIDList, $row1[10]);
-        array_push($tmpCardNameList, $row1[20]);
-        array_push($tmpDriverNameList, $row1[21]);
-        array_push($tmpChangeListNumList, $row1[4]);
-        array_push($tmpCpuNameList, $row1[22]);
-        array_push($tmpSysNameList, $row1[23]);
-        array_push($tmpMainLineNameList, $row1[24]);
-        array_push($tmpResultTimeList, $row1[7]);
+        $umdIndex++;
+        if ($umdIndex >= count($umdNameList))
+        {
+            $umdIndex = 0;
+        }
+        
+        
+        
+        //$tmpDriverName = $row1[21];
+        //
+        //// if this machine has umd less than DX11, DX12, Vulkan
+        //$tmpIndex = array_search($tmpDriverName, $umdNameList);
+        //if ($tmpIndex == (count($umdNameList) - 1))
+        //{
+        //    if ($i != $tmpIndex)
+        //    {
+        //        for ($j = 0; $j < ($tmpIndex - $i); $j++)
+        //        {
+        //            array_push($tmpResultIDList, PHP_INT_MAX);
+        //            array_push($tmpMachineIDList, PHP_INT_MAX);
+        //            array_push($tmpCardIDList, $row1[10]);
+        //            array_push($tmpCardNameList, $row1[20]);
+        //            array_push($tmpDriverNameList, $umdNameList[$j]);
+        //            array_push($tmpChangeListNumList, PHP_INT_MAX);
+        //            array_push($tmpCpuNameList, "");
+        //            array_push($tmpSysNameList, $row1[23]);
+        //            array_push($tmpMainLineNameList, "");
+        //            array_push($tmpResultTimeList, "");
+        //        }
+        //        $i = $tmpIndex;
+        //    }
+        //}
+        //$i++;
+        //if ($i >= count($umdNameList))
+        //{
+        //    $i = 0;
+        //}
+        //
+        //array_push($tmpResultIDList, $row1[0]);
+        //array_push($tmpMachineIDList, $row1[1]);
+        //array_push($tmpCardIDList, $row1[10]);
+        //array_push($tmpCardNameList, $row1[20]);
+        //array_push($tmpDriverNameList, $row1[21]);
+        //array_push($tmpChangeListNumList, $row1[4]);
+        //array_push($tmpCpuNameList, $row1[22]);
+        //array_push($tmpSysNameList, $row1[23]);
+        //array_push($tmpMainLineNameList, $row1[24]);
+        //array_push($tmpResultTimeList, $row1[7]);
     }
     array_push($resultIDList, $tmpResultIDList);
     array_push($machineIDList, $tmpMachineIDList);

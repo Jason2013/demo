@@ -220,8 +220,13 @@ $subTestNum = $returnSet["subTestNum"];
 $reportUmdNum = count($umdNameList);
 $startResultID = intval($resultPos / $umdNum) * $umdNum;
 // $cmpStartResultID
-$umdOrder = array(-1, -1, -1, -1, -1, -1);
-$resultUmdOrder = array(-1, -1, -1, -1, -1, -1);
+//$umdOrder = array(-1, -1, -1, -1, -1, -1);
+//$resultUmdOrder = array(-1, -1, -1, -1, -1, -1);
+$umdOrder = array_fill(0, $reportUmdNum * 2, -1);
+$resultUmdOrder = array_fill(0, $reportUmdNum * 2, -1);
+
+$validUmdNum = 0;
+
 for ($i = 0; $i < $reportUmdNum; $i++)
 {
     $n3 = array_search($driverNameList[0][$i], $umdNameList);
@@ -233,6 +238,7 @@ for ($i = 0; $i < $reportUmdNum; $i++)
         if ($resultIDList[0][$startResultID + $i] != PHP_INT_MAX)
         {
             $resultUmdOrder[$i] = $n3;
+            $validUmdNum++;
         }
         if ($cmpStartResultID != -1)
         {
@@ -246,6 +252,19 @@ for ($i = 0; $i < $reportUmdNum; $i++)
 
 $returnMsg["resultUmdOrder"] = $resultUmdOrder;
 $returnMsg["resultIDList[0]"] = $resultIDList[0];
+$returnMsg["validUmdNum"] = $validUmdNum;
+
+$returnSet = $xmlWriter->checkReportDataColumnNum();
+if ($returnSet === null)
+{
+    $returnMsg["errorCode"] = 0;
+    $returnMsg["errorMsg"] = "data column invalid";
+    $returnMsg["resultUmdOrder"] = $resultUmdOrder;
+    $returnMsg["reportUmdNum"] = $reportUmdNum;
+    $returnMsg["cmpMachineID"] = $cmpMachineID;
+    echo json_encode($returnMsg);
+}
+$dataColumnNum = $returnSet["dataColumnNum"];
 
 $tmpUmdName = "";
 $tmpCardName = "";
@@ -262,13 +281,14 @@ $returnMsg["umdStandardOrder"] = $umdStandardOrder;
 $returnMsg["tmpUmdName"] = $tmpUmdName;
 $returnMsg["tmpCardName"] = $tmpCardName;
 $returnMsg["tmpSysName"] = $tmpSysName;
+$returnMsg["driverNameList[0]"] = $driverNameList[0];
 
 $isCompStandard = false;
 for ($i = 0; $i < count($umdStandardOrder); $i++)
 {
     // find a standard umd name
     $isSkip = false;
-    for ($j = 0; $j < count($uniqueUmdNameList); $j++)
+    for ($j = 0; $j < $reportUmdNum; $j++)
     {
         if ($umdStandardOrder[$i] == $driverNameList[0][$j])
         {
@@ -284,6 +304,18 @@ for ($i = 0; $i < count($umdStandardOrder); $i++)
     {
         continue;
     }
+    if ($cmpMachineID != -1)
+    {
+        // asic comparison
+        $tmpPos = array_search($umdStandardOrder[$i], $umdNameList);
+        if (($tmpPos === false) ||
+            ($resultUmdOrder[$tmpPos] == -1) ||
+            ($resultUmdOrder[$reportUmdNum + $tmpPos] == -1))
+        {
+            // win cmp ubuntu, skip none vulkan
+            //continue;
+        }
+    }
     $tmpPos = array_search($umdStandardOrder[$i], $uniqueUmdNameList);
     if ($tmpPos !== false)
     {
@@ -293,6 +325,16 @@ for ($i = 0; $i < count($umdStandardOrder); $i++)
         }
         break;
     }
+}
+
+$swtReportInfo = array_fill(0, $reportUmdNum, "");
+$swtReportUmdInfo = array_fill(0, $reportUmdNum, "");
+
+for ($i = 0; $i < $reportUmdNum; $i++)
+{
+    // loop all comparison batches of one umd
+    $swtReportInfo[$i] = "CL#" . $changeListNumList[0][$startResultID + $i];
+    $swtReportUmdInfo[$i] = $driverNameList[0][$startResultID + $i];
 }
 
 // get subtest num of all tests
@@ -307,6 +349,8 @@ $cmpSubTestNumList = $returnSet["cmpSubTestNumList"];
 // skip these test in report compare sheet and graph
 $skipTestNameList = $returnSet["skipTestNameList"];
 $subTestUmdDataMaskList = $returnSet["subTestUmdDataMaskList"];
+
+$returnMsg["skipTestNameList"] = $skipTestNameList;
 
 // generate seperate cards report
 if (($subTestNum     == 0) ||

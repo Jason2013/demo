@@ -114,15 +114,18 @@ foreach ($batchIDList as $tmpBatchID)
     $umdIndex = 0;
     $cardIndex = -1;
     $curCardID = -1;
+    $curSysID = -1;
     $umdNum = count($umdNameList);
     while ($row1 = $db->fetchRow())
     {
         $tmpCardID = intval($row1[10]);
+        $tmpSysID = intval($row1[12]);
         $tmpDriverName = $row1[21];
         
         if ($umdIndex == 0)
         {
             $curCardID = $tmpCardID;
+            $curSysID = $tmpSysID;
             $cardIndex++;
             // hold enough space
             for ($j = 0; $j < $umdNum; $j++)
@@ -143,12 +146,14 @@ foreach ($batchIDList as $tmpBatchID)
         }
         else
         {
-            if ($curCardID != $tmpCardID)
+            if (($curCardID != $tmpCardID) ||
+                ($curSysID  != $tmpSysID))
             {
                 // next card
                 // e.g. tmpCardNameList:   jan26, jan31
                 //      tmpDriverNameList: DX12, DX12
                 $curCardID = $tmpCardID;
+                $curSysID = $tmpSysID;
                 $cardIndex++;
                 // hold enough space
                 for ($j = 0; $j < $umdNum; $j++)
@@ -161,6 +166,9 @@ foreach ($batchIDList as $tmpBatchID)
                     array_push($tmpCpuNameList, "");
                     array_push($tmpSysNameList, $row1[23]);
                     array_push($tmpMainLineNameList, "");
+                    array_push($tmpSClockNameList, "");
+                    array_push($tmpMClockNameList, "");
+                    array_push($tmpGpuMemNameList, "");
                     array_push($tmpResultTimeList, "");
                 }
                 $umdIndex = 0;

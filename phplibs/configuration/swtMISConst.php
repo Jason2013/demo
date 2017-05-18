@@ -32,8 +32,11 @@ $swtClientMachineConfigurationNames = array("machineName",
 //$swtUmdNameList = array("DX11", "DX12", "Vulkan");
 //$swtUmdStandardOrder = array("Vulkan", "DX12", "DX11");
 
-$swtUmdNameList = array("DX11", "DX12", "Vulkan");
-$swtUmdStandardOrder = array("Vulkan", "DX12", "DX11");
+$swtUmdNameList = array("DX11", "DX12", "Vulkan", "OGL");
+$swtUmdStandardOrder = array("Vulkan", "DX12", "DX11", "OGL");
+
+//$swtUmdNameList = array("DX11", "DX12", "Vulkan");
+//$swtUmdStandardOrder = array("Vulkan", "DX12", "DX11");
 
 $swtSheetColumnIDList = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", 
                               "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
@@ -42,8 +45,8 @@ $swtSheetColumnIDList = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
                               "BA", "BB", "BC", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BK", "BL", "BM",
                               "BN", "BO", "BP", "BQ", "BR", "BS", "BT", "BU", "BV", "BW", "BX", "BY", "BZ");
 
-define("graphDataStartLineID", "7");
-define("graphDataStartLineIDCompare", "7");
+define("graphDataStartLineID", "6");
+define("graphDataStartLineIDCompare", "6");
 define("graphDataStartCloumnID", "R");
 define("graphDataEndCloumnID", "U");
 define("graphDataStartCloumnIDIndex", 17);

@@ -1,5 +1,5 @@
  <Worksheet ss:Name="Summary">
-  <Table ss:ExpandedColumnCount="00004" x:FullColumns="1"
+  <Table x:FullColumns="1"
    x:FullRows="1" ss:StyleID="Default" ss:DefaultRowHeight="15">
 
    <Column ss:AutoFitWidth="0" ss:Width="80"/>
