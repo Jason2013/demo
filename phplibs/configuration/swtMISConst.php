@@ -29,6 +29,9 @@ $swtClientMachineConfigurationNames = array("machineName",
                                             "machineID");
  
 
+//$swtUmdNameList = array("DX11", "DX12", "Vulkan");
+//$swtUmdStandardOrder = array("Vulkan", "DX12", "DX11");
+
 $swtUmdNameList = array("DX11", "DX12", "Vulkan");
 $swtUmdStandardOrder = array("Vulkan", "DX12", "DX11");
 

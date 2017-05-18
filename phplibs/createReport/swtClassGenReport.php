@@ -972,7 +972,7 @@ class CGenReport
                     if ($tmpSubTestNum == 0)
                     {
                         // set to skip test in report sheet if has no data
-                        array_push($skipTestNameList, $testNameList[$i]);
+                        //array_push($skipTestNameList, $testNameList[$i]);
                     }
                 }
             }
@@ -1153,6 +1153,8 @@ class CGenReport
                                           $subjectNameFilterNumMax + 4, $subjectNameFilterNumMax + 4,
                                           $subjectNameFilterNumMax + 7, $subjectNameFilterNumMax + 7,
                                           $subjectNameFilterNumMax + 10, $subjectNameFilterNumMax + 10);
+                                          
+                    $returnMsg["tmp_cmpMachineID0"] = $_cmpMachineID;
                 }
                 else
                 {
@@ -1161,6 +1163,8 @@ class CGenReport
                                           $subjectNameFilterNumMax + 4, $subjectNameFilterNumMax + 4,
                                           $subjectNameFilterNumMax + 6, $subjectNameFilterNumMax + 6,
                                           $subjectNameFilterNumMax + 8, $subjectNameFilterNumMax + 8);
+                                          
+                    $returnMsg["tmp_cmpMachineID"] = $_cmpMachineID;
                 }
                 if (strlen($xmlSection) == 0)
                 {
@@ -1872,6 +1876,48 @@ class CGenReport
         return $returnSet;
     }
     
+	public function testTempChange1($_curTestName)
+	{
+        global $cmpCardName;
+        
+        $t1 = strtolower($cmpCardName);
+        if (strpos($t1, "gt") === false)
+        {
+            return false;
+        }
+        $t1 = strtolower($_curTestName);
+        if (strcmp($t1, strtolower("CSFillRate")) == 0)
+        {
+            return true;
+        }
+        if (strcmp($t1, strtolower("CsMandelbrot")) == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+	public function testTempChange2($_curTestName)
+	{
+        global $curCardName;
+        
+        $t1 = strtolower($curCardName);
+        if (strpos($t1, "gt") === false)
+        {
+            return false;
+        }
+        $t1 = strtolower($_curTestName);
+        if (strcmp($t1, strtolower("CSFillRate")) == 0)
+        {
+            return true;
+        }
+        if (strcmp($t1, strtolower("CsMandelbrot")) == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+    
 	public function genAverageDataForGraph($_isCompStandard, $_cmpStartResultID,
                                            $_curCardName, $_cmpCardName, $_graphCells,
                                            $_tmpSysName, $_cmpSysName)
@@ -1881,6 +1927,7 @@ class CGenReport
         global $subTestUmdDataMaskList;
         global $umdNum;
         global $subTestNumList;
+        global $subTestNumMap;
         global $cmpSubTestNumList;
         global $umdOrder;
         global $resultUmdOrder;
@@ -1949,6 +1996,14 @@ class CGenReport
             for ($i = 0; $i < count($testNameList); $i++)
             {
                 if (intval($subTestNumList[$i]) == 0)
+                {
+                    //continue;
+                }
+                if (isset($subTestNumMap[$testNameList[$i]]) == false)
+                {
+                    continue;
+                }
+                if ($subTestNumMap[$testNameList[$i]] == 0)
                 {
                     continue;
                 }
@@ -2050,6 +2105,8 @@ class CGenReport
                         
                     $t1 = " <Cell ss:Index=\"" . (20 + $subjectNameFilterNumMax) . "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
                           $testNameList[$i] . "</Data></Cell>\n";
+                          
+                          
                     $t1 .= $tmpVal[0];
                     $t1 .= $tmpVal[1];
                     $t1 .= $tmpVal[2];
@@ -2097,6 +2154,11 @@ class CGenReport
                     $tmpValHas[5] = " <Cell ss:StyleID=\"Default\" " .
                                     "ss:Formula=\"=RC[-8]/RC[-" . (14 - $startIndex) .
                                     "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                                    
+                                        
+                    $tmpValHas2 = " <Cell ss:StyleID=\"Default\" " .
+                                  "ss:Formula=\"=RC[-8]/RC[-" . (12 - $startIndex) .
+                                  "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
                     
                     
                     for ($k = 0; $k < $reportUmdNum; $k++)
@@ -2128,12 +2190,21 @@ class CGenReport
                     $t1 .= " <Cell ss:Index=\"" . (29 + $subjectNameFilterNumMax) . "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
                            $testNameList[$i] . "</Data></Cell>\n";
                            
+                    //testTempChange1
+                           
                     $t1 .= $tmpVal[0];
                     $t1 .= $tmpVal[1];
                     $t1 .= $tmpVal[2];
-                    $t1 .= $tmpVal[3];
+                    $t1 .= $this->testTempChange1($testNameList[$i]) ? $tmpValHas2 : $tmpVal[3];
                     $t1 .= $tmpVal[4];
                     $t1 .= $tmpVal[5];
+                    
+                    //$t1 .= $tmpVal[0];
+                    //$t1 .= $tmpVal[1];
+                    //$t1 .= $tmpVal[2];
+                    //$t1 .= $tmpVal[3];
+                    //$t1 .= $tmpVal[4];
+                    //$t1 .= $tmpVal[5];
                     
                 }
                 else
@@ -2215,6 +2286,10 @@ class CGenReport
                     $tmpValHas[2] = " <Cell ss:StyleID=\"Default\" " .
                                     "ss:Formula=\"=RC[-5]/RC[-" . (7 - $startIndex) .
                                     "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                                    
+                    $tmpValHas2 = " <Cell ss:StyleID=\"Default\" " .
+                                  "ss:Formula=\"=RC[-6]/RC[-" . (6 - $startIndex) .
+                                  "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
                     
                     
                     for ($j = 0; $j < $reportUmdNum; $j++)
@@ -2232,9 +2307,13 @@ class CGenReport
                     $t1 .= " <Cell ss:Index=\"" . (19 + $subjectNameFilterNumMax) . "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
                            $testNameList[$i] . "</Data></Cell>\n";
                     $t1 .= $tmpVal[0];
-                    $t1 .= $tmpVal[1];
+                    $t1 .= $this->testTempChange2($testNameList[$i]) ? $tmpValHas2 : $tmpVal[1];
                     $t1 .= $tmpVal[2];
-                        
+                    
+                    
+                    //$t1 .= $tmpVal[0];
+                    //$t1 .= $tmpVal[1];
+                    //$t1 .= $tmpVal[2];
                 }
                 array_push($graphCells, $t1);
                 $n1 = $n2 + 2;

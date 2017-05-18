@@ -215,8 +215,6 @@ if ($returnSet === null)
 }
 $subTestNum = $returnSet["subTestNum"];
 
-$undNumList = array();
-
 //umdNameList
 
 $reportUmdNum = count($umdNameList);
