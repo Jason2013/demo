@@ -1203,7 +1203,20 @@ class CGenReport
                         array_push($tmpRange, ("R6C" . ($subjectNameFilterNumMax + 4 + $i * 3) . ":R1000000C" . ($subjectNameFilterNumMax + 4 + $i * 3) . ""));
                     }
                     $t1 = implode(",", $tmpRange);
+                    
+                    // freeze column num
+                    $n2 = $subjectNameFilterNumMax + 2 + $dataColumnNum;
+                    
+                    $freezePanesCode = "   <FreezePanes/>\n" .
+                                       "   <FrozenNoSplit/>\n" .
+                                       "   <SplitHorizontal>4</SplitHorizontal>\n" .
+                                       "   <TopRowBottomPane>4</TopRowBottomPane>\n" .
+                                       "   <SplitVertical>" . $n2 . "</SplitVertical>\n".
+                                       "   <LeftColumnRightPane>" . $n2 . "</LeftColumnRightPane>\n";
+                    
+                    
                     $xmlSection = sprintf($xmlSection,
+                                          $freezePanesCode,
                                           $t1);
                                           
                     $returnMsg["tmp_ConditionalFormatting0"] = $xmlSection;
@@ -1226,7 +1239,19 @@ class CGenReport
                         array_push($tmpRange, "R6C" . ($subjectNameFilterNumMax + (4 + $i * 2)) . ":R1000000C" . ($subjectNameFilterNumMax + (4 + $i * 2)) . "");
                     }
                     $t1 = implode(",", $tmpRange);
+                    
+                    // freeze column num
+                    $n2 = $subjectNameFilterNumMax + 2 + $dataColumnNum;
+                    
+                    $freezePanesCode = "   <FreezePanes/>\n" .
+                                       "   <FrozenNoSplit/>\n" .
+                                       "   <SplitHorizontal>4</SplitHorizontal>\n" .
+                                       "   <TopRowBottomPane>4</TopRowBottomPane>\n" .
+                                       "   <SplitVertical>" . $n2 . "</SplitVertical>\n".
+                                       "   <LeftColumnRightPane>" . $n2 . "</LeftColumnRightPane>\n";
+                    
                     $xmlSection = sprintf($xmlSection,
+                                          $freezePanesCode,
                                           $t1);
                                           
                     $returnMsg["tmp_ConditionalFormatting"] = $xmlSection;
