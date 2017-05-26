@@ -131,6 +131,31 @@ if ($fileID < count($oldReportXLSXList))
                                        "    Selection.Delete Shift:=xlToLeft\n";
                     }
                 }
+                if ($vbaConfig->cmpMachineID != -1)
+                {
+                    $t5 = "    myChart.Activate\n" .
+                          "    ActiveChart.ChartTitle.Select\n" .
+                          "    Selection.Format.TextFrame2.TextRange.Characters.Text = _\n" .
+                          "        \"Microbench Performance relative to DXX - Fiji XT\" & Chr(13) & \"%s\"\n" .
+                          "    With Selection.Format.TextFrame2.TextRange.Characters(50, %d).Font.Fill\n" .
+                          "        .Visible = msoTrue\n" .
+                          "        .ForeColor.ObjectThemeColor = msoThemeColorAccent6\n" .
+                          "        .ForeColor.TintAndShade = 0\n" .
+                          "        .ForeColor.Brightness = 0\n" .
+                          "        .Transparency = 0\n" .
+                          "        .Solid\n" .
+                          "    End With\n";
+                    $t6 = $vbaConfig->cmpCardName . " vs " . $vbaConfig->curCardName;
+                    if (strcmp($vbaConfig->cmpCardName, $vbaConfig->curCardName) == 0)
+                    {
+                        $tmpList1 = explode(" ", $vbaConfig->cmpSysName);
+                        $tmpList2 = explode(" ", $vbaConfig->curSysName);
+                        $t6 = $tmpList1[0] . " vs " . $tmpList2[0];
+                    }
+                    
+                    $n1 = strlen($t6);
+                    $codePiece1 = sprintf($t5, $t6, $n1);
+                }
                 
                 // $vbaConfig->graphDataArea
                 $t2 = sprintf($t2, $t4, $tmpCardName, $vbaConfig->graphDataAreaNoBlank, $codePiece1);

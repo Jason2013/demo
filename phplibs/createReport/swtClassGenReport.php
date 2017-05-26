@@ -1210,9 +1210,9 @@ class CGenReport
                     $freezePanesCode = "   <FreezePanes/>\n" .
                                        "   <FrozenNoSplit/>\n" .
                                        "   <SplitHorizontal>4</SplitHorizontal>\n" .
-                                       "   <TopRowBottomPane>4</TopRowBottomPane>\n" .
-                                       "   <SplitVertical>" . $n2 . "</SplitVertical>\n".
-                                       "   <LeftColumnRightPane>" . $n2 . "</LeftColumnRightPane>\n";
+                                       "   <TopRowBottomPane>4</TopRowBottomPane>\n";
+                                       //"   <SplitVertical>" . $n2 . "</SplitVertical>\n".
+                                       //"   <LeftColumnRightPane>" . $n2 . "</LeftColumnRightPane>\n";
                     
                     
                     $xmlSection = sprintf($xmlSection,
@@ -1246,9 +1246,9 @@ class CGenReport
                     $freezePanesCode = "   <FreezePanes/>\n" .
                                        "   <FrozenNoSplit/>\n" .
                                        "   <SplitHorizontal>4</SplitHorizontal>\n" .
-                                       "   <TopRowBottomPane>4</TopRowBottomPane>\n" .
-                                       "   <SplitVertical>" . $n2 . "</SplitVertical>\n".
-                                       "   <LeftColumnRightPane>" . $n2 . "</LeftColumnRightPane>\n";
+                                       "   <TopRowBottomPane>4</TopRowBottomPane>\n";
+                                       //"   <SplitVertical>" . $n2 . "</SplitVertical>\n".
+                                       //"   <LeftColumnRightPane>" . $n2 . "</LeftColumnRightPane>\n";
                     
                     $xmlSection = sprintf($xmlSection,
                                           $freezePanesCode,
@@ -2511,8 +2511,10 @@ class CGenReport
             $t1 = "";
             if ($_cmpStartResultID != -1)
             {
-                $addCurSysName = $_curCardName == $_cmpCardName ? "-" . $_tmpSysName : "";
-                $addCmpSysName = $_curCardName == $_cmpCardName ? "-" . $_cmpSysName : "";
+                $tmpList1 = explode(" ", $_tmpSysName);
+                $tmpList2 = explode(" ", $_cmpSysName);
+                $addCurSysName = $_curCardName == $_cmpCardName ? "-" . $tmpList1[0] : "";
+                $addCmpSysName = $_curCardName == $_cmpCardName ? "-" . $tmpList2[0] : "";
                 
                 $tmpAverageDataCode = "";
                 $tmpCompAverageDataCode = "";
@@ -3636,12 +3638,14 @@ class CGenReport
         global $curCardName;
         global $cmpCardName;
         global $tmpSysName;
+        global $cmpSysName;
         global $swtTempVBAConfigJsonName;
         global $graphDataStartCloumnIDCompareList;
         global $jsonFileName;
         global $reportTemplateDir;
         global $subTestUmdDataMaskList;
         global $dataColumnNum;
+        global $cmpMachineID;
 
         $db = $_db;
         $tempFileHandle = $_tempFileHandle;
@@ -3731,6 +3735,11 @@ class CGenReport
         $tmpJson = array();
         $tmpJson["graphDataArea"] = $graphDataArea;
         $tmpJson["graphDataAreaNoBlank"] = $graphDataAreaNoBlank;
+        $tmpJson["curCardName"] = $curCardName;
+        $tmpJson["cmpCardName"] = $cmpCardName;
+        $tmpJson["curSysName"] = $tmpSysName;
+        $tmpJson["cmpSysName"] = $cmpSysName;
+        $tmpJson["cmpMachineID"] = $cmpMachineID;
         // use DX11, DX12, vulkan mask of Alu as overall mask
         // subTestUmdDataMaskList[0]
         $tmpMask = $subTestUmdDataMaskList[0];
