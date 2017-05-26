@@ -123,14 +123,14 @@ if ($fileID < count($oldReportXLSXList))
                 }
                 // dropArea
                 $codePiece1 = "";
-                for ($i = 0; $i < count($vbaConfig->dropArea); $i++)
-                {
-                    if (strlen($vbaConfig->dropArea[$i]) > 0)
-                    {
-                        $codePiece1 .= "    Columns(\"" . $vbaConfig->dropArea[$i] . "\").Select\n" .
-                                       "    Selection.Delete Shift:=xlToLeft\n";
-                    }
-                }
+                //for ($i = 0; $i < count($vbaConfig->dropArea); $i++)
+                //{
+                //    if (strlen($vbaConfig->dropArea[$i]) > 0)
+                //    {
+                //        $codePiece1 .= "    Columns(\"" . $vbaConfig->dropArea[$i] . "\").Select\n" .
+                //                       "    Selection.Delete Shift:=xlToLeft\n";
+                //    }
+                //}
                 if ($vbaConfig->cmpMachineID != -1)
                 {
                     $t5 = "    myChart.Activate\n" .
