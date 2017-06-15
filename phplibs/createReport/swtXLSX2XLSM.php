@@ -131,7 +131,8 @@ if ($fileID < count($oldReportXLSXList))
                 //                       "    Selection.Delete Shift:=xlToLeft\n";
                 //    }
                 //}
-                if ($vbaConfig->cmpMachineID != -1)
+                if (($vbaConfig->cmpMachineID != -1) ||
+                    ($vbaConfig->crossType == 2))
                 {
                     $t5 = "    myChart.Activate\n" .
                           "    ActiveChart.ChartTitle.Select\n" .
@@ -151,6 +152,12 @@ if ($fileID < count($oldReportXLSXList))
                         $tmpList1 = explode(" ", $vbaConfig->cmpSysName);
                         $tmpList2 = explode(" ", $vbaConfig->curSysName);
                         $t6 = $tmpList1[0] . " vs " . $tmpList2[0];
+                    }
+                    
+                    if ($vbaConfig->crossType == 2)
+                    {
+                        // cross build
+                        $t6 = $vbaConfig->curResultTime . " vs " . $vbaConfig->cmpBatchTime;
                     }
                     
                     $n1 = strlen($t6);

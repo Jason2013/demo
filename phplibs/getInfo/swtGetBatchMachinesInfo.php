@@ -106,6 +106,68 @@ while ($row1 = $db->fetchRow())
     array_push($systemNameList, $row1[3]);
 }
 
+$historyBatchList = array();
+$historyTimeList = array();
+
+$returnMsg["tmpIDList"] = "";
+
+foreach ($machineIDList as $tmpMachineID)
+{
+    $sql1 = "";
+    $params1 = array();
+    if ($userChecker->isManager())
+    {
+        // manager login
+        $params1 = array($tmpMachineID);
+
+        $sql1 = "SELECT DISTINCT (t0.batch_id), t1.insert_time FROM mis_table_result_list t0 " .
+                "LEFT JOIN mis_table_batch_list t1 USING (batch_id) " .
+                "WHERE t0.machine_id = ? AND t0.batch_id IN (SELECT batch_id FROM mis_table_batch_list " .
+                "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") " .
+                "ORDER BY insert_time DESC) LIMIT 5";
+    }
+    else
+    {
+        $userID = $userChecker->getUserID();
+        $params1 = array($userID, $tmpMachineID);
+        
+        $returnMsg["userID_1"] = $userID;
+        $returnMsg["machineIDList_1"] = $machineIDList;
+        $returnMsg["tmpIDList"] .= $tmpMachineID;
+
+        // 
+        $sql1 = "SELECT t0.batch_id, t3.insert_time FROM mis_table_user_batch_info t0 " .
+                "LEFT JOIN mis_table_batch_list t3 USING (batch_id) " .
+                "WHERE t0.user_id = ? " .
+                "AND t0.batch_id IN (SELECT t1.batch_id FROM mis_table_batch_list t1 " .
+                "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
+                "AND t0.batch_id IN (SELECT t2.batch_id FROM mis_table_result_list t2 " .
+                "WHERE t2.machine_id = ?) " .
+                "ORDER BY t0.batch_id DESC LIMIT 5";
+    }
+    
+    if ($db->QueryDB($sql1, $params1) == null)
+    {
+        $returnMsg["errorCode"] = 0;
+        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", " . $db->getError()[2];
+        echo json_encode($returnMsg);
+        return;
+    }
+
+    $tmpBatchList = array();
+    $tmpTimeList = array();
+    
+    while ($row1 = $db->fetchRow())
+    {
+        //$returnMsg["userID_2"] = $userID;
+        array_push($tmpBatchList, $row1[0]);
+        $tmpVal = explode(" ", $row1[1]);
+        array_push($tmpTimeList, $tmpVal[0]);
+    }
+    array_push($historyBatchList, $tmpBatchList);
+    array_push($historyTimeList, $tmpTimeList);
+}
+
 $reportFileNameList = array();
 $reportFolderName = $downloadReportDir . "/batch" . $batchID;
 if ((file_exists($reportFolderName) == true) &&
@@ -161,6 +223,9 @@ $returnMsg["cardNameList"] = $cardNameList;
 $returnMsg["systemNameList"] = $systemNameList;
 $returnMsg["reportFileNameList"] = $reportFileNameList;
 $returnMsg["reportFolderName"] = $reportFolderName;
+$returnMsg["historyBatchList"] = $historyBatchList;
+$returnMsg["historyTimeList"] = $historyTimeList;
+$returnMsg["batchID"] = $batchID;
 
 echo json_encode($returnMsg);
 

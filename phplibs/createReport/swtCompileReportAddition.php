@@ -34,6 +34,7 @@ $forceGenReport = intval($_POST["forceGenReport"]);
 $reportToken = intval($_POST["reportToken"]);
 $curReportFolder = intval($_POST["curReportFolder"]);
 $reportType = intval($_POST["reportType"]);
+$crossType = intval($_POST["crossType"]);
 
 // default values
 $startStyleID = $swtStartStyleID;
@@ -75,8 +76,12 @@ if ($returnSet == null)
     return;
 }
 $machineIDPairList = $returnSet["machineIDPairList"];
+$machineIDBatchPairList = $returnSet["machineIDBatchPairList"];
+$machineIDBatchPairMap = $returnSet["machineIDBatchPairMap"];
 $checkedMachineIDList = $returnSet["checkedMachineIDList"];
 $checkedMachineIDListString = $returnSet["checkedMachineIDListString"];
+
+$returnMsg["machineIDBatchPairList"] = $machineIDBatchPairList;
 
 $db = new CPdoMySQL();
 if ($db->getError() != null)
@@ -167,6 +172,24 @@ $mClockNameList = $returnSet["mClockNameList"];
 $gpuMemNameList = $returnSet["gpuMemNameList"];
 $resultTimeList = $returnSet["resultTimeList"];
 
+$crossBuildResultIDList =      $returnSet["crossBuildResultIDList"];
+$crossBuildMachineIDList =     $returnSet["crossBuildMachineIDList"];
+$crossBuildCardNameList =      $returnSet["crossBuildCardNameList"];
+$crossBuildDriverNameList =    $returnSet["crossBuildDriverNameList"];
+$crossBuildChangeListNumList = $returnSet["crossBuildChangeListNumList"];
+$crossBuildCpuNameList =       $returnSet["crossBuildCpuNameList"];
+$crossBuildSysNameList =       $returnSet["crossBuildSysNameList"];
+$crossBuildMainLineNameList =  $returnSet["crossBuildMainLineNameList"];
+$crossBuildSClockNameList =    $returnSet["crossBuildSClockNameList"];
+$crossBuildMClockNameList =    $returnSet["crossBuildMClockNameList"];
+$crossBuildGpuMemNameList =    $returnSet["crossBuildGpuMemNameList"];
+$crossBuildResultTimeList =    $returnSet["crossBuildResultTimeList"];
+
+$returnMsg["crossBuildResultIDList"] = $crossBuildResultIDList;
+$returnMsg["crossBuildMachineIDList"] = $crossBuildMachineIDList;
+$returnMsg["crossBuildCardNameList"] = $crossBuildCardNameList;
+$returnMsg["crossBuildDriverNameList"] = $crossBuildDriverNameList;
+$returnMsg["crossBuildSysNameList"] = $crossBuildSysNameList;
 
 $returnMsg["checkedMachineIDList"] = $checkedMachineIDList;
 $returnMsg["cardNameList"] = $cardNameList[0];
@@ -200,12 +223,16 @@ $xmlWriter->checkDefaultMachinePair($resultPos);
 
 $returnSet = $xmlWriter->getCompareMachineInfo($resultPos);
 $cmpMachineID = $returnSet["cmpMachineID"];
+$curMachineID = $returnSet["curMachineID"];
+$curResultTime = $returnSet["curResultTime"];
+$cmpBatchTime = $returnSet["cmpBatchTime"];
 $cmpStartResultID = $returnSet["cmpStartResultID"];
 $cmpCardName = $returnSet["cmpCardName"];
 $cmpSysName = $returnSet["cmpSysName"];
 $curCardName = $returnSet["curCardName"];
 
-
+$returnMsg["curMachineID"] = $curMachineID;
+$returnMsg["cmpMachineID"] = $cmpMachineID;
 
 // get subtest num of current test
 $returnSet = $xmlWriter->getSubTestNum($db, $resultPos, $tableName01, $subTestNum);
@@ -250,6 +277,53 @@ for ($i = 0; $i < $reportUmdNum; $i++)
     }
 }
 
+if ($crossType == 2)
+{
+    $umdOrder = array_fill(0, $reportUmdNum * 2, -1);
+    $resultUmdOrder = array_fill(0, $reportUmdNum * 2, -1);
+    
+    for ($i = 0; $i < $reportUmdNum; $i++)
+    {
+        $n3 = array_search($driverNameList[0][$i], $umdNameList);
+        if ($n3 !== false)
+        {
+            $umdOrder[$i] = $n3;
+            $umdOrder[$reportUmdNum + $i] = $umdNum + $n3;
+            
+            if ($resultIDList[0][$startResultID + $i] != PHP_INT_MAX)
+            {
+                $resultUmdOrder[$i] = $n3;
+                $validUmdNum++;
+            }
+            $tmpIndex = -1;
+            for ($j = 0; $j < (count($machineIDBatchPairList) / 2); $j++)
+            {
+                if ($curMachineID == intval($machineIDBatchPairList[$j * 2]))
+                {
+                    $tmpIndex = $j;
+                    break;
+                }
+            }
+            if ($tmpIndex == -1)
+            {
+                continue;
+            }
+            if ($crossBuildResultIDList[$tmpIndex][$i] != PHP_INT_MAX)
+            {
+                $resultUmdOrder[$reportUmdNum + $i] = $n3;
+            }
+        }
+    }
+    
+    if ($curMachineID == PHP_INT_MAX)
+    {
+        for ($i = 0; $i < $reportUmdNum; $i++)
+        {
+            $resultUmdOrder[$reportUmdNum + $i] = $resultUmdOrder[$i];
+        }
+    }
+}
+
 $returnMsg["resultUmdOrder"] = $resultUmdOrder;
 $returnMsg["resultIDList[0]"] = $resultIDList[0];
 $returnMsg["validUmdNum"] = $validUmdNum;
@@ -265,6 +339,7 @@ if ($returnSet === null)
     echo json_encode($returnMsg);
 }
 $dataColumnNum = $returnSet["dataColumnNum"];
+$returnMsg["dataColumnNum"] = $dataColumnNum;
 
 $tmpUmdName = "";
 $tmpCardName = "";
@@ -376,7 +451,9 @@ if (($subTestNum     == 0) ||
     if ($curTestPos >= count($testNameList))
     {
         $returnSet = $xmlWriter->getReportFileNames($reportFolder, $tmpCardName, $tmpSysName, $batchID);
+        // main xml file
         $xmlFileName = $returnSet["xmlFileName"];
+        // comparison sheet
         $tmpFileName = $returnSet["tmpFileName"];
         // flatData
         $tmpFileName1 = $returnSet["tmpFileName1"];
@@ -604,7 +681,7 @@ $returnMsg["curReportFolder"] = $curReportFolder;
 $returnMsg["batchID"] = $batchID;
 $returnMsg["uniqueUmdNameList"] = $uniqueUmdNameList;
 $returnMsg["subTestUmdDataMaskList"] = $subTestUmdDataMaskList;
-
+$returnMsg["crossType"] = $crossType;
 
 $t1 = json_encode($returnMsg);
 echo $t1;

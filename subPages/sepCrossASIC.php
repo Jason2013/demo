@@ -6,14 +6,14 @@ $html1 = new CSwtHtmlTemple("Grapher Generate Routine Report", "../");
 $html1->outPageHead("", "" .
                         "<script type=\"text/javascript\" src=\"../jslibs/some/genFuncs.js\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/jquery-cookie/jquery.cookie.js\"></script>\n" .
-                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201702071520\"></script>\n");
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201706081304\"></script>\n");
 
 $html1->outPageBodyStart();
 
 ?>
 
 <div class = "pageArticleTitle">
-    <p>Generate Routine Report:</p>
+    <p>Generate Routine Report - Cross ASIC & System</p>
 </div>
 <div id="pageArticleContent" class = "pageArticleContent">
 
@@ -31,7 +31,13 @@ $html1->outPageBodyStart();
         <p>please <span style="background-color: #FF0000; color: #FFFFFF;">don't close this page in process of generating report!</span></p>
         
         <p>finishing percent: <div id="finishPercentBar" >0%</div></p>
-        <div id="" class="button01 roundCorner" onclick="swtGenerateRoutineReport('finishPercentBar', 'reportList', 0, -1, -1);" onselectstart="return false;" style="float: left;">
+        <div id="" class="button02 roundCorner" onclick="swtGotoPage('./sepStartPage.php');" onselectstart="return false;" style="float: left;">
+        Step Back
+        </div>
+        <div style="float: left; width: 100px;">
+        &nbsp&nbsp&nbsp&nbsp
+        </div>
+        <div id="" class="button01 roundCorner" onclick="swtGenerateRoutineReport('finishPercentBar', 'reportList', 0, -1, 1);" onselectstart="return false;" style="float: left;">
         generate
         </div>
         <div style="float: left;">&nbsp&nbsp</div>
@@ -53,7 +59,7 @@ $html1->outPageBodyNext();
     
 <script>
 
-swtGetCardChoiceCode("cardChoice", "reportList");
+swtGetCardChoiceCodeCrossASIC("cardChoice", "reportList");
 
 </script>
 

@@ -228,6 +228,7 @@ function swtDoSubmitTestResults(_inputTagName,
                 $("#" + _inputTagName).val("");
                 $("#" + _percentTagName).html("feeding database: 100%");
                 alert("import success");
+                swtGotoPage('./sepStartPage.php');
                 //location.reload(true);
             }
             else
@@ -270,7 +271,9 @@ function swtDoSubmitTestResults(_inputTagName,
     });
 }
 
-function swtGenerateRoutineReport(_percentTagName, _reportListTag, _reportType, _batchID)
+// _crossType, 0 for cross API, 1 for cross ASIC, SYS, 2 for cross Builds
+
+function swtGenerateRoutineReport(_percentTagName, _reportListTag, _reportType, _batchID, _crossType)
 {
     $("#" + _percentTagName).html("0% (generating is started...)");
     
@@ -305,6 +308,15 @@ function swtGenerateRoutineReport(_percentTagName, _reportListTag, _reportType, 
             {
                 machineIDPair.push(parseInt(machineIDList[i]));
                 machineIDPair.push(n1);
+                // if cross asic, pair are machineID, machineID
+                // if cross build, pair are machineID, batch
+            }
+            else if ((_crossType == 1) || 
+                     (_crossType == 2))
+            {
+                // cross ASIC, SYS
+                // cross build
+                continue;
             }
             checkedMachineIDList.push(parseInt(machineIDList[i]));
         }
@@ -312,11 +324,12 @@ function swtGenerateRoutineReport(_percentTagName, _reportListTag, _reportType, 
         t3 = swtImplode(checkedMachineIDList, ",");
     }
 
+    console.log("---: " + t2);
 
-    //console.log("---: " + t2);
     swtDoGenerateFlatData(_percentTagName,
                           _batchID,
                           _reportType,
+                          _crossType,
                           -1,
                           t2,
                           t3
@@ -326,17 +339,24 @@ function swtGenerateRoutineReport(_percentTagName, _reportListTag, _reportType, 
 function swtDoGenerateFlatData(_percentTagName,
                                _batchID,
                                _reportType,
+                               _crossType,
                                _curReportFolder,
                                _machineIDPair,
                                _machineIDList
                                )
 {
+    var tmpMachineIDPair = _machineIDPair;
+    if (_crossType == 2)
+    {
+        // cross build
+        tmpMachineIDPair = "";
+    }
     $.post("../phplibs/createReport/swtGenTempFlatData.php", 
     {
         batchID:               _batchID,
         reportType:            _reportType,
         curReportFolder:       _curReportFolder,
-        machineIDPair:         _machineIDPair,
+        machineIDPair:         tmpMachineIDPair, //_machineIDPair,
         machineIDList:         _machineIDList
     }, 
     function(data,status) 
@@ -358,6 +378,7 @@ function swtDoGenerateFlatData(_percentTagName,
                                            _machineIDPair,
                                            1,
                                            _reportType,
+                                           _crossType,
                                            0,
                                            0,
                                            0,
@@ -377,6 +398,7 @@ function swtDoGenerateFlatData(_percentTagName,
                 swtDoGenerateFlatData(_percentTagName,
                                       _batchID,
                                       _reportType,
+                                      _crossType,
                                       json.curReportFolder,
                                       _machineIDPair,
                                       _machineIDList
@@ -400,6 +422,7 @@ function swtDoGenerateRoutineReport(_percentTagName,
                                     _machineIDPair,
                                     _forceGenReport,
                                     _reportType,
+                                    _crossType,
                                     _resultPos,
                                     _curTestPos,
                                     _nextSubTestPos,
@@ -421,6 +444,7 @@ function swtDoGenerateRoutineReport(_percentTagName,
         machineIDList:  _machineIDList,
         forceGenReport: _forceGenReport,
         reportType:     _reportType,
+        crossType:      _crossType,
         resultPos:      _resultPos,
         curTestPos:     _curTestPos,
         nextSubTestPos: _nextSubTestPos,
@@ -457,6 +481,7 @@ function swtDoGenerateRoutineReport(_percentTagName,
                                            _machineIDPair,
                                            0,
                                            _reportType,
+                                           _crossType,
                                            json.resultPos,
                                            json.curTestPos,
                                            json.nextSubTestPos,
@@ -644,7 +669,7 @@ function swtGenAllHistoryReports()
             console.log("333: " + batchID);
             var t1 = swtImplode(batchIDList, ",");
             $("#batchesToGenerate").text(t1);
-            swtGenerateRoutineReport('finishPercentBar', 'reportList', 1, batchID);
+            swtGenerateRoutineReport('finishPercentBar', 'reportList', 1, batchID, -1);
         }
     }
     else
@@ -820,6 +845,270 @@ function swtGetCardChoiceCode(_divTag, _reportTag)
                 t1 += "<td>\n";
                 t1 += "&nbsp&nbsp";
                 t1 += "<input id=\"" + t5 + "\" name=\"" + t5 + "\" type=\"checkbox\" checked=\"checked\">\n";
+                t1 += "</td>\n";
+                
+                t1 += "<tr>\n";
+            }
+            console.log("machines: " + t4);
+            
+            t1 += "</table>\n";
+            t1 += "<input type=\"hidden\" id=\"valMachineIDList\" name=\"valMachineIDList\" value=\"" + t4 + "\" />\n";
+            $("#" + _divTag).html(t1);
+            
+            var reportListCode = "";
+            for (var i = 0; i < json.reportFileNameList.length; i++)
+            {
+                var tmpList = json.reportFileNameList[i].split("/");
+                var t1 = "";
+                if (tmpList.length > 0)
+                {
+                    t1 = tmpList[tmpList.length - 1];
+                }
+                
+                reportListCode += "<p><a href=\"" + json.reportFileNameList[i] + "\">" +
+                                  t1 +
+                                  "</a></p>\n";
+            }
+            $("#" + _reportTag).html(reportListCode);
+        }
+    });
+}
+
+function swtGetCardChoiceCodeCrossAPI(_divTag, _reportTag)
+{
+    
+    $.post("../phplibs/getInfo/swtGetBatchMachinesInfo.php", 
+    {
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+		console.log("<<<");
+		console.log(data);
+		console.log("<<<");
+        var json = eval("(" + data + ")");
+
+        
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            //alert(json.errorMsg);
+            swtLastBatchMachineIDList = json.machineIDList;
+            var t4 = "";
+            var t1 = "<table>\n";
+            for (var i = 0; i < json.machineIDList.length; i++)
+            {
+                t1 += "<tr>\n";
+                t1 += "<td>\n";
+                t1 += "-&nbsp&nbsp";
+                t1 += json.cardNameList[i] + " - " + json.systemNameList[i];
+                t1 += "&nbsp&nbsp";
+                t1 += "</td>\n";
+                t1 += "<td>\n";
+                var t3 = "selMachineID" + json.machineIDList[i];
+                var t5 = "checkMachineID" + json.machineIDList[i];
+                var t2 = "<select id=\"" + t3 + "\" name=\"" + t3 + "\" style=\"display:none;\">\n" +
+                         "<option value=\"-1\">no comparison</option>\n";
+                t4 += json.machineIDList[i];
+                if (i < (json.machineIDList.length - 1))
+                {
+                    t4 += ",";
+                }
+                for (var j = 0; j < json.machineIDList.length; j++)
+                {
+                    if (i == j)
+                    {
+                        continue;
+                    }
+                    t2 += "<option value=\"" + json.machineIDList[j] + "\">" + json.cardNameList[j] + " - " + json.systemNameList[j] + "</option>";
+                }
+                t2 += "</select>\n";
+                
+                t1 += t2;
+                
+                t1 += "</td>\n";
+                
+                t1 += "<td>\n";
+                t1 += "&nbsp&nbsp";
+                t1 += "<input id=\"" + t5 + "\" name=\"" + t5 + "\" type=\"checkbox\" checked=\"checked\">\n";
+                t1 += "</td>\n";
+                
+                t1 += "<tr>\n";
+            }
+            console.log("machines: " + t4);
+            
+            t1 += "</table>\n";
+            t1 += "<input type=\"hidden\" id=\"valMachineIDList\" name=\"valMachineIDList\" value=\"" + t4 + "\" />\n";
+            $("#" + _divTag).html(t1);
+            
+            var reportListCode = "";
+            for (var i = 0; i < json.reportFileNameList.length; i++)
+            {
+                var tmpList = json.reportFileNameList[i].split("/");
+                var t1 = "";
+                if (tmpList.length > 0)
+                {
+                    t1 = tmpList[tmpList.length - 1];
+                }
+                
+                reportListCode += "<p><a href=\"" + json.reportFileNameList[i] + "\">" +
+                                  t1 +
+                                  "</a></p>\n";
+            }
+            $("#" + _reportTag).html(reportListCode);
+        }
+    });
+}
+
+function swtGetCardChoiceCodeCrossASIC(_divTag, _reportTag)
+{
+    
+    $.post("../phplibs/getInfo/swtGetBatchMachinesInfo.php", 
+    {
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+		console.log("<<<");
+		console.log(data);
+		console.log("<<<");
+        var json = eval("(" + data + ")");
+
+        
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            //alert(json.errorMsg);
+            swtLastBatchMachineIDList = json.machineIDList;
+            var t4 = "";
+            var t1 = "<table>\n";
+            for (var i = 0; i < json.machineIDList.length; i++)
+            {
+                t1 += "<tr>\n";
+                t1 += "<td>\n";
+                t1 += "-&nbsp&nbsp";
+                t1 += json.cardNameList[i] + " - " + json.systemNameList[i];
+                t1 += "&nbsp&nbsp";
+                t1 += "</td>\n";
+                t1 += "<td>\n";
+                var t3 = "selMachineID" + json.machineIDList[i];
+                var t5 = "checkMachineID" + json.machineIDList[i];
+                var t2 = "<select id=\"" + t3 + "\" name=\"" + t3 + "\" >\n" +
+                         "<option value=\"-1\">skip</option>\n";
+                t4 += json.machineIDList[i];
+                if (i < (json.machineIDList.length - 1))
+                {
+                    t4 += ",";
+                }
+                for (var j = 0; j < json.machineIDList.length; j++)
+                {
+                    if (i == j)
+                    {
+                        continue;
+                    }
+                    t2 += "<option value=\"" + json.machineIDList[j] + "\">" + json.cardNameList[j] + " - " + json.systemNameList[j] + "</option>";
+                }
+                t2 += "</select>\n";
+                
+                t1 += t2;
+                
+                t1 += "</td>\n";
+                
+                t1 += "<td>\n";
+                t1 += "&nbsp&nbsp";
+                t1 += "<input id=\"" + t5 + "\" name=\"" + t5 + 
+                      "\" type=\"checkbox\" checked=\"checked\" style=\"display:none;\">\n";
+                t1 += "</td>\n";
+                
+                t1 += "<tr>\n";
+            }
+            console.log("machines: " + t4);
+            
+            t1 += "</table>\n";
+            t1 += "<input type=\"hidden\" id=\"valMachineIDList\" name=\"valMachineIDList\" value=\"" + t4 + "\" />\n";
+            $("#" + _divTag).html(t1);
+            
+            var reportListCode = "";
+            for (var i = 0; i < json.reportFileNameList.length; i++)
+            {
+                var tmpList = json.reportFileNameList[i].split("/");
+                var t1 = "";
+                if (tmpList.length > 0)
+                {
+                    t1 = tmpList[tmpList.length - 1];
+                }
+                
+                reportListCode += "<p><a href=\"" + json.reportFileNameList[i] + "\">" +
+                                  t1 +
+                                  "</a></p>\n";
+            }
+            $("#" + _reportTag).html(reportListCode);
+        }
+    });
+}
+
+function swtGetCardChoiceCodeCrossBuild(_divTag, _reportTag)
+{
+    
+    $.post("../phplibs/getInfo/swtGetBatchMachinesInfo.php", 
+    {
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+		console.log("<<<");
+		console.log(data);
+		console.log("<<<");
+        var json = eval("(" + data + ")");
+
+        
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            //alert(json.errorMsg);
+            swtLastBatchMachineIDList = json.machineIDList;
+            var t4 = "";
+            var t1 = "<table>\n";
+            for (var i = 0; i < json.machineIDList.length; i++)
+            {
+                t1 += "<tr>\n";
+                t1 += "<td>\n";
+                t1 += "-&nbsp&nbsp";
+                t1 += json.cardNameList[i] + " - " + json.systemNameList[i];
+                t1 += "&nbsp&nbsp";
+                t1 += "</td>\n";
+                t1 += "<td>\n";
+                var t3 = "selMachineID" + json.machineIDList[i];
+                var t5 = "checkMachineID" + json.machineIDList[i];
+                var t2 = "<select id=\"" + t3 + "\" name=\"" + t3 + "\" >\n" +
+                         "<option value=\"-1\">skip</option>\n";
+                t4 += json.machineIDList[i];
+                if (i < (json.machineIDList.length - 1))
+                {
+                    t4 += ",";
+                }
+                for (var j = 0; j < json.historyBatchList[i].length; j++)
+                {
+                    if (json.batchID == json.historyBatchList[i][j])
+                    {
+                        continue;
+                    }
+                    t2 += "<option value=\"" + json.historyBatchList[i][j] + "\">" + json.historyTimeList[i][j] + 
+                          " - batch: " + json.historyBatchList[i][j] +
+                          "</option>";
+                }
+                t2 += "</select>\n";
+                
+                console.log(t2);
+                
+                t1 += t2;
+                
+                t1 += "</td>\n";
+                
+                t1 += "<td>\n";
+                t1 += "&nbsp&nbsp";
+                t1 += "<input id=\"" + t5 + "\" name=\"" + t5 + 
+                      "\" type=\"checkbox\" checked=\"checked\" style=\"display:none;\">\n";
                 t1 += "</td>\n";
                 
                 t1 += "<tr>\n";

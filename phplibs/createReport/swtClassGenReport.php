@@ -161,6 +161,8 @@ class CGenReport
 	public function checkInputMachineID($_machineIDPair, $_checkedMachineIDList)
 	{
         global $returnMsg;
+        global $crossType;
+        
         $machineIDPairList = array();
         if (strlen($_machineIDPair) > 0)
         {
@@ -169,6 +171,19 @@ class CGenReport
         if ($_checkedMachineIDList === false)
         {
             $_checkedMachineIDList = "";
+        }
+        $machineIDBatchPairList = array();
+        $machineIDBatchPairMap = array();
+        if ($crossType == 2)
+        {
+            // cross build
+            $machineIDBatchPairList = $machineIDPairList;
+            $machineIDPairList = array();
+            
+            for ($i = 0; $i < (count($machineIDBatchPairList) / 2); $i++)
+            {
+                $machineIDBatchPairMap["" . $machineIDBatchPairList[$i * 2]] = intval($machineIDBatchPairList[$i * 2 + 1]);
+            }
         }
 
         $checkedMachineIDList = explode(",", $_checkedMachineIDList);
@@ -198,6 +213,8 @@ class CGenReport
         
         $returnSet = array();
         $returnSet["machineIDPairList"] = $machineIDPairList;
+        $returnSet["machineIDBatchPairList"] = $machineIDBatchPairList;
+        $returnSet["machineIDBatchPairMap"] = $machineIDBatchPairMap;
         $returnSet["checkedMachineIDList"] = $checkedMachineIDList;
         $returnSet["checkedMachineIDListString"] = $checkedMachineIDListString;
         return $returnSet;
@@ -490,6 +507,9 @@ class CGenReport
         global $selectedCardIDList;
         global $selectedSysIDList;
         global $umdNameList;
+        global $crossType;
+        global $machineIDBatchPairList;
+        
         $db = $_db;
 
         $resultIDList = array();
@@ -677,6 +697,183 @@ class CGenReport
             array_push($resultTimeList, $tmpResultTimeList);
         }
         
+        
+        $crossBuildResultIDList = array();
+        $crossBuildMachineIDList = array();
+        $crossBuildCardNameList = array();
+        $crossBuildDriverNameList = array();
+        $crossBuildChangeListNumList = array();
+        $crossBuildCpuNameList = array();
+        $crossBuildSysNameList = array();
+        $crossBuildMainLineNameList = array();
+        $crossBuildSClockNameList = array();
+        $crossBuildMClockNameList = array();
+        $crossBuildGpuMemNameList = array();
+        $crossBuildResultTimeList = array();
+        
+        if ($crossType == 2)
+        {
+            // cross build
+
+            for ($i = 0; $i < (count($machineIDBatchPairList) / 2); $i++)
+            {
+                $tmpMachineID = $machineIDBatchPairList[$i * 2];
+                $tmpBatchID = $machineIDBatchPairList[$i * 2 + 1];
+                
+                $tmpResultIDList = array();
+                $tmpMachineIDList = array();
+                $tmpCardNameList = array();
+                $tmpDriverNameList = array();
+                $tmpChangeListNumList = array();
+                $tmpCpuNameList = array();
+                $tmpSysNameList = array();
+                $tmpMainLineNameList = array();
+                $tmpSClockNameList = array();
+                $tmpMClockNameList = array();
+                $tmpGpuMemNameList = array();
+                $tmpResultTimeList = array();
+                
+                $params1 = array($tmpBatchID, $tmpMachineID);
+                $sql1 = "SELECT t0.*, " .
+                        "t1.*, " .
+                        "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.card_id) AS cardName, " .
+                        "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t0.umd_id) AS umdName, " .
+                        "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.cpu_id) AS cpuName, " .
+                        "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.sys_id) AS sysName, " .
+                        "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.ml_id) AS mlName, " .
+                        "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.s_clock_id) AS sClockName, " .
+                        "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.m_clock_id) AS mClockName, " .
+                        "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.gpu_mem_id) AS gpuMemName " .
+                        "FROM mis_table_result_list t0 " .
+                        "LEFT JOIN mis_table_machine_info t1 " .
+                        "USING (machine_id) " .
+                        "WHERE batch_id = ? AND machine_id = ? ORDER BY t0.umd_id ASC";
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . $db->getError()[2];
+                    echo json_encode($returnMsg);
+                    return null;
+                }
+
+                $umdIndex = 0;
+                $cardIndex = -1;
+                $curCardID = -1;
+                $curSysID = -1;
+                $umdNum = count($umdNameList);
+                while ($row1 = $db->fetchRow())
+                {
+                    $tmpMachineID = intval($row1[1]);
+                    
+                    $tmpCardID = intval($row1[10]);
+                    $tmpSysID = intval($row1[12]);
+                    $tmpKeys1 = array_keys($selectedCardIDList, $tmpCardID);
+                    $tmpKeys2 = array_keys($selectedSysIDList, $tmpSysID);
+                    $tmpKeys3 = array_intersect($tmpKeys1, $tmpKeys2);
+                    if (count($tmpKeys3) == 0)
+                    {
+                        // skip unselected cards
+                        continue;
+                    }
+                    $tmpDriverName = $row1[21];
+                    
+                    if ($umdIndex == 0)
+                    {
+                        $curCardID = $tmpCardID;
+                        $curSysID = $tmpSysID;
+                        $cardIndex++;
+                        // hold enough space
+                        for ($j = 0; $j < $umdNum; $j++)
+                        {
+                            array_push($tmpResultIDList, PHP_INT_MAX);
+                            array_push($tmpMachineIDList, PHP_INT_MAX);
+                            array_push($tmpCardNameList, $row1[20]);
+                            array_push($tmpDriverNameList, $umdNameList[$j]);
+                            array_push($tmpChangeListNumList, PHP_INT_MAX);
+                            array_push($tmpCpuNameList, "");
+                            array_push($tmpSysNameList, $row1[23]);
+                            array_push($tmpMainLineNameList, "");
+                            array_push($tmpSClockNameList, "");
+                            array_push($tmpMClockNameList, "");
+                            array_push($tmpGpuMemNameList, "");
+                            array_push($tmpResultTimeList, "");
+                        }
+                    }
+                    else
+                    {
+                        if (($curCardID != $tmpCardID) ||
+                            ($curSysID  != $tmpSysID))
+                        {
+                            // next card
+                            // e.g. tmpCardNameList:   jan26, jan31
+                            //      tmpDriverNameList: DX12, DX12
+                            $curCardID = $tmpCardID;
+                            $curSysID = $tmpSysID;
+                            $cardIndex++;
+                            // hold enough space
+                            for ($j = 0; $j < $umdNum; $j++)
+                            {
+                                array_push($tmpResultIDList, PHP_INT_MAX);
+                                array_push($tmpMachineIDList, PHP_INT_MAX);
+                                array_push($tmpCardNameList, $row1[20]);
+                                array_push($tmpDriverNameList, $umdNameList[$j]);
+                                array_push($tmpChangeListNumList, PHP_INT_MAX);
+                                array_push($tmpCpuNameList, "");
+                                array_push($tmpSysNameList, $row1[23]);
+                                array_push($tmpMainLineNameList, "");
+                                array_push($tmpSClockNameList, "");
+                                array_push($tmpMClockNameList, "");
+                                array_push($tmpGpuMemNameList, "");
+                                array_push($tmpResultTimeList, "");
+                            }
+                            $umdIndex = 0;
+                        }
+                    }
+
+                    $tmpIndex = array_search($tmpDriverName, $umdNameList);
+                    if ($tmpIndex !== false)
+                    {
+                        $n1 = $cardIndex * $umdNum + $tmpIndex;
+                        $tmpResultIDList[$n1] = $row1[0];
+                        $tmpMachineIDList[$n1] = $row1[1];
+                        $tmpCardNameList[$n1] = $row1[20];
+                        $tmpDriverNameList[$n1] = $row1[21];
+                        $tmpChangeListNumList[$n1] = $row1[4];
+                        $tmpCpuNameList[$n1] = $row1[22];
+                        $tmpSysNameList[$n1] = $row1[23];
+                        $tmpMainLineNameList[$n1] = $row1[24];
+                        $tmpSClockNameList[$n1] = $row1[25];
+                        $tmpMClockNameList[$n1] = $row1[26];
+                        $tmpGpuMemNameList[$n1] = $row1[27];
+                        $tmpResultTimeList[$n1] = $row1[7];
+                    }
+                    if ($umdIndex != $tmpIndex)
+                    {
+                        $umdIndex = $tmpIndex;
+                    }
+                    
+                    $umdIndex++;
+                    if ($umdIndex >= count($umdNameList))
+                    {
+                        $umdIndex = 0;
+                    }
+                }
+                array_push($crossBuildResultIDList, $tmpResultIDList);
+                array_push($crossBuildMachineIDList, $tmpMachineIDList);
+                array_push($crossBuildCardNameList, $tmpCardNameList);
+                array_push($crossBuildDriverNameList, $tmpDriverNameList);
+                array_push($crossBuildChangeListNumList, $tmpChangeListNumList);
+                array_push($crossBuildCpuNameList, $tmpCpuNameList);
+                array_push($crossBuildSysNameList, $tmpSysNameList);
+                array_push($crossBuildMainLineNameList, $tmpMainLineNameList);
+                array_push($crossBuildSClockNameList, $tmpSClockNameList);
+                array_push($crossBuildMClockNameList, $tmpMClockNameList);
+                array_push($crossBuildGpuMemNameList, $tmpGpuMemNameList);
+                array_push($crossBuildResultTimeList, $tmpResultTimeList);
+            }
+            
+        }
+        
         $returnMsg["cardNameListFlat"] = $cardNameListFlat;
         $returnMsg["driverNameListFlat"] = $driverNameListFlat;
         
@@ -699,6 +896,20 @@ class CGenReport
         $returnSet["mClockNameList"] = $mClockNameList;
         $returnSet["gpuMemNameList"] = $gpuMemNameList;
         $returnSet["resultTimeList"] = $resultTimeList;
+        
+        $returnSet["crossBuildResultIDList"] =      $crossBuildResultIDList;
+        $returnSet["crossBuildMachineIDList"] =     $crossBuildMachineIDList;
+        $returnSet["crossBuildCardNameList"] =      $crossBuildCardNameList;
+        $returnSet["crossBuildDriverNameList"] =    $crossBuildDriverNameList;
+        $returnSet["crossBuildChangeListNumList"] = $crossBuildChangeListNumList;
+        $returnSet["crossBuildCpuNameList"] =       $crossBuildCpuNameList;
+        $returnSet["crossBuildSysNameList"] =       $crossBuildSysNameList;
+        $returnSet["crossBuildMainLineNameList"] =  $crossBuildMainLineNameList;
+        $returnSet["crossBuildSClockNameList"] =    $crossBuildSClockNameList;
+        $returnSet["crossBuildMClockNameList"] =    $crossBuildMClockNameList;
+        $returnSet["crossBuildGpuMemNameList"] =    $crossBuildGpuMemNameList;
+        $returnSet["crossBuildResultTimeList"] =    $crossBuildResultTimeList;
+        
         return $returnSet;
     }
     
@@ -785,14 +996,35 @@ class CGenReport
         global $sysNameList;
         global $machineIDPairList;
         global $machineIDList;
+        global $resultTimeList;
+        global $crossBuildResultTimeList;
         global $umdNameList;
         global $umdNum;
+        global $crossType;
+        global $machineIDBatchPairList;
         
         $cmpMachineID = -1;
         $cmpStartResultID = -1;
         $cmpCardName = "";
         $cmpSysName = "";
         $curCardName = $cardNameList[0][$_resultPos];
+        $curMachineID = intval($machineIDList[0][$_resultPos]);
+        $tmpTime = explode(" ", $resultTimeList[0][$_resultPos]);
+        $curResultTime = $tmpTime[0];
+        $cmpBatchTime = "";
+        if ($crossType == 2)
+        {
+            // cross build
+            for ($i = 0; $i < (count($machineIDBatchPairList) / 2); $i++)
+            {
+                if ($curMachineID == intval($machineIDBatchPairList[$i * 2]))
+                {
+                    $tmpTime = explode(" ", $crossBuildResultTimeList[$i][0]);
+                    $cmpBatchTime = $tmpTime[0];
+                    break;
+                }
+            }
+        }
         if (count($machineIDPairList) > 0)
         {
             // get comparison machine result id list
@@ -848,6 +1080,9 @@ class CGenReport
 
         $returnSet = array();
         $returnSet["cmpMachineID"] = $cmpMachineID;
+        $returnSet["curMachineID"] = $curMachineID;
+        $returnSet["curResultTime"] = $curResultTime;
+        $returnSet["cmpBatchTime"] = $cmpBatchTime;
         $returnSet["cmpStartResultID"] = $cmpStartResultID;
         $returnSet["cmpCardName"] = $cmpCardName;
         $returnSet["cmpSysName"] = $cmpSysName;
@@ -1029,9 +1264,13 @@ class CGenReport
 	{
         global $returnMsg;
 
+        // main xml file
         $xmlFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d.tmp2", $_batchID);
+        // comparison sheet
         $tmpFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d.tmp", $_batchID);
+        // flat data
         $tmpFileName1 = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d.tmp1", $_batchID);
+        // summary data
         $jsonFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d.json", $_batchID);
         
         $returnSet = array();
@@ -1128,6 +1367,7 @@ class CGenReport
         global $swtReportInfo;
         global $swtReportUmdInfo;
         global $resultUmdOrder;
+        global $crossType;
 
         $sheetLinePos = $_sheetLinePos;
         
@@ -1190,7 +1430,8 @@ class CGenReport
                     $n1 -= $n2;
                 }
                 $xmlSection = "";
-                if ($cmpMachineID != -1)
+                if (($cmpMachineID != -1) ||
+                    ($crossType == 2))
                 {
                     // if comparison with other cards
                     // $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet002B1.txt");
@@ -1203,6 +1444,9 @@ class CGenReport
                         array_push($tmpRange, ("R6C" . ($subjectNameFilterNumMax + 4 + $i * 3) . ":R1000000C" . ($subjectNameFilterNumMax + 4 + $i * 3) . ""));
                     }
                     $t1 = implode(",", $tmpRange);
+                    
+                    $returnMsg["conditionFormatRange"] = $t1;
+                    $returnMsg["dataColumnNum_1"] = $dataColumnNum;
                     
                     // freeze column num
                     $n2 = $subjectNameFilterNumMax + 2 + $dataColumnNum;
@@ -1303,7 +1547,8 @@ class CGenReport
                     $summarySheetHeadCode2 = "   <Row ss:StyleID=\"Default\">" .
                                              "    <Cell ss:StyleID=\"s91\"><Data ss:Type=\"String\">Tests</Data></Cell>";
                                              
-                    if ($cmpStartResultID != -1)
+                    if (($cmpStartResultID != -1) ||
+                        ($crossType == 2))
                     {
                         // asic comparison
                         for ($i = 0; $i < $reportUmdNum; $i++)
@@ -1411,7 +1656,8 @@ class CGenReport
                         $tmpLoopNum = 0;
                         
                         // to deal with random api missing
-                        if ($cmpStartResultID != -1)
+                        if (($cmpStartResultID != -1) ||
+                            ($crossType == 2))
                         {
                             for ($i = 0; $i < $reportUmdNum; $i++)
                             {
@@ -1435,7 +1681,8 @@ class CGenReport
                         for ($i = 0; $i < $tmpLoopNum; $i++)
                         {
                             // skip absent api
-                            if ($cmpStartResultID != -1)
+                            if (($cmpStartResultID != -1) ||
+                                ($crossType == 2))
                             {
                                 if (($resultUmdOrder[$i] == -1) ||
                                     ($resultUmdOrder[$reportUmdNum + $i] == -1))
@@ -1804,10 +2051,12 @@ class CGenReport
         global $validUmdNum;
         global $reportUmdNum;
         global $cmpMachineID;
+        global $crossType;
         
         $dataColumnNum = 0;
         
-        if ($cmpMachineID != -1)
+        if (($cmpMachineID != -1) ||
+            ($crossType == 2))
         {
             // asic comparison
             $curFirstRowAPIColumnID = 0;
@@ -1847,7 +2096,8 @@ class CGenReport
             }
         }
         
-        if ($curFirstRowAPIColumnID == 0)
+        if (($curFirstRowAPIColumnID == 0) &&
+            ($crossType != 2))
         {
             // no data
             return null;
@@ -1883,6 +2133,9 @@ class CGenReport
         global $checkNeedCreateReportFile;
         global $swtReportInfo;
         global $swtReportUmdInfo;
+        global $crossType;
+        global $curResultTime;
+        global $cmpBatchTime;
         
 
         $tempFileLineNumPos = $_tempFileLineNumPos;
@@ -1932,7 +2185,8 @@ class CGenReport
             $tempFileHandle = fopen($_tmpFileName, "w+");
             $xmlSection = "";
             $t1 = "";
-            if ($_cmpMachineID != -1)
+            if (($_cmpMachineID != -1) ||
+                ($crossType == 2))
             {
                 // if comparison with other card
                 // $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet002A1.txt");
@@ -1946,6 +2200,30 @@ class CGenReport
                     $curCardTitle .= "&#10;" . $_tmpSysName;
                     $cmpCardTitle .= "&#10;" . $_cmpSysName;
                 }
+                
+                $curCardTitle2 = $_curCardName . " - " . $_tmpSysName;
+                $cmpCardTitle2 = $_cmpCardName . " - " . $_cmpSysName;
+                
+                $curCardTitle3 = $_curCardName;
+                $cmpCardTitle3 = $_cmpCardName;
+                
+                if ($crossType == 2)
+                {
+                    $curCardTitle = $cmpBatchTime;
+                    $cmpCardTitle = $curResultTime;
+                    $curCardTitle2 = $cmpBatchTime;
+                    $cmpCardTitle2 = $curResultTime;
+                    $curCardTitle3 = $cmpBatchTime;
+                    $cmpCardTitle3 = $curResultTime;
+                    
+                    //$curCardTitle = $curResultTime;
+                    //$cmpCardTitle = $cmpBatchTime;
+                    //$curCardTitle2 = $curResultTime;
+                    //$cmpCardTitle2 = $cmpBatchTime;
+                    //$curCardTitle3 = $curResultTime;
+                    //$cmpCardTitle3 = $cmpBatchTime;
+                }
+                
                 // sheet head, comparison
                 $reportCardComparisonHead = " <Worksheet ss:Name=\"Cross-API_Comparison\">" .
                                             "  <Table ss:ExpandedRowCount=\"%010d\" x:FullColumns=\"1\"" .
@@ -1962,7 +2240,7 @@ class CGenReport
                 $t1 .= "   <Row ss:StyleID=\"Default\">" .
                        "    <Cell ss:StyleID=\"s84\"/>" .
                        "    <Cell ss:StyleID=\"s84\" ss:MergeAcross=\"" . ($subjectNameFilterNumMax - 0) . "\" >" .
-                       "<Data ss:Type=\"String\">" . ($_cmpCardName . " - " . $_cmpSysName . " vs " . $_curCardName . " - " . $_tmpSysName) . 
+                       "<Data ss:Type=\"String\">" . ($cmpCardTitle2 . " vs " . $curCardTitle2) . 
                        "</Data></Cell>";
                 $curFirstRowAPIColumnID = 0;
                 for ($i = 0; $i < $reportUmdNum; $i++)
@@ -1997,7 +2275,7 @@ class CGenReport
                         continue;
                     }
                     $t1 .= "    <Cell ss:StyleID=\"s87\"><Data ss:Type=\"String\">" . ($curCardTitle) . "</Data></Cell>" .
-                           "    <Cell ss:StyleID=\"s87\"><Data ss:Type=\"String\">" . ($_cmpCardName . "&#10;vs&#10;" . $_curCardName) . "</Data></Cell>" .
+                           "    <Cell ss:StyleID=\"s87\"><Data ss:Type=\"String\">" . ($cmpCardTitle3 . "&#10;vs&#10;" . $curCardTitle3) . "</Data></Cell>" .
                            "    <Cell ss:StyleID=\"s87\"><Data ss:Type=\"String\">" . ($cmpCardTitle) . "</Data></Cell>";
                     $curFirstRowAPIColumnID++;
                 }
@@ -2490,6 +2768,9 @@ class CGenReport
         global $dataColumnNum;
         global $swtReportInfo;
         global $swtReportUmdInfo;
+        global $crossType;
+        global $curResultTime;
+        global $cmpBatchTime;
 
         $graphCells = $_graphCells;
         // columns have values (if true, not blank in excel table)
@@ -2509,12 +2790,25 @@ class CGenReport
         {
             // generate average data for graph
             $t1 = "";
-            if ($_cmpStartResultID != -1)
+            if (($_cmpStartResultID != -1) ||
+                ($crossType == 2))
             {
                 $tmpList1 = explode(" ", $_tmpSysName);
                 $tmpList2 = explode(" ", $_cmpSysName);
-                $addCurSysName = $_curCardName == $_cmpCardName ? "-" . $tmpList1[0] : "";
-                $addCmpSysName = $_curCardName == $_cmpCardName ? "-" . $tmpList2[0] : "";
+                $addCurCardSysName = $_curCardName == $_cmpCardName ? "-" . $tmpList1[0] : "";
+                $addCmpCardSysName = $_curCardName == $_cmpCardName ? "-" . $tmpList2[0] : "";
+                
+                if ($crossType == 2)
+                {
+                    // cross build
+                    $addCurCardSysName = $cmpBatchTime;
+                    $addCmpCardSysName = $curResultTime;
+                }
+                else
+                {
+                    $addCurCardSysName = $_curCardName . $addCurCardSysName;
+                    $addCmpCardSysName = $_cmpCardName . $addCmpCardSysName;
+                }
                 
                 $tmpAverageDataCode = "";
                 $tmpCompAverageDataCode = "";
@@ -2545,14 +2839,14 @@ class CGenReport
                     }
                     
                     $tmpAverageDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
-                                           $_curCardName . "</Data></Cell>\n";
+                                           $addCurCardSysName . "</Data></Cell>\n";
                     $tmpCompAverageDataCode .= " <Cell " . $tmpIndexCode .
                                                " ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
-                                               $_cmpCardName . "</Data></Cell>\n";
+                                               $addCmpCardSysName . "</Data></Cell>\n";
                     $tmpGraphDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
-                                         $_curCardName . $addCurSysName . "</Data></Cell>\n" .
+                                         $addCurCardSysName . "</Data></Cell>\n" .
                                          " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
-                                         $_cmpCardName . $addCmpSysName . "</Data></Cell>\n";
+                                         $addCmpCardSysName . "</Data></Cell>\n";
                 }
                 
                 $t1 = $tmpAverageDataCode . $tmpCompAverageDataCode . $tmpGraphDataCode;
@@ -2665,7 +2959,8 @@ class CGenReport
                 $n2 = $n1 + $subTestNumList[$i] - 1;
 
                 $t1 = "";
-                if ($_cmpStartResultID != -1)
+                if (($_cmpStartResultID != -1) ||
+                    ($crossType == 2))
                 {
                     // if comparison with other cards
                     
@@ -3155,6 +3450,7 @@ class CGenReport
         global $subjectFilterNameList;
         global $startGraphDataLinePos;
         global $dataColumnNum;
+        global $crossType;
 
         $lineNum = $_lineNum;
         $sheetLinePos = $_sheetLinePos;
@@ -3324,7 +3620,8 @@ class CGenReport
                 //       " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\"/>\n";
                        
                 //if (count($machineIDPairList) > 0)
-                if ($_cmpMachineID != -1)
+                if (($_cmpMachineID != -1) ||
+                    ($crossType == 2))
                 {
                     // if comparison with other cards
                     
@@ -3646,6 +3943,12 @@ class CGenReport
         global $subTestUmdDataMaskList;
         global $dataColumnNum;
         global $cmpMachineID;
+        global $curMachineID;
+        global $crossType;
+        global $machineIDBatchPairList;
+        global $crossBuildResultIDList;
+        global $curResultTime;
+        global $cmpBatchTime;
 
         $db = $_db;
         $tempFileHandle = $_tempFileHandle;
@@ -3681,7 +3984,8 @@ class CGenReport
                          
         $graphDataAreaNoBlank = $graphDataArea;
         
-        if ($_cmpStartResultID != -1)
+        if (($_cmpStartResultID != -1) ||
+            ($crossType == 2))
         {
             $hasBlank = array_search(false, $_averageColumnHasVal);
             
@@ -3740,55 +4044,14 @@ class CGenReport
         $tmpJson["curSysName"] = $tmpSysName;
         $tmpJson["cmpSysName"] = $cmpSysName;
         $tmpJson["cmpMachineID"] = $cmpMachineID;
+        $tmpJson["crossType"] = $crossType;
+        $tmpJson["curResultTime"] = $curResultTime;
+        $tmpJson["cmpBatchTime"] = $cmpBatchTime;
         // use DX11, DX12, vulkan mask of Alu as overall mask
         // subTestUmdDataMaskList[0]
         $tmpMask = $subTestUmdDataMaskList[0];
         $dropArea = array();
-        if ($_cmpStartResultID != -1)
-        {
-            // comp with other card
-            
-        }
-        else
-        {
-            // not comp
-            //if ($tmpMask == 110)
-            //{
-            //    // DX11 missing
-            //    array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 7] . ":" .
-            //                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 7]);
-            //    array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 2] . ":" .
-            //                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 3]);
-            //}
-            //else if ($tmpMask == 100)
-            //{
-            //    // DX11, DX12 missing
-            //    array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 7] . ":" .
-            //                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 7]);
-            //    array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 2] . ":" .
-            //                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 5]);
-            //}
-            //else if ($tmpMask == 11)
-            //{
-            //    // vulkan missing
-            //    array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 5] . ":" .
-            //                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 7]);
-            //}
-            //else if ($tmpMask == 10)
-            //{
-            //    // DX11, vulkan missing
-            //    array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 5] . ":" .
-            //                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 7]);
-            //    array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 2] . ":" .
-            //                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 3]);
-            //}
-            //else if ($tmpMask == 1)
-            //{
-            //    // DX12, vulkan missing
-            //    array_push($dropArea, $swtSheetColumnIDList[$subjectNameFilterNumMax + 3] . ":" .
-            //                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 7]);
-            //}
-        }
+
         $tmpJson["dropArea"] = $dropArea;
         $t1 = json_encode($tmpJson);
         
@@ -3811,6 +4074,8 @@ class CGenReport
             $dataIndexList = array_fill(0, $reportUmdNumn * 2, -1);
             array_push($selectKeyList, "t0.data_value");
             $params1 = array();
+            $tmpParams1 = array();
+            $tmpParams2 = array();
             for ($i = 0; $i < $reportUmdNumn; $i++)
             {
                 if ($i >= count($resultIDList[0]))
@@ -3832,7 +4097,7 @@ class CGenReport
                 $t2 .= "LEFT JOIN " . $tableName01 . " " . $nextTabName . " " .
                        "ON (" . $nextTabName . ".result_id=? AND t0.sub_id=" . $nextTabName . ".sub_id) ";
                 $dataIndexList[$i] = $n1;
-                array_push($params1, $resultIDList[0][$_startResultID + $i]);
+                array_push($tmpParams1, $resultIDList[0][$_startResultID + $i]);
                 $n1++;
             }
             if ($_cmpStartResultID != -1)
@@ -3853,8 +4118,58 @@ class CGenReport
                     $t2 .= "LEFT JOIN " . $tableName01 . " " . $nextTabName . " " .
                            "ON (" . $nextTabName . ".result_id=? AND t0.sub_id=" . $nextTabName . ".sub_id) ";
                     $dataIndexList[$reportUmdNumn + $i] = $n1;
-                    array_push($params1, $resultIDList[0][$_cmpStartResultID + $i]);
+                    array_push($tmpParams2, $resultIDList[0][$_cmpStartResultID + $i]);
                     $n1++;
+                }
+            }
+            else if ($crossType == 2)
+            {
+                // cross build
+                // if comparison with other builds
+                
+                $tmpListIndex = -1;
+                for ($i = 0; $i < (count($machineIDBatchPairList) / 2); $i++)
+                {
+                    if (intval($machineIDBatchPairList[$i * 2]) == $curMachineID)
+                    {
+                        $tmpListIndex = $i;
+                        break;
+                    }
+                }
+                
+                for ($i = 0; $i < $umdNum; $i++)
+                {
+                    $nextTabName = "t" . $n1;
+                    array_push($selectKeyList, $nextTabName . ".data_value");
+                    $t2 .= "LEFT JOIN " . $tableName01 . " " . $nextTabName . " " .
+                           "ON (" . $nextTabName . ".result_id=? AND t0.sub_id=" . $nextTabName . ".sub_id) ";
+                    $dataIndexList[$reportUmdNumn + $i] = $n1;
+                    array_push($tmpParams2, $crossBuildResultIDList[$tmpListIndex][$i]);
+                    $n1++;
+                }
+            }
+            
+            if ($crossType == 2)
+            {
+                // cross build
+                foreach ($tmpParams2 as $tmpVal)
+                {
+                    array_push($params1, $tmpVal);
+                }
+                foreach ($tmpParams1 as $tmpVal)
+                {
+                    array_push($params1, $tmpVal);
+                }
+            }
+            else
+            {
+                foreach ($tmpParams1 as $tmpVal)
+                {
+                    array_push($params1, $tmpVal);
+                }
+                foreach ($tmpParams2 as $tmpVal)
+                {
+                    array_push($params1, $tmpVal);
                 }
             }
             
@@ -3942,7 +4257,8 @@ class CGenReport
                     }
                     //$dataVal[$j] = floatval($umdData[$j]);
                     
-                    if ($_cmpStartResultID != -1)
+                    if (($_cmpStartResultID != -1) ||
+                        ($crossType == 2))
                     {
                         $umdData[$reportUmdNumn + $j] = "";
                         if ($dataIndexList[$reportUmdNumn + $j] != -1)
@@ -4074,7 +4390,8 @@ class CGenReport
                 //$cmpPartName = array("", "", "", "", "", "");
                 $summaryDataVal = array_fill(0, $reportUmdNumn * 2, -1);
                 $cmpPartName = array_fill(0, $reportUmdNumn * 2, "");
-                if ($_cmpStartResultID != -1)
+                if (($_cmpStartResultID != -1) ||
+                    ($crossType == 2))
                 {
                     // data rows for asic comparison
                     $t3 = "<Row>\n" .

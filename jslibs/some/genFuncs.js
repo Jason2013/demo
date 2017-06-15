@@ -26,3 +26,8 @@ function swtUniqueArray(_valList)
     }
     return tmpList;
 }
+
+function swtGotoPage(_link)
+{
+    window.location.href = _link;
+}

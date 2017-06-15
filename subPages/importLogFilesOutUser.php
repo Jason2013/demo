@@ -4,8 +4,9 @@ include_once "../phplibs/generalLibs/swtHtmlTemple.php";
 $html1 = new CSwtHtmlTemple("Grapher Import Results", "../");
 
 $html1->outPageHead("", "" .
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/genFuncs.js\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/jquery-cookie/jquery.cookie.js\"></script>\n" .
-                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201704271708\"></script>\n");
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201706081304\"></script>\n");
 
 $html1->outPageBodyStart();
 
@@ -51,13 +52,22 @@ $html1->outPageBodyStart();
         <p><span style="background-color: #FFFF00;">username</span> & <span style="background-color: #FFFF00;">password</span> are your AMD domain username & password,</p>
         <p>they are used to enable our server to access above result folder.</p>
         
-        <p>like: <span style="background-color: #FFFF00;">\\oglserver\Incoming\Davy\deletable\benchMax\2016-03-29-man</span></p>
+        <p>like: <span style="background-color: #FFFF00;">\\oglserver\Incoming\Davy\deletable\benchMax\2017-05-18-man00003</span></p>
         <p>please <span style="background-color: #FF0000; color: #FFFFFF;">don't close this page in process of importing result!</span></p>
         
         <p>finishing percent: <div id="finishPercentBar" >0%</div></p>
         <div id="" class="button01 roundCorner" onclick="swtSubmitTestResultsMannualOutUser('inputFolderName', 'finishPercentBar', 'inputUsername', 'inputPassword', 'selBatchID');" onselectstart="return false;" style="float: left;">
         import
         </div>
+        
+        <div style="float: left; width: 100px;">
+        &nbsp&nbsp&nbsp&nbsp
+        </div>
+        
+        <div id="" class="button02 roundCorner" onclick="swtGotoPage('./sepStartPage.php');" onselectstart="return false;" style="float: left;">
+        Skip Import
+        </div>
+        
         <div style="float: left;">&nbsp&nbsp</div>
     </div>
     <div id="" class = "pageArticleContent01">
