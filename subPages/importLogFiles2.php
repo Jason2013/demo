@@ -4,6 +4,7 @@ include_once "../phplibs/generalLibs/swtHtmlTemple.php";
 $html1 = new CSwtHtmlTemple("Grapher Import Results", "../");
 
 $html1->outPageHead("", "" .
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/genFuncs.js\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/jquery-cookie/jquery.cookie.js\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201704271708\"></script>\n");
 

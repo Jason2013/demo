@@ -82,11 +82,13 @@ $sql1 = "SELECT DISTINCT (t0.machine_id), t1.card_id, t2.env_name, t3.env_name "
         "ON (t2.env_type=0 AND t2.env_id=t1.card_id) " .
         "LEFT JOIN mis_table_environment_info t3 " .
         "ON (t3.env_type=2 AND t3.env_id=t1.sys_id) " .
-        "WHERE t0.batch_id=? ORDER BY t0.insert_time ASC";
+        "WHERE t0.batch_id=?";
 if ($db->QueryDB($sql1, $params1) == null)
 {
     $returnMsg["errorCode"] = 0;
-    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+    $returnMsg["tmpSQL"] = $sql1;
+    $returnMsg["tmpParam"] = $params1;
+    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", " . $db->getError()[2];
     echo json_encode($returnMsg);
     return;
 }
@@ -169,7 +171,33 @@ foreach ($machineIDList as $tmpMachineID)
 }
 
 $reportFileNameList = array();
+$reportFolderMatchList = array();
 $reportFolderName = $downloadReportDir . "/batch" . $batchID;
+
+function checkFilesInFolder($_path)
+{
+    global $reportFileNameList;
+    global $reportFolderMatchList;
+    
+    if (is_dir($_path) == false)
+    {
+        return 0;
+    }
+    $tmpFolderName = basename($_path);
+    $tmpList = glob($_path . "/*.xlsm");
+    
+    if (count($tmpList) > 0)
+    {
+        foreach ($tmpList as $tmpName2)
+        {
+            $t1 = substr($tmpName2, strlen("../"));
+            array_push($reportFileNameList, $t1);
+            array_push($reportFolderMatchList, $tmpFolderName);
+        }
+    }
+    return count($tmpList);
+}
+
 if ((file_exists($reportFolderName) == true) &&
     (is_dir($reportFolderName)      == true))
 {
@@ -181,15 +209,21 @@ if ((file_exists($reportFolderName) == true) &&
         
         foreach ($tmpReverseList as $tmpName)
         {
-            $tmpList = glob($tmpName . "/*.xlsm");
-            if (count($tmpList) > 0)
+            $n1 = checkFilesInFolder($tmpName);
+            if ($n1 > 0)
             {
-                foreach ($tmpList as $tmpName2)
+                // found reports
+                break;
+            }
+            
+            $tmpList2 = glob($tmpName . "/*", GLOB_ONLYDIR);
+            
+            if (count($tmpList2) > 0)
+            {
+                foreach ($tmpList2 as $tmpName2)
                 {
-                    $t1 = substr($tmpName2, strlen("../"));
-                    array_push($reportFileNameList, $t1);
+                    $n1 = checkFilesInFolder($tmpName2);
                 }
-                //$reportFileNameList = $tmpList;
                 break;
             }
         }
@@ -223,6 +257,7 @@ $returnMsg["cardNameList"] = $cardNameList;
 $returnMsg["systemNameList"] = $systemNameList;
 $returnMsg["reportFileNameList"] = $reportFileNameList;
 $returnMsg["reportFolderName"] = $reportFolderName;
+$returnMsg["reportFolderMatchList"] = $reportFolderMatchList;
 $returnMsg["historyBatchList"] = $historyBatchList;
 $returnMsg["historyTimeList"] = $historyTimeList;
 $returnMsg["batchID"] = $batchID;

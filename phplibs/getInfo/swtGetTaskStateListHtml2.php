@@ -57,6 +57,7 @@ else
         echo json_encode($returnMsg);
         return;
     }
+    $returnMsg["tmpCheck3"] = $userID;
 }
 $row1 = $db->fetchRow();
 if ($row1 == false)
@@ -101,6 +102,9 @@ if ($reportType == 0)
                 "WHERE t0.batch_group = ? AND " .
                 "t0.batch_id IN (SELECT t2.batch_id FROM mis_table_user_batch_info t2 WHERE t2.user_id = ? ORDER BY t2.batch_id DESC) " .
                 "ORDER BY t0.insert_time DESC LIMIT ?, ?";
+                
+        $returnMsg["tmpCheck"] = 2;
+        $returnMsg["tmpCheck2"] = $params1;
     }
 }
 else if ($reportType == 1)
@@ -155,6 +159,7 @@ if (count($batchIDList) == 0)
     $returnMsg["batchNum"] = $batchNum;
     $returnMsg["itemStart"] = $itemStart;
     $returnMsg["itemEnd"] = $itemEnd;
+    $returnMsg["userID"] = $userID;
     echo json_encode($returnMsg);
     return;
 }

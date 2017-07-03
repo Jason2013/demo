@@ -224,6 +224,8 @@ for ($i = 0; $i < count($batchIDList); $i++)
     swtDelFileTree($batchPathName);
 }
 
+$returnMsg["errorCode"] = 1;
+$returnMsg["errorMsg"] = "del batches success";
 
 echo json_encode($returnMsg);
 

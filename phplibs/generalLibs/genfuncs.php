@@ -19,9 +19,19 @@ function cleaninput( $str, $len)
  return substr( $str, 0, $n);
 }
 
+function cleanFolderName( $str, $len)
+{
+ $str = preg_replace( "/[^a-zA-Z0-9.\-\,\(\)]/", " ", $str);
+ $n = strlen( $str);
+ if( $n > $len)
+ return substr( $str, 0, $len);
+ else
+ return substr( $str, 0, $n);
+}
+
 function cleanPath( $str, $len)
 {
- $str = preg_replace( "/[^a-zA-Z0-9_.-\\\\\\/]/", "", $str);
+ $str = preg_replace( "/[^a-zA-Z0-9_.:\-\\\\\\/]/", "", $str);
  $n = strlen( $str);
  if( $n > $len)
  return substr( $str, 0, $len);

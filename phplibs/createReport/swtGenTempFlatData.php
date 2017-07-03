@@ -19,6 +19,7 @@ $returnMsg["parseFinished"] = 0;
 $batchID = intval($_POST["batchID"]);
 // $reportType == 0 for routine report, 1 for all reports
 $reportType = intval($_POST["reportType"]);
+$crossType = intval($_POST["crossType"]);
 $curReportFolder = intval($_POST["curReportFolder"]);
 $machineIDPairStr = cleanText($_POST["machineIDPair"], 256);
 $machineIDListStr = cleanText($_POST["machineIDList"], 256);
@@ -97,6 +98,9 @@ if ($returnSet["parseFinished"] == 1)
 
 $reportFolder = $returnSet["reportFolder"];
 $curReportFolder = $returnSet["curReportFolder"];
+
+$returnMsg["reportFolder"] = $reportFolder;
+$returnMsg["curReportFolder"] = $curReportFolder;
 
 $returnSet = $flatDataGen->getConnectValues($reportFolder);
 if ($returnSet == false)
@@ -178,6 +182,9 @@ if (count($allFileList) == 0)
     // $allFileList
     // $allFolderList
     // $cardNameList
+    $returnMsg["tmp---003:"] = "";
+    $returnMsg["tmp---004:"] = "";
+    $returnMsg["tmp---005:"] = "";
     $tmpResult = $flatDataGen->getAllFileList($batchPathName);
     if ($tmpResult === false)
     {
@@ -386,7 +393,8 @@ $flatDataGen->setConnectValues($valueSet, $reportFolder);
 $returnMsg["fileID"] = $fileID;
 $returnMsg["fileNum"] = count($allFileList);
 $returnMsg["curReportFolder"] = $curReportFolder;
-
+$returnMsg["uniqueCardNameList"] = $uniqueCardNameList;
+$returnMsg["crossType"] = $crossType;
 
 echo json_encode($returnMsg);
 return;

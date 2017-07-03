@@ -82,7 +82,16 @@ h1, h2 { color: #000000; margin:0; padding: 0 4px 0 4px; font-size: 14px; font-w
 .driverSlotTemple03 {font-size: 20px; color: #ff0000; }
 .driverSlotTemple04 {font-size: 20px; white-space: nowrap; }
 .uploadDialog01 {}
-.pageArticleSubject01 {font-size: 26px; margin:0; padding: 0 8px 0 8px; background-color: #c0c0c0; }
+
+.batchList01 { background-image: url(../images/menubar03.gif); background-repeat: repeat-y; }
+.batchList02 {font-size: 18px; padding: 0 5px 0 5px;  
+                       text-align: center; color: #f0f0f0;}
+.batchList03 {font-size: 16px; padding: 0 5px 0 5px;  
+                       text-align: center; }
+.batchList04 { border: 1px solid #000000; }
+
+.pageArticleSubject01 {font-size: 18px; padding: 0 5px 0 5px;  
+                       text-align: center; color: #f0f0f0;}
 .pageBottom01 { position: relative; white-space: nowrap; float: left; display:inline; }
 .pageLeftAccordion { width: 100%; padding: 4px 0 4px 0; font-size: 14px; }
 .pageLeftAccordionTitle { padding: 0 0 0 4px; font-size: 18px; line-height: 24px; text-decoration: none; color: #ffffff; clear: both; background-image: url(../images/menubar03.gif); background-repeat: repeat-y; background-size: 100%; white-space: nowrap; cursor: pointer; } /*#404040*/
@@ -120,4 +129,5 @@ h1, h2 { color: #000000; margin:0; padding: 0 4px 0 4px; font-size: 14px; font-w
     font-weight: bold;
     font-size:   18px;
 }
+
 

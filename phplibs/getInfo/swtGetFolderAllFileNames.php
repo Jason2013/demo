@@ -5,6 +5,7 @@ include_once "../configuration/swtMISConst.php";
 include_once "../configuration/swtConfig.php";
 include_once "../generalLibs/genfuncs.php";
 include_once "../generalLibs/code01.php";
+include_once "../userManage/swtUserManager.php";
 
 //$logFolderName = "\\\\oglserver\\Incoming\\Davy\\deletable\\benchMax\\code20160607\\benchMax\\logStore\\2016-03-29-man";
 $batchID = intval($_POST["batchID"]);
@@ -35,6 +36,17 @@ if ((strlen($username) > 0) && (strlen($password) > 0))
     system ( "net use \"" . $logFolderName . "\" " . $password . " /user:" . $username . " /persistent:no>nul 2>&1" );
     //setcookie("benchMaxUsername", $username, time()+3600);
     //setcookie("benchMaxPassword", $password, time()+3600);
+}
+else
+{
+    $userChecker = new CUserManger();
+    if (($userChecker->isUser()    == true) &&
+        ($userChecker->isManager() == false))
+    {
+        $password = $userChecker->getPassWord();
+        $username = $userChecker->getUserName();
+        system ( "net use \"" . $logFolderName . "\" " . $password . " /user:" . $username . " /persistent:no>nul 2>&1" );
+    }
 }
 
 if (count($allFileList) == 0)

@@ -18,9 +18,50 @@ class CUserManger
 
     }
     
+	public function ldapCheckUserInfo($_userName, $_passWord)
+	{
+        global $returnMsg;
+        
+        $returnMsg["errorCode"] = 1;
+        $returnMsg["errorMsg"] = "LDAP login success";
+        
+        $conn = @ldap_connect('amd.com');
+        if ($conn == false)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "can't connect LDAP server.";
+            return false;
+        }
+
+        $tmpUserName = $_userName;
+        if (strpos($_userName, "\\") === false)
+        {
+            $tmpUserName = "amd\\" . $_userName;
+        }
+        
+        $tmpResult = @ldap_bind($conn, $tmpUserName, $_passWord);
+        if ($tmpResult == false)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "can't bind with LDAP server.";
+            return false;
+        }
+
+        if(@ldap_errno($conn) != 0)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "LDAP can't log in. " . ldap_error($conn);
+            return false;
+        }
+
+        @ldap_unbind($conn);
+        return true;
+    }
+    
 	public function checkUserInfo($_userName, $_passWord)
 	{
         global $swtSiteAuthInfo;
+        global $returnMsg;
         
         if ((strlen($_userName) == 0) ||
             (strlen($_passWord) == 0))
@@ -46,9 +87,18 @@ class CUserManger
             return false;
         }
         
-        $returnMsg = array();
+        //$returnMsg = array();
         $returnMsg["errorCode"] = 1;
         $returnMsg["errorMsg"] = "query MySQL success";
+        
+        
+        if ($this->ldapCheckUserInfo($_userName, $_passWord) == false)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "can't verify LDAP credential, line: " . __LINE__;
+            //echo json_encode($returnMsg);
+            return false;
+        }
         
         // not manager
         $db = new CPdoMySQL();
@@ -61,7 +111,9 @@ class CUserManger
         }
         
         $userName = cleaninput($_userName, 128);
-        $passWord = md5($_passWord);
+        //$passWord = md5($_passWord);
+        $passWord = $_passWord;
+        //$passWord = md5("123");
         
         $params1 = array($userName);
         $sql1 = "SELECT COUNT(*) FROM mis_table_user_info " .
@@ -85,7 +137,7 @@ class CUserManger
         if (intval($row1[0]) == 0)
         {
             // new user
-            $params1 = array($userName, md5("123"), "2");
+            $params1 = array($userName, $passWord, "2");
             $sql1 = "INSERT INTO mis_table_user_info " .
                     "(user_name, pass_word, user_type, create_time, login_time) " .
                     "VALUES (?, ?, ?, NOW(), NOW())";
@@ -134,7 +186,28 @@ class CUserManger
             }
             
             $returnMsg["errorCode"] = 0;
-            $returnMsg["errorMsg"] = "possibly password wrong";
+            $returnMsg["errorMsg"] = "user login success";
+            
+            return true;
+        }
+        else
+        {
+            // login success
+            // update login time
+            $params1 = array($passWord, $userName);
+            $sql1 = "UPDATE mis_table_user_info " .
+                    "SET pass_word = ?, login_time = NOW() " .
+                    "WHERE user_name = ?";
+            
+            if ($db->QueryDB($sql1, $params1) == null)
+            {
+                $returnMsg["errorCode"] = 0;
+                $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                return false;
+            }
+            
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "user login success";
             
             return true;
         }
@@ -157,6 +230,7 @@ class CUserManger
         }
         // is common user
         $this->doLogIn($_userName, $_passWord);
+        //$this->doLogIn($_userName, "123");
         return true;
     }
     
@@ -250,6 +324,8 @@ class CUserManger
     
 	public function getUserID()
 	{
+        global $returnMsg;
+        
         if ($this->isUser() == false)
         {
             return -1;
@@ -257,7 +333,7 @@ class CUserManger
         $userName = $this->getUserName();
         $passWord = $this->getPassWord();
         
-        $returnMsg = array();
+        //$returnMsg = array();
         $returnMsg["errorCode"] = 1;
         $returnMsg["errorMsg"] = "query MySQL success";
         
@@ -272,7 +348,8 @@ class CUserManger
         }
         
         $userName = cleaninput($userName, 128);
-        $passWord = md5($passWord);
+        //$passWord = md5($passWord);
+        $passWord = $passWord;
         
         $params1 = array($userName, $passWord);
         $sql1 = "SELECT user_id FROM mis_table_user_info " .

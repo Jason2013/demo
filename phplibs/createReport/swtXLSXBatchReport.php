@@ -83,41 +83,6 @@ if ($fileID < count($oldReportXMLList))
 
         $excel->WorkBooks->Close();
         $excel->Quit();
-        
-        /*
-        //echo "" . $tmpVBAConfigPath;
-        if (file_exists($tmpVBAConfigPath))
-        {
-            // add graph
-            $excel = new COM("Excel.Application");
-            
-            $workBook = $excel->WorkBooks->Open("" . __dir__ . "/" . $filename);
-            
-            $t1 = file_get_contents($tmpVBAConfigPath);
-            $vbaConfig = json_decode($t1);
-            
-            $t2 = file_get_contents("../../vbaLibs/createGraph01.vba");
-            
-            $t2 = sprintf($t2, $vbaConfig->graphDataArea, $tmpCardName);
-            file_put_contents($tmpVBAPath, $t2);
-            
-            $workBook->VBProject->VBComponents->Item(1)->CodeModule->AddFromFile(__dir__ . "\\" . $tmpVBAPath);
-            
-            $excel->Run("ThisWorkbook.createGraph01");
-            
-            $excel->ActiveWorkbook->Sheets(1)->Activate();
-            
-            $excel->ActiveWorkbook->SaveAs("" . __dir__ . "/" . $filename2, 52);
-            $excel->ActiveWorkbook->Close();
-
-            $excel->WorkBooks->Close();
-            $excel->Quit();
-            
-            unlink($tmpVBAConfigPath);
-            unlink($tmpVBAPath);
-            //unlink($filename);
-        }
-        //*/
 
     }
     catch (Exception $e)

@@ -21,7 +21,7 @@ if ($db->getError() != null)
 }
 
 $params1 = array($batchID);
-$sql1 = "SELECT t0.machine_id, t0.result_id, t0.umd_id, t1.*, " .
+$sql1 = "SELECT t0.machine_id, group_concat(t0.result_id), group_concat(t0.umd_id), t1.*, " .
         "(SELECT env_name FROM mis_table_environment_info WHERE env_id=t1.name_id), " .
         "(SELECT env_name FROM mis_table_environment_info WHERE env_id=t1.card_id), " .
         "(SELECT env_name FROM mis_table_environment_info WHERE env_id=t1.sys_id) " .
@@ -32,7 +32,7 @@ $sql1 = "SELECT t0.machine_id, t0.result_id, t0.umd_id, t1.*, " .
 if ($db->QueryDB($sql1, $params1) == null)
 {
     $returnMsg["errorCode"] = 0;
-    $returnMsg["errorMsg"] = "query mysql table failed #1";
+    $returnMsg["errorMsg"] = "query mysql table failed, line: " . __LINE__ . ", " . $db->getError()[2];
     echo json_encode($returnMsg);
     return;
 }

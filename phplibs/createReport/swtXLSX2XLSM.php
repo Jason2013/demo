@@ -1,6 +1,7 @@
 <?php
 
 include_once "../configuration/swtConfig.php";
+include_once "../configuration/swtMISConst.php";
 include_once "../generalLibs/genfuncs.php";
 
 $batchID = intval($_POST["batchID"]);
@@ -23,6 +24,9 @@ if ($reportType == 0)
 $returnMsg["reportFolder"] = $reportFolder;
 $oldReportXLSXList = glob($reportFolder . "/*.xlsx");
 $oldReportXMLList = glob($reportFolder . "/*.xml");
+
+$returnMsg["oldReportXLSXList"] = $oldReportXLSXList;
+$returnMsg["fileID"] = $fileID;
 
 if ($fileID < count($oldReportXLSXList))
 {
@@ -153,6 +157,13 @@ if ($fileID < count($oldReportXLSXList))
                         $tmpList2 = explode(" ", $vbaConfig->curSysName);
                         $t6 = $tmpList1[0] . " vs " . $tmpList2[0];
                     }
+                    if ((strlen($vbaConfig->curMachineName) > 0) &&
+                        (strlen($vbaConfig->cmpMachineName) > 0) &&
+                        (strcmp($vbaConfig->curMachineName, $vbaConfig->cmpMachineName) != 0))
+                    {
+                        // if no json, use folder names
+                        $t6 = $vbaConfig->curMachineName . " vs " . $vbaConfig->cmpMachineName;
+                    }
                     
                     if ($vbaConfig->crossType == 2)
                     {
@@ -208,7 +219,11 @@ if (($fileID + 1) >= count($oldReportXLSXList))
     $tmpFolderList = glob($reportFolder . "/*");
     foreach ($tmpFolderList as $tmpPath)
     {
-        if (is_dir($tmpPath))
+        $b1 = true;
+        $t1 = basename($tmpPath);
+        $tmpPos = strpos($t1, $reportFolderCheckWord);
+        $b1 = $tmpPos === false;
+        if (is_dir($tmpPath) && $b1)
         {
             // delete temp runlog.txt
             swtDelFileTree($tmpPath);

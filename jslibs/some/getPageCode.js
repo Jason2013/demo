@@ -210,19 +210,19 @@ function swtGetTodayTaskListHtml2(_tagName, _pageTag, _pageID, _batchGroup)
         var json = eval("(" + data + ")");
         var t1 = "<p>checking date is " + swtBatchListDayBack + " days back</p>";
         var t2 = "";
-        t2 += "<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\">";
-        t2 += "<tr class='pageArticleSubject01'>";
-        t2 += "<td>batch ID&nbsp&nbsp&nbsp";
+        t2 += "<table class=\"batchList04 roundCorner02\" border=\"1\" cellspacing=\"0\" cellpadding=\"0\">";
+        t2 += "<tr class=''>";
+        t2 += "<td class='batchList02 batchList01' style='background-position: 0% 0%;'>batch ID&nbsp&nbsp&nbsp";
         t2 += "</td>";
-        t2 += "<td>state&nbsp&nbsp&nbsp";
+        t2 += "<td class='batchList02 batchList01' style='background-position: 20% 0%;'>state&nbsp&nbsp&nbsp";
         t2 += "</td>";
-        t2 += "<td>group&nbsp&nbsp&nbsp";
+        t2 += "<td class='batchList02 batchList01' style='background-position: 40% 0%;'>group&nbsp&nbsp&nbsp";
         t2 += "</td>";
-        t2 += "<td>insert time&nbsp&nbsp&nbsp";
+        t2 += "<td class='batchList02 batchList01' style='background-position: 60% 0%;'>import time&nbsp&nbsp&nbsp";
         t2 += "</td>";
-        t2 += "<td>log path&nbsp&nbsp&nbsp";
+        t2 += "<td class='batchList02 batchList01' style='background-position: 80% 0%;'>log path&nbsp&nbsp&nbsp";
         t2 += "</td>";
-        t2 += "<td>delete&nbsp&nbsp&nbsp";
+        t2 += "<td class='batchList02 batchList01' style='background-position: 100% 0%;'>delete&nbsp&nbsp&nbsp";
         t2 += "</td>";
         t2 += "</tr>";
         
@@ -250,7 +250,7 @@ function swtGetTodayTaskListHtml2(_tagName, _pageTag, _pageID, _batchGroup)
                     t5 = "checked=\"checked\"";
                 }
                 
-                var t4 = "background-color: #80ff00;";
+                var t4 = "background-color: #30f000;";
                 if (json.batchStateList[i] == 0)
                 {
                     t4 = "background-color: #ffa000;";
@@ -267,15 +267,15 @@ function swtGetTodayTaskListHtml2(_tagName, _pageTag, _pageID, _batchGroup)
                       "', false);\">" +
                       "&nbsp#&nbsp" + json.batchIDList[i] + "&nbsp&nbsp&nbsp";
                 t2 += "</td>";
-                t2 += "<td style=\"" + t4 + "\">" + json.batchStateNameList[i] + "&nbsp&nbsp&nbsp";
+                t2 += "<td class=\"batchList03\" style=\"" + t4 + "\">" + json.batchStateNameList[i] + "&nbsp&nbsp&nbsp";
                 t2 += "</td>";
-                t2 += "<td style=\"" + t4 + "\">" + json.batchGroupNameList[i] + "&nbsp&nbsp&nbsp";
+                t2 += "<td class=\"batchList03\" style=\"" + t4 + "\">" + json.batchGroupNameList[i] + "&nbsp&nbsp&nbsp";
                 t2 += "</td>";
-                t2 += "<td>" + json.batchInsertTimeList[i] + "&nbsp&nbsp&nbsp";
+                t2 += "<td class=\"batchList03\">" + json.batchInsertTimeList[i] + "&nbsp&nbsp&nbsp";
                 t2 += "</td>";
-                t2 += "<td>" + json.logPathNameList[i] + "&nbsp&nbsp&nbsp";
+                t2 += "<td class=\"batchList03\">" + json.logPathNameList[i] + "&nbsp&nbsp&nbsp";
                 t2 += "</td>";
-                t2 += "<td>&nbsp&nbsp<button type=\"button\" onclick=\"swtDelBatchesDirect(" +
+                t2 += "<td>&nbsp&nbsp<button class=\"roundCorner02\" type=\"button\" onclick=\"swtDelBatchesDirect(" +
                       json.batchIDList[i] + ", " + json.batchIDList[i] +
                       ");\">delete</button>&nbsp";
                 t2 += "</td>";
@@ -646,6 +646,10 @@ function swtGetBatchMachineListHtml(_tagName, _batchID)
     function(data,status) 
     {
         //alert(data);
+        
+        console.log (">>>");
+        console.log (data);
+        console.log ("<<<");
         
         var json = eval("(" + data + ")");
 

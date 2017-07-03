@@ -171,6 +171,7 @@ $sClockNameList = $returnSet["sClockNameList"];
 $mClockNameList = $returnSet["mClockNameList"];
 $gpuMemNameList = $returnSet["gpuMemNameList"];
 $resultTimeList = $returnSet["resultTimeList"];
+$machineNameList = $returnSet["machineNameList"];
 
 $crossBuildResultIDList =      $returnSet["crossBuildResultIDList"];
 $crossBuildMachineIDList =     $returnSet["crossBuildMachineIDList"];
@@ -184,6 +185,7 @@ $crossBuildSClockNameList =    $returnSet["crossBuildSClockNameList"];
 $crossBuildMClockNameList =    $returnSet["crossBuildMClockNameList"];
 $crossBuildGpuMemNameList =    $returnSet["crossBuildGpuMemNameList"];
 $crossBuildResultTimeList =    $returnSet["crossBuildResultTimeList"];
+$crossBuildMachineNameList =   $returnSet["crossBuildMachineNameList"];
 
 $returnMsg["crossBuildResultIDList"] = $crossBuildResultIDList;
 $returnMsg["crossBuildMachineIDList"] = $crossBuildMachineIDList;
@@ -224,6 +226,8 @@ $xmlWriter->checkDefaultMachinePair($resultPos);
 $returnSet = $xmlWriter->getCompareMachineInfo($resultPos);
 $cmpMachineID = $returnSet["cmpMachineID"];
 $curMachineID = $returnSet["curMachineID"];
+$cmpMachineName = $returnSet["cmpMachineName"];
+$curMachineName = $returnSet["curMachineName"];
 $curResultTime = $returnSet["curResultTime"];
 $cmpBatchTime = $returnSet["cmpBatchTime"];
 $cmpStartResultID = $returnSet["cmpStartResultID"];
@@ -233,6 +237,8 @@ $curCardName = $returnSet["curCardName"];
 
 $returnMsg["curMachineID"] = $curMachineID;
 $returnMsg["cmpMachineID"] = $cmpMachineID;
+$returnMsg["curMachineName"] = $curMachineName;
+$returnMsg["cmpMachineName"] = $cmpMachineName;
 
 // get subtest num of current test
 $returnSet = $xmlWriter->getSubTestNum($db, $resultPos, $tableName01, $subTestNum);

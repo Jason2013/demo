@@ -89,6 +89,7 @@ class CGenReportFlatData
                 if ($row1 == false)
                 {
                     $returnMsg["errorCode"] = 0;
+                    $returnMsg["userID"] = $userID;
                     $returnMsg["errorMsg"] = "no result availabe in database, line: " . __LINE__;
                     echo json_encode($returnMsg);
                     return false;
@@ -339,6 +340,7 @@ class CGenReportFlatData
     
     public function checkFiles($_parentFolder, $_cardName)
     {
+        global $returnMsg;
         global $allFileList;
         global $allFolderList;
         global $cardNameList;
@@ -351,6 +353,7 @@ class CGenReportFlatData
         global $machineIDSysNameDict;
         global $cardSysNameMachineIDDict;
         global $machineIDPair;
+        global $crossType;
         
         $fileList = glob($_parentFolder . "\\*");
         $folderList = array();
@@ -382,6 +385,7 @@ class CGenReportFlatData
                         // will be attached to report later
                         if (is_dir($tmpDestFolder) == false)
                         {
+                            //$returnMsg["tmp---006:"] .= $tmpDestFolder . ",";
                             mkdir($tmpDestFolder);
                         }
                         copy($tmpSrcPath, $tmpDestPath);
@@ -399,9 +403,17 @@ class CGenReportFlatData
         foreach ($folderList as $tmpName)
         {
             $t1 = $tmpName . "\\..\\" . $machineInfoFileName;
+            $t2 = $tmpName . "\\" . $resultFileName3;
             $cardName = "";
-            if (file_exists($t1) == true)
+            
+            $returnMsg["tmp---004:"] .= $crossType . ",";
+            $returnMsg["tmp---005:"] .= $t2 . ",";
+            
+            
+            if ((file_exists($t1) == true) &&
+                ($crossType       <  10))
             {
+                // use json
                 $t2 = file_get_contents($t1);
                 $obj = json_decode($t2);
                 $cardName = $obj->videoCardName . "_" . $obj->systemName;
@@ -423,6 +435,38 @@ class CGenReportFlatData
                     $cardSysNameMachineIDDict[$cardName] = count($commonKeys) > 0 ? $commonKeys[0] : -1;
                 }
             }
+            else if ((file_exists($t2) == true) &&
+                     ($crossType       >= 10))
+            {
+                // donot use json
+                $machineFolderPath = $tmpName . "\\..\\";
+                $clientCmdParser = new CClientHeartBeat;
+                $obj = $clientCmdParser->getMachineInfoWithoutJson($machineFolderPath);
+                
+                
+                $cardName = $obj["videoCardName"] . "_" . $obj["systemName"];
+                
+                $returnMsg["tmp---003:"] .= $cardName . "," . $machineFolderPath . ",";
+                
+                
+                if (count($machineIDPair) >= 2)
+                {
+                    // if has compare card
+                    $cardNameKeys = array_keys($machineIDCardNameDict, $obj["videoCardName"]);
+                    $sysNameKeys = array_keys($machineIDSysNameDict, $obj["systemName"]);
+                    
+                    // get machineID of certain card & system
+                    $tmpKeys = array_intersect($cardNameKeys, $sysNameKeys);
+                    $commonKeys = array();
+                    foreach ($tmpKeys as $tmpKey)
+                    {
+                        array_push($commonKeys, $tmpKey);
+                    }
+                    
+                    $cardSysNameMachineIDDict[$cardName] = count($commonKeys) > 0 ? $commonKeys[0] : -1;
+                }
+            }
+            
             $this->checkFiles($tmpName, $cardName);
         }
         //print_r($folderList);
