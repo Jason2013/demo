@@ -347,6 +347,8 @@ class CGenReportFlatData
         global $resultFileName1;
         global $resultFileName2;
         global $machineInfoFileName;
+        global $resultFileName1;
+        global $resultFileName2;
         global $resultFileName3;
         global $reportFolder;
         global $machineIDCardNameDict;
@@ -439,9 +441,14 @@ class CGenReportFlatData
                      ($crossType       >= 10))
             {
                 // donot use json
-                $machineFolderPath = $tmpName . "\\..\\";
+                $machineFolderPath = $tmpName . "\\";
                 $clientCmdParser = new CClientHeartBeat;
                 $obj = $clientCmdParser->getMachineInfoWithoutJson($machineFolderPath);
+                //if ($obj["errorCode"] == 0)
+                //{
+                //    $machineFolderPath = $tmpName . "\\";
+                //    $obj = $clientCmdParser->getMachineInfoWithoutJson($machineFolderPath);
+                //}
                 
                 
                 $cardName = $obj["videoCardName"] . "_" . $obj["systemName"];
