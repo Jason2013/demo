@@ -1,5 +1,7 @@
 <?php
 
+//session_start();
+
 //include_once "swtExcelGenFuncs.php";
 include_once "../generalLibs/dopdo.php";
 include_once "../configuration/swtMISConst.php";

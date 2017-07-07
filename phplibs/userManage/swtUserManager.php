@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include_once __dir__ . "/../../config/siteInfo.php";
 include_once __dir__ . "/../generalLibs/code01.php";
 include_once __dir__ . "/../generalLibs/dopdo.php";
@@ -11,7 +13,7 @@ class CUserManger
     
 	public function __construct()
 	{
-        session_start();
+        //session_start();
 	}
 	public function __destruct()
 	{
@@ -94,10 +96,10 @@ class CUserManger
         
         if ($this->ldapCheckUserInfo($_userName, $_passWord) == false)
         {
-            $returnMsg["errorCode"] = 0;
-            $returnMsg["errorMsg"] = "can't verify LDAP credential, line: " . __LINE__;
-            //echo json_encode($returnMsg);
-            return false;
+                $returnMsg["errorCode"] = 0;
+                $returnMsg["errorMsg"] = "can't verify LDAP credential, line: " . __LINE__;
+                //echo json_encode($returnMsg);
+                return false;
         }
         
         // not manager
@@ -326,8 +328,10 @@ class CUserManger
 	{
         global $returnMsg;
         
+        $returnMsg["tmpStep00"] = 1;
         if ($this->isUser() == false)
         {
+            $returnMsg["tmpStep01"] = 1;
             return -1;
         }
         $userName = $this->getUserName();
@@ -358,6 +362,7 @@ class CUserManger
         if ($db->QueryDB($sql1, $params1) == null)
         {
             $returnMsg["errorCode"] = 0;
+            $returnMsg["tmpStep02"] = 1;
             $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
             return -1;
         }
@@ -366,6 +371,7 @@ class CUserManger
         if ($row1 == false)
         {
             $returnMsg["errorCode"] = 0;
+            $returnMsg["tmpStep03"] = 1;
             $returnMsg["errorMsg"] = "invalid username or password";
             return -1;
         }

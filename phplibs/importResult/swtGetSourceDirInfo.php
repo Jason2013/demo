@@ -39,14 +39,18 @@ if (($userChecker->isUser()    == true) &&
     {
         $username = "amd\\" . $username;
     }
-    system ( "net use \"" . $srcFolderName . "\" " . $password . " /user:" . $username . " /persistent:no>nul 2>&1" );
+    // net use * /del
+    //system ("net use \"" . $srcFolderName . "\" /del");
+    system ("net use * /del /y >nul 2>&1");
+    system ( "net use \"" . $srcFolderName . "\" \"" . $password . "\" /user:\"" . $username . "\" /persistent:no>nul 2>&1" );
     $returnMsg["check"] = "check";
     $returnMsg["username"] = $username;
     $returnMsg["password"] = $password;
+    $returnMsg["srcFolderName"] = $srcFolderName;
 }
 
 //$cardFolderList = glob($logStoreDir . "/" . $logFolderName . "/*", GLOB_ONLYDIR);
-$cardFolderList = glob($srcFolderName . "/*", GLOB_ONLYDIR);
+$cardFolderList = glob($srcFolderName . "\\*", GLOB_ONLYDIR);
 
 $returnMsg["srcFolderName"] = $srcFolderName;
 

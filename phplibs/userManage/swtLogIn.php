@@ -1,7 +1,10 @@
 <?php
 
+
 include_once "../generalLibs/genfuncs.php";
 include_once "swtUserManager.php";
+
+$userChecker = new CUserManger();
 
 $userName = cleaninput($_POST["userName"], 32);
 $passWord = cleaninput($_POST["passWord"], 32);
@@ -18,8 +21,6 @@ if ((strlen($userName) == 0) ||
     echo json_encode($returnMsg);
     return;
 }
-
-$userChecker = new CUserManger();
 
 if ($userChecker->logIn($userName, $passWord))
 {
