@@ -7,19 +7,19 @@ $html1->outPageHead("", "" .
                         "<script type=\"text/javascript\" src=\"../jslibs/some/genFuncs.js?v=201706291304\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/jquery-cookie/jquery.cookie.js\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/browserFolder/browserFolder.js\"></script>\n" .
-                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201706291304\"></script>\n");
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201707061304\"></script>\n");
 
 $html1->outPageBodyStart();
 
 ?>
 
 <div class = "pageArticleTitle">
-    <p>Import Test Results:</p>
+    <p><span style="font-weight:bold;">Import Results & Generate Reports:</span></p>
 </div>
 <div id="pageArticleContent" class = "pageArticleContent">
 
     <div class = "pageArticleContent01">
-        <p>Import Options:</p>
+        <p><span style="font-weight:bold;">Generation Options:</span></p>
         <table>
         <tr>
             <td>
@@ -37,13 +37,27 @@ $html1->outPageBodyStart();
 
         </table>
         <p>
+        
+        <fieldset id="crossAPI" style="width: 250px; float: left;">
+        <legend>cross API<input id="crossAPICheck" name="crossAPICheck" type="checkbox"></input></legend>
+        ...
+        </fieldset>
+        <div style="width: 20px; float: left;">
+        &nbsp&nbsp
+        </div>
+        <fieldset id="crossASIC" style="width: 400px; float: left;">
+        <legend>cross ASIC / Build<input id="crossASICCheck" name="crossASICCheck" type="checkbox"></input></legend>
+        ...
+        </fieldset>
+        
+        <!--
         <table>
             <tr>
-                <td style="width: 300px;">
-                Cross API
+                <td style="width: 450px;">
+                <span style="font-weight:bold;">Cross API</span>
                 </td>
                 <td style="width: 600px;">
-                Cross ASIC / Build
+                <span style="font-weight:bold;">Cross ASIC / Build</span>
                 </td>
                 <td style="width: 600px;">
                 
@@ -61,7 +75,11 @@ $html1->outPageBodyStart();
                 </td>
             </tr>
         </table>
+        -->
         </p>
+        
+        <div style="clear: both;">&nbsp&nbsp</div>
+        
         <p><span style="background-color: #FFFF00;">folder name</span> must be a windows server folder can be accessed by our server.</p>
 
         <p>like: <span style="background-color: #FFFF00;">\\oglserver1\Incoming\Davy\deletable\benchMax\2017-05-18-man00003</span></p>

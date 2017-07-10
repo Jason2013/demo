@@ -58,17 +58,17 @@ a:active {text-decoration:underline ; color:#F0A010;}
 
 h1, h2 { color: #000000; margin:0; padding: 0 4px 0 4px; font-size: 14px; font-weight: normal; line-height:32px; }
 
-
-.mainBodyFrame { position: relative; margin: 0 auto; width: 100%; min-width: 1420px; min-height: 800px; _height: 800px; font-size: 14px; text-align: left; background-image: url(../images/colorbar01.jpg); background-repeat: repeat-x;}
+/* min-width: 1420px;*/
+.mainBodyFrame { position: relative; margin: 0 auto; width: 100%; min-width: 100%; min-height: 800px; _height: 800px; font-size: 14px; text-align: left; background-image: url(../images/colorbar01.jpg); background-repeat: repeat-x;}
 .pageTitle { position: relative; margin: 0 auto; width: 100%; min-width: 100%; background-color: #c0c0c0; background-image: url(../images/waterdrops02.jpg); background-repeat: repeat-x; }
 .pageHeader { position: relative; width: 100%; background-image: url(../images/menubar01.jpg); background-repeat: repeat-y; background-size: 100%; min-height: 2px; _height: 2px;}
 .pageHeaderItem { position: relative; width: 120px; padding: 0 8px 0 8px; color: #e0e0e0; min-height: 30px; _height: 30px; line-height: 30px; text-align: center; }
 .pageHeaderItem:hover { background-color: #808080; color: #ffffff; }
 .pageHeaderItem:active { background-color: #808080; color: #ffffff; }
-.pageLeftBar { position: relative; width: 12%; background-color: #f0f0ff; float: left; display:inline; }
-.pageLeftBar2 { position: relative; width: 12%; float: left; display:inline; }
+.pageLeftBar { position: relative; width: 15%; min-width: 220px; background-color: #f0f0ff; float: left; display:inline; }
+.pageLeftBar2 { position: relative; width: 15%; min-width: 220px; float: left; display:inline; }
 .pageMiddleSpace { position: relative; width: 0.5%; float: left; display:inline; }
-.pageRightPart { position: relative; width: 86%; padding: 0 8px 0 8px; background-color: #ffffff; float: right; display:inline; }
+.pageRightPart { position: relative; width: 65%; min-width: 750px; padding: 0 8px 0 8px; background-color: #ffffff; float: left; display:inline; }
 .pageArticleTitle { text-align: center; }
 .pageArticleContent { text-align: left; padding: 0 0 0 4px; float: left; word-break: break-all; }
 .pageArticleContent01 { text-align: left; padding: 0 0 0 0; clear: both; }

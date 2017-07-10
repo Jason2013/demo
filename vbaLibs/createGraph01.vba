@@ -4,9 +4,16 @@ Public Sub createGraph01()
     Dim myRange As Range
     Dim myChart As ChartObject
     
+    For Each sh In Worksheets
+        If sh.Name <> "Summary" And sh.Name <> "runlog" Then
+            sh.Select
+            sh.Activate
+            sh.Range("A:A").AutoFilter
+        End If
+    Next
+    
     Set destSheet = Worksheets("Cross-API_Comparison")
     destSheet.Activate
-    destSheet.Range("A:A").AutoFilter
 
     Set myUnion = %s
     Set myChart = destSheet.ChartObjects.Add(120, 40, 900, 400)

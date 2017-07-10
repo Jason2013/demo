@@ -425,6 +425,7 @@ function swtDoSubmitTestResultsVer2(_inputTagName,
                 $("#" + _percentTagName).html("feeding database: 100%");
                 //alert("import success");
                 
+                //swtWaitBatchFinished(_batchID);
                 swtGenerateRoutineReportVer2('finishPercentBar', 'reportList', 0, -1, -1, 10);
                 //swtGotoPage('./sepStartPage.php');
                 //location.reload(true);
@@ -464,6 +465,36 @@ function swtDoSubmitTestResultsVer2(_inputTagName,
                     // parseFloat(s).toFixed(1);
                     $("#" + _percentTagName).html("feeding database: " + ((f3 + f4) * 100.0 ).toFixed(1) + "%");
                 }
+            }
+        }
+    });
+}
+
+function swtWaitBatchFinished(_batchID)
+{   
+    $.post("../phplibs/getInfo/swtGetBatchFinished.php", 
+    {
+        batchID:    _batchID,
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+        console.log(data);
+        var json = eval("(" + data + ")");
+
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            var batchNum = parseInt(json.batchNum);
+            if (batchNum == 0)
+            {
+                // batch not finished
+                setTimeout("swtWaitBatchFinished(" + _batchID + ");", 5000)
+            }
+            else
+            {
+                // batch finished
+                swtGenerateRoutineReportVer2('finishPercentBar', 'reportList', 0, -1, -1, 10);
             }
         }
     });
@@ -1634,6 +1665,34 @@ function swtGetShortBatchIDListOutUser(_comboTag)
     });
 }
 
+function swtCheckCrossFolderOption(_checkTag)
+{
+    var b1 = $("#" + _checkTag).is(":checked");
+
+    var t1 = $("#valMachineIDList").val();
+    var machineIDList = t1.split(",");
+    
+    if (_checkTag == "crossAPICheck")
+    {
+        for (var i = 0; i < machineIDList.length; i++)
+        {
+            $("#checkMachineID" + machineIDList[i]).prop("checked", b1);
+        }
+    }
+    else if (_checkTag == "crossASICCheck")
+    {
+        if (b1 == false)
+        {
+            for (var i = 0; i < machineIDList.length; i++)
+            {
+                //$("#selMachineID" + machineIDList[i]).find("option[text='Skip']").attr("selected", true);
+                $("#selMachineID" + machineIDList[i]).val(-1);
+            }
+        }
+    }
+    //swtReportOptionChanged(_checkTag);
+}
+
 function swtGetFolderMachineNameListOutUser(_srcFolderName, _crossAPITag, _crossASICTag, _crossBuildTag)
 {
     $("#" + _crossAPITag).html("<img src=\"../images/loading.gif\" width=\"20px\" height=\"20px\" />");
@@ -1652,24 +1711,26 @@ function swtGetFolderMachineNameListOutUser(_srcFolderName, _crossAPITag, _cross
         {
             //alert(json.errorMsg);
 
-            var crossAPI = "<table>";
-            var crossASIC = "<table>";
-            var crossBuild = "";
+            var crossAPICode = "<legend>Cross API<input id=\"crossAPICheck\" name=\"crossAPICheck\" type=\"checkbox\" onchange=\"swtCheckCrossFolderOption('crossAPICheck');\" checked=\"checked\"></input></legend>";
+            var crossASICCode = "<legend>Cross ASIC / Build<input id=\"crossASICCheck\" name=\"crossASICCheck\" type=\"checkbox\" onchange=\"swtCheckCrossFolderOption('crossASICCheck');\" checked=\"checked\"></input></legend>";
+            
+            crossAPICode += "<table>\n";
+            crossASICCode += "<table>\n";
             
             for (var i = 0; i < json.folderMachineNameList.length; i++)
             {
-                crossAPI += "<tr>\n";
-                crossAPI += "<td> - " + json.folderMachineNameList[i] + "</td>\n<td>&nbsp</td>\n";
-                crossAPI += "<td><input id=\"checkMachineID" + json.machineIDList[i] + 
+                crossAPICode += "<tr>\n";
+                crossAPICode += "<td> - " + json.folderMachineNameList[i] + "</td><td>&nbsp</td>\n";
+                crossAPICode += "<td> <input id=\"checkMachineID" + json.machineIDList[i] + 
                             "\" type=\"checkbox\" value=\"" + 
                             json.machineIDList[i] + "\" checked=\"checked\" /></td>\n";
-                crossAPI += "</tr>\n";
+                crossAPICode += "</tr>\n";
                 
-                crossASIC += "<tr>\n";
-                crossASIC += "<td> - " + json.folderMachineNameList[i] + "</td>\n<td>&nbsp</td>\n";
-                crossASIC += "<td><select id=\"selMachineID" + json.machineIDList[i] + 
+                crossASICCode += "<tr>\n";
+                crossASICCode += "<td> - " + json.folderMachineNameList[i] + "</td><td>&nbsp</td>\n";
+                crossASICCode += "<td> <select id=\"selMachineID" + json.machineIDList[i] + 
                              "\">\n";
-                crossASIC += "<option value=\"-1\">Skip</option>";
+                crossASICCode += "<option value=\"-1\">Skip</option>";
                 
                 for (var j = 0; j < json.folderMachineNameList.length; j++)
                 {
@@ -1678,26 +1739,64 @@ function swtGetFolderMachineNameListOutUser(_srcFolderName, _crossAPITag, _cross
                     {
                         continue;
                     }
-                    crossASIC += "<option value=\"" + json.machineIDList[j] + 
+                    crossASICCode += "<option value=\"" + json.machineIDList[j] + 
                                  "\">" + json.folderMachineNameList[j] + "</option>";
                 }
                 
-                crossASIC += "</select></td>\n";
-                crossASIC += "</tr>\n";
-                
-                
+                crossASICCode += "</select></td>\n";
+                crossASICCode += "</tr>\n";
             }
+            crossAPICode += "</table>";
+            crossASICCode += "</table>";
             
-            crossAPI += "</table>";
-            crossASIC += "</table>";
+            //var crossAPI = "<table>";
+            //var crossASIC = "<table>";
+            //var crossBuild = "";
+            //
+            //for (var i = 0; i < json.folderMachineNameList.length; i++)
+            //{
+            //    crossAPI += "<tr>\n";
+            //    crossAPI += "<td> - " + json.folderMachineNameList[i] + "</td>\n<td>&nbsp</td>\n";
+            //    crossAPI += "<td><input id=\"checkMachineID" + json.machineIDList[i] + 
+            //                "\" type=\"checkbox\" value=\"" + 
+            //                json.machineIDList[i] + "\" checked=\"checked\" /></td>\n";
+            //    crossAPI += "</tr>\n";
+            //    
+            //    crossASIC += "<tr>\n";
+            //    crossASIC += "<td> - " + json.folderMachineNameList[i] + "</td>\n<td>&nbsp</td>\n";
+            //    crossASIC += "<td><select id=\"selMachineID" + json.machineIDList[i] + 
+            //                 "\">\n";
+            //    crossASIC += "<option value=\"-1\">Skip</option>";
+            //    
+            //    for (var j = 0; j < json.folderMachineNameList.length; j++)
+            //    {
+            //        if (json.folderMachineNameList[j] ==
+            //            json.folderMachineNameList[i])
+            //        {
+            //            continue;
+            //        }
+            //        crossASIC += "<option value=\"" + json.machineIDList[j] + 
+            //                     "\">" + json.folderMachineNameList[j] + "</option>";
+            //    }
+            //    
+            //    crossASIC += "</select></td>\n";
+            //    crossASIC += "</tr>\n";
+            //    
+            //    
+            //}
+            //
+            //crossAPI += "</table>";
+            //crossASIC += "</table>";
             
             var t1 = swtImplode(json.machineIDList, ",");
             var t3 = swtImplode(json.folderMachineNameList, ",");
             var t2 = "<input type=\"hidden\" id=\"valMachineIDList\" name=\"valMachineIDList\" value=\"" + t1 + "\" />\n" +
                      "<input type=\"hidden\" id=\"valFolderMachineNameList\" name=\"valFolderMachineNameList\" value=\"" + t3 + "\" />\n";
             
-            $("#" + _crossAPITag).html(crossAPI);
-            $("#" + _crossASICTag).html(crossASIC);
+            //$("#" + _crossAPITag).html(crossAPI);
+            //$("#" + _crossASICTag).html(crossASIC);
+            $("#" + _crossAPITag).html(crossAPICode);
+            $("#" + _crossASICTag).html(crossASICCode);
             
             console.log(">>>>");
             console.log(crossASIC);
