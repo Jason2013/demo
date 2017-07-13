@@ -33,16 +33,21 @@ $testCaseIDColumnName = "TestCaseId#";
 $tmpMachineIDPair = explode(",", $machineIDPairStr);
 $tmpMachineIDList = explode(",", $machineIDListStr);
 
+$machineIDListLimit = array();
+foreach ($tmpMachineIDList as $tmpVal)
+{
+    array_push($machineIDListLimit, intval($tmpVal));
+}
+
 $machineIDPair = array();
 foreach ($tmpMachineIDPair as $tmpVal)
 {
     array_push($machineIDPair, intval($tmpVal));
-}
-
-$machineIDList = array();
-foreach ($tmpMachineIDList as $tmpVal)
-{
-    array_push($machineIDList, intval($tmpVal));
+    
+    if (array_search(intval($tmpVal), $machineIDListLimit) === false)
+    {
+        array_push($machineIDListLimit, intval($tmpVal));
+    }
 }
 
 $xmlWriter = new CGenReport();
@@ -114,11 +119,13 @@ if ($returnSet == false)
 }
 
 $allFileList = $returnSet["allFileList"];
-$cardNameList= $returnSet["cardNameList"];
+$cardNameList = $returnSet["cardNameList"];
+$machineIDList = $returnSet["machineIDList"];
 $fileID =    intval($returnSet["fileID"]);
 $columnNum = intval($returnSet["columnNum"]);
 $rowNum =    intval($returnSet["rowNum"]);
 $cardSysNameMachineIDDict = $returnSet["cardSysNameMachineIDDict"];
+$cardSysNameMachineIDDictNew = array();
 
 
 $machineInfoFileName = "machine_info.json";
@@ -153,7 +160,9 @@ if ($returnSet == false)
 $machineIDCardNameDict = $returnSet["machineIDCardNameDict"];
 $machineIDSysNameDict = $returnSet["machineIDSysNameDict"];
 $machineIDCardNameSysNameDict = $returnSet["machineIDCardNameSysNameDict"];
-
+$returnMsg["machineIDCardNameDict"] = $machineIDCardNameDict;
+$returnMsg["machineIDSysNameDict"] = $machineIDSysNameDict;
+$returnMsg["machineIDCardNameSysNameDict"] = $machineIDCardNameSysNameDict;
 
 $returnMsg["pathName"] = $pathName;
 
@@ -179,6 +188,7 @@ if (count($allFileList) == 0)
     $allFileList = array();
     $allFolderList = array();
     $cardNameList = array();
+    $machineIDList = array();
     
     // will write to
     // $allFileList
@@ -205,13 +215,44 @@ if (count($allFileList) == 0)
 
 $tmpUniqueCardNameList = array_unique($cardNameList);
 $uniqueCardNameList = array();
+$uniqueMachineIDList = array();
 
 foreach ($tmpUniqueCardNameList as $tmpName)
 {
     array_push($uniqueCardNameList, $tmpName);
 }
 
+foreach ($uniqueCardNameList as $tmpName)
+{
+    $tmpPos = array_search($tmpName, $cardNameList);
+    array_push($uniqueMachineIDList, intval($machineIDList[$tmpPos]));
+}
 
+while (($crossType >= 10) && 
+       ($fileID    != 0)  &&
+       ($fileID    <  count($uniqueCardNameList)))
+{
+    $curMachineID = $uniqueMachineIDList[$fileID];
+    
+    $returnMsg["tmpEnter1"] = "2";
+    
+    $tmpPos = array_search($curMachineID, $machineIDListLimit);
+    
+    $returnMsg["tmpEnter_curMachineID"] = $curMachineID;
+    $returnMsg["tmpEnter_machineIDListLimit"] = $machineIDListLimit;
+    $returnMsg["tmpEnter_machineIDPair"] = $machineIDPair;
+    
+    if (($tmpPos === false) &&
+        ($fileID <=  count($uniqueCardNameList)))
+    {
+        $returnMsg["tmpEnter3"] = "1";
+        $fileID++;
+    }
+    else
+    {
+        break;
+    }
+}
 
 if ($fileID <= count($uniqueCardNameList))
 {
@@ -255,6 +296,10 @@ if ($fileID <= count($uniqueCardNameList))
 
     $curMachineID = $returnSet["curMachineID"];
     $curPairMachineID = $returnSet["curPairMachineID"];
+    
+    $returnMsg["curMachineID"] = $curMachineID;
+    $returnMsg["curPairMachineID"] = $curPairMachineID;
+    $returnMsg["cardSysNameMachineIDDict"] = $cardSysNameMachineIDDict;
 
     $returnMsg["curPairMachineID"] = $curPairMachineID;
 
@@ -278,6 +323,7 @@ if ($fileID <= count($uniqueCardNameList))
     $pairTestStartPosList = array();
     
     $returnMsg["cardNameList"] = $cardNameList;
+    $returnMsg["machineIDListNew"] = $machineIDList;
     $returnMsg["machineIDCardNameSysNameDict"] = $machineIDCardNameSysNameDict;
     $returnMsg["curPairMachineID"] = $curPairMachineID;
     $returnMsg["curCardNameList"] = $curCardNameList;
@@ -384,6 +430,7 @@ else
 $valueSet = array();
 $valueSet["allFileList"] = $valueSet;
 $valueSet["cardNameList"] = $cardNameList;
+$valueSet["machineIDList"] = $machineIDList;
 $valueSet["cardSysNameMachineIDDict"] = $cardSysNameMachineIDDict;
 $valueSet["fileID"] =    $fileID;
 $valueSet["columnNum"] = $columnNum;
@@ -391,11 +438,13 @@ $valueSet["rowNum"] =    $rowNum;
 
 $flatDataGen->setConnectValues($valueSet, $reportFolder);
 
-
+$returnMsg["cardSysNameMachineIDDictNew"] = $cardSysNameMachineIDDictNew;
+$returnMsg["valueSet"] = $valueSet;
 $returnMsg["fileID"] = $fileID;
 $returnMsg["fileNum"] = count($allFileList);
 $returnMsg["curReportFolder"] = $curReportFolder;
 $returnMsg["uniqueCardNameList"] = $uniqueCardNameList;
+$returnMsg["uniqueMachineIDList"] = $uniqueMachineIDList;
 $returnMsg["crossType"] = $crossType;
 
 echo json_encode($returnMsg);

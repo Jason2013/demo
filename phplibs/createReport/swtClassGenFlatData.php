@@ -233,6 +233,7 @@ class CGenReportFlatData
         {
             $returnSet["allFileList"] = array();
             $returnSet["cardNameList"] = array();
+            $returnSet["machineIDList"] = array();
             $returnSet["cardSysNameMachineIDDict"] = array();
             $returnSet["fileID"] =    0;
             $returnSet["columnNum"] = 0;
@@ -338,12 +339,13 @@ class CGenReportFlatData
         return $returnSet;
     }
     
-    public function checkFiles($_parentFolder, $_cardName)
+    public function checkFiles($_parentFolder, $_cardName, $_curMachineID, $_level, $_folderName)
     {
         global $returnMsg;
         global $allFileList;
         global $allFolderList;
         global $cardNameList;
+        global $machineIDList;
         global $resultFileName1;
         global $resultFileName2;
         global $machineInfoFileName;
@@ -354,6 +356,7 @@ class CGenReportFlatData
         global $machineIDCardNameDict;
         global $machineIDSysNameDict;
         global $cardSysNameMachineIDDict;
+        global $cardSysNameMachineIDDictNew;
         global $machineIDPair;
         global $crossType;
         
@@ -376,6 +379,7 @@ class CGenReportFlatData
                 {
                     array_push($allFileList, $tmpName);
                     array_push($cardNameList, $_cardName);
+                    array_push($machineIDList, $_curMachineID);
                     
                     $tmpSrcFolder = substr($tmpName, 0, strlen($tmpName) - strlen($t1));
                     $tmpSrcPath = $tmpSrcFolder . $resultFileName3;
@@ -407,6 +411,7 @@ class CGenReportFlatData
             $t1 = $tmpName . "\\..\\" . $machineInfoFileName;
             $t2 = $tmpName . "\\" . $resultFileName3;
             $cardName = "";
+            $curMachineID = -1;
             
             $returnMsg["tmp---004:"] .= $crossType . ",";
             $returnMsg["tmp---005:"] .= $t2 . ",";
@@ -444,16 +449,14 @@ class CGenReportFlatData
                 $machineFolderPath = $tmpName . "\\";
                 $clientCmdParser = new CClientHeartBeat;
                 $obj = $clientCmdParser->getMachineInfoWithoutJson($machineFolderPath);
-                //if ($obj["errorCode"] == 0)
-                //{
-                //    $machineFolderPath = $tmpName . "\\";
-                //    $obj = $clientCmdParser->getMachineInfoWithoutJson($machineFolderPath);
-                //}
-                
                 
                 $cardName = $obj["videoCardName"] . "_" . $obj["systemName"];
                 
                 $returnMsg["tmp---003:"] .= $cardName . "," . $machineFolderPath . ",";
+                
+                $obj["machineInfo"]["machineName"] = basename($_level == 0 ? $tmpName : $_folderName);
+                $obj2 = $clientCmdParser->updateMachineInfo3($obj["machineInfo"]);
+                $curMachineID = $obj2["machineID"];
                 
                 
                 if (count($machineIDPair) >= 2)
@@ -473,11 +476,11 @@ class CGenReportFlatData
                     $cardSysNameMachineIDDict[$cardName] = count($commonKeys) > 0 ? $commonKeys[0] : -1;
                 }
             }
-            
-            $this->checkFiles($tmpName, $cardName);
+            $tmpFolderName = $_level == 0 ? $tmpName : $_folderName;
+            $this->checkFiles($tmpName, $cardName, $curMachineID, $_level + 1, $tmpFolderName);
         }
         //print_r($folderList);
-        
+        $cardSysNameMachineIDDictNew = $cardSysNameMachineIDDict;
         return true;
     }
     
@@ -488,7 +491,7 @@ class CGenReportFlatData
         global $allFolderList;
         global $cardNameList;
 
-        $tmpResult = $this->checkFiles($_batchPathName, "");
+        $tmpResult = $this->checkFiles($_batchPathName, "", -1, 0, "");
 
         return $tmpResult;
     }

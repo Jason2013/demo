@@ -562,6 +562,180 @@ class CClientHeartBeat
         return $returnMsg;
 	}
     
+	public function updateMachineInfo3($_tmpInfo)
+	{
+        $tmpInfo = $_tmpInfo;
+        
+        $machineName   = cleanFolderName($tmpInfo["machineName"], 256); //$tmpInfo["machineName"];
+        $videoCardName = cleanFolderName($tmpInfo["videoCardName"], 256);
+        $cpuName       = cleanFolderName($tmpInfo["cpuName"], 256);
+        $systemName    = cleanFolderName($tmpInfo["systemName"], 256);
+        $memoryName    = cleanFolderName($tmpInfo["memoryName"], 256);
+        $chipsetName   = cleanFolderName($tmpInfo["chipsetName"], 256);
+        $mainLineName  = cleanFolderName($tmpInfo["mainLineName"], 256);
+        $sClockName    = cleanFolderName($tmpInfo["sClockName"], 256);
+        $mClockName    = cleanFolderName($tmpInfo["mClockName"], 256);
+        $gpuMemName    = cleanFolderName($tmpInfo["gpuMemName"], 256);
+        
+        $db = new CPdoMySQL();
+
+        if ($db->getError() != null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "can't reach mysql server";
+            return $returnMsg;
+        }
+        
+        $envTypeList = array(5, 0, 1, 2, 6, 7, 3, 9, 10, 11);
+        $envNameList = array($machineName,
+                             $videoCardName,
+                             $cpuName,
+                             $systemName,
+                             $memoryName,
+                             $chipsetName,
+                             $mainLineName,
+                             $sClockName,
+                             $mClockName,
+                             $gpuMemName);
+        $envIDList = array();
+
+        $params1 = array($machineName,
+                         $videoCardName,
+                         $cpuName,
+                         $systemName,
+                         $memoryName,
+                         $chipsetName,
+                         $mainLineName,
+                         $sClockName,
+                         $mClockName,
+                         $gpuMemName);
+                
+        $sql1 = "SELECT " .
+                "(SELECT tei.env_id FROM mis_table_environment_info tei WHERE tei.env_type=\"5\" AND tei.env_name=?) AS machineNameID, " .
+                "(SELECT tei.env_id FROM mis_table_environment_info tei WHERE tei.env_type=\"0\" AND tei.env_name=?) AS videoCardNameID, " .
+                "(SELECT tei.env_id FROM mis_table_environment_info tei WHERE tei.env_type=\"1\" AND tei.env_name=?) AS cpuNameID, " .
+                "(SELECT tei.env_id FROM mis_table_environment_info tei WHERE tei.env_type=\"2\" AND tei.env_name=?) AS systemNameID, " .
+                "(SELECT tei.env_id FROM mis_table_environment_info tei WHERE tei.env_type=\"6\" AND tei.env_name=?) AS memoryNameID, " .
+                "(SELECT tei.env_id FROM mis_table_environment_info tei WHERE tei.env_type=\"7\" AND tei.env_name=?) AS chipsetNameID, " .
+                "(SELECT tei.env_id FROM mis_table_environment_info tei WHERE tei.env_type=\"3\" AND tei.env_name=?) AS mainLineNameID, " .
+                "(SELECT tei.env_id FROM mis_table_environment_info tei WHERE tei.env_type=\"9\" AND tei.env_name=?) AS sClockNameID, " .
+                "(SELECT tei.env_id FROM mis_table_environment_info tei WHERE tei.env_type=\"10\" AND tei.env_name=?) AS mClockNameID, " .
+                "(SELECT tei.env_id FROM mis_table_environment_info tei WHERE tei.env_type=\"11\" AND tei.env_name=?) AS gpuMemNameID " .
+                "FROM mis_table_environment_info tei";
+                
+        if ($db->QueryDB($sql1, $params1) == null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "query mysql table failed #1";
+            return $returnMsg;
+        }
+        $row1 = $db->fetchRow();
+        $b1 = false;
+        // check, if new names occur
+        if ($row1 == false)
+        {
+            $b1 = true;
+            for ($i = 0; $i < count($envNameList); $i++)
+            {
+                $envIDList[$i] = -1;
+            }
+        }
+        else
+        {
+            for ($i = 0; $i < count($envNameList); $i++)
+            {
+                if ($row1[$i] == NULL)
+                {
+                    $b1 = true;
+                    $envIDList[$i] = -1;
+                }
+                else
+                {
+                    $envIDList[$i] = $row1[$i];
+                }
+            }
+        }
+        if ($b1 == false)
+        {
+            // if all names are not new, get machine id
+            $params1 = ($envIDList);
+            $sql1 = "SELECT machine_id " .
+                    "FROM mis_table_machine_info WHERE " .
+                    "name_id=? AND card_id=? AND cpu_id=? AND sys_id=? " .
+                    "AND mem_id=? AND chipset_id=? AND ml_id=? " .
+                    "AND s_clock_id=? AND m_clock_id=? AND gpu_mem_id=?";
+            if ($db->QueryDB($sql1, $params1) == null)
+            {
+                $returnMsg["errorCode"] = 0;
+                $returnMsg["errorMsg"] = "query mysql table failed #5";
+                return $returnMsg;
+            }
+            $row1 = $db->fetchRow();
+            if ($row1 == false)
+            {
+                $b1 = true;
+            }
+            $machineID = $row1[0];
+        }
+        
+        if ($b1)
+        {
+            // no such machine ever online
+            // insert new
+            for ($i = 0; $i < count($envNameList); $i++)
+            {
+                if ($envIDList[$i] != -1)
+                {
+                    continue;
+                }
+                $params1 = array($envTypeList[$i], $envNameList[$i]);
+                $sql1 = "SELECT env_id FROM mis_table_environment_info WHERE env_type=? AND env_name=?";
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #2";
+                    return $returnMsg;
+                }
+                $row1 = $db->fetchRow();
+                if ($row1 == false)
+                {
+                    $params1 = array($envTypeList[$i], $envNameList[$i]);
+                    $sql1 = "INSERT IGNORE INTO mis_table_environment_info " .
+                            "(env_type, env_name) VALUES (?, ?)";
+                    if ($db->QueryDB($sql1, $params1) == null)
+                    {
+                        $returnMsg["errorCode"] = 0;
+                        $returnMsg["errorMsg"] = "query mysql table failed #3";
+                        return $returnMsg;
+                    }
+                    $envIDList[$i] = $db->getInsertID();
+                }
+                else
+                {
+                    $envIDList[$i] = $row1[0];
+                }
+            }
+            
+            $params1 = ($envIDList);
+            $sql1 = "INSERT INTO mis_table_machine_info " .
+                    "(name_id, card_id, cpu_id, sys_id, mem_id, chipset_id, ml_id, s_clock_id, m_clock_id, gpu_mem_id, insert_time) " .
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+            if ($db->QueryDB($sql1, $params1) == null)
+            {
+                $returnMsg["errorCode"] = 0;
+                $returnMsg["errorMsg"] = "query mysql table failed #4";
+                return $returnMsg;
+            }
+            $machineID = $db->getInsertID();
+        }
+        
+        $returnMsg["errorCode"] = 1;
+        $returnMsg["errorMsg"] = "get machine id success";
+        $returnMsg["machineID"] = $machineID;
+        //$returnMsg["machineInfo"] = $tmpInfo;
+        return $returnMsg;
+	}
+    
 	public function getMachineInfoWithoutJson($_machineFolderPath)
 	{
         $tmpInfo = array();
@@ -690,6 +864,7 @@ class CClientHeartBeat
             }
         }
         
+        //$tmpInfo["machineName"] = $machineName;
         $machineName   = cleanFolderName($machineName, 256); //$tmpInfo["machineName"];
         $videoCardName = cleanFolderName($tmpInfo["videoCardName"], 256);
         $cpuName       = cleanFolderName($tmpInfo["cpuName"], 256);
@@ -705,6 +880,7 @@ class CClientHeartBeat
         $returnMsg["errorCode"] = 1;
         $returnMsg["errorMsg"] = "get machine info success";
         $returnMsg = array_merge($returnMsg, $tmpInfo);
+        $returnMsg["machineInfo"] = $tmpInfo;
         return $returnMsg;
     }
     

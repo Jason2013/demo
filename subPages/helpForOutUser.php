@@ -17,15 +17,12 @@ $html1->outPageBodyStart();
 </div>
 <div id="pageContent01" class = "">
     <p>1. you need to organize your microbench result files into a folders tree hierarchy, before start everything.</p>
-    <p>&nbsp&nbsp&nbsp&nbsphere is an example: \\gfxbench\Grapher\result_example</p>
-    <p>2. open this link <a href="importLogFilesOutUser.php">"import results"</a> to import your results into our database.</p>
-    <p>&nbsp&nbsp&nbsp&nbspby above example, please fill <span style="background-color: #FFFF00;">\\gfxbench\Grapher\result_example\2017-4-25-man00001</span> as folder name.</p>
-    <p>&nbsp&nbsp&nbsp&nbspand don't forget to click the <span style="background-color: #0000FF; color: #FFFFFF;">import</span> button </p>
+    <p>&nbsp&nbsp&nbsp&nbsphere is an example: <a href="\\gfxbench\Grapher\result_example">\\gfxbench\Grapher\result_example</a></p>
+    <p>2. open this link <a href="genReportOutUser.php">"generate report"</a> to import your results into our database, and start generating reports.</p>
+    <p>&nbsp&nbsp&nbsp&nbspby above example, please fill <span style="background-color: #FFFF00;">\\gfxbench\Grapher\result_example\2017-05-18-man00003</span> as folder name.</p>
+    <p>&nbsp&nbsp&nbsp&nbspand don't forget to click the <span style="background-color: #0000FF; color: #FFFFFF;">start generation</span> button </p>
     <p>&nbsp&nbsp&nbsp&nbspduring the process of result importing, please <span style="background-color: #FF0000; color: #FFFFFF;">don't close current page or switch to other page!</span></p>
-    <p>3. after importing results, please open this link <a href="compileReportBatchID.php">"gnerate report"</a> to generate reports.</p>
-    <p>&nbsp&nbsp&nbsp&nbspand don't forget to click the <span style="background-color: #0000FF; color: #FFFFFF;">generate</span> button </p>
-    <p>&nbsp&nbsp&nbsp&nbspduring the process of report generating, please <span style="background-color: #FF0000; color: #FFFFFF;">don't close current page or switch to other page!</span></p>
-    <p>&nbsp&nbsp&nbsp&nbspafter report generating is done, report downloading links will be shown on current webpage.</p>
+    <p>3. after reports generation is done, reports downloading links will be shown on current webpage.</p>
 </div>
 
 <p></p>

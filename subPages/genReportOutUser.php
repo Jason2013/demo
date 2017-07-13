@@ -7,7 +7,7 @@ $html1->outPageHead("", "" .
                         "<script type=\"text/javascript\" src=\"../jslibs/some/genFuncs.js?v=201706291304\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/jquery-cookie/jquery.cookie.js\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/browserFolder/browserFolder.js\"></script>\n" .
-                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201707061304\"></script>\n");
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201707131304\"></script>\n");
 
 $html1->outPageBodyStart();
 
@@ -82,7 +82,7 @@ $html1->outPageBodyStart();
         
         <p><span style="background-color: #FFFF00;">folder name</span> must be a windows server folder can be accessed by our server.</p>
 
-        <p>like: <span style="background-color: #FFFF00;">\\oglserver1\Incoming\Davy\deletable\benchMax\2017-05-18-man00003</span></p>
+        <p>like: <span style="background-color: #FFFF00;">\\oglserver\Incoming\Davy\deletable\benchMax\2017-05-18-man00003</span></p>
         <p>please <span style="background-color: #FF0000; color: #FFFFFF;">don't close this page in process of reports generation!</span></p>
         
         <p>finishing state: <div id="finishPercentBar" >0%</div></p>

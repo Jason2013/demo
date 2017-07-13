@@ -355,7 +355,9 @@ function swtDoCopyResultFilesVer2(_inputTagName,
                                            0,
                                            0,
                                            _batchID,
-                                           _reportGroup);
+                                           _reportGroup,
+                                           0,
+                                           0);
             }
             else
             {
@@ -395,7 +397,9 @@ function swtDoSubmitTestResultsVer2(_inputTagName,
                                     _curTestID,
                                     _nextSubTestID,
                                     _batchID,
-                                    _reportGroup)
+                                    _reportGroup,
+                                    _curFileOffset1,
+                                    _curFileOffset2)
 {   
     $.post("../phplibs/importResult/swtParseBenchLogManualVer2.php", 
     {
@@ -407,7 +411,9 @@ function swtDoSubmitTestResultsVer2(_inputTagName,
         curTestID:        _curTestID,
         nextSubTestID:    _nextSubTestID,
         batchID:          _batchID,
-        reportGroup:      _reportGroup
+        reportGroup:      _reportGroup,
+        curFileOffset1:   _curFileOffset1,
+        curFileOffset2:   _curFileOffset2
     }, 
     function(data,status) 
     {
@@ -442,7 +448,9 @@ function swtDoSubmitTestResultsVer2(_inputTagName,
                                            json.curTestID,
                                            json.nextSubTestID,
                                            json.batchID,
-                                           _reportGroup);
+                                           _reportGroup,
+                                           json.curFileOffset1,
+                                           json.curFileOffset2);
                 if (parseInt(_resultFileNum) > 0)
                 {
                     var resultFileNum = parseFloat(_resultFileNum);

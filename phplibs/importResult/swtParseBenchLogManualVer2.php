@@ -21,6 +21,8 @@ $nextLineID = intval($_POST["nextLineID"]);
 $curTestID = intval($_POST["curTestID"]);
 $nextSubTestID = intval($_POST["nextSubTestID"]);
 $curFileLineNum = intval($_POST["curFileLineNum"]);
+$curFileOffset1 = intval($_POST["curFileOffset1"]);
+$curFileOffset2 = intval($_POST["curFileOffset2"]);
 
 //$targetLogFileName = "test_results.txt";
 //$targetLogFileName2 = "test_results.csv";
@@ -445,6 +447,8 @@ function swtParseLogFile($_pathName, $_machineID)
     global $batchID;
     global $curTestID;
     global $nextSubTestID;
+    global $curFileOffset1;
+    global $curFileOffset2;
     
     if (file_exists($_pathName) == false)
     {
@@ -495,6 +499,8 @@ function swtParseLogFile($_pathName, $_machineID)
     $handle = fopen($_pathName, "r");
     $data = false;
     
+    fseek($handle, $curFileOffset1, SEEK_SET);
+    $isTitleChecked = false;
     // jump to start csv line of this call
     while ($data = fgetcsv($handle, 0, ","))
     {
@@ -519,6 +525,10 @@ function swtParseLogFile($_pathName, $_machineID)
             $testCaseIDKeyAPI = array_search("TestCaseId#", $data);
             $tmpTestID++;
             $tmpSubTestID = 0;
+            
+            $n1 = ftell($handle);
+            $curFileOffset2 = $curFileOffset2 > $n1 ? $curFileOffset2 : $n1;
+            $isTitleChecked = true;
             
             for ($i = 1; $i < count($data); $i++)
             {
@@ -552,7 +562,7 @@ function swtParseLogFile($_pathName, $_machineID)
                 $returnMsg["_pathName"] = $_pathName;
             }
             
-            if (($tmpTestID - 1) >= $curTestID)
+            //if (($tmpTestID - 1) >= $curTestID)
             {
                 // if this line is start of each test
                 // try create table if not exist
@@ -681,24 +691,19 @@ function swtParseLogFile($_pathName, $_machineID)
                     }
                 }
             }
+            
+            fseek($handle, $curFileOffset2, SEEK_SET);
+            break;
         }
-        else
-        {
-            $tmpSubTestID++;
-        }
-        if (($tmpTestID - 1) >= $curTestID)
-        {
-            if (($tmpSubTestID) >= $nextSubTestID)
-            {
-                // resume last parse
-                break;
-            }
-        }
+
+        $curFileOffset1 = ftell($handle);
     }
     
     $tmpTestID = 0;
     $tmpSubTestID = 0;
     
+    $curTitleOffset1 = $curFileOffset1;
+    $curTitleOffset2 = $curFileOffset2;
     while ($data = fgetcsv($handle, 0, ","))
     {
         $tmpLineID++;
@@ -731,6 +736,8 @@ function swtParseLogFile($_pathName, $_machineID)
             $tmpTestID++;
             $curTestID++;
             $nextSubTestID = 0;
+            $curFileOffset2 = ftell($handle);
+            $curFileOffset1 = $curTitleOffset1;
             fclose($handle);
             return -1;
         }
@@ -747,6 +754,7 @@ function swtParseLogFile($_pathName, $_machineID)
                 $feedSubTestDataString = "";
 
                 $nextSubTestID--;
+                $curFileOffset2 = $curTitleOffset2;
                 fclose($handle);
                 return -1;
             }
@@ -858,7 +866,9 @@ function swtParseLogFile($_pathName, $_machineID)
                 }
             }
         }
-        
+        $curTitleOffset1 = ftell($handle);
+        $curTitleOffset2 = ftell($handle);
+        $curFileOffset2 = ftell($handle);
     }
     fclose($handle);
     
@@ -868,6 +878,9 @@ function swtParseLogFile($_pathName, $_machineID)
     $nextSubTestID = 0;
     $nextLineID = 0;
     $curFileLineNum = 0;
+    
+    $curFileOffset1 = 0;
+    $curFileOffset2 = 0;
     
     // set result finished
     if (count($resultIDList) > 0)
@@ -1195,6 +1208,8 @@ $returnMsg["nextResultFileID"] = $nextResultFileID;
 $returnMsg["resultFileNum"] = $resultFileNum;
 $returnMsg["parseFinished"] = $parseFinished;
 $returnMsg["batchID"] = $batchID;
+$returnMsg["curFileOffset1"] = $curFileOffset1;
+$returnMsg["curFileOffset2"] = $curFileOffset2;
 
 // set batch finished
 if (($batchID       != -1) &&
