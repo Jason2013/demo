@@ -442,6 +442,7 @@ function swtParseLogFile($_pathName, $_machineID)
     global $batchID;
     global $curTestID;
     global $nextSubTestID;
+    global $swtOldUmdNameMatchList;
     
     if (file_exists($_pathName) == false)
     {
@@ -812,6 +813,21 @@ function swtParseLogFile($_pathName, $_machineID)
                     
                     // like changeListDX11, changeListDX12, changeListVulkan
                     $t1 = $changeListJsonTag . $umdName;
+                    if (array_key_exists($t1, $defaultInfo) == false)
+                    {
+                        $tmpCount = intval(count($swtOldUmdNameMatchList) / 2);
+                        for ($j = 0; $j < $tmpCount; $j++)
+                        {
+                            if (strcmp($swtOldUmdNameMatchList[$j * 2], $umdName) == 0)
+                            {
+                                $t1 = $changeListJsonTag . $swtOldUmdNameMatchList[$j * 2 + 1];
+                                if (array_key_exists($t1, $defaultInfo) == true)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
                     $changeList = "0";
                     if ((array_key_exists($t1, $defaultInfo)  == true) &&
                         ($defaultInfo[$t1]                    != null) &&

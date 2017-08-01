@@ -9,22 +9,24 @@ function swtChangeDivColor(_tag, _color, _bgColor)
 
 function swtRollOutOrUpDiv(_tag)
 {
-    var n1 = $("#" + _tag).height();
-    var n2 = 24;
-    var n3 = swtPageLeftBarSlotNum * n2;
-    $("#" + _tag).show();
-    n3 = $("#" + _tag).css("height", "auto").height();
+    //var n1 = $("#" + _tag).height();
+    //var n2 = 24;
+    //var n3 = swtPageLeftBarSlotNum * n2;
+    //$("#" + _tag).show();
+    //n3 = $("#" + _tag).css("height", "auto").height();
+    //
+    //// console.log(n1 + ", " + n3);
+    //if ((n1 >= n3) && (n1 != 0))
+    //{
+    //    $("#" + _tag).animate({height: "0px"}, 300,  function() { $("#" + _tag).hide(); });
+    //}
+    //else
+    //{
+    //    $("#" + _tag).show();
+    //    $("#" + _tag).animate({height: n3 + "px"}, 300, function() { $("#" + _tag).show(); });
+    //}
     
-    // console.log(n1 + ", " + n3);
-    if ((n1 >= n3) && (n1 != 0))
-    {
-        $("#" + _tag).animate({height: "0px"}, 300,  function() { $("#" + _tag).hide(); });
-    }
-    else
-    {
-        $("#" + _tag).show();
-        $("#" + _tag).animate({height: n3 + "px"}, 300, function() { $("#" + _tag).show(); });
-    }
+    $("#" + _tag).slideToggle(300);
 }
 
 function swtInitAccordion(_tag, _prePath, _pageDate)

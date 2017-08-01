@@ -173,6 +173,8 @@ $gpuMemNameList = $returnSet["gpuMemNameList"];
 $resultTimeList = $returnSet["resultTimeList"];
 $machineNameList = $returnSet["machineNameList"];
 
+$returnMsg["changeListNumList"] = $changeListNumList;
+
 $crossBuildResultIDList =      $returnSet["crossBuildResultIDList"];
 $crossBuildMachineIDList =     $returnSet["crossBuildMachineIDList"];
 $crossBuildCardNameList =      $returnSet["crossBuildCardNameList"];
@@ -344,6 +346,7 @@ if ($returnSet === null)
     $returnMsg["cmpMachineID"] = $cmpMachineID;
     echo json_encode($returnMsg);
 }
+$returnMsg["reportUmdNum"] = $reportUmdNum;
 $dataColumnNum = $returnSet["dataColumnNum"];
 $returnMsg["dataColumnNum"] = $dataColumnNum;
 
@@ -363,6 +366,7 @@ $returnMsg["tmpUmdName"] = $tmpUmdName;
 $returnMsg["tmpCardName"] = $tmpCardName;
 $returnMsg["tmpSysName"] = $tmpSysName;
 $returnMsg["driverNameList[0]"] = $driverNameList[0];
+$returnMsg["driverNameList"] = $driverNameList;
 
 $isCompStandard = false;
 for ($i = 0; $i < count($umdStandardOrder); $i++)
@@ -417,6 +421,10 @@ for ($i = 0; $i < $reportUmdNum; $i++)
     $swtReportInfo[$i] = "CL#" . $changeListNumList[0][$startResultID + $i];
     $swtReportUmdInfo[$i] = $driverNameList[0][$startResultID + $i];
 }
+
+$returnMsg["swtReportInfo"] = $swtReportInfo;
+$returnMsg["swtReportUmdInfo"] = $swtReportUmdInfo;
+$returnMsg["startResultID"] = $startResultID;
 
 // get subtest num of all tests
 $returnSet = $xmlWriter->getSubTestNumList($db, $isCompStandard, $resultPos, $cmpStartResultID, $umdNum);

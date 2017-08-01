@@ -32,8 +32,13 @@ $swtClientMachineConfigurationNames = array("machineName",
 //$swtUmdNameList = array("DX11", "DX12", "Vulkan");
 //$swtUmdStandardOrder = array("Vulkan", "DX12", "DX11");
 
-$swtUmdNameList = array("DX11", "DX12", "Vulkan", "OGL");
-$swtUmdStandardOrder = array("Vulkan", "DX12", "DX11", "OGL");
+//$swtUmdNameList = array("DX11", "DX12", "Vulkan", "OGL");
+//$swtUmdStandardOrder = array("Vulkan", "DX12", "DX11", "OGL");
+
+$swtUmdNameList = array("D3D11", "D3D12", "Vulkan", "OGL");
+$swtUmdStandardOrder = array("Vulkan", "D3D12", "D3D11", "OGL");
+
+$swtOldUmdNameMatchList = array("D3D11", "DX11", "D3D12", "DX12");
 
 //$swtUmdNameList = array("DX11", "DX12", "Vulkan");
 //$swtUmdStandardOrder = array("Vulkan", "DX12", "DX11");

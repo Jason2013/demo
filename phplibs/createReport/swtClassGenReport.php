@@ -509,6 +509,7 @@ class CGenReport
         global $umdNameList;
         global $crossType;
         global $machineIDBatchPairList;
+        global $swtOldUmdNameMatchList;
         
         $db = $_db;
 
@@ -661,6 +662,21 @@ class CGenReport
                 }
 
                 $tmpIndex = array_search($tmpDriverName, $umdNameList);
+                if ($tmpIndex === false)
+                {
+                    $tmpCount = intval(count($swtOldUmdNameMatchList) / 2);
+                    for ($j = 0; $j < $tmpCount; $j++)
+                    {
+                        if (strcmp($swtOldUmdNameMatchList[$j * 2 + 1], $tmpDriverName) == 0)
+                        {
+                            $tmpIndex = array_search($swtOldUmdNameMatchList[$j * 2], $umdNameList);
+                            if ($tmpIndex !== false)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
                 if ($tmpIndex !== false)
                 {
                     $n1 = $cardIndex * $umdNum + $tmpIndex;
@@ -3714,6 +3730,8 @@ class CGenReport
         global $cardNameList;
         global $sysNameList;
         global $driverNameList;
+        global $swtOldUmdNameMatchList;
+		global $reportUmdNum;
         
         $historyResultIDList = array();
         for ($i = 1; $i < count($resultIDList); $i++)
@@ -3721,6 +3739,39 @@ class CGenReport
             $cardNameKeys = array_keys($cardNameList[$i], $cardNameList[0][$_resultPos]);
             $sysNameKeys = array_keys($sysNameList[$i], $sysNameList[0][$_resultPos]);
             $driverNameKeys = array_keys($driverNameList[$i], $driverNameList[0][$_resultPos]);
+            $returnMsg["enter01"] = 1;
+			$tmpMachineNum = intval(count($driverNameList[$i]) / $reportUmdNum);
+            if (count($driverNameKeys) < $tmpMachineNum)
+            {
+                $returnMsg["enter02"] = 2;
+                $tmpCount = intval(count($swtOldUmdNameMatchList) / 2);
+                for ($j = 0; $j < $tmpCount; $j++)
+                {
+                    if (strcmp($swtOldUmdNameMatchList[$j * 2], $driverNameList[0][$_resultPos]) == 0)
+                    {
+                        $tmpKeys = array_keys($driverNameList[$i], $swtOldUmdNameMatchList[$j * 2 + 1]);
+                        if (count($tmpKeys) > 0)
+                        {
+							foreach ($tmpKeys as $tmpVal)
+							{
+								$tmpPos = array_search($tmpVal, $driverNameKeys);
+								if ($tmpPos === false)
+								{
+									array_push($driverNameKeys, $tmpVal);
+								}
+							}
+							
+							$returnMsg["enter03"] = 3;
+							$returnMsg["driverNameKeys"] = $driverNameKeys;
+                            //break;
+							if (count($driverNameKeys) >= $tmpMachineNum)
+							{
+								break;
+							}
+                        }
+                    }
+                }
+            }
             $commonKeys1 = array_intersect($cardNameKeys, $sysNameKeys);
             $commonKeys2 = array_intersect($cardNameKeys, $driverNameKeys);
             $commonKeys3 = array_intersect($commonKeys1, $commonKeys2);
@@ -3744,6 +3795,7 @@ class CGenReport
 
         $returnSet = array();
         $returnSet["historyResultIDList"] = $historyResultIDList;
+		$returnMsg["historyResultIDList"] = $historyResultIDList;
         return $returnSet;
     }
     
