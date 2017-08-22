@@ -387,6 +387,111 @@ function swtDoCopyResultFilesVer2(_inputTagName,
     });
 }
 
+function swtSubmitTestResultsMannualOutUserVer3(_inputTagName,
+                                                _percentTagName,
+                                                _usernameTagName,
+                                                _passwordTagName,
+                                                _targetTagName)
+{
+    // for outside users
+    var reportGroup = 0;
+    
+    $("#" + _percentTagName).html("copying files: 0% (importing is started...)");
+    var t1 = "" + $("#" + _inputTagName).val();
+    if (t1.length == 0)
+    {
+        $("#" + _percentTagName).html("0%");
+        alert("please fill in folder name");
+        return;
+    }
+    var t2 = ""; //$("#" + _usernameTagName).val();
+    var t3 = ""; //$("#" + _passwordTagName).val();
+    var t4 = -1; //$("#" + _targetTagName).val();
+    $.cookie('benchMaxUsername', t2);
+    $.cookie('benchMaxPassword', t3);
+    swtDoCopyResultFilesVer3(_inputTagName,
+                             _percentTagName,
+                             t4, // batch ID
+                             t1,
+                             t2,
+                             t3,
+                             "",
+                             0,
+                             "",
+                             "",
+                             reportGroup);
+}
+
+function swtDoCopyResultFilesVer3(_inputTagName,
+                                  _percentTagName,
+                                  _batchID,
+                                  _logFolderName,
+                                  _username,
+                                  _password,
+                                  _allFileListString,
+                                  _fileID,
+                                  _parentFolder,
+                                  _parentFolderOnly,
+                                  _reportGroup)
+{
+    $.post("../phplibs/getInfo/swtGetFolderAllFileNamesVer3.php", 
+    {
+        batchID:           _batchID,
+        logFolderName:     _logFolderName,
+        username:          _username,
+        password:          _password,
+        allFileListString: _allFileListString,
+        fileID:            _fileID,
+        parentFolder:      _parentFolder,
+        parentFolderOnly:  _parentFolderOnly
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+        console.log(data);
+        var json = eval("(" + data + ")");
+
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            //alert(json.errorMsg);
+            if (json.copyFileFinished == "1")
+            {
+                //$("#" + _inputTagName).val("");
+                $("#" + _percentTagName).html("copying files: 100%");
+                // copying result files finished,
+                // start to feed data into database
+                
+                swtGenerateRoutineReportVer3('finishPercentBar', 'reportList', 0, -1, -1, 10);
+            }
+            else
+            {
+                swtDoCopyResultFilesVer3(_inputTagName,
+                                         _percentTagName,
+                                         _batchID,
+                                         _logFolderName,
+                                         _username,
+                                         _password,
+                                         json.allFileListString,
+                                         json.fileID,
+                                         json.parentFolder,
+                                         json.parentFolderOnly,
+                                         _reportGroup);
+                if (json.fileID <= json.fileNum)
+                {
+                    $("#" + _percentTagName).html("copying files: " + ((json.fileID / json.fileNum) * 100.0 ).toFixed(1) + "%");
+                }
+            }
+        }
+        else if (json.errorCode == "0")
+        {
+            $("#" + _percentTagName).html("0%");
+            alert(json.errorMsg);
+            console.log("check out 001");
+        }
+    });
+}
+
 function swtDoSubmitTestResultsVer2(_inputTagName,
                                     _percentTagName,
                                     _logFolderName,
@@ -431,7 +536,6 @@ function swtDoSubmitTestResultsVer2(_inputTagName,
                 $("#" + _percentTagName).html("feeding database: 100%");
                 //alert("import success");
                 
-                //swtWaitBatchFinished(_batchID);
                 swtGenerateRoutineReportVer2('finishPercentBar', 'reportList', 0, -1, -1, 10);
                 //swtGotoPage('./sepStartPage.php');
                 //location.reload(true);
@@ -475,35 +579,9 @@ function swtDoSubmitTestResultsVer2(_inputTagName,
                 }
             }
         }
-    });
-}
-
-function swtWaitBatchFinished(_batchID)
-{   
-    $.post("../phplibs/getInfo/swtGetBatchFinished.php", 
-    {
-        batchID:    _batchID,
-    }, 
-    function(data,status) 
-    {
-        //alert(data);
-        console.log(data);
-        var json = eval("(" + data + ")");
-
-        //alert(json.errorMsg);
-        if (json.errorCode == "1")
+        else
         {
-            var batchNum = parseInt(json.batchNum);
-            if (batchNum == 0)
-            {
-                // batch not finished
-                setTimeout("swtWaitBatchFinished(" + _batchID + ");", 5000)
-            }
-            else
-            {
-                // batch finished
-                swtGenerateRoutineReportVer2('finishPercentBar', 'reportList', 0, -1, -1, 10);
-            }
+            alert(json.errorMsg);
         }
     });
 }
@@ -791,6 +869,219 @@ function swtDoGenerateFlatData(_percentTagName,
     });
 }
 
+// _crossType, 0 for cross API, 1 for cross ASIC, SYS, 2 for cross Builds, 
+//             10 for version 2 cross API, 11 for version 2 cross ASIC / build (cross machines)
+// _reportType, 0 for routine report, 1 for all reports
+function swtGenerateRoutineReportVer3(_percentTagName, _reportListTag, _reportType, _curReportFolder, _batchID, _crossType)
+{
+    var t1 = "" + $("#inputFolderName").val();
+    if (t1.length == 0)
+    {
+        //$("#" + _percentTagName).html("0%");
+        //alert("please fill in folder name");
+        //return;
+    }
+    
+    $("#" + _percentTagName).html("0% (generating is started...)");
+    
+    $("#" + _reportListTag).html("");
+
+    var t1 = "" + $("#valMachineIDList").val();
+    //console.log("valMachineIDList: " + t1);
+    var machineIDList = [];
+    if (t1.length > 0)
+    {
+        machineIDList = t1.split(",");
+    }
+    t1 = "" + $("#valFolderMachineNameList").val();
+    var folderMachineNameList = [];
+    if (t1.length > 0)
+    {
+        folderMachineNameList = t1.split(",");
+    }
+    
+    var machineIDPair = [];
+    var checkedMachineIDList = [];
+    var checkedMachineIDListCopy = [];
+    var t2 = "";
+    var t3 = "";
+    if (_crossType == 10)
+    {
+        // cross API
+        // generating latest report
+        for (var i = 0; i < machineIDList.length; i++)
+        {
+            var b1 = $("#checkMachineID" + machineIDList[i]).is(":checked");
+            //console.log(b1);
+            if (b1)
+            {
+                checkedMachineIDList.push(parseInt(machineIDList[i]));
+            }
+        }
+        console.log("tmp---002B:" + checkedMachineIDList.length);
+        if (checkedMachineIDList.length == 0)
+        {
+            // if cross api no machine selected go to next step
+            // goto cross machine
+            console.log("tmp---002A:" + checkedMachineIDList.length);
+            swtGenerateRoutineReportVer3(_percentTagName, _reportListTag, _reportType, _curReportFolder, _batchID, 11);
+            return;
+        }
+        console.log("tmp---002C:" + checkedMachineIDList.length);
+    }
+    else if (_crossType == 11)
+    {
+        // cross machines
+        // generating latest report
+        for (var i = 0; i < machineIDList.length; i++)
+        {
+            t1 = $("#selMachineID" + machineIDList[i]).val();
+
+            if ((t1 == null) ||
+                (t1 == undefined) ||
+                (t1.length == 0))
+            {
+                continue;
+            }
+            console.log("tmp---001:" + t1);
+            
+            var n1 = parseInt(t1);
+            if (n1 != -1)
+            {
+                checkedMachineIDList.push(parseInt(machineIDList[i]));
+                machineIDPair.push(parseInt(machineIDList[i]));
+                machineIDPair.push(n1);
+                // if cross asic, pair are machineID, machineID
+            }
+        }
+        for (var i = 0; i < machineIDList.length; i++)
+        {
+            var b1 = $("#checkMachineID" + machineIDList[i]).is(":checked");
+            //console.log(b1);
+            if (b1)
+            {
+                checkedMachineIDListCopy.push(parseInt(machineIDList[i]));
+            }
+        }
+        if (machineIDPair.length == 0)
+        {
+            // if no machine selected go back
+            $("#" + _percentTagName).html("0%");
+            
+            if (checkedMachineIDListCopy.length == 0)
+            {
+                console.log("tmp---008:" + checkedMachineIDList.length);
+                alert("please select report to generate");
+                return;
+            }
+            alert("generate success");
+            location.reload(true);
+            return;
+        }
+        console.log("tmp---002D:" + checkedMachineIDList.length);
+    }
+    t2 = swtImplode(machineIDPair, ",");
+    t3 = swtImplode(checkedMachineIDList, ",");
+
+    console.log("tmp---: " + t2);
+    console.log("tmp---: " + t3);
+    console.log("tmp---08:" + _crossType);
+
+    swtDoGenerateFlatDataVer3(_percentTagName,
+                              _reportListTag,
+                              _batchID,
+                              _reportType,
+                              _crossType,
+                              _curReportFolder,
+                              t2,
+                              t3
+                              );
+}
+
+function swtDoGenerateFlatDataVer3(_percentTagName,
+                                   _reportListTag,
+                                   _batchID,
+                                   _reportType,
+                                   _crossType,
+                                   _curReportFolder,
+                                   _machineIDPair,
+                                   _machineIDList
+                                   )
+{
+    var tmpMachineIDPair = _machineIDPair;
+    if (_crossType == 2)
+    {
+        // cross build
+        tmpMachineIDPair = "";
+    }
+    
+    console.log("tmp---07:" + _crossType);
+    
+    $.post("../phplibs/createReport/swtGenTempFlatDataVer3.php", 
+    {
+        batchID:               _batchID,
+        reportType:            _reportType,
+        crossType:             _crossType,
+        curReportFolder:       _curReportFolder,
+        machineIDPair:         tmpMachineIDPair, //_machineIDPair,
+        machineIDList:         _machineIDList
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+        console.log(data);
+        var json = eval("(" + data + ")");
+
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            //alert(json.errorMsg);
+            if (json.parseFinished == "1")
+            {
+                //console.log("----");
+                
+                //alert("next");
+                
+                swtDoGenerateRoutineReportVer3(_percentTagName,
+                                               _reportListTag,
+                                               _batchID,
+                                               _machineIDList,
+                                               _machineIDPair,
+                                               _reportType,
+                                               _crossType,
+                                               0,
+                                               0,
+                                               0,
+                                               0,
+                                               json.curReportFolder,
+                                               0
+                                               );
+            }
+            else
+            {
+                swtDoGenerateFlatDataVer3(_percentTagName,
+                                          _reportListTag,
+                                          _batchID,
+                                          _reportType,
+                                          _crossType,
+                                          json.curReportFolder,
+                                          _machineIDPair,
+                                          _machineIDList
+                                          );
+                if (json.fileID <= json.fileNum)
+                {
+                    $("#" + _percentTagName).html("gen flatData: " + ((json.fileID / json.fileNum) * 100.0 ).toFixed(1) + "%");
+                }
+            }
+        }
+        else if (json.errorCode == "0")
+        {
+            console.log("tmp---08:" + json.errorMsg);
+            alert(json.errorMsg);
+        }
+    });
+}
+
 function swtDoGenerateRoutineReport(_percentTagName,
                                     _reportListTag,
                                     _batchID,
@@ -880,6 +1171,86 @@ function swtDoGenerateRoutineReport(_percentTagName,
                     var f1 = 1.0 / json.resultNum;
                     var f2 = f1 * json.curTestPos / json.testNum;
                     var f3 = f1 * json.resultPos;
+                    var f4 = (f3 + f2) * 100.0;
+                    $("#" + _percentTagName).html("gen report: " + f4.toFixed(1) + "%");
+                }
+            }
+        }
+    });
+}
+
+function swtDoGenerateRoutineReportVer3(_percentTagName,
+                                        _reportListTag,
+                                        _batchID,
+                                        _machineIDList,
+                                        _machineIDPair,
+                                        _reportType,
+                                        _crossType,
+                                        _folderID,
+                                        _curTestPos,
+                                        _subTestNum,
+                                        _reportToken,
+                                        _curReportFolder,
+                                        _sheetLinePos
+                                        )
+{
+    $.post("../phplibs/createReport/swtCompileReportAdditionVer3.php", 
+    {
+        batchID:        _batchID,
+        machineIDPair:  _machineIDPair,
+        machineIDList:  _machineIDList,
+        reportType:     _reportType,
+        crossType:      _crossType,
+        folderID:       _folderID,
+        curTestPos:     _curTestPos,
+        subTestNum:     _subTestNum,
+        reportToken:        _reportToken,
+        curReportFolder:    _curReportFolder,
+        sheetLinePos:       _sheetLinePos
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+        console.log(data);
+        var json = eval("(" + data + ")");
+
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            //alert(json.errorMsg);
+            if (json.compileFinished == "1")
+            {
+                //alert("next");
+                //return;
+                
+                
+                $("#" + _percentTagName).html("converting XML to XLSX, please wait...");
+                swtXLSXBatchReport(_percentTagName,
+                                   _reportListTag,
+                                   json.batchID, _reportType, 0, _curReportFolder, _crossType);
+            }
+            else
+            {   
+                swtDoGenerateRoutineReportVer3(_percentTagName,
+                                               _reportListTag,
+                                               _batchID,
+                                               _machineIDList,
+                                               _machineIDPair,
+                                               _reportType,
+                                               _crossType,
+                                               json.folderID,
+                                               json.curTestPos,
+                                               json.subTestNum,
+                                               json.reportToken,
+                                               json.curReportFolder,
+                                               json.sheetLinePos
+                                               );
+                if ((json.folderNum > 0) &&
+                    (json.testNum   > 0))
+                {
+                    var f1 = 1.0 / json.folderNum;
+                    var f2 = f1 * json.curTestPos / json.testNum;
+                    var f3 = f1 * json.folderID;
                     var f4 = (f3 + f2) * 100.0;
                     $("#" + _percentTagName).html("gen report: " + f4.toFixed(1) + "%");
                 }
@@ -1035,7 +1406,7 @@ function swtMoveReportToFolder(_percentTagName, _reportListTag, _batchID, _repor
         {
             if (_crossType == 10)
             {
-                swtGenerateRoutineReportVer2(_percentTagName, _reportListTag, _reportType, _curReportFolder, _batchID, 11);
+                swtGenerateRoutineReportVer3(_percentTagName, _reportListTag, _reportType, _curReportFolder, _batchID, 11);
                 return;
             }
             

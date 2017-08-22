@@ -5,6 +5,7 @@ $allReportsDir = "../../allReports";
 $allReportsDirFromRoot = "allReports";
 $reportTemplateDir = "../../template/temple/fileSections";
 $logStoreDir = "../../logStore";
+$tmpLogStoreDir = "../../tmpLogStore";
 $driverStoreDir = "../../driverStore";
 $downloadReportDir = "../../report";
 $swtTempFilesDir = "../../tmpFiles";

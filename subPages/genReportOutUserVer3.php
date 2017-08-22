@@ -7,7 +7,7 @@ $html1->outPageHead("", "" .
                         "<script type=\"text/javascript\" src=\"../jslibs/some/genFuncs.js?v=201706291304\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/jquery-cookie/jquery.cookie.js\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/browserFolder/browserFolder.js\"></script>\n" .
-                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201707131304\"></script>\n");
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201708171304\"></script>\n");
 
 $html1->outPageBodyStart();
 
@@ -86,15 +86,17 @@ $html1->outPageBodyStart();
         <p>please <span style="background-color: #FF0000; color: #FFFFFF;">don't close this page in process of reports generation!</span></p>
         
         <p>finishing state: <div id="finishPercentBar" >0%</div></p>
-        <div id="" class="button01 roundCorner" onclick="swtSubmitTestResultsMannualOutUserVer2('inputFolderName', 'finishPercentBar', 'inputUsername', 'inputPassword', 'selBatchID');" onselectstart="return false;" style="float: left;">
+        <div id="" class="button01 roundCorner" onclick="swtSubmitTestResultsMannualOutUserVer3('inputFolderName', 'finishPercentBar', 'inputUsername', 'inputPassword', 'selBatchID');" onselectstart="return false;" style="float: left;">
         start generation
         </div>
         
         <div style="float: left;">&nbsp&nbsp</div>
         
-        <div id="" class="button01 roundCorner" onclick="swtGenerateRoutineReportVer2('finishPercentBar', 'reportList', 0, -1, -1, 10);" onselectstart="return false;" style="float: left;">
+        <!--
+        <div id="" class="button01 roundCorner" onclick="swtGenerateRoutineReportVer3('finishPercentBar', 'reportList', 0, -1, -1, 10);" onselectstart="return false;" style="float: left;">
         generate latest
         </div>
+        -->
         
         <div style="float: left;">&nbsp&nbsp</div>
         

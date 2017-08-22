@@ -393,7 +393,8 @@ class CClientHeartBeat
         }
         
         $machineName   = cleanFolderName($_machineName, 256); //$tmpInfo["machineName"];
-        $videoCardName = cleanFolderName($tmpInfo["videoCardName"], 256);
+        //$videoCardName = cleanFolderName($tmpInfo["videoCardName"], 256);
+        $videoCardName = cleanFolderName($_machineName, 256);
         $cpuName       = cleanFolderName($tmpInfo["cpuName"], 256);
         $systemName    = cleanFolderName($tmpInfo["systemName"], 256);
         $memoryName    = cleanFolderName($tmpInfo["memoryName"], 256);
@@ -562,12 +563,14 @@ class CClientHeartBeat
         return $returnMsg;
 	}
     
-	public function updateMachineInfo3($_tmpInfo)
+	public function updateMachineInfo3($_tmpInfo, $_machineName)
 	{
         $tmpInfo = $_tmpInfo;
         
-        $machineName   = cleanFolderName($tmpInfo["machineName"], 256); //$tmpInfo["machineName"];
-        $videoCardName = cleanFolderName($tmpInfo["videoCardName"], 256);
+        //$machineName   = cleanFolderName($tmpInfo["machineName"], 256);
+        //$videoCardName = cleanFolderName($tmpInfo["videoCardName"], 256);
+        $machineName   = cleanFolderName($_machineName, 256);
+        $videoCardName = cleanFolderName($_machineName, 256);
         $cpuName       = cleanFolderName($tmpInfo["cpuName"], 256);
         $systemName    = cleanFolderName($tmpInfo["systemName"], 256);
         $memoryName    = cleanFolderName($tmpInfo["memoryName"], 256);
@@ -736,7 +739,7 @@ class CClientHeartBeat
         return $returnMsg;
 	}
     
-	public function getMachineInfoWithoutJson($_machineFolderPath)
+	public function getMachineInfoWithoutJson($_machineFolderPath, $_machineName)
 	{
         $tmpInfo = array();
         
@@ -780,7 +783,8 @@ class CClientHeartBeat
         
         $runLogFileName = "runlog.txt";
         
-        $machineName = basename($_machineFolderPath);
+        //$machineName = basename($_machineFolderPath);
+        $machineName = $_machineName;
         
         $pieceFolderList = glob($_machineFolderPath . "/*", GLOB_ONLYDIR);
         $runLogPath = "";
@@ -866,7 +870,8 @@ class CClientHeartBeat
         
         //$tmpInfo["machineName"] = $machineName;
         $machineName   = cleanFolderName($machineName, 256); //$tmpInfo["machineName"];
-        $videoCardName = cleanFolderName($tmpInfo["videoCardName"], 256);
+        //$videoCardName = cleanFolderName($tmpInfo["videoCardName"], 256);
+        $videoCardName = cleanFolderName($machineName, 256);
         $cpuName       = cleanFolderName($tmpInfo["cpuName"], 256);
         $systemName    = cleanFolderName($tmpInfo["systemName"], 256);
         $memoryName    = cleanFolderName($tmpInfo["memoryName"], 256);
@@ -876,6 +881,8 @@ class CClientHeartBeat
         $mClockName    = cleanFolderName($tmpInfo["mClockName"], 256);
         $gpuMemName    = cleanFolderName($tmpInfo["gpuMemName"], 256);
         
+        $tmpInfo["videoCardNameReal"] = $tmpInfo["videoCardName"];
+        $tmpInfo["videoCardName"] = $machineName;
         
         $returnMsg["errorCode"] = 1;
         $returnMsg["errorMsg"] = "get machine info success";

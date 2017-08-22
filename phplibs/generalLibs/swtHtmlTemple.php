@@ -88,7 +88,8 @@ class CSwtHtmlTemple
         else if ($userChecker->isUser())
         {
             echo "        <a href=\"" . $this->pagePrePath . "subPages/batchListOutUser.php\">batch list</a>\n";
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/genReportOutUser.php\">generate Reports</a>\n";
+            //echo "        <a href=\"" . $this->pagePrePath . "subPages/genReportOutUser.php\">generate Reports</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/genReportOutUserVer3.php\">generate Reports</a>\n";
             //echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFilesOutUser.php\">import results</a>\n";
             //echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportBatchID.php\">generate report</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/helpForOutUser.php\">help center</a>\n";
