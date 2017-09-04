@@ -164,6 +164,9 @@ $subTestNum = $testCaseNumList[$curTestPos];
 $testName = $testNameList[$curTestPos];
 $tableName01 = $db_mis_table_name_string001 . $testName;
 
+$returnMsg["testName"] = $testName;
+$returnMsg["subTestNum"] = $subTestNum;
+
 $reportUmdNum = count($umdNameList);
 
 $umdOrder = array_fill(0, $reportUmdNum * 2, -1);
@@ -260,7 +263,7 @@ $returnMsg["averageColumnHasVal"] = $averageColumnHasVal;
 
 $flatDataBuffer = "";
 
-$isProduceFlatData = false;
+$isProduceFlatData = true;
 
 if ($curTestPos < count($testNameList))
 {
@@ -293,55 +296,47 @@ if ($curTestPos < count($testNameList))
     
     // get data of a test of cur machine
     $returnSet = $xmlWriter->getTestResultData($curMachineID, $curTestName, true, $fileHandleFlatData);
-    if ($returnSet === null)
+    if ($returnSet !== null)
     {
-        fclose($fileHandle);
-        fclose($tempFileHandle);
-
-        echo "error line: " . __LINE__;
-        return;
-    }
-    $testSubjectNameList = $returnSet["testSubjectNameList"];
-    $unitSubject = $returnSet["unitSubject"];
-    // get data of same test of cmp machine
-    $returnSet = $xmlWriter->getTestResultData($cmpMachineID, $curTestName, false, $fileHandleFlatData);
-    if ($returnSet === null)
-    {
-        if ($fileHandleFlatData !== null)
+        $testSubjectNameList = $returnSet["testSubjectNameList"];
+        $unitSubject = $returnSet["unitSubject"];
+        // get data of same test of cmp machine
+        $returnSet = $xmlWriter->getTestResultData($cmpMachineID, $curTestName, false, $fileHandleFlatData);
+        if ($returnSet !== null)
         {
-            fclose($fileHandleFlatData);
-        }
-        fclose($fileHandle);
-        fclose($tempFileHandle);
+            if ($fileHandleFlatData !== null)
+            {
+                fclose($fileHandleFlatData);
+                $fileHandleFlatData = null;
+            }
+            
+            $returnSet = $xmlWriter->checkStartTest($fileHandle, $tempFileHandle,
+                                                    $curTestPos, $curTestName, $testSubjectNameList, $unitSubject,
+                                                    $isCompStandard, $cmpMachineID, $sheetLinePos);
+                                                    
+            $sheetLinePos = $returnSet["sheetLinePos"];
+            
+            $returnSet = $xmlWriter->writeReportCompareData($tempFileHandle, $reportFolder,
+                                                            $isCompStandard, $reportUmdNum,
+                                                            $sheetLinePos, $startGraphDataLinePos,
+                                                            $averageColumnHasVal);
+            if ($returnSet === null)
+            {
+                fclose($fileHandle);
+                fclose($tempFileHandle);
 
-        echo "error line: " . __LINE__;
-        return;
+                echo "error line: " . __LINE__;
+                return;
+            }
+            $sheetLinePos = $returnSet["sheetLinePos"];
+        
+        }
     }
     
     if ($fileHandleFlatData !== null)
     {
         fclose($fileHandleFlatData);
     }
-    
-    $returnSet = $xmlWriter->checkStartTest($fileHandle, $tempFileHandle,
-                                            $curTestPos, $curTestName, $testSubjectNameList, $unitSubject,
-                                            $isCompStandard, $cmpMachineID, $sheetLinePos);
-                                            
-    $sheetLinePos = $returnSet["sheetLinePos"];
-    
-    $returnSet = $xmlWriter->writeReportCompareData($tempFileHandle, $reportFolder,
-                                                    $isCompStandard, $reportUmdNum,
-                                                    $sheetLinePos, $startGraphDataLinePos,
-                                                    $averageColumnHasVal);
-    if ($returnSet === null)
-    {
-        fclose($fileHandle);
-        fclose($tempFileHandle);
-
-        echo "error line: " . __LINE__;
-        return;
-    }
-    $sheetLinePos = $returnSet["sheetLinePos"];
     
     fclose($fileHandle);
     fclose($tempFileHandle);
