@@ -34,6 +34,8 @@ class CUserManger
             $returnMsg["errorMsg"] = "can't connect LDAP server.";
             return false;
         }
+		
+		@ldap_set_option($conn, LDAP_OPT_REFERRALS, 0);
 
         $tmpUserName = $_userName;
         if (strpos($_userName, "\\") === false)
@@ -46,6 +48,7 @@ class CUserManger
         {
             $returnMsg["errorCode"] = 0;
             $returnMsg["errorMsg"] = "can't bind with LDAP server.";
+			$returnMsg["errorMsg"] = "LDAP can't log in. " . ldap_error($conn) . ", username: " . $tmpUserName;
             return false;
         }
 
@@ -97,7 +100,7 @@ class CUserManger
         if ($this->ldapCheckUserInfo($_userName, $_passWord) == false)
         {
                 $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "can't verify LDAP credential, line: " . __LINE__;
+                //$returnMsg["errorMsg"] = "can't verify LDAP credential, line: " . __LINE__;
                 //echo json_encode($returnMsg);
                 return false;
         }

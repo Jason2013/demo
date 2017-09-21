@@ -89,7 +89,7 @@ class CSwtHtmlTemple
         {
             echo "        <a href=\"" . $this->pagePrePath . "subPages/batchListOutUser.php\">batch list</a>\n";
             //echo "        <a href=\"" . $this->pagePrePath . "subPages/genReportOutUser.php\">generate Reports</a>\n";
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/genReportOutUserVer3a.php\">generate Reports</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/genReportOutUserVer4.php\">generate Reports</a>\n";
             //echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFilesOutUser.php\">import results</a>\n";
             //echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportBatchID.php\">generate report</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/helpForOutUser.php\">help center</a>\n";
@@ -115,6 +115,17 @@ class CSwtHtmlTemple
         echo "</div>\n";
         echo "</div>\n";
         echo "</div>\n";
+    }
+    
+    public function outPageBodyCheckLog()
+    {
+        $userChecker = new CUserManger();
+        if ($userChecker->isUser() == false)
+        {
+            echo "<script>\n";
+            echo "window.location.href = \"userLogIn.php\";\n";
+            echo "</script>\n";
+        }
     }
     
     public function outPageBodyEnd()
