@@ -162,13 +162,13 @@ if ($fileID < count($oldReportXLSXList))
                         (strcmp($vbaConfig->curMachineName, $vbaConfig->cmpMachineName) != 0))
                     {
                         // if no json, use folder names
-                        $t6 = $vbaConfig->curMachineName . " vs " . $vbaConfig->cmpMachineName;
+                        $t6 = $vbaConfig->cmpMachineName . " vs " . $vbaConfig->curMachineName;
                     }
                     
                     if ($vbaConfig->crossType == 2)
                     {
                         // cross build
-                        $t6 = $vbaConfig->curResultTime . " vs " . $vbaConfig->cmpBatchTime;
+                        $t6 = $vbaConfig->cmpResultTime . " vs " . $vbaConfig->curBatchTime;
                     }
                     
                     $n1 = strlen($t6);

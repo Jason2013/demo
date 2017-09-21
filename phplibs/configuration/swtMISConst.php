@@ -36,7 +36,17 @@ $swtClientMachineConfigurationNames = array("machineName",
 //$swtUmdStandardOrder = array("Vulkan", "DX12", "DX11", "OGL");
 
 $swtUmdNameList = array("D3D11", "D3D12", "Vulkan", "OGL");
+$swtUmdNameList_old = array("DX11", "DX12", "Vulkan", "OGL");
 $swtUmdStandardOrder = array("Vulkan", "D3D12", "D3D11", "OGL");
+
+//$swtUmdNameList = array("VG10_40CU_1600e_945m",
+//                        "VG10_64CU_1600e_945m",
+//                        "GTX1080_Fixed",
+//                        "GTX1080_Default");
+//$swtUmdStandardOrder = array("VG10_40CU_1600e_945m",
+//                             "VG10_64CU_1600e_945m",
+//                             "GTX1080_Fixed",
+//                             "GTX1080_Default");
 
 $swtOldUmdNameMatchList = array("D3D11", "DX11", "D3D12", "DX12");
 

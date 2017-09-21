@@ -491,6 +491,8 @@ class CGenReport
 	{
         global $returnMsg;
         global $connectDataSet;
+        global $swtUmdNameList;
+        global $swtUmdNameList_old;
 
         $tmpKeys = array_keys($connectDataSet["machineIDList"], $_curMachineID);
         if ($tmpKeys === false)
@@ -538,6 +540,11 @@ class CGenReport
             for ($i = 0; $i < $tmpUmdNum; $i++)
             {
                 $tmpUmdName = $connectDataSet["allFileReportUmdNameList"][$tmpIndex][$i];
+                $tmpPos = array_search($tmpUmdName, $swtUmdNameList_old);
+                if ($tmpPos !== false)
+                {
+                    $tmpUmdName = $swtUmdNameList[$tmpPos];
+                }
                 if (array_search($tmpUmdName, $reportUmdNameList) === false)
                 {
                     array_push($reportUmdNameList, $tmpUmdName);
@@ -3265,6 +3272,8 @@ class CGenReport
         global $subTestNumList;
         global $subTestNum;
         global $testNameList;
+        global $swtUmdNameList_old;
+        global $swtUmdNameList;
         
         if ($_tmpMachineID == -1)
         {
@@ -3422,6 +3431,13 @@ class CGenReport
                 }
                 $tmpCaseID = intval($data[$testCaseIDKeyAPI]);
                 $tmpPos = isset($testCaseIDList[$tmpCaseID]);
+                $tmpUmdName = $data[$dataKeyAPI];
+                $tmpPos1 = array_search($tmpUmdName, $swtUmdNameList_old);
+                if ($tmpPos1 !== false)
+                {
+                    $tmpUmdName = $swtUmdNameList[$tmpPos1];
+                }
+                
 
                 $testFilterNameList = array();
                 $tmpDataList = array();
@@ -3454,7 +3470,7 @@ class CGenReport
                     }
                     //array_merge($testCaseDataList, $tmpDataList);
                     
-                    $tmpUmdPos = array_search($data[$dataKeyAPI], $umdNameList);
+                    $tmpUmdPos = array_search($tmpUmdName, $umdNameList);
                     $tmpVal = $data[$dataKeyDataColumnID];
                     if (($tmpUmdPos !== false) &&
                         //(is_numeric($tmpVal)))
@@ -3469,7 +3485,7 @@ class CGenReport
                     //$tmpIndex = $testCaseIDMap[$tmpCaseID];
                     $tmpIndex = $testCaseIDList[$tmpCaseID];
                     
-                    $tmpUmdPos = array_search($data[$dataKeyAPI], $umdNameList);
+                    $tmpUmdPos = array_search($tmpUmdName, $umdNameList);
                     $tmpVal = $data[$dataKeyDataColumnID];
                     
                     if ($_isMainMachineID == true)
