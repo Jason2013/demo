@@ -409,6 +409,7 @@ function swtSubmitTestResultsMannualOutUserVer3(_inputTagName,
     var t4 = -1; //$("#" + _targetTagName).val();
     $.cookie('benchMaxUsername', t2);
     $.cookie('benchMaxPassword', t3);
+                             
     swtDoCopyResultFilesVer3(_inputTagName,
                              _percentTagName,
                              t4, // batch ID
@@ -490,6 +491,106 @@ function swtDoCopyResultFilesVer3(_inputTagName,
             console.log("check out 001");
         }
     });
+}
+
+function swtDoCopyResultFilesVer3a(_inputTagName,
+                                   _percentTagName,
+                                   _batchID,
+                                   _fileID,
+                                   _parentFolder,
+                                   _parentFolderOnly,
+                                   _reportGroup)
+{
+    var fileNum = $('#' + _inputTagName).get(0).files.length;
+    
+    if (fileNum == 0)
+    {
+        alert("please choose folder to upload.");
+        return;
+    }
+    
+    if (_fileID < fileNum)
+    {
+        var pic_data = new FormData();
+        
+        pic_data.append("file" + _fileID,   $('#' + _inputTagName).get(0).files[_fileID]);
+        pic_data.append("srcFilePath",      $('#' + _inputTagName).get(0).files[_fileID].webkitRelativePath);
+        pic_data.append("batchID",          _batchID);
+        pic_data.append("parentFolder",     _parentFolder);
+        pic_data.append("parentFolderOnly", _parentFolderOnly);
+        pic_data.append("fileID",           _fileID);
+        pic_data.append("fileNum",          fileNum);
+        
+        $.ajax({
+            url:"../phplibs/getInfo/swtGetFolderAllFileNamesVer3a.php",  
+            type: "POST",
+            //method: "POST",
+            cache: false,
+            enctype: "multipart/form-data",
+            processData:false,  
+            contentType:false,  
+            data:pic_data,
+            //async: false,
+            success:function(data)
+            {  
+                console.log(data);
+                var json = eval("(" + data + ")");
+                
+                if (json.errorCode == "1")
+                {
+                    //alert(json.errorMsg);
+                    if (json.copyFileFinished == "1")
+                    {
+                        // uploading complete
+                        $("#" + _percentTagName).html("copying files: 100%");
+                        swtGetFolderMachineNameListOutUser(json.parentFolder,
+                                                           "crossAPI",
+                                                           "crossASIC",
+                                                           "crossBuild");
+                    }
+                    else
+                    {
+                        if (_fileID <= fileNum)
+                        {
+                            console.log("xxxppp");
+                            console.log(_fileID);
+                            console.log(fileNum);
+                            $("#" + _percentTagName).html("copying files: " + ((_fileID * 1.0 / fileNum) * 100.0 ).toFixed(1) + "%");
+                            //$("#finishPercentBar").html("copying files: 23%");
+                        }
+                        
+                        swtDoCopyResultFilesVer3a(_inputTagName,
+                                                  _percentTagName,
+                                                  _batchID,
+                                                  json.fileID,
+                                                  json.parentFolder,
+                                                  json.parentFolderOnly,
+                                                  _reportGroup);
+                                                  
+                        //if (json.fileID <= fileNum)
+                        {
+                            //$("#" + _percentTagName).html("copying files: " + ((json.fileID / fileNum) * 100.0 ).toFixed(1) + "%");
+                        }
+                    }
+                }
+                else if (json.errorCode == "0")
+                {
+                    $("#" + _percentTagName).html("0%");
+                    alert(json.errorMsg);
+                    console.log("check out 001");
+                }
+
+            },
+            error:function(data)
+            {  
+                alert(data);  
+            }  
+        });
+        
+        
+        //if (json.fileID <= fileNum)
+
+    }
 }
 
 function swtDoSubmitTestResultsVer2(_inputTagName,
@@ -880,6 +981,14 @@ function swtGenerateRoutineReportVer3(_percentTagName, _reportListTag, _reportTy
         //$("#" + _percentTagName).html("0%");
         //alert("please fill in folder name");
         //return;
+    }
+    
+    var fileNum = $('#inputFileList').get(0).files.length;
+    
+    if (fileNum == 0)
+    {
+        alert("please choose folder to upload.");
+        return;
     }
     
     $("#" + _percentTagName).html("0% (generating is started...)");
@@ -2127,45 +2236,6 @@ function swtGetFolderMachineNameListOutUser(_srcFolderName, _crossAPITag, _cross
             }
             crossAPICode += "</table>";
             crossASICCode += "</table>";
-            
-            //var crossAPI = "<table>";
-            //var crossASIC = "<table>";
-            //var crossBuild = "";
-            //
-            //for (var i = 0; i < json.folderMachineNameList.length; i++)
-            //{
-            //    crossAPI += "<tr>\n";
-            //    crossAPI += "<td> - " + json.folderMachineNameList[i] + "</td>\n<td>&nbsp</td>\n";
-            //    crossAPI += "<td><input id=\"checkMachineID" + json.machineIDList[i] + 
-            //                "\" type=\"checkbox\" value=\"" + 
-            //                json.machineIDList[i] + "\" checked=\"checked\" /></td>\n";
-            //    crossAPI += "</tr>\n";
-            //    
-            //    crossASIC += "<tr>\n";
-            //    crossASIC += "<td> - " + json.folderMachineNameList[i] + "</td>\n<td>&nbsp</td>\n";
-            //    crossASIC += "<td><select id=\"selMachineID" + json.machineIDList[i] + 
-            //                 "\">\n";
-            //    crossASIC += "<option value=\"-1\">Skip</option>";
-            //    
-            //    for (var j = 0; j < json.folderMachineNameList.length; j++)
-            //    {
-            //        if (json.folderMachineNameList[j] ==
-            //            json.folderMachineNameList[i])
-            //        {
-            //            continue;
-            //        }
-            //        crossASIC += "<option value=\"" + json.machineIDList[j] + 
-            //                     "\">" + json.folderMachineNameList[j] + "</option>";
-            //    }
-            //    
-            //    crossASIC += "</select></td>\n";
-            //    crossASIC += "</tr>\n";
-            //    
-            //    
-            //}
-            //
-            //crossAPI += "</table>";
-            //crossASIC += "</table>";
             
             var t1 = swtImplode(json.machineIDList, ",");
             var t3 = swtImplode(json.folderMachineNameList, ",");
