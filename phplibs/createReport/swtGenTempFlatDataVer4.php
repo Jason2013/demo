@@ -122,7 +122,8 @@ $returnMsg["checkSet"] = $returnSet;
 
 $allFileList = $returnSet["allFileList"];
 $allFileSizeList = $returnSet["allFileSizeList"];
-$reportUmdNameList = $returnSet["reportUmdNameList"];
+//$reportUmdNameList = $returnSet["reportUmdNameList"];
+$allFileReportUmdNameList = $returnSet["allFileReportUmdNameList"];
 //$allFileTestPosList = $returnSet["allFileTestPosList"];
 //$allFileTestCaseNumList = $returnSet["allFileTestCaseNumList"];
 //$allFileSubTestNameFilterNumMaxList = $returnSet["allFileSubTestNameFilterNumMaxList"];
@@ -196,7 +197,7 @@ if (count($allFileList) == 0)
 {
     $allFileList = array();
     $allFileSizeList = array();
-    $reportUmdNameList = array();
+    //$reportUmdNameList = array();
     $allFolderList = array();
     $cardNameList = array();
     $machineIDList = array();
@@ -214,6 +215,13 @@ if (count($allFileList) == 0)
         // "run.log" file missing
         return;
     }
+    $allFileReportUmdNameList = array();
+    foreach ($allFileList as $tmpName)
+    {
+        array_push($allFileReportUmdNameList, array());
+    }
+    
+    
     //$allFileTestPosList = array();
     //$allFileTestCaseNumList = array();
     //$allFileSubTestNameFilterNumMaxList = array();
@@ -346,18 +354,18 @@ if ($fileID <= count($uniqueCardNameList))
     }
     
     $visitedTestNameList = array();
-    $testStartPosList = array();
-    $pairTestStartPosList = array();
-    $testCaseNumList = array();
-    $pairTestCaseNumList = array();
-    $subTestNameFilterNumMaxList = array();
-    $pairSubTestNameFilterNumMaxList = array();
-    $folderTestNameList = array();
-    $pairFolderTestNameList = array();
+    //$testStartPosList = array();
+    //$pairTestStartPosList = array();
+    //$testCaseNumList = array();
+    //$pairTestCaseNumList = array();
+    //$subTestNameFilterNumMaxList = array();
+    //$pairSubTestNameFilterNumMaxList = array();
+    //$folderTestNameList = array();
+    //$pairFolderTestNameList = array();
     $reportUmdNameList = array();
     $pairReportUmdNameList = array();
-    $testCaseUmdDataMaskList = array();
-    $pairTestCaseUmdDataMaskList = array();
+    //$testCaseUmdDataMaskList = array();
+    //$pairTestCaseUmdDataMaskList = array();
     
     $returnMsg["cardNameList"] = $cardNameList;
     $returnMsg["machineIDListNew"] = $machineIDList;
@@ -370,7 +378,29 @@ if ($fileID <= count($uniqueCardNameList))
     
     $returnSet = $flatDataGen->getReportUmdNameList($curCardNameList);
     $reportUmdNameList = $returnSet["reportUmdNameList"];
+    if ($curPairMachineID != -1)
+    {
+        $returnSet = $flatDataGen->getReportUmdNameList($pairCardNameList);
+        $pairReportUmdNameList = $returnSet["reportUmdNameList"];
+    }
     
+    for ($i = 0; $i < count($curCardNameList); $i++)
+    {
+        //$t1 = "";
+        //$o1 = array();
+        //$o1["allFileReportUmdNameList"] = $allFileReportUmdNameList;
+        //$o1["curCardNameList"] = $curCardNameList;
+        //$o1["reportUmdNameList"] = $reportUmdNameList;
+        //$o1["i"] = $i;
+        //$t1 = json_encode($o1);
+        //file_put_contents("x1.json", $t1);
+        //
+        $allFileReportUmdNameList[$curCardNameList[$i]] = $reportUmdNameList[$i];
+    }
+    for ($i = 0; $i < count($pairCardNameList); $i++)
+    {
+        $allFileReportUmdNameList[$pairCardNameList[$i]] = $pairReportUmdNameList[$i];
+    }
     
     /*
 
@@ -439,7 +469,8 @@ $valueSet = array();
 //$valueSet["allFileList"] = $valueSet;
 $valueSet["allFileList"] = $allFileList;
 $valueSet["allFileSizeList"] = $allFileSizeList;
-$valueSet["reportUmdNameList"] = $reportUmdNameList;
+//$valueSet["reportUmdNameList"] = $reportUmdNameList;
+$valueSet["allFileReportUmdNameList"] = $allFileReportUmdNameList;
 //$valueSet["allFileTestPosList"] = $allFileTestPosList;
 //$valueSet["allFileSubTestNameFilterNumMaxList"] = $allFileSubTestNameFilterNumMaxList;
 //$valueSet["allFileTestCaseNumList"] = $allFileTestCaseNumList;

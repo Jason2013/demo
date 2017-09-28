@@ -234,6 +234,7 @@ class CGenReportFlatData
             $returnSet["allFileList"] = array();
             $returnSet["allFileSizeList"] = array();
             $returnSet["reportUmdNameList"] = array();
+            $returnSet["allFileReportUmdNameList"] = array();
             //$returnSet["allFileTestPosList"] = array();
             //$returnSet["allFileTestCaseNumList"] = array();
             //$returnSet["allFileSubTestNameFilterNumMaxList"] = array();
@@ -268,6 +269,15 @@ class CGenReportFlatData
                 $tmpArray["" . $tmpKey] = $tmpVal;
             }
             $returnSet["cardSysNameMachineIDDict"] = $tmpArray;
+            
+            $tmpJson = $returnSet["allFileReportUmdNameList"];
+            $tmpArray = array();
+            foreach ($tmpJson as $tmpVal)
+            {
+                array_push($tmpArray, $tmpVal);
+            }
+            $returnSet["allFileReportUmdNameList"] = $tmpArray;
+            
             /*
             $tmpJson = $returnSet["allFileTestPosList"];
             $tmpArray = array();
@@ -888,6 +898,7 @@ class CGenReportFlatData
         // find all start pos in file for each test
         for ($i = 0; $i < count($_curCardNameList); $i++)
         {
+            array_push($reportUmdNameList, array());
             $curTmpFileName = $allFileList[$_curCardNameList[$i]];
             $resultFileHandle = fopen($curTmpFileName, "r");
 
@@ -947,10 +958,10 @@ class CGenReportFlatData
                             if ($tmpTestIndex == 0)
                             {
                                 // only first test
-                                if (array_search($tmpUmdName, $reportUmdNameList) === false)
+                                if (array_search($tmpUmdName, $reportUmdNameList[$i]) === false)
                                 {
                                     // save used API names
-                                    array_push($reportUmdNameList, $tmpUmdName);
+                                    array_push($reportUmdNameList[$i], $tmpUmdName);
                                 }
                             }
                         }
@@ -969,11 +980,6 @@ class CGenReportFlatData
             }
             
             fclose($resultFileHandle);
-            
-            if ($tmpFinished == true)
-            {
-                break;
-            }
         }
         
         $returnSet = array();

@@ -107,7 +107,11 @@ if ($connectDataSet === null)
     echo "error line: " . __LINE__;
     return;
 }
-$reportUmdNameList = $connectDataSet["reportUmdNameList"];
+//$allFileReportUmdNameList = $connectDataSet["allFileReportUmdNameList"];
+//$machineIDList = $connectDataSet["machineIDList"];
+//$returnMsg["reportUmdNameList"] = $reportUmdNameList;
+//$reportUmdNameList = $connectDataSet["reportUmdNameList"];
+//$returnMsg["reportUmdNameList"] = $reportUmdNameList;
 
 // check if batch id valid
 $returnSet = $xmlWriter->checkBatchNum($db, $batchID);
@@ -131,6 +135,8 @@ $cmpCardName = $returnSet["cmpCardName"];
 $cmpSysName = $returnSet["cmpSysName"];
 $curCardName = $returnSet["curCardName"];
 $curSysName = $returnSet["curSysName"];
+$curReportUmdNameList = $returnSet["curReportUmdNameList"];
+$cmpReportUmdNameList = $returnSet["cmpReportUmdNameList"];
 
 $returnMsg["curMachineID"] = $curMachineID;
 $returnMsg["cmpMachineID"] = $cmpMachineID;
@@ -138,26 +144,41 @@ $returnMsg["curMachineName"] = $curMachineName;
 $returnMsg["cmpMachineName"] = $cmpMachineName;
 $returnMsg["folderID"] = $folderID;
 $returnMsg["folderNum"] = $folderNum;
+$returnMsg["curReportUmdNameList"] = $curReportUmdNameList;
+$returnMsg["cmpReportUmdNameList"] = $cmpReportUmdNameList;
 
 $reportUmdNum = count($umdNameList);
 $umdOrder = array_fill(0, $reportUmdNum * 2, -1);
 $resultUmdOrder = array_fill(0, $reportUmdNum * 2, -1);
 
+$reportUmdListRef = $curReportUmdNameList;
+if (($cmpMachineID                != -1) &&
+    (count($cmpReportUmdNameList) >  count($curReportUmdNameList)))
+{
+    $reportUmdListRef = $cmpReportUmdNameList;
+}
+
 for ($i = 0; $i < $reportUmdNum; $i++)
 {
     $n3 = false;
-    if ($i < count($reportUmdNameList))
+    $n4 = false;
+    $n5 = false;
+    if ($i < count($reportUmdListRef))
     {
-        $n3 = array_search($reportUmdNameList[$i], $umdNameList);
+        $n3 = array_search($reportUmdListRef[$i], $umdNameList);
+        $n4 = array_search($reportUmdListRef[$i], $curReportUmdNameList);
+        $n5 = array_search($reportUmdListRef[$i], $cmpReportUmdNameList);
     }
     if ($n3 !== false)
     {
         $umdOrder[$i] = $n3;
         $umdOrder[$reportUmdNum + $i] = $reportUmdNum + $n3;
         
-        $resultUmdOrder[$i] = $n3;
-        
-        if ($cmpMachineID != -1)
+        if ($n4 !== false)
+        {
+            $resultUmdOrder[$i] = $n3;
+        }
+        if ($n5 !== false)
         {
             $resultUmdOrder[$reportUmdNum + $i] = $n3;
         }
@@ -186,11 +207,11 @@ $isCompStandard = true;
 $swtReportInfo = array_fill(0, $reportUmdNum, "");
 $swtReportUmdInfo = array_fill(0, $reportUmdNum, "");
 
-for ($i = 0; $i < count($reportUmdNameList); $i++)
+for ($i = 0; $i < count($curReportUmdNameList); $i++)
 {
     // loop all comparison batches of one umd
     $swtReportInfo[$i] = "CL#";
-    $swtReportUmdInfo[$i] = $reportUmdNameList[$i];
+    $swtReportUmdInfo[$i] = $curReportUmdNameList[$i];
 }
 
 $returnMsg["swtReportInfo"] = $swtReportInfo;
@@ -331,7 +352,7 @@ if ($isFolderFinished == true)
     $testNameList = $connectDataSet["testNameList"];
     $testCaseNumList = $connectDataSet["testCaseNumList"];
     $testCaseUmdDataMaskList = $connectDataSet["testCaseUmdDataMaskList"];
-    $reportUmdNameList = $connectDataSet["reportUmdNameList"];
+    //$reportUmdNameList = $connectDataSet["reportUmdNameList"];
     $testCaseNumMap = $connectDataSet["testCaseNumMap"];
     // $subjectNameFilterNumMax = $subjectNameFilterNumMax;
     $subTestNumList = $testCaseNumList;

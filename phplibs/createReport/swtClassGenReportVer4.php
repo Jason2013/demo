@@ -350,6 +350,19 @@ class CGenReport
                 $returnSet["testCaseNumMap"] = $tmpArray;
             }
             
+            $tmpJson = $returnSet["allFileReportUmdNameList"];
+            $tmpArray = array();
+            foreach ($tmpJson as $tmpKey => $tmpVal)
+            {
+                $tmpV1 = array();
+                foreach ($tmpVal as $k1 => $v1)
+                {
+                    $tmpV1[$k1] = $v1;
+                }
+                $tmpArray[$tmpKey] = $tmpV1;
+            }
+            $returnSet["allFileReportUmdNameList"] = $tmpArray;
+            
             //$tmpJson = $returnSet["allFileTestPosList"];
             //$tmpArray = array();
             //foreach ($tmpJson as $tmpKey => $tmpVal)
@@ -531,6 +544,8 @@ class CGenReport
         $cmpSysName = "";
         $curCardName = "";
         $curSysName = "";
+        $curReportUmdNameList = array();
+        $cmpReportUmdNameList = array();
         
         $returnSet = array();
         $returnSet["cmpMachineID"] = $cmpMachineID;
@@ -541,6 +556,8 @@ class CGenReport
         $returnSet["cmpSysName"] = $cmpSysName;
         $returnSet["curCardName"] = $curCardName;
         $returnSet["curSysName"] = $curSysName;
+        $returnSet["curReportUmdNameList"] = $curReportUmdNameList;
+        $returnSet["cmpReportUmdNameList"] = $cmpReportUmdNameList;
         
         if ($_folderID >= $_folderNum)
         {
@@ -569,6 +586,8 @@ class CGenReport
             $curCardName = $tmpVal[0];
             $curMachineName = $tmpVal[0];
             $curSysName = $tmpVal[1];
+            
+            $curReportUmdNameList = $connectDataSet["allFileReportUmdNameList"][$tmpPos];
         }
         else if ($crossType == 11)
         {
@@ -606,6 +625,9 @@ class CGenReport
             $cmpCardName = $tmpVal[0];
             $cmpMachineName = $tmpVal[0];
             $cmpSysName = $tmpVal[1];
+            
+            $curReportUmdNameList = $connectDataSet["allFileReportUmdNameList"][$tmpPos1];
+            $cmpReportUmdNameList = $connectDataSet["allFileReportUmdNameList"][$tmpPos2];
         }
 
         $returnSet["cmpMachineID"] = $cmpMachineID;
@@ -616,6 +638,8 @@ class CGenReport
         $returnSet["cmpSysName"] = $cmpSysName;
         $returnSet["curCardName"] = $curCardName;
         $returnSet["curSysName"] = $curSysName;
+        $returnSet["curReportUmdNameList"] = $curReportUmdNameList;
+        $returnSet["cmpReportUmdNameList"] = $cmpReportUmdNameList;
         return $returnSet;
     }
     
@@ -3600,7 +3624,10 @@ class CGenReport
                             $umdDataVal[$reportUmdNumn + $i] = floatval($umdData[$reportUmdNumn + $i]);
                         }
                     }
-
+                }
+                
+                for ($i = 0; $i < $_reportUmdNum; $i++)
+                {
                     if ($umdOrder[$i] != -1)
                     {
                         $tmpData[$i] = $umdDataXML[$umdOrder[$i]];
@@ -3609,10 +3636,28 @@ class CGenReport
                         $tmpDataVal[$i] = $umdDataVal[$umdOrder[$i]];
                         $tmpDataVal[$reportUmdNumn + $i] = $umdDataVal[$reportUmdNumn + $umdOrder[$i]];
                     }
-                    
+                }
+                for ($i = 0; $i < $_reportUmdNum; $i++)
+                {
                     if ($resultUmdOrder[$i] != -1)
                     {
+                        //if (file_exists("o1.json") == false)
+                        //{
+                        //    $o1 = array();
+                        //    $o1["resultUmdOrder"] = $resultUmdOrder;
+                        //    $o1["tmpData"] = $tmpData;
+                        //    $o1["tmpDataVal"] = $tmpDataVal;
+                        //    $o1["umdDataXML"] = $umdDataXML;
+                        //    $o1["umdDataVal"] = $umdDataVal;
+                        //    $o1["umdOrder"] = $umdOrder;
+                        //    $o1["i"] = $i;
+                        //    $o1["_reportUmdNum"] = $_reportUmdNum;
+                        //    $t1 = json_encode($o1);
+                        //    file_put_contents("o1.json", $t1);
+                        //}
+                        
                         array_push($tmpDataList, $tmpData[$i]);
+                        //array_push($tmpDataList, $tmpData[$i]);
                         //array_push($tmpDataValList, $tmpDataVal[$i]);
                         $tmpDataColumnNum++;
                     }
