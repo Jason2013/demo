@@ -649,6 +649,9 @@ function swtDoCopyResultFilesVer3a(_inputTagName,
                     {
                         // uploading complete
                         $("#" + _percentTagName).html("copying files: 100%");
+                        $("#loadProgressBar").progressbar({
+                                value: 100
+                            });
                         swtGetFolderMachineNameListOutUser(json.parentFolder,
                                                            "crossAPI",
                                                            "crossASIC",
@@ -661,8 +664,12 @@ function swtDoCopyResultFilesVer3a(_inputTagName,
                             console.log("xxxppp");
                             console.log(_fileID);
                             console.log(fileNum);
-                            $("#" + _percentTagName).html("copying files: " + ((_fileID * 1.0 / fileNum) * 100.0 ).toFixed(1) + "%");
-                            //$("#finishPercentBar").html("copying files: 23%");
+                            var f1 = (_fileID * 1.0 / fileNum) * 100.0;
+                            $("#" + _percentTagName).html("copying files: " + f1.toFixed(1) + "%");
+                            
+                            $("#loadProgressBar").progressbar({
+                                value: Math.floor(f1)
+                            });
                         }
                         
                         swtDoCopyResultFilesVer3a(_inputTagName,
@@ -1698,6 +1705,72 @@ function swtDoGenerateRoutineReportVer3(_percentTagName,
     });
 }
 
+function swtSetMachineReportProgress(_crossType, _phaseTag, _machineID, _value)
+{
+    if (_crossType == 10)
+    {
+        $("#pBarAPI_" + _machineID + "_" + _phaseTag).progressbar({
+            value: Math.floor(_value)
+        });
+    }
+    else if (_crossType == 11)
+    {
+        $("#pBarASIC_" + _machineID + "_" + _phaseTag).progressbar({
+            value: Math.floor(_value)
+        });
+    }
+}
+
+function swtGetMachineReportProgress(_crossType, _phaseTag, _machineID)
+{
+    var tmpTag = "";
+    if (_crossType == 10)
+    {
+        tmpTag = "pBarAPI_" + _machineID + "_" + _phaseTag;
+    }
+    else if (_crossType == 11)
+    {
+        tmpTag = "pBarASIC_" + _machineID + "_" + _phaseTag;
+    }
+    else
+    {
+        return -1;
+    }
+    var tmpVal = $("#" + tmpTag).progressbar( "value" );
+    return tmpVal;
+}
+
+function swtSetMachineReportFileName(_crossType, _phaseTag, _machineID, _value)
+{
+    if (_crossType == 10)
+    {
+        $("#pBarAPI_" + _machineID + "_" + _phaseTag).text(_value);
+    }
+    else if (_crossType == 11)
+    {
+        $("#pBarASIC_" + _machineID + "_" + _phaseTag).text(_value);
+    }
+}
+
+function swtGetMachineReportFileName(_crossType, _phaseTag, _machineID)
+{
+    var tmpTag = "";
+    if (_crossType == 10)
+    {
+        tmpTag = "pBarAPI_" + _machineID + "_" + _phaseTag;
+    }
+    else if (_crossType == 11)
+    {
+        tmpTag = "pBarASIC_" + _machineID + "_" + _phaseTag;
+    }
+    else
+    {
+        return "";
+    }
+    var tmpVal = $("#" + tmpTag).text();
+    return tmpVal;
+}
+
 function swtDoGenerateRoutineReportVer4(_percentTagName,
                                         _reportListTag,
                                         _batchID,
@@ -1747,7 +1820,7 @@ function swtDoGenerateRoutineReportVer4(_percentTagName,
             {
                 //alert("next");
                 //return;
-                
+                //swtSetMachineReportProgress(_crossType, "01", json.curMachineID, 100);
                 
                 $("#" + _percentTagName).html("converting XML to XLSX, please wait...");
                 swtXLSXBatchReport(_percentTagName,
@@ -1780,12 +1853,23 @@ function swtDoGenerateRoutineReportVer4(_percentTagName,
                                   (json.curToVisitFileSizeSum + json.cmpToVisitFileSizeSum);
                     var f3 = f1 * json.folderID;
                     var f4 = (f3 + f2) * 100.0;
+                    var f5 = 100.0 * (json.curVisitedFileSizeSum + json.cmpVisitedFileSizeSum) / 
+                                     (json.curToVisitFileSizeSum + json.cmpToVisitFileSizeSum);
                     //var f1 = 1.0 / json.folderNum;
                     //var f2 = f1 * json.curTestPos / json.testNum;
                     //var f3 = f1 * json.folderID;
                     //var f4 = (f3 + f2) * 100.0;
                     
                     $("#" + _percentTagName).html("gen report: " + f4.toFixed(1) + "%");
+                    
+                    swtSetMachineReportProgress(_crossType, "01", json.curMachineID, Math.ceil(f5));
+                    
+                    var tmpVal = swtGetMachineReportFileName(_crossType, "03", json.curMachineID);
+                    if ((tmpVal.length                   == 0) &&
+                        (json.finalReportFileName.length >  0))
+                    {
+                        swtSetMachineReportFileName(_crossType, "03", json.curMachineID, json.finalReportFileName);
+                    }
                 }
             }
         }
@@ -1850,12 +1934,19 @@ function swtXLSXBatchReport(_percentTagName, _reportListTag, _batchID, _reportTy
             //alert(json.errorMsg);
             $("#" + _percentTagName).html("generating Graphs, please wait...");
             swtXLSX2XLSM(_percentTagName, _reportListTag, _batchID, _reportType, 0, _curReportFolder, _crossType);
+            
+            var f1 = swtGetMachineReportProgress(_crossType, "02", json.curMachineID);
+            swtSetMachineReportProgress(_crossType, "02", json.curMachineID, Math.ceil(f1) + 25);
         }
         else if (json.errorCode == "2")
         {
             // generate all history reports
             $("#" + _percentTagName).html(json.errorMsg);
             swtXLSXBatchReport(_percentTagName, _reportListTag, _batchID, _reportType, _fileID + 1, _curReportFolder, _crossType);
+            
+            //var f1 = json.fileID * 0.5 / json.fileNum * 100.0;
+            var f1 = swtGetMachineReportProgress(_crossType, "02", json.curMachineID);
+            swtSetMachineReportProgress(_crossType, "02", json.curMachineID, Math.ceil(f1) + 25);
         }
         else
         {
@@ -1886,7 +1977,9 @@ function swtXLSX2XLSM(_percentTagName, _reportListTag, _batchID, _reportType, _f
         //alert(json.errorMsg);
         if (json.errorCode == "1")
         {
-            //alert(json.errorMsg);
+            var f1 = swtGetMachineReportProgress(_crossType, "02", json.curMachineID);
+            swtSetMachineReportProgress(_crossType, "02", json.curMachineID, Math.ceil(f1) + 25);
+            
             if (_reportType == 0)
             {
                 // only generating latest report
@@ -1914,6 +2007,9 @@ function swtXLSX2XLSM(_percentTagName, _reportListTag, _batchID, _reportType, _f
             // generate all history reports
             $("#" + _percentTagName).html(json.errorMsg);
             swtXLSX2XLSM(_percentTagName, _reportListTag, _batchID, _reportType, _fileID + 1, _curReportFolder, _crossType);
+            
+            var f1 = swtGetMachineReportProgress(_crossType, "02", json.curMachineID);
+            swtSetMachineReportProgress(_crossType, "02", json.curMachineID, Math.ceil(f1) + 25);
         }
     });
 }
@@ -2637,6 +2733,24 @@ function swtGetFolderMachineNameListOutUser(_srcFolderName, _crossAPITag, _cross
                             "\" type=\"checkbox\" value=\"" + 
                             json.machineIDList[i] + "\" checked=\"checked\" /></td>\n";
                 crossAPICode += "</tr>\n";
+                crossAPICode += "<tr>\n";
+                crossAPICode += "<td colspan=\"3\">\n";
+                crossAPICode += "<div id=\"pBarAPI_" + json.machineIDList[i] + 
+                                "_01\" style=\"width: 350px; height: 5px;\"></div>\n";
+                crossAPICode += "</td>\n";
+                crossAPICode += "</tr>\n";
+                crossAPICode += "<tr>\n";
+                crossAPICode += "<td colspan=\"3\">\n";
+                crossAPICode += "<div id=\"pBarAPI_" + json.machineIDList[i] +
+                                "_02\" style=\"width: 350px; height: 5px;\"></div>\n";
+                crossAPICode += "</td>\n";
+                crossAPICode += "</tr>\n";
+                crossAPICode += "<tr>\n";
+                crossAPICode += "<td colspan=\"3\">\n";
+                crossAPICode += "<div id=\"pBarAPI_" + json.machineIDList[i] +
+                                "_03\" style=\"width: 300px; font-size: 12px;\"></div>\n";
+                crossAPICode += "</td>\n";
+                crossAPICode += "</tr>\n";
                 
                 crossASICCode += "<tr>\n";
                 crossASICCode += "<td> - " + json.folderMachineNameList[i] + "</td><td>&nbsp</td>\n";
@@ -2657,6 +2771,24 @@ function swtGetFolderMachineNameListOutUser(_srcFolderName, _crossAPITag, _cross
                 
                 crossASICCode += "</select></td>\n";
                 crossASICCode += "</tr>\n";
+                crossASICCode += "<tr>\n";
+                crossASICCode += "<td colspan=\"3\">\n";
+                crossASICCode += "<div id=\"pBarASIC_" + json.machineIDList[i] +
+                                 "_01\" style=\"width: 350px; height: 5px;\"></div>\n";
+                crossASICCode += "</td>\n";
+                crossASICCode += "</tr>\n";
+                crossASICCode += "<tr>\n";
+                crossASICCode += "<td colspan=\"3\">\n";
+                crossASICCode += "<div id=\"pBarASIC_" + json.machineIDList[i] +
+                                 "_02\" style=\"width: 350px; height: 5px;\"></div>\n";
+                crossASICCode += "</td>\n";
+                crossASICCode += "</tr>\n";
+                crossASICCode += "<tr>\n";
+                crossASICCode += "<td colspan=\"3\">\n";
+                crossASICCode += "<div id=\"pBarASIC_" + json.machineIDList[i] +
+                                 "_03\" style=\"width: 300px; font-size: 12px;\"></div>\n";
+                crossASICCode += "</td>\n";
+                crossASICCode += "</tr>\n";
             }
             crossAPICode += "</table>";
             crossASICCode += "</table>";
@@ -2670,6 +2802,17 @@ function swtGetFolderMachineNameListOutUser(_srcFolderName, _crossAPITag, _cross
             //$("#" + _crossASICTag).html(crossASIC);
             $("#" + _crossAPITag).html(crossAPICode);
             $("#" + _crossASICTag).html(crossASICCode);
+            
+            for (var i = 0; i < json.folderMachineNameList.length; i++)
+            {
+                $("#pBarAPI_" + json.machineIDList[i] + "_01").progressbar();
+                $("#pBarAPI_" + json.machineIDList[i] + "_02").progressbar();
+                $("#pBarAPI_" + json.machineIDList[i] + "_03").progressbar();
+                
+                $("#pBarASIC_" + json.machineIDList[i] + "_01").progressbar();
+                $("#pBarASIC_" + json.machineIDList[i] + "_02").progressbar();
+                $("#pBarASIC_" + json.machineIDList[i] + "_03").progressbar();
+            }
             
             console.log(">>>>");
             console.log(crossASIC);

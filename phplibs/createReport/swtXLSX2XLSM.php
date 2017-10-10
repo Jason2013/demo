@@ -27,6 +27,7 @@ $oldReportXMLList = glob($reportFolder . "/*.xml");
 
 $returnMsg["oldReportXLSXList"] = $oldReportXLSXList;
 $returnMsg["fileID"] = $fileID;
+$curMachineID = -1;
 
 if ($fileID < count($oldReportXLSXList))
 {
@@ -50,6 +51,19 @@ if ($fileID < count($oldReportXLSXList))
     $tmpVBAConfigPath = $reportFolder . "/" . $tmpFileNameSection[0] .
                         "_" . $tmpFileNameSection[1] . "/" . $swtTempVBAConfigJsonName;
     $tmpVBAPath = $reportFolder . "/" . $swtTempVBAName;
+    
+    $vbaConfig = null;
+    
+    if (file_exists($tmpVBAConfigPath))
+    {
+        $t1 = file_get_contents($tmpVBAConfigPath);
+        $vbaConfig = json_decode($t1);
+        
+        if (isset($vbaConfig->curMachineID))
+        {
+            $curMachineID = $vbaConfig->curMachineID;
+        }
+    }
     
     $isFlatData = strpos($tmpFileName, "(FlatData)");
     if ($isFlatData !== false)
@@ -95,15 +109,16 @@ if ($fileID < count($oldReportXLSXList))
         try
         {
             //echo $tmpVBAConfigPath;
-            if (file_exists($tmpVBAConfigPath))
+            //if (file_exists($tmpVBAConfigPath))
+            if ($vbaConfig != null)
             {
                 // add graph
                 $excel = new COM("Excel.Application");
                 
                 $workBook = $excel->WorkBooks->Open("" . __dir__ . "/" . $tmpPath);
                 
-                $t1 = file_get_contents($tmpVBAConfigPath);
-                $vbaConfig = json_decode($t1);
+                //$t1 = file_get_contents($tmpVBAConfigPath);
+                //$vbaConfig = json_decode($t1);
                 
                 $t2 = file_get_contents("../../vbaLibs/createGraph01.vba");
                 
@@ -207,6 +222,9 @@ if ($fileID < count($oldReportXLSXList))
     
     $returnMsg["errorCode"] = 2;
     $returnMsg["errorMsg"] = "generating Graphs: (" . ($fileID + 1) . " / " . count($oldReportXLSXList) . ")";
+    $returnMsg["curMachineID"] = $curMachineID;
+    $returnMsg["fileID"] = $fileID + 1;
+    $returnMsg["fileNum"] = count($oldReportXMLList);
 }
 
 if (($fileID + 1) >= count($oldReportXLSXList))
@@ -233,7 +251,7 @@ if (($fileID + 1) >= count($oldReportXLSXList))
     // zip finished
     $returnMsg["errorCode"] = 1;
     $returnMsg["errorMsg"] = "convert report success";
-    
+    $returnMsg["curMachineID"] = $curMachineID;
 }
 
 echo json_encode($returnMsg);

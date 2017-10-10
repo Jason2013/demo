@@ -7,9 +7,10 @@ $html1->outPageHead("", "" .
                         "<script type=\"text/javascript\" src=\"../jslibs/some/genFuncs.js?v=201706291304\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/jquery-cookie/jquery.cookie.js\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/browserFolder/browserFolder.js\"></script>\n" .
-                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201709201410\"></script>\n");
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201709281410\"></script>\n");
 
 $html1->outPageBodyStart();
+$html1->outPageBodyCheckLog();
 
 ?>
 
@@ -29,22 +30,26 @@ $html1->outPageBodyStart();
                 <!--
                 <input id="inputFolderName" type="text" name="foldername" size="64" />&nbsp&nbsp&nbsp
                 -->
-                <input type="file" id="inputFileList" name="inputFileList" webkitdirectory multiple />&nbsp&nbsp&nbsp
+                <input type="file" id="inputFileList" name="inputFileList" style="width: 100px;" 
+                 webkitdirectory multiple />&nbsp&nbsp&nbsp
                 <button id="subBtn">upload</button>&nbsp&nbsp&nbsp
+            </td>
+            <td>
+                <div id="loadProgressBar" style="width: 300px; height: 10px;"></div>
             </td>
         </tr>
 
         </table>
         <p>
         
-        <fieldset id="crossAPI" style="width: 250px; float: left;">
+        <fieldset id="crossAPI" style="width: 350px; float: left;">
         <legend>cross API<input id="crossAPICheck" name="crossAPICheck" type="checkbox"></input></legend>
         ...
         </fieldset>
         <div style="width: 20px; float: left;">
         &nbsp&nbsp
         </div>
-        <fieldset id="crossASIC" style="width: 400px; float: left;">
+        <fieldset id="crossASIC" style="width: 350px; float: left;">
         <legend>cross ASIC / OS<input id="crossASICCheck" name="crossASICCheck" type="checkbox"></input></legend>
         ...
         </fieldset>
@@ -52,12 +57,13 @@ $html1->outPageBodyStart();
         </p>
         
         <div style="clear: both;">&nbsp&nbsp</div>
-        
+
+        <!--
         <p>choose your local folder that has MB result files to upload.</p>
 
         <p>see an example here: <span style="background-color: #FFFF00;">\\oglserver\Incoming\Davy\deletable\benchMax\2017-08-11-man00001</span></p>
         <p>please <span style="background-color: #FF0000; color: #FFFFFF;">don't close this page in process of reports generation!</span></p>
-        
+        -->
         <p>finishing state: <div id="finishPercentBar" >0%</div></p>
         
         <!--
@@ -66,7 +72,7 @@ $html1->outPageBodyStart();
         </div>
         -->
         
-        <div id="" class="button01 roundCorner" onclick="swtGenerateRoutineReportVer4('finishPercentBar', 'reportList', 0, -1, -1, 10);" onselectstart="return false;" style="float: left;">
+        <div id="startGen" class="button01 roundCorner" onclick="swtGenerateRoutineReportVer4('finishPercentBar', 'reportList', 0, -1, -1, 10);" onselectstart="return false;" style="float: left;">
         start generation
         </div>
         
@@ -90,11 +96,30 @@ $html1->outPageBodyStart();
 <?php
 
 $html1->outPageBodyNext();
-$html1->outPageBodyCheckLog();
+//$html1->outPageBodyCheckLog();
 
 ?>
     
 <script>
+
+function isInputDirSupported() {
+    var tmpInput = document.createElement('input');
+    if ('webkitdirectory' in tmpInput 
+        || 'mozdirectory' in tmpInput 
+        || 'odirectory' in tmpInput 
+        || 'msdirectory' in tmpInput 
+        || 'directory' in tmpInput) return true;
+
+    return false;
+}
+
+if (isInputDirSupported() == false)
+{
+    $("#inputFileList").attr("disabled", "disabled");
+    $("#subBtn").attr("disabled", "disabled");
+    $("#startGen").attr("disabled", "disabled");
+    alert("your web browser doesn't support folder uploading, please try WinEdge or Chrome or Firefox.");
+}
 
 var t2 = $.cookie('benchMaxUsername');
 var t3 = $.cookie('benchMaxPassword');
@@ -131,8 +156,12 @@ $("#inputFolderName").bind("input propertychange", function(){
 
 swtGetCardChoiceCodeVer2("reportList");
 
+$("#loadProgressBar").progressbar({
+    value: 0
+});
 
-
+//$("#inputFileList").button();
+//$("#subBtn").button();
 
 </script>
 

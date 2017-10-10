@@ -25,6 +25,8 @@ $oldReportXMLList = glob($reportFolder . "/*.xml");
 $resultFileName3 = "runlog.txt";
 $resultSheetName = "runlog";
 
+$curMachineID = -1;
+
 if ($fileID < count($oldReportXMLList))
 {
     // zip one by one file
@@ -43,7 +45,6 @@ if ($fileID < count($oldReportXMLList))
         $tmpCardName = $tmpFileNameSection[0];
         $tmpSysName = $tmpFileNameSection[1];
     }
-    
     $isFlatData = strpos($tmpFileName, "(FlatData)");
     
     $tmpSrcFolder = substr($filename, 0, strlen($filename) - strlen($tmpFileName));
@@ -94,8 +95,22 @@ if ($fileID < count($oldReportXMLList))
         return;
     }
     
+    if (file_exists($tmpVBAConfigPath))
+    {
+        $t1 = file_get_contents($tmpVBAConfigPath);
+        $vbaConfig = json_decode($t1);
+        
+        if (isset($vbaConfig->curMachineID))
+        {
+            $curMachineID = $vbaConfig->curMachineID;
+        }
+    }
+    
     $returnMsg["errorCode"] = 2;
     $returnMsg["errorMsg"] = "converting XML to XLSX: (" . ($fileID + 1) . " / " . count($oldReportXMLList) . ")";
+    $returnMsg["curMachineID"] = $curMachineID;
+    $returnMsg["fileID"] = $fileID + 1;
+    $returnMsg["fileNum"] = count($oldReportXMLList);
 }
 
 if (($fileID + 1) >= count($oldReportXMLList))
@@ -123,7 +138,7 @@ if (($fileID + 1) >= count($oldReportXMLList))
     // zip finished
     $returnMsg["errorCode"] = 1;
     $returnMsg["errorMsg"] = "convert report success";
-    
+    $returnMsg["curMachineID"] = $curMachineID;
 }
 
 

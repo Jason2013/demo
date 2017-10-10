@@ -655,6 +655,8 @@ class CGenReport
         $tmpFileName1 = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d.tmp1", $_batchID);
         // summary data
         $jsonFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d.json", $_batchID);
+        // final xlsm file
+        $xlsmFileName = sprintf($_tmpCardName . "_" . $_tmpSysName . "_batch%05d.xlsm", $_batchID);
         
         $returnSet = array();
         // API sheets
@@ -665,6 +667,8 @@ class CGenReport
         $returnSet["tmpFileName1"] = $tmpFileName1;
         // summary json file for each card, has testNameList
         $returnSet["jsonFileName"] = $jsonFileName;
+        // final report name
+        $returnSet["xlsmFileName"] = $xlsmFileName;
         return $returnSet;
     }
     
@@ -1235,6 +1239,8 @@ class CGenReport
                                             $_folderNum)
 	{
         global $returnMsg;
+        global $curMachineID;
+        global $xlsmFileName;
 
         if ($_folderID >= $_folderNum)
         {
@@ -1263,6 +1269,8 @@ class CGenReport
             $returnMsg["errorCode"] = 1;
             $returnMsg["compileFinished"] = 1;
             $returnMsg["errorMsg"] = "report finished";
+            $returnMsg["curMachineID"] = $curMachineID;
+            $returnMsg["finalReportFileName"] = $xlsmFileName;
             echo json_encode($returnMsg);
             return null;
         }
@@ -3429,6 +3437,7 @@ class CGenReport
         $tmpJson["curMachineName"] = $curMachineName;
         $tmpJson["cmpMachineName"] = $cmpMachineName;
         $tmpJson["cmpMachineID"] = $cmpMachineID;
+        $tmpJson["curMachineID"] = $curMachineID;
         $tmpJson["crossType"] = $crossType;
         // use DX11, DX12, vulkan mask of Alu as overall mask
         $dropArea = array();

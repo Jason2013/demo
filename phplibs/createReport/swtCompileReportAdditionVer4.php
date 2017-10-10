@@ -226,7 +226,8 @@ $tmpFileName = $returnSet["tmpFileName"];
 $tmpFileName1 = $returnSet["tmpFileName1"];
 // summary
 $jsonFileName = $returnSet["jsonFileName"];
-
+// final report name
+$xlsmFileName = $returnSet["xlsmFileName"];
 
 $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $tmpFileName, $jsonFileName,
                                                    $cmpMachineID,
@@ -435,7 +436,7 @@ $returnMsg["subTestNum"] = $subTestNum;
 $returnMsg["compileFinished"] = $compileFinished;
 $returnMsg["curReportFolder"] = $curReportFolder;
 $returnMsg["batchID"] = $batchID;
-//$returnMsg["subTestUmdDataMaskList"] = $subTestUmdDataMaskList;
+$returnMsg["curMachineID"] = $curMachineID;
 $returnMsg["crossType"] = $crossType;
 $returnMsg["folderID"] = $folderID;
 $returnMsg["folderNum"] = $folderNum;
@@ -448,6 +449,7 @@ $returnMsg["curVisitedFileSizeSum"] = $curVisitedFileSizeSum;
 $returnMsg["curToVisitFileSizeSum"] = $curToVisitFileSizeSum;
 $returnMsg["cmpVisitedFileSizeSum"] = $cmpVisitedFileSizeSum;
 $returnMsg["cmpToVisitFileSizeSum"] = $cmpToVisitFileSizeSum;
+$returnMsg["finalReportFileName"] = $xlsmFileName;
 
 $t1 = json_encode($returnMsg);
 echo $t1;
