@@ -35,6 +35,7 @@ class CUserManger
             return false;
         }
 		
+        @ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);
 		@ldap_set_option($conn, LDAP_OPT_REFERRALS, 0);
 
         $tmpUserName = $_userName;
@@ -116,8 +117,8 @@ class CUserManger
         }
         
         $userName = cleaninput($_userName, 128);
-        //$passWord = md5($_passWord);
-        $passWord = $_passWord;
+        $passWord = md5($_passWord);
+        //$passWord = $_passWord;
         //$passWord = md5("123");
         
         $params1 = array($userName);
@@ -355,8 +356,8 @@ class CUserManger
         }
         
         $userName = cleaninput($userName, 128);
-        //$passWord = md5($passWord);
-        $passWord = $passWord;
+        $passWord = md5($passWord);
+        //$passWord = $passWord;
         
         $params1 = array($userName, $passWord);
         $sql1 = "SELECT user_id FROM mis_table_user_info " .
