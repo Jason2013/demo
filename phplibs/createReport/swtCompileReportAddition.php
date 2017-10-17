@@ -254,9 +254,10 @@ $subTestNum = $returnSet["subTestNum"];
 
 $reportUmdNum = count($umdNameList);
 $startResultID = intval($resultPos / $umdNum) * $umdNum;
-// $cmpStartResultID
-//$umdOrder = array(-1, -1, -1, -1, -1, -1);
-//$resultUmdOrder = array(-1, -1, -1, -1, -1, -1);
+
+$returnSet = $xmlWriter->getHistoryNachineInfo($startResultID, $resultPos);
+$historyStartResultID = $returnSet["historyStartResultID"];
+
 $umdOrder = array_fill(0, $reportUmdNum * 2, -1);
 $resultUmdOrder = array_fill(0, $reportUmdNum * 2, -1);
 
@@ -334,6 +335,8 @@ if ($crossType == 2)
 
 $returnMsg["resultUmdOrder"] = $resultUmdOrder;
 $returnMsg["resultIDList[0]"] = $resultIDList[0];
+$returnMsg["startResultID"] = $startResultID;
+$returnMsg["resultIDListAll"] = $resultIDList;
 $returnMsg["validUmdNum"] = $validUmdNum;
 
 $returnSet = $xmlWriter->checkReportDataColumnNum();
@@ -473,6 +476,7 @@ if (($subTestNum     == 0) ||
         $tmpFileName1 = $returnSet["tmpFileName1"];
         // summary
         $jsonFileName = $returnSet["jsonFileName"];
+        $jsonFileName2 = $returnSet["jsonFileName2"];
 
         $returnMsg["checkShiftCard"] = "0";
         $returnMsg["resultPos"] = $resultPos;
@@ -482,7 +486,7 @@ if (($subTestNum     == 0) ||
             $tempFileHandle = fopen($tmpFileName, "r+");
         
             $returnMsg["checkNeedCreateReportFile"] = "1";
-            $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $tmpFileName, $jsonFileName,
+            $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $tmpFileName, $jsonFileName, $jsonFileName2,
                                                                $umdNum, $startResultID, $cmpMachineID, $resultPos,
                                                                $tempFileLineNumPos,
                                                                $curCardName, $tmpSysName,
@@ -534,7 +538,8 @@ if (($subTestNum     == 0) ||
         
         
         $returnMsg["checkShiftCard"] = "1";
-        $returnSet = $xmlWriter->checkShiftCard($xmlFileName, $tmpFileName, $tmpFileName1, $jsonFileName,
+        $returnSet = $xmlWriter->checkShiftCard($xmlFileName, $tmpFileName, $tmpFileName1, 
+                                                $jsonFileName, $jsonFileName2,
                                                 $allSheetsEndTag,
                                                 $resultPos, $sheetLinePos,
                                                 $tmpUmdName, $tmpCardName, $tmpSysName, $cmpMachineID,
@@ -571,8 +576,9 @@ else
     $tmpFileName1 = $returnSet["tmpFileName1"];
     // summary
     $jsonFileName = $returnSet["jsonFileName"];
+    $jsonFileName2 = $returnSet["jsonFileName2"];
     
-    $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $tmpFileName, $jsonFileName,
+    $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $tmpFileName, $jsonFileName, $jsonFileName2,
                                                        $umdNum, $startResultID, $cmpMachineID, $resultPos,
                                                        $tempFileLineNumPos,
                                                        $curCardName, $tmpSysName,
@@ -662,7 +668,7 @@ else
     
     $returnSet = $xmlWriter->writeReportCompareData($db, $tempFileHandle, $reportFolder,
                                                     $isCompStandard, $umdNum, $tempFileLineNumPos,
-                                                    $startResultID, $cmpStartResultID, $tempLineNum,
+                                                    $startResultID, $cmpStartResultID, $historyStartResultID, $tempLineNum,
                                                     $resultPos, $sheetLinePos, $startGraphDataLinePos,
                                                     $averageColumnHasVal);
     if ($returnSet === null)
@@ -681,7 +687,11 @@ $returnMsg["tempFileLineNumPos"] = $tempFileLineNumPos;
 $returnMsg["lineNumPos"] = $lineNumPos;
 $returnMsg["resultPos"] = $resultPos;
 $returnMsg["resultNum"] = count($resultIDList[0]);
-$returnMsg["resultIDList"] = $resultIDList[0];
+$returnMsg["resultIDList"] = $resultIDList;
+$returnMsg["cardNameList"] = $cardNameList;
+$returnMsg["sysNameList"] = $sysNameList;
+$returnMsg["machineIDList"] = $machineIDList;
+$returnMsg["driverNameList"] = $driverNameList;
 $returnMsg["curTestPos"] = $curTestPos;
 $returnMsg["firstTestPos"] = $firstTestPos;
 $returnMsg["firstSubTestPos"] = $firstSubTestPos;

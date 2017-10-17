@@ -102,25 +102,6 @@ $html1->outPageBodyNext();
     
 <script>
 
-function isInputDirSupported() {
-    var tmpInput = document.createElement('input');
-    if ('webkitdirectory' in tmpInput 
-        || 'mozdirectory' in tmpInput 
-        || 'odirectory' in tmpInput 
-        || 'msdirectory' in tmpInput 
-        || 'directory' in tmpInput) return true;
-
-    return false;
-}
-
-if (isInputDirSupported() == false)
-{
-    $("#inputFileList").attr("disabled", "disabled");
-    $("#subBtn").attr("disabled", "disabled");
-    $("#startGen").attr("disabled", "disabled");
-    alert("your web browser doesn't support folder uploading, please try WinEdge or Chrome or Firefox.");
-}
-
 var t2 = $.cookie('benchMaxUsername');
 var t3 = $.cookie('benchMaxPassword');
 
@@ -173,3 +154,28 @@ $("#loadProgressBar").progressbar({
 $html1->outPageBodyEnd();
 
 ?>
+
+<script>
+
+function isInputDirSupported() {
+    var tmpInput = document.createElement('input');
+    if ('webkitdirectory' in tmpInput 
+        || 'mozdirectory' in tmpInput 
+        || 'odirectory' in tmpInput 
+        || 'msdirectory' in tmpInput 
+        || 'directory' in tmpInput) return true;
+
+    return false;
+}
+
+if (isInputDirSupported() == false)
+{
+    $("#inputFileList").attr("disabled", "disabled");
+    $("#subBtn").attr("disabled", "disabled");
+    $("#startGen").attr("disabled", "disabled");
+    alert("your web browser doesn't support folder uploading, please try WinEdge or Chrome or Firefox.");
+}
+
+</script>
+
+</script>

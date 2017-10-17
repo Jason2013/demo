@@ -32,7 +32,7 @@ class CSwtHtmlTemple
         echo "    <title>" . $this->pageTitle . "</title>\n";
         
         echo "    <link rel=\"stylesheet\" href=\"" . $this->pagePrePath . "jslibs/jquery-ui/jquery-ui.min.css\" type=\"text/css\" />\n";
-        echo "    <link rel=\"stylesheet\" href=\"" . $this->pagePrePath . "css/main.css?v=201709271354\" type=\"text/css\" />\n";
+        echo "    <link rel=\"stylesheet\" href=\"" . $this->pagePrePath . "css/main.css?v=201710131528\" type=\"text/css\" />\n";
         echo "    <link rel=\"stylesheet\" href=\"" . $this->pagePrePath . "jslibs/simple_calendar/tcal.css\" type=\"text/css\" />\n";
         echo $_linkTags . "\n";
         echo "    <script src=\"" . $this->pagePrePath . "jslibs/some/moment.js\"></script>\n";

@@ -1128,6 +1128,56 @@ class CGenReport
         return $returnSet;
     }
     
+	public function getHistoryNachineInfo($_startResultID,
+                                          $_resultPos)
+	{
+        global $returnMsg;
+        global $resultIDList;
+        global $cardNameList;
+        global $sysNameList;
+        global $machineIDPairList;
+        global $machineIDList;
+        global $resultTimeList;
+        global $crossBuildResultTimeList;
+        global $umdNameList;
+        global $umdNum;
+        global $crossType;
+        global $machineIDBatchPairList;
+        global $machineNameList;
+        
+        $returnSet = array();
+        
+        if (count($resultIDList) <= 1)
+        {
+            $returnSet["historyStartResultID"] = -1;
+            return $returnSet;
+        }
+        
+        $tmpCardName = $cardNameList[0][$_startResultID];
+        $tmpsysName = $sysNameList[0][$_startResultID];
+        
+        $tmpKeyList1 = array_keys($cardNameList[1], $tmpCardName);
+        $tmpKeyList2 = array_keys($sysNameList[1], $tmpsysName);
+        $tmpKeyList3 = array_intersect($tmpKeyList1, $tmpKeyList2);
+        
+        if (count($tmpKeyList3) == 0)
+        {
+            $returnSet["historyStartResultID"] = -1;
+            return $returnSet;
+        }
+        
+        $tmpKeys = array();
+        foreach ($tmpKeyList3 as $tmpKey)
+        {
+            array_push($tmpKeys, $tmpKey);
+        }
+        
+        $historyStartResultID = intval($tmpKeys[0] / $umdNum) * $umdNum;
+
+        $returnSet["historyStartResultID"] = $historyStartResultID;
+        return $returnSet;
+    }
+    
 	public function getSubTestNum($_db, $_resultPos, $_tableName01, $_subTestNum)
 	{
         global $returnMsg;
@@ -1310,6 +1360,7 @@ class CGenReport
         $tmpFileName1 = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d.tmp1", $_batchID);
         // summary data
         $jsonFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d.json", $_batchID);
+        $jsonFileName2 = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d_2.json", $_batchID);
         
         $returnSet = array();
         $returnSet["xmlFileName"] = $xmlFileName;
@@ -1318,6 +1369,7 @@ class CGenReport
         $returnSet["tmpFileName1"] = $tmpFileName1;
         // summary json file for each card, has testNameList
         $returnSet["jsonFileName"] = $jsonFileName;
+        $returnSet["jsonFileName2"] = $jsonFileName2;
         return $returnSet;
     }
     
@@ -1378,10 +1430,380 @@ class CGenReport
         return $returnSet;
     }
     
+    public function writeSummaryIntoReport($_tmpJsonFileName,
+                                           $_fileHandle,
+                                           $_tmpSummarySheetName,
+                                           $_isHistorySummary)
+    {
+        global $reportUmdNum;
+        global $swtReportUmdInfo;
+        global $cmpStartResultID;
+        global $crossType;
+        global $resultUmdOrder;
+        global $reportTemplateDir;
+        
+        if (file_exists($_tmpJsonFileName))
+        {
+            $sectionPosList = array(0,
+                                    $reportUmdNum * 2,
+                                    $reportUmdNum * 2 + $reportUmdNum * 2,
+                                    $reportUmdNum * 2 + $reportUmdNum * 2 + 1,
+                                    $reportUmdNum * 2 + $reportUmdNum * 2 + 1 + $reportUmdNum * 8,
+                                    $reportUmdNum * 2 + $reportUmdNum * 2 + 1 + $reportUmdNum * 8 + $reportUmdNum * 2,
+                                    $reportUmdNum * 2 + $reportUmdNum * 2 + 1 + 
+                                    $reportUmdNum * 8 + $reportUmdNum * 2 + $reportUmdNum * 4
+                                    );
+            
+            $tmpReportUmdInfo = $swtReportUmdInfo;
+            
+            $summarySheetHeadCode = " <Worksheet ss:Name=\"" . $_tmpSummarySheetName . "\">" .
+                                    "  <Table x:FullColumns=\"1\"" .
+                                    "   x:FullRows=\"1\" ss:StyleID=\"Default\" ss:DefaultRowHeight=\"15\">" .
+                                    "   <Column ss:AutoFitWidth=\"0\" ss:Width=\"80\"/>";
+            
+            $summarySheetHeadCode2 = "   <Row ss:StyleID=\"Default\">" .
+                                     "    <Cell ss:StyleID=\"s91\"><Data ss:Type=\"String\">Tests</Data></Cell>";
+                                     
+            if (($cmpStartResultID != -1) ||
+                ($crossType == 2))
+            {
+                // asic comparison
+                for ($i = 0; $i < $reportUmdNum; $i++)
+                {
+                    if (($resultUmdOrder[$i] == -1) ||
+                        ($resultUmdOrder[$reportUmdNum + $i] == -1))
+                    {
+                        continue;
+                    }
+                    
+                    $summarySheetHeadCode .= "   <Column ss:AutoFitWidth=\"0\" ss:Width=\"500\"/>";
+                    $summarySheetHeadCode2 .= "<Cell ss:StyleID=\"s92\"><Data ss:Type=\"String\">" . 
+                                             ($tmpReportUmdInfo[$i]) . 
+                                             "</Data></Cell>";
+                }
+            }
+            else
+            {
+                // api comparison
+                
+                $tmpIndexList = array();
+                for ($i = 0; $i < $reportUmdNum; $i++)
+                {
+                    if ($resultUmdOrder[$i] == -1)
+                    {
+                        continue;
+                    }
+                    array_push($tmpIndexList, $i);
+                }
+                
+                for ($i = 0; $i < count($tmpIndexList); $i++)
+                {
+                    if ($i < (count($tmpIndexList) - 1))
+                    {
+                        if (($resultUmdOrder[$tmpIndexList[$i]] == -1) ||
+                            ($resultUmdOrder[$tmpIndexList[$i + 1]] == -1))
+                        {
+                            continue;
+                        }
+                        
+                        $summarySheetHeadCode .= "   <Column ss:AutoFitWidth=\"0\" ss:Width=\"500\"/>";
+                        if ($_isHistorySummary == false)
+                        {
+                            $summarySheetHeadCode2 .= "<Cell ss:StyleID=\"s92\"><Data ss:Type=\"String\">" . 
+                                                     ($tmpReportUmdInfo[$tmpIndexList[$i + 1]] . " v.s " . $tmpReportUmdInfo[$tmpIndexList[$i]]) . 
+                                                     "</Data></Cell>";
+                        }
+                        else
+                        {
+                            $summarySheetHeadCode2 .= "<Cell ss:StyleID=\"s92\"><Data ss:Type=\"String\">" . 
+                                                     ($tmpReportUmdInfo[$tmpIndexList[$i]]) . 
+                                                     "</Data></Cell>";
+                        }
+                    }
+                    else
+                    {
+                        if (($resultUmdOrder[$tmpIndexList[$i]] == -1) ||
+                            ($resultUmdOrder[$tmpIndexList[0]] == -1))
+                        {
+                            continue;
+                        }
+                        
+                        $summarySheetHeadCode .= "   <Column ss:AutoFitWidth=\"0\" ss:Width=\"500\"/>";
+                        if ($_isHistorySummary == false)
+                        {
+                            $summarySheetHeadCode2 .= "<Cell ss:StyleID=\"s92\"><Data ss:Type=\"String\">" . 
+                                                     ($tmpReportUmdInfo[$tmpIndexList[$i]] . " v.s " . $tmpReportUmdInfo[$tmpIndexList[0]]) . 
+                                                     "</Data></Cell>";
+                        }
+                        else
+                        {
+                            $summarySheetHeadCode2 .= "<Cell ss:StyleID=\"s92\"><Data ss:Type=\"String\">" . 
+                                                     ($tmpReportUmdInfo[$tmpIndexList[$i]]) . 
+                                                     "</Data></Cell>";
+                        }
+                    }
+                }
+            }
+
+            $summarySheetHeadCode2 .= "   </Row>";
+            
+            $t1 = $summarySheetHeadCode . $summarySheetHeadCode2;
+            
+            fwrite($_fileHandle, $t1);
+            $t1 = file_get_contents($_tmpJsonFileName);
+            $summaryJson = json_decode($t1, true);
+            
+            $t1 = file_get_contents($reportTemplateDir . "/../reportConfig/summarySheet.json");
+            $variationJson = json_decode($t1, true);
+            
+            $t1 = "";
+            foreach ($summaryJson as $k=>$v)
+            {
+                
+                $t1 .= "<Row ss:StyleID=\"Default\">\n";
+                $t1 .= "<Cell ss:MergeDown=\"1\" ss:StyleID=\"s93\"><Data ss:Type=\"String\">" . $k . "</Data></Cell>\n";
+                $t7 = "<Row ss:StyleID=\"Default\" ss:Height=\"30\">\n";
+                $t6 = "<Row ss:StyleID=\"Default\" >\n";
+                $t4 = "";
+                
+                $tmpVal = $variationJson["defaultVariation"];
+                if (array_key_exists($k, $variationJson))
+                {
+                    $tmpVal = $variationJson[$k];
+                }
+                
+                //$tmpSum = intval($v[12]);
+                $tmpSum = intval($v[$sectionPosList[2]]);
+                
+                $hasContent = false;
+                $tmpColumnNum = 0;
+                
+                $tmpIndexList = array();
+                $tmpLoopNum = 0;
+                
+                // to deal with random api missing
+                if (($cmpStartResultID != -1) ||
+                    ($crossType == 2))
+                {
+                    for ($i = 0; $i < $reportUmdNum; $i++)
+                    {
+                        array_push($tmpIndexList, $i);
+                    }
+                    $tmpLoopNum = $reportUmdNum;
+                }
+                else
+                {
+                    for ($i = 0; $i < $reportUmdNum; $i++)
+                    {
+                        if ($resultUmdOrder[$i] == -1)
+                        {
+                            continue;
+                        }
+                        array_push($tmpIndexList, $i);
+                    }
+                    $tmpLoopNum = count($tmpIndexList);
+                }
+                
+                for ($i = 0; $i < $tmpLoopNum; $i++)
+                {
+                    // skip absent api
+                    if (($cmpStartResultID != -1) ||
+                        ($crossType == 2))
+                    {
+                        if (($resultUmdOrder[$i] == -1) ||
+                            ($resultUmdOrder[$reportUmdNum + $i] == -1))
+                        {
+                            continue;
+                        } 
+                    }
+                    
+                    $j = $tmpIndexList[$i] * 2;
+                    
+                    $tmpMin = floatval($v[$tmpIndexList[$i] * 2]);
+                    $tmpMax = floatval($v[$tmpIndexList[$i] * 2 + 1]);
+                    $tmpMinRate = round($tmpMin * 100.0);
+                    $tmpMaxRate = round($tmpMax * 100.0);
+                    $tmpLmtMinRate = round($tmpVal[0] * 100.0);
+                    $tmpLmtMaxRate = round($tmpVal[1] * 100.0);
+                    $tmpUp = intval($v[$sectionPosList[1] + $tmpIndexList[$i] * 2 + 1]);
+                    $tmpDown = intval($v[$sectionPosList[1] + $tmpIndexList[$i] * 2]);
+                    $tmpUpRate = intval($tmpSum == 0 ? 0 : $tmpUp * 100.0 / $tmpSum);
+                    $tmpDownRate = intval($tmpSum == 0 ? 0 : $tmpDown * 100.0 / $tmpSum);
+                    
+                    $lossRateSum = $v[$sectionPosList[5] + $tmpIndexList[$i] * 4];
+                    $lossRateNum = $v[$sectionPosList[5] + $tmpIndexList[$i] * 4 + 1];
+                    $gainRateSum = $v[$sectionPosList[5] + $tmpIndexList[$i] * 4 + 2];
+                    $gainRateNum = $v[$sectionPosList[5] + $tmpIndexList[$i] * 4 + 3];
+                    
+                    $t2 = "Even";
+                    $isEven = true;
+                    // grey font
+                    $t3 = "s95";
+                    $t5 = "";
+                    if (($tmpMin == -1) ||
+                        ($tmpMax == -1))
+                    {
+                        $t2 = "N/A";
+                        $isEven = false;
+                    }
+                    else if (($tmpMinRate < $tmpLmtMinRate) ||
+                             ($tmpMaxRate > $tmpLmtMaxRate))
+                    {
+                        // black font
+                        $t3 = "s94";
+                        $t2 = sprintf("[%d%%, %d%%], %d%% test cases drop and %d%% test cases gain",
+                                      $tmpMinRate, $tmpMaxRate,
+                                      $tmpDownRate, $tmpUpRate);
+                        $isEven = false;
+                    }
+
+                    if (($tmpMin == -1) ||
+                        ($tmpMax == -1))
+                    {
+                        // black
+                        $t3 = "s94";
+                    }
+                    else
+                    {
+                        if (($tmpMinRate < $tmpLmtMinRate) &&
+                            ($tmpMaxRate < $tmpLmtMaxRate))
+                        {
+                            // all down, font red
+                            $t3 = "s98";
+                            $n3 = $lossRateNum == 0 ? 0 : round(($lossRateSum * 100) / $lossRateNum);
+                            $n4 = $gainRateNum == 0 ? 0 : round(($gainRateSum * 100) / $gainRateNum);
+                            $n5 = abs($n3 + $n4);
+                            $n5 = $n5 > maxAverageStyleRate ? maxAverageStyleRate : $n5;
+                            $n6 = intval($n5 / maxAverageStyleRate * (reportStyleRedNum - 1));
+                            $n7 = intval(reportStyleRedStart) + $n6;
+                            $t3 = "s" . $n7;
+                        }
+                        else if (($tmpMinRate > $tmpLmtMinRate) &&
+                                 ($tmpMaxRate > $tmpLmtMaxRate))
+                        {
+                            // all up, font green
+                            $t3 = "s99";
+                            $n3 = $lossRateNum == 0 ? 0 : round(($lossRateSum * 100) / $lossRateNum);
+                            $n4 = $gainRateNum == 0 ? 0 : round(($gainRateSum * 100) / $gainRateNum);
+                            $n5 = abs($n3 + $n4);
+                            $n5 = $n5 > maxAverageStyleRate ? maxAverageStyleRate : $n5;
+                            $n6 = intval($n5 / maxAverageStyleRate * (reportStyleGreenNum - 1));
+                            $n7 = intval(reportStyleGreenStart) + $n6;
+                            $t3 = "s" . $n7;
+                        }
+                        else if ($isEven == false)
+                        {
+                            // not even, not N/A, not pure gain or loss
+                            $n3 = $lossRateNum == 0 ? 0 : round(($lossRateSum * 100) / $lossRateNum);
+                            $n4 = $gainRateNum == 0 ? 0 : round(($gainRateSum * 100) / $gainRateNum);
+                            $n5 = abs($n3 + $n4);
+                            $n8 = ($n3 + $n4);
+                            $n5 = $n5 > maxAverageStyleRate ? maxAverageStyleRate : $n5;
+                            if ($n8 > 0)
+                            {
+                                // gain green
+                                $n6 = intval($n5 / maxAverageStyleRate * (reportStyleGreenNum - 1));
+                                $n7 = intval(reportStyleGreenStart) + $n6;
+                                $t3 = "s" . $n7;
+                            }
+                            else if ($n8 == 0)
+                            {
+                                // black
+                                $t3 = "s94";
+                            }
+                            else
+                            {
+                                // loss red
+                                $n6 = intval($n5 / maxAverageStyleRate * (reportStyleRedNum - 1));
+                                $n7 = intval(reportStyleRedStart) + $n6;
+                                $t3 = "s" . $n7;
+                            }
+                        }
+                        
+                        if ($isEven == true)
+                        {
+                            $t5 = "";
+                        }
+                        else
+                        {
+                            // if not even
+                            if ($tmpMinRate == 0)
+                            {
+                                $t5 = sprintf("&#10;" .
+                                              "#%d,\t%s,\t%d,\t%d%%,\t%d",
+                                              $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8], 
+                                              $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8 + 1],
+                                              $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8 + 2], 
+                                              $tmpMaxRate, $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8 + 3]);
+
+                            }
+                            else if ($tmpMaxRate == 0)
+                            {
+                                $t5 = sprintf("#%d,\t%s,\t%d,\t%d%%,\t%d" .
+                                              "&#10;",
+                                              $v[$sectionPosList[3] + $tmpIndexList[$i] * 8], 
+                                              $v[$sectionPosList[3] + $tmpIndexList[$i] * 8 + 1],
+                                              $v[$sectionPosList[3] + $tmpIndexList[$i] * 8 + 2], 
+                                              $tmpMinRate, $v[$sectionPosList[3] + $tmpIndexList[$i] * 8 + 3]);
+                            }
+                            else
+                            {
+                                $t5 = sprintf("#%d,\t%s,\t%d,\t%d%%,\t%d&#10;" .
+                                              "#%d,\t%s,\t%d,\t%d%%,\t%d",
+                                              $v[$sectionPosList[3] + $tmpIndexList[$i] * 8], 
+                                              $v[$sectionPosList[3] + $tmpIndexList[$i] * 8 + 1],
+                                              $v[$sectionPosList[3] + $tmpIndexList[$i] * 8 + 2], 
+                                              $tmpMinRate, $v[$sectionPosList[3] + $tmpIndexList[$i] * 8 + 3],
+                                              $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8], 
+                                              $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8 + 1],
+                                              $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8 + 2], 
+                                              $tmpMaxRate, $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8 + 3]);
+                            }
+                        }
+                    }
+                    
+                    $t1 .= "<Cell ss:StyleID=\"" . $t3 . "\"><Data ss:Type=\"String\">" . $t2 . "</Data></Cell>\n";
+                    // summary sheet
+                    $t4 .= "<Cell ss:Index=\"" . (2 + $tmpColumnNum) . 
+                           "\" ss:StyleID=\"s100\"><Data ss:Type=\"String\">" . $t5 . 
+                           "</Data></Cell>\n";
+                           
+                    if (strlen($t5) > 0)
+                    {
+                        $hasContent = true;
+                    }
+                    
+                    $tmpColumnNum++;
+                }
+
+                $t1 .= "</Row>\n";
+                $t4 .= "</Row>\n";
+                
+                if ($hasContent)
+                {
+                    $t4 = $t7 . $t4;
+                }
+                else
+                {
+                    $t4 = $t6 . $t4;
+                }
+                
+                $t1 .= $t4;
+            }
+
+            fwrite($_fileHandle, $t1);
+            $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet004B.txt");
+            fwrite($_fileHandle, $xmlSection);
+            
+            unlink($_tmpJsonFileName);
+        }
+    }
+    
 	public function checkShiftCard($_xmlFileName,
                                    $_tmpFileName,
                                    $_tmpFileName1,
                                    $_jsonFileName,
+                                   $_jsonFileName2,
                                    $_allSheetsEndTag,
                                    $_resultPos,
                                    $_sheetLinePos,
@@ -1441,14 +1863,7 @@ class CGenReport
                 echo json_encode($returnMsg);
                 return null;
             }
-            //if (file_exists($_jsonFileName) == false)
-            //{
-            //    $returnMsg["errorCode"] = 0;
-            //    $returnMsg["tmpSrc"] = $tmpSrc;
-            //    $returnMsg["errorMsg"] = "temp file: " . $_jsonFileName . " missing, line: " . __LINE__;
-            //    echo json_encode($returnMsg);
-            //    return null;
-            //}
+
             $_fileHandle = fopen($_xmlFileName, "r+");
             fseek($_fileHandle, 0, SEEK_END);
             
@@ -1559,6 +1974,17 @@ class CGenReport
             // summary sheet temp file
             //if ($cmpStartResultID != -1)
             {
+                $this->writeSummaryIntoReport($_jsonFileName,
+                                              $_fileHandle,
+                                              "Summary",
+                                              false);
+                                              
+                $this->writeSummaryIntoReport($_jsonFileName2,
+                                              $_fileHandle,
+                                              "HistorySummary",
+                                              true);
+                
+                /*
                 if (file_exists($_jsonFileName))
                 {
                     $sectionPosList = array(0,
@@ -1923,6 +2349,8 @@ class CGenReport
                     
                     unlink($_jsonFileName);
                 }
+                
+                //*/
             }
             
             // save flatdata into separate report
@@ -2146,7 +2574,7 @@ class CGenReport
         return $returnSet;
     }
     
-	public function checkNeedCreateReportFile($_xmlFileName, $_tmpFileName, $_jsonFileName,
+	public function checkNeedCreateReportFile($_xmlFileName, $_tmpFileName, $_jsonFileName, $_jsonFileName2,
                                               $_umdNum, $_startResultID, $_cmpMachineID, $_resultPos,
                                               $_tempFileLineNumPos,
                                               $_curCardName, $_tmpSysName,
@@ -2504,7 +2932,8 @@ class CGenReport
             // create summary sheet temp file
             //if ($_cmpMachineID != -1)
             {
-                if (file_exists($_jsonFileName) == false)
+                if ((file_exists($_jsonFileName) == false) ||
+                    (file_exists($_jsonFileName2) == false))
                 {
                     $sectionPosList = array(0,
                                             $reportUmdNum * 2,
@@ -2557,29 +2986,18 @@ class CGenReport
                             $tmpObj[$tmpName][$tmpPos5 + $i * 4 + 3] = 0;
                         }
                     }
-                    
-                    //$tmpObj = array();
-                    //foreach ($testNameList as $tmpName)
-                    //{
-                    //    $tmpObj[$tmpName] = array(-1, -1, -1, -1, -1, -1,
-                    //                              0, 0, 0, 0, 0, 0,
-                    //                              0,
-                    //                              -1, "", 0, 0,
-                    //                              -1, "", 0, 0,
-                    //                              -1, "", 0, 0,
-                    //                              -1, "", 0, 0,
-                    //                              -1, "", 0, 0,
-                    //                              -1, "", 0, 0,
-                    //                              "", "",
-                    //                              "", "",
-                    //                              "", "",
-                    //                              0, 0, 0, 0,
-                    //                              0, 0, 0, 0,
-                    //                              0, 0, 0, 0);
-                    //}
+
                     $t1 = json_encode($tmpObj);
                     
-                    file_put_contents($_jsonFileName, $t1);
+                    if (file_exists($_jsonFileName) == false)
+                    {
+                        file_put_contents($_jsonFileName, $t1);
+                    }
+                    
+                    if (file_exists($_jsonFileName2) == false)
+                    {
+                        file_put_contents($_jsonFileName2, $t1);
+                    }
                 }
             }
         }
@@ -3788,7 +4206,7 @@ class CGenReport
             else
             {
                 $returnMsg["commonKeys"] = $commonKeys;
-                $returnMsg["resultIDList"] = $resultIDList[$i];
+                $returnMsg["resultIDList"] = $resultIDList;
                 array_push($historyResultIDList, $resultIDList[$i][$commonKeys[0]]);
             }
         }
@@ -3974,9 +4392,230 @@ class CGenReport
         return $returnSet;
     }
     
+    public function writeSummaryJsonPerTest($_summaryJson,
+                                            $_variationJson,
+                                            $_rateVal,
+                                            $_summaryDataVal,
+                                            $_cmpPartName,
+                                            $_tmpTestCaseIndex)
+    {
+        global $testName;
+        global $subTestNum;
+        global $umdNameList;
+        global $standardTestCaseIDList;
+        global $standardSubTestNameList;
+        
+        $summaryJson = $_summaryJson;
+        $variationJson = $_variationJson;
+        $rateVal = $_rateVal;
+        $summaryDataVal = $_summaryDataVal;
+        $cmpPartName = $_cmpPartName;
+        $n1 = $_tmpTestCaseIndex;
+        
+        $reportUmdNumn = count($umdNameList);
+        
+        $sectionPosList = array(0,
+                                $reportUmdNumn * 2,
+                                $reportUmdNumn * 2 + $reportUmdNumn * 2,
+                                $reportUmdNumn * 2 + $reportUmdNumn * 2 + 1,
+                                $reportUmdNumn * 2 + $reportUmdNumn * 2 + 1 + $reportUmdNumn * 8,
+                                $reportUmdNumn * 2 + $reportUmdNumn * 2 + 1 + $reportUmdNumn * 8 + $reportUmdNumn * 2,
+                                $reportUmdNumn * 2 + $reportUmdNumn * 2 + 1 + 
+                                $reportUmdNumn * 8 + $reportUmdNumn * 2 + $reportUmdNumn * 4
+                                );
+        
+        if (array_key_exists($testName, $summaryJson))
+        {
+            // data for summary sheet
+            $tmpVal = $summaryJson[$testName];
+            $tmpValOld = $tmpVal;
+            // loss: testcaseid, testcasename,
+            // gain: testcaseid, testcasename,
+            // comp0, comp1,
+            
+            $rateVal2 = array_fill(0, $reportUmdNumn * 2, -1);
+            
+            for ($i = 0; $i < $reportUmdNumn; $i++)
+            {
+                $j = $i * 2;
+
+                $tmpVal[$j] =     ($tmpVal[$j] == -1)     ? $rateVal[$i] : $tmpVal[$j];
+                $tmpVal[$j + 1] = ($tmpVal[$j + 1] == -1) ? $rateVal[$i] : $tmpVal[$j + 1];
+                
+                $rateVal2[$j] =     ($rateVal[$i] == -1) ? $tmpVal[$j] :     $rateVal[$i];
+                $rateVal2[$j + 1] = ($rateVal[$i] == -1) ? $tmpVal[$j + 1] : $rateVal[$i];
+            }
+
+            $tmpVariation = $variationJson["defaultVariation"];
+            if (array_key_exists($testName, $variationJson))
+            {
+                $tmpVariation = $variationJson[$testName];
+            }
+            // get test case up / down num for each test
+            
+            $lossRateSum = array_fill(0, $reportUmdNumn, -1);
+            $lossRateNum = array_fill(0, $reportUmdNumn, -1);
+            $gainRateSum = array_fill(0, $reportUmdNumn, -1);
+            $gainRateNum = array_fill(0, $reportUmdNumn, -1);
+            
+            for ($i = 0; $i < $reportUmdNumn; $i++)
+            {
+                $j = $i * 2;
+                $tmpPos = $sectionPosList[1];
+
+                $tmpVal[$j + $tmpPos] =     (($rateVal[$i] < $tmpVariation[0]) && ($rateVal[$i] != -1)) ? 
+                                            ($tmpVal[$j + $tmpPos] + 1)     : $tmpVal[$j + $tmpPos];
+                $tmpVal[$j + $tmpPos + 1] = (($rateVal[$i] > $tmpVariation[1]) && ($rateVal[$i] != -1)) ? 
+                                            ($tmpVal[$j + $tmpPos + 1] + 1) : $tmpVal[$j + $tmpPos + 1];
+                
+                $tmpPos2 = $sectionPosList[5];
+                $lossRateSum[$i] = $tmpVal[$tmpPos2 + $i * 4];
+                $lossRateNum[$i] = $tmpVal[$tmpPos2 + 1 + $i * 4];
+                $gainRateSum[$i] = $tmpVal[$tmpPos2 + 2 + $i * 4];
+                $gainRateNum[$i] = $tmpVal[$tmpPos2 + 3 + $i * 4];
+            }
+            
+            for ($i = 0; $i < $reportUmdNumn; $i++)
+            {
+                if ($rateVal[$i] == -1)
+                {
+                    continue;
+                }
+                if ($rateVal[$i] < $tmpVariation[0])
+                {
+                    // less than -3%
+                    $lossRateSum[$i] += ($rateVal[$i] - $tmpVariation[0]);
+                    $lossRateNum[$i]++;
+                }
+                else if ($rateVal[$i] > $tmpVariation[1])
+                {
+                    // greater than 3%
+                    $gainRateSum[$i] += ($rateVal[$i] - $tmpVariation[1]);
+                    $gainRateNum[$i]++;
+                }
+            }
+            
+            $finalRateVal = array_fill(0, $reportUmdNumn * 2, -1);
+            $tmpChangeFlag = array_fill(0, $reportUmdNumn * 2, false);
+            
+            for ($i = 0; $i < $reportUmdNumn; $i++)
+            {
+                $j = $i * 2;
+                $finalRateVal[$j] =     min($rateVal2[$j],     $tmpVal[$j]);
+                $finalRateVal[$j + 1] = max($rateVal2[$j + 1], $tmpVal[$j + 1]);
+                
+                $tmpChangeFlag[$j] =     $finalRateVal[$j]     != $tmpValOld[$j] ? true : false;
+                $tmpChangeFlag[$j + 1] = $finalRateVal[$j + 1] != $tmpValOld[$j + 1] ? true : false;
+                
+                $tmpPos = $sectionPosList[3];
+                
+                $tmpVal[$tmpPos + $j * 4] =     $tmpChangeFlag[$j]     ? 
+                                                $standardTestCaseIDList[$n1] : $tmpVal[$tmpPos + $j * 4];
+                $tmpVal[$tmpPos + $j * 4 + 4] = $tmpChangeFlag[$j + 1] ? 
+                                                $standardTestCaseIDList[$n1] : $tmpVal[$tmpPos + $j * 4 + 4];
+                                                
+                $tmpPos2 = $sectionPosList[3] + 1;
+                $tmpVal[$tmpPos2 + $j * 4]     = $tmpChangeFlag[$j] ? 
+                                                 $standardSubTestNameList[$n1] : $tmpVal[$tmpPos2 + $j * 4];
+                $tmpVal[$tmpPos2 + $j * 4 + 4] = $tmpChangeFlag[$j + 1] ? 
+                                                 $standardSubTestNameList[$n1] : $tmpVal[$tmpPos2 + $j * 4 + 4];
+                                                 
+                $tmpPos3 = $sectionPosList[3] + 2;
+                $tmpVal[$tmpPos3 + $j * 4] =     $tmpChangeFlag[$j] ? 
+                                                 $summaryDataVal[$j] : $tmpVal[$tmpPos3 + $j * 4];
+                $tmpVal[$tmpPos3 + $j * 4 + 4] = $tmpChangeFlag[$j + 1] ? 
+                                                 $summaryDataVal[$j] : $tmpVal[$tmpPos3 + $j * 4 + 4];
+                                                 
+                $tmpPos4 = $sectionPosList[3] + 3;
+                $tmpVal[$tmpPos4 + $j * 4] =     $tmpChangeFlag[$j] ? 
+                                                 $summaryDataVal[$j + 1] : $tmpVal[$tmpPos4 + $j * 4];
+                $tmpVal[$tmpPos4 + $j * 4 + 4] = $tmpChangeFlag[$j + 1] ? 
+                                                 $summaryDataVal[$j + 1] : $tmpVal[$tmpPos4 + $j * 4 + 4];
+            }
+            
+            $summaryJson[$testName] = array_fill(0, $sectionPosList[6], -1);
+            
+            for ($i = 0; $i < $reportUmdNumn; $i++)
+            {
+                $j = $i * 2;
+                
+                $summaryJson[$testName][$j] =     $finalRateVal[$j];
+                $summaryJson[$testName][$j + 1] = $finalRateVal[$j + 1];
+                
+                $tmpPos = $sectionPosList[1];
+                $summaryJson[$testName][$tmpPos + $j] =     $tmpVal[$tmpPos + $j];
+                $summaryJson[$testName][$tmpPos + $j + 1] = $tmpVal[$tmpPos + $j + 1];
+                
+                $tmpPos2 = $sectionPosList[2];
+                $summaryJson[$testName][$tmpPos2] = $subTestNum;
+                
+                $tmpPos3 = $sectionPosList[3];
+                $summaryJson[$testName][$tmpPos3 + $j * 4] = $tmpVal[$tmpPos3 + $j * 4];
+                $summaryJson[$testName][$tmpPos3 + $j * 4 + 1] = $tmpVal[$tmpPos3 + $j * 4 + 1];
+                $summaryJson[$testName][$tmpPos3 + $j * 4 + 2] = $tmpVal[$tmpPos3 + $j * 4 + 2];
+                $summaryJson[$testName][$tmpPos3 + $j * 4 + 3] = $tmpVal[$tmpPos3 + $j * 4 + 3];
+                $summaryJson[$testName][$tmpPos3 + $j * 4 + 4] = $tmpVal[$tmpPos3 + $j * 4 + 4];
+                $summaryJson[$testName][$tmpPos3 + $j * 4 + 5] = $tmpVal[$tmpPos3 + $j * 4 + 5];
+                $summaryJson[$testName][$tmpPos3 + $j * 4 + 6] = $tmpVal[$tmpPos3 + $j * 4 + 6];
+                $summaryJson[$testName][$tmpPos3 + $j * 4 + 7] = $tmpVal[$tmpPos3 + $j * 4 + 7];
+                
+                $tmpPos4 = $sectionPosList[4];
+                $summaryJson[$testName][$tmpPos4 + $j] = $cmpPartName[$j];
+                $summaryJson[$testName][$tmpPos4 + $j + 1] = $cmpPartName[$j + 1];
+                
+                $tmpPos5 = $sectionPosList[5];
+                $summaryJson[$testName][$tmpPos5 + $i * 4] =     $lossRateSum[$i];
+                $summaryJson[$testName][$tmpPos5 + $i * 4 + 1] = $lossRateNum[$i];
+                $summaryJson[$testName][$tmpPos5 + $i * 4 + 2] = $gainRateSum[$i];
+                $summaryJson[$testName][$tmpPos5 + $i * 4 + 3] = $gainRateNum[$i];
+            }
+        }
+        else
+        {
+            $summaryJson[$testName] = array_fill(0, $sectionPosList[6], -1);
+            
+            for ($i = 0; $i < $reportUmdNumn; $i++)
+            {
+                $j = $i * 2;
+                
+                $summaryJson[$testName][$j] =     $rateVal[$i];
+                $summaryJson[$testName][$j + 1] = $rateVal[$i];
+                
+                $tmpPos = $sectionPosList[1];
+                $summaryJson[$testName][$tmpPos + $j] =     0;
+                $summaryJson[$testName][$tmpPos + $j + 1] = 0;
+                
+                $tmpPos2 = $sectionPosList[2];
+                $summaryJson[$testName][$tmpPos2] = 0;
+                
+                $tmpPos3 = $sectionPosList[3];
+                $summaryJson[$testName][$tmpPos3 + $j * 4] =     -1;
+                $summaryJson[$testName][$tmpPos3 + $j * 4 + 1] = "";
+                $summaryJson[$testName][$tmpPos3 + $j * 4 + 2] = 0;
+                $summaryJson[$testName][$tmpPos3 + $j * 4 + 3] = 0;
+                $summaryJson[$testName][$tmpPos3 + $j * 4 + 4] = -1;
+                $summaryJson[$testName][$tmpPos3 + $j * 4 + 5] = "";
+                $summaryJson[$testName][$tmpPos3 + $j * 4 + 6] = 0;
+                $summaryJson[$testName][$tmpPos3 + $j * 4 + 7] = 0;
+                
+                $tmpPos4 = $sectionPosList[4];
+                $summaryJson[$testName][$tmpPos4 + $j] =     "";
+                $summaryJson[$testName][$tmpPos4 + $j + 1] = "";
+                
+                $tmpPos5 = $sectionPosList[5];
+                $summaryJson[$testName][$tmpPos5 + $i * 4] =     0;
+                $summaryJson[$testName][$tmpPos5 + $i * 4 + 1] = 0;
+                $summaryJson[$testName][$tmpPos5 + $i * 4 + 2] = 0;
+                $summaryJson[$testName][$tmpPos5 + $i * 4 + 3] = 0;
+            }
+        }
+        
+        return $summaryJson;
+    }
+    
 	public function writeReportCompareData($_db, $_tempFileHandle, $reportFolder,
                                            $_isCompStandard, $_umdNum, $_tempFileLineNumPos,
-                                           $_startResultID, $_cmpStartResultID, $_tempLineNum,
+                                           $_startResultID, $_cmpStartResultID, $_historyStartResultID, $_tempLineNum,
                                            $_resultPos, $_sheetLinePos, $_startGraphDataLinePos,
                                            $_averageColumnHasVal)
 	{
@@ -4009,6 +4648,7 @@ class CGenReport
         global $swtTempVBAConfigJsonName;
         global $graphDataStartCloumnIDCompareList;
         global $jsonFileName;
+        global $jsonFileName2;
         global $reportTemplateDir;
         global $subTestUmdDataMaskList;
         global $dataColumnNum;
@@ -4019,18 +4659,14 @@ class CGenReport
         global $crossBuildResultIDList;
         global $curResultTime;
         global $cmpBatchTime;
+        global $batchIDList;
 
         $db = $_db;
         $tempFileHandle = $_tempFileHandle;
         $umdNum = $_umdNum;
         $reportUmdNumn = count($umdNameList);
         $sheetLinePos = $_sheetLinePos;
-        
-        //$graphDataArea = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 18] . 
-        //                 graphDataStartLineID . ":" . 
-        //                 $swtSheetColumnIDList[$subjectNameFilterNumMax + 21] .
-        //                 (intval(graphDataStartLineID) + count($graphCells) - 1);
-                         
+
         $graphDataColumnNum = 0;
         if ($dataColumnNum == 1)
         {
@@ -4058,11 +4694,6 @@ class CGenReport
             ($crossType == 2))
         {
             $hasBlank = array_search(false, $_averageColumnHasVal);
-            
-            //$graphDataAreaNoBlank = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 28] .
-            //                        graphDataStartLineIDCompare . ":" . 
-            //                        $swtSheetColumnIDList[$subjectNameFilterNumMax + 34] .
-            //                        (intval(graphDataStartLineIDCompare) + count($graphCells) - 1);
                                     
             $graphDataColumnNum = intval($dataColumnNum / 3);
                                     
@@ -4072,38 +4703,6 @@ class CGenReport
                                     (intval(graphDataStartLineIDCompare) + count($graphCells) - 1);
             
             $graphDataArea = $graphDataAreaNoBlank;
-            //if ($hasBlank === false)
-            //{
-            //    // all columns have no blank
-            //    $graphDataArea = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 28] .
-            //                     graphDataStartLineIDCompare . ":" . 
-            //                     $swtSheetColumnIDList[$subjectNameFilterNumMax + 34] .
-            //                     (intval(graphDataStartLineIDCompare) + count($graphCells) - 1);
-            //}
-            //else
-            //{
-            //    // let Graph area skip blank
-            //    $tmpArea = array();
-            //    
-            //    $t1 = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 28] .
-            //               graphDataStartLineIDCompare . ":" . 
-            //               $swtSheetColumnIDList[$subjectNameFilterNumMax + 28] .
-            //               (intval(graphDataStartLineIDCompare) + count($graphCells) - 1);
-            //    array_push($tmpArea, $t1);
-            //    for ($i = 0; $i < count($_averageColumnHasVal); $i++)
-            //    {
-            //        $t1 = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 29 + $i] .
-            //                   graphDataStartLineIDCompare . ":" . 
-            //                   $swtSheetColumnIDList[$subjectNameFilterNumMax + 29 + $i] .
-            //                   (intval(graphDataStartLineIDCompare) + count($graphCells) - 1);
-            //               
-            //        if ($_averageColumnHasVal[$i] == true)
-            //        {
-            //            array_push($tmpArea, $t1);
-            //        }
-            //    }
-            //    $graphDataArea = implode(",", $tmpArea);
-            //}
         }
         
         $tmpJson = array();
@@ -4143,11 +4742,12 @@ class CGenReport
             $selectKeyList = array();
             $n1 = 1;
             //$dataIndexList = array(-1, -1, -1, -1, -1, -1);
-            $dataIndexList = array_fill(0, $reportUmdNumn * 2, -1);
+            $dataIndexList = array_fill(0, $reportUmdNumn * 3, -1);
             array_push($selectKeyList, "t0.data_value");
             $params1 = array();
             $tmpParams1 = array();
             $tmpParams2 = array();
+            $tmpParams3 = array();
             for ($i = 0; $i < $reportUmdNumn; $i++)
             {
                 if ($i >= count($resultIDList[0]))
@@ -4220,6 +4820,21 @@ class CGenReport
                     $n1++;
                 }
             }
+            // summary sheet2, compare with last batch
+            for ($i = 0; $i < $umdNum; $i++)
+            {
+                $nextTabName = "t" . $n1;
+                array_push($selectKeyList, $nextTabName . ".data_value");
+                $t2 .= "LEFT JOIN " . $tableName01 . " " . $nextTabName . " " .
+                       "ON (" . $nextTabName . ".result_id=? AND t0.sub_id=" . $nextTabName . ".sub_id) ";
+                $dataIndexList[$reportUmdNumn * 2 + $i] = $n1;
+                
+                $tmpResultIndex = $_historyStartResultID == -1 ? $_startResultID : $_historyStartResultID;
+                $tmpbatchIndex = $_historyStartResultID == -1 ? 0 : 1;
+                array_push($tmpParams3, $resultIDList[$tmpbatchIndex][$tmpResultIndex + $i]);
+                $n1++;
+            }
+            
             
             if ($crossType == 2)
             {
@@ -4232,6 +4847,10 @@ class CGenReport
                 {
                     array_push($params1, $tmpVal);
                 }
+                foreach ($tmpParams3 as $tmpVal)
+                {
+                    array_push($params1, $tmpVal);
+                }
             }
             else
             {
@@ -4240,6 +4859,10 @@ class CGenReport
                     array_push($params1, $tmpVal);
                 }
                 foreach ($tmpParams2 as $tmpVal)
+                {
+                    array_push($params1, $tmpVal);
+                }
+                foreach ($tmpParams3 as $tmpVal)
                 {
                     array_push($params1, $tmpVal);
                 }
@@ -4276,11 +4899,15 @@ class CGenReport
             
             
             $summaryJson = array();
+            $summaryJson2 = array();
             $variationJson = array();
             //if ($_cmpStartResultID != -1)
             {
                 $t1 = file_get_contents($jsonFileName);
                 $summaryJson = json_decode($t1, true);
+                
+                $t1 = file_get_contents($jsonFileName2);
+                $summaryJson2 = json_decode($t1, true);
                 
                 $t1 = file_get_contents($reportTemplateDir . "/../reportConfig/summarySheet.json");
                 $variationJson = json_decode($t1, true);
@@ -4295,12 +4922,9 @@ class CGenReport
                     $returnMsg["tmp002"] .= $t9;
                 }
                 
-                //$umdData = array("", "", "", "", "", "");
-                //$umdDataXML = array("", "", "", "", "", "");
-                //$umdDataVal = array(-1, -1, -1, -1, -1, -1);
-                $umdData = array_fill(0, $reportUmdNumn * 2, "");
-                $umdDataXML = array_fill(0, $reportUmdNumn * 2, "");
-                $umdDataVal = array_fill(0, $reportUmdNumn * 2, -1);
+                $umdData = array_fill(0, $reportUmdNumn * 3, "");
+                $umdDataXML = array_fill(0, $reportUmdNumn * 3, "");
+                $umdDataVal = array_fill(0, $reportUmdNumn * 3, -1);
                 
                 for ($j = 0; $j < $umdNum; $j++)
                 {
@@ -4344,21 +4968,33 @@ class CGenReport
                             $umdDataVal[$reportUmdNumn + $j] = floatval($umdData[$reportUmdNumn + $j]);
                         }
                     }
+                    // summary sheet2, last batch data
+                    $umdData[$reportUmdNumn * 2 + $j] = "";
+                    if ($dataIndexList[$reportUmdNumn * 2 + $j] != -1)
+                    {
+                        $umdData[$reportUmdNumn * 2 + $j] = "" . $row1[$dataIndexList[$reportUmdNumn * 2 + $j]];
+                    }
+                    if (strlen($umdData[$reportUmdNumn * 2 + $j]) > 0)
+                    {
+                        // if null value, leave it null
+                        $umdDataXML[$reportUmdNumn * 2 + $j] = "<Data ss:Type=\"Number\">" . $umdData[$reportUmdNumn * 2 + $j] . "</Data>";
+                        $umdDataVal[$reportUmdNumn * 2 + $j] = floatval($umdData[$reportUmdNumn * 2 + $j]);
+                    }
                 }
-                
-                //$tmpData = array("", "", "", "", "", "");
-                //$tmpDataVal = array(-1, -1, -1, -1, -1, -1);
-                $tmpData = array_fill(0, $reportUmdNumn * 2, "");
-                $tmpDataVal = array_fill(0, $reportUmdNumn * 2, -1);
+
+                $tmpData = array_fill(0, $reportUmdNumn * 3, "");
+                $tmpDataVal = array_fill(0, $reportUmdNumn * 3, -1);
                 for ($i = 0; $i < $umdNum; $i++)
                 {
                     if ($umdOrder[$i] != -1)
                     {
                         $tmpData[$i] = $umdDataXML[$umdOrder[$i]];
                         $tmpData[$reportUmdNumn + $i] = $umdDataXML[$reportUmdNumn + $umdOrder[$i]];
+                        $tmpData[$reportUmdNumn * 2 + $i] = $umdDataXML[$reportUmdNumn * 2 + $umdOrder[$i]];
                         
                         $tmpDataVal[$i] = $umdDataVal[$umdOrder[$i]];
                         $tmpDataVal[$reportUmdNumn + $i] = $umdDataVal[$reportUmdNumn + $umdOrder[$i]];
+                        $tmpDataVal[$reportUmdNumn * 2 + $i] = $umdDataVal[$reportUmdNumn * 2 + $umdOrder[$i]];
                     }
                 }
                 
@@ -4430,38 +5066,11 @@ class CGenReport
                     }
                 }          
                 
-                
-                //$t3  = "<Row>\n" .
-                //       " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\"><Data ss:Type=\"String\">" . $testName . "</Data></Cell>\n" .
-                //       //" <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"><Data ss:Type=\"String\">" .
-                //       //"" . $standardSubTestNameList[$n1] . "</Data></Cell>\n" .
-                //       $tmpCode .
-                //       //" <Cell ss:StyleID=\"s" . ($startStyleID + 1) . "\"/>\n" .
-                //       //" <Cell ss:StyleID=\"s" . ($startStyleID + 1) . "\"/>\n" .
-                //       //" <Cell ss:StyleID=\"s" . ($startStyleID + 1) . "\"/>\n" .
-                //       " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
-                //       "" . $tmpData[0] . "</Cell>\n" .
-                //       " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                //       "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 5) . // 8
-                //                     "-RC" . ($subjectNameFilterNumMax + 3) . // 6
-                //                     ")/RC" . ($subjectNameFilterNumMax + 3) . "\"><Data ss:Type=\"Number\"></Data></Cell>\n" .
-                //       " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
-                //       "" . $tmpData[1] . "</Cell>\n" .
-                //       " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                //       "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 7) . // 10
-                //       "-RC" . ($subjectNameFilterNumMax + 5) . // 8
-                //       ")/RC" . ($subjectNameFilterNumMax + 5) . "\"><Data ss:Type=\"Number\"></Data></Cell>\n" .
-                //       " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
-                //       "" . $tmpData[2] . "</Cell>\n" .
-                //       " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                //       "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 7) . // 10
-                //       "-RC" . ($subjectNameFilterNumMax + 3) . // 6
-                //       ")/RC" . ($subjectNameFilterNumMax + 3) . "\"><Data ss:Type=\"Number\"></Data></Cell>\n";
-                       
-                //$summaryDataVal = array(-1, -1, -1, -1, -1, -1);
-                //$cmpPartName = array("", "", "", "", "", "");
                 $summaryDataVal = array_fill(0, $reportUmdNumn * 2, -1);
                 $cmpPartName = array_fill(0, $reportUmdNumn * 2, "");
+                // for summary sheet2, cur & last batch
+                $summaryDataVal2 = array_fill(0, $reportUmdNumn * 2, -1);
+                $cmpPartName2 = array_fill(0, $reportUmdNumn * 2, "");
                 if (($_cmpStartResultID != -1) ||
                     ($crossType == 2))
                 {
@@ -4508,11 +5117,14 @@ class CGenReport
                                "" . $tmpDataList[$tmpDataColumnNum + $i] . "</Cell>\n";
                     }
                     
-
-                    //$rateVal = array(-1, -1, -1);
                     $rateVal = array_fill(0, $reportUmdNumn, -1);
                     $summaryDataVal = array_fill(0, $reportUmdNumn * 2, -1);
                     $cmpPartName = array_fill(0, $reportUmdNumn * 2, "");
+                    
+                    // for summary sheet2, cur & last batch
+                    $rateVal3 = array_fill(0, $reportUmdNumn, -1);
+                    $summaryDataVal2 = array_fill(0, $reportUmdNumn * 2, -1);
+                    $cmpPartName2 = array_fill(0, $reportUmdNumn * 2, "");
                     
                     for ($i = 0; $i < $reportUmdNumn; $i++)
                     {
@@ -4529,7 +5141,6 @@ class CGenReport
                         $cmpPartName[$j] = $curCardName;
                         $cmpPartName[$j + 1] = $cmpCardName;
                     }
-                    
                 }
                 else
                 {
@@ -4538,6 +5149,11 @@ class CGenReport
                     $rateVal = array_fill(0, $reportUmdNumn, -1);
                     $summaryDataVal = array_fill(0, $reportUmdNumn * 2, -1);
                     $cmpPartName = array_fill(0, $reportUmdNumn * 2, "");
+                    
+                    // for summary sheet2, cur & last batch
+                    $rateVal3 = array_fill(0, $reportUmdNumn, -1);
+                    $summaryDataVal2 = array_fill(0, $reportUmdNumn * 2, -1);
+                    $cmpPartName2 = array_fill(0, $reportUmdNumn * 2, "");
                     
                     $tmpIndexList = array();
                     for ($i = 0; $i < $reportUmdNumn; $i++)
@@ -4580,7 +5196,38 @@ class CGenReport
                     }
 
                 }
+                // for summary sheet2, cur & last batch
+                for ($i = 0; $i < $reportUmdNumn; $i++)
+                {
+                    if (($tmpDataVal[$i] > 0) &&
+                        ($tmpDataVal[$reportUmdNumn * 2 + $i] > 0))
+                    {
+                        $rateVal3[$i] = ($tmpDataVal[$i] - $tmpDataVal[$reportUmdNumn * 2 + $i]) / $tmpDataVal[$reportUmdNumn * 2 + $i];
+                    }
+                    
+                    $j = $i * 2;
+                    $summaryDataVal2[$j] = $tmpDataVal[$reportUmdNumn * 2 + $i];
+                    $summaryDataVal2[$j + 1] = $tmpDataVal[$i];
+                    
+                    $cmpPartName2[$j] = count($batchIDList) > 1 ? $batchIDList[1] : $batchIDList[0];
+                    $cmpPartName2[$j + 1] = $batchIDList[0];
+                }
                 
+                $summaryJson = $this->writeSummaryJsonPerTest($summaryJson,
+                                                              $variationJson,
+                                                              $rateVal,
+                                                              $summaryDataVal,
+                                                              $cmpPartName,
+                                                              $n1);
+                
+                $summaryJson2 = $this->writeSummaryJsonPerTest($summaryJson2,
+                                                               $variationJson,
+                                                               $rateVal3,
+                                                               $summaryDataVal2,
+                                                               $cmpPartName2,
+                                                               $n1);
+                
+                /*
                 $sectionPosList = array(0,
                                         $reportUmdNumn * 2,
                                         $reportUmdNumn * 2 + $reportUmdNumn * 2,
@@ -4613,23 +5260,6 @@ class CGenReport
                         $rateVal2[$j + 1] = ($rateVal[$i] == -1) ? $tmpVal[$j + 1] : $rateVal[$i];
                     }
 
-                    //$tmpVal[0] = ($tmpVal[0] == -1) ? $rateVal[0] : $tmpVal[0];
-                    //$tmpVal[1] = ($tmpVal[1] == -1) ? $rateVal[0] : $tmpVal[1];
-                    //$tmpVal[2] = ($tmpVal[2] == -1) ? $rateVal[1] : $tmpVal[2];
-                    //$tmpVal[3] = ($tmpVal[3] == -1) ? $rateVal[1] : $tmpVal[3];
-                    //$tmpVal[4] = ($tmpVal[4] == -1) ? $rateVal[2] : $tmpVal[4];
-                    //$tmpVal[5] = ($tmpVal[5] == -1) ? $rateVal[2] : $tmpVal[5];
-                    //
-                    //$rateVal2 = array(($rateVal[0] == -1) ? $tmpVal[0] : $rateVal[0],
-                    //                  ($rateVal[0] == -1) ? $tmpVal[1] : $rateVal[0],
-                    //                  ($rateVal[1] == -1) ? $tmpVal[2] : $rateVal[1],
-                    //                  ($rateVal[1] == -1) ? $tmpVal[3] : $rateVal[1],
-                    //                  ($rateVal[2] == -1) ? $tmpVal[4] : $rateVal[2],
-                    //                  ($rateVal[2] == -1) ? $tmpVal[5] : $rateVal[2]);
-                                      
-
-
-                    
                     $tmpVariation = $variationJson["defaultVariation"];
                     if (array_key_exists($testName, $variationJson))
                     {
@@ -4659,18 +5289,6 @@ class CGenReport
                         $gainRateNum[$i] = $tmpVal[$tmpPos2 + 3 + $i * 4];
                     }
                     
-                    //$tmpVal[6] = (($rateVal[0] < $tmpVariation[0]) && ($rateVal[0] !=  -1)) ? ($tmpVal[6] + 1) : $tmpVal[6];
-                    //$tmpVal[7] = (($rateVal[0] > $tmpVariation[1]) && ($rateVal[0] !=  -1)) ? ($tmpVal[7] + 1) : $tmpVal[7];
-                    //$tmpVal[8] = (($rateVal[1] < $tmpVariation[0]) && ($rateVal[1] !=  -1)) ? ($tmpVal[8] + 1) : $tmpVal[8];
-                    //$tmpVal[9] = (($rateVal[1] > $tmpVariation[1]) && ($rateVal[1] !=  -1)) ? ($tmpVal[9] + 1) : $tmpVal[9];
-                    //$tmpVal[10] = (($rateVal[2] < $tmpVariation[0]) && ($rateVal[2] != -1)) ? ($tmpVal[10] + 1) : $tmpVal[10];
-                    //$tmpVal[11] = (($rateVal[2] > $tmpVariation[1]) && ($rateVal[2] != -1)) ? ($tmpVal[11] + 1) : $tmpVal[11];
-                    //
-                    //$lossRateSum = array($tmpVal[43], $tmpVal[47], $tmpVal[51]);
-                    //$lossRateNum = array($tmpVal[44], $tmpVal[48], $tmpVal[52]);
-                    //$gainRateSum = array($tmpVal[45], $tmpVal[49], $tmpVal[53]);
-                    //$gainRateNum = array($tmpVal[46], $tmpVal[50], $tmpVal[54]);
-                    
                     for ($i = 0; $i < $reportUmdNumn; $i++)
                     {
                         if ($rateVal[$i] == -1)
@@ -4690,26 +5308,6 @@ class CGenReport
                             $gainRateNum[$i]++;
                         }
                     }
-                    
-                    //for ($i = 0; $i < 3; $i++)
-                    //{
-                    //    if ($rateVal[$i] == -1)
-                    //    {
-                    //        continue;
-                    //    }
-                    //    if ($rateVal[$i] < $tmpVariation[0])
-                    //    {
-                    //        // less than -3%
-                    //        $lossRateSum[$i] += ($rateVal[$i] - $tmpVariation[0]);
-                    //        $lossRateNum[$i]++;
-                    //    }
-                    //    else if ($rateVal[$i] > $tmpVariation[1])
-                    //    {
-                    //        // greater than 3%
-                    //        $gainRateSum[$i] += ($rateVal[$i] - $tmpVariation[1]);
-                    //        $gainRateNum[$i]++;
-                    //    }
-                    //}
                     
                     $finalRateVal = array_fill(0, $reportUmdNumn * 2, -1);
                     $tmpChangeFlag = array_fill(0, $reportUmdNumn * 2, false);
@@ -4749,55 +5347,6 @@ class CGenReport
                                                          $summaryDataVal[$j + 1] : $tmpVal[$tmpPos4 + $j * 4 + 4];
                     }
                     
-                    
-                    //$finalRateVal = array(min($rateVal2[0], $tmpVal[0]), max($rateVal2[1], $tmpVal[1]),
-                    //                      min($rateVal2[2], $tmpVal[2]), max($rateVal2[3], $tmpVal[3]),
-                    //                      min($rateVal2[4], $tmpVal[4]), max($rateVal2[5], $tmpVal[5]));
-                    //
-                    //
-                    //// test case id
-                    //$tmpChangeFlag = array(false, false,
-                    //                       false, false,
-                    //                       false, false);
-                    //$tmpChangeFlag[0] = $finalRateVal[0] != $tmpValOld[0] ? true : false;
-                    //$tmpChangeFlag[1] = $finalRateVal[1] != $tmpValOld[1] ? true : false;
-                    //$tmpChangeFlag[2] = $finalRateVal[2] != $tmpValOld[2] ? true : false;
-                    //$tmpChangeFlag[3] = $finalRateVal[3] != $tmpValOld[3] ? true : false;
-                    //$tmpChangeFlag[4] = $finalRateVal[4] != $tmpValOld[4] ? true : false;
-                    //$tmpChangeFlag[5] = $finalRateVal[5] != $tmpValOld[5] ? true : false;
-                    
-                    // test case id
-                    //$tmpVal[13] = $tmpChangeFlag[0] ? $standardTestCaseIDList[$n1] : $tmpVal[13];
-                    //$tmpVal[17] = $tmpChangeFlag[1] ? $standardTestCaseIDList[$n1] : $tmpVal[17];
-                    //$tmpVal[21] = $tmpChangeFlag[2] ? $standardTestCaseIDList[$n1] : $tmpVal[21];
-                    //$tmpVal[25] = $tmpChangeFlag[3] ? $standardTestCaseIDList[$n1] : $tmpVal[25];
-                    //$tmpVal[29] = $tmpChangeFlag[4] ? $standardTestCaseIDList[$n1] : $tmpVal[29];
-                    //$tmpVal[33] = $tmpChangeFlag[5] ? $standardTestCaseIDList[$n1] : $tmpVal[33];
-                    
-                    // test case name
-                    //$tmpVal[14] = $tmpChangeFlag[0] ? $standardSubTestNameList[$n1] : $tmpVal[14];
-                    //$tmpVal[18] = $tmpChangeFlag[1] ? $standardSubTestNameList[$n1] : $tmpVal[18];
-                    //$tmpVal[22] = $tmpChangeFlag[2] ? $standardSubTestNameList[$n1] : $tmpVal[22];
-                    //$tmpVal[26] = $tmpChangeFlag[3] ? $standardSubTestNameList[$n1] : $tmpVal[26];
-                    //$tmpVal[30] = $tmpChangeFlag[4] ? $standardSubTestNameList[$n1] : $tmpVal[30];
-                    //$tmpVal[34] = $tmpChangeFlag[5] ? $standardSubTestNameList[$n1] : $tmpVal[34];
-
-                    // test case val
-                    //$tmpVal[15] = $tmpChangeFlag[0] ? $summaryDataVal[0] : $tmpVal[15];
-                    //$tmpVal[19] = $tmpChangeFlag[1] ? $summaryDataVal[0] : $tmpVal[19];
-                    //$tmpVal[23] = $tmpChangeFlag[2] ? $summaryDataVal[2] : $tmpVal[23];
-                    //$tmpVal[27] = $tmpChangeFlag[3] ? $summaryDataVal[2] : $tmpVal[27];
-                    //$tmpVal[31] = $tmpChangeFlag[4] ? $summaryDataVal[4] : $tmpVal[31];
-                    //$tmpVal[35] = $tmpChangeFlag[5] ? $summaryDataVal[4] : $tmpVal[35];
-                    
-                    //$tmpVal[16] = $tmpChangeFlag[0] ? $summaryDataVal[1] : $tmpVal[16];
-                    //$tmpVal[20] = $tmpChangeFlag[1] ? $summaryDataVal[1] : $tmpVal[20];
-                    //$tmpVal[24] = $tmpChangeFlag[2] ? $summaryDataVal[3] : $tmpVal[24];
-                    //$tmpVal[28] = $tmpChangeFlag[3] ? $summaryDataVal[3] : $tmpVal[28];
-                    //$tmpVal[32] = $tmpChangeFlag[4] ? $summaryDataVal[5] : $tmpVal[32];
-                    //$tmpVal[36] = $tmpChangeFlag[5] ? $summaryDataVal[5] : $tmpVal[36];
-                    
-                    
                     $summaryJson[$testName] = array_fill(0, $sectionPosList[6], -1);
                     
                     for ($i = 0; $i < $reportUmdNumn; $i++)
@@ -4834,26 +5383,6 @@ class CGenReport
                         $summaryJson[$testName][$tmpPos5 + $i * 4 + 2] = $gainRateSum[$i];
                         $summaryJson[$testName][$tmpPos5 + $i * 4 + 3] = $gainRateNum[$i];
                     }
-                    
-                    //$summaryJson[$testName] = array($finalRateVal[0], $finalRateVal[1],
-                    //                                $finalRateVal[2], $finalRateVal[3],
-                    //                                $finalRateVal[4], $finalRateVal[5],
-                    //                                $tmpVal[6], $tmpVal[7], 
-                    //                                $tmpVal[8], $tmpVal[9], 
-                    //                                $tmpVal[10], $tmpVal[11],
-                    //                                $subTestNum,
-                    //                                $tmpVal[13], $tmpVal[14], $tmpVal[15], $tmpVal[16], 
-                    //                                $tmpVal[17], $tmpVal[18], $tmpVal[19], $tmpVal[20],
-                    //                                $tmpVal[21], $tmpVal[22], $tmpVal[23], $tmpVal[24],
-                    //                                $tmpVal[25], $tmpVal[26], $tmpVal[27], $tmpVal[28],
-                    //                                $tmpVal[29], $tmpVal[30], $tmpVal[31], $tmpVal[32],
-                    //                                $tmpVal[33], $tmpVal[34], $tmpVal[35], $tmpVal[36],
-                    //                                $cmpPartName[0], $cmpPartName[1],
-                    //                                $cmpPartName[2], $cmpPartName[3],
-                    //                                $cmpPartName[4], $cmpPartName[5],
-                    //                                $lossRateSum[0], $lossRateNum[0], $gainRateSum[0], $gainRateNum[0],
-                    //                                $lossRateSum[1], $lossRateNum[1], $gainRateSum[1], $gainRateNum[1],
-                    //                                $lossRateSum[2], $lossRateNum[2], $gainRateSum[2], $gainRateNum[2]);
                 }
                 else
                 {
@@ -4893,25 +5422,9 @@ class CGenReport
                         $summaryJson[$testName][$tmpPos5 + $i * 4 + 2] = 0;
                         $summaryJson[$testName][$tmpPos5 + $i * 4 + 3] = 0;
                     }
-                    
-                    //$summaryJson[$testName] = array($rateVal[0], $rateVal[0],
-                    //                                $rateVal[1], $rateVal[1],
-                    //                                $rateVal[2], $rateVal[2],
-                    //                                0, 0, 0, 0, 0, 0, 0,
-                    //                                -1, "", 0, 0,
-                    //                                -1, "", 0, 0,
-                    //                                -1, "", 0, 0,
-                    //                                -1, "", 0, 0,
-                    //                                -1, "", 0, 0,
-                    //                                -1, "", 0, 0,
-                    //                                "", "", // cmp 2 part name, like Vega10 vs Fiji XT, DX12 vs DX11
-                    //                                "", "",
-                    //                                "", "",
-                    //                                // lossRateSum, lossNum, gainRateSum, gainNum
-                    //                                0, 0, 0, 0,
-                    //                                0, 0, 0, 0,
-                    //                                0, 0, 0, 0);
                 }
+                
+                //*/
                 
                 $t1 .= $t3;
                 if (count($graphCells) > 0)
@@ -4950,6 +5463,9 @@ class CGenReport
                 // write summary sheet json
                 $t1 = json_encode($summaryJson);
                 file_put_contents($jsonFileName, $t1);
+                
+                $t1 = json_encode($summaryJson2);
+                file_put_contents($jsonFileName2, $t1);
             }
         }
 
