@@ -78,26 +78,26 @@ class CSwtHtmlTemple
         if ($userChecker->isManager())
         {
             //echo "        <a href=\"" . $this->pagePrePath . "subPages/newTask.php\">new task</a>\n";
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/batchList.php\">batch list</a>\n";
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFiles2.php\">import results</a>\n";
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFilesSkynet.php\">impt skynet res</a>\n";
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportBatchID.php\">routine report</a>\n";
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportAll.php\">generate all reports</a>\n";
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/userLogOut.php\">logout</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/batchList.php\">Batch List</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFiles2.php\">Import Results</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFilesSkynet.php\">Impt Skynet Res</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportBatchID.php\">Routine Report</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportAll.php\">Generate All Reports</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/userLogOut.php\">Logout</a>\n";
         }
         else if ($userChecker->isUser())
         {
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/batchListOutUser.php\">batch list</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/genReportOutUserVer4.php\">Generate Reports</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/batchListOutUser.php\">Batch List</a>\n";
             //echo "        <a href=\"" . $this->pagePrePath . "subPages/genReportOutUser.php\">generate Reports</a>\n";
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/genReportOutUserVer4.php\">generate Reports</a>\n";
             //echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFilesOutUser.php\">import results</a>\n";
             //echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportBatchID.php\">generate report</a>\n";
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/helpForOutUser.php\">help center</a>\n";
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/userLogOut.php\">logout</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/helpForOutUser.php\">Help Center</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/userLogOut.php\">Logout</a>\n";
         }
         else
         {
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/userLogIn.php\">login</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/userLogIn.php\">Login</a>\n";
         }
         echo "    </div>\n";
         echo "</div>\n";

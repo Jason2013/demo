@@ -13,6 +13,7 @@ include_once "../userManage/swtUserManager.php";
 $srcFolderName = cleanPath($_POST["srcFolderName"], 512);
 //$srcFolderName = $_POST["srcFolderName"];
 $runLogFileName = "runlog.txt";
+$batchID = intval($_POST["batchID"]);
 
 $returnMsg = array();
 $returnMsg["errorCode"] = 1;
@@ -26,7 +27,7 @@ function swtGetMachineID($_pathName, $_machineName)
     $tmpMsg = $clientCmdParser->updateMachineInfo2($_pathName, $_machineName);
 
     $returnMsg["errorMsg"] = isset($tmpMsg["errorMsg"]) ? $tmpMsg["errorMsg"] : "";
-    return $tmpMsg["machineID"];
+    return $tmpMsg;
 }
 
 $userChecker = new CUserManger();
@@ -67,6 +68,9 @@ if ((strlen($srcFolderName) == 0) ||
 $machineID = -1;
 $folderMachineNameList = array();
 $machineIDList = array();
+$cardNameList = array();
+$sysNameList = array();
+$reportNameList = array();
 
 foreach ($cardFolderList as $tmpPath)
 {   
@@ -75,6 +79,8 @@ foreach ($cardFolderList as $tmpPath)
     $pieceFolderList = glob($tmpPath . "/*", GLOB_ONLYDIR);
     
     $machineID = -1;
+    $tmpCardName = "";
+    $tmpSysName = "";
     
     if (count($pieceFolderList) == 0)
     {
@@ -82,7 +88,10 @@ foreach ($cardFolderList as $tmpPath)
         $t2 = $tmpPath . "/" . $runLogFileName;
         if (file_exists($t2))
         {
-            $machineID = swtGetMachineID($t2, $tmpFolderName);
+            $tmpSet = swtGetMachineID($t2, $tmpFolderName);
+            $machineID = $tmpSet["machineID"];
+            $tmpCardName = $tmpSet["videoCardName"];
+            $tmpSysName = $tmpSet["systemName"];
         }
     }
     else
@@ -93,7 +102,10 @@ foreach ($cardFolderList as $tmpPath)
             $t2 = $piecePath . "/" . $runLogFileName;
             if (file_exists($t2))
             {
-                $machineID = swtGetMachineID($t2, $tmpFolderName);
+                $tmpSet = swtGetMachineID($t2, $tmpFolderName);
+                $machineID = $tmpSet["machineID"];
+                $tmpCardName = $tmpSet["videoCardName"];
+                $tmpSysName = $tmpSet["systemName"];
                 if ($machineID != -1)
                 {
                     break;
@@ -103,11 +115,16 @@ foreach ($cardFolderList as $tmpPath)
     }
     
     array_push($machineIDList, $machineID);
+    array_push($cardNameList, $tmpCardName);
+    array_push($sysNameList, $tmpSysName);
+    $t1 = sprintf($tmpCardName . "_" . $tmpSysName . "_batch%05d.xlsm", $batchID);
+    array_push($reportNameList, $t1);
     array_push($folderMachineNameList, $tmpFolderName);
 }
 
 $returnMsg["folderMachineNameList"] = $folderMachineNameList;
 $returnMsg["machineIDList"] = $machineIDList;
+$returnMsg["reportNameList"] = $reportNameList;
 
 echo json_encode($returnMsg);
 

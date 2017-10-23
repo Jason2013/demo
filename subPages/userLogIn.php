@@ -19,7 +19,7 @@ $html1->outPageBodyStart();
     <p>to login, thank you for using our service.</p>
     <p>username: <input type="text" id="userName" name="userName" value="<?php echo $html1->userName; ?>" /></p>
     <p>password: <input type="password" id="passWord" name="passWord" /></p>
-    <p><input type="submit" value="Submit" onclick="swtUserLogIn('userName', 'passWord');" /></p>
+    <p><input type="submit" value="Logon" onclick="swtUserLogIn('userName', 'passWord');" /></p>
 </div>
 <div id="machineList01" class = "machineListInfo" style="display: none;">
     ...

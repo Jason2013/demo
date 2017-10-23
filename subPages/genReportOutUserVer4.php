@@ -7,7 +7,7 @@ $html1->outPageHead("", "" .
                         "<script type=\"text/javascript\" src=\"../jslibs/some/genFuncs.js?v=201706291304\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/jquery-cookie/jquery.cookie.js\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/browserFolder/browserFolder.js\"></script>\n" .
-                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201709281410\"></script>\n");
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201710191442\"></script>\n");
 
 $html1->outPageBodyStart();
 $html1->outPageBodyCheckLog();
@@ -15,7 +15,7 @@ $html1->outPageBodyCheckLog();
 ?>
 
 <div class = "pageArticleTitle">
-    <p><span style="font-weight:bold;">Generate Reports:</span></p>
+    <p><span style="">Generate Reports:</span></p>
 </div>
 <div id="pageArticleContent" class = "pageArticleContent">
 
@@ -30,30 +30,43 @@ $html1->outPageBodyCheckLog();
                 <!--
                 <input id="inputFolderName" type="text" name="foldername" size="64" />&nbsp&nbsp&nbsp
                 -->
-                <input type="file" id="inputFileList" name="inputFileList" style="width: 100px;" 
+                <input type="file" id="inputFileList" name="inputFileList" style="" 
                  webkitdirectory multiple />&nbsp&nbsp&nbsp
                 <button id="subBtn">upload</button>&nbsp&nbsp&nbsp
             </td>
             <td>
-                <div id="loadProgressBar" style="width: 300px; height: 10px;"></div>
+                <div id="loadProgressBar" style="width: 270px; position: relative;">
+                    <div id="loadProgressBarText" style="position: absolute; left: 45%; top: 4px; font-weight: bold; text-shadow: 1px 1px 0 #fff;">
+                        &nbsp
+                    </div>
+                </div>
             </td>
         </tr>
 
         </table>
         <p>
         
-        <fieldset id="crossAPI" style="width: 350px; float: left;">
+        <table>
+        <tr>
+        <td>
+        <fieldset id="crossAPI" style="width: 380px; float: left;">
         <legend>cross API<input id="crossAPICheck" name="crossAPICheck" type="checkbox"></input></legend>
         ...
         </fieldset>
+        </td>
+        <td>
         <div style="width: 20px; float: left;">
         &nbsp&nbsp
         </div>
-        <fieldset id="crossASIC" style="width: 350px; float: left;">
+        </td>
+        <td>
+        <fieldset id="crossASIC" style="width: 380px; float: left;">
         <legend>cross ASIC / OS<input id="crossASICCheck" name="crossASICCheck" type="checkbox"></input></legend>
         ...
         </fieldset>
-        
+        </td>
+        </tr>
+        </table>
         </p>
         
         <div style="clear: both;">&nbsp&nbsp</div>
@@ -64,7 +77,7 @@ $html1->outPageBodyCheckLog();
         <p>see an example here: <span style="background-color: #FFFF00;">\\oglserver\Incoming\Davy\deletable\benchMax\2017-08-11-man00001</span></p>
         <p>please <span style="background-color: #FF0000; color: #FFFFFF;">don't close this page in process of reports generation!</span></p>
         -->
-        <p>finishing state: <div id="finishPercentBar" >0%</div></p>
+        <p>Generating Progress:&nbsp&nbsp<span id="finishPercentBar" >ready...</span></p>
         
         <!--
         <div id="" class="button01 roundCorner" onclick="swtSubmitTestResultsMannualOutUserVer3('inputFolderName', 'finishPercentBar', 'inputUsername', 'inputPassword', 'selBatchID');" onselectstart="return false;" style="float: left;">
@@ -138,11 +151,16 @@ $("#inputFolderName").bind("input propertychange", function(){
 swtGetCardChoiceCodeVer2("reportList");
 
 $("#loadProgressBar").progressbar({
-    value: 0
+    value: 0,
+    change: function() {
+        $("#loadProgressBarText").text( $("#loadProgressBar").progressbar( "value" ) + "%" );
+    }
 });
 
-//$("#inputFileList").button();
-//$("#subBtn").button();
+var progressbarValue = $("#loadProgressBar").find( ".ui-progressbar-value" );
+progressbarValue.css({
+  "background": "#00a000"
+});
 
 </script>
 

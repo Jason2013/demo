@@ -559,6 +559,8 @@ class CClientHeartBeat
         $returnMsg["errorCode"] = 1;
         $returnMsg["errorMsg"] = "get machine id success";
         $returnMsg["machineID"] = $machineID;
+        $returnMsg["videoCardName"] = $videoCardName;
+        $returnMsg["systemName"] = $systemName;
         $returnMsg["machineInfo"] = $tmpInfo;
         return $returnMsg;
 	}
