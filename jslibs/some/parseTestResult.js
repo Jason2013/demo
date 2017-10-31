@@ -188,20 +188,8 @@ function swtDoSubmitTestResults(_inputTagName,
                                 _batchID,
                                 _reportGroup)
 {
-    //var reportGroupName = $("input[name='reportGroup']:checked").val();
-    //var reportGroup = 1;
-    //if (reportGroupName == "routineReport")
-    //{
-    //    reportGroup = 1;
-    //}
-    //else if (reportGroupName == "tempReport")
-    //{
-    //    reportGroup = 2;
-    //}
-    
-    //alert(reportGroup);
-    
-    $.post("../phplibs/importResult/swtParseBenchLogManual.php", 
+    //$.post("../phplibs/importResult/swtParseBenchLogManual.php",
+    $.post("../phplibs/importResult/swtParseBenchLogManualVer3.php",
     {
         logFolderName:    _logFolderName,
         nextResultFileID: _nextResultFileID,
@@ -1020,7 +1008,8 @@ function swtDoGenerateFlatData(_percentTagName,
     
     console.log("tmp---07:" + _crossType);
     
-    $.post("../phplibs/createReport/swtGenTempFlatData.php", 
+    //$.post("../phplibs/createReport/swtGenTempFlatData.php", 
+    $.post("../phplibs/createReport/swtGenTempFlatDataNoise.php", 
     {
         batchID:               _batchID,
         reportType:            _reportType,
@@ -1557,7 +1546,8 @@ function swtDoGenerateRoutineReport(_percentTagName,
                                     //_subTestUmdDataMaskList
                                     )
 {
-    $.post("../phplibs/createReport/swtCompileReportAddition.php", 
+    //$.post("../phplibs/createReport/swtCompileReportAddition.php",
+    $.post("../phplibs/createReport/swtCompileReportAdditionNoise.php",
     {
         batchID:        _batchID,
         machineIDPair:  _machineIDPair,

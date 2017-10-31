@@ -799,9 +799,6 @@ function swtGetTestData2(_testPosID, _subTestPosID, _updateNum)
                                       y: f1,
                                       label: t1};
                                       
-                    
-                    //var t3 = json.uniqueCardNameList[cardPosID] + "-" + systemName + "-" + json.uniqueDriverNameList[j];
-
                     var t3 = json.cardNameListAll[i][k] + "-" + json.sysNameListAll[i][k] + "-" + json.driverNameListAll[i][k];
                     
                     var n3 = machineConfigMap[t3];
@@ -820,98 +817,6 @@ function swtGetTestData2(_testPosID, _subTestPosID, _updateNum)
                     
                 }
             }
-            
-            
-            
-            /*
-            var totleMachineNum = 0;
-            for (var i = 0; i < batchNum; i++)
-            {
-                console.log("---5: " + testVal.length);
-                if (testVal.length == 0)
-                {
-                    // if no data selected
-                    continue;
-                }
-                var tmpTime = "" + json.batchTimeList[i];
-                var usedCardNum = 0;
-                var usedSlotNum = 0;
-                // json.machineIDListAll[i].length
-                //for (var k = 0; k < machineNum; k++)
-                for (var k = 0; k < Math.floor(json.resultIDList[i].length / 3); k++)
-                {
-                    var machineID = curMachineIDMap[k];
-                    var systemName = curSystemMachineIDMap[machineID];
-                    var isUbunu = systemName.search(/ubuntu/i) != -1;
-                    var cardID = curCardMachineIDMap[machineID];
-                    var cardPosID = curCardPosIDMap[cardID];
-                    if ((curSystemNameMap[systemName]  == true) &&
-                        (curHasCardPosIDMap[cardPosID] == true))
-                    {
-                        var usedDriverNum = 0;
-                        for (var j = 0; j < umdNum; j++)
-                        {
-                            var umdName = json.uniqueDriverNameList[j];
-                            var isVulkan = umdName.search(/vulkan/i) != -1;
-                            if (curDriverPosIDMap[j])
-                            {
-                                var d1 = new Date(Date.parse(tmpTime.replace(/-/g, "/")));
-                                var t1 = d1.toDateString();
-
-                                
-                                var f1 = 0.0;
-                                var n1 = k * umdNum + j;
-                                if ((k < json.resultIDList[i].length) &&
-                                    (json.resultIDList[i][n1] < 200000000) &&
-                                    (isUbunu ? isVulkan : true))
-                                {
-                                    f1 = parseFloat(json.testValList[totleMachineNum * umdNum + k * umdNum + j]);
-                                    //f1 = parseFloat(json.testValList[i * machineNum * umdNum + k * umdNum + j]);
-                                    //f1 = parseFloat(json.testValList[totleSlotNum]);
-
-                                    f1 = f1 == null ? 0.0 : f1;
-                                    f1 = isNaN(f1) ? 0.0 : f1;
-                                    var tmpDataSec = {x: batchNum - i - 1,
-                                                      y: f1,
-                                                      label: t1};
-                                                      
-                                    
-                                    //var n2 = usedCardNum * curDriverPosIDList.length + usedDriverNum;
-                                    //if (n2 >= testVal.length)
-                                    //{
-                                    //    continue;
-                                    //}
-                                    //testVal[n2].dataPoints.push(tmpDataSec);
-                                    //testVal[umdAccumNumList[k] - umdNumList[k] + j].dataPoints.push(tmpDataSec);
-                                    
-                                    var t3 = json.uniqueCardNameList[cardPosID] + "-" + systemName + "-" + json.uniqueDriverNameList[j];
-                                    
-                                    var n3 = machineConfigMap[t3];
-                                    
-                                    console.log("123--t" + t3);
-                                    console.log("123--n" + n3);
-                                    
-                                    if (n3 == undefined)
-                                    {
-                                        continue;
-                                    }
-                                    testVal[n3].dataPoints.push(tmpDataSec);
-                                    //testVal[usedSlotNum++].dataPoints.push(tmpDataSec);
-                                    
-                                    maxVal = Math.max(maxVal, tmpDataSec.y);
-                                    minVal = Math.min(minVal, tmpDataSec.y);
-                                    usedDriverNum++;
-                                }
-                            }
-                            //totleSlotNum++;
-                        }
-                        usedCardNum++;
-                    }
-                    totleMachineNum++;
-                }
-            }
-            
-            //*/
             
             var maxY = maxVal + ((maxVal - minVal) * 0.0);
             var minY = minVal - ((maxVal - minVal) * 0.0);

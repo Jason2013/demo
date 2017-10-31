@@ -289,6 +289,16 @@ $db_mis_table_create_string001 = "CREATE TABLE IF NOT EXISTS mis_table_data_test
                                  "  test_case_id INT," .
                                  "  PRIMARY KEY (data_id), " .
                                  "  UNIQUE (result_id, sub_id))";// value
+                                 
+$db_mis_table_create_string002 = "CREATE TABLE IF NOT EXISTS mis_table_data_test_%s_noise " .
+                                 "( data_id INT UNSIGNED AUTO_INCREMENT, " .
+                                 "  result_id INT UNSIGNED, " .  // driver index 
+                                 "  sub_id INT UNSIGNED,    " .  // sub test index
+                                 "  data_value FLOAT," .
+                                 "  test_case_id INT," .
+                                 "  noise_id INT," .
+                                 "  PRIMARY KEY (data_id), " .
+                                 "  UNIQUE (result_id, sub_id, noise_id))";// value
 
 $db_mis_table_name_string001 = "mis_table_data_test_";
                                

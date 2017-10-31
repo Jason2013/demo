@@ -174,6 +174,34 @@ foreach ($batchIDList as $batchID)
                 echo json_encode($returnMsg);
                 return;
             }
+            
+            $params1 = array($tableName . "_noise");
+            $sql1 = "SELECT table_name FROM information_schema.TABLES " .
+                    "WHERE table_name = ?;";
+            if ($db->QueryDB($sql1, $params1) == null)
+            {
+                $returnMsg["errorCode"] = 0;
+                $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+                echo json_encode($returnMsg);
+                return;
+            }
+            
+            $row1 = $db->fetchRow();
+            if ($row1 == false)
+            {
+                continue;
+            }
+            
+            $params1 = array();
+            $sql1 = "DELETE IGNORE FROM " . $tableName . "_noise " .
+                    "WHERE result_id IN (" . $resultIDListString . ")";
+            if ($db->QueryDB($sql1, $params1) == null)
+            {
+                $returnMsg["errorCode"] = 0;
+                $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+                echo json_encode($returnMsg);
+                return;
+            }
         }
         
         $params1 = array();

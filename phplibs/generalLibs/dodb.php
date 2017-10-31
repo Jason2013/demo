@@ -66,6 +66,11 @@ class CDoMySQL
 		return TRUE;
 	}
     
+	public function FetchResult()
+	{
+        return mysql_fetch_row($this->dbResult);
+    }
+    
 	public function QueryDBNoResult( $cmd )
 	{
         if (($this->dbResult != null) && ($this->hasResult == true))
