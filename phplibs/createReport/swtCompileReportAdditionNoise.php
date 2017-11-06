@@ -242,17 +242,26 @@ $returnMsg["cmpMachineName"] = $cmpMachineName;
 
 // get subtest num of current test
 $returnMsg["returnLine"] = "line: " . __LINE__;
+
+//umdNameList
+
+$reportUmdNum = count($umdNameList);
+$startResultID = intval($resultPos / $umdNum) * $umdNum;
+
+$cardStandardResultPos = $xmlWriter->getStandardResultID($startResultID, $resultPos);
+$cardStandardResultID = $resultIDList[0][$cardStandardResultPos];
+$returnMsg["cardStandardResultPos"] = $cardStandardResultPos;
+$returnMsg["cardStandardResultID"] = $cardStandardResultID;
+
+//$returnSet = $xmlWriter->getSubTestNum($db, $resultPos, $tableName01, $subTestNum);
 $returnSet = $xmlWriter->getSubTestNum($db, $resultPos, $tableName01, $subTestNum);
 if ($returnSet === null)
 {
     return;
 }
 $subTestNum = $returnSet["subTestNum"];
-
-//umdNameList
-
-$reportUmdNum = count($umdNameList);
-$startResultID = intval($resultPos / $umdNum) * $umdNum;
+$standardTestCaseNum = $returnSet["standardTestCaseNum"];
+$curResultTestCaseNum = $returnSet["curResultTestCaseNum"];
 
 $returnSet = $xmlWriter->getHistoryNachineInfo($startResultID, $resultPos);
 $historyStartResultID = $returnSet["historyStartResultID"];
@@ -445,10 +454,15 @@ $subTestUmdDataMaskList = $returnSet["subTestUmdDataMaskList"];
 
 $returnMsg["skipTestNameList"] = $skipTestNameList;
 
-$allUmdTestCaseNumList = $xmlWriter->getAllUmdTestCaseNumList($db);
-$returnMsg["allUmdTestCaseNumList"] = $allUmdTestCaseNumList;
+//$allUmdTestCaseNumList = $xmlWriter->getAllUmdTestCaseNumList($db);
+//$returnMsg["allUmdTestCaseNumList"] = $allUmdTestCaseNumList;
+
+$standardUmdTestCaseNumList = $xmlWriter->getStandardUmdTestCaseNumList($db);
+$returnMsg["standardUmdTestCaseNumList"] = $standardUmdTestCaseNumList;
+
 // generate seperate cards report
-if (($subTestNum     == 0) ||
+if (($subTestNum == 0) ||
+    ($resultIDList[0][$resultPos] == PHP_INT_MAX) ||
     ($nextSubTestPos >= $subTestNum))
 {
     // if this test has no sub test
@@ -639,7 +653,7 @@ else
     $averageColumnHasVal = $returnSet["averageColumnHasVal"];
     $returnMsg["averageColumnHasVal"] = $averageColumnHasVal;
     
-    $returnSet = $xmlWriter->checkStartTest($fileHandle, $tempFileHandle,
+    $returnSet = $xmlWriter->checkStartTest($db, $fileHandle, $tempFileHandle,
                                             $nextSubTestPos, $firstSubTestPos, $curTestPos, 
                                             $isCompStandard, $cmpMachineID,
                                             $lineNum, $sheetLinePos, $tempLineNum);
