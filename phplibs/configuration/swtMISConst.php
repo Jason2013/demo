@@ -86,4 +86,6 @@ define("reportStyleGreenStart", 109);
 define("reportStyleGreenNum", 8);
 define("maxAverageStyleRate", 100);
 
+$swtNoiseDataExpireDayNum = 30;
+
 ?>

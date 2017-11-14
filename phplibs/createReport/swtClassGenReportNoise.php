@@ -4004,16 +4004,16 @@ class CGenReport
         {
             // start of each test
             // del average data inserted when importing result
-            $params1 = array($resultIDList[0][$resultPos]);
-            $sql1 = "DELETE FROM " . $tableName01 . " " .
-                    "WHERE result_id=?";
-            if ($db->QueryDB($sql1, $params1) == null)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
-                echo json_encode($returnMsg);
-                return null;
-            }
+            //$params1 = array($resultIDList[0][$resultPos]);
+            //$sql1 = "DELETE FROM " . $tableName01 . " " .
+            //        "WHERE result_id=?";
+            //if ($db->QueryDB($sql1, $params1) == null)
+            //{
+            //    $returnMsg["errorCode"] = 0;
+            //    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+            //    echo json_encode($returnMsg);
+            //    return null;
+            //}
             
             $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + 3) . "\"/>\n");
             $tmpList2 = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n");
@@ -4480,18 +4480,18 @@ class CGenReport
                 continue;
             }
             
-            if (strlen($tmpDataList[0]) > 0)
-            {
-                $tmpSum = 0.0;
-                for ($i = 0; $i < count($averageIndexList); $i++)
-                {
-                    $tmpSum += floatval($sortArrayList[$averageIndexList[$i]]);
-                }
-                $tmpAvg = $tmpSum / count($averageIndexList);
-                
-                $testAverageData .= "" . $resultIDList[0][$_resultPos] . "," .
-                                    $subTestID . "," . $tmpAvg . "," . $testCaseID . "\n";
-            }
+            //if (strlen($tmpDataList[0]) > 0)
+            //{
+            //    $tmpSum = 0.0;
+            //    for ($i = 0; $i < count($averageIndexList); $i++)
+            //    {
+            //        $tmpSum += floatval($sortArrayList[$averageIndexList[$i]]);
+            //    }
+            //    $tmpAvg = $tmpSum / count($averageIndexList);
+            //    
+            //    $testAverageData .= "" . $resultIDList[0][$_resultPos] . "," .
+            //                        $subTestID . "," . $tmpAvg . "," . $testCaseID . "\n";
+            //}
             
             $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"/>\n");
             
@@ -4509,42 +4509,60 @@ class CGenReport
             $tmpCode2 = "";
             for ($i = 0; $i < $resultNoiseNum; $i++)
             {
-                //if ($i == 0)
-                //{
-                //    $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" . $dataValueXML . "</Cell>\n" .
-                //                 " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                //                 "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 5) . // 6
-                //                 "-RC" . ($subjectNameFilterNumMax + 4) . // 8
-                //                 ")/RC" . ($subjectNameFilterNumMax + 4) . "\"><Data ss:Type=\"Number\"></Data></Cell>\n";
-                //}
-                //else
-                //{
-                    $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" . $tmpDataListXML[$i] . "</Cell>\n" .
-                                 " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                                 "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 5 + $i * 2) . // 6
-                                 "-RC" . ($subjectNameFilterNumMax + 4) . // 8
-                                 ")/RC" . ($subjectNameFilterNumMax + 4) . "\"><Data ss:Type=\"Number\"></Data></Cell>\n";
-                //}
+                //$tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" . $tmpDataListXML[$i] . "</Cell>\n" .
+                //             " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
+                //             "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 5 + $i * 2) . // 6
+                //             "-RC" . ($subjectNameFilterNumMax + 4) . // 8
+                //             ")/RC" . ($subjectNameFilterNumMax + 4) . "\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                             
+                             
+                $rcID1 = ($subjectNameFilterNumMax + 5 + $i * 2);
+                $rcID2 = ($subjectNameFilterNumMax + 4);
+                $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" . $tmpDataListXML[$i] . "</Cell>\n" .
+                             " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
+                             "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
+                             "RC" . $rcID2 . "=&quot;&quot;," .
+                             "RC" . $rcID1 . "=0," .
+                             "RC" . $rcID2 . "=0" .
+                             "),&quot;&quot;," .
+                             "(RC" . $rcID1 . // 6
+                             "-RC" . $rcID2 . // 8
+                             ")/RC" . $rcID2 . ")\"><Data ss:Type=\"Number\"></Data></Cell>\n";
             }
             
             $tmpList = array();
             $tmpList2 = array();
+            $tmpList3 = array();
+            $tmpList4 = array();
             for ($i = 0; $i < count($averageIndexList); $i++)
             {
                 $tmpList []= "RC" . ($averageIndexList[$i] * 2 + $subjectNameFilterNumMax + 6) . "*" . 
                              "RC" . ($averageIndexList[$i] * 2 + $subjectNameFilterNumMax + 6);
+                             
+                $tmpList3 []= "RC[" . ($averageIndexList[$i] * 2 + 3) . "]=&quot;&quot;";
                 
                 $tmpList2 []= "RC[" . ($averageIndexList[$i] * 2 + 1) . "]";
+                
+                $tmpList4 []= "RC[" . ($averageIndexList[$i] * 2 + 1) . "]=&quot;&quot;";
             }
             
             $t5 = implode("+", $tmpList);
+            $t7 = implode(",", $tmpList3);
             $t6 = implode(",", $tmpList2);
+            $t8 = implode(",", $tmpList4);
             
+            //$tmpCode1 = "<Cell ss:StyleID=\"s" . ($startStyleID + 13) . "\" " .
+            //            "ss:Formula=\"=SQRT((" . $t5 . ")/" . count($averageIndexList) . ")\"" .
+            //            "><Data ss:Type=\"Number\"></Data></Cell>\n" .
+            //            "<Cell ss:StyleID=\"s" . ($startStyleID + 14) . "\" " .
+            //            "ss:Formula=\"=AVERAGE(" . $t6 . ")\"" .
+            //            "><Data ss:Type=\"Number\"></Data></Cell>\n";
+                        
             $tmpCode1 = "<Cell ss:StyleID=\"s" . ($startStyleID + 13) . "\" " .
-                        "ss:Formula=\"=SQRT((" . $t5 . ")/" . count($averageIndexList) . ")\"" .
+                        "ss:Formula=\"=IF(OR(" . $t7 . "),&quot;&quot;,SQRT((" . $t5 . ")/" . count($averageIndexList) . "))\"" .
                         "><Data ss:Type=\"Number\"></Data></Cell>\n" .
                         "<Cell ss:StyleID=\"s" . ($startStyleID + 14) . "\" " .
-                        "ss:Formula=\"=AVERAGE(" . $t6 . ")\"" .
+                        "ss:Formula=\"=IF(AND(" . $t8 . "),&quot;&quot;,AVERAGE(" . $t6 . "))\"" .
                         "><Data ss:Type=\"Number\"></Data></Cell>\n";
             
             // api sheet comparison
@@ -4567,39 +4585,39 @@ class CGenReport
             }
         }
         
-        if (strlen($testAverageData) > 0)
-        {
-            error_reporting(E_ALL ^ E_DEPRECATED);
-            
-            $tmpFileName = $this->getTmpFileName();
-            
-            file_put_contents($tmpFileName, $testAverageData);
-            $tmpPathName = dirname(__FILE__) . "/" . $tmpFileName;
-            $tmpPathName = str_replace("\\", "/", $tmpPathName);
-            
-            
-            $db2 = new CDoMySQL($db_username, $db_password);
-            if ($db2->ReadyDB() != true)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "can't reach mysql server. line: " . __LINE__;
-                echo json_encode($returnMsg);
-                return null;
-            }
-            
-            $sql1 = "LOAD DATA INFILE \"" . $tmpPathName . "\" IGNORE INTO TABLE " . $tableName01 . " " .
-                    "FIELDS TERMINATED BY ',' " .
-                    "LINES TERMINATED BY '\n' (result_id, sub_id, data_value, test_case_id);";
-            if ($db2->QueryDBNoResult($sql1) == null)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__;
-                echo json_encode($returnMsg);
-                return null;
-            }
-            
-            unlink($tmpFileName);
-        }
+        //if (strlen($testAverageData) > 0)
+        //{
+        //    error_reporting(E_ALL ^ E_DEPRECATED);
+        //    
+        //    $tmpFileName = $this->getTmpFileName();
+        //    
+        //    file_put_contents($tmpFileName, $testAverageData);
+        //    $tmpPathName = dirname(__FILE__) . "/" . $tmpFileName;
+        //    $tmpPathName = str_replace("\\", "/", $tmpPathName);
+        //    
+        //    
+        //    $db2 = new CDoMySQL($db_username, $db_password);
+        //    if ($db2->ReadyDB() != true)
+        //    {
+        //        $returnMsg["errorCode"] = 0;
+        //        $returnMsg["errorMsg"] = "can't reach mysql server. line: " . __LINE__;
+        //        echo json_encode($returnMsg);
+        //        return null;
+        //    }
+        //    
+        //    $sql1 = "LOAD DATA INFILE \"" . $tmpPathName . "\" IGNORE INTO TABLE " . $tableName01 . " " .
+        //            "FIELDS TERMINATED BY ',' " .
+        //            "LINES TERMINATED BY '\n' (result_id, sub_id, data_value, test_case_id);";
+        //    if ($db2->QueryDBNoResult($sql1) == null)
+        //    {
+        //        $returnMsg["errorCode"] = 0;
+        //        $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__;
+        //        echo json_encode($returnMsg);
+        //        return null;
+        //    }
+        //    
+        //    unlink($tmpFileName);
+        //}
         
         
         $returnMsg["dataNum"] = $dataNum;
@@ -5319,23 +5337,46 @@ class CGenReport
                         if ($i < ($tmpDataColumnNum - 1))
                         {
                             // 
+                            $rcID1 = ($subjectNameFilterNumMax + 5 + $i * 2);
+                            $rcID2 = ($subjectNameFilterNumMax + 3 + $i * 2);
+                            
+                            //$t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
+                            //       "" . $tmpDataList[$i] . "</Cell>\n" .
+                            //       " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
+                            //       "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 5 + $i * 2) . // 8
+                            //                    "-RC" . ($subjectNameFilterNumMax + 3 + $i * 2) . // 6
+                            //                    ")/RC" . ($subjectNameFilterNumMax + 3 + $i * 2) . "\">" .
+                            //                    "<Data ss:Type=\"Number\"></Data></Cell>\n";
+                                                
                             $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
                                    "" . $tmpDataList[$i] . "</Cell>\n" .
                                    " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                                   "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 5 + $i * 2) . // 8
-                                                "-RC" . ($subjectNameFilterNumMax + 3 + $i * 2) . // 6
-                                                ")/RC" . ($subjectNameFilterNumMax + 3 + $i * 2) . "\">" .
+                                   "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
+                                                "RC" . $rcID2 . "=&quot;&quot;," .
+                                                "RC" . $rcID1 . "=0," .
+                                                "RC" . $rcID2 . "=0" .
+                                                "),&quot;&quot;," .
+                                                "(RC" . $rcID1 . // 8
+                                                "-RC" . $rcID2 . // 6
+                                                ")/RC" . $rcID2 . ")\">" .
                                                 "<Data ss:Type=\"Number\"></Data></Cell>\n";
                         }
                         else
                         {
                             // 
+                            $rcID1 = ($subjectNameFilterNumMax + 3 + $i * 2);
+                            $rcID2 = ($subjectNameFilterNumMax + 3);
                             $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
                                    "" . $tmpDataList[$i] . "</Cell>\n" .
                                    " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                                   "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 3 + $i * 2) . // 8
-                                                "-RC" . ($subjectNameFilterNumMax + 3) . // 6
-                                                ")/RC" . ($subjectNameFilterNumMax + 3) . "\">" .
+                                   "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
+                                                "RC" . $rcID2 . "=&quot;&quot;," .
+                                                "RC" . $rcID1 . "=0," .
+                                                "RC" . $rcID2 . "=0" .
+                                                "),&quot;&quot;," .
+                                                "(RC" . $rcID1 . // 8
+                                                "-RC" . $rcID2 . // 6
+                                                ")/RC" . $rcID2 . ")\">" .
                                                 "<Data ss:Type=\"Number\"></Data></Cell>\n";
                         }
                     }
@@ -5400,12 +5441,29 @@ class CGenReport
                     
                     for ($i = 0; $i < $tmpDataColumnNum; $i++)
                     {
+                        //$t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
+                        //       "" . $tmpDataList[$i] . "</Cell>\n" .
+                        //       " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
+                        //       "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 5 + $i * 3) . // 8
+                        //       "-RC" . ($subjectNameFilterNumMax + 3 + $i * 3) . // 6
+                        //       ")/RC" . ($subjectNameFilterNumMax + 3 + $i * 3) . "\"><Data ss:Type=\"Number\"></Data></Cell>\n" .
+                        //       " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
+                        //       "" . $tmpDataList[$tmpDataColumnNum + $i] . "</Cell>\n";
+                               
+                        $rcID1 = ($subjectNameFilterNumMax + 5 + $i * 3);
+                        $rcID2 = ($subjectNameFilterNumMax + 3 + $i * 3);
+                               
                         $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
                                "" . $tmpDataList[$i] . "</Cell>\n" .
                                " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                               "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 5 + $i * 3) . // 8
-                               "-RC" . ($subjectNameFilterNumMax + 3 + $i * 3) . // 6
-                               ")/RC" . ($subjectNameFilterNumMax + 3 + $i * 3) . "\"><Data ss:Type=\"Number\"></Data></Cell>\n" .
+                               "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
+                               "RC" . $rcID2 . "=&quot;&quot;," .
+                               "RC" . $rcID1 . "=0," .
+                               "RC" . $rcID2 . "=0" .
+                               "),&quot;&quot;," .
+                               "(RC" . $rcID1 . // 8
+                               "-RC" . $rcID2 . // 6
+                               ")/RC" . $rcID2 . ")\"><Data ss:Type=\"Number\"></Data></Cell>\n" .
                                " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
                                "" . $tmpDataList[$tmpDataColumnNum + $i] . "</Cell>\n";
                     }

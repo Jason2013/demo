@@ -3704,23 +3704,39 @@ class CGenReport
                         if ($i < ($tmpDataColumnNum - 1))
                         {
                             // 
+                            $rcID1 = ($subjectNameFilterNumMax + 5 + $i * 2);
+                            $rcID2 = ($subjectNameFilterNumMax + 3 + $i * 2);
+                            
                             $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
                                    "" . $tmpDataList[$i] . "</Cell>\n" .
                                    " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                                   "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 5 + $i * 2) . // 8
-                                                "-RC" . ($subjectNameFilterNumMax + 3 + $i * 2) . // 6
-                                                ")/RC" . ($subjectNameFilterNumMax + 3 + $i * 2) . "\">" .
+                                   "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
+                                                "RC" . $rcID2 . "=&quot;&quot;," .
+                                                "RC" . $rcID1 . "=0," .
+                                                "RC" . $rcID2 . "=0" .
+                                                "),&quot;&quot;," .
+                                                "(RC" . $rcID1 . // 8
+                                                "-RC" . $rcID2 . // 6
+                                                ")/RC" . $rcID2 . ")\">" .
                                                 "<Data ss:Type=\"Number\"></Data></Cell>\n";
                         }
                         else
                         {
                             // 
+                            $rcID1 = ($subjectNameFilterNumMax + 3 + $i * 2);
+                            $rcID2 = ($subjectNameFilterNumMax + 3);
+                            
                             $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
                                    "" . $tmpDataList[$i] . "</Cell>\n" .
                                    " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                                   "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 3 + $i * 2) . // 8
-                                                "-RC" . ($subjectNameFilterNumMax + 3) . // 6
-                                                ")/RC" . ($subjectNameFilterNumMax + 3) . "\">" .
+                                   "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
+                                                "RC" . $rcID2 . "=&quot;&quot;," .
+                                                "RC" . $rcID1 . "=0," .
+                                                "RC" . $rcID2 . "=0" .
+                                                "),&quot;&quot;," .
+                                                "(RC" . $rcID1 . // 8
+                                                "-RC" . $rcID2 . // 6
+                                                ")/RC" . $rcID2 . ")\">" .
                                                 "<Data ss:Type=\"Number\"></Data></Cell>\n";
                         }
                     }
@@ -3779,12 +3795,20 @@ class CGenReport
                     
                     for ($i = 0; $i < $tmpDataColumnNum; $i++)
                     {
+                        $rcID1 = ($subjectNameFilterNumMax + 5 + $i * 3);
+                        $rcID2 = ($subjectNameFilterNumMax + 3 + $i * 3);
+                        
                         $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
                                "" . $tmpDataList[$i] . "</Cell>\n" .
                                " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                               "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 5 + $i * 3) . // 8
-                               "-RC" . ($subjectNameFilterNumMax + 3 + $i * 3) . // 6
-                               ")/RC" . ($subjectNameFilterNumMax + 3 + $i * 3) . "\"><Data ss:Type=\"Number\"></Data></Cell>\n" .
+                               "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
+                               "RC" . $rcID2 . "=&quot;&quot;," .
+                               "RC" . $rcID1 . "=0," .
+                               "RC" . $rcID2 . "=0" .
+                               "),&quot;&quot;," .
+                               "(RC" . $rcID1 . // 8
+                               "-RC" . $rcID2 . // 6
+                               ")/RC" . $rcID2 . ")\"><Data ss:Type=\"Number\"></Data></Cell>\n" .
                                " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
                                "" . $tmpDataList[$tmpDataColumnNum + $i] . "</Cell>\n";
                     }

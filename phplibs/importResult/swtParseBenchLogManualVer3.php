@@ -450,25 +450,25 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
         $tableName01 = $db_mis_table_name_string001 . cleaninput($_testName, 256);
         $tableName02 = $db_mis_table_name_string001 . cleaninput($_testName, 256) . "_noise";
         
-        $sql1 = "SELECT MAX(data_id) FROM " . $tableName02 . ";";
-        
-        if ($db->QueryDB($sql1) == null)
-        {
-            $returnMsg["errorCode"] = 0;
-            $returnMsg["sql1"] = $sql1;
-            $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
-            return -1;
-        }
-        
-        $row = $db->FetchResult();
-        if ($row == false)
-        {
-            $returnMsg["errorCode"] = 0;
-            $returnMsg["sql1"] = $sql1;
-            $returnMsg["errorMsg"] = "query mysql table failed, line: " . __LINE__ . ", error: " . $db->dbError;
-            return -1;
-        }
-        $lastDataID = $row[0];
+        //$sql1 = "SELECT MAX(data_id) FROM " . $tableName02 . ";";
+        //
+        //if ($db->QueryDB($sql1) == null)
+        //{
+        //    $returnMsg["errorCode"] = 0;
+        //    $returnMsg["sql1"] = $sql1;
+        //    $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+        //    return -1;
+        //}
+        //
+        //$row = $db->FetchResult();
+        //if ($row == false)
+        //{
+        //    $returnMsg["errorCode"] = 0;
+        //    $returnMsg["sql1"] = $sql1;
+        //    $returnMsg["errorMsg"] = "query mysql table failed, line: " . __LINE__ . ", error: " . $db->dbError;
+        //    return -1;
+        //}
+        //$lastDataID = $row[0];
                 
         $sql1 = "INSERT IGNORE INTO " . $tableName02 . " " .
                 "(result_id, sub_id, data_value, test_case_id, noise_id) " .
@@ -488,94 +488,94 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
             return -1;
         }
 
-        if (($_noiseDataID + 1) >= $_noiseDataNum)
-        {
-            $tableName01 = $db_mis_table_name_string001 . cleaninput($_testName, 256);
-            $tableName02 = $db_mis_table_name_string001 . cleaninput($_testName, 256) . "_noise";
-            
-            $sql1 = "CREATE TEMPORARY TABLE IF NOT EXISTS tmp_table_test_data3 " .
-                    "( data_id INT UNSIGNED AUTO_INCREMENT, " .
-                    "  result_id INT UNSIGNED, " .
-                    "  PRIMARY KEY (data_id));";
-            if ($db->QueryDBNoResult($sql1) == null)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
-                return -1;
-            }
-            $sql1 = "DELETE FROM tmp_table_test_data3;";
-            if ($db->QueryDBNoResult($sql1) == null)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
-                return -1;
-            }
-            
-            $sql1 = "CREATE TEMPORARY TABLE IF NOT EXISTS tmp_table_test_data4 " .
-                    "( data_id INT UNSIGNED AUTO_INCREMENT, " .
-                    "  sub_id INT UNSIGNED, " .
-                    "  PRIMARY KEY (data_id));";
-            if ($db->QueryDBNoResult($sql1) == null)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
-                return -1;
-            }
-            $sql1 = "DELETE FROM tmp_table_test_data4;";
-            if ($db->QueryDBNoResult($sql1) == null)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
-                return -1;
-            }
-            
-            $sql1 = "INSERT IGNORE INTO tmp_table_test_data3 " .
-                    "(result_id) " .
-                    "(SELECT t0.result_id " .
-                    "FROM " . $tableName02 . " t0 " .
-                    "WHERE t0.data_id>\"" . $lastDataID . "\" " .
-                    "GROUP BY t0.result_id);";
-                    
-            if ($db->QueryDBNoResult($sql1) == null)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["sql1"] = $sql1;
-                $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
-                return -1;
-            }
-            
-            $sql1 = "INSERT IGNORE INTO tmp_table_test_data4 " .
-                    "(sub_id) " .
-                    "(SELECT t0.sub_id " .
-                    "FROM " . $tableName02 . " t0 " .
-                    "WHERE t0.data_id>\"" . $lastDataID . "\" " .
-                    "GROUP BY t0.sub_id);";
-                    
-            if ($db->QueryDBNoResult($sql1) == null)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["sql1"] = $sql1;
-                $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
-                return -1;
-            }
-            
-            $sql1 = "INSERT IGNORE INTO " . $tableName01 . " " .
-                    "(result_id, sub_id, data_value, test_case_id) " .
-                    "(SELECT t0.result_id, t0.sub_id, AVG(t0.data_value), MIN(t0.test_case_id) " .
-                    "FROM " . $tableName02 . " t0 " .
-                    "WHERE (t0.result_id IN (SELECT result_id FROM tmp_table_test_data3)) AND " .
-                    "(t0.sub_id IN (SELECT sub_id FROM tmp_table_test_data4)) " .
-                    "GROUP BY t0.result_id, t0.sub_id);";
-                    
-            if ($db->QueryDBNoResult($sql1) == null)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["sql1"] = $sql1;
-                $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
-                return -1;
-            }
-            
-        }
+        //if (($_noiseDataID + 1) >= $_noiseDataNum)
+        //{
+        //    $tableName01 = $db_mis_table_name_string001 . cleaninput($_testName, 256);
+        //    $tableName02 = $db_mis_table_name_string001 . cleaninput($_testName, 256) . "_noise";
+        //    
+        //    $sql1 = "CREATE TEMPORARY TABLE IF NOT EXISTS tmp_table_test_data3 " .
+        //            "( data_id INT UNSIGNED AUTO_INCREMENT, " .
+        //            "  result_id INT UNSIGNED, " .
+        //            "  PRIMARY KEY (data_id));";
+        //    if ($db->QueryDBNoResult($sql1) == null)
+        //    {
+        //        $returnMsg["errorCode"] = 0;
+        //        $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+        //        return -1;
+        //    }
+        //    $sql1 = "DELETE FROM tmp_table_test_data3;";
+        //    if ($db->QueryDBNoResult($sql1) == null)
+        //    {
+        //        $returnMsg["errorCode"] = 0;
+        //        $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+        //        return -1;
+        //    }
+        //    
+        //    $sql1 = "CREATE TEMPORARY TABLE IF NOT EXISTS tmp_table_test_data4 " .
+        //            "( data_id INT UNSIGNED AUTO_INCREMENT, " .
+        //            "  sub_id INT UNSIGNED, " .
+        //            "  PRIMARY KEY (data_id));";
+        //    if ($db->QueryDBNoResult($sql1) == null)
+        //    {
+        //        $returnMsg["errorCode"] = 0;
+        //        $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+        //        return -1;
+        //    }
+        //    $sql1 = "DELETE FROM tmp_table_test_data4;";
+        //    if ($db->QueryDBNoResult($sql1) == null)
+        //    {
+        //        $returnMsg["errorCode"] = 0;
+        //        $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+        //        return -1;
+        //    }
+        //    
+        //    $sql1 = "INSERT IGNORE INTO tmp_table_test_data3 " .
+        //            "(result_id) " .
+        //            "(SELECT t0.result_id " .
+        //            "FROM " . $tableName02 . " t0 " .
+        //            "WHERE t0.data_id>\"" . $lastDataID . "\" " .
+        //            "GROUP BY t0.result_id);";
+        //            
+        //    if ($db->QueryDBNoResult($sql1) == null)
+        //    {
+        //        $returnMsg["errorCode"] = 0;
+        //        $returnMsg["sql1"] = $sql1;
+        //        $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+        //        return -1;
+        //    }
+        //    
+        //    $sql1 = "INSERT IGNORE INTO tmp_table_test_data4 " .
+        //            "(sub_id) " .
+        //            "(SELECT t0.sub_id " .
+        //            "FROM " . $tableName02 . " t0 " .
+        //            "WHERE t0.data_id>\"" . $lastDataID . "\" " .
+        //            "GROUP BY t0.sub_id);";
+        //            
+        //    if ($db->QueryDBNoResult($sql1) == null)
+        //    {
+        //        $returnMsg["errorCode"] = 0;
+        //        $returnMsg["sql1"] = $sql1;
+        //        $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+        //        return -1;
+        //    }
+        //    
+        //    $sql1 = "INSERT IGNORE INTO " . $tableName01 . " " .
+        //            "(result_id, sub_id, data_value, test_case_id) " .
+        //            "(SELECT t0.result_id, t0.sub_id, AVG(t0.data_value), MIN(t0.test_case_id) " .
+        //            "FROM " . $tableName02 . " t0 " .
+        //            "WHERE (t0.result_id IN (SELECT result_id FROM tmp_table_test_data3)) AND " .
+        //            "(t0.sub_id IN (SELECT sub_id FROM tmp_table_test_data4)) " .
+        //            "GROUP BY t0.result_id, t0.sub_id);";
+        //            
+        //    if ($db->QueryDBNoResult($sql1) == null)
+        //    {
+        //        $returnMsg["errorCode"] = 0;
+        //        $returnMsg["sql1"] = $sql1;
+        //        $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+        //        return -1;
+        //    }
+        //    
+        //}
         unlink($tmpFileName);
     }
 
@@ -1357,6 +1357,7 @@ $returnMsg["parseFinished"] = $parseFinished;
 $returnMsg["batchID"] = $batchID;
 
 // set batch finished
+/*
 if (($batchID       != -1) &&
     ($parseFinished == 1))
 {
@@ -1381,6 +1382,7 @@ if (($batchID       != -1) &&
         return;
     }
 }
+//*/
 
 echo json_encode($returnMsg);
 

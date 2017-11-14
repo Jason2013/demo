@@ -215,9 +215,17 @@ function swtDoSubmitTestResults(_inputTagName,
             {
                 //$("#" + _inputTagName).val("");
                 $("#" + _percentTagName).html("feeding database: 100%");
-                alert("import success");
+                //alert("import success");
                 //swtGotoPage('./sepStartPage.php');
                 //location.reload(true);
+                
+                swtCalcNoiseAverage(_inputTagName,
+                                    _percentTagName,
+                                    json.batchID,
+                                    0,
+                                    0,
+                                    0
+                                    );
             }
             else
             {
@@ -255,6 +263,66 @@ function swtDoSubmitTestResults(_inputTagName,
                     $("#" + _percentTagName).html("feeding database: " + ((f3 + f4) * 100.0 ).toFixed(1) + "%");
                 }
             }
+        }
+    });
+}
+
+function swtCalcNoiseAverage(_inputTagName,
+                             _percentTagName,
+                             _batchID,
+                             _resultPos,
+                             _testPos,
+                             _testCasePos
+                             )
+{
+    $.post("../phplibs/importResult/swtCalcNoiseAverage.php",
+    {
+        batchID:     _batchID,
+        resultPos:   _resultPos,
+        testPos:     _testPos,
+        testCasePos: _testCasePos
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+        console.log(data);
+        var json = eval("(" + data + ")");
+
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            //alert(json.errorMsg);
+            if (json.parseFinished == "1")
+            {
+                //$("#" + _inputTagName).val("");
+                $("#" + _percentTagName).html("calc average: 100%");
+                alert("import success");
+                //swtGotoPage('./sepStartPage.php');
+                //location.reload(true);
+            }
+            else
+            {
+                swtCalcNoiseAverage(_inputTagName,
+                                    _percentTagName,
+                                    _batchID,
+                                    json.resultPos,
+                                    json.testPos,
+                                    json.testCasePos
+                                    );
+                                    
+                var tmpResultPos = parseFloat(json.resultPos);
+                var tmpResultNum = parseFloat(json.resultNum);
+                var tmpTestPos = parseFloat(json.testPos);
+                var tmpTestNum = parseFloat(json.testNum);
+                var f1 = tmpResultPos / tmpResultNum;
+                var f2 = tmpTestPos / tmpTestNum;
+                var f3 = f2 / tmpResultNum;
+                $("#" + _percentTagName).html("calc average: " + ((f1 + f3) * 100.0 ).toFixed(1) + "%");
+            }
+        }
+        else
+        {
+            console.log(json.errorMsg);
         }
     });
 }
