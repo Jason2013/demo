@@ -127,3 +127,18 @@ function swtUpdateLeftBarCalender(_prePath, _tagName, _checkDate)
         }
     });
 }
+
+function pageShowMask()
+{
+    $("#pageMask").css("height",$(document).height());
+    $("#pageMask").css("width",$(document).width());
+    $("#pageMaskImg").css("top", parseInt($(document).height()) / 2);
+    $("#pageMaskImg").css("left", parseInt($(document).width()) / 2);
+    $("#pageMaskImg").show();
+    $("#pageMask").show();
+}
+function pageHideMask()
+{
+    $("#pageMaskImg").hide();
+    $("#pageMask").hide();
+}

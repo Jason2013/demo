@@ -195,45 +195,48 @@ else
     $returnMsg["tmpTableName02"] = $tmpTableName02;
     
     // clear expired 5 noise data
-
-    //$params1 = array();
-    //$sql1 = "SELECT DISTINCT t0.result_id, " .
-    //        "DATEDIFF(NOW(), (SELECT t1.insert_time FROM mis_table_result_list t1 WHERE t1.result_id=t0.result_id)) " .
-    //        "FROM " . $tmpTableName02 . " t0;";
-    //
-    //if ($db->QueryDB($sql1, $params1) == null)
-    //{
-    //    $returnMsg["errorCode"] = 0;
-    //    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-    //    echo json_encode($returnMsg);
-    //    return null;
-    //}
-    //
-    //$expiredResultIDList = array();
-    //
-    //while ($row1 = $db->fetchRow())
-    //{
-    //    $tmpDays = intval($row1[1]);
-    //    
-    //    if ($tmpDays >= $swtNoiseDataExpireDayNum)
-    //    {
-    //        array_push($expiredResultIDList, $row1[0]);
-    //    }
-    //}
-    //
-    //foreach ($expiredResultIDList as $tmpResultID)
-    //{
-    //    $params1 = array($tmpResultID);
-    //    $sql1 = "DELETE FROM " . $tmpTableName02 . " " .
-    //            "WHERE result_id=?";
-    //    if ($db->QueryDB($sql1, $params1) == null)
-    //    {
-    //        $returnMsg["errorCode"] = 0;
-    //        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-    //        echo json_encode($returnMsg);
-    //        return null;
-    //    }
-    //}
+    if (($resultPos == 0) &&
+        ($testCasePos == 0))
+    {
+        $params1 = array();
+        $sql1 = "SELECT DISTINCT t0.result_id, " .
+                "DATEDIFF(NOW(), (SELECT t1.insert_time FROM mis_table_result_list t1 WHERE t1.result_id=t0.result_id)) " .
+                "FROM " . $tmpTableName02 . " t0;";
+        
+        if ($db->QueryDB($sql1, $params1) == null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+            echo json_encode($returnMsg);
+            return null;
+        }
+        
+        $expiredResultIDList = array();
+        
+        while ($row1 = $db->fetchRow())
+        {
+            $tmpDays = intval($row1[1]);
+            
+            if ($tmpDays >= $swtNoiseDataExpireDayNum)
+            {
+                array_push($expiredResultIDList, $row1[0]);
+            }
+        }
+        
+        foreach ($expiredResultIDList as $tmpResultID)
+        {
+            $params1 = array($tmpResultID);
+            $sql1 = "DELETE FROM " . $tmpTableName02 . " " .
+                    "WHERE result_id=?";
+            if ($db->QueryDB($sql1, $params1) == null)
+            {
+                $returnMsg["errorCode"] = 0;
+                $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+                echo json_encode($returnMsg);
+                return null;
+            }
+        }
+    }
     
     // calc and insert average
     
@@ -260,6 +263,8 @@ else
     }
     
     $curTestCaseNum = intval($row1[0]);
+    
+    $returnMsg["curTestCaseNum"] = $curTestCaseNum;
     
     if ($testCasePos >= $curTestCaseNum)
     {
@@ -412,6 +417,8 @@ else
             
             unlink($tmpFileName);
         }
+        
+        $returnMsg["tmpDoTestCaseNum"] = $tmpDoTestCaseNum;
         
         $testCasePos += $tmpDoTestCaseNum;
     }

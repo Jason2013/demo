@@ -2226,6 +2226,8 @@ function swtDelBatchesDirect(_startBatchID, _endBatchID)
         return;
     }
     
+    pageShowMask();
+    
     $.post("../phplibs/generalLibs/delBatch.php", 
     {
         startBatchID:        _startBatchID,
@@ -2241,7 +2243,7 @@ function swtDelBatchesDirect(_startBatchID, _endBatchID)
         if (json.errorCode == "1")
         {
             //alert(json.errorMsg);
-
+            pageHideMask();
         }
     });
 }

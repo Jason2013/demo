@@ -162,8 +162,49 @@ foreach ($batchIDList as $batchID)
             return;
         }
         
-        foreach ($dataTables as $tableName)
+        
+        $params1 = array($batchID);
+        $sql1 = "SELECT DISTINCT t0.test_id, t0.list_id, " .
+                "(SELECT t1.test_name FROM mis_table_test_info t1 WHERE t1.test_id=t0.test_id) AS testName " .
+                "FROM mis_table_test_subject_list t0 " .
+                "WHERE t0.batch_id=? ORDER BY t0.list_id ASC";
+        if ($db->QueryDB($sql1, $params1) == null)
         {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+            echo json_encode($returnMsg);
+            return;
+        }
+
+        $testNameList = array();
+
+        while ($row1 = $db->fetchRow())
+        {
+            array_push($testNameList, $row1[2]);
+        }
+        
+        //foreach ($dataTables as $tableName)
+        foreach ($testNameList as $tmpTestName)
+        {
+            $tableName = $db_mis_table_name_string001 . $tmpTestName;
+            
+            //$params1 = array($tableName);
+            //$sql1 = "SELECT table_name FROM information_schema.TABLES " .
+            //        "WHERE table_name = ?;";
+            //if ($db->QueryDB($sql1, $params1) == null)
+            //{
+            //    $returnMsg["errorCode"] = 0;
+            //    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+            //    echo json_encode($returnMsg);
+            //    return;
+            //}
+            //
+            //$row1 = $db->fetchRow();
+            //if ($row1 == false)
+            //{
+            //    continue;
+            //}
+            
             $params1 = array();
             $sql1 = "DELETE FROM " . $tableName . " " .
                     "WHERE result_id IN (" . $resultIDListString . ")";

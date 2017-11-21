@@ -43,6 +43,14 @@ a:active {text-decoration:underline ; color:#F0A010;}
                  -webkit-border-radius: 5px;   /* Webkit browsers */
                   border-radius: 5px;          /* W3C syntax */
                }
+               
+.pageMask { position: absolute; top: 0px; filter: alpha(opacity=60); background-color: #777;
+            z-index: 3000; left: 0px;
+            opacity:0.5; -moz-opacity:0.5;
+          }
+.pageMaskImg { position: absolute; top: 0px;
+                z-index: 3001; left: 0px;
+             } 
 
 .button01 {color:#303030; background-color: #5050ff; width: 150px; text-align: center; color: #ffffff; cursor: default; }
 .button01:hover {color:#000000; background-color: #8080ff; color: #ffffff; cursor: default; }

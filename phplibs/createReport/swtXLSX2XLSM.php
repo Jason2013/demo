@@ -156,7 +156,7 @@ if ($fileID < count($oldReportXLSXList))
                     $t5 = "    myChart.Activate\n" .
                           "    ActiveChart.ChartTitle.Select\n" .
                           "    Selection.Format.TextFrame2.TextRange.Characters.Text = _\n" .
-                          "        \"Microbench Performance relative to DXX - Fiji XT\" & Chr(13) & \"%s\"\n" .
+                          "        \"Microbench Performance relative to DXX          \" & Chr(13) & \"%s\"\n" .
                           "    With Selection.Format.TextFrame2.TextRange.Characters(50, %d).Font.Fill\n" .
                           "        .Visible = msoTrue\n" .
                           "        .ForeColor.ObjectThemeColor = msoThemeColorAccent6\n" .

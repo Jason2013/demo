@@ -6,8 +6,8 @@ $html1 = new CSwtHtmlTemple("Grapher mainpage", "../");
 $html1->outPageHead("", "" .
                         "<link rel=\"stylesheet\" href=\"../jslibs/jpagination/pagination.css\"/>" .
                         "<script type=\"text/javascript\" src=\"../jslibs/jpagination/jquery.pagination.js\"></script>\n" .
-                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201704271708\"></script>\n" .
-                        "<script type=\"text/javascript\" src=\"../jslibs/some/getPageCode.js?v=201704271708\"></script>\n");
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=201711151507\"></script>\n" .
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/getPageCode.js?v=201711151507\"></script>\n");
 $html1->outPageBodyStart();
 
 ?>
@@ -41,6 +41,10 @@ $html1->outPageBodyNext();
 
 swtGetTodayTaskListHtml2('pageContent01', 'pageBottom01', swtBatchListPageID, -1);
 setInterval("swtGetTodayTaskListHtml2('pageContent01', 'pageBottom01', swtBatchListPageID, -1)", 1000);
+
+
+
+//pageShowMask();
 
 
 

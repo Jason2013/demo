@@ -35,10 +35,15 @@ $swtClientMachineConfigurationNames = array("machineName",
 //$swtUmdNameList = array("DX11", "DX12", "Vulkan", "OGL");
 //$swtUmdStandardOrder = array("Vulkan", "DX12", "DX11", "OGL");
 
-$swtUmdNameList = array("D3D11", "D3D12", "Vulkan", "OGL");
-$swtUmdNameList_old =   array("DX11",  "DX12",  "Vulkan", "OGL", "D3D11_NATIVE");
-$swtUmdNameList_final = array("D3D11", "D3D12", "Vulkan", "OGL", "D3D11");
-$swtUmdStandardOrder = array("Vulkan", "D3D12", "D3D11", "OGL");
+//$swtUmdNameList = array("D3D11", "D3D12", "Vulkan", "OGL");
+//$swtUmdNameList_old =   array("DX11",  "DX12",  "Vulkan", "OGL", "D3D11_NATIVE");
+//$swtUmdNameList_final = array("D3D11", "D3D12", "Vulkan", "OGL", "D3D11");
+//$swtUmdStandardOrder = array("Vulkan", "D3D12", "D3D11", "OGL");
+
+$swtUmdNameList = array("D3D11", "D3D12", "Vulkan", "OpenGL", "Metal");
+$swtUmdNameList_old =   array("DX11",  "DX12",  "Vulkan", "OpenGL", "OGL",    "D3D11_NATIVE", "Metal");
+$swtUmdNameList_final = array("D3D11", "D3D12", "Vulkan", "OpenGL", "OpenGL", "D3D11",        "Metal");
+$swtUmdStandardOrder = array("Vulkan", "D3D12", "D3D11", "OpenGL", "Metal");
 
 //$swtUmdNameList = array("VG10_40CU_1600e_945m",
 //                        "VG10_64CU_1600e_945m",
@@ -86,6 +91,6 @@ define("reportStyleGreenStart", 109);
 define("reportStyleGreenNum", 8);
 define("maxAverageStyleRate", 100);
 
-$swtNoiseDataExpireDayNum = 30;
+$swtNoiseDataExpireDayNum = 200;
 
 ?>

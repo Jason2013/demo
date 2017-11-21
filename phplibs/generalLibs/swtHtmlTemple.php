@@ -32,11 +32,11 @@ class CSwtHtmlTemple
         echo "    <title>" . $this->pageTitle . "</title>\n";
         
         echo "    <link rel=\"stylesheet\" href=\"" . $this->pagePrePath . "jslibs/jquery-ui/jquery-ui.min.css\" type=\"text/css\" />\n";
-        echo "    <link rel=\"stylesheet\" href=\"" . $this->pagePrePath . "css/main.css?v=201710131528\" type=\"text/css\" />\n";
+        echo "    <link rel=\"stylesheet\" href=\"" . $this->pagePrePath . "css/main.css?v=201711151440\" type=\"text/css\" />\n";
         echo "    <link rel=\"stylesheet\" href=\"" . $this->pagePrePath . "jslibs/simple_calendar/tcal.css\" type=\"text/css\" />\n";
         echo $_linkTags . "\n";
         echo "    <script src=\"" . $this->pagePrePath . "jslibs/some/moment.js\"></script>\n";
-        echo "    <script src=\"" . $this->pagePrePath . "jslibs/some/uiFuncs.js\"></script>\n";
+        echo "    <script src=\"" . $this->pagePrePath . "jslibs/some/uiFuncs.js?v=201711151449\"></script>\n";
         echo "    <script src=\"" . $this->pagePrePath . "jslibs/simple_calendar/tcal.js\"></script>\n";
         echo "    <script src=\"" . $this->pagePrePath . "jslibs/jquery.js?v=201608191638\"></script>\n";
         
@@ -50,6 +50,11 @@ class CSwtHtmlTemple
         
         
         echo "<body>\n";
+        echo "<div id=\"pageMask\" class=\"pageMask\" style=\"display: none;\">\n";
+        echo "<div id=\"pageMaskImg\" class=\"pageMaskImg\" style=\"display: none;\">\n";
+        echo "<img src=\"../images/loading.gif\" width=\"50px\" height=\"50px\" />\n";
+        echo "</div>\n";
+        echo "</div>\n";
         echo "<div class = \"mainBodyFrame\">\n";
         echo "<div class = \"pageTitle\">\n";
         echo "<img src=\"" . $this->pagePrePath . "images/logo01.png\" width=\"220px\" height=\"50px\" />\n";
@@ -139,6 +144,19 @@ class CSwtHtmlTemple
         //echo "});\n";
         $pageDate = isset($_GET["pageDate"]) ? floatval($_GET["pageDate"]) : "null";
         echo "    swtInitAccordion('pageLeftBarAccordion', '" . $this->pagePrePath . "', " . $pageDate . ");";
+        
+        //echo "function showMask()\n";
+        //echo "{\n";
+        //echo "    $(\"#pageMask\").css(\"height\",$(document).height());\n";
+        //echo "    $(\"#pageMask\").css(\"width\",$(document).width());\n";
+        //echo "    $(\"#pageMask\").show();\n";
+        //echo "}\n";
+        //echo "\n";
+        //echo "function hideMask()\n";
+        //echo "{\n";
+        //echo "    $(\"#pageMask\").hide();\n";
+        //echo "}\n";
+        
         echo "</script>\n";
         
         echo "</body>\n";
