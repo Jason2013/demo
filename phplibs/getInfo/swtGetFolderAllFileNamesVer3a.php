@@ -156,10 +156,15 @@ if ($fileID == 0)
 if ($fileID < $fileNum)
 {
     $srcFilePath = str_replace("\\", "/", $srcFilePath);
-    $tmpPos = strpos($srcFilePath, "/");
-    if ($tmpPos !== false)
+    
+    $tmpNum = substr_count($srcFilePath, "/");
+    if ($tmpNum > 1)
     {
-        $srcFilePath = substr($srcFilePath, $tmpPos + 1);
+        $tmpPos = strpos($srcFilePath, "/");
+        if ($tmpPos !== false)
+        {
+            $srcFilePath = substr($srcFilePath, $tmpPos + 1);
+        }
     }
     
     $tmpFileName = basename($srcFilePath);
@@ -171,6 +176,10 @@ if ($fileID < $fileNum)
         $t1 = substr($srcFilePath, 0, $n1 - $n2);
     }
     $tmpFolderName = $parentFolder . "/" . $t1;
+    $returnMsg["tmpFolderName"] = $tmpFolderName;
+    $returnMsg["t1"] = $t1;
+    $returnMsg["srcFilePath"] = $srcFilePath;
+    $returnMsg["tmpFileName"] = $tmpFileName;
 
     if ((file_exists($tmpFolderName) == false) ||
         (is_dir($tmpFolderName)      == false))

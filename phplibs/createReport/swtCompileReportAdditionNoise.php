@@ -166,6 +166,7 @@ $mClockNameList = $returnSet["mClockNameList"];
 $gpuMemNameList = $returnSet["gpuMemNameList"];
 $resultTimeList = $returnSet["resultTimeList"];
 $machineNameList = $returnSet["machineNameList"];
+$sysMemNameList = $returnSet["sysMemNameList"];
 
 $returnMsg["changeListNumList"] = $changeListNumList;
 
@@ -196,6 +197,10 @@ $returnMsg["sysNameList"] = $sysNameList[0];
 $returnMsg["sysNameListAll"] = $sysNameList;
 $returnMsg["mainLineNameList"] = $mainLineNameList;
 $returnMsg["gpuMemNameList"] = $gpuMemNameList;
+
+$returnSet = $xmlWriter->getBatchEnvironmentInfo($db, $batchID);
+$envDefaultInfo = $returnSet["envDefaultInfo"];
+$logFileFolder = $returnSet["logFileFolder"];
 
 for ($i = 0; $i < count($machineIDList); $i++)
 {

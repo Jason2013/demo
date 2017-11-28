@@ -283,6 +283,40 @@ class CGenReport
                               "ss:Bold=\"1\"/>\n" .
                               "<Interior ss:Color=\"#A03300\" ss:Pattern=\"Solid\"/>\n" .
                               "</Style>\n";
+                              
+        $stylePlatformInfoName = "<Style ss:ID=\"s%d\">\n" .
+                                 "<Alignment ss:Horizontal=\"Right\" ss:Vertical=\"Center\"/>\n" .
+                                 "<Borders>\n" .
+                                 "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"\n" .
+                                 " ss:Color=\"#000000\"/>\n" .
+                                 "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"\n" .
+                                 " ss:Color=\"#000000\"/>\n" .
+                                 "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"\n" .
+                                 " ss:Color=\"#000000\"/>\n" .
+                                 "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"\n" .
+                                 " ss:Color=\"#000000\"/>\n" .
+                                 "</Borders>\n" .
+                                 "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FFFFFF\"\n" .
+                                 " ss:Bold=\"1\"/>\n" .
+                                 "<Interior ss:Color=\"#800000\" ss:Pattern=\"Solid\"/>\n" .
+                                 "</Style>\n";
+        
+        $stylePlatformInfoValue = "<Style ss:ID=\"s%d\">\n" .
+                                  "<Alignment ss:Horizontal=\"Right\" ss:Vertical=\"Center\"/>\n" .
+                                  "<Borders>\n" .
+                                  "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"\n" .
+                                  " ss:Color=\"#000000\"/>\n" .
+                                  "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"\n" .
+                                  " ss:Color=\"#000000\"/>\n" .
+                                  "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"\n" .
+                                  " ss:Color=\"#000000\"/>\n" .
+                                  "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"\n" .
+                                  " ss:Color=\"#000000\"/>\n" .
+                                  "</Borders>\n" .
+                                  "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#000000\"\n" .
+                                  " ss:Bold=\"1\"/>\n" .
+                                  "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
+                                  "</Style>\n";
              
         $appendStyleList = array($styleBlackBar, $styleBlank,
                                  $styleA, $styleB,
@@ -292,7 +326,8 @@ class CGenReport
                                  $styleVariance, $styleAverage, $styleOrdinal,
                                  $styleVarianceData, $styleAverageData,
                                  $styleSummaryTitle01, $styleSummaryTitle02,
-                                 $styleSummaryLine01, $styleSummaryLine02, $styleSummaryLine03);
+                                 $styleSummaryLine01, $styleSummaryLine02, $styleSummaryLine03,
+                                 $stylePlatformInfoName, $stylePlatformInfoValue);
                                  
         $allStylesEndTag = "</Styles>\n";
         $allSheetsEndTag = "</Workbook>";
@@ -729,6 +764,91 @@ class CGenReport
         return $returnSet;
     }
     
+	public function getBatchEnvironmentInfo($_db, $_batchID)
+	{
+        global $returnMsg;
+        global $logStoreDir;
+        
+        $db = $_db;
+        $params1 = array($_batchID);
+        $sql1 = "SELECT t0.path_id, t1.path_name " .
+                "FROM mis_table_batch_list t0 " .
+                "LEFT JOIN mis_table_path_info t1 " .
+                "USING (path_id) " .
+                "WHERE t0.batch_id=?";
+        if ($db->QueryDB($sql1, $params1) == null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+            echo json_encode($returnMsg);
+            return null;
+        }
+        $row1 = $db->fetchRow();
+        
+        if ($row1 == false)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+            echo json_encode($returnMsg);
+            return null;
+        }
+        
+        $logFileFolder = $row1[1];
+        
+        $tmpPath = $logStoreDir . "/" . $logFileFolder . "/" . "default_info.json";
+        
+        $envDefaultInfo = array();
+        
+        if (file_exists($tmpPath))
+        {
+            $t1 = file_get_contents($tmpPath);
+            
+            $tmpObj = json_decode($t1);
+            
+            foreach ($tmpObj as $tmpKey => $tmpVal)
+            {
+                $envDefaultInfo[$tmpKey] = $tmpVal;
+            }
+        }
+        
+        $params1 = array($_batchID);
+        $sql1 = "SELECT insert_time FROM mis_table_batch_list WHERE batch_id=?";
+        if ($db->QueryDB($sql1, $params1) == null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+            echo json_encode($returnMsg);
+            return null;
+        }
+        
+        $row1 = $db->fetchRow();
+        
+        if ($row1 == false)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+            echo json_encode($returnMsg);
+            return null;
+        }
+        
+        $tmpArr = explode(" ", $row1[0]);
+        $tmpDate = "";
+        $tmpTime = "";
+        if (count($tmpArr) >= 2)
+        {
+            $tmpDate = $tmpArr[0];
+            $tmpTime = $tmpArr[1];
+        }
+        
+        $envDefaultInfo["testingDate"] = $tmpDate;
+        $envDefaultInfo["testingTime"] = $tmpTime;
+        
+        $returnSet = array();
+        $returnSet["envDefaultInfo"] = $envDefaultInfo;
+        $returnSet["logFileFolder"] = $logFileFolder;
+        return $returnSet;
+    }
+    
 	public function getSelectedMachineInfo($_db, $_batchID, $_checkedMachineIDListString)
 	{
         global $returnMsg;
@@ -822,6 +942,7 @@ class CGenReport
         $gpuMemNameList = array();
         $resultTimeList = array();
         $machineNameList = array();
+        $sysMemNameList = array();
         
         $cardNameListFlat = array();
         $driverNameListFlat = array();
@@ -847,6 +968,7 @@ class CGenReport
             $tmpGpuMemNameList = array();
             $tmpResultTimeList = array();
             $tmpMachineNameList = array();
+            $tmpSysMemNameList = array();
             
             $params1 = array($tmpBatchID);
             $sql1 = "SELECT t0.*, " .
@@ -859,7 +981,8 @@ class CGenReport
                     "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.s_clock_id) AS sClockName, " .
                     "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.m_clock_id) AS mClockName, " .
                     "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.gpu_mem_id) AS gpuMemName, " .
-                    "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.name_id) AS machineName " .
+                    "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.name_id) AS machineName, " .
+                    "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.mem_id) AS sysMemName " .
                     "FROM mis_table_result_list t0 " .
                     "LEFT JOIN mis_table_machine_info t1 " .
                     "USING (machine_id) " .
@@ -923,6 +1046,7 @@ class CGenReport
                         array_push($tmpGpuMemNameList, "");
                         array_push($tmpResultTimeList, "");
                         array_push($tmpMachineNameList, "");
+                        array_push($tmpSysMemNameList, "");
                     }
                 }
                 else
@@ -952,6 +1076,7 @@ class CGenReport
                             array_push($tmpGpuMemNameList, "");
                             array_push($tmpResultTimeList, "");
                             array_push($tmpMachineNameList, "");
+                            array_push($tmpSysMemNameList, "");
                         }
                         $umdIndex = 0;
                     }
@@ -989,6 +1114,7 @@ class CGenReport
                     $tmpGpuMemNameList[$n1] = $row1[27];
                     $tmpResultTimeList[$n1] = $row1[7];
                     $tmpMachineNameList[$n1] = $row1[28];
+                    $tmpSysMemNameList[$n1] = $row1[29];
                 }
                 if ($umdIndex != $tmpIndex)
                 {
@@ -1014,6 +1140,7 @@ class CGenReport
             array_push($gpuMemNameList, $tmpGpuMemNameList);
             array_push($resultTimeList, $tmpResultTimeList);
             array_push($machineNameList, $tmpMachineNameList);
+            array_push($sysMemNameList, $tmpSysMemNameList);
         }
         
         
@@ -1030,6 +1157,7 @@ class CGenReport
         $crossBuildGpuMemNameList = array();
         $crossBuildResultTimeList = array();
         $crossBuildMachineNameList = array();
+        $crossBuildSysMemNameList = array();
         
         if ($crossType == 2)
         {
@@ -1053,6 +1181,7 @@ class CGenReport
                 $tmpGpuMemNameList = array();
                 $tmpResultTimeList = array();
                 $tmpMachineNameList = array();
+                $tmpSysMemNameList = array();
                 
                 $params1 = array($tmpBatchID, $tmpMachineID);
                 $sql1 = "SELECT t0.*, " .
@@ -1065,7 +1194,8 @@ class CGenReport
                         "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.s_clock_id) AS sClockName, " .
                         "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.m_clock_id) AS mClockName, " .
                         "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.gpu_mem_id) AS gpuMemName, " .
-                        "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.name_id) AS machineName " .
+                        "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.name_id) AS machineName, " .
+                        "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.mem_id) AS sysMemName " .
                         "FROM mis_table_result_list t0 " .
                         "LEFT JOIN mis_table_machine_info t1 " .
                         "USING (machine_id) " .
@@ -1120,6 +1250,7 @@ class CGenReport
                             array_push($tmpGpuMemNameList, "");
                             array_push($tmpResultTimeList, "");
                             array_push($tmpMachineNameList, "");
+                            array_push($tmpSysMemNameList, "");
                         }
                     }
                     else
@@ -1149,6 +1280,7 @@ class CGenReport
                                 array_push($tmpGpuMemNameList, "");
                                 array_push($tmpResultTimeList, "");
                                 array_push($tmpMachineNameList, "");
+                                array_push($tmpSysMemNameList, "");
                             }
                             $umdIndex = 0;
                         }
@@ -1171,6 +1303,7 @@ class CGenReport
                         $tmpGpuMemNameList[$n1] = $row1[27];
                         $tmpResultTimeList[$n1] = $row1[7];
                         $tmpMachineNameList[$n1] = $row1[28];
+                        $tmpSysMemNameList[$n1] = $row1[29];
                     }
                     if ($umdIndex != $tmpIndex)
                     {
@@ -1196,6 +1329,7 @@ class CGenReport
                 array_push($crossBuildGpuMemNameList, $tmpGpuMemNameList);
                 array_push($crossBuildResultTimeList, $tmpResultTimeList);
                 array_push($crossBuildMachineNameList, $tmpMachineNameList);
+                array_push($crossBuildSysMemNameList, $tmpSysMemNameList);
             }
             
         }
@@ -1223,6 +1357,7 @@ class CGenReport
         $returnSet["gpuMemNameList"] = $gpuMemNameList;
         $returnSet["resultTimeList"] = $resultTimeList;
         $returnSet["machineNameList"] = $machineNameList;
+        $returnSet["sysMemNameList"] = $sysMemNameList;
         
         $returnSet["crossBuildResultIDList"] =      $crossBuildResultIDList;
         $returnSet["crossBuildMachineIDList"] =     $crossBuildMachineIDList;
@@ -1237,6 +1372,7 @@ class CGenReport
         $returnSet["crossBuildGpuMemNameList"] =    $crossBuildGpuMemNameList;
         $returnSet["crossBuildResultTimeList"] =    $crossBuildResultTimeList;
         $returnSet["crossBuildMachineNameList"] =   $crossBuildMachineNameList;
+        $returnSet["crossBuildSysMemNameList"] =    $crossBuildSysMemNameList;
         
         return $returnSet;
     }
@@ -1865,6 +2001,142 @@ class CGenReport
         return $tmpTestCaseList;
     }
     
+    public function writePlatformInfo($_fileHandle)
+    {
+        global $envDefaultInfo;
+        global $resultPos;
+        global $startResultID;
+        global $sysNameList;
+        global $cpuNameList;
+        global $cardNameList;
+        global $sClockNameList;
+        global $mClockNameList;
+        global $gpuMemNameList;
+        global $sysMemNameList;
+        global $changeListNumList;
+        global $driverNameList;
+        global $umdNameList;
+        global $reportTemplateDir;
+        global $startStyleID;
+        global $logStoreDir;
+        global $logFileFolder;
+        
+        $tmpRootPath = $logStoreDir . "/" . $logFileFolder;
+        $cardFolderList = glob($tmpRootPath . "/*", GLOB_ONLYDIR);
+        
+        $machineInfoList = array();
+        
+        foreach ($cardFolderList as $tmpPath)
+        {
+            $tmpPath2 = $tmpPath . "/" . "machine_info.json";
+            if (file_exists($tmpPath2))
+            {
+                $machineInfoList []= $tmpPath2;
+            }
+        }
+        
+        $tmpResultPos = $startResultID;
+        
+        for ($i = 0; $i < count($umdNameList); $i++)
+        {
+            if (strlen($cpuNameList[0][$tmpResultPos]) > 0)
+            {
+                break;
+            }
+            $tmpResultPos++;
+        }
+        
+        $tmpCardName = $cardNameList[0][$tmpResultPos];
+        $tmpSysName = $sysNameList[0][$tmpResultPos];
+        $tmpBaseDriverVersion = "";
+        $tmpBaseDriverDate = "";
+        
+        foreach ($machineInfoList as $tmpPath)
+        {
+            $t1 = file_get_contents($tmpPath);
+            $tmpObj = json_decode($t1);
+            
+            $tmpObj2 = array();
+            foreach ($tmpObj as $tmpKey => $tmpVal)
+            {
+                $tmpObj2[$tmpKey] = $tmpVal;
+            }
+            
+            $tmpCardName1 = isset($tmpObj2["videoCardName"]) ? $tmpObj2["videoCardName"] : "";
+            $tmpSysName1 = isset($tmpObj2["systemName"]) ? $tmpObj2["systemName"] : "";
+            
+            $tmpCardNameLow = strtolower($tmpCardName);
+            $tmpSysNameLow  = strtolower($tmpSysName);
+            $tmpCardNameLow1 = strtolower($tmpCardName1);
+            $tmpSysNameLow1 = strtolower($tmpSysName1);
+            
+            if (($tmpCardNameLow == $tmpCardNameLow1) &&
+                ($tmpSysNameLow  == $tmpSysNameLow1))
+            {
+                $tmpBaseDriverVersion = isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
+                $tmpBaseDriverDate = isset($tmpObj2["baseDriverDate"]) ? $tmpObj2["baseDriverDate"] : "";
+                
+                break;
+            }
+        }
+        
+        $tableRowList = array();
+        
+        $tableRowList["Base_Driver_Version"] = $tmpBaseDriverVersion;
+        $tableRowList["Base_Driver_Date"]    = $tmpBaseDriverDate;
+        $tableRowList["Vulkan_SDK_Version"] = isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
+        $tableRowList["Microbench_Version"] = isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
+        
+        $tableRowList["Operating_System"] = $sysNameList[0][$tmpResultPos];
+        $tableRowList["Test_Date"] = $envDefaultInfo["testingDate"];
+        $tableRowList["Test_Time"] = $envDefaultInfo["testingTime"];
+        $tableRowList["CPU"] = $cpuNameList[0][$tmpResultPos];
+        $tableRowList["GPU"] = $cardNameList[0][$tmpResultPos];
+        $tableRowList["GPU_Core_Clock"] = $sClockNameList[0][$tmpResultPos];
+        $tableRowList["GPU_Memory_Clock"] = $mClockNameList[0][$tmpResultPos];
+        $tableRowList["GPU_Memory"] = $gpuMemNameList[0][$tmpResultPos];
+        $tableRowList["System_Memory"] = $sysMemNameList[0][$tmpResultPos];
+        
+        
+        $apiVersionList = array();
+        
+        for ($i = 0; $i < count($umdNameList); $i++)
+        {
+            $tmpName = "changeList" . $umdNameList[$i];
+            if (isset($envDefaultInfo[$tmpName]))
+            {
+                $tmpKey = $umdNameList[$i] . " Version / CL#";
+                $apiVersionList[$tmpKey] = $envDefaultInfo[$tmpName];
+            }
+        }
+        
+        $sheetCode = "<Worksheet ss:Name=\"PlatformInfo\">\n" .
+                     "<Table x:FullColumns=\"1\" " .
+                     "x:FullRows=\"1\" ss:DefaultRowHeight=\"15\">\n" .
+                     "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n" .
+                     "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n";
+                     
+        foreach ($tableRowList as $tmpKey => $tmpVal)
+        {
+            $sheetCode .= "<Row ss:Height=\"20.0\">\n" .
+                          "<Cell ss:StyleID=\"s" . ($startStyleID + 20) . "\"><Data ss:Type=\"String\">" . $tmpKey . "</Data></Cell>\n" .
+                          "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $tmpVal . "</Data></Cell>\n" .
+                          "</Row>\n";
+        }
+        
+        foreach ($apiVersionList as $tmpKey => $tmpVal)
+        {
+            $sheetCode .= "<Row ss:Height=\"20.0\">\n" .
+                          "<Cell ss:StyleID=\"s" . ($startStyleID + 20) . "\"><Data ss:Type=\"String\">" . $tmpKey . "</Data></Cell>\n" .
+                          "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $tmpVal . "</Data></Cell>\n" .
+                          "</Row>\n";
+        }
+
+        fwrite($_fileHandle, $sheetCode);
+        $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet004B.txt");
+        fwrite($_fileHandle, $xmlSection);
+    }
+    
     public function writeSummaryVariance($_fileHandle)
     {
         global $reportUmdNum;
@@ -1880,7 +2152,9 @@ class CGenReport
         
         $sheetCode = "<Worksheet ss:Name=\"Variance\">\n" .
                      "<Table x:FullColumns=\"1\" " .
-                     "x:FullRows=\"1\" ss:DefaultRowHeight=\"15\">\n";
+                     "x:FullRows=\"1\" ss:DefaultRowHeight=\"15\">\n" .
+                     "<Column ss:AutoFitWidth=\"0\" ss:Width=\"50\"/>\n" .
+                     "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n";
                      
         $sheetCode .= "<Row ss:Height=\"20.25\">\n" .
                       "<Cell ss:StyleID=\"s" . ($startStyleID + 15) . "\"/>\n" .
@@ -2520,7 +2794,7 @@ class CGenReport
                                               "HistorySummary",
                                               true);
                                               
-                
+                $this->writePlatformInfo($_fileHandle);
                 
             }
             

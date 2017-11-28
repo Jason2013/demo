@@ -103,7 +103,7 @@ class CUserManger
                 $returnMsg["errorCode"] = 0;
                 //$returnMsg["errorMsg"] = "can't verify LDAP credential, line: " . __LINE__;
                 //echo json_encode($returnMsg);
-                return false;
+                //return false;
         }
         
         // not manager

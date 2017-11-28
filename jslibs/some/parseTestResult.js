@@ -683,6 +683,9 @@ function swtDoCopyResultFilesVer3a(_inputTagName,
         pic_data.append("fileID",           _fileID);
         pic_data.append("fileNum",          fileNum);
         
+        console.log("files:--");
+        console.info($('#' + _inputTagName).get(0).files);
+        
         $.ajax({
             url:"../phplibs/getInfo/swtGetFolderAllFileNamesVer3a.php",  
             type: "POST",
