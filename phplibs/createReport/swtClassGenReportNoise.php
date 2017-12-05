@@ -317,6 +317,24 @@ class CGenReport
                                   " ss:Bold=\"1\"/>\n" .
                                   "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
                                   "</Style>\n";
+                                  
+        $styleSummaryTitle03 = "<Style ss:ID=\"s%d\">\n" .
+                               "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>\n" .
+                               "<Borders>\n" .
+                               "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" " .
+                               " ss:Color=\"#000000\"/>\n" .
+                               "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" " .
+                               " ss:Color=\"#000000\"/>\n" .
+                               "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" " .
+                               " ss:Color=\"#000000\"/>\n" .
+                               "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" " .
+                               " ss:Color=\"#000000\"/>\n" .
+                               "</Borders>\n" .
+                               "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"14\" ss:Color=\"#FFFFFF\" " .
+                               "ss:Bold=\"1\"/>\n" .
+                               "<Interior ss:Color=\"#800000\" ss:Pattern=\"Solid\"/>\n" .
+                               "</Style>\n";
+                               
              
         $appendStyleList = array($styleBlackBar, $styleBlank,
                                  $styleA, $styleB,
@@ -327,7 +345,8 @@ class CGenReport
                                  $styleVarianceData, $styleAverageData,
                                  $styleSummaryTitle01, $styleSummaryTitle02,
                                  $styleSummaryLine01, $styleSummaryLine02, $styleSummaryLine03,
-                                 $stylePlatformInfoName, $stylePlatformInfoValue);
+                                 $stylePlatformInfoName, $stylePlatformInfoValue,
+                                 $styleSummaryTitle03);
                                  
         $allStylesEndTag = "</Styles>\n";
         $allSheetsEndTag = "</Workbook>";
@@ -2006,6 +2025,7 @@ class CGenReport
         global $envDefaultInfo;
         global $resultPos;
         global $startResultID;
+        global $cmpStartResultID;
         global $sysNameList;
         global $cpuNameList;
         global $cardNameList;
@@ -2046,10 +2066,32 @@ class CGenReport
             $tmpResultPos++;
         }
         
+        $cmpResultPos = $cmpStartResultID;
+        
+        if ($cmpStartResultID != -1)
+        {
+            for ($i = 0; $i < count($umdNameList); $i++)
+            {
+                if (strlen($cpuNameList[0][$cmpResultPos]) > 0)
+                {
+                    break;
+                }
+                $cmpResultPos++;
+            }
+        }
+        
         $tmpCardName = $cardNameList[0][$tmpResultPos];
         $tmpSysName = $sysNameList[0][$tmpResultPos];
+        $cmpCardName = $cmpStartResultID == -1 ? -1 : $cardNameList[0][$cmpResultPos];
+        $cmpSysName = $cmpStartResultID == -1 ? -1 : $sysNameList[0][$cmpResultPos];
+        
         $tmpBaseDriverVersion = "";
         $tmpBaseDriverDate = "";
+        $cmpBaseDriverVersion = "";
+        $cmpBaseDriverDate = "";
+        
+        $tmpRead = false;
+        $cmpRead = false;
         
         foreach ($machineInfoList as $tmpPath)
         {
@@ -2076,11 +2118,37 @@ class CGenReport
                 $tmpBaseDriverVersion = isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
                 $tmpBaseDriverDate = isset($tmpObj2["baseDriverDate"]) ? $tmpObj2["baseDriverDate"] : "";
                 
+                $tmpRead = true;
+            }
+            
+            if ($cmpStartResultID != -1)
+            {
+                $tmpCardNameLow = strtolower($cmpCardName);
+                $tmpSysNameLow  = strtolower($cmpSysName);
+                $tmpCardNameLow1 = strtolower($tmpCardName1);
+                $tmpSysNameLow1 = strtolower($tmpSysName1);
+                
+                if (($tmpCardNameLow == $tmpCardNameLow1) &&
+                    ($tmpSysNameLow  == $tmpSysNameLow1))
+                {
+                    $cmpBaseDriverVersion = isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
+                    $cmpBaseDriverDate = isset($tmpObj2["baseDriverDate"]) ? $tmpObj2["baseDriverDate"] : "";
+                    
+                    $cmpRead = true;
+                }
+            }
+            if ($tmpRead && $cmpRead)
+            {
+                break;
+            }
+            if (($cmpStartResultID == -1) && $tmpRead)
+            {
                 break;
             }
         }
         
         $tableRowList = array();
+        $cmpTableRowList = array();
         
         $tableRowList["Base_Driver_Version"] = $tmpBaseDriverVersion;
         $tableRowList["Base_Driver_Date"]    = $tmpBaseDriverDate;
@@ -2097,6 +2165,23 @@ class CGenReport
         $tableRowList["GPU_Memory"] = $gpuMemNameList[0][$tmpResultPos];
         $tableRowList["System_Memory"] = $sysMemNameList[0][$tmpResultPos];
         
+        if ($cmpStartResultID != -1)
+        {
+            $cmpTableRowList["Base_Driver_Version"] = $cmpBaseDriverVersion;
+            $cmpTableRowList["Base_Driver_Date"]    = $cmpBaseDriverDate;
+            $cmpTableRowList["Vulkan_SDK_Version"] = isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
+            $cmpTableRowList["Microbench_Version"] = isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
+            
+            $cmpTableRowList["Operating_System"] = $sysNameList[0][$cmpResultPos];
+            $cmpTableRowList["Test_Date"] = $envDefaultInfo["testingDate"];
+            $cmpTableRowList["Test_Time"] = $envDefaultInfo["testingTime"];
+            $cmpTableRowList["CPU"] = $cpuNameList[0][$cmpResultPos];
+            $cmpTableRowList["GPU"] = $cardNameList[0][$cmpResultPos];
+            $cmpTableRowList["GPU_Core_Clock"] = $sClockNameList[0][$cmpResultPos];
+            $cmpTableRowList["GPU_Memory_Clock"] = $mClockNameList[0][$cmpResultPos];
+            $cmpTableRowList["GPU_Memory"] = $gpuMemNameList[0][$cmpResultPos];
+            $cmpTableRowList["System_Memory"] = $sysMemNameList[0][$cmpResultPos];
+        }
         
         $apiVersionList = array();
         
@@ -2110,25 +2195,63 @@ class CGenReport
             }
         }
         
+        $t1 = "";
+        if ($cmpStartResultID != -1)
+        {
+            $t1 = "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n";
+        }
+        
         $sheetCode = "<Worksheet ss:Name=\"PlatformInfo\">\n" .
                      "<Table x:FullColumns=\"1\" " .
                      "x:FullRows=\"1\" ss:DefaultRowHeight=\"15\">\n" .
                      "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n" .
-                     "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n";
+                     "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n" . $t1;
+                     
+        $t1 = "";
+        if ($cmpStartResultID != -1)
+        {
+            $t1 = "<Cell ss:StyleID=\"s" . ($startStyleID + 16) . "\"><Data ss:Type=\"String\">" .
+                  $cmpSysName . " - " . $cmpCardName .
+                  "</Data></Cell>\n";
+        }
+                     
+        $sheetCode .= "<Row ss:Height=\"20.0\">\n" .
+                      "<Cell ss:StyleID=\"s" . ($startStyleID + 22) . "\"><Data ss:Type=\"String\">Platform Info</Data></Cell>\n" .
+                      "<Cell ss:StyleID=\"s" . ($startStyleID + 16) . "\"><Data ss:Type=\"String\">" .
+                      $tmpSysName . " - " . $tmpCardName .
+                      "</Data></Cell>\n" .
+                      $t1 .
+                      "</Row>\n";
                      
         foreach ($tableRowList as $tmpKey => $tmpVal)
         {
+            $t1 = "";
+            if ($cmpStartResultID != -1)
+            {
+                $cmpVal = isset($cmpTableRowList[$tmpKey]) ? $cmpTableRowList[$tmpKey] : "";
+                
+                $t1 = "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $cmpVal . "</Data></Cell>\n";
+            }
+            
             $sheetCode .= "<Row ss:Height=\"20.0\">\n" .
                           "<Cell ss:StyleID=\"s" . ($startStyleID + 20) . "\"><Data ss:Type=\"String\">" . $tmpKey . "</Data></Cell>\n" .
                           "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $tmpVal . "</Data></Cell>\n" .
+                          $t1 .
                           "</Row>\n";
         }
         
         foreach ($apiVersionList as $tmpKey => $tmpVal)
         {
+            $t1 = "";
+            if ($cmpStartResultID != -1)
+            {
+                $t1 = "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $tmpVal . "</Data></Cell>\n";
+            }
+            
             $sheetCode .= "<Row ss:Height=\"20.0\">\n" .
                           "<Cell ss:StyleID=\"s" . ($startStyleID + 20) . "\"><Data ss:Type=\"String\">" . $tmpKey . "</Data></Cell>\n" .
                           "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $tmpVal . "</Data></Cell>\n" .
+                          $t1 .
                           "</Row>\n";
         }
 
@@ -2154,7 +2277,8 @@ class CGenReport
                      "<Table x:FullColumns=\"1\" " .
                      "x:FullRows=\"1\" ss:DefaultRowHeight=\"15\">\n" .
                      "<Column ss:AutoFitWidth=\"0\" ss:Width=\"50\"/>\n" .
-                     "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n";
+                     "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n" .
+                     "<Column ss:AutoFitWidth=\"0\" ss:Width=\"50\"/>\n";
                      
         $sheetCode .= "<Row ss:Height=\"20.25\">\n" .
                       "<Cell ss:StyleID=\"s" . ($startStyleID + 15) . "\"/>\n" .
