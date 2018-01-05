@@ -281,11 +281,14 @@ array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_user_batch_
 //array_push($db_create_table01, "CREATE INDEX idx_test_name ON mis_table_test_info (test_name)");
                                
 // mis_table_data_list_00001 2
+// ALTER TABLE mis_table_data_test_alu MODIFY COLUMN data_value DOUBLE;
+// show columns from mis_table_data_test_alu;
+// show tables like 'mis_table_data_test_%'
 $db_mis_table_create_string001 = "CREATE TABLE IF NOT EXISTS mis_table_data_test_%s " .
                                  "( data_id INT UNSIGNED AUTO_INCREMENT, " .
                                  "  result_id INT UNSIGNED, " .  // driver index 
                                  "  sub_id INT UNSIGNED,    " .  // sub test index
-                                 "  data_value FLOAT," .
+                                 "  data_value DOUBLE," .
                                  "  test_case_id INT," .
                                  "  PRIMARY KEY (data_id), " .
                                  "  UNIQUE (result_id, sub_id))";// value
@@ -294,16 +297,84 @@ $db_mis_table_create_string002 = "CREATE TABLE IF NOT EXISTS mis_table_data_test
                                  "( data_id INT UNSIGNED AUTO_INCREMENT, " .
                                  "  result_id INT UNSIGNED, " .  // driver index 
                                  "  sub_id INT UNSIGNED,    " .  // sub test index
-                                 "  data_value FLOAT," .
+                                 "  data_value DOUBLE," .
                                  "  test_case_id INT," .
                                  "  noise_id INT," .
                                  "  PRIMARY KEY (data_id), " .
                                  "  UNIQUE (result_id, sub_id, noise_id))";// value
 
 $db_mis_table_name_string001 = "mis_table_data_test_";
-                               
-                               
-                               
+                 
+// show columns from mis_table_data_test_alu_noise;
+// ALTER TABLE mis_table_data_test_vertexfetch_noise MODIFY COLUMN data_value DOUBLE;
+/*
+mis_table_data_test_alu                      
+mis_table_data_test_alu_noise                
+mis_table_data_test_branching                
+mis_table_data_test_branching_noise          
+mis_table_data_test_cbupdate                 
+mis_table_data_test_cbupdate_noise           
+mis_table_data_test_coherencystall           
+mis_table_data_test_coherencystall_noise     
+mis_table_data_test_colorclear               
+mis_table_data_test_colorclear_noise         
+mis_table_data_test_computetest              
+mis_table_data_test_csfillrate               
+mis_table_data_test_csfillrate_noise         
+mis_table_data_test_csmandelbrot             
+mis_table_data_test_csmandelbrot_noise       
+mis_table_data_test_depthclear               
+mis_table_data_test_depthclear_noise         
+mis_table_data_test_depthop                  
+mis_table_data_test_depthop_noise            
+mis_table_data_test_fillrate                 
+mis_table_data_test_fillrate_noise           
+mis_table_data_test_gsaluheavy               
+mis_table_data_test_gsaluheavy_noise         
+mis_table_data_test_gspointampl              
+mis_table_data_test_gspointampl_noise        
+mis_table_data_test_gspointsprites           
+mis_table_data_test_gspointsprites_noise     
+mis_table_data_test_gstriampl                
+mis_table_data_test_gstriampl_noise          
+mis_table_data_test_hwcontextroll            
+mis_table_data_test_hwcontextroll_noise      
+mis_table_data_test_interpolation            
+mis_table_data_test_interpolation_noise      
+mis_table_data_test_lightprobesampling       
+mis_table_data_test_lightprobesampling_noise 
+mis_table_data_test_multiplert               
+mis_table_data_test_multiplert_noise         
+mis_table_data_test_oglstatevalidation       
+mis_table_data_test_primfilter               
+mis_table_data_test_primfilter_noise         
+mis_table_data_test_primsetup                
+mis_table_data_test_primsetup_noise          
+mis_table_data_test_ps_postprocess           
+mis_table_data_test_pspostprocess            
+mis_table_data_test_pspostprocess_noise      
+mis_table_data_test_quadtess                 
+mis_table_data_test_quadtess_noise           
+mis_table_data_test_randomsphere             
+mis_table_data_test_randomsphere_noise       
+mis_table_data_test_rescopy                  
+mis_table_data_test_rescopy_noise            
+mis_table_data_test_resolve                  
+mis_table_data_test_resolve_noise            
+mis_table_data_test_shadercompile            
+mis_table_data_test_shadercompile_noise      
+mis_table_data_test_smallbatch               
+mis_table_data_test_smallbatch_noise         
+mis_table_data_test_texfetch                 
+mis_table_data_test_texfetch_noise           
+mis_table_data_test_triangletest             
+mis_table_data_test_trisizefill              
+mis_table_data_test_trisizefill_noise        
+mis_table_data_test_uniginetess              
+mis_table_data_test_uniginetess_noise        
+mis_table_data_test_vertexfetch              
+mis_table_data_test_vertexfetch_noise        
+//*/
                                
                                
                                

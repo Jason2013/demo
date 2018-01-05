@@ -397,7 +397,7 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
                 "( data_id INT UNSIGNED AUTO_INCREMENT, " .
                 "  result_id INT UNSIGNED, " .
                 "  sub_name VARCHAR(128), " .
-                "  data_value FLOAT," .
+                "  data_value DOUBLE," .
                 "  test_case_id INT," .
                 "  PRIMARY KEY (data_id));";
         if ($db->QueryDBNoResult($sql1) == null)

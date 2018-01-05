@@ -81,7 +81,7 @@ class CGenReport
                      "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
                      "</Borders>\n" .
                      "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
-                     "<NumberFormat ss:Format=\"Fixed\"/>" .
+                     "<NumberFormat ss:Format=\"0.000\"/>" .
                      "</Style>\n";
                   
         $styleRate = "<Style ss:ID=\"s%d\">\n" .
@@ -121,7 +121,7 @@ class CGenReport
                          "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
                          "</Borders>\n" .
                          "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
-                         "<NumberFormat ss:Format=\"Fixed\"/>" .
+                         "<NumberFormat ss:Format=\"0.000\"/>" .
                          "</Style>\n";
              
         $appendStyleList = array($styleBlackBar, $styleBlank,

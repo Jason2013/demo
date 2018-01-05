@@ -82,7 +82,8 @@ class CGenReport
                      "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
                      "</Borders>\n" .
                      "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
-                     "<NumberFormat ss:Format=\"Fixed\"/>" .
+                     //"<NumberFormat ss:Format=\"Fixed\"/>" .
+                     "<NumberFormat ss:Format=\"0.000\"/>" .
                      "</Style>\n";
                   
         $styleRate = "<Style ss:ID=\"s%d\">\n" .
@@ -122,7 +123,8 @@ class CGenReport
                          "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
                          "</Borders>\n" .
                          "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
-                         "<NumberFormat ss:Format=\"Fixed\"/>" .
+                         //"<NumberFormat ss:Format=\"Fixed\"/>" .
+                         "<NumberFormat ss:Format=\"0.000\"/>" .
                          "</Style>\n";
                          
         $styleVariance = "<Style ss:ID=\"s%d\">\n" .
@@ -194,7 +196,8 @@ class CGenReport
                             " ss:Color=\"#000000\"/>\n" .
                             "</Borders>\n" .
                             "<Interior ss:Color=\"#FFC000\" ss:Pattern=\"Solid\"/>\n" .
-                            "<NumberFormat ss:Format=\"Fixed\"/>\n" .
+                            //"<NumberFormat ss:Format=\"Fixed\"/>\n" .
+                            "<NumberFormat ss:Format=\"0.000\"/>\n" .
                             "</Style>";
                             
         $styleSummaryTitle01 = "<Style ss:ID=\"s%d\">\n" .
@@ -467,16 +470,79 @@ class CGenReport
             if ($b1 == false)
             {
                 // if not assign current batch id
-                $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
-                        "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") ORDER BY insert_time DESC LIMIT " . $historyBatchMaxNum;
+                $sql1 = "SELECT batch_id, batch_group FROM mis_table_batch_list " .
+                        "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") ORDER BY batch_id DESC LIMIT 1";
+                
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return null;
+                }
+                $row1 = $db->fetchRow();
+                if ($row1 == false)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return null;
+                }
+                $tmpBatchGroup = intval($row1[1]);
+                
+                if ($tmpBatchGroup == 1)
+                {
+                    // routine report
+                    $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
+                            "WHERE batch_state=\"1\" AND batch_group=\"1\" ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
+                }
+                else
+                {
+                    // temp report
+                    $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
+                            "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
+                }
             }
             else
             {
                 // if assign current batch id
                 $params1 = array($_batchID);
-                $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
-                        "WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") " .
-                        "ORDER BY insert_time DESC LIMIT " . $historyBatchMaxNum;
+                $sql1 = "SELECT batch_id, batch_group FROM mis_table_batch_list " .
+                        "WHERE batch_id=?";
+                
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return null;
+                }
+                $row1 = $db->fetchRow();
+                if ($row1 == false)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return null;
+                }
+                $tmpBatchGroup = intval($row1[1]);
+                
+                if ($tmpBatchGroup == 1)
+                {
+                    // routine report
+                    $params1 = array($_batchID);
+                    $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
+                            "WHERE batch_id<=? AND batch_state=\"1\" AND batch_group=\"1\" " .
+                            "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
+                }
+                else
+                {
+                    // temp report
+                    $params1 = array($_batchID);
+                    $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
+                            "WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") " .
+                            "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
+                }
             }
         }
         else
