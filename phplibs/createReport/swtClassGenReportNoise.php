@@ -646,8 +646,11 @@ class CGenReport
                 echo json_encode($returnMsg);
                 return;
             }
-            $tmpNoiseNum = $row1[0];
-            break;
+            $tmpNoiseNum = intval($row1[0]);
+            if ($tmpNoiseNum > 0)
+            {
+                break;
+            }
         }
         return intval($tmpNoiseNum) + 1;
     }
