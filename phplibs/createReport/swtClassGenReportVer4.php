@@ -3048,7 +3048,7 @@ class CGenReport
                             $dataKeyDataColumnID = $i;
                             break;
                         }
-                        else if ($data[$i] == "FPS") // asynccompute
+                        else if ($data[$i] == "FPS") // randomsphere
                         {
                             // data column id
                             $dataKeyDataColumnID = $i;
