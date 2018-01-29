@@ -665,6 +665,13 @@ function swtParseLogFile($_pathName, $_machineID, $_noiseDataID, $_noiseDataNum)
         {
             // if this line is title line of each test
             $testName = $tmpName;
+            
+            // temp fix
+            if ($testName == "RandomSphere")
+            {
+                $testName = "AsyncCompute";
+            }
+            
             $dataKeyAPI = array_search("API", $data);
             $testCaseIDKeyAPI = array_search("TestCaseId#", $data);
             $tmpTestID++;
