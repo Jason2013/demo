@@ -684,7 +684,7 @@ function swtParseLogFile($_pathName, $_machineID, $_noiseDataID, $_noiseDataNum)
                     $returnMsg["subTestNameFilterNum"] = $subTestNameFilterNum;
                     break;
                 }
-                else if ($data[$i] == "FPS") // randomsphere
+                else if ($data[$i] == "FPS") // asynccompute
                 {
                     // data column id
                     $dataKeyDataColumnID = $i;
