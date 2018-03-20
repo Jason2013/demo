@@ -14,8 +14,6 @@ $batchID = intval($_POST["batchID"]);
 $resultPos = intval($_POST["resultPos"]);
 $testPos = intval($_POST["testPos"]);
 $testCasePos = intval($_POST["testCasePos"]);
-$curTestCaseNum = intval($_POST["curTestCaseNum"]);
-$curTestNoiseNum = intval($_POST["curTestNoiseNum"]);
 
 $returnMsg = array();
 $returnMsg["errorCode"] = 1;
@@ -135,6 +133,42 @@ function swtGetAverageDataList($_dataList)
     return $returnArr;
 }
 
+function swtGetAverageAndVariance ($_sortArrayList, $_averageIndexList)
+{
+    $sortArrayList = $_sortArrayList;
+    $averageIndexList = $_averageIndexList;
+    
+    $tmpSum = 0.0;
+    for ($i = 0; $i < count($averageIndexList); $i++)
+    {
+        $tmpSum += floatval($sortArrayList[$averageIndexList[$i]]);
+    }
+    $tmpAvg = $tmpSum / count($averageIndexList);
+    
+    $tmpSum = 0.0;
+    
+    for ($i = 0; $i < count($averageIndexList); $i++)
+    {
+        if ($tmpAvg < 0.00001)
+        {
+            $f2 = 0.0;
+        }
+        else
+        {
+            $f1 = floatval($sortArrayList[$averageIndexList[$i]]);
+            $f2 = ($f1 - $tmpAvg) / $tmpAvg;
+            $tmpSum += ($f2 * $f2);
+        }
+    }
+    
+    $tmpVariance = sqrt($tmpSum / count($averageIndexList));
+    
+    $tmpRet = array();
+    $tmpRet["tmpAvg"] = $tmpAvg;
+    $tmpRet["tmpVariance"] = $tmpVariance;
+    return $tmpRet;
+}
+
 function swtGetTmpFileName()
 {
     global $swtTempFilesDir;
@@ -189,8 +223,8 @@ else
     
     $curTestName = $testNameList[$testPos];
     
-    $tmpTableName01 = $db_mis_table_name_string001 . $curTestName;
-    $tmpTableName02 = $db_mis_table_name_string001 . $curTestName . "_noise";
+    $tmpTableName01 = $db_mis_table_name_string002 . $curTestName;
+    $tmpTableName02 = $db_mis_table_name_string002 . $curTestName . "_noise";
     
     $returnMsg["curTestName"] = $curTestName;
     $returnMsg["tmpTableName01"] = $tmpTableName01;
@@ -242,34 +276,45 @@ else
     
     // calc and insert average
     
-    if ($testCasePos == 0)
-    {
-        // get test case num of each test
-        $params1 = array($resultIDList[$resultPos]);
-        $sql1 = "SELECT COUNT(*) FROM " . $tmpTableName02 . " " .
-                "WHERE result_id=? AND noise_id=0";
+    $params1 = array($resultIDList[$resultPos]);
+    $sql1 = "SELECT COUNT(*) FROM " . $tmpTableName02 . " " .
+            "WHERE result_id=? AND noise_id=0";
 
-        if ($db->QueryDB($sql1, $params1) == null)
+    if ($db->QueryDB($sql1, $params1) == null)
+    {
+        $returnMsg["errorCode"] = 0;
+        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+        echo json_encode($returnMsg);
+        return null;
+    }
+    
+    $row1 = $db->fetchRow();
+    
+    if ($row1 == false)
+    {
+        $returnMsg["errorCode"] = 0;
+        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+        echo json_encode($returnMsg);
+        return null;
+    }
+    
+    $curTestCaseNum = intval($row1[0]);
+    
+    $returnMsg["curTestCaseNum"] = $curTestCaseNum;
+    
+    if ($testCasePos >= $curTestCaseNum)
+    {
+        // go to next test
+        $testCasePos = 0;
+        $testPos++;
+    }
+    else
+    {
+        $tmpDoTestCaseNum = $oneTimeDoTestCaseNum;
+        if (($testCasePos + $tmpDoTestCaseNum) > $curTestCaseNum)
         {
-            $returnMsg["errorCode"] = 0;
-            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-            echo json_encode($returnMsg);
-            return null;
+            $tmpDoTestCaseNum = $curTestCaseNum - $testCasePos;
         }
-        
-        $row1 = $db->fetchRow();
-        
-        if ($row1 == false)
-        {
-            $returnMsg["errorCode"] = 0;
-            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-            echo json_encode($returnMsg);
-            return null;
-        }
-        
-        $curTestCaseNum = intval($row1[0]);
-        $returnMsg["curTestCaseNum"] = $curTestCaseNum;
-        
         
         // get noise num
         
@@ -292,48 +337,27 @@ else
             echo json_encode($returnMsg);
             return;
         }
-        $curTestNoiseNum = intval($row1[0]) + 1;
-        $returnMsg["curTestNoiseNum"] = $curTestNoiseNum;
-    }
-    
-
-    
-    if ($testCasePos >= $curTestCaseNum)
-    {
-        // go to next test
-        $testCasePos = 0;
-        $testPos++;
-    }
-    else
-    {
-        $tmpDoTestCaseNum = $oneTimeDoTestCaseNum;
-        if (($testCasePos + $tmpDoTestCaseNum) > $curTestCaseNum)
-        {
-            $tmpDoTestCaseNum = $curTestCaseNum - $testCasePos;
-        }
-        
+        $tmpNoiseNum = intval($row1[0]) + 1;
+        $returnMsg["tmpNoiseNum"] = $tmpNoiseNum;
         
         $tmpList = array();
         $tmpCode2 = "";
-        $tmpParams1 = array();
-        for ($i = 0; $i < $curTestNoiseNum; $i++)
+        for ($i = 0; $i < $tmpNoiseNum; $i++)
         {
-            $t1 = " t" . $i . ".data_value ";
+            $t1 = " t" . $i . ".data_value1," . " t" . $i . ".data_value2," .
+                  " t" . $i . ".data_value3," . " t" . $i . ".data_value4";
             $tmpCode2 .= " LEFT JOIN " . $tmpTableName02 . " t" . $i . " " .
-                         "ON (t" . $i . ".result_id=? AND " .
+                         "ON (t" . $i . ".result_id=t100.result_id AND " .
                          "t" . $i . ".sub_id=t100.sub_id AND " .
                          "t" . $i . ".noise_id=" . $i . ") ";
                   
             $tmpList []= $t1;
-            $tmpParams1 []= $resultIDList[$resultPos];
         }
         
         $tmpCode1 = implode(",", $tmpList);
         
-        $tmpParams1 []= $resultIDList[$resultPos];
-        $params1 = $tmpParams1;
-        //$params1 = array($resultIDList[$resultPos]);
-        $sql1 = "SELECT t100.result_id, t100.sub_id, t100.data_value, t100.test_case_id, " . $tmpCode1 . " " .
+        $params1 = array($resultIDList[$resultPos]);
+        $sql1 = "SELECT t100.result_id, t100.sub_id, t100.test_case_id, t100.group_id, " . $tmpCode1 . " " .
                 "FROM " . $tmpTableName02 . " t100 " .
                 $tmpCode2 . " " .
                 "WHERE (t100.result_id=? AND t100.noise_id=0) ORDER BY t100.data_id ASC " .
@@ -357,16 +381,40 @@ else
         {  
             $tmpResultID = $row1[0];
             $tmpSubTestID = $row1[1];
-            $tmpTestCaseID = $row1[3];
+            $tmpTestCaseID = $row1[2];
+            $tmpGroupID = $row1[3];
             
             $sortArrayList = array();
-            for ($i = 0; $i < $curTestNoiseNum; $i++)
+            $sortArrayList2 = array();
+            $sortArrayList3 = array();
+            $sortArrayList4 = array();
+            for ($i = 0; $i < $tmpNoiseNum; $i++)
             {
-                $sortArrayList []= $row1[$i + 4];
+                $sortArrayList []= $row1[4 + $i * 4];
+                $sortArrayList2 []= $row1[5 + $i * 4];
+                $sortArrayList3 []= $row1[6 + $i * 4];
+                $sortArrayList4 []= $row1[7 + $i * 4];
             }
         
             $averageIndexList = swtGetAverageDataList($sortArrayList);
+            $averageIndexList2 = swtGetAverageDataList($sortArrayList2);
+            $averageIndexList3 = swtGetAverageDataList($sortArrayList3);
+            $averageIndexList4 = swtGetAverageDataList($sortArrayList4);
             
+            $tmpRet = swtGetAverageAndVariance($sortArrayList, $averageIndexList);
+            $tmpAvg = $tmpRet["tmpAvg"];
+            $tmpVariance = $tmpRet["tmpVariance"];
+            $tmpRet = swtGetAverageAndVariance($sortArrayList2, $averageIndexList2);
+            $tmpAvg2 = $tmpRet["tmpAvg"];
+            $tmpVariance2 = $tmpRet["tmpVariance"];
+            $tmpRet = swtGetAverageAndVariance($sortArrayList3, $averageIndexList3);
+            $tmpAvg3 = $tmpRet["tmpAvg"];
+            $tmpVariance3 = $tmpRet["tmpVariance"];
+            $tmpRet = swtGetAverageAndVariance($sortArrayList4, $averageIndexList4);
+            $tmpAvg4 = $tmpRet["tmpAvg"];
+            $tmpVariance4 = $tmpRet["tmpVariance"];
+            
+            /*
             $tmpSum = 0.0;
             for ($i = 0; $i < count($averageIndexList); $i++)
             {
@@ -378,7 +426,7 @@ else
             
             for ($i = 0; $i < count($averageIndexList); $i++)
             {
-                if ($tmpAvg < 0.00001)
+                if ($tmpAvg == 0.0)
                 {
                     $f2 = 0.0;
                 }
@@ -391,9 +439,20 @@ else
             }
             
             $tmpVariance = sqrt($tmpSum / count($averageIndexList));
+            //*/
             
             $testAverageData .= "" . $resultIDList[$resultPos] . "," .
-                                $tmpSubTestID . "," . $tmpAvg . "," . $tmpVariance . "," . $tmpTestCaseID . "\n";
+                                $tmpSubTestID . "," . 
+                                $tmpAvg . "," . 
+                                $tmpVariance . "," . 
+                                $tmpAvg2 . "," . 
+                                $tmpVariance2 . "," . 
+                                $tmpAvg3 . "," . 
+                                $tmpVariance3 . "," . 
+                                $tmpAvg4 . "," . 
+                                $tmpVariance4 . "," . 
+                                $tmpTestCaseID . "," .
+                                $tmpGroupID . "\n";
             
         }
         
@@ -420,7 +479,12 @@ else
             
             $sql1 = "LOAD DATA INFILE \"" . $tmpPathName . "\" IGNORE INTO TABLE " . $tmpTableName01 . " " .
                     "FIELDS TERMINATED BY ',' " .
-                    "LINES TERMINATED BY '\n' (result_id, sub_id, data_value, data_value2, test_case_id);";
+                    "LINES TERMINATED BY '\n' (result_id, sub_id," .
+                    " data_value1, variance_value1," .
+                    " data_value2, variance_value2," .
+                    " data_value3, variance_value3," .
+                    " data_value4, variance_value4," .
+                    " test_case_id, group_id);";
             if ($db2->QueryDBNoResult($sql1) == null)
             {
                 $returnMsg["errorCode"] = 0;
@@ -446,8 +510,6 @@ $returnMsg["testPos"] = $testPos;
 $returnMsg["testCasePos"] = $testCasePos;
 $returnMsg["resultNum"] = count($resultIDList);
 $returnMsg["testNum"] = count($testNameList);
-$returnMsg["curTestCaseNum"] = $curTestCaseNum;
-$returnMsg["curTestNoiseNum"] = $curTestNoiseNum;
 
 echo json_encode($returnMsg);
 return;

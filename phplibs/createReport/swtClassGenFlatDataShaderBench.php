@@ -44,7 +44,7 @@ class CGenReportFlatData
                 $sql1 = "SELECT t0.*, t1.* FROM mis_table_batch_list t0 " .
                         "LEFT JOIN mis_table_path_info t1 " .
                         "USING (path_id) " .
-                        "WHERE t0.batch_state=\"1\" AND (t0.batch_group=\"1\" OR t0.batch_group=\"2\") ORDER BY t0.insert_time DESC LIMIT 1";
+                        "WHERE t0.batch_state=\"1\" AND (t0.batch_group=\"3\") ORDER BY t0.insert_time DESC LIMIT 1";
                 if ($db->QueryDB($sql1, $params1) == null)
                 {
                     $returnMsg["errorCode"] = 0;
@@ -232,16 +232,8 @@ class CGenReportFlatData
         if (file_exists($tmpFileName) == false)
         {
             $returnSet["allFileList"] = array();
-            $returnSet["allFileTestPosList"] = array();
-            $returnSet["allFileTestCaseNumList"] = array();
-            $returnSet["allFileSubTestNameFilterNumMaxList"] = array();
-            $returnSet["allFileFolderTestNameList"] = array();
-            $returnSet["allFileReportUmdNameList"] = array();
-            $returnSet["allFileTestCaseUmdDataMaskList"] = array();
-
             $returnSet["cardNameList"] = array();
             $returnSet["machineIDList"] = array();
-            $returnSet["allFolderList"] = array();
             $returnSet["cardSysNameMachineIDDict"] = array();
             $returnSet["fileID"] =    0;
             $returnSet["columnNum"] = 0;
@@ -266,54 +258,6 @@ class CGenReportFlatData
                 $tmpArray["" . $tmpKey] = $tmpVal;
             }
             $returnSet["cardSysNameMachineIDDict"] = $tmpArray;
-            
-            $tmpJson = $returnSet["allFileTestPosList"];
-            $tmpArray = array();
-            foreach ($tmpJson as $tmpKey => $tmpVal)
-            {
-                $tmpArray["" . $tmpKey] = $tmpVal;
-            }
-            $returnSet["allFileTestPosList"] = $tmpArray;
-            
-            $tmpJson = $returnSet["allFileTestCaseNumList"];
-            $tmpArray = array();
-            foreach ($tmpJson as $tmpKey => $tmpVal)
-            {
-                $tmpArray["" . $tmpKey] = $tmpVal;
-            }
-            $returnSet["allFileTestCaseNumList"] = $tmpArray;
-            
-            $tmpJson = $returnSet["allFileSubTestNameFilterNumMaxList"];
-            $tmpArray = array();
-            foreach ($tmpJson as $tmpKey => $tmpVal)
-            {
-                $tmpArray["" . $tmpKey] = $tmpVal;
-            }
-            $returnSet["allFileSubTestNameFilterNumMaxList"] = $tmpArray;
-            
-            $tmpJson = $returnSet["allFileFolderTestNameList"];
-            $tmpArray = array();
-            foreach ($tmpJson as $tmpKey => $tmpVal)
-            {
-                $tmpArray["" . $tmpKey] = $tmpVal;
-            }
-            $returnSet["allFileFolderTestNameList"] = $tmpArray;
-            
-            $tmpJson = $returnSet["allFileReportUmdNameList"];
-            $tmpArray = array();
-            foreach ($tmpJson as $tmpKey => $tmpVal)
-            {
-                $tmpArray["" . $tmpKey] = $tmpVal;
-            }
-            $returnSet["allFileReportUmdNameList"] = $tmpArray;
-            
-            $tmpJson = $returnSet["allFileTestCaseUmdDataMaskList"];
-            $tmpArray = array();
-            foreach ($tmpJson as $tmpKey => $tmpVal)
-            {
-                $tmpArray["" . $tmpKey] = $tmpVal;
-            }
-            $returnSet["allFileTestCaseUmdDataMaskList"] = $tmpArray;
         }
 
         return $returnSet;
@@ -342,7 +286,7 @@ class CGenReportFlatData
         
         if (file_exists($tmpFileName))
         {
-            //unlink($tmpFileName);
+            unlink($tmpFileName);
         }
 
         return;
@@ -436,7 +380,6 @@ class CGenReportFlatData
                     array_push($allFileList, $tmpName);
                     array_push($cardNameList, $_cardName);
                     array_push($machineIDList, $_curMachineID);
-                    array_push($allFolderList, basename($_folderName));
                     
                     $tmpSrcFolder = substr($tmpName, 0, strlen($tmpName) - strlen($t1));
                     $tmpSrcPath = $tmpSrcFolder . $resultFileName3;
@@ -466,6 +409,7 @@ class CGenReportFlatData
         foreach ($folderList as $tmpName)
         {
             $t1 = $tmpName . "\\..\\" . $machineInfoFileName;
+            $t3 = $tmpName . "\\..\\..\\" . $machineInfoFileName;
             $t2 = $tmpName . "\\" . $resultFileName3;
             $cardName = "";
             $curMachineID = -1;
@@ -473,6 +417,11 @@ class CGenReportFlatData
             $returnMsg["tmp---004:"] .= $crossType . ",";
             $returnMsg["tmp---005:"] .= $t2 . ",";
             
+            if ((file_exists($t1) == false) && 
+                (file_exists($t3) == true))
+            {
+                $t1 = $t3;
+            }
             
             if ((file_exists($t1) == true) &&
                 ($crossType       <  10))
@@ -506,7 +455,7 @@ class CGenReportFlatData
                 $machineFolderPath = $tmpName . "\\";
                 $clientCmdParser = new CClientHeartBeat;
                 $tmpMachineName = basename($_level == 0 ? $tmpName : $_folderName);
-                $obj = $clientCmdParser->getMachineInfoWithoutJson($machineFolderPath, $tmpMachineName);
+                $obj = $clientCmdParser->getMachineInfoWithoutJson($machineFolderPath);
                 
                 $cardName = $obj["videoCardName"] . "_" . $obj["systemName"];
                 
@@ -571,22 +520,22 @@ class CGenReportFlatData
         if ($_fileID == 0)
         {
             // add sheet head to tmp file
-            //foreach ($_uniqueCardNameList as $tmpName)
-            //{
-            //    $tmpFileName = sprintf($_reportFolder . "/" . $tmpName . $_outFileNameLater, $_batchID);
-            //    $fileHandle = fopen($tmpFileName, "w");
-            //    
-            //    // report head
-            //    $t1 = file_get_contents($templateFileName0);
-            //    fwrite($fileHandle, $t1);
-            //    // style end tag
-            //    $xmlWriter->writeAdditionalStyles($fileHandle);
-            //    //$t1 = file_get_contents($templateFileName3);
-            //    ////$t1 = sprintf($t1, 0, 0);
-            //    //fwrite($fileHandle, $t1);
-            //    
-            //    fclose($fileHandle);
-            //}
+            foreach ($_uniqueCardNameList as $tmpName)
+            {
+                $tmpFileName = sprintf($_reportFolder . "/" . $tmpName . $_outFileNameLater, $_batchID);
+                $fileHandle = fopen($tmpFileName, "w");
+                
+                // report head
+                $t1 = file_get_contents($templateFileName0);
+                fwrite($fileHandle, $t1);
+                // style end tag
+                $xmlWriter->writeAdditionalStyles($fileHandle);
+                //$t1 = file_get_contents($templateFileName3);
+                ////$t1 = sprintf($t1, 0, 0);
+                //fwrite($fileHandle, $t1);
+                
+                fclose($fileHandle);
+            }
             $columnNum = 0;
             $rowNum = 0;
         }
@@ -609,16 +558,16 @@ class CGenReportFlatData
         if ($_fileID >= count($_uniqueCardNameList))
         {
             // add sheet end
-            //foreach ($_uniqueCardNameList as $tmpName)
-            //{
-            //    $tmpFileName = sprintf($_reportFolder . "/" . $tmpName . $_outFileNameLater, $_batchID);
-            //    $fileHandle = fopen($tmpFileName, "r+");
-            //    fseek($fileHandle, 0, SEEK_END);
-            //    //$t1 = file_get_contents($templateFileName2);
-            //    fwrite($fileHandle, $allSheetsEndTag);
-            //    
-            //    fclose($fileHandle);
-            //}
+            foreach ($_uniqueCardNameList as $tmpName)
+            {
+                $tmpFileName = sprintf($_reportFolder . "/" . $tmpName . $_outFileNameLater, $_batchID);
+                $fileHandle = fopen($tmpFileName, "r+");
+                fseek($fileHandle, 0, SEEK_END);
+                //$t1 = file_get_contents($templateFileName2);
+                fwrite($fileHandle, $allSheetsEndTag);
+                
+                fclose($fileHandle);
+            }
             
             $returnMsg["parseFinished"] = 1;
             $returnMsg["curReportFolder"] = $_curReportFolder;
@@ -663,214 +612,46 @@ class CGenReportFlatData
         return $returnSet;
     }
     
-    public function getTestCaseUmdDataMask($_tmpUmdTestCaseNumList)
-    {
-        global $swtUmdNameList;
-        
-        if (count($_tmpUmdTestCaseNumList) > 0)
-        {
-            // set last test umd data mask
-            $tmpAllMask = 0;
-            for ($j = 0; $j < count($swtUmdNameList); $j++)
-            {
-                $tmpUmdName = $swtUmdNameList[$j];
-                if ((array_key_exists($tmpUmdName, $_tmpUmdTestCaseNumList)) &&
-                    ($_tmpUmdTestCaseNumList[$tmpUmdName] > 0))
-                {
-                    $tmpMask = 1;
-                    for ($l = 0; $l < $j; $l++)
-                    {
-                        $tmpMask *= 10;
-                    }
-                    $tmpAllMask |= $tmpMask;
-                }
-            }
-            return $tmpAllMask;
-        }
-        return -1;
-    }
-    
     public function getTestStartPos($_curCardNameList)
     {
         global $allFileList;
         global $visitedTestNameList;
         global $tmpCardName;
-        global $swtUmdNameList;
         
         $testStartPosList = array();
-        $testCaseNumList = array();
-        $folderTestNameList = array();
-        $subTestNameFilterNumMaxList = array();
-        $reportUmdNameList = array();
-        $testCaseUmdDataMaskList = array();
         // find all start pos in file for each test
         for ($i = 0; $i < count($_curCardNameList); $i++)
         {
             array_push($testStartPosList, array());
-            array_push($testCaseNumList, array());
-            array_push($folderTestNameList, array());
-            array_push($subTestNameFilterNumMaxList, array());
-            array_push($reportUmdNameList, array());
-            array_push($testCaseUmdDataMaskList, array());
             
             $curTmpFileName = $allFileList[$_curCardNameList[$i]];
             $resultFileHandle = fopen($curTmpFileName, "r");
 
             $tmpPos = ftell($resultFileHandle);
-            $tmpTestCaseNum = 0;
-            $lastTestName = "";
-            $tmpTestName = "";
-            $tmpAPIPos = 0;
-            $lastAPIName = "";
-            $subTestNameFilterNumMax = 0;
-            $tmpTestIndex = -1;
-            $dataKeyDataColumnID = 0;
-            $tmpUmdTestCaseNumList = array();
             while($dataSet = fgetcsv($resultFileHandle, 0, ","))
             {
                 $dataSetSize = count($dataSet);
                 
                 if ($dataSetSize > 0)
                 {
-                    $tmpDataSet = $dataSet;
-                    $dataSet = array();
-                    foreach ($tmpDataSet as $tmpData)
+                    $tmpTestName = trim($dataSet[0]);
+                    if (strlen($tmpTestName) > 0)
                     {
-                        array_push($dataSet, trim($tmpData));
+                        $testStartPosList[$i][$tmpTestName] = $tmpPos;
                     }
-                    $curTestName = $dataSet[0];
-                    if (strlen($curTestName) > 0)
-                    {
-                        // test title line
-                        $tmpTestIndex++;
-                        $subTestNameFilterNum = 0;
-                        for ($j = 1; $j < count($dataSet); $j++)
-                        {
-                            $tmpIndex = strpos($dataSet[$j], "/");
-                            if ($tmpIndex !== false)
-                            {
-                                // data column id
-                                $dataKeyDataColumnID = $j;
-                                $subTestNameFilterNum = $dataKeyDataColumnID - 1;
-                                break;
-                            }
-                            else if ($dataSet[$j] == "FPS") // randomsphere
-                            {
-                                // data column id
-                                $dataKeyDataColumnID = $j;
-                                $subTestNameFilterNum = $dataKeyDataColumnID - 1;
-                                break;
-                            }
-                        }
-                        $subTestNameFilterNumMax = $subTestNameFilterNumMax < $subTestNameFilterNum ? 
-                                                   $subTestNameFilterNum : $subTestNameFilterNumMax;
-                        
-                        $testStartPosList[$i][$curTestName] = $tmpPos;
-                        $subTestNameFilterNumMaxList[$i] = $subTestNameFilterNumMax;
-                        $lastTestName = $tmpTestName;
-                        $tmpTestName = $curTestName;
-                        
-                        $tmpAPIPos = array_search("API", $dataSet);
-                        
-                        // all tests before the last test
-                        if (strlen($lastTestName) > 0)
-                        {
-                            $testCaseNumList[$i][$lastTestName] = $tmpTestCaseNum;
-                            //$testCaseNumList[$i][$lastTestName] = $lastAPIName . "_" . $tmpAPIPos;
-                        }
-                        $lastAPIName = "";
-                        $tmpTestCaseNum = 0;
-                        
-                        $tmpPos = array_search($curTestName, $folderTestNameList[$i]);
-                        if ($tmpPos === false)
-                        {
-                            array_push($folderTestNameList[$i], $curTestName);
-                            array_push($testCaseUmdDataMaskList[$i], 0);
-                        }
-                        
-                        $tmpMask = $this->getTestCaseUmdDataMask($tmpUmdTestCaseNumList);
-                        if ($tmpMask != -1)
-                        {
-                            $tmpPos = array_search($lastTestName, $folderTestNameList[$i]);
-                            if ($tmpPos !== false)
-                            {
-                                $testCaseUmdDataMaskList[$i][$tmpPos] = $tmpMask;
-                            }
-                        }
-                        $tmpUmdTestCaseNumList = array();
-                    }
-                    else if ($tmpAPIPos < $dataSetSize)
-                    {
-                        // test data line
-                        $tmpUmdName = $dataSet[$tmpAPIPos];
-                        if (strlen($lastAPIName) == 0)
-                        {
-                            $lastAPIName = $tmpUmdName;
-                            $tmpTestCaseNum++;
-                        }
-                        else if (strcmp($lastAPIName, $tmpUmdName) == 0)
-                        {
-                            $tmpTestCaseNum++;
-                        }
-                        if (is_numeric($dataSet[$dataKeyDataColumnID]))
-                        {
-                            // skip N/A
-                            if (array_key_exists($tmpUmdName, $tmpUmdTestCaseNumList))
-                            {
-                                // test case num per API
-                                $tmpUmdTestCaseNumList[$tmpUmdName]++;
-                            }
-                            else
-                            {
-                                $tmpUmdTestCaseNumList[$tmpUmdName] = 1;
-                            }
-                            if ($tmpTestIndex == 0)
-                            {
-                                // only first test
-                                if (array_search($tmpUmdName, $reportUmdNameList[$i]) === false)
-                                {
-                                    // save used API names
-                                    array_push($reportUmdNameList[$i], $tmpUmdName);
-                                }
-                            }
-                        }
-                    }
-                    if (array_search($curTestName, $visitedTestNameList) === false)
+                    if (array_search($tmpTestName, $visitedTestNameList) === false)
                     {
                         // save start pos in file for each test
-                        array_push($visitedTestNameList, $curTestName);
+                        array_push($visitedTestNameList, $tmpTestName);
                     }
                 }
                 $tmpPos = ftell($resultFileHandle);
-            }
-            // the last test
-            if (strlen($tmpTestName) > 0)
-            {
-                $testCaseNumList[$i][$tmpTestName] = $tmpTestCaseNum;
-                
-                $tmpMask = $this->getTestCaseUmdDataMask($tmpUmdTestCaseNumList);
-                if ($tmpMask != -1)
-                {
-                    $tmpPos = array_search($tmpTestName, $folderTestNameList[$i]);
-                    if ($tmpPos !== false)
-                    {
-                        $testCaseUmdDataMaskList[$i][$tmpPos] = $tmpMask;
-                    }
-                }
             }
             
             fclose($resultFileHandle);
         }
         
-        $returnSet = array();
-        $returnSet["testStartPosList"] = $testStartPosList;
-        $returnSet["testCaseNumList"] = $testCaseNumList;
-        $returnSet["folderTestNameList"] = $folderTestNameList;
-        $returnSet["subTestNameFilterNumMaxList"] = $subTestNameFilterNumMaxList;
-        $returnSet["reportUmdNameList"] = $reportUmdNameList;
-        $returnSet["testCaseUmdDataMaskList"] = $testCaseUmdDataMaskList;
-
-        return $returnSet;
+        return $testStartPosList;
     }
     
     public function addLinesToFlatData($_srcFileHandle,
@@ -1024,6 +805,16 @@ class CGenReportFlatData
                     $t3 .= "<Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . $t2 . "</Data></Cell>\n";
                 }
                 
+                //if (($curCardName == "Fiji XT") &&
+                //    ($isDX12      == true) &&
+                //    ($i == 9))
+                //{
+                //    //$t3 = "<Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . (floatval($t2) / 1.000) . "</Data></Cell>\n";
+                //}
+                //else
+                //{
+                //    $t3 = "<Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . $t2 . "</Data></Cell>\n";
+                //}
                 
                 if ((strlen(trim($dataSet[0])) == 0) &&
                     (strlen($_apiAddText) > 0) &&

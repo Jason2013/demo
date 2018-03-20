@@ -21,14 +21,11 @@ $nextLineID = intval($_POST["nextLineID"]);
 $curTestID = intval($_POST["curTestID"]);
 $nextSubTestID = intval($_POST["nextSubTestID"]);
 $curFileLineNum = intval($_POST["curFileLineNum"]);
-$curFileOffset1 = intval($_POST["curFileOffset1"]);
-$curFileOffset2 = intval($_POST["curFileOffset2"]);
 
 //$targetLogFileName = "test_results.txt";
 //$targetLogFileName2 = "test_results.csv";
 $targetLogFileName = "test_results_for_analysis.txt";
 $targetLogFileName2 = "test_results_for_analysis.csv";
-$runLogFileName = "runlog.txt";
 $machineInfoFileName = "machine_info.json";
 $defaultInfoFileName = "default_info.json";
 $changeListJsonTag = "changeList";
@@ -127,11 +124,6 @@ function swtGetBatchID($_state)
         return -1;
     }
     $batchGroup = $reportGroup;
-    if (intval($_state) == 4)
-    {
-        // if routine batch
-        //$batchGroup = 1;
-    }
     
     $params1 = array($logFolderName);
     $sql1 = "SELECT * FROM mis_table_path_info " .
@@ -174,51 +166,7 @@ function swtGetBatchID($_state)
         return -1;
     }
     $batchID = $db->getInsertID();
-    
-    if ($batchGroup == 0)
-    {
-        // for outside users
-        $userChecker = new CUserManger();
-        $userID = $userChecker->getUserID();
-        if ($userID != -1)
-        {
-            // valid user
-            
-            $params1 = array($userID, $batchID);
-            $sql1 = "SELECT COUNT(*) FROM mis_table_user_batch_info " .
-                    "WHERE user_id = ? AND batch_id = ?";
-            if ($db->QueryDB($sql1, $params1) == null)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "query mysql table failed #3a, line: " . __LINE__;
-                return -1;
-            }
-            $row1 = $db->fetchRow();
-            if ($row1 == false)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "query mysql table failed #3a, line: " . __LINE__;
-                return -1;
-            }
-            $userNum = intval($row1[0]);
-            if ($userNum == 0)
-            {
-                $params1 = array($userID, $batchID);
-                $sql1 = "INSERT INTO mis_table_user_batch_info " .
-                        "(user_id, batch_id, insert_time) " .
-                        "VALUES (?, ?, NOW())";
-                if ($db->QueryDB($sql1, $params1) == null)
-                {
-                    $returnMsg["errorCode"] = 0;
-                    $returnMsg["errorMsg"] = "query mysql table failed #3a, line: " . __LINE__;
-                    return -1;
-                }
-            }
-        }
-    }
-    
-    
-    
+
     return $batchID;
 }
 
@@ -265,12 +213,31 @@ function swtGetUmdID($_umdName)
     return $umdID;
 }
 
-function swtFeedData($_db, $_subTestList, $_dataList, $_testName)
+function swtGetTmpFileName()
+{
+    global $swtTempFilesDir;
+    
+    while (1)
+    {
+        $tmpToken = md5("sql_script_" . time());
+        $tmpFileName = $swtTempFilesDir . "/sqlTmpFile" . $tmpToken . ".txt";
+        if (file_exists($tmpFileName) == false)
+        {
+            $tmpRes = @file_put_contents($tmpFileName, "");
+            if ($tmpRes !== false)
+            {
+                return $tmpFileName;
+            }
+        }
+    }
+}
+
+function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID, $_noiseDataNum)
 {
     global $db_username;
     global $db_password;
     global $returnMsg;
-    global $db_mis_table_name_string001;
+    global $db_mis_table_name_string002;
     global $swtTempFilesDir;
 
     if (strlen($_testName) == 0)
@@ -281,17 +248,6 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName)
         (strlen($_dataList)    == 0))
     {
         return;
-    }
-    
-    $tmpFileName = "";
-    while (1)
-    {
-        $tmpToken = md5("sql_script_" . time());
-        $tmpFileName = $swtTempFilesDir . "/sqlTmpFile" . $tmpToken . ".txt";
-        if (file_exists($tmpFileName) == false)
-        {
-            break;
-        }
     }
     
     error_reporting(E_ALL ^ E_DEPRECATED);
@@ -306,6 +262,8 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName)
     
     if (strlen($_subTestList) > 0)
     {
+        $tmpFileName = swtGetTmpFileName();
+        
         file_put_contents($tmpFileName, $_subTestList);
         $tmpPathName = dirname(__FILE__) . "/" . $tmpFileName;
         $tmpPathName = str_replace("\\", "/", $tmpPathName);
@@ -341,9 +299,6 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName)
             return -1;
         }
         
-        //$sql1 = "INSERT INTO mis_table_test_info " .
-        //        "SELECT * FROM tmp_table_test_data2 " .
-        //        "ON DUPLICATE KEY UPDATE test_filter = VALUES(test_filter);";
         $sql1 = "INSERT INTO mis_table_test_info (test_name, test_type, test_filter) " .
                 "SELECT test_name, test_type, test_filter FROM tmp_table_test_data2 " .
                 "ON DUPLICATE KEY UPDATE test_filter = VALUES(test_filter);";
@@ -371,6 +326,8 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName)
     
     if (strlen($_dataList) > 0)
     {
+        $tmpFileName = swtGetTmpFileName();
+        
         file_put_contents($tmpFileName, $_dataList);
         $tmpPathName = dirname(__FILE__) . "/" . $tmpFileName;
         $tmpPathName = str_replace("\\", "/", $tmpPathName);
@@ -379,8 +336,12 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName)
                 "( data_id INT UNSIGNED AUTO_INCREMENT, " .
                 "  result_id INT UNSIGNED, " .
                 "  sub_name VARCHAR(128), " .
-                "  data_value FLOAT," .
+                "  data_value1 DOUBLE," .
+                "  data_value2 DOUBLE," .
+                "  data_value3 DOUBLE," .
+                "  data_value4 DOUBLE," .
                 "  test_case_id INT," .
+                "  group_name VARCHAR(128), " .
                 "  PRIMARY KEY (data_id));";
         if ($db->QueryDBNoResult($sql1) == null)
         {
@@ -397,31 +358,37 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName)
         }
         $sql1 = "LOAD DATA INFILE \"" . $tmpPathName . "\" IGNORE INTO TABLE tmp_table_test_data1 " .
                 "FIELDS TERMINATED BY ',' " .
-                "LINES TERMINATED BY '\n' (result_id, sub_name, data_value, test_case_id);";
+                "LINES TERMINATED BY '\n' (result_id, sub_name, data_value1, data_value2, data_value3, data_value4, " .
+                "test_case_id, group_name);";
         if ($db->QueryDBNoResult($sql1) == null)
         {
             $returnMsg["errorCode"] = 0;
-            $returnMsg["sql1"] = $sql1;
-            $returnMsg["tmpPathName"] = $tmpPathName;
-            $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", " . $db->dbError;
+            $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__;
             return -1;
         }
-        
-        $tableName01 = $db_mis_table_name_string001 . cleaninput($_testName, 256);
+
+        $tableName02 = $db_mis_table_name_string002 . cleaninput($_testName, 256) . "_noise";
                 
-        $sql1 = "INSERT IGNORE INTO " . $tableName01 . " " .
-                "(result_id, sub_id, data_value, test_case_id) " .
-                "(SELECT t0.result_id, t1.test_id, t0.data_value, t0.test_case_id " .
-                "FROM tmp_table_test_data1 t0, mis_table_test_info t1 " .
-                "WHERE t0.sub_name=t1.test_name AND t1.test_type=\"2\" " .
-                "ORDER BY t0.data_id ASC);";
-                
-        //$sql1 = "REPLACE INTO " . $tableName01 . " " .
-        //        "(result_id, sub_id, data_value, test_case_id) " .
-        //        "(SELECT t0.result_id, t1.test_id, t0.data_value, t0.test_case_id " .
+        //$sql1 = "INSERT IGNORE INTO " . $tableName02 . " " .
+        //        "(result_id, sub_id, data_value, test_case_id, noise_id) " .
+        //        "(SELECT t0.result_id, t1.test_id, t0.data_value, t0.test_case_id, \"" . $_noiseDataID . "\" " .
         //        "FROM tmp_table_test_data1 t0, mis_table_test_info t1 " .
         //        "WHERE t0.sub_name=t1.test_name AND t1.test_type=\"2\" " .
         //        "ORDER BY t0.data_id ASC);";
+                
+        $sql1 = "INSERT IGNORE INTO " . $tableName02 . " " .
+                "(result_id, sub_id, data_value1, data_value2, data_value3, data_value4, test_case_id, noise_id, group_id) " .
+                "(SELECT t0.result_id, t1.test_id, t0.data_value1, t0.data_value2, t0.data_value3, t0.data_value4," .
+                " t0.test_case_id, \"" . $_noiseDataID . "\", t2.test_id " .
+                "FROM tmp_table_test_data1 t0 " .
+                "LEFT JOIN mis_table_test_info t1 " .
+                "ON (t0.sub_name=t1.test_name AND t1.test_type=\"2\") " .
+                "LEFT JOIN mis_table_test_info t2 " .
+                "ON (t0.group_name=t2.test_name AND t2.test_type=\"4\") " .
+                "ORDER BY t0.data_id ASC);";
+                
+        $returnMsg["noise_sql1"] = $sql1;
+        $returnMsg["noise_id"] = $_noiseDataID;
                 
         if ($db->QueryDBNoResult($sql1) == null)
         {
@@ -430,25 +397,27 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName)
             $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
             return -1;
         }
+
         unlink($tmpFileName);
     }
 
 }
 
-function swtParseLogFile($_pathName, $_machineID)
+function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID, $_noiseDataNum)
 {
     global $returnMsg;
     global $globalResultIDList;
     global $changeListJsonTag;
-    global $db_mis_table_create_string001;
-    global $db_mis_table_name_string001;
+    global $db_mis_table_create_string004;
+    global $db_mis_table_create_string003;
     global $defaultInfo;
     global $nextLineID;
     global $batchID;
     global $curTestID;
     global $nextSubTestID;
-    global $curFileOffset1;
-    global $curFileOffset2;
+    global $swtOldUmdNameMatchList;
+    
+    $returnMsg["checkIn"] = "checkIn";
     
     if (file_exists($_pathName) == false)
     {
@@ -476,14 +445,19 @@ function swtParseLogFile($_pathName, $_machineID)
     $minColumnNum = 4;
 
     $testName = "";
+    $fullTestName = "";
     $umdName = "";
+    $groupName = "";
     $umdID = -1;
     $umdIDMap = array();
-    $tableName01 = "";
     $dataKeyAPI = -1;
     $testCaseIDKeyAPI = -1;
     $dataKeyDataColumnID = -1;
     $subTestNameFilterNum = 0;
+    
+    $subTestSubject = "";
+    $subTestSubjectFilter = "";
+    $unitSubject = "";
 
     $feedSubTestNameString = "";
     $feedSubTestDataString = "";
@@ -499,8 +473,6 @@ function swtParseLogFile($_pathName, $_machineID)
     $handle = fopen($_pathName, "r");
     $data = false;
     
-    fseek($handle, $curFileOffset1, SEEK_SET);
-    $isTitleChecked = false;
     // jump to start csv line of this call
     while ($data = fgetcsv($handle, 0, ","))
     {
@@ -515,9 +487,12 @@ function swtParseLogFile($_pathName, $_machineID)
         {
             $data[$i] = trim($data[$i]);
         }
-        $tmpName = trim($data[0]);
+        
+        $tmpName = $data[0];
+        $isTestCasesShow = $data[1] == "TestCases";
 
-        if (strlen($tmpName) > 0)
+        if ((strlen($tmpName) >  0) &&
+            ($isTestCasesShow == true))
         {
             // if this line is title line of each test
             $testName = $tmpName;
@@ -526,25 +501,13 @@ function swtParseLogFile($_pathName, $_machineID)
             $tmpTestID++;
             $tmpSubTestID = 0;
             
-            $n1 = ftell($handle);
-            $curFileOffset2 = $curFileOffset2 > $n1 ? $curFileOffset2 : $n1;
-            $isTitleChecked = true;
+            $groupName = "default";
+            $feedSubTestNameString .= "\"" . $groupName . "\",4,\"\"\n";
             
             for ($i = 1; $i < count($data); $i++)
             {
-                $tmpPos = strpos($data[$i], "/");
+                $tmpPos = strpos($data[$i], "(");
                 if ($tmpPos !== false)
-                {
-                    // data column id
-                    $dataKeyDataColumnID = $i;
-                    $subTestNameFilterNum = $dataKeyDataColumnID - 1;
-                    
-                    $returnMsg["testName"] = $testName;
-                    $returnMsg["dataKeyDataColumnID"] = $dataKeyDataColumnID;
-                    $returnMsg["subTestNameFilterNum"] = $subTestNameFilterNum;
-                    break;
-                }
-                else if ($data[$i] == "FPS") // randomsphere
                 {
                     // data column id
                     $dataKeyDataColumnID = $i;
@@ -562,21 +525,32 @@ function swtParseLogFile($_pathName, $_machineID)
                 $returnMsg["_pathName"] = $_pathName;
             }
             
-            //if (($tmpTestID - 1) >= $curTestID)
+            if (($tmpTestID - 1) >= $curTestID)
             {
                 // if this line is start of each test
                 // try create table if not exist
-                $sql1 = sprintf($db_mis_table_create_string001, cleaninput($testName, 256));
-                $params1 = array();
-                if ($db->QueryDB($sql1, $params1) == null)
-                {
-                    fclose($handle);
-                    $returnMsg["errorCode"] = 0;
-                    $returnMsg["sql1"] = $sql1;
-                    $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__;
-                    return -1;
-                }
-                $tableName01 = $db_mis_table_name_string001 . cleaninput($testName, 256);
+                
+                //$sql1 = sprintf($db_mis_table_create_string004, cleaninput($testName, 256));
+                //$params1 = array();
+                //if ($db->QueryDB($sql1, $params1) == null)
+                //{
+                //    fclose($handle);
+                //    $returnMsg["errorCode"] = 0;
+                //    $returnMsg["sql1"] = $sql1;
+                //    $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__;
+                //    return -1;
+                //}
+                //
+                //$sql1 = sprintf($db_mis_table_create_string003, cleaninput($testName, 256));
+                //$params1 = array();
+                //if ($db->QueryDB($sql1, $params1) == null)
+                //{
+                //    fclose($handle);
+                //    $returnMsg["errorCode"] = 0;
+                //    $returnMsg["sql1"] = $sql1;
+                //    $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__;
+                //    return -1;
+                //}
 
                 $tmpNameList = array();
                 for ($i = 1; $i < $dataKeyDataColumnID; $i++)
@@ -588,31 +562,37 @@ function swtParseLogFile($_pathName, $_machineID)
                     array_push($tmpNameList, $data[$i]);
                 }
                 
+                $unitNameList = array();
+                for ($i = 0; $i < 4; $i++)
+                {
+                    // Compile Time(ms), Execution Time(ms), Shaders/s, FPS,
+                    array_push($unitNameList, $data[$dataKeyDataColumnID + $i]);
+                }
+                
                 $subTestSubject = implode("_", $tmpNameList);
                 $subTestSubjectFilter = implode("|", $tmpNameList);
-                $unitSubject = $data[$dataKeyDataColumnID];
+                $unitSubject = implode("|", $unitNameList);
                 
-                //$subTestSubject = $data[1];
-                //$unitSubject = $data[2];
                 // insert testName, subTestSubject, unitSubject
-                $testNameInsertSQL = "INSERT INTO mis_table_test_info " .
-                                     "(test_name, test_type, test_filter) " .
-                                     "VALUES ";
-                $testNameInsertSQL .= "(?, \"0\", \"\"), ";
-                $testNameInsertSQL .= "(?, \"1\", \"". $subTestSubjectFilter ."\"), ";
-                $testNameInsertSQL .= "(?, \"3\", \"\") ";
-                $testNameInsertSQL .= "ON DUPLICATE KEY UPDATE test_filter = VALUES(test_filter);";
+                //$testNameInsertSQL = "INSERT INTO mis_table_test_info " .
+                //                     "(test_name, test_type, test_filter) " .
+                //                     "VALUES ";
+                //$testNameInsertSQL .= "(?, \"0\", \"\"), ";
+                //$testNameInsertSQL .= "(?, \"1\", \"". $subTestSubjectFilter ."\"), ";
+                //$testNameInsertSQL .= "(?, \"3\", \"\") ";
+                //$testNameInsertSQL .= "ON DUPLICATE KEY UPDATE test_filter = VALUES(test_filter);";
+                //
+                //$sql1 = $testNameInsertSQL;
+                //$params1 = array($testName, $subTestSubject, $unitSubject);
+                //if ($db->QueryDB($sql1, $params1) == null)
+                //{
+                //    fclose($handle);
+                //    $returnMsg["errorCode"] = 0;
+                //    $returnMsg["errorMsg"] = "query mysql table failed #3" . $db->getError()[2] . ", line: " . __LINE__;
+                //    echo json_encode($returnMsg);
+                //    return -1;
+                //}
                 
-                $sql1 = $testNameInsertSQL;
-                $params1 = array($testName, $subTestSubject, $unitSubject);
-                if ($db->QueryDB($sql1, $params1) == null)
-                {
-                    fclose($handle);
-                    $returnMsg["errorCode"] = 0;
-                    $returnMsg["errorMsg"] = "query mysql table failed #3" . $db->getError()[2] . ", line: " . __LINE__;
-                    echo json_encode($returnMsg);
-                    return -1;
-                }
                 
                 if ($batchID == -1)
                 {
@@ -626,6 +606,7 @@ function swtParseLogFile($_pathName, $_machineID)
                     }
                 }
                 
+                /*
                 $sql1 = "SELECT test_id FROM mis_table_test_info WHERE test_name=? AND test_type=\"0\" LIMIT 1";
                 $params1 = array($testName);
                 if ($db->QueryDB($sql1, $params1) == null)
@@ -690,20 +671,39 @@ function swtParseLogFile($_pathName, $_machineID)
                         return -1;
                     }
                 }
+                //*/
             }
-            
-            fseek($handle, $curFileOffset2, SEEK_SET);
-            break;
         }
+        else
+        {
+            if (strlen($tmpName) > 0)
+            {
+                // shader bench result group name
+                $groupName = $tmpName;
+                $feedSubTestNameString .= "\"" . $groupName . "\",4,\"\"\n";
+                
+                $fullTestName = $testName . "_" . $groupName;
+                
+                //if (($tmpTestID - 1) >= $curTestID)
+                {
 
-        $curFileOffset1 = ftell($handle);
+                }
+            }
+            $tmpSubTestID++;
+        }
+        if (($tmpTestID - 1) >= $curTestID)
+        {
+            if (($tmpSubTestID) >= $nextSubTestID)
+            {
+                // resume last parse
+                break;
+            }
+        }
     }
     
     $tmpTestID = 0;
     $tmpSubTestID = 0;
     
-    $curTitleOffset1 = $curFileOffset1;
-    $curTitleOffset2 = $curFileOffset2;
     while ($data = fgetcsv($handle, 0, ","))
     {
         $tmpLineID++;
@@ -723,53 +723,186 @@ function swtParseLogFile($_pathName, $_machineID)
             $data[$i] = trim($data[$i]);
         }
         $tmpName = $data[0];
+        $isTestCasesShow = $data[1] == "TestCases";
 
-        if (strlen($tmpName) > 0)
+        if ((strlen($tmpName) >  0) &&
+            ($isTestCasesShow == true))
         {
             // if this line is title line of each test
-            swtFeedData($db, $feedSubTestNameString, $feedSubTestDataString, $testName);
+            swtFeedData($db, $feedSubTestNameString, $feedSubTestDataString, $fullTestName, $_noiseDataID, $_noiseDataNum);
             $feedSubTestNameString = "";
             $feedSubTestDataString = "";
+            
+            $groupName = "default";
+            $feedSubTestNameString .= "\"" . $groupName . "\",4,\"\"\n";
 
             //$testName = $tmpName;
             //$dataKeyAPI = array_search("API", $data);
             $tmpTestID++;
             $curTestID++;
             $nextSubTestID = 0;
-            $curFileOffset2 = ftell($handle);
-            $curFileOffset1 = $curTitleOffset1;
             fclose($handle);
             return -1;
         }
         else
         {
+            if (strlen($tmpName) > 0)
+            {
+                swtFeedData($db, $feedSubTestNameString, $feedSubTestDataString, $fullTestName, $_noiseDataID, $_noiseDataNum);
+                $feedSubTestNameString = "";
+                $feedSubTestDataString = "";
+                
+                // shader bench result group name
+                $groupName = $tmpName;
+                $feedSubTestNameString .= "\"" . $groupName . "\",4,\"\"\n";
+                
+                $fullTestName = $testName . "_" . $groupName;
+                
+                // create test table
+                $sql1 = sprintf($db_mis_table_create_string004, cleaninput($fullTestName, 256));
+                $params1 = array();
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    fclose($handle);
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["sql1"] = $sql1;
+                    $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__;
+                    return -1;
+                }
+                
+                $sql1 = sprintf($db_mis_table_create_string003, cleaninput($fullTestName, 256));
+                $params1 = array();
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    fclose($handle);
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["sql1"] = $sql1;
+                    $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__;
+                    return -1;
+                }
+                
+                
+                // insert testName, subTestSubject, unitSubject
+                $testNameInsertSQL = "INSERT INTO mis_table_test_info " .
+                                     "(test_name, test_type, test_filter) " .
+                                     "VALUES ";
+                $testNameInsertSQL .= "(?, \"0\", \"\"), ";
+                $testNameInsertSQL .= "(?, \"1\", \"". $subTestSubjectFilter ."\"), ";
+                $testNameInsertSQL .= "(?, \"3\", \"\") ";
+                $testNameInsertSQL .= "ON DUPLICATE KEY UPDATE test_filter = VALUES(test_filter);";
+                
+                $sql1 = $testNameInsertSQL;
+                $params1 = array($fullTestName, $subTestSubject, $unitSubject);
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    fclose($handle);
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3" . $db->getError()[2] . ", line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return -1;
+                }
+                
+                if ($batchID == -1)
+                {
+                    $batchID = swtGetBatchID("4");
+                    if ($batchID == -1)
+                    {
+                        fclose($handle);
+                        $returnMsg["errorCode"] = 0;
+                        $returnMsg["errorMsg"] = "get batch id failed";
+                        return -1;
+                    }
+                }
+                
+                
+                //
+                $sql1 = "SELECT test_id FROM mis_table_test_info WHERE test_name=? AND test_type=\"0\" LIMIT 1";
+                $params1 = array($fullTestName);
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    fclose($handle);
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #4" . $db->getError()[2] . ", line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return -1;
+                }
+                $row1 = $db->fetchRow();
+                if ($row1 == false)
+                {
+                    fclose($handle);
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #4" . $db->getError()[2] . ", line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return -1;
+                }
+                $tableTestID = $row1[0];
+                
+                $sql1 = "SELECT COUNT(*) FROM mis_table_test_subject_list " .
+                        "WHERE batch_id = ? AND test_id = ?";
+                $params1 = array($batchID, $tableTestID);
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    fclose($handle);
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #4" . $db->getError()[2] . ", line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return -1;
+                }
+                $row1 = $db->fetchRow();
+                if ($row1 == false)
+                {
+                    fclose($handle);
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #4" . $db->getError()[2] . ", line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return -1;
+                }
+                $tableTestIDNum = intval($row1[0]);
+                
+                if ($tableTestIDNum == 0)
+                {
+                    // new test name for this batch
+                    $testSubjectListInsertSQL = "INSERT IGNORE INTO mis_table_test_subject_list " .
+                                                "(batch_id, test_id, subject_id, unit_id, filter_num) VALUES " .
+                                                "(?, " .
+                                                " (SELECT test_id FROM mis_table_test_info WHERE test_name=? LIMIT 1), " .
+                                                " (SELECT test_id FROM mis_table_test_info WHERE test_name=? LIMIT 1), " .
+                                                " (SELECT test_id FROM mis_table_test_info WHERE test_name=? LIMIT 1), ?);";
+                                                 
+                    $sql1 = $testSubjectListInsertSQL;
+                    $params1 = array($batchID, $fullTestName, $subTestSubject, $unitSubject, $subTestNameFilterNum);
+                    if ($db->QueryDB($sql1, $params1) == null)
+                    {
+                        fclose($handle);
+                        $returnMsg["errorCode"] = 0;
+                        $returnMsg["errorMsg"] = "query mysql table failed #4" . $db->getError()[2] . ", line: " . __LINE__;
+                        echo json_encode($returnMsg);
+                        return -1;
+                    }
+                }
+            }
+            
             // if this line is sub test
             $tmpSubTestID++;
             $nextSubTestID++;
             
+            $dataValList = array();
+            $isDataValValid = false;
+            
             if ($tmpSubTestID >= $maxInsertDataNum)
             {
-                swtFeedData($db, $feedSubTestNameString, $feedSubTestDataString, $testName);
+                swtFeedData($db, $feedSubTestNameString, $feedSubTestDataString, $fullTestName, $_noiseDataID, $_noiseDataNum);
                 $feedSubTestNameString = "";
                 $feedSubTestDataString = "";
 
                 $nextSubTestID--;
-                $curFileOffset2 = $curTitleOffset2;
                 fclose($handle);
                 return -1;
             }
 
-            //if ((strlen($testName) > 0)    &&
-            //    ($batchID != -1))
-            if ((strlen($testName) > 0)    &&
+            if ((strlen($testName) > 0) &&
                 ($batchID != -1))
             {
-                //$subTestName = $data[1];
-                //$dataValue = $data[2];
-                //$subTestName = $data[1];
-                //$dataValue = $data[$dataKeyDataColumnID];
-                //$testCaseID = $data[$testCaseIDKeyAPI];
-                
                 $tmpNameList = array();
                 for ($i = 1; $i < $dataKeyDataColumnID; $i++)
                 {
@@ -785,7 +918,8 @@ function swtParseLogFile($_pathName, $_machineID)
 
                 if ($dataKeyAPI !== false)
                 {
-                    $umdName = $data[$dataKeyAPI];
+                    //$umdName = $data[$dataKeyAPI];
+                    $umdName = $_compilerName;
                 }
                 if ($testCaseIDKeyAPI !== -1)
                 {
@@ -793,7 +927,28 @@ function swtParseLogFile($_pathName, $_machineID)
                 }
                 if ($dataKeyDataColumnID !== -1)
                 {
-                    $dataValue = $data[$dataKeyDataColumnID];
+                    //$dataValue = $data[$dataKeyDataColumnID];
+                    
+                    $dataValList = array($data[$dataKeyDataColumnID],
+                                         $data[$dataKeyDataColumnID + 1],
+                                         $data[$dataKeyDataColumnID + 2],
+                                         $data[$dataKeyDataColumnID + 3]);
+                                         
+                    $b1 = true;
+                    foreach ($dataValList as $tmpVal)
+                    {
+                        if (strlen($tmpVal) == 0)
+                        {
+                            $b1 = false;
+                            break;
+                        }
+                        if (is_numeric($tmpVal) == false)
+                        {
+                            $b1 = false;
+                            break;
+                        }
+                    }
+                    $isDataValValid = $b1;
                 }
                 if (strlen($umdName) == 0)
                 {
@@ -807,8 +962,7 @@ function swtParseLogFile($_pathName, $_machineID)
                 }
                 if ((($umdID == null) ||
                     ($umdID == -1))   &&
-                    (strlen($dataValue) > 0)   &&
-                    (is_numeric($dataValue) == true))
+                    ($isDataValValid == true))
                 {
                     // get umd driver id
                     $umdID = swtGetUmdID($umdName);
@@ -823,13 +977,28 @@ function swtParseLogFile($_pathName, $_machineID)
                     
                     // like changeListDX11, changeListDX12, changeListVulkan
                     $t1 = $changeListJsonTag . $umdName;
+                    if (array_key_exists($t1, $defaultInfo) == false)
+                    {
+                        $tmpCount = intval(count($swtOldUmdNameMatchList) / 2);
+                        for ($j = 0; $j < $tmpCount; $j++)
+                        {
+                            if (strcmp($swtOldUmdNameMatchList[$j * 2], $umdName) == 0)
+                            {
+                                $t1 = $changeListJsonTag . $swtOldUmdNameMatchList[$j * 2 + 1];
+                                if (array_key_exists($t1, $defaultInfo) == true)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
                     $changeList = "0";
-                    //if ((array_key_exists($t1, $defaultInfo)  == true) &&
-                    //    ($defaultInfo[$t1]                    != null) &&
-                    //    (is_numeric($defaultInfo[$t1])        == true))
-                    //{
-                    //    $changeList = $defaultInfo[$t1];
-                    //}
+                    if ((array_key_exists($t1, $defaultInfo)  == true) &&
+                        ($defaultInfo[$t1]                    != null) &&
+                        (is_numeric($defaultInfo[$t1])        == true))
+                    {
+                        $changeList = $defaultInfo[$t1];
+                    }
                     
                     $resultID = swtGetResultID($batchID, $_machineID, $umdID, $changeList, "4");
                     if ($resultID == -1)
@@ -845,9 +1014,8 @@ function swtParseLogFile($_pathName, $_machineID)
                 }
                 
                 if ((strlen($subTestName) > 0) &&
-                    (strlen($dataValue) > 0)   &&
                     (strlen($umdName) > 0)     &&
-                    (is_numeric($dataValue) == true))
+                    ($isDataValValid == true))
                 {
                     // if data is valid
                     $tmpKey = array_search($umdName, $umdNameList);
@@ -859,28 +1027,29 @@ function swtParseLogFile($_pathName, $_machineID)
                         
                         $feedSubTestNameString .= "\"" . $subTestName . "\",2," . $subTestFilterName . "\n";
 
+                        //$feedSubTestDataString .= "" . $resultIDList[$tmpKey] . ",\"" . $subTestName . "\"," .
+                        //                          $dataValue . ", " . $testCaseID . "\n";
+                                                  
                         $feedSubTestDataString .= "" . $resultIDList[$tmpKey] . ",\"" . $subTestName . "\"," .
-                                                  $dataValue . ", " . $testCaseID . "\n";
-                        
+                                                  $dataValList[0] . ", " . 
+                                                  $dataValList[1] . ", " . 
+                                                  $dataValList[2] . ", " . 
+                                                  $dataValList[3] . ", " . 
+                                                  $testCaseID . ",\"" . $groupName . "\"\n";
                     }
                 }
             }
         }
-        $curTitleOffset1 = ftell($handle);
-        $curTitleOffset2 = ftell($handle);
-        $curFileOffset2 = ftell($handle);
+        
     }
     fclose($handle);
     
-    swtFeedData($db, $feedSubTestNameString, $feedSubTestDataString, $testName);
+    swtFeedData($db, $feedSubTestNameString, $feedSubTestDataString, $fullTestName, $_noiseDataID, $_noiseDataNum);
 
     $curTestID = 0;
     $nextSubTestID = 0;
     $nextLineID = 0;
     $curFileLineNum = 0;
-    
-    $curFileOffset1 = 0;
-    $curFileOffset2 = 0;
     
     // set result finished
     if (count($resultIDList) > 0)
@@ -904,19 +1073,18 @@ function swtParseLogFile($_pathName, $_machineID)
     return 1;
 }
 
-function swtGetMachineID($_pathName, $_machineName)
+function swtGetMachineID($_pathName)
 {
     global $returnMsg;
-    //$json = file_get_contents($_pathName);
-    //$obj = json_decode($json, true);
-    //$obj["clientCmd"] = clientSendMachineInfo;
+    $json = file_get_contents($_pathName);
+    $obj = json_decode($json, true);
+    $obj["clientCmd"] = clientSendMachineInfo;
 
     $clientCmdParser = new CClientHeartBeat;
-    //$tmpMsg = $clientCmdParser->parseClientCmd($obj);
-    $tmpMsg = $clientCmdParser->updateMachineInfo2($_pathName, $_machineName);
+    $tmpMsg = $clientCmdParser->parseClientCmd($obj);
 
     $returnMsg["errorMsg"] = isset($tmpMsg["errorMsg"]) ? $tmpMsg["errorMsg"] : "";
-    return $tmpMsg["machineID"];
+    return $tmpMsg;
 }
 
 // start parse, above are globals & functions
@@ -928,16 +1096,16 @@ if (strlen($logFolderName) == 0)
     return;
 }
 
-//$t1 = $logStoreDir . "/" . $logFolderName . "/" . $defaultInfoFileName;
-//if (file_exists($t1) == false)
-//{
-//    $returnMsg["errorCode"] = 0;
-//    $returnMsg["errorMsg"] = "default info json file missing";
-//    echo json_encode($returnMsg);
-//    return;
-//}
-//$json = file_get_contents($t1);
-//$defaultInfo = json_decode($json, true);
+$t1 = $logStoreDir . "/" . $logFolderName . "/" . $defaultInfoFileName;
+if (file_exists($t1) == false)
+{
+    $returnMsg["errorCode"] = 0;
+    $returnMsg["errorMsg"] = "default info json file missing";
+    echo json_encode($returnMsg);
+    return;
+}
+$json = file_get_contents($t1);
+$defaultInfo = json_decode($json, true);
 
 $cardFolderList = glob($logStoreDir . "/" . $logFolderName . "/*", GLOB_ONLYDIR);
 
@@ -951,19 +1119,130 @@ if (count($cardFolderList) == 0)
 
 $cardNameList = array();
 
+$breakToEnd = false;
 if ($resultFileNum == 0)
 {
     // get result file num, to show parsing percent
-    foreach ($cardFolderList as $tmpPath)
+    foreach ($cardFolderList as $tmpCardPath)
     {
-        //$t1 = $tmpPath . "/" . $machineInfoFileName;
-        //if (file_exists($t1) == false)
-        //{
-        //    $returnMsg["errorCode"] = 0;
-        //    $returnMsg["errorMsg"] = "machine info json file missing, under folder: " . $tmpPath;
-        //    break;
-        //}
-        
+        $t1 = $tmpCardPath . "/" . $machineInfoFileName;
+        if (file_exists($t1) == false)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "machine info json file missing, under folder: " . $tmpCardPath;
+            $breakToEnd = true;
+            break;
+        }
+        $noiseFolderList = glob($tmpCardPath . "/*", GLOB_ONLYDIR);
+        //$returnMsg["noiseFolderList"] = $noiseFolderList;
+        foreach ($noiseFolderList as $tmpPath)
+        {
+            $pieceFolderList = glob($tmpPath . "/*", GLOB_ONLYDIR);
+            
+            if (count($pieceFolderList) == 0)
+            {
+                // no piece folder
+                // maybe log files not in piece folder
+                $t1 = $tmpPath . "/" . $targetLogFileName;
+                $tmpResult = -1;
+                if (file_exists($t1))
+                {
+                    $tmpResult = 1;
+                }
+                if ($tmpResult == -1)
+                {
+                    $t1 = $tmpPath . "/" . $targetLogFileName2;
+                }
+                if (file_exists($t1))
+                {
+                    $tmpResult = 1;
+                }
+                if ($tmpResult == 1)
+                {
+                    $resultFileNum++;
+                }
+            }
+            else
+            {
+                // log file in piece folders
+                foreach ($pieceFolderList as $piecePath)
+                {
+                    $t1 = $piecePath . "/" . $targetLogFileName;
+                    $tmpResult = -1;
+                    if (file_exists($t1))
+                    {
+                        $tmpResult = 1;
+                    }
+                    if ($tmpResult == -1)
+                    {
+                        $t1 = $piecePath . "/" . $targetLogFileName2;
+                    }
+                    if (file_exists($t1))
+                    {
+                        $tmpResult = 1;
+                    }
+                    if ($tmpResult == 1)
+                    {
+                        $resultFileNum++;
+                    }
+                }
+            }
+        }
+        if ($breakToEnd)
+        {
+            break;
+        }
+    }
+}
+
+if ($resultFileNum == 0)
+{
+    $returnMsg["errorCode"] = 0;
+    $returnMsg["errorMsg"] = "no valid result files found under this path";
+    echo json_encode($returnMsg);
+    return;
+}
+
+$curResultFileID = 0;
+$parseFinished = 0;
+$parseFolderNum = 0;
+$curFileLineNum = 0;
+foreach ($cardFolderList as $tmpCardPath)
+{
+    $machineID = -1;
+    $compilerName = "";
+    
+    $t1 = $tmpCardPath . "/" . $machineInfoFileName;
+    if (file_exists($t1))
+    {
+        $tmpInfo = swtGetMachineID($t1);
+        $machineID = $tmpInfo["machineID"];
+        $compilerName = $tmpInfo["compilerName"];
+    }
+    else
+    {
+        $returnMsg["errorCode"] = 0;
+        $returnMsg["errorMsg"] = "machine info json file missing, under folder: " . $tmpCardPath;
+        break;
+    }
+    
+    if ($machineID == -1)
+    {
+        $returnMsg["errorCode"] = 0;
+        $returnMsg["errorMsg"] = "invalid mahine info";
+        break;
+    }
+    
+    $returnMsg["machineID"] = $machineID;
+    
+    $noiseDataID = -1;
+    
+    $noiseFolderList = glob($tmpCardPath . "/*", GLOB_ONLYDIR);
+    foreach ($noiseFolderList as $tmpPath)
+    {
+        $noiseDataID++;
+        $returnMsg["noiseDataID"] = $noiseDataID;
+        $returnMsg["noiseDataNum"] = count($noiseFolderList);
         $pieceFolderList = glob($tmpPath . "/*", GLOB_ONLYDIR);
         
         if (count($pieceFolderList) == 0)
@@ -986,7 +1265,20 @@ if ($resultFileNum == 0)
             }
             if ($tmpResult == 1)
             {
-                $resultFileNum++;
+                if (($curResultFileID++) >= $nextResultFileID)
+                {
+                    $curFileLineNum = swtGetFileLinesNum($t1);
+                    $tmpResult = swtParseLogFile($t1, $machineID, $compilerName, $noiseDataID, count($noiseFolderList));
+                    if ($tmpResult == -1)
+                    {
+                        break;
+                    }
+                    $nextResultFileID++;
+                }
+            }
+            if ($tmpResult == -1)
+            {
+                break;
             }
         }
         else
@@ -1010,173 +1302,21 @@ if ($resultFileNum == 0)
                 }
                 if ($tmpResult == 1)
                 {
-                    $resultFileNum++;
+                    if (($curResultFileID++) >= $nextResultFileID)
+                    {
+                        $curFileLineNum = swtGetFileLinesNum($t1);
+                        $tmpResult = swtParseLogFile($t1, $machineID, $compilerName, $noiseDataID, count($noiseFolderList));
+                        $returnMsg["tmpResult"] = $tmpResult;
+                        if ($tmpResult == -1)
+                        {
+                            break;
+                        }
+                        $nextResultFileID++;
+                    }
                 }
-            }
-        }
-    }
-
-}
-
-if ($resultFileNum == 0)
-{
-    $returnMsg["errorCode"] = 0;
-    $returnMsg["errorMsg"] = "no valid result files found under this path";
-    echo json_encode($returnMsg);
-    return;
-}
-
-$curResultFileID = 0;
-$parseFinished = 0;
-$parseFolderNum = 0;
-$curFileLineNum = 0;
-foreach ($cardFolderList as $tmpPath)
-{
-    $machineID = -1;
-    //$t1 = $tmpPath . "/" . $machineInfoFileName;
-    //if (file_exists($t1))
-    //{
-    //    $machineID = swtGetMachineID($t1);
-    //}
-    //else
-    //{
-    //    $returnMsg["errorCode"] = 0;
-    //    $returnMsg["errorMsg"] = "machine info json file missing, under folder: " . $tmpPath;
-    //    break;
-    //}
-    //
-    //if ($machineID == -1)
-    //{
-    //    $returnMsg["errorCode"] = 0;
-    //    $returnMsg["errorMsg"] = "invalid mahine info";
-    //    break;
-    //}
-    //
-    //$returnMsg["machineID"] = $machineID;
-    
-    $tmpFolderName = basename($tmpPath);
-    
-    $pieceFolderList = glob($tmpPath . "/*", GLOB_ONLYDIR);
-    
-    if (count($pieceFolderList) == 0)
-    {
-        // no piece folder
-        // maybe log files not in piece folder
-        $t1 = $tmpPath . "/" . $targetLogFileName;
-        $t2 = $tmpPath . "/" . $runLogFileName;
-        
-        $tmpResult = -1;
-        
-        if (file_exists($t2))
-        {
-            $machineID = swtGetMachineID($t2, $tmpFolderName);
-        }
-        else
-        {
-            $returnMsg["errorCode"] = 0;
-            $returnMsg["errorMsg"] = "runlog file missing, under folder: " . $tmpPath . ", " . __LINE__;
-            break;
-        }
-        
-        if ($machineID == -1)
-        {
-            $returnMsg["errorCode"] = 0;
-            $returnMsg["errorMsg"] = "invalid mahine info";
-            break;
-        }
-        
-        $returnMsg["machineID"] = $machineID;
-        
-        if (file_exists($t1))
-        {
-            $tmpResult = 1;
-        }
-        if ($tmpResult == -1)
-        {
-            $t1 = $tmpPath . "/" . $targetLogFileName2;
-        }
-        if (file_exists($t1))
-        {
-            $tmpResult = 1;
-        }
-        if ($tmpResult == 1)
-        {
-            if (($curResultFileID++) >= $nextResultFileID)
-            {
-                $curFileLineNum = swtGetFileLinesNum($t1);
-                $tmpResult = swtParseLogFile($t1, $machineID);
                 if ($tmpResult == -1)
                 {
                     break;
-                }
-                $nextResultFileID++;
-            }
-        }
-        if ($tmpResult == -1)
-        {
-            break;
-        }
-    }
-    else
-    {
-        $getMachineID = true;
-        // log file in piece folders
-        foreach ($pieceFolderList as $piecePath)
-        {
-            $t1 = $piecePath . "/" . $targetLogFileName;
-            $t2 = $piecePath . "/" . $runLogFileName;
-            
-            $tmpResult = -1;
-            
-            if ($getMachineID)
-            {
-                if (file_exists($t2))
-                {
-                    $machineID = swtGetMachineID($t2, $tmpFolderName);
-                }
-                else
-                {
-                    $returnMsg["errorCode"] = 0;
-                    $returnMsg["errorMsg"] = "runlog file missing, under folder: " . $tmpPath . ", " . __LINE__;
-                    break;
-                }
-                
-                if ($machineID == -1)
-                {
-                    $returnMsg["errorCode"] = 0;
-                    $returnMsg["errorMsg"] = "invalid mahine info";
-                    break;
-                }
-                
-                $returnMsg["machineID"] = $machineID;
-                
-                $getMachineID = false;
-            }
-            
-            if (file_exists($t1))
-            {
-                $tmpResult = 1;
-            }
-            if ($tmpResult == -1)
-            {
-                $t1 = $piecePath . "/" . $targetLogFileName2;
-            }
-            if (file_exists($t1))
-            {
-                $tmpResult = 1;
-            }
-            if ($tmpResult == 1)
-            {
-                if (($curResultFileID++) >= $nextResultFileID)
-                {
-                    $curFileLineNum = swtGetFileLinesNum($t1);
-                    $tmpResult = swtParseLogFile($t1, $machineID);
-                    $returnMsg["tmpResult"] = $tmpResult;
-                    if ($tmpResult == -1)
-                    {
-                        break;
-                    }
-                    $nextResultFileID++;
                 }
             }
             if ($tmpResult == -1)
@@ -1184,15 +1324,19 @@ foreach ($cardFolderList as $tmpPath)
                 break;
             }
         }
-        if ($tmpResult == -1)
-        {
-            break;
-        }
+        //$noiseDataID++;
     }
     
-    $returnMsg["check"] = $parseFolderNum;
+    if ($tmpResult == -1)
+    {
+        break;
+    }
+    
+    //$returnMsg["noiseDataID"] = $noiseDataID;
+    //$returnMsg["noiseDataNum"] = count($noiseFolderList);
+    $returnMsg["parseFolderNum"] = $parseFolderNum;
+    $returnMsg["cardFolderList"] = $cardFolderList;
     $parseFolderNum++;
-    //$returnMsg["tmpResult"] = $tmpResult;
 }
 
 if ($parseFolderNum >= count($cardFolderList))
@@ -1208,10 +1352,9 @@ $returnMsg["nextResultFileID"] = $nextResultFileID;
 $returnMsg["resultFileNum"] = $resultFileNum;
 $returnMsg["parseFinished"] = $parseFinished;
 $returnMsg["batchID"] = $batchID;
-$returnMsg["curFileOffset1"] = $curFileOffset1;
-$returnMsg["curFileOffset2"] = $curFileOffset2;
 
 // set batch finished
+
 if (($batchID       != -1) &&
     ($parseFinished == 1))
 {
@@ -1236,6 +1379,7 @@ if (($batchID       != -1) &&
         return;
     }
 }
+//*/
 
 echo json_encode($returnMsg);
 

@@ -28,21 +28,16 @@
   <ConditionalFormatting xmlns="urn:schemas-microsoft-com:office:excel">
    <Range>%s</Range>
    <Condition>
-    <Qualifier>Between</Qualifier>
-    <Value1>0.00001</Value1>
-    <Value2>0.05</Value2>
-    <Format Style='color:#006100;background:#C6EFCE'/>
-   </Condition>
-   <Condition>
-    <Qualifier>Greater</Qualifier>
-    <Value1>0.05</Value1>
-    <Format Style='color:#9C0006;background:#FFC7CE'/>
+    <Qualifier>LessOrEqual</Qualifier>
+    <Value1>-0.03</Value1>
+    <Format Style='color:windowtext;font-weight:700;background:lime;mso-pattern:
+     black none'/>
    </Condition>
    <Condition>
     <Qualifier>Between</Qualifier>
-    <Value1>0.00001</Value1>
-    <Value2>0.03</Value2>
-    <Format Style='color:#006100;background:#C6EFCE'/>
+    <Value1>0.03</Value1>
+    <Value2>1000</Value2>
+    <Format Style='background:red;mso-pattern:black none'/>
    </Condition>
   </ConditionalFormatting>
  </Worksheet>

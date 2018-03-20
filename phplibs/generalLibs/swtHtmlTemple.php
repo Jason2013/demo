@@ -84,9 +84,11 @@ class CSwtHtmlTemple
         {
             //echo "        <a href=\"" . $this->pagePrePath . "subPages/newTask.php\">new task</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/batchList.php\">Batch List</a>\n";
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFiles2.php\">Import Results</a>\n";
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFilesSkynet.php\">Impt Skynet Res</a>\n";
-            echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportBatchID.php\">Routine Report</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFiles2.php\">MicroBench Import</a>\n";
+            //echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFilesSkynet.php\">Impt Skynet Res</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportBatchID.php\">MicroBench Report</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFiles3.php\">ShaderBench Import</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportShaderBench.php\">ShaderBench Report</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportAll.php\">Generate All Reports</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/userLogOut.php\">Logout</a>\n";
         }

@@ -770,7 +770,7 @@ class CGenReportFlatData
                                 $subTestNameFilterNum = $dataKeyDataColumnID - 1;
                                 break;
                             }
-                            else if ($dataSet[$j] == "FPS") // asynccompute
+                            else if ($dataSet[$j] == "FPS") // randomsphere
                             {
                                 // data column id
                                 $dataKeyDataColumnID = $j;
@@ -938,7 +938,7 @@ class CGenReportFlatData
                                 $dataKeyDataColumnID = $j;
                                 break;
                             }
-                            else if ($dataSet[$j] == "FPS") // asynccompute
+                            else if ($dataSet[$j] == "FPS") // randomsphere
                             {
                                 // data column id
                                 $dataKeyDataColumnID = $j;

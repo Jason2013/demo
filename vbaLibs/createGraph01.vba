@@ -1,8 +1,15 @@
+Function WorksheetExists(WSName As String) As Boolean
+    On Error Resume Next
+    WorksheetExists = Len(Worksheets(WSName).Name) > 0
+End Function
+
 Public Sub createGraph01()
 
     Dim destSheet As Worksheet
     Dim myRange As Range
     Dim myChart As ChartObject
+    Dim myMainTitle As String
+    Dim myNumFormat As String
     
     For Each sh In Worksheets
         If sh.Name <> "Summary" And sh.Name <> "runlog" Then
@@ -12,7 +19,20 @@ Public Sub createGraph01()
         End If
     Next
     
-    Set destSheet = Worksheets("Cross-API_Comparison")
+    'Set destSheet = Worksheets("Cross-API_Comparison")
+    
+    If WorksheetExists("Cross-API_Comparison") = True Then
+        Set destSheet = Worksheets("Cross-API_Comparison")
+        myMainTitle = "Microbench Performance relative to DXX - "
+        myNumFormat = "0%%"
+    ElseIf WorksheetExists("Summary_Overall") = True Then
+        Set destSheet = Worksheets("Summary_Overall")
+        myMainTitle = "ShaderBench Performance relative to SCPC - "
+        myNumFormat = "0X"
+    End If
+    
+    Worksheets("Variance").Move before := Worksheets(1)
+    destSheet.Move before := Worksheets(1)
     destSheet.Activate
 
     Set myUnion = %s
@@ -22,7 +42,7 @@ Public Sub createGraph01()
     myChart.Chart.SetSourceData Source:=myUnion, PlotBy:=xlColumns
     myChart.Chart.ApplyDataLabels ShowValue:=False
     myChart.Chart.HasTitle = True
-    myChart.Chart.ChartTitle.Text = "Microbench Performance relative to DXX - %s"
+    myChart.Chart.ChartTitle.Text = myMainTitle & "%s"
     myChart.Name = "chart01"
 
     myChart.Activate
@@ -55,7 +75,7 @@ Public Sub createGraph01()
     ActiveChart.Axes(xlValue).TickLabels.Font.Color = RGB(200, 200, 200)
 
     ActiveChart.Axes(xlValue).Select
-    Selection.TickLabels.NumberFormat = "0%%"
+    Selection.TickLabels.NumberFormat = myNumFormat
 
     
     ActiveChart.Legend.Select
@@ -81,7 +101,7 @@ Public Sub createGraph01()
     Selection.FormatConditions(1).ColorScaleCriteria(1).Type = _
         xlConditionValueLowestValue
     With Selection.FormatConditions(1).ColorScaleCriteria(1).FormatColor
-        .Color = 7039480
+        .Color = 8109667
         .TintAndShade = 0
     End With
     Selection.FormatConditions(1).ColorScaleCriteria(2).Type = _
@@ -94,7 +114,7 @@ Public Sub createGraph01()
     Selection.FormatConditions(1).ColorScaleCriteria(3).Type = _
         xlConditionValueHighestValue
     With Selection.FormatConditions(1).ColorScaleCriteria(3).FormatColor
-        .Color = 8109667
+        .Color = 7039480
         .TintAndShade = 0
     End With
     

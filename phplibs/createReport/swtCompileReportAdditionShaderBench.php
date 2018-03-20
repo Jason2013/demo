@@ -6,7 +6,7 @@ include_once "../configuration/swtMISConst.php";
 include_once "../server/swtHeartBeatFuncs.php";
 include_once "../generalLibs/genfuncs.php";
 include_once "../generalLibs/code01.php";
-include_once "swtClassGenReportNoise.php";
+include_once "swtClassGenReportShaderBench.php";
 include_once "../configuration/swtConfig.php";
 
 
@@ -51,8 +51,8 @@ $returnMsg = array();
 $returnMsg["errorCode"] = 1;
 $returnMsg["errorMsg"] = "compile report success";
 
-$umdNameList = $swtUmdNameList;
-$umdStandardOrder = $swtUmdStandardOrder;
+$umdNameList = $swtUmdNameList_sb;
+$umdStandardOrder = $swtUmdStandardOrder_sb;
 
 // check input card, system selection
 $returnSet = $xmlWriter->checkInputMachineID($machineIDPair, $checkedMachineIDList);
@@ -79,6 +79,8 @@ if ($db->getError() != null)
     echo json_encode($returnMsg);
     return;
 }
+
+$returnMsg["postBatchID"] = $batchID;
 
 $returnSet = $xmlWriter->getBatchID($db, $batchID);
 $returnMsg["returnLine"] = "line: " . __LINE__;
@@ -145,7 +147,7 @@ $selectedCardIDList = $returnSet["selectedCardIDList"];
 $selectedSysIDList = $returnSet["selectedSysIDList"];
 
 $testName = $testNameList[$curTestPos];
-$tableName01 = $db_mis_table_name_string001 . $testName;
+$tableName01 = $db_mis_table_name_string002 . $testName;
 
 $returnMsg["returnLine"] = "line: " . __LINE__;
 $returnSet = $xmlWriter->getBatchInfo($db, $batchIDList);
@@ -167,6 +169,24 @@ $gpuMemNameList = $returnSet["gpuMemNameList"];
 $resultTimeList = $returnSet["resultTimeList"];
 $machineNameList = $returnSet["machineNameList"];
 $sysMemNameList = $returnSet["sysMemNameList"];
+
+$cardNameRealList = $returnSet["cardNameRealList"];
+$sysNameRealList = $returnSet["sysNameRealList"];
+
+//$t1 = "H:/wamp64/www/benchMax/test01.json";
+//if (file_exists($t1) == false)
+//{
+//    $tmpArr = array();
+//    $tmpArr["resultIDList"] = $resultIDList;
+//    $tmpArr["machineIDList"] = $machineIDList;
+//    $tmpArr["cardNameList"] = $cardNameList;
+//    $tmpArr["cpuNameList"] = $cpuNameList;
+//    $tmpArr["driverNameList"] = $driverNameList;
+//    $tmpArr["sysNameList"] = $sysNameList;
+//    
+//    $t2 = json_encode($tmpArr);
+//    file_put_contents($t1, $t2);
+//}
 
 $returnMsg["changeListNumList"] = $changeListNumList;
 
@@ -206,6 +226,9 @@ for ($i = 0; $i < count($machineIDList); $i++)
 {
     $returnMsg["machineIDList_" . $i] = $machineIDList[$i];
 }
+
+$returnMsg["resultPos"] = $resultPos;
+$returnMsg["resultIDList"] = $resultIDList;
 
 $returnMsg["returnLine"] = "line: " . __LINE__;
 if ($resultPos >= count($resultIDList[0]))
@@ -494,6 +517,7 @@ if (($subTestNum == 0) ||
         $returnSet = $xmlWriter->getReportFileNames($reportFolder, $tmpCardName, $tmpSysName, $batchID);
         // main xml file
         $xmlFileName = $returnSet["xmlFileName"];
+        $xmlFileName2 = $returnSet["xmlFileName2"];
         // comparison sheet
         $tmpFileName = $returnSet["tmpFileName"];
         // flatData
@@ -501,17 +525,22 @@ if (($subTestNum == 0) ||
         // summary
         $jsonFileName = $returnSet["jsonFileName"];
         $jsonFileName2 = $returnSet["jsonFileName2"];
+        $jsonFileName3 = $returnSet["jsonFileName3"];
+        $jsonFileName4 = $returnSet["jsonFileName4"];
 
         $returnMsg["checkShiftCard"] = "0";
         $returnMsg["resultPos"] = $resultPos;
         if ($resultIDList[0][$resultPos] != PHP_INT_MAX)
         {
             $fileHandle = fopen($xmlFileName, "r+");
+            $fileHandle2 = fopen($xmlFileName2, "r+");
             $tempFileHandle = fopen($tmpFileName, "r+");
         
             $returnMsg["checkNeedCreateReportFile"] = "1";
             $returnMsg["returnLine"] = "line: " . __LINE__;
-            $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $tmpFileName, $jsonFileName, $jsonFileName2,
+            $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $xmlFileName2,
+                                                               $tmpFileName, $jsonFileName, $jsonFileName2,
+                                                               $jsonFileName3, $jsonFileName4,
                                                                $umdNum, $startResultID, $cmpMachineID, $resultPos,
                                                                $tempFileLineNumPos,
                                                                $curCardName, $tmpSysName,
@@ -531,10 +560,11 @@ if (($subTestNum == 0) ||
 
 
             fseek($fileHandle, 0, SEEK_END);
+            fseek($fileHandle2, 0, SEEK_END);
             fseek($tempFileHandle, 0, SEEK_END);
             
             $returnMsg["returnLine"] = "line: " . __LINE__;
-            $returnSet = $xmlWriter->checkStartSheet($fileHandle, $tempFileHandle,
+            $returnSet = $xmlWriter->checkStartSheet($fileHandle, $fileHandle2, $tempFileHandle,
                                                      $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
                                                      $lineNumPos, $resultPos, $umdNum,
                                                      $tmpUmdName, $tmpCardName, $tmpSysName);
@@ -544,11 +574,10 @@ if (($subTestNum == 0) ||
             }
             $lineNumPos = $returnSet["lineNumPos"];
             
-            
-            //$fileHandle = fopen($xmlFileName, "r+");
             fseek($fileHandle, 0, SEEK_END);
+            fseek($fileHandle2, 0, SEEK_END);
             $returnMsg["returnLine"] = "line: " . __LINE__;
-            $returnSet = $xmlWriter->checkShiftAPI($fileHandle, $resultPos, $tmpUmdName,
+            $returnSet = $xmlWriter->checkShiftAPI($fileHandle, $fileHandle2, $resultPos, $tmpUmdName,
                                                    $firstTestPos, $firstSubTestPos, $sheetLinePos);
             if ($returnSet === null)
             {
@@ -560,14 +589,17 @@ if (($subTestNum == 0) ||
         
             fclose($tempFileHandle);
             fclose($fileHandle);
+            fclose($fileHandle2);
         }
         
         
         
         $returnMsg["checkShiftCard"] = "1";
         $returnMsg["returnLine"] = "line: " . __LINE__;
-        $returnSet = $xmlWriter->checkShiftCard($xmlFileName, $tmpFileName, $tmpFileName1, 
+        $returnSet = $xmlWriter->checkShiftCard($xmlFileName, $xmlFileName2,
+                                                $tmpFileName, $tmpFileName1, 
                                                 $jsonFileName, $jsonFileName2,
+                                                $jsonFileName3, $jsonFileName4,
                                                 $allSheetsEndTag,
                                                 $resultPos, $sheetLinePos,
                                                 $tmpUmdName, $tmpCardName, $tmpSysName, $cmpMachineID,
@@ -599,17 +631,22 @@ else
     // if cur test in process
     $returnSet = $xmlWriter->getReportFileNames($reportFolder, $tmpCardName, $tmpSysName, $batchID);
     $xmlFileName = $returnSet["xmlFileName"];
+    $xmlFileName2 = $returnSet["xmlFileName2"];
     $tmpFileName = $returnSet["tmpFileName"];
     // flatData
     $tmpFileName1 = $returnSet["tmpFileName1"];
     // summary
     $jsonFileName = $returnSet["jsonFileName"];
     $jsonFileName2 = $returnSet["jsonFileName2"];
+    $jsonFileName3 = $returnSet["jsonFileName3"];
+    $jsonFileName4 = $returnSet["jsonFileName4"];
     
     //$returnMsg["returnLine2"] = "line: " . __LINE__;
     
     $returnMsg["returnLine"] = "line: " . __LINE__;
-    $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $tmpFileName, $jsonFileName, $jsonFileName2,
+    $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $xmlFileName2,
+                                                       $tmpFileName, $jsonFileName, $jsonFileName2,
+                                                       $jsonFileName3, $jsonFileName4,
                                                        $umdNum, $startResultID, $cmpMachineID, $resultPos,
                                                        $tempFileLineNumPos,
                                                        $curCardName, $tmpSysName,
@@ -622,9 +659,11 @@ else
     
     
     $fileHandle = fopen($xmlFileName, "r+");
+    $fileHandle2 = fopen($xmlFileName2, "r+");
     $tempFileHandle = fopen($tmpFileName, "r+");
 
     fseek($fileHandle, 0, SEEK_END);
+    fseek($fileHandle2, 0, SEEK_END);
     fseek($tempFileHandle, 0, SEEK_END);
     
     if ($firstTestPos == -1)
@@ -634,7 +673,7 @@ else
     }
     
     $returnMsg["returnLine"] = "line: " . __LINE__;
-    $returnSet = $xmlWriter->checkStartSheet($fileHandle, $tempFileHandle,
+    $returnSet = $xmlWriter->checkStartSheet($fileHandle, $fileHandle2, $tempFileHandle,
                                              $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
                                              $lineNumPos, $resultPos, $umdNum,
                                              $tmpUmdName, $tmpCardName, $tmpSysName);
@@ -658,7 +697,7 @@ else
     $averageColumnHasVal = $returnSet["averageColumnHasVal"];
     $returnMsg["averageColumnHasVal"] = $averageColumnHasVal;
     
-    $returnSet = $xmlWriter->checkStartTest($db, $fileHandle, $tempFileHandle,
+    $returnSet = $xmlWriter->checkStartTest($db, $fileHandle, $fileHandle2, $tempFileHandle,
                                             $nextSubTestPos, $firstSubTestPos, $curTestPos, 
                                             $isCompStandard, $cmpMachineID,
                                             $lineNum, $sheetLinePos, $tempLineNum);
@@ -670,7 +709,7 @@ else
     $historyResultIDList = $returnSet["historyResultIDList"];
     
     $returnMsg["returnLine"] = "line: " . __LINE__;
-    $returnSet = $xmlWriter->writeReportData($db, $fileHandle, $tempFileHandle,
+    $returnSet = $xmlWriter->writeReportData($db, $fileHandle, $fileHandle2, $tempFileHandle,
                                              $resultPos, $nextSubTestPos,
                                              $isCompStandard,
                                              $lineNum);
@@ -686,18 +725,21 @@ else
     $standardTestCaseIDList = $returnSet["standardTestCaseIDList"];
 
     
-    fseek($fileHandle, $lineNumPos, SEEK_SET);
-    // line num is 10 digis number, like: 0000000011
-    $t1 = fread($fileHandle, 10);
-    $n1 = intval($t1);
-    $n1 += $lineNum;
-    
-    fseek($fileHandle, $lineNumPos, SEEK_SET);
-    $t1 = sprintf("%010d", $n1);
-    //$t1 = "1234567890";
-    fwrite($fileHandle, $t1);
+    //fseek($fileHandle, $lineNumPos, SEEK_SET);
+    //// line num is 10 digis number, like: 0000000011
+    //$t1 = fread($fileHandle, 10);
+    //$n1 = intval($t1);
+    //$n1 += $lineNum;
+    //
+    //fseek($fileHandle, $lineNumPos, SEEK_SET);
+    //fseek($fileHandle2, $lineNumPos, SEEK_SET);
+    //$t1 = sprintf("%010d", $n1);
+    ////$t1 = "1234567890";
+    //fwrite($fileHandle, $t1);
+    //fwrite($fileHandle2, $t1);
     
     fclose($fileHandle);
+    fclose($fileHandle2);
     
     $returnMsg["returnLine"] = "line: " . __LINE__;
     $returnSet = $xmlWriter->writeReportCompareData($db, $tempFileHandle, $reportFolder,

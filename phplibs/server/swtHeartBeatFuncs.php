@@ -25,6 +25,7 @@ class CClientHeartBeat
         $machineID = isset($_info["machineID"]) ? intval($_info["machineID"]) : -1;
         $returnMsg = array();
         $returnMsg["serverCmd"] = serverDoNothing;
+        $returnMsg["compilerName"] = isset($_info["compilerName"]) ? $_info["compilerName"] : "";
         switch ($clientCmd)
         {
             case clientSendHeartBeat:

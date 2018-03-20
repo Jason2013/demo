@@ -493,6 +493,7 @@ class CGenReport
         global $connectDataSet;
         global $swtUmdNameList;
         global $swtUmdNameList_old;
+        global $swtUmdNameList_final;
 
         $tmpKeys = array_keys($connectDataSet["machineIDList"], $_curMachineID);
         if ($tmpKeys === false)
@@ -543,7 +544,7 @@ class CGenReport
                 $tmpPos = array_search($tmpUmdName, $swtUmdNameList_old);
                 if ($tmpPos !== false)
                 {
-                    $tmpUmdName = $swtUmdNameList[$tmpPos];
+                    $tmpUmdName = $swtUmdNameList_final[$tmpPos];
                 }
                 if (array_search($tmpUmdName, $reportUmdNameList) === false)
                 {
@@ -3273,6 +3274,7 @@ class CGenReport
         global $subTestNum;
         global $testNameList;
         global $swtUmdNameList_old;
+        global $swtUmdNameList_final;
         global $swtUmdNameList;
         
         if ($_tmpMachineID == -1)
@@ -3395,7 +3397,7 @@ class CGenReport
                         $returnMsg["subTestNameFilterNum"] = $subTestNameFilterNum;
                         break;
                     }
-                    else if ($data[$i] == "FPS") // asynccompute
+                    else if ($data[$i] == "FPS") // randomsphere
                     {
                         // data column id
                         $dataKeyDataColumnID = $i;
@@ -3435,7 +3437,7 @@ class CGenReport
                 $tmpPos1 = array_search($tmpUmdName, $swtUmdNameList_old);
                 if ($tmpPos1 !== false)
                 {
-                    $tmpUmdName = $swtUmdNameList[$tmpPos1];
+                    $tmpUmdName = $swtUmdNameList_final[$tmpPos1];
                 }
                 
 

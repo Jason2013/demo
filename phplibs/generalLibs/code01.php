@@ -54,7 +54,8 @@ $swtTestBatchStateString = array("submitted",
                                  
 $swtTestBatchGroupString = array("out user",
                                  "routine report",
-                                 "temp report");
+                                 "temp report",
+                                 "shaderBench");
 
 // show tables like 'mis_table_data_test_%'
 // show columns from tablename
@@ -138,6 +139,7 @@ array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_test_info "
                                       // 2 for sub-test name,  
                                       // like D16_UNORM_1024x1024_1xAA
                                       // 3 for unit subject, like GInstr/s
+                                      // 4 for group name of shaderBench
                                 
 // mis_table_path_info 2
 array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_path_info " .
@@ -179,8 +181,10 @@ array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_batch_list 
                                "( batch_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, " .
                                "  insert_time DATETIME,     " . // submit time
                                "  batch_state INT UNSIGNED, " . // 0 for submitted, 1 for finished, 2 for skipped, 3 for time out
-                               "  batch_group INT UNSIGNED, " . // 0 for outside user, 1 for routine run every week
-                                                                // 2 for temp report
+                               "  batch_group INT UNSIGNED, " . // 0 for outside user, 
+                                                                // 1 for routine run every week
+                                                                // 2 for temp report, 
+                                                                // 3 for shaderBench report
                                "  path_id INT UNSIGNED )");     // in use, log file path
 //*/
 // mis_table_task_list 6 
@@ -288,7 +292,8 @@ $db_mis_table_create_string001 = "CREATE TABLE IF NOT EXISTS mis_table_data_test
                                  "( data_id INT UNSIGNED AUTO_INCREMENT, " .
                                  "  result_id INT UNSIGNED, " .  // driver index 
                                  "  sub_id INT UNSIGNED,    " .  // sub test index
-                                 "  data_value DOUBLE," .
+                                 "  data_value DOUBLE," .        // average
+                                 "  data_value2 DOUBLE," .       // variance
                                  "  test_case_id INT," .
                                  "  PRIMARY KEY (data_id), " .
                                  "  UNIQUE (result_id, sub_id))";// value
@@ -299,14 +304,49 @@ $db_mis_table_create_string002 = "CREATE TABLE IF NOT EXISTS mis_table_data_test
                                  "  sub_id INT UNSIGNED,    " .  // sub test index
                                  "  data_value DOUBLE," .
                                  "  test_case_id INT," .
-                                 "  noise_id INT," .
+                                 "  noise_id INT," .             // noise id
                                  "  PRIMARY KEY (data_id), " .
                                  "  UNIQUE (result_id, sub_id, noise_id))";// value
 
 $db_mis_table_name_string001 = "mis_table_data_test_";
+
+$db_mis_table_create_string004 = "CREATE TABLE IF NOT EXISTS mis_table_data_shadertest_%s " .
+                                 "( data_id INT UNSIGNED AUTO_INCREMENT, " .
+                                 "  result_id INT UNSIGNED, " .  // driver index 
+                                 "  sub_id INT UNSIGNED,    " .  // sub test index
+                                 "  data_value1 DOUBLE," .       // Compile Time(ms)
+                                 "  variance_value1 DOUBLE," .
+                                 "  data_value2 DOUBLE," .       // Execution Time(ms)
+                                 "  variance_value2 DOUBLE," .
+                                 "  data_value3 DOUBLE," .       // Shaders/s
+                                 "  variance_value3 DOUBLE," .
+                                 "  data_value4 DOUBLE," .       // FPS
+                                 "  variance_value4 DOUBLE," .
+                                 "  test_case_id INT," .
+                                 "  group_id INT," .
+                                 "  PRIMARY KEY (data_id), " .
+                                 "  UNIQUE (result_id, sub_id))";// value
+
+$db_mis_table_create_string003 = "CREATE TABLE IF NOT EXISTS mis_table_data_shadertest_%s_noise " .
+                                 "( data_id INT UNSIGNED AUTO_INCREMENT, " .
+                                 "  result_id INT UNSIGNED, " .  // driver index 
+                                 "  sub_id INT UNSIGNED,    " .  // sub test index
+                                 "  data_value1 DOUBLE," .       // Compile Time(ms)
+                                 "  data_value2 DOUBLE," .       // Execution Time(ms)
+                                 "  data_value3 DOUBLE," .       // Shaders/s
+                                 "  data_value4 DOUBLE," .       // FPS
+                                 "  test_case_id INT," .
+                                 "  noise_id INT," .
+                                 "  group_id INT," .
+                                 "  PRIMARY KEY (data_id), " .
+                                 "  UNIQUE (result_id, sub_id, noise_id))";// value
+
+$db_mis_table_name_string002 = "mis_table_data_shadertest_";
                  
 // show columns from mis_table_data_test_alu_noise;
 // ALTER TABLE mis_table_data_test_vertexfetch_noise MODIFY COLUMN data_value DOUBLE;
+// ALTER TABLE mis_table_data_test_vertexfetch ADD COLUMN data_value2 DOUBLE AFTER data_value;
+
 /*
 mis_table_data_test_alu                      
 mis_table_data_test_alu_noise                

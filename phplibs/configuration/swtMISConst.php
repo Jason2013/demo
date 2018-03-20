@@ -45,6 +45,13 @@ $swtUmdNameList_old =   array("DX11",  "DX12",  "Vulkan", "OpenGL", "OGL",    "D
 $swtUmdNameList_final = array("D3D11", "D3D12", "Vulkan", "OpenGL", "OpenGL", "D3D11",        "Metal");
 $swtUmdStandardOrder = array("Vulkan", "D3D12", "D3D11", "OpenGL", "Metal");
 
+$swtUmdNameList_sb = array("SCPC", "LLPC", "RADV", "NVIDIA", "OPT1");
+$swtUmdStandardOrder_sb = array("SCPC", "LLPC", "RADV", "NVIDIA", "OPT1");
+
+$swtPreSheetName_sb = array("compileTime", "executionTime");
+$swtPreSheetNameTitle_sb = array("Compile Time", "Execution Time");
+$swtPreSheetNameShort_sb = array("compTime", "execTime");
+
 //$swtUmdNameList = array("VG10_40CU_1600e_945m",
 //                        "VG10_64CU_1600e_945m",
 //                        "GTX1080_Fixed",
