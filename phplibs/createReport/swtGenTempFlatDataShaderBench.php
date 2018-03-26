@@ -120,6 +120,7 @@ if ($returnSet == false)
 
 $allFileList = $returnSet["allFileList"];
 $cardNameList = $returnSet["cardNameList"];
+$compilerNameList = $returnSet["compilerNameList"];
 $machineIDList = $returnSet["machineIDList"];
 $fileID =    intval($returnSet["fileID"]);
 $columnNum = intval($returnSet["columnNum"]);
@@ -188,6 +189,7 @@ if (count($allFileList) == 0)
     $allFileList = array();
     $allFolderList = array();
     $cardNameList = array();
+    $compilerNameList = array();
     $machineIDList = array();
     
     // will write to
@@ -281,6 +283,25 @@ if ($fileID <= count($uniqueCardNameList))
     $tmpCardName = $uniqueCardNameList[$fileID];
     
     $curCardNameList = array_keys($cardNameList, $tmpCardName);
+    // fix for shaderbench
+    $tmpArr = explode("_", $tmpCardName);
+    $tmpSysName = $tmpCardName;
+    if (count($tmpArr) > 1)
+    {
+        $tmpSysName = $tmpArr[1];
+    }
+    for ($i = 0; $i < count($cardNameList); $i++)
+    {
+        if ($cardNameList[$i] == $tmpCardName)
+        {
+            continue;
+        }
+        if (strpos($cardNameList[$i], $tmpSysName) !== false)
+        {
+            $curCardNameList []= $i;
+        }
+    }
+    
     $curMachineID = -1;
     $curPairMachineID = -1;
     $pairCardNameList = array();
@@ -325,6 +346,7 @@ if ($fileID <= count($uniqueCardNameList))
     $pairTestStartPosList = array();
     
     $returnMsg["cardNameList"] = $cardNameList;
+    $returnMsg["compilerNameList"] = $compilerNameList;
     $returnMsg["machineIDListNew"] = $machineIDList;
     $returnMsg["machineIDCardNameSysNameDict"] = $machineIDCardNameSysNameDict;
     $returnMsg["curPairMachineID"] = $curPairMachineID;
@@ -432,6 +454,7 @@ else
 $valueSet = array();
 $valueSet["allFileList"] = $valueSet;
 $valueSet["cardNameList"] = $cardNameList;
+$valueSet["compilerNameList"] = $compilerNameList;
 $valueSet["machineIDList"] = $machineIDList;
 $valueSet["cardSysNameMachineIDDict"] = $cardSysNameMachineIDDict;
 $valueSet["fileID"] =    $fileID;

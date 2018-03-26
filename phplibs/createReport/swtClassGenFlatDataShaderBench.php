@@ -233,6 +233,7 @@ class CGenReportFlatData
         {
             $returnSet["allFileList"] = array();
             $returnSet["cardNameList"] = array();
+            $returnSet["compilerNameList"] = array();
             $returnSet["machineIDList"] = array();
             $returnSet["cardSysNameMachineIDDict"] = array();
             $returnSet["fileID"] =    0;
@@ -339,12 +340,14 @@ class CGenReportFlatData
         return $returnSet;
     }
     
-    public function checkFiles($_parentFolder, $_cardName, $_curMachineID, $_level, $_folderName)
+    public function checkFiles($_parentFolder, $_cardName, $_curMachineID, $_level, $_folderName,
+                               $_compilerName)
     {
         global $returnMsg;
         global $allFileList;
         global $allFolderList;
         global $cardNameList;
+        global $compilerNameList;
         global $machineIDList;
         global $resultFileName1;
         global $resultFileName2;
@@ -379,6 +382,7 @@ class CGenReportFlatData
                 {
                     array_push($allFileList, $tmpName);
                     array_push($cardNameList, $_cardName);
+                    $compilerNameList []= $_compilerName;
                     array_push($machineIDList, $_curMachineID);
                     
                     $tmpSrcFolder = substr($tmpName, 0, strlen($tmpName) - strlen($t1));
@@ -413,6 +417,7 @@ class CGenReportFlatData
             $t2 = $tmpName . "\\" . $resultFileName3;
             $cardName = "";
             $curMachineID = -1;
+            $compilerName = "";
             
             $returnMsg["tmp---004:"] .= $crossType . ",";
             $returnMsg["tmp---005:"] .= $t2 . ",";
@@ -430,6 +435,7 @@ class CGenReportFlatData
                 $t2 = file_get_contents($t1);
                 $obj = json_decode($t2);
                 $cardName = $obj->videoCardName . "_" . $obj->systemName;
+                $compilerName = $obj->compilerName;
                 
                 if (count($machineIDPair) >= 2)
                 {
@@ -458,6 +464,7 @@ class CGenReportFlatData
                 $obj = $clientCmdParser->getMachineInfoWithoutJson($machineFolderPath);
                 
                 $cardName = $obj["videoCardName"] . "_" . $obj["systemName"];
+                $compilerName = $obj["compilerName"];
                 
                 $returnMsg["tmp---003:"] .= $cardName . "," . $machineFolderPath . ",";
                 
@@ -483,7 +490,7 @@ class CGenReportFlatData
                 }
             }
             $tmpFolderName = $_level == 0 ? $tmpName : $_folderName;
-            $this->checkFiles($tmpName, $cardName, $curMachineID, $_level + 1, $tmpFolderName);
+            $this->checkFiles($tmpName, $cardName, $curMachineID, $_level + 1, $tmpFolderName, $compilerName);
         }
         //print_r($folderList);
         $cardSysNameMachineIDDictNew = $cardSysNameMachineIDDict;
@@ -497,7 +504,7 @@ class CGenReportFlatData
         global $allFolderList;
         global $cardNameList;
 
-        $tmpResult = $this->checkFiles($_batchPathName, "", -1, 0, "");
+        $tmpResult = $this->checkFiles($_batchPathName, "", -1, 0, "", "");
 
         return $tmpResult;
     }
@@ -659,7 +666,9 @@ class CGenReportFlatData
                                        $_tmpCardName,
                                        $_tmpTestName,
                                        $_isComp,
-                                       $_apiAddText)
+                                       $_apiAddText,
+                                       $_curCardNameList,
+                                       $_curCardNameIndex)
     {
         global $columnNum;
         global $rowNum;
@@ -667,15 +676,23 @@ class CGenReportFlatData
         global $tmpCardName;
         global $startStyleID;
         global $testCaseIDColumnName;
+        global $cardNameList;
+        global $compilerNameList;
         
-        $tmpList = explode("_", $_tmpCardName);
-        //$tmpListCmp = explode("_", $_tmpCmpCardName);
+        //$tmpList = explode("_", $_tmpCardName);
+        $curSysName = $cardNameList[$_curCardNameList[$_curCardNameIndex]];
+        $curCompilerName = $compilerNameList[$_curCardNameList[$_curCardNameIndex]];
+        $tmpList = explode("_", $curSysName);
         $curCardName = $tmpList[0];
-        $curSysName = $tmpList[1];
+        if (count($tmpList) > 1)
+        {
+            $curSysName = $tmpList[1];
+        }
         
         $curTestName = "";
         $testCaseIDPos = -1;
         $testColumnNum = 0;
+        $dataKeyAPI = -1;
         while($dataSet = fgetcsv($_srcFileHandle, 0, ","))
         {
             $tmpDataSet = $dataSet;
@@ -696,6 +713,19 @@ class CGenReportFlatData
                     // start of a test
                     $curTestName = $tmpSrcTestName;
                     $testCaseIDPos = array_search($testCaseIDColumnName, $dataSet);
+                    if ($dataKeyAPI == -1)
+                    {
+                        $dataKeyAPI = array_search("API", $dataSet);
+                        if ($dataKeyAPI == false)
+                        {
+                            $dataKeyAPI = array_search("Vulkan", $dataSet);
+                        }
+                        
+                        //$tmpArr = array();
+                        //$tmpArr["dataSet"] = $dataSet;
+                        //$t1 = json_encode($tmpArr);
+                        //file_put_contents("H:/wamp64/www/benchMax/test01.json", $t1);
+                    }
                     $isTitleLine = true;
                     
                     $testColumnNum = $dataSetSize;
@@ -802,7 +832,15 @@ class CGenReportFlatData
                 }
                 else
                 {
-                    $t3 .= "<Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . $t2 . "</Data></Cell>\n";
+                    if ($j == $dataKeyAPI)
+                    {
+                        $t3 .= "<Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . $curCompilerName . "</Data></Cell>\n";
+                    }
+                    else
+                    {
+                        $t3 .= "<Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . $t2 . "</Data></Cell>\n";
+                    }
+                    //$t3 .= "<Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . $t2 . "</Data></Cell>\n";
                 }
                 
                 //if (($curCardName == "Fiji XT") &&
@@ -875,7 +913,9 @@ class CGenReportFlatData
                                                   $_tmpCardName,
                                                   $tmpTestName,
                                                   false,
-                                                  ""); // PBBOff-
+                                                  "",
+                                                  $_curCardNameList,
+                                                  $i); // PBBOff-
                     }
                     else
                     {
@@ -884,7 +924,9 @@ class CGenReportFlatData
                                                   $_tmpCardName,
                                                   $tmpTestName,
                                                   true,
-                                                  ""); // PBBOn-
+                                                  "",
+                                                  $_curCardNameList,
+                                                  $i); // PBBOn-
                     }
                 }
             }
@@ -911,7 +953,9 @@ class CGenReportFlatData
                                                   $_machineIDCardNameSysNameDict[$_curPairMachineID],
                                                   $tmpTestName,
                                                   true,
-                                                  "");
+                                                  "",
+                                                  $_curCardNameList,
+                                                  $i);
                     }
                 }
             }

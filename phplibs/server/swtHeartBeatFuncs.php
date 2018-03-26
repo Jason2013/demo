@@ -755,7 +755,8 @@ class CClientHeartBeat
         $tmpInfo["mainLineName"]  = "";        
         $tmpInfo["sClockName"]    = "";        
         $tmpInfo["mClockName"]    = "";        
-        $tmpInfo["gpuMemName"]    = "";        
+        $tmpInfo["gpuMemName"]    = "";
+        $tmpInfo["compilerName"]    = "";
         
         $tmpNameList = array("machineName",
                              "videoCardName",
@@ -766,7 +767,8 @@ class CClientHeartBeat
                              "mainLineName",
                              "sClockName",
                              "mClockName",
-                             "gpuMemName");
+                             "gpuMemName",
+                             "compilerName");
         $tmpTagList = array("",
                             "GPU:",
                             "CPU:",
@@ -883,6 +885,7 @@ class CClientHeartBeat
         $sClockName    = cleanFolderName($tmpInfo["sClockName"], 256);
         $mClockName    = cleanFolderName($tmpInfo["mClockName"], 256);
         $gpuMemName    = cleanFolderName($tmpInfo["gpuMemName"], 256);
+        $compilerName    = cleanFolderName($tmpInfo["compilerName"], 256);
         
         $tmpInfo["videoCardNameReal"] = $tmpInfo["videoCardName"];
         $tmpInfo["videoCardName"] = $machineName;
