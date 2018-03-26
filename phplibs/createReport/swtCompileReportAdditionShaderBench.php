@@ -55,6 +55,7 @@ $umdNameList = $swtUmdNameList_sb;
 $umdStandardOrder = $swtUmdStandardOrder_sb;
 
 // check input card, system selection
+//$machineIDPair = "";
 $returnSet = $xmlWriter->checkInputMachineID($machineIDPair, $checkedMachineIDList);
 if ($returnSet == null)
 {
