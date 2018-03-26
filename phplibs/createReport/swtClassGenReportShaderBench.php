@@ -1209,11 +1209,30 @@ class CGenReport
                     }
                     $n1 = $sysIndex * $umdNum + $tmpIndex;
                     
+                    $needUpdate = false;
                     for ($j = 0; $j < $umdNum; $j++)
                     {
-                        $tmpCardNameList[$sysIndex * $umdNum + $j] = $row1[20];
-                        $tmpSysNameList[$sysIndex * $umdNum + $j] = $row1[23];
+                        if(strlen($tmpCardNameList[$sysIndex * $umdNum + $j]) == 0)
+                        {
+                            $needUpdate = true;
+                            break;
+                        }
+                        if(strlen($tmpSysNameList[$sysIndex * $umdNum + $j]) == 0)
+                        {
+                            $needUpdate = true;
+                            break;
+                        }
                     }
+                    
+                    if ($needUpdate)
+                    {
+                        for ($j = 0; $j < $umdNum; $j++)
+                        {
+                            $tmpCardNameList[$sysIndex * $umdNum + $j] = $row1[20];
+                            $tmpSysNameList[$sysIndex * $umdNum + $j] = $row1[23];
+                        }
+                    }
+
                     
                     $tmpResultIDList[$n1] = $row1[0];
                     $tmpMachineIDList[$n1] = $row1[1];
@@ -2701,7 +2720,9 @@ class CGenReport
                         if ($_isHistorySummary == false)
                         {
                             $summarySheetHeadCode2 .= "<Cell ss:StyleID=\"s92\"><Data ss:Type=\"String\">" . 
-                                                     ($tmpReportUmdInfo[$tmpIndexList[$i]] . " v.s " . $tmpReportUmdInfo[$tmpIndexList[0]]) . 
+                                                     //($tmpReportUmdInfo[$tmpIndexList[$i]] . " v.s " . $tmpReportUmdInfo[$tmpIndexList[0]]) . 
+                                                     // for SCPC vs NVIDIA
+                                                     ($tmpReportUmdInfo[$tmpIndexList[0]] . " v.s " . $tmpReportUmdInfo[$tmpIndexList[$i]]) . 
                                                      "</Data></Cell>";
                         }
                         else
@@ -3761,7 +3782,8 @@ class CGenReport
                         else
                         {
                             $t1 .= "    <Cell ss:StyleID=\"s87\">" .
-                                   "<Data ss:Type=\"String\">" . ($tmpAPIList[$i] . "&#10;vs&#10;" . $tmpAPIList[0]) . 
+                                   //"<Data ss:Type=\"String\">" . ($tmpAPIList[$i] . "&#10;vs&#10;" . $tmpAPIList[0]) . 
+                                   "<Data ss:Type=\"String\">" . ($tmpAPIList[0] . "&#10;vs&#10;" . $tmpAPIList[$i]) . 
                                    "</Data></Cell>";
                         }
                     }
@@ -3779,7 +3801,8 @@ class CGenReport
                         else
                         {
                             $t1 .= "    <Cell ss:StyleID=\"s87\">" .
-                                   "<Data ss:Type=\"String\">" . ($tmpAPIList[$i] . "&#10;vs&#10;" . $tmpAPIList[0]) . 
+                                   //"<Data ss:Type=\"String\">" . ($tmpAPIList[$i] . "&#10;vs&#10;" . $tmpAPIList[0]) . 
+                                   "<Data ss:Type=\"String\">" . ($tmpAPIList[0] . "&#10;vs&#10;" . $tmpAPIList[$i]) . 
                                    "</Data></Cell>";
                         }
                     }
@@ -6346,8 +6369,10 @@ class CGenReport
                         else
                         {
                             // 
-                            $rcID1 = ($subjectNameFilterNumMax + 3 + $i * 2);
-                            $rcID2 = ($subjectNameFilterNumMax + 3);
+                            //$rcID1 = ($subjectNameFilterNumMax + 3 + $i * 2);
+                            //$rcID2 = ($subjectNameFilterNumMax + 3);
+                            $rcID2 = ($subjectNameFilterNumMax + 3 + $i * 2);
+                            $rcID1 = ($subjectNameFilterNumMax + 3);
                             $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
                                    "" . $tmpDataList[$i] . "</Cell>\n" .
                                    " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
@@ -6414,8 +6439,10 @@ class CGenReport
                         else
                         {
                             // 
-                            $rcID1 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2) + $i * 2 + 1);
-                            $rcID2 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2) + 1);
+                            //$rcID1 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2) + $i * 2 + 1);
+                            //$rcID2 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2) + 1);
+                            $rcID2 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2) + $i * 2 + 1);
+                            $rcID1 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2) + 1);
                             $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
                                    "" . $tmpDataList2[$i] . "</Cell>\n" .
                                    " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
@@ -6633,8 +6660,12 @@ class CGenReport
                         }
                         else
                         {
-                            $tmpIndex = 0;
-                            $tmpIndex2 = $tmpIndexList[$i];
+                            //$tmpIndex = 0;
+                            //$tmpIndex2 = $tmpIndexList[$i];
+                            
+                            // for SCPC vs NVIDIA
+                            $tmpIndex2 = 0;
+                            $tmpIndex = $tmpIndexList[$i];
                         }
                         // compile time
                         if (($tmpDataVal[$tmpIndex] > 0) &&
