@@ -780,6 +780,12 @@ class CGenReportFlatData
                     continue;
                 }
                 
+                // skip testname colummn, cause already in testname sheet
+                if ($j == 0)
+                {
+                    continue;
+                }
+                
                 $t3 = "";
                 
                 if (($i             == 1) &&
