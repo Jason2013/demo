@@ -623,6 +623,7 @@ class CGenReportFlatData
     {
         global $allFileList;
         global $visitedTestNameList;
+        global $visitedCardTestNameList;
         global $tmpCardName;
         
         $testStartPosList = array();
@@ -645,11 +646,21 @@ class CGenReportFlatData
                     if (strlen($tmpTestName) > 0)
                     {
                         $testStartPosList[$i][$tmpTestName] = $tmpPos;
-                    }
-                    if (array_search($tmpTestName, $visitedTestNameList) === false)
-                    {
-                        // save start pos in file for each test
-                        array_push($visitedTestNameList, $tmpTestName);
+                        
+                        if (array_search($tmpTestName, $visitedTestNameList) === false)
+                        {
+                            // save start pos in file for each test
+                            array_push($visitedTestNameList, $tmpTestName);
+                        }
+                        // avoid adding none existing testname to this card
+                        //if ($i < count($visitedCardTestNameList))
+                        //{
+                        //    if (array_search($tmpTestName, $visitedCardTestNameList[$i]) === false)
+                        //    {
+                        //        // save start pos in file for each test
+                        //        array_push($visitedCardTestNameList[$i], $tmpTestName);
+                        //    }
+                        //}
                     }
                 }
                 $tmpPos = ftell($resultFileHandle);
@@ -693,6 +704,52 @@ class CGenReportFlatData
         $testCaseIDPos = -1;
         $testColumnNum = 0;
         $dataKeyAPI = -1;
+        
+        $tmpFileOffset = ftell($_srcFileHandle);
+        
+        fseek($_srcFileHandle, 0, SEEK_SET);
+        $isSheetTitleLine = false;
+        while($dataSet = fgetcsv($_srcFileHandle, 0, ","))
+        {
+            $tmpDataSet = $dataSet;
+            $dataSet = array();
+            foreach ($tmpDataSet as $tmpVal)
+            {
+                array_push($dataSet, trim($tmpVal));
+            }
+            $dataSetSize = count($dataSet);
+
+            if ($dataSetSize > 0)
+            {
+                $tmpSrcTestName = trim($dataSet[0]);
+                
+                if (strlen($tmpSrcTestName) > 0)
+                {
+                    // start of a test
+                    if ($testCaseIDPos == -1)
+                    {
+                        $testCaseIDPos = array_search($testCaseIDColumnName, $dataSet);
+                    }
+                    
+                    if ($dataKeyAPI == -1)
+                    {
+                        $dataKeyAPI = array_search("API", $dataSet);
+                        if ($dataKeyAPI == false)
+                        {
+                            $dataKeyAPI = array_search("Vulkan", $dataSet);
+                        }
+                        else
+                        {
+                            // result file title line
+                            $isSheetTitleLine = true;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        
+        fseek($_srcFileHandle, $tmpFileOffset, SEEK_SET);
         while($dataSet = fgetcsv($_srcFileHandle, 0, ","))
         {
             $tmpDataSet = $dataSet;
@@ -702,8 +759,10 @@ class CGenReportFlatData
                 array_push($dataSet, trim($tmpVal));
             }
             $isTitleLine = false;
-            
+            $isSheetTitleLine = false;
+            $isFileShift = false;
             $dataSetSize = count($dataSet);
+            $t1 = "";
             if ($dataSetSize > 0)
             {
                 $tmpSrcTestName = trim($dataSet[0]);
@@ -712,20 +771,14 @@ class CGenReportFlatData
                 {
                     // start of a test
                     $curTestName = $tmpSrcTestName;
-                    $testCaseIDPos = array_search($testCaseIDColumnName, $dataSet);
-                    if ($dataKeyAPI == -1)
+                    
+                    $tmpDataKeyAPI = array_search("API", $dataSet);
+                    if ($tmpDataKeyAPI !== false)
                     {
-                        $dataKeyAPI = array_search("API", $dataSet);
-                        if ($dataKeyAPI == false)
-                        {
-                            $dataKeyAPI = array_search("Vulkan", $dataSet);
-                        }
-                        
-                        //$tmpArr = array();
-                        //$tmpArr["dataSet"] = $dataSet;
-                        //$t1 = json_encode($tmpArr);
-                        //file_put_contents("H:/wamp64/www/benchMax/test01.json", $t1);
+                        // result file title line
+                        $isSheetTitleLine = true;
                     }
+                        
                     $isTitleLine = true;
                     
                     $testColumnNum = $dataSetSize;
@@ -738,7 +791,6 @@ class CGenReportFlatData
                     if (strcmp($_tmpTestName, $tmpSrcTestName) != 0)
                     {
                         // test lines end
-                        //$returnMsg["tmpStr1"] .= "x";
                         if ($_isComp == true)
                         {
                             // add an empty line at end of a test
@@ -748,15 +800,18 @@ class CGenReportFlatData
                             fwrite($_destFileHandle, $t1);
                             $rowNum++;
                         }
+                        //$isFileShift = true;
                         break;
                     }
-                    if ($_isComp == true)
+                    if (($_isComp          == true) &&
+                        ($isSheetTitleLine == true))
                     {
                         // skip comp card test title line
                         continue;
                     }
                 }
-                else
+                if (($_isComp     == true) ||
+                    ($isTitleLine == false))
                 {
                     $tmpList1 = explode(" ", $curSysName);
                     array_push($dataSet, $curCardName);
@@ -868,6 +923,11 @@ class CGenReportFlatData
             $t1 .= "</Row>\n";
             fwrite($_destFileHandle, $t1);
             $rowNum++;
+            
+            //if ($isFileShift)
+            //{
+            //    break;
+            //}
         }
     }
     
@@ -894,6 +954,22 @@ class CGenReportFlatData
             {
                 continue;
             }
+            
+            //$hasLines = false;
+            //for ($i = 0; $i < count($_curCardNameList); $i++)
+            //{
+            //    if (array_key_exists($tmpTestName, $_testStartPosList[$i]))
+            //    {
+            //        $hasLines = true;
+            //        break;
+            //    }
+            //}
+            //
+            //if ($hasLines == false)
+            //{
+            //    continue;
+            //}
+            
             // add new sheet
             $t1 = file_get_contents($templateFileName3);
             $t1 = sprintf($t1, $tmpTestName);

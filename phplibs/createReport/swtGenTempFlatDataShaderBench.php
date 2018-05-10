@@ -283,6 +283,8 @@ if ($fileID <= count($uniqueCardNameList))
     $tmpCardName = $uniqueCardNameList[$fileID];
     
     $curCardNameList = array_keys($cardNameList, $tmpCardName);
+    // will not add same sys but different card
+    $absoluteCurCardNameList = array_keys($cardNameList, $tmpCardName);
     // fix for shaderbench
     $tmpArr = explode("_", $tmpCardName);
     $tmpSysName = $tmpCardName;
@@ -342,8 +344,14 @@ if ($fileID <= count($uniqueCardNameList))
     }
     
     $visitedTestNameList = array();
+    //$visitedCardTestNameList = array();
     $testStartPosList = array();
     $pairTestStartPosList = array();
+    
+    //for ($i = 0; $i < count($cardNameList); $i++)
+    //{
+    //    $visitedCardTestNameList []= array();
+    //}
     
     $returnMsg["cardNameList"] = $cardNameList;
     $returnMsg["compilerNameList"] = $compilerNameList;

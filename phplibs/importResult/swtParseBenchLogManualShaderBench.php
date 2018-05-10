@@ -324,6 +324,8 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
         unlink($tmpFileName);
     }
     
+    $returnMsg["_dataList"] = $_dataList;
+    
     if (strlen($_dataList) > 0)
     {
         $tmpFileName = swtGetTmpFileName();
@@ -929,10 +931,13 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                 {
                     //$dataValue = $data[$dataKeyDataColumnID];
                     
+                    //$dataValList = array($data[$dataKeyDataColumnID],
+                    //                     $data[$dataKeyDataColumnID + 1],
+                    //                     $data[$dataKeyDataColumnID + 2],
+                    //                     $data[$dataKeyDataColumnID + 3]);
+                                         
                     $dataValList = array($data[$dataKeyDataColumnID],
-                                         $data[$dataKeyDataColumnID + 1],
-                                         $data[$dataKeyDataColumnID + 2],
-                                         $data[$dataKeyDataColumnID + 3]);
+                                         $data[$dataKeyDataColumnID + 1]);
                                          
                     $b1 = true;
                     foreach ($dataValList as $tmpVal)
@@ -1005,7 +1010,7 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                     {
                         fclose($handle);
                         $returnMsg["errorCode"] = 0;
-                        $returnMsg["errorMsg"] .= " | get result id failed";
+                        $returnMsg["errorMsg"] .= "get result id failed";
                         return -1;
                     }
                     
@@ -1013,12 +1018,19 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                     array_push($umdNameList, $umdName);
                 }
                 
+                $returnMsg["unentered"] = 1;
+                $returnMsg["subTestName"] = $subTestName;
+                $returnMsg["umdName"] = $umdName;
+                $returnMsg["isDataValValid"] = $isDataValValid;
+                
                 if ((strlen($subTestName) > 0) &&
                     (strlen($umdName) > 0)     &&
                     ($isDataValValid == true))
                 {
                     // if data is valid
                     $tmpKey = array_search($umdName, $umdNameList);
+                    
+                    $returnMsg["entered"] = 1;
                     
                     if (($tmpKey !== false) &&
                         ($tmpKey < count($resultIDList)))
@@ -1030,13 +1042,19 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                         //$feedSubTestDataString .= "" . $resultIDList[$tmpKey] . ",\"" . $subTestName . "\"," .
                         //                          $dataValue . ", " . $testCaseID . "\n";
                                                   
+                        //$feedSubTestDataString .= "" . $resultIDList[$tmpKey] . ",\"" . $subTestName . "\"," .
+                        //                          $dataValList[0] . ", " . 
+                        //                          $dataValList[1] . ", " . 
+                        //                          $dataValList[2] . ", " . 
+                        //                          $dataValList[3] . ", " . 
+                        //                          $testCaseID . ",\"" . $groupName . "\"\n";
+                                                  
                         $feedSubTestDataString .= "" . $resultIDList[$tmpKey] . ",\"" . $subTestName . "\"," .
                                                   $dataValList[0] . ", " . 
                                                   $dataValList[1] . ", " . 
-                                                  $dataValList[2] . ", " . 
-                                                  $dataValList[3] . ", " . 
-                                                  $testCaseID . ",\"" . $groupName . "\"\n";
-                    }
+                                                  "0.0, " . 
+                                                  "0.0, " . 
+                                                  $testCaseID . ",\"" . $groupName . "\"\n";                    }
                 }
             }
         }
