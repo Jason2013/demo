@@ -5258,6 +5258,7 @@ class CGenReport
             else
             {
                 $noiseResultIDList []= PHP_INT_MAX;
+                //array_unshift($noiseResultIDList, PHP_INT_MAX);
             }
         }
         
@@ -5279,6 +5280,7 @@ class CGenReport
         // following line has no error, many question marks
         //$params1 = $historyResultIDList;
         $params1 = $noiseResultIDList;
+        $returnMsg["noiseResultIDList"] = $noiseResultIDList;
         $sql1 = "SELECT t0.result_id, t0.sub_id, t0.data_value1, t0.test_case_id, " .
                 "(SELECT t1.test_name FROM mis_table_test_info t1 WHERE t1.test_id=t0.sub_id) AS subTestName, " .
                 "(SELECT t100.test_filter FROM mis_table_test_info t100 WHERE t100.test_id=t0.sub_id) AS subTestFilterName " .
