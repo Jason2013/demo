@@ -241,6 +241,50 @@ function swtDelFileTree($dir)
      rmdir($dir);
 }
 
+// copy folder
+function recurse_copy($src, $dst)
+{ 
+    $dir = opendir($src); 
+    @mkdir($dst); 
+    while(false !== ($file = readdir($dir)))
+    { 
+        if (( $file != '.' ) && ( $file != '..' ))
+        { 
+            if ( is_dir($src . '/' . $file) )
+            { 
+                recurse_copy($src . '/' . $file,$dst . '/' . $file); 
+            } 
+            else
+            { 
+                copy($src . '/' . $file,$dst . '/' . $file); 
+            } 
+        } 
+    } 
+    closedir($dir); 
+}
+
+// copy folder skip copying existing files
+function recurse_copy_fast($src, $dst)
+{ 
+    $dir = opendir($src); 
+    @mkdir($dst); 
+    while(false !== ($file = readdir($dir)))
+    { 
+        if (( $file != '.' ) && ( $file != '..' ))
+        { 
+            if ( is_dir($src . '\\' . $file) )
+            { 
+                recurse_copy_fast($src . '\\' . $file, $dst . '\\' . $file); 
+            } 
+            else if (file_exists($dst . '\\' . $file) == false)
+            { 
+                @copy($src . '\\' . $file, $dst . '\\' . $file); 
+            } 
+        } 
+    } 
+    closedir($dir); 
+} 
+
 function swtGetFileTreeLastAccessTime($dir)
 {
     $lastTime = 0;
