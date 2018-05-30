@@ -504,7 +504,10 @@ else
                 return null;
             }
             
-            unlink($tmpFileName);
+            if (is_writable($tmpFileName))
+            {
+                @unlink($tmpFileName);
+            }
         }
         
         $returnMsg["tmpDoTestCaseNum"] = $tmpDoTestCaseNum;

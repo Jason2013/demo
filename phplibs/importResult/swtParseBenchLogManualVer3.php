@@ -382,7 +382,10 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
             return -1;
         }
         
-        unlink($tmpFileName);
+        if (is_writable($tmpFileName))
+        {
+            @unlink($tmpFileName);
+        }
     }
     
     if (strlen($_dataList) > 0)
@@ -413,13 +416,15 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
             $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
             return -1;
         }
-        $sql1 = "LOAD DATA INFILE \"" . $tmpPathName . "\" IGNORE INTO TABLE tmp_table_test_data1 " .
+        $sql1 = "LOAD DATA LOCAL INFILE \"" . $tmpPathName . "\" IGNORE INTO TABLE tmp_table_test_data1 " .
                 "FIELDS TERMINATED BY ',' " .
                 "LINES TERMINATED BY '\n' (result_id, sub_name, data_value, test_case_id);";
         if ($db->QueryDBNoResult($sql1) == null)
         {
             $returnMsg["errorCode"] = 0;
-            $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__;
+            $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+            $returnMsg["tmpPathName"] = $tmpPathName;
+            $returnMsg["sql1"] = $sql1;
             return -1;
         }
         
@@ -576,7 +581,11 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
         //    }
         //    
         //}
-        unlink($tmpFileName);
+        
+        if (is_writable($tmpFileName))
+        {
+            @unlink($tmpFileName);
+        }
     }
 
 }

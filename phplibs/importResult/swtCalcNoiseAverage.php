@@ -418,7 +418,7 @@ else
                 return null;
             }
             
-            $sql1 = "LOAD DATA INFILE \"" . $tmpPathName . "\" IGNORE INTO TABLE " . $tmpTableName01 . " " .
+            $sql1 = "LOAD DATA LOCAL INFILE \"" . $tmpPathName . "\" IGNORE INTO TABLE " . $tmpTableName01 . " " .
                     "FIELDS TERMINATED BY ',' " .
                     "LINES TERMINATED BY '\n' (result_id, sub_id, data_value, data_value2, test_case_id);";
             if ($db2->QueryDBNoResult($sql1) == null)
@@ -429,7 +429,10 @@ else
                 return null;
             }
             
-            unlink($tmpFileName);
+            if (is_writable($tmpFileName))
+            {
+                @unlink($tmpFileName);
+            }
         }
         
         $returnMsg["tmpDoTestCaseNum"] = $tmpDoTestCaseNum;

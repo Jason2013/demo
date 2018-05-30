@@ -386,7 +386,10 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
             return -1;
         }
         
-        unlink($tmpFileName);
+        if (is_writable($tmpFileName))
+        {
+            @unlink($tmpFileName);
+        }
     }
     
     if (strlen($_dataList) > 0)
@@ -580,7 +583,11 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
         //    }
         //    
         //}
-        unlink($tmpFileName);
+
+        if (is_writable($tmpFileName))
+        {
+            @unlink($tmpFileName);
+        }
     }
 
 }

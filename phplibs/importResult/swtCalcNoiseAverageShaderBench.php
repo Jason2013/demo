@@ -477,7 +477,7 @@ else
                 return null;
             }
             
-            $sql1 = "LOAD DATA INFILE \"" . $tmpPathName . "\" IGNORE INTO TABLE " . $tmpTableName01 . " " .
+            $sql1 = "LOAD DATA LOCAL INFILE \"" . $tmpPathName . "\" IGNORE INTO TABLE " . $tmpTableName01 . " " .
                     "FIELDS TERMINATED BY ',' " .
                     "LINES TERMINATED BY '\n' (result_id, sub_id," .
                     " data_value1, variance_value1," .
@@ -492,8 +492,11 @@ else
                 echo json_encode($returnMsg);
                 return null;
             }
-            
-            unlink($tmpFileName);
+
+            if (is_writable($tmpFileName))
+            {
+                @unlink($tmpFileName);
+            }
         }
         
         $returnMsg["tmpDoTestCaseNum"] = $tmpDoTestCaseNum;
