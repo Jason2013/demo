@@ -242,6 +242,8 @@ else
         if ($db->QueryDB($sql1, $params1) == null)
         {
             $returnMsg["errorCode"] = 0;
+            $returnMsg["sql1"] = $sql1;
+            $returnMsg["tmpTableName02"] = $tmpTableName02;
             $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
             echo json_encode($returnMsg);
             return null;

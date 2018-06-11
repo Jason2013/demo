@@ -496,7 +496,7 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
             $data[$i] = trim($data[$i]);
         }
         
-        $tmpName = $data[0];
+        $tmpName = str_replace(" ", "", $data[0]);
         $isTestCasesShow = $data[1] == "TestCases";
 
         if ((strlen($tmpName) >  0) &&
@@ -691,10 +691,10 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                 $feedSubTestNameString .= "\"" . $groupName . "\",4,\"\"\n";
                 
                 $fullTestName = $testName . "_" . $groupName;
-                
-                //if (($tmpTestID - 1) >= $curTestID)
+                // if tablename of mysql exceeds 64 chars
+                if (strlen($fullTestName) > 32)
                 {
-
+                    $fullTestName = $groupName;
                 }
             }
             $tmpSubTestID++;
@@ -730,7 +730,7 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
         {
             $data[$i] = trim($data[$i]);
         }
-        $tmpName = $data[0];
+        $tmpName = str_replace(" ", "", $data[0]);
         $isTestCasesShow = $data[1] == "TestCases";
 
         if ((strlen($tmpName) >  0) &&
@@ -765,6 +765,11 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                 $feedSubTestNameString .= "\"" . $groupName . "\",4,\"\"\n";
                 
                 $fullTestName = $testName . "_" . $groupName;
+                // if tablename of mysql exceeds 64 chars
+                if (strlen($fullTestName) > 32)
+                {
+                    $fullTestName = $groupName;
+                }
                 
                 // create test table
                 $sql1 = sprintf($db_mis_table_create_string004, cleaninput($fullTestName, 256));
@@ -785,7 +790,10 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                     fclose($handle);
                     $returnMsg["errorCode"] = 0;
                     $returnMsg["sql1"] = $sql1;
-                    $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__;
+                    $returnMsg["testName"] = $testName;
+                    $returnMsg["groupName"] = $groupName;
+                    $returnMsg["fullTestName"] = $fullTestName;
+                    $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error:" . $db->getError()[2];
                     return -1;
                 }
                 
