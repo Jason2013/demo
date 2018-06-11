@@ -989,10 +989,13 @@ function swtParseLogFile($_pathName, $_machineID, $_noiseDataID, $_noiseDataNum)
                 {
                     $umdID = $umdIDMap[$umdName];
                 }
+                //if ((($umdID == null) ||
+                //    ($umdID == -1))   &&
+                //    (strlen($dataValue) > 0)   &&
+                //    (is_numeric($dataValue) == true))
                 if ((($umdID == null) ||
                     ($umdID == -1))   &&
-                    (strlen($dataValue) > 0)   &&
-                    (is_numeric($dataValue) == true))
+                    (strlen($dataValue) > 0))
                 {
                     // get umd driver id
                     $umdID = swtGetUmdID($umdName);
@@ -1043,10 +1046,13 @@ function swtParseLogFile($_pathName, $_machineID, $_noiseDataID, $_noiseDataNum)
                     array_push($umdNameList, $umdName);
                 }
                 
+                //if ((strlen($subTestName) > 0) &&
+                //    (strlen($dataValue) > 0)   &&
+                //    (strlen($umdName) > 0)     &&
+                //    (is_numeric($dataValue) == true))
                 if ((strlen($subTestName) > 0) &&
                     (strlen($dataValue) > 0)   &&
-                    (strlen($umdName) > 0)     &&
-                    (is_numeric($dataValue) == true))
+                    (strlen($umdName) > 0))
                 {
                     // if data is valid
                     $tmpKey = array_search($umdName, $umdNameList);
@@ -1055,6 +1061,11 @@ function swtParseLogFile($_pathName, $_machineID, $_noiseDataID, $_noiseDataNum)
                         ($tmpKey < count($resultIDList)))
                     {
                         //$dataRow++;
+                        // if N/A
+                        if (is_numeric($dataValue) == false)
+                        {
+                            $dataValue = 0.0;
+                        }
                         
                         $feedSubTestNameString .= "\"" . $subTestName . "\",2," . $subTestFilterName . "\n";
 
