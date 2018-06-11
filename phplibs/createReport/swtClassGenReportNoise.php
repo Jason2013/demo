@@ -1790,7 +1790,7 @@ class CGenReport
             {
                 $tmpTableName = $db_mis_table_name_string001 . $testNameList[$i];
                 $params1 = array($resultIDList[0][$tmpStartResultID + $j]);
-                $sql1 = "SELECT COUNT(*) FROM " . $tmpTableName . " WHERE result_id=?";
+                $sql1 = "SELECT COUNT(*) FROM " . $tmpTableName . " WHERE (result_id=? AND data_value>0.0)";
                 if ($db->QueryDB($sql1, $params1) == null)
                 {
                     $returnMsg["errorCode"] = 0;
@@ -1827,7 +1827,8 @@ class CGenReport
                 $tmpTableName = $db_mis_table_name_string001 . $testNameList[$i];
                 //$params1 = array($resultIDList[0][$_resultPos]);
                 $params1 = array($resultIDList[0][$cardStandardResultPos]);
-                $sql1 = "SELECT COUNT(*) FROM " . $tmpTableName . "_noise WHERE (result_id=? AND noise_id=0)";
+                //$sql1 = "SELECT COUNT(*) FROM " . $tmpTableName . "_noise WHERE (result_id=? AND noise_id=0)";
+                $sql1 = "SELECT COUNT(*) FROM " . $tmpTableName . " WHERE result_id=?";
                 if ($db->QueryDB($sql1, $params1) == null)
                 {
                     $returnMsg["errorCode"] = 0;
@@ -5003,8 +5004,10 @@ class CGenReport
                 if ($n1 < count($row1))
                 {
                     $tmpDataList[$i] = "" . $row1[$n1];
+                    $f1 = floatval($row1[$n1]);
                     
-                    if (strlen($tmpDataList[$i]) > 0)
+                    if ((strlen($tmpDataList[$i]) > 0) &&
+                        ($f1                      > 0.0))
                     {
                         $tmpDataListXML[$i] = "<Data ss:Type=\"Number\">" . $tmpDataList[$i] . "</Data>";
                     }
@@ -5721,7 +5724,9 @@ class CGenReport
                         $umdData[$j] = "" . (floatval($umdData[$j]) / 1.000);
                     }
                     
-                    if (strlen($umdData[$j]) > 0)
+                    $f1 = floatval($umdData[$j]);
+                    if ((strlen($umdData[$j]) > 0) &&
+                        ($f1                  > 0.0))
                     {
                         // if null value, leave it null
                         $umdDataXML[$j] = "<Data ss:Type=\"Number\">" . $umdData[$j] . "</Data>";
@@ -5737,7 +5742,9 @@ class CGenReport
                         {
                             $umdData[$reportUmdNumn + $j] = "" . $row1[$dataIndexList[$reportUmdNumn + $j]];
                         }
-                        if (strlen($umdData[$reportUmdNumn + $j]) > 0)
+                        $f1 = floatval($umdData[$reportUmdNumn + $j]);
+                        if ((strlen($umdData[$reportUmdNumn + $j]) > 0) &&
+                            ($f1                                   > 0.0))
                         {
                             // if null value, leave it null
                             $umdDataXML[$reportUmdNumn + $j] = "<Data ss:Type=\"Number\">" . $umdData[$reportUmdNumn + $j] . "</Data>";
@@ -5750,7 +5757,9 @@ class CGenReport
                     {
                         $umdData[$reportUmdNumn * 2 + $j] = "" . $row1[$dataIndexList[$reportUmdNumn * 2 + $j]];
                     }
-                    if (strlen($umdData[$reportUmdNumn * 2 + $j]) > 0)
+                    $f1 = floatval($umdData[$reportUmdNumn * 2 + $j]);
+                    if ((strlen($umdData[$reportUmdNumn * 2 + $j]) > 0) &&
+                        ($f1                                       > 0.0))
                     {
                         // if null value, leave it null
                         $umdDataXML[$reportUmdNumn * 2 + $j] = "<Data ss:Type=\"Number\">" . $umdData[$reportUmdNumn * 2 + $j] . "</Data>";

@@ -251,6 +251,30 @@ foreach ($tmpList as $tmpName)
     }
 }
 
+// delete skip noise data cache
+$tmpPath = $swtTempFilesDir . "/*";
+//$tmpList = glob($tmpPath, GLOB_ONLYDIR);
+$tmpList = glob($tmpPath);
+$curTime = time();
+// 7 days
+$noTouchTimeLen = 7 * 24 * 3600;
+
+foreach ($tmpList as $tmpName)
+{
+    $n1 = swtGetFileTreeLastAccessTime($tmpName);
+    if (($curTime - $n1) > $noTouchTimeLen)
+    {
+        if (is_dir($tmpName))
+        {
+            swtDelFileTree($tmpName);
+        }
+        else
+        {
+            @unlink($tmpName);
+        }
+    }
+}
+
 $returnMsg["machineIDList"] = $machineIDList;
 $returnMsg["cardIDList"] = $cardIDList;
 $returnMsg["cardNameList"] = $cardNameList;

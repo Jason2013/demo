@@ -298,8 +298,8 @@ function swtDoSubmitTestResults(_inputTagName,
                                 _batchID,
                                 _reportGroup)
 {
-    //$.post("../phplibs/importResult/swtParseBenchLogManual.php",
-    $.post("../phplibs/importResult/swtParseBenchLogManualVer3.php",
+    //$.post("../phplibs/importResult/swtParseBenchLogManualVer3.php",
+    $.post("../phplibs/importResult/swtParseBenchLogManualSkipNoise.php",
     {
         logFolderName:    _logFolderName,
         nextResultFileID: _nextResultFileID,
@@ -480,7 +480,8 @@ function swtCalcNoiseAverage(_inputTagName,
                              _curTestNoiseNum
                              )
 {
-    $.post("../phplibs/importResult/swtCalcNoiseAverage.php",
+    //$.post("../phplibs/importResult/swtCalcNoiseAverage.php",
+    $.post("../phplibs/importResult/swtCalcNoiseAverageskipNoise.php",
     {
         batchID:     _batchID,
         resultPos:   _resultPos,
@@ -2593,7 +2594,7 @@ function swtXLSX2XLSM(_percentTagName, _reportListTag, _batchID, _reportType, _f
                 
                 $("#inputFolderName").val("");
                 alert("generate success");
-                //location.reload(true);
+                location.reload(true);
             }
             else
             {
