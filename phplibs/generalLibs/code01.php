@@ -3,11 +3,17 @@
 include_once __dir__ . "/../configuration/swtErrorMsg.php";
 include_once __dir__ . "/../configuration/swtUIStrings.php";
 
-$db_username = "root";
+//$db_server = "127.0.0.1";
+//$db_username = "root";
+//$db_password = "dgxqh523120";
+//$db_dbname = "db_mis";
 
-$db_password = "dgxqh523120";
-
-$db_dbname = "db_mis";
+//$db_server = "ATLVMYSQLDP21";
+$db_server = "Srdcvmysqldp1";
+$db_username = "davychen";
+$db_password = "davychen7$";
+//$db_dbname = "db_gfxbench1";
+$db_dbname = "db_gfxbench";
 
 
 $db_table_surname = "mis_table";
@@ -278,7 +284,17 @@ array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_user_batch_
                                "( info_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, " .
                                "  user_id INT UNSIGNED, " .
                                "  batch_id INT UNSIGNED, " .
-                               "  insert_time DATETIME )");  
+                               "  insert_time DATETIME )");
+                               
+// runlog.txt tests runtime cost
+array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_data_test_Statistics " .
+                               "( data_id INT UNSIGNED AUTO_INCREMENT, " .
+                               "  result_id INT UNSIGNED, " .  // machine-API index 
+                               "  test_id INT UNSIGNED,    " . // test index
+                               "  data_value DOUBLE," .        // average
+                               "  data_value2 DOUBLE," .       // variance
+                               "  PRIMARY KEY (data_id), " .
+                               "  UNIQUE (result_id, test_id))");// value
                                
 //array_push($db_create_table01, "CREATE INDEX idx_env_name ON mis_table_environment_info (env_name);");
                                

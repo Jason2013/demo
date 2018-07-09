@@ -26,6 +26,7 @@ $curFileLineNum = intval($_POST["curFileLineNum"]);
 //$targetLogFileName2 = "test_results.csv";
 $targetLogFileName = "test_results_for_analysis.txt";
 $targetLogFileName2 = "test_results_for_analysis.csv";
+$targetRunLogFileName = "runlog.txt";
 $machineInfoFileName = "machine_info.json";
 $defaultInfoFileName = "default_info.json";
 $changeListJsonTag = "changeList";
@@ -562,6 +563,215 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
         }
     }
 
+}
+
+function swtParseRunLogFile($_pathName, $_machineID, $_noiseDataID, $_noiseDataNum)
+{
+    global $returnMsg;
+    global $globalResultIDList;
+    global $changeListJsonTag;
+    global $defaultInfo;
+    global $nextLineID;
+    global $batchID;
+    global $curTestID;
+    global $nextSubTestID;
+    global $swtOldUmdNameMatchList;
+    global $swtTempFilesDir;
+    global $swtTempRunLogJsonName;
+    
+    if (file_exists($_pathName) == false)
+    {
+        $returnMsg["errorCode"] = 0;
+        $returnMsg["errorMsg"] = "log file is missing, line: " . __LINE__ . "path: " . $_pathName;
+        return -1;
+    }
+
+    $tmpDestFileHandle = fopen($_pathName, "r");
+    fseek($tmpDestFileHandle, 0, SEEK_SET);    
+                 
+    $testStep = 0;
+    $reachStep = 0;
+    $hasLines = 0;
+    
+    $testNamePos = -1;
+    $APINamePos = -1;
+    $runTimePos = -1;
+    
+    $testNamePosTag = "tests";
+    $APINamePosTag  = "api";
+    $runTimePosTag  = "run time";
+    
+    $tmpTestName = "";
+    $tmpAPIName = "";
+    
+    $tmpJsonPath = $swtTempFilesDir . "/batch" . $batchID . "/" . $swtTempRunLogJsonName;
+    
+    $tmpObj = array();
+    if (file_exists($tmpJsonPath))
+    {
+        $t2 = file_get_contents($tmpJsonPath);
+        $tmpObj = json_decode($t2, true);
+    }
+    
+    while ($tmpLine = fgets($tmpDestFileHandle))
+    {
+        $trimedLine = trim($tmpLine);
+        $t3 = substr($trimedLine, 0, 5);
+        if (strcmp("-----", $t3) == 0)
+        {
+            $testStep++;
+            continue;
+        }
+        if ($testStep == 0)
+        {
+            continue;
+        }
+        if (($testStep > 0) &&
+            ($reachStep == 0))
+        {
+            $tmpRet1 = strpos(strtolower($trimedLine), "microb");
+            $tmpRet2 = strpos(strtolower($trimedLine), "statistics");
+            
+            //if (strcmp("microbech statistics", strtolower($trimedLine)) == 0)
+            if (($tmpRet1 !== false) &&
+                ($tmpRet2 !== false))
+            {
+                $reachStep++;
+                continue;
+            }
+        }
+        
+        if (($testStep > 2) &&
+            ($reachStep > 0))
+        {
+            // reach table end
+            break;
+        }
+        
+        if (($testStep > 1) &&
+            ($reachStep > 0))
+        {
+            $tmpDataList = explode(",", $trimedLine);
+            // Microbech Statistics have 8 columns
+            if (count($tmpDataList) < 8)
+            {
+                continue;
+            }
+            
+            $tmpDataList_ = array();
+            for ($i = 0; $i < count($tmpDataList); $i++)
+            {
+                $tmpDataList[$i] = trim($tmpDataList[$i]);
+                $tmpDataList_ []= strtolower($tmpDataList[$i]);
+            }
+            
+            if ($testNamePos == -1)
+            {
+                // title line
+                $testNamePos = 0;
+                $tmpPos = strpos($tmpDataList_[$testNamePos], $testNamePosTag);
+                if ($tmpPos === false)
+                {
+                    $testNamePos = -1;
+                    continue;
+                }
+                $APINamePos = 1;
+                $tmpPos = strpos($tmpDataList_[$APINamePos], $APINamePosTag);
+                if ($tmpPos === false)
+                {
+                    $APINamePos = -1;
+                    continue;
+                }
+                for ($i = 0; $i < count($tmpDataList_); $i++)
+                {
+                    $tmpPos = strpos($tmpDataList_[$i], $runTimePosTag);
+                    if ($tmpPos !== false)
+                    {
+                        $runTimePos = $i;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                // data lines
+                if (strlen($tmpDataList[$testNamePos]) > 0)
+                {
+                    $tmpTestName = $tmpDataList[$testNamePos];
+                }
+                if (strlen($tmpTestName) == 0)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] .= " | null testname";
+                    continue;
+                }
+                if (strlen($tmpDataList[$APINamePos]) > 0)
+                {
+                    $tmpAPIName = $tmpDataList[$APINamePos];
+                }
+                if (strlen($tmpAPIName) == 0)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] .= " | null API name";
+                    continue;
+                }
+                $tmpRunTime = 0;
+                if (strlen($tmpDataList[$runTimePos]) > 0)
+                {
+                    if (is_numeric($tmpDataList[$runTimePos]))
+                    {
+                        $tmpRunTime = intval($tmpDataList[$runTimePos]);
+                    }
+                }
+                
+                $tmpUmdID = swtGetUmdID($tmpAPIName);
+                
+                // like changeListDX11, changeListDX12, changeListVulkan
+                $t1 = $changeListJsonTag . $tmpAPIName;
+                if (array_key_exists($t1, $defaultInfo) == false)
+                {
+                    $tmpCount = intval(count($swtOldUmdNameMatchList) / 2);
+                    for ($j = 0; $j < $tmpCount; $j++)
+                    {
+                        if (strcmp($swtOldUmdNameMatchList[$j * 2], $tmpAPIName) == 0)
+                        {
+                            $t1 = $changeListJsonTag . $swtOldUmdNameMatchList[$j * 2 + 1];
+                            if (array_key_exists($t1, $defaultInfo) == true)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+                $changeList = "0";
+                if ((array_key_exists($t1, $defaultInfo)  == true) &&
+                    ($defaultInfo[$t1]                    != null) &&
+                    (is_numeric($defaultInfo[$t1])        == true))
+                {
+                    $changeList = $defaultInfo[$t1];
+                }
+
+                $tmpResultID = swtGetResultID($batchID, $_machineID, $tmpUmdID, $changeList, "4");
+                if ($tmpResultID == -1)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] .= " | get result id failed, line: " . __LINE__;
+                    continue;
+                }
+                
+                $tmpObj[$tmpResultID             . "_" .
+                        strtolower($tmpTestName) . "_" .
+                        $_noiseDataID] = $tmpRunTime;
+                
+            }
+            
+        }
+    }
+    
+    fclose($tmpDestFileHandle);
+    
+    $t2 = json_encode($tmpObj);
+    file_put_contents($tmpJsonPath, $t2);
 }
 
 function swtParseLogFile($_pathName, $_machineID, $_noiseDataID, $_noiseDataNum)
@@ -1255,6 +1465,7 @@ foreach ($cardFolderList as $tmpCardPath)
             // no piece folder
             // maybe log files not in piece folder
             $t1 = $tmpPath . "/" . $targetLogFileName;
+            $t2 = $tmpPath . "/" . $targetRunLogFileName;
             $tmpResult = -1;
             if (file_exists($t1))
             {
@@ -1278,6 +1489,7 @@ foreach ($cardFolderList as $tmpCardPath)
                     {
                         break;
                     }
+                    swtParseRunLogFile($t2, $machineID, $noiseDataID, count($noiseFolderList));
                     $nextResultFileID++;
                 }
             }
@@ -1292,6 +1504,7 @@ foreach ($cardFolderList as $tmpCardPath)
             foreach ($pieceFolderList as $piecePath)
             {
                 $t1 = $piecePath . "/" . $targetLogFileName;
+                $t2 = $piecePath . "/" . $targetRunLogFileName;
                 $tmpResult = -1;
                 if (file_exists($t1))
                 {
@@ -1316,6 +1529,7 @@ foreach ($cardFolderList as $tmpCardPath)
                         {
                             break;
                         }
+                        swtParseRunLogFile($t2, $machineID, $noiseDataID, count($noiseFolderList));
                         $nextResultFileID++;
                     }
                 }

@@ -120,6 +120,7 @@ if ($returnSet === null)
     return;
 }
 $testNameList = $returnSet["testNameList"];
+$testIDList = $returnSet["testIDList"];
 $subjectNameList = $returnSet["subjectNameList"];
 $unitNameList = $returnSet["unitNameList"];
 $subjectNameFilterNumMax = $returnSet["subjectNameFilterNumMax"];

@@ -30,6 +30,7 @@ $machineFolder = cleanText($_POST["machineFolder"], 128);
 //$targetLogFileName2 = "test_results.csv";
 $targetLogFileName = "test_results_for_analysis.txt";
 $targetLogFileName2 = "test_results_for_analysis.csv";
+$targetRunLogFileName = "runlog.txt";
 $machineInfoFileName = "machine_info.json";
 $defaultInfoFileName = "default_info.json";
 $changeListJsonTag = "changeList";
@@ -292,6 +293,7 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
     global $returnMsg;
     global $db_mis_table_name_string001;
     global $swtTempFilesDir;
+    global $batchID;
 
     if (strlen($_testName) == 0)
     {
@@ -477,23 +479,23 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
         //}
         //$lastDataID = $row[0];
                 
-        $sql1 = "INSERT IGNORE INTO " . $tableName02 . " " .
-                "(result_id, sub_id, data_value, test_case_id, noise_id) " .
-                "(SELECT t0.result_id, t1.test_id, t0.data_value, t0.test_case_id, \"" . $_noiseDataID . "\" " .
-                "FROM tmp_table_test_data1 t0, mis_table_test_info t1 " .
-                "WHERE t0.sub_name=t1.test_name AND t1.test_type=\"2\" " .
-                "ORDER BY t0.data_id ASC);";
-                
-        $returnMsg["noise_sql1"] = $sql1;
-        $returnMsg["noise_id"] = $_noiseDataID;
-                
-        if ($db->QueryDBNoResult($sql1) == null)
-        {
-            $returnMsg["errorCode"] = 0;
-            $returnMsg["sql1"] = $sql1;
-            $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
-            return -1;
-        }
+        //$sql1 = "INSERT IGNORE INTO " . $tableName02 . " " .
+        //        "(result_id, sub_id, data_value, test_case_id, noise_id) " .
+        //        "(SELECT t0.result_id, t1.test_id, t0.data_value, t0.test_case_id, \"" . $_noiseDataID . "\" " .
+        //        "FROM tmp_table_test_data1 t0, mis_table_test_info t1 " .
+        //        "WHERE t0.sub_name=t1.test_name AND t1.test_type=\"2\" " .
+        //        "ORDER BY t0.data_id ASC);";
+        //        
+        //$returnMsg["noise_sql1"] = $sql1;
+        //$returnMsg["noise_id"] = $_noiseDataID;
+        //        
+        //if ($db->QueryDBNoResult($sql1) == null)
+        //{
+        //    $returnMsg["errorCode"] = 0;
+        //    $returnMsg["sql1"] = $sql1;
+        //    $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+        //    return -1;
+        //}
 
         //if (($_noiseDataID + 1) >= $_noiseDataNum)
         //{
@@ -583,13 +585,304 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
         //    }
         //    
         //}
-
+        
+        $tmpBatchFolder = $swtTempFilesDir . "/batch" . $batchID;
+        
+        if (file_exists($tmpBatchFolder) == false)
+        {
+            mkdir($tmpBatchFolder);
+        }
+                
+        $sql1 = "SELECT t0.result_id, t1.test_id, t0.data_value, t0.test_case_id " .
+                "FROM tmp_table_test_data1 t0 " .
+                "LEFT JOIN mis_table_test_info t1 " .
+                "ON (t0.sub_name=t1.test_name AND t1.test_type=\"2\") " .
+                "ORDER BY t0.data_id ASC;";
+                
+        if ($db->QueryDB($sql1) == null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["sql1"] = $sql1;
+            $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+            return -1;
+        }
+        
+        $tmpFileHandle = false;
+        $lastResultID = -1;
+        $lastTestName = "";
+        $lastNoiseDataID = -1;
+        
+        while ($row1 = $db->FetchResult())
+        {
+            $tmpResultID = $row1[0];
+            $tmpSubTestID = intval($row1[1]);
+            $dataValue = floatval($row1[2]);
+            $testCaseID = intval($row1[3]);
+            
+            $tmpFileName2 = $tmpBatchFolder . "/dataFile_" . 
+                                             $tmpResultID  . "_" .
+                                             $_testName    . "_" .
+                                             $_noiseDataID . ".txt";
+                                             
+                                             
+            if (($tmpFileHandle == false) ||
+                ($tmpResultID != $lastResultID) ||
+                ($_testName   != $lastTestName) ||
+                ($_noiseDataID != $lastNoiseDataID))
+            {
+                if ($tmpFileHandle != false)
+                {
+                    fclose($tmpFileHandle);
+                }
+                $tmpFileHandle = fopen($tmpFileName2, "a");
+                
+                $lastResultID = $tmpResultID;
+                $lastTestName = $_testName;
+                $lastNoiseDataID = $_noiseDataID;
+            }
+            
+            fseek($tmpFileHandle, 0, SEEK_END);
+            $tmpFileSize = ftell($tmpFileHandle);
+            $t1 = pack("d", 0.0);
+            $tmpDataSize = strlen($t1);
+            $t1 = pack("i", 0);
+            $tmpDataIDSize = strlen($t1);
+            
+            $tmpFileDataNum = intval($tmpFileSize / ($tmpDataSize + $tmpDataIDSize));
+            
+            $n1 = $testCaseID - $tmpFileDataNum;
+            for ($i = 0; $i < $n1; $i++)
+            {
+                $t1 = pack("id", -1, 0.0);
+                fwrite($tmpFileHandle, $t1);
+            }
+            
+            fseek($tmpFileHandle, $testCaseID * ($tmpDataSize + $tmpDataIDSize), SEEK_SET);
+            $t1 = pack("id", $tmpSubTestID, $dataValue);
+            //$t1 = pack("id", $testCaseID, $dataValue);
+            fwrite($tmpFileHandle, $t1);
+            
+            //fclose($tmpFileHandle);
+        }
+        if ($tmpFileHandle != false)
+        {
+            fclose($tmpFileHandle);
+        }
         if (is_writable($tmpFileName))
         {
             @unlink($tmpFileName);
         }
     }
 
+}
+
+function swtParseRunLogFile($_pathName, $_machineID, $_noiseDataID, $_noiseDataNum)
+{
+    global $returnMsg;
+    global $globalResultIDList;
+    global $changeListJsonTag;
+    global $defaultInfo;
+    global $nextLineID;
+    global $batchID;
+    global $curTestID;
+    global $nextSubTestID;
+    global $swtOldUmdNameMatchList;
+    global $swtTempFilesDir;
+    global $swtTempRunLogJsonName;
+    
+    if (file_exists($_pathName) == false)
+    {
+        $returnMsg["errorCode"] = 0;
+        $returnMsg["errorMsg"] = "log file is missing, line: " . __LINE__ . "path: " . $_pathName;
+        return -1;
+    }
+
+    $tmpDestFileHandle = fopen($_pathName, "r");
+    fseek($tmpDestFileHandle, 0, SEEK_SET);    
+                 
+    $testStep = 0;
+    $reachStep = 0;
+    $hasLines = 0;
+    
+    $testNamePos = -1;
+    $APINamePos = -1;
+    $runTimePos = -1;
+    
+    $testNamePosTag = "tests";
+    $APINamePosTag  = "api";
+    $runTimePosTag  = "run time";
+    
+    $tmpTestName = "";
+    $tmpAPIName = "";
+    
+    $tmpJsonPath = $swtTempFilesDir . "/batch" . $batchID . "/" . $swtTempRunLogJsonName;
+    
+    $tmpObj = array();
+    if (file_exists($tmpJsonPath))
+    {
+        $t2 = file_get_contents($tmpJsonPath);
+        //$tmpObj = json_decode($t2, true);
+    }
+    
+    while ($tmpLine = fgets($tmpDestFileHandle))
+    {
+        $trimedLine = trim($tmpLine);
+        $t3 = substr($trimedLine, 0, 5);
+        if (strcmp("-----", $t3) == 0)
+        {
+            $testStep++;
+            continue;
+        }
+        if ($testStep == 0)
+        {
+            continue;
+        }
+        if (($testStep > 0) &&
+            ($reachStep == 0))
+        {
+            $tmpRet1 = strpos(strtolower($trimedLine), "microb");
+            $tmpRet2 = strpos(strtolower($trimedLine), "statistics");
+            
+            //if (strcmp("microbech statistics", strtolower($trimedLine)) == 0)
+            if (($tmpRet1 !== false) &&
+                ($tmpRet2 !== false))
+            {
+                $reachStep++;
+                continue;
+            }
+        }
+        
+        if (($testStep > 2) &&
+            ($reachStep > 0))
+        {
+            // reach table end
+            break;
+        }
+        
+        if (($testStep > 1) &&
+            ($reachStep > 0))
+        {
+            $tmpDataList = explode(",", $trimedLine);
+            // Microbech Statistics have 8 columns
+            if (count($tmpDataList) < 8)
+            {
+                continue;
+            }
+            
+            $tmpDataList_ = array();
+            for ($i = 0; $i < count($tmpDataList); $i++)
+            {
+                $tmpDataList[$i] = trim($tmpDataList[$i]);
+                $tmpDataList_ []= strtolower($tmpDataList[$i]);
+            }
+            
+            if ($testNamePos == -1)
+            {
+                // title line
+                $testNamePos = 0;
+                $tmpPos = strpos($tmpDataList_[$testNamePos], $testNamePosTag);
+                if ($tmpPos === false)
+                {
+                    $testNamePos = -1;
+                    continue;
+                }
+                $APINamePos = 1;
+                $tmpPos = strpos($tmpDataList_[$APINamePos], $APINamePosTag);
+                if ($tmpPos === false)
+                {
+                    $APINamePos = -1;
+                    continue;
+                }
+                for ($i = 0; $i < count($tmpDataList_); $i++)
+                {
+                    $tmpPos = strpos($tmpDataList_[$i], $runTimePosTag);
+                    if ($tmpPos !== false)
+                    {
+                        $runTimePos = $i;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                // data lines
+                if (strlen($tmpDataList[$testNamePos]) > 0)
+                {
+                    $tmpTestName = $tmpDataList[$testNamePos];
+                }
+                if (strlen($tmpTestName) == 0)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] .= " | null testname";
+                    continue;
+                }
+                if (strlen($tmpDataList[$APINamePos]) > 0)
+                {
+                    $tmpAPIName = $tmpDataList[$APINamePos];
+                }
+                if (strlen($tmpAPIName) == 0)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] .= " | null API name";
+                    continue;
+                }
+                $tmpRunTime = 0;
+                if (strlen($tmpDataList[$runTimePos]) > 0)
+                {
+                    if (is_numeric($tmpDataList[$runTimePos]))
+                    {
+                        $tmpRunTime = intval($tmpDataList[$runTimePos]);
+                    }
+                }
+                
+                $tmpUmdID = swtGetUmdID($tmpAPIName);
+                
+                // like changeListDX11, changeListDX12, changeListVulkan
+                $t1 = $changeListJsonTag . $tmpAPIName;
+                if (array_key_exists($t1, $defaultInfo) == false)
+                {
+                    $tmpCount = intval(count($swtOldUmdNameMatchList) / 2);
+                    for ($j = 0; $j < $tmpCount; $j++)
+                    {
+                        if (strcmp($swtOldUmdNameMatchList[$j * 2], $tmpAPIName) == 0)
+                        {
+                            $t1 = $changeListJsonTag . $swtOldUmdNameMatchList[$j * 2 + 1];
+                            if (array_key_exists($t1, $defaultInfo) == true)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+                $changeList = "0";
+                if ((array_key_exists($t1, $defaultInfo)  == true) &&
+                    ($defaultInfo[$t1]                    != null) &&
+                    (is_numeric($defaultInfo[$t1])        == true))
+                {
+                    $changeList = $defaultInfo[$t1];
+                }
+
+                $tmpResultID = swtGetResultID($batchID, $_machineID, $tmpUmdID, $changeList, "4");
+                if ($tmpResultID == -1)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] .= " | get result id failed, line: " . __LINE__;
+                    continue;
+                }
+                
+                $tmpObj[$tmpResultID             . "_" .
+                        strtolower($tmpTestName) . "_" .
+                        $_noiseDataID] = $tmpRunTime;
+                
+            }
+            
+        }
+    }
+    
+    fclose($tmpDestFileHandle);
+    
+    $t2 = json_encode($tmpObj);
+    file_put_contents($tmpJsonPath, $t2);
 }
 
 function swtParseLogFile($_pathName, $_machineID, $_noiseDataID, $_noiseDataNum)
@@ -1287,6 +1580,7 @@ foreach ($cardFolderList as $tmpCardPath)
             // no piece folder
             // maybe log files not in piece folder
             $t1 = $tmpPath . "/" . $targetLogFileName;
+            $t2 = $tmpPath . "/" . $targetRunLogFileName;
             $tmpResult = -1;
             if (file_exists($t1))
             {
@@ -1310,6 +1604,7 @@ foreach ($cardFolderList as $tmpCardPath)
                     {
                         break;
                     }
+                    swtParseRunLogFile($t2, $machineID, $noiseDataID, count($noiseFolderList));
                     $nextResultFileID++;
                 }
             }
@@ -1325,6 +1620,7 @@ foreach ($cardFolderList as $tmpCardPath)
             foreach ($pieceFolderList as $piecePath)
             {
                 $t1 = $piecePath . "/" . $targetLogFileName;
+                $t2 = $piecePath . "/" . $targetRunLogFileName;
                 $tmpResult = -1;
                 if (file_exists($t1))
                 {
@@ -1349,6 +1645,7 @@ foreach ($cardFolderList as $tmpCardPath)
                         {
                             break;
                         }
+                        swtParseRunLogFile($t2, $machineID, $noiseDataID, count($noiseFolderList));
                         $nextResultFileID++;
                     }
                 }

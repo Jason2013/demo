@@ -183,6 +183,8 @@ if (file_exists($batchPathName) == false)
     return;
 }
 
+$allRunLogFileList = array();
+
 if (count($allFileList) == 0)
 {
     $allFileList = array();

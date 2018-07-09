@@ -343,6 +343,7 @@ class CGenReportFlatData
     {
         global $returnMsg;
         global $allFileList;
+        global $allRunLogFileList;
         global $allFolderList;
         global $cardNameList;
         global $machineIDList;
@@ -387,6 +388,7 @@ class CGenReportFlatData
                     $tmpDestPath = $tmpDestFolder . "/" . $resultFileName3;
                     if (file_exists($tmpSrcPath))
                     {
+                        $allRunLogFileList []= $tmpSrcPath;
                         // copy runlog.txt to report folder
                         // will be attached to report later
                         if (is_dir($tmpDestFolder) == false)
@@ -494,10 +496,23 @@ class CGenReportFlatData
 	{
         global $returnMsg;
         global $allFileList;
+        global $allRunLogFileList;
         global $allFolderList;
         global $cardNameList;
+        global $swtTempReportConfigJsonName2;
+        global $reportFolder;
 
         $tmpResult = $this->checkFiles($_batchPathName, "", -1, 0, "");
+        
+        // save runlog.txt paths for reading tests run time
+        // on generating reports
+        $tmpObj = array();
+        $tmpObj["allRunLogFileList"] = $allRunLogFileList;
+        $tmpObj["cardNameList"] = $cardNameList;
+        
+        $t1 = json_encode($tmpObj);
+        file_put_contents($reportFolder . "/" . $swtTempReportConfigJsonName2,
+                          $t1);
 
         return $tmpResult;
     }

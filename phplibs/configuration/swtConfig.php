@@ -17,6 +17,8 @@ $usernameServerDBA = "\\davychen";
 $passwordServerDBA = "amd@123";
 
 $swtTempReportConfigJsonName = "tmpReportConnection.json";
+$swtTempReportConfigJsonName2 = "tmpReportConnection2.json";
+$swtTempRunLogJsonName = "tmpReportRunLog.json";
 $swtTempVBAConfigJsonName = "tmpVBAConnection.json";
 $swtTempVBAName = "tmpVBA.json";
 

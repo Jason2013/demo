@@ -824,6 +824,7 @@ class CGenReport
         }
 
         $testNameList = array();
+        $testIDList = array();
         $subjectNameList = array();
         $subjectFilterNameList = array();
         $subjectNameFilterNumList = array();
@@ -833,6 +834,7 @@ class CGenReport
         while ($row1 = $db->fetchRow())
         {
             array_push($testNameList, $row1[7]);
+            array_push($testIDList, $row1[0]);
             array_push($subjectNameList, $row1[8]);
             $subjectNameFilterNum = intval($row1[6]);
             array_push($subjectNameFilterNumList, $subjectNameFilterNum);
@@ -844,6 +846,7 @@ class CGenReport
         
         $returnSet = array();
         $returnSet["testNameList"] = $testNameList;
+        $returnSet["testIDList"] = $testIDList;
         $returnSet["subjectNameList"] = $subjectNameList;
         $returnSet["unitNameList"] = $unitNameList;
         $returnSet["subjectNameFilterNumMax"] = $subjectNameFilterNumMax;
@@ -2097,6 +2100,325 @@ class CGenReport
         return $tmpTestCaseList;
     }
     
+    public function writeStatistics($_fileHandle)
+    {
+        global $envDefaultInfo;
+        global $resultPos;
+        global $resultIDList;
+        global $startResultID;
+        global $cmpStartResultID;
+        global $sysNameList;
+        global $cpuNameList;
+        global $cardNameList;
+        global $sClockNameList;
+        global $mClockNameList;
+        global $gpuMemNameList;
+        global $sysMemNameList;
+        global $changeListNumList;
+        global $driverNameList;
+        global $umdNameList;
+        global $reportTemplateDir;
+        global $startStyleID;
+        global $logStoreDir;
+        global $logFileFolder;
+        global $tmpCardName;
+        global $tmpSysName;
+        global $cmpCardName;
+        global $cmpSysName;
+        global $swtTempReportConfigJsonName2;
+        global $reportFolder;
+        global $returnMsg;
+        global $testNameList;
+        global $testIDList;
+        global $reportUmdNum;
+        global $db;
+        global $historyBatchMaxNum;
+        
+        
+        $allDataList = array();
+        
+        $ordinalNameList = array("Current", 
+                                 "Previous1",
+                                 "Previous2",
+                                 "Previous3",
+                                 "Previous4",
+                                 "Previous5");
+        
+        $sheetCode = "<Worksheet ss:Name=\"Statistics\">\n" .
+                     "<Table x:FullColumns=\"1\" " .
+                     "x:FullRows=\"1\" ss:DefaultRowHeight=\"15\">\n" .
+                     "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"60\"/>\n" .
+                     "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"60\"/>\n" .
+                     "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"100\"/>\n";
+                     
+        for ($i = 0; $i < $historyBatchMaxNum; $i++)
+        {
+            $sheetCode .= "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"120\"/>\n";
+            if ($i < ($historyBatchMaxNum - 1))
+            {
+                $sheetCode .= "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"50\"/>\n";
+            }
+        }
+                     
+        // top line
+        $sheetCode .= "<Row ss:StyleID=\"Default\">\n";
+        $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 12) . "\"><Data ss:Type=\"String\"></Data></Cell>\n";
+        $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 12) . "\"><Data ss:Type=\"String\"></Data></Cell>\n";
+        $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 10) . "\"><Data ss:Type=\"String\">Variance</Data></Cell>\n";
+        for ($i = 0; $i < $historyBatchMaxNum; $i++)
+        {
+            $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 12) . "\"><Data ss:Type=\"String\">" . $ordinalNameList[$i] . "</Data></Cell>\n";
+            if ($i < ($historyBatchMaxNum - 1))
+            {
+                $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 12) . "\"><Data ss:Type=\"String\"></Data></Cell>\n";
+            }
+        }
+        $sheetCode .= "</Row>\n";
+        
+        // title line
+        $sheetCode .= "<Row ss:StyleID=\"Default\">\n";
+        $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">Tests</Data></Cell>\n";
+        $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">API</Data></Cell>\n";
+        $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 13) . "\"><Data ss:Type=\"String\"></Data></Cell>\n";
+        for ($i = 0; $i < $historyBatchMaxNum; $i++)
+        {
+            $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">Run Time (s)</Data></Cell>\n";
+            if ($i < ($historyBatchMaxNum - 1))
+            {
+                $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\"><Data ss:Type=\"String\"></Data></Cell>\n";
+            }
+        }
+        $sheetCode .= "</Row>\n";
+                     
+        $hasLines = 0;
+        
+        for ($i = 0; $i < count($testIDList); $i++)
+        {
+            $tmpTestID = $testIDList[$i];
+            $tmpTestName = $testNameList[$i];
+            
+            for ($j = 0; $j < count($umdNameList); $j++)
+            {
+                $tmpAPIName = $umdNameList[$j];
+            
+                $sqlPieceList01 = array();
+                $sqlParamList01 = array();
+                for ($k = 1; $k < $historyBatchMaxNum; $k++)
+                {
+                    $t1 = "t" . ($k);
+                    $sqlPieceList01 []= "(SELECT " . $t1 . ".data_value " .
+                                        "FROM mis_table_data_test_Statistics " . $t1 . " " .
+                                        "WHERE (" . $t1 . ".result_id=? AND " . $t1 . ".test_id=?) LIMIT 1)";
+                                        
+                    
+                    if (($startResultID + $j) < count($resultIDList[$k]))
+                    {
+                        $sqlParamList01 []= $resultIDList[$k][$startResultID + $j];
+                    }
+                    else
+                    {
+                        $sqlParamList01 []= PHP_INT_MAX;
+                    }
+                    
+                    $sqlParamList01 []= $tmpTestID;
+                }
+                
+                $sqlPiece01 = implode(",", $sqlPieceList01);
+
+                $params1 = $sqlParamList01;
+                if (($startResultID + $j) < count($resultIDList[0]))
+                {
+                    $params1 []= $resultIDList[0][$startResultID + $j];
+                }
+                else
+                {
+                    $params1 []= PHP_INT_MAX;
+                }
+                $params1 []= $tmpTestID;
+                $sql1 = "SELECT t0.data_value2, t0.data_value, " .
+                        $sqlPiece01 .
+                        "FROM mis_table_data_test_Statistics t0 " .
+                        "WHERE (t0.result_id=? AND t0.test_id=?)";
+                
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return null;
+                }
+                
+                $row1 = $db->fetchRow();
+                
+                if ($row1 != false)
+                {
+                    // data line
+                    
+                    $tmpName = $j == 0 ? $tmpTestName : "";
+                    $sheetCode .= "<Row ss:StyleID=\"Default\">\n";
+                    $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" . $tmpName . "</Data></Cell>\n";
+                    $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" . $tmpAPIName . "</Data></Cell>\n";
+                    $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 13) . "\"><Data ss:Type=\"Number\">" . $row1[0] . "</Data></Cell>\n";
+                    for ($k = 0; $k < $historyBatchMaxNum; $k++)
+                    {
+                        $rcID1 = (4 + $k * 2);
+                        $rcID2 = (4 + $k * 2 + 2);
+                        
+                        $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"Number\">" . $row1[$k + 1] . "</Data></Cell>\n";
+                        if ($k < ($historyBatchMaxNum - 1))
+                        {
+                            //$sheetCode .= "<Cell ss:StyleID=\"Default\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                            
+                            $sheetCode .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
+                                          "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
+                                          "RC" . $rcID2 . "=&quot;&quot;," .
+                                          "RC" . $rcID1 . "=0," .
+                                          "RC" . $rcID2 . "=0" .
+                                          "),&quot;&quot;," .
+                                          "(RC" . $rcID1 . // 4
+                                          "-RC" . $rcID2 . // 6
+                                          ")/RC" . $rcID2 . ")\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                        }
+                    }
+                    $sheetCode .= "</Row>\n";
+                    
+                    $hasLines++;
+                }
+            }
+            
+        }
+        
+        if ($hasLines > 0)
+        {
+            fwrite($_fileHandle, $sheetCode);
+            $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet004B.txt");
+            fwrite($_fileHandle, $xmlSection);
+        }
+        
+        
+        return;
+        
+        $tmpJsonPath = $reportFolder . "/" . $swtTempReportConfigJsonName2;
+        $t2 = file_get_contents($tmpJsonPath);
+        $tmpObj = json_decode($t2, true);
+        
+        $tmpAllRunLogFileList = $tmpObj["allRunLogFileList"];
+        //$tmpCardNameList = $tmpObj["cardNameList"];
+        $tmpCardNameList = array();
+        foreach ($tmpObj["cardNameList"] as $tmpName)
+        {
+            $tmpCardNameList []= strtolower($tmpName);
+        }
+        
+        $tmpKeys = array_keys($tmpCardNameList, strtolower($tmpCardName . "_" . $tmpSysName));
+        
+        if (count($tmpKeys) == 0)
+        {
+            $returnMsg["runlogTmpKeys"] = $tmpKeys;
+            $returnMsg["tmpAllRunLogFileList"] = $tmpAllRunLogFileList;
+            $returnMsg["tmpCardNameList"] = $tmpCardNameList;
+            return;
+        }
+        
+        $tmpSrcPath = $tmpAllRunLogFileList[$tmpKeys[0]];
+        if (file_exists($tmpSrcPath) == false)
+        {
+            $returnMsg["runlogTmpSrcPath"] = $tmpSrcPath;
+            $returnMsg["runlogTmpKeys"] = $tmpKeys;
+            $returnMsg["tmpAllRunLogFileList"] = $tmpAllRunLogFileList;
+            $returnMsg["tmpCardNameList"] = $tmpCardNameList;
+            return;
+        }
+        
+        $tmpDestFileHandle = fopen($tmpSrcPath, "r");
+        fseek($tmpDestFileHandle, 0, SEEK_SET);
+        
+        //if ($cmpStartResultID != -1)
+        
+        $sheetCode = "<Worksheet ss:Name=\"Statistics\">\n" .
+                     "<Table x:FullColumns=\"1\" " .
+                     "x:FullRows=\"1\" ss:DefaultRowHeight=\"15\">\n";
+                     
+        $testStep = 0;
+        $reachStep = 0;
+        $hasLines = 0;
+        
+        while ($tmpLine = fgets($tmpDestFileHandle))
+        {
+            $trimedLine = trim($tmpLine);
+            $t3 = substr($trimedLine, 0, 5);
+            if (strcmp("-----", $t3) == 0)
+            {
+                $testStep++;
+                continue;
+            }
+            if ($testStep == 0)
+            {
+                continue;
+            }
+            if (($testStep > 0) &&
+                ($reachStep == 0))
+            {
+                $tmpRet1 = strpos(strtolower($trimedLine), "microb");
+                $tmpRet2 = strpos(strtolower($trimedLine), "statistics");
+                
+                //if (strcmp("microbech statistics", strtolower($trimedLine)) == 0)
+                if (($tmpRet1 !== false) &&
+                    ($tmpRet2 !== false))
+                {
+                    $reachStep++;
+                    continue;
+                }
+            }
+            
+            if (($testStep > 3) &&
+                ($reachStep > 0))
+            {
+                break;
+            }
+            
+            if (($testStep > 1) &&
+                ($reachStep > 0))
+            {
+                $tmpDataList = explode(",", $trimedLine);
+                // Microbech Statistics have 8 columns
+                if (count($tmpDataList) < 8)
+                {
+                    continue;
+                }
+                
+                $sheetCode .= "<Row ss:StyleID=\"Default\">\n";
+                
+                foreach ($tmpDataList as $tmpData)
+                {
+                    $tmpData = trim($tmpData);
+                    if (is_numeric($tmpData))
+                    {
+                        $sheetCode .= "<Cell ss:StyleID=\"Default\"><Data ss:Type=\"Number\">" . $tmpData . "</Data></Cell>\n";
+                    }
+                    else
+                    {
+                        $sheetCode .= "<Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . $tmpData . "</Data></Cell>\n";
+                    }
+                }
+                $hasLines++;
+
+                $sheetCode .= "</Row>\n";
+            }
+        }
+
+        fclose($tmpDestFileHandle);
+        
+        //unlink($tmpJsonPath);
+
+        if ($hasLines > 0)
+        {
+            fwrite($_fileHandle, $sheetCode);
+            $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet004B.txt");
+            fwrite($_fileHandle, $xmlSection);
+        }
+    }
+    
     public function writePlatformInfo($_fileHandle)
     {
         global $envDefaultInfo;
@@ -2997,6 +3319,8 @@ class CGenReport
                                               
                 $this->writePlatformInfo($_fileHandle);
                 
+                $this->writeStatistics($_fileHandle);
+                
             }
             
             // save flatdata into separate report
@@ -3107,6 +3431,8 @@ class CGenReport
 	{
         global $returnMsg;
         global $resultIDList;
+        global $swtTempReportConfigJsonName2;
+        global $reportFolder;
 
         $db = $_db;
 
@@ -3130,6 +3456,13 @@ class CGenReport
             {
                 unlink($tmpPath);
             }
+            // del runlog.txt list json
+            $tmpJsonPath = $reportFolder . "/" . $swtTempReportConfigJsonName2;
+            if (file_exists($tmpJsonPath))
+            {
+                unlink($tmpJsonPath);
+            }
+            
             // end of generating reports
             
             /*
