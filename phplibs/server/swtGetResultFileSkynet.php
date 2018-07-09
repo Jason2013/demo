@@ -154,8 +154,25 @@ if (in_array($fileParts['extension'], $fileTypes))
 $zip = new ZipArchive;
 if ($zip->open($targetFile) === TRUE)
 {
+    //$zip->extractTo($fullFolder01);
+    //$zip->close();
+    //$returnMsg["fullFolder01"] = $fullFolder01;
+    //
+    //system ("net use * /delete /y >nul 2>&1");
+    //system ( "net use \"" . $swtLogStoreDirServerDBA . "\" " . $passwordServerDBA . " /user:" . $usernameServerDBA . " /persistent:yes >nul 2>&1" );
+    //
+    //// copy result files to \\srdcvmysqldp1\PHPresultfiles\benchMax\logStore
+    //$tmpDestPath = $swtLogStoreDirServerDBA . "\\" . $pathName;
+    //if (file_exists($tmpDestPath) == false)
+    //{
+    //    @mkdir($tmpDestPath, 0777, true);
+    //}
+    //recurse_copy_fast($fullFolder01, $tmpDestPath);
+    //
+    //system ("net use * /delete /y >nul 2>&1");
+    
+    
     $zip->extractTo($fullFolder01);
-    $zip->close();
     $returnMsg["fullFolder01"] = $fullFolder01;
     
     system ("net use * /delete /y >nul 2>&1");
@@ -167,7 +184,10 @@ if ($zip->open($targetFile) === TRUE)
     {
         @mkdir($tmpDestPath, 0777, true);
     }
-    recurse_copy_fast($fullFolder01, $tmpDestPath);
+    
+    $zip->extractTo($tmpDestPath);
+    $returnMsg["tmpDestPath"] = $tmpDestPath;
+    $zip->close();
     
     system ("net use * /delete /y >nul 2>&1");
 }
