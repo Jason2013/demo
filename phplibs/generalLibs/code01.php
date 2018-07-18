@@ -61,7 +61,8 @@ $swtTestBatchStateString = array("submitted",
 $swtTestBatchGroupString = array("out user",
                                  "routine report",
                                  "temp report",
-                                 "shaderBench");
+                                 "shaderBench",
+                                 "skynet report");
 
 // show tables like 'mis_table_data_test_%'
 // show columns from tablename
@@ -191,6 +192,7 @@ array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_batch_list 
                                                                 // 1 for routine run every week
                                                                 // 2 for temp report, 
                                                                 // 3 for shaderBench report
+                                                                // 4 for skynet report
                                "  path_id INT UNSIGNED )");     // in use, log file path
 //*/
 // mis_table_task_list 6 

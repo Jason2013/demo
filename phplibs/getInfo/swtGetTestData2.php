@@ -36,7 +36,7 @@ $batchTimeList = array();
 $params1 = array();
 $sql1 = "SELECT batch_id, insert_time " .
         "FROM mis_table_batch_list " .
-        "WHERE batch_state=\"1\" AND batch_group=\"1\" ORDER BY insert_time DESC LIMIT " . $historyBatchMaxNum;
+        "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"4\") ORDER BY insert_time DESC LIMIT " . $historyBatchMaxNum;
 if ($db->QueryDB($sql1, $params1) == null)
 {
     $returnMsg["errorCode"] = 0;
@@ -439,7 +439,9 @@ for ($i = 0; $i < count($batchIDList); $i++)
                     if ($db->QueryDB($sql1, $params1) == null)
                     {
                         $returnMsg["errorCode"] = 0;
-                        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+                        $returnMsg["sql1"] = $sql1;
+                        $returnMsg["params1"] = $params1;
                         echo json_encode($returnMsg);
                         return;
                     }

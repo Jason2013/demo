@@ -25,7 +25,9 @@ class CDoMySQL
 	
 	public function ReadyDB()
 	{
-		$this->dbLink = @mysql_connect( "127.0.0.1", $this->dbUN, $this->dbPW );
+        global $db_server;
+        
+		$this->dbLink = @mysql_connect( $db_server, $this->dbUN, $this->dbPW );
         //echo "" . $this->dbUN . "-" . $this->dbPW;
 		if( ! $this->dbLink )
 		{

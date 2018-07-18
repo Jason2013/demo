@@ -471,7 +471,9 @@ class CGenReport
             {
                 // if not assign current batch id
                 $sql1 = "SELECT batch_id, batch_group FROM mis_table_batch_list " .
-                        "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") ORDER BY batch_id DESC LIMIT 1";
+                        "WHERE batch_state=\"1\" AND " .
+                        "(batch_group=\"1\" OR batch_group=\"2\" OR batch_group=\"4\") " .
+                        "ORDER BY batch_id DESC LIMIT 1";
                 
                 if ($db->QueryDB($sql1, $params1) == null)
                 {
@@ -490,17 +492,21 @@ class CGenReport
                 }
                 $tmpBatchGroup = intval($row1[1]);
                 
-                if ($tmpBatchGroup == 1)
+                if (($tmpBatchGroup == 1) ||
+                    ($tmpBatchGroup == 4))
                 {
-                    // routine report
+                    // routine report & skynet report
                     $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
-                            "WHERE batch_state=\"1\" AND batch_group=\"1\" ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
+                            "WHERE batch_state=\"1\" AND " .
+                            "(batch_group=\"1\" OR batch_group=\"4\") " .
+                            "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
                 }
                 else
                 {
                     // temp report
                     $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
-                            "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
+                            //"WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
+                            "WHERE batch_state=\"1\" AND (batch_group=\"2\") ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
                 }
             }
             else
@@ -527,12 +533,13 @@ class CGenReport
                 }
                 $tmpBatchGroup = intval($row1[1]);
                 
-                if ($tmpBatchGroup == 1)
+                if (($tmpBatchGroup == 1) ||
+                    ($tmpBatchGroup == 4))
                 {
                     // routine report
                     $params1 = array($_batchID);
                     $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
-                            "WHERE batch_id<=? AND batch_state=\"1\" AND batch_group=\"1\" " .
+                            "WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"4\") " .
                             "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
                 }
                 else
@@ -540,7 +547,8 @@ class CGenReport
                     // temp report
                     $params1 = array($_batchID);
                     $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
-                            "WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") " .
+                            //"WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") " .
+                            "WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group=\"2\") " .
                             "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
                 }
             }
@@ -777,7 +785,8 @@ class CGenReport
         $db = $_db;
         $params1 = array($_batchID);
         $sql1 = "SELECT COUNT(*) FROM mis_table_batch_list " .
-                "WHERE batch_id=? AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\" OR batch_group=\"0\")";
+                "WHERE batch_id=? AND batch_state=\"1\" AND " .
+                "(batch_group=\"1\" OR batch_group=\"2\" OR batch_group=\"0\" OR batch_group=\"4\")";
         if ($db->QueryDB($sql1, $params1) == null)
         {
             $returnMsg["errorCode"] = 0;
@@ -2210,14 +2219,20 @@ class CGenReport
                                         "FROM mis_table_data_test_Statistics " . $t1 . " " .
                                         "WHERE (" . $t1 . ".result_id=? AND " . $t1 . ".test_id=?) LIMIT 1)";
                                         
-                    
-                    if (($startResultID + $j) < count($resultIDList[$k]))
+                    if ($k >= count($resultIDList))
                     {
-                        $sqlParamList01 []= $resultIDList[$k][$startResultID + $j];
+                        $sqlParamList01 []= PHP_INT_MAX;
                     }
                     else
                     {
-                        $sqlParamList01 []= PHP_INT_MAX;
+                        if (($startResultID + $j) < count($resultIDList[$k]))
+                        {
+                            $sqlParamList01 []= $resultIDList[$k][$startResultID + $j];
+                        }
+                        else
+                        {
+                            $sqlParamList01 []= PHP_INT_MAX;
+                        }
                     }
                     
                     $sqlParamList01 []= $tmpTestID;
@@ -5232,13 +5247,21 @@ class CGenReport
             $t1 .= "LEFT JOIN " . $tableName01 . " " . $t2 . " " .
                    "ON (" . $t2 . ".result_id=? AND " .
                    "t0.sub_id=" . $t2 . ".sub_id) ";
-            if ($_resultPos < count($resultIDList[$i]))
+                   
+            if ($i >= count($resultIDList))
             {
-                $noiseResultIDList []= $resultIDList[$i][$_resultPos];
+                $noiseResultIDList []= PHP_INT_MAX;
             }
             else
             {
-                $noiseResultIDList []= PHP_INT_MAX;
+                if ($_resultPos < count($resultIDList[$i]))
+                {
+                    $noiseResultIDList []= $resultIDList[$i][$_resultPos];
+                }
+                else
+                {
+                    $noiseResultIDList []= PHP_INT_MAX;
+                }
             }
         }
         

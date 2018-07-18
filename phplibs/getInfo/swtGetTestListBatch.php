@@ -30,7 +30,7 @@ if ($db->getError() != null)
 $params1 = array($batchID);
 $sql1 = "SELECT COUNT(*) " .
         "FROM mis_table_batch_list " .
-        "WHERE batch_id = ? AND batch_state = 1 AND batch_group=\"1\"";
+        "WHERE batch_id = ? AND batch_state = 1 AND (batch_group=\"1\" OR batch_group=\"4\")";
 if ($db->QueryDB($sql1, $params1) == null)
 {
     $returnMsg["errorCode"] = 0;
@@ -54,7 +54,7 @@ if ($batchNum == 0)
     $params1 = array();
     $sql1 = "SELECT batch_id " .
             "FROM mis_table_batch_list " .
-            "WHERE batch_state = 1 AND batch_group=\"1\" " .
+            "WHERE batch_state = 1 AND (batch_group=\"1\" OR batch_group=\"4\") " .
             "ORDER BY insert_time DESC LIMIT 1";
     if ($db->QueryDB($sql1, $params1) == null)
     {

@@ -44,7 +44,9 @@ class CGenReportFlatData
                 $sql1 = "SELECT t0.*, t1.* FROM mis_table_batch_list t0 " .
                         "LEFT JOIN mis_table_path_info t1 " .
                         "USING (path_id) " .
-                        "WHERE t0.batch_state=\"1\" AND (t0.batch_group=\"1\" OR t0.batch_group=\"2\") ORDER BY t0.insert_time DESC LIMIT 1";
+                        "WHERE t0.batch_state=\"1\" AND " .
+                        "(t0.batch_group=\"1\" OR t0.batch_group=\"2\" OR t0.batch_group=\"4\") " .
+                        "ORDER BY t0.insert_time DESC LIMIT 1";
                 if ($db->QueryDB($sql1, $params1) == null)
                 {
                     $returnMsg["errorCode"] = 0;
@@ -650,7 +652,17 @@ class CGenReportFlatData
                 if ($dataSetSize > 0)
                 {
                     $tmpTestName = trim($dataSet[0]);
-                    if (strlen($tmpTestName) > 0)
+                    
+                    $isValid = true;
+                    $tmpArr = array();
+                    $tmpArr[$tmpTestName] = $tmpPos;
+                    $t1 = json_encode($tmpArr);
+                    if (strlen(trim($t1)) == 0)
+                    {
+                        $isValid = false;
+                    }
+                    
+                    if ((strlen($tmpTestName) > 0) && $isValid)
                     {
                         $testStartPosList[$i][$tmpTestName] = $tmpPos;
                     }
@@ -691,6 +703,8 @@ class CGenReportFlatData
         $curTestName = "";
         $testCaseIDPos = -1;
         $testColumnNum = 0;
+        
+        $mainContent = "";
         while($dataSet = fgetcsv($_srcFileHandle, 0, ","))
         {
             $tmpDataSet = $dataSet;
@@ -730,7 +744,8 @@ class CGenReportFlatData
                             $t1 = "<Row ss:StyleID=\"Default\">\n";
                             $t1 .= "<Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\"></Data></Cell>\n";
                             $t1 .= "</Row>\n";
-                            fwrite($_destFileHandle, $t1);
+                            //fwrite($_destFileHandle, $t1);
+                            $mainContent .= $t1;
                             $rowNum++;
                         }
                         break;
@@ -849,9 +864,12 @@ class CGenReportFlatData
                 $i++;
             }
             $t1 .= "</Row>\n";
-            fwrite($_destFileHandle, $t1);
+            //fwrite($_destFileHandle, $t1);
+            $mainContent .= $t1;
             $rowNum++;
         }
+        
+        return $mainContent;
     }
     
 	public function dumpLines($_visitedTestNameList,
@@ -869,6 +887,9 @@ class CGenReportFlatData
         global $returnMsg;
         global $templateFileName3;
         global $templateFileName4;
+        global $curCardNameList;
+        global $pairCardNameList;
+        global $allFileList;
 
         // add rows to tmp file
         foreach ($_visitedTestNameList as $tmpTestName)
@@ -877,36 +898,76 @@ class CGenReportFlatData
             {
                 continue;
             }
-            // add new sheet
-            $t1 = file_get_contents($templateFileName3);
-            $t1 = sprintf($t1, $tmpTestName);
-            fwrite($_fileHandle, $t1);
+            //$isValid = true;
+            //$tmpArr = array();
+            //$tmpArr[$tmpTestName] = 1;
+            //$t1 = json_encode($tmpArr);
+            //if (strlen(trim($t1)) == 0)
+            //{
+            //    $isValid = false;
+            //}
+            //if ($isValid == false)
+            //{
+            //    continue;
+            //}
+            
+            $hasContent = false;
+            $mainContent = "";
+            
+            //// add new sheet
+            //$t1 = file_get_contents($templateFileName3);
+            //$t1 = sprintf($t1, $tmpTestName);
+            //fwrite($_fileHandle, $t1);
             
             for ($i = 0; $i < count($_curCardNameList); $i++)
             {
                 if (array_key_exists($tmpTestName, $_testStartPosList[$i]))
                 {
+                    
                     $tmpPos = $_testStartPosList[$i][$tmpTestName];
-                    fseek($_resultFileHandleList[$i], $tmpPos, SEEK_SET);
+                    
+                    $curTmpFileName = $allFileList[$curCardNameList[$i]];
+                    $resultFileHandle = fopen($curTmpFileName, "r"); 
+                    
+                    //fseek($_resultFileHandleList[$i], $tmpPos, SEEK_SET);
+                    fseek($resultFileHandle, $tmpPos, SEEK_SET);
 
                     if ($i == 0)
                     {
-                        $this->addLinesToFlatData($_resultFileHandleList[$i],
+                        //$this->addLinesToFlatData($_resultFileHandleList[$i],
+                        //                          $_fileHandle,
+                        //                          $_tmpCardName,
+                        //                          $tmpTestName,
+                        //                          false,
+                        //                          ""); // PBBOff-
+                                                  
+                        $t1 = $this->addLinesToFlatData($resultFileHandle,
                                                   $_fileHandle,
                                                   $_tmpCardName,
                                                   $tmpTestName,
                                                   false,
                                                   ""); // PBBOff-
+                                                  
+                        $mainContent .= $t1;
                     }
                     else
                     {
-                        $this->addLinesToFlatData($_resultFileHandleList[$i],
+                        //$this->addLinesToFlatData($_resultFileHandleList[$i],
+                        //                          $_fileHandle,
+                        //                          $_tmpCardName,
+                        //                          $tmpTestName,
+                        //                          true,
+                        //                          ""); // PBBOn-
+                                                  
+                        $t1 = $this->addLinesToFlatData($resultFileHandle,
                                                   $_fileHandle,
                                                   $_tmpCardName,
                                                   $tmpTestName,
                                                   true,
                                                   ""); // PBBOn-
+                        $mainContent .= $t1;
                     }
+                    fclose($resultFileHandle);
                 }
             }
             
@@ -920,26 +981,50 @@ class CGenReportFlatData
                 {
                     if (array_key_exists($tmpTestName, $_pairTestStartPosList[$i]))
                     {
-                        
                         $returnMsg["CardNameSysName"] = $_machineIDCardNameSysNameDict[$_curPairMachineID];
                         $returnMsg["machineIDCardNameSysNameDict"] = $_machineIDCardNameSysNameDict;
                 
                         $tmpPos = $_pairTestStartPosList[$i][$tmpTestName];
-                        fseek($_pairResultFileHandleList[$i], $tmpPos, SEEK_SET);
+                        
+                        $curTmpFileName = $allFileList[$pairCardNameList[$i]];
+                        $resultFileHandle = fopen($curTmpFileName, "r"); 
+                        
+                        //fseek($_pairResultFileHandleList[$i], $tmpPos, SEEK_SET);
+                        fseek($resultFileHandle, $tmpPos, SEEK_SET);
 
-                        $this->addLinesToFlatData($_pairResultFileHandleList[$i],
+                        //$this->addLinesToFlatData($_pairResultFileHandleList[$i],
+                        //                          $_fileHandle,
+                        //                          $_machineIDCardNameSysNameDict[$_curPairMachineID],
+                        //                          $tmpTestName,
+                        //                          true,
+                        //                          "");
+                                                  
+                        $t1 = $this->addLinesToFlatData($resultFileHandle,
                                                   $_fileHandle,
                                                   $_machineIDCardNameSysNameDict[$_curPairMachineID],
                                                   $tmpTestName,
                                                   true,
                                                   "");
+                        $mainContent .= $t1;
+                        fclose($resultFileHandle);
                     }
                 }
             }
             
-            // end sheet
-            $t1 = file_get_contents($templateFileName4);
-            fwrite($_fileHandle, $t1);
+            if (strlen($mainContent) > 0)
+            {
+                // add new sheet
+                $t1 = file_get_contents($templateFileName3);
+                $t1 = sprintf($t1, $tmpTestName);
+                fwrite($_fileHandle, $t1);
+
+                // write sheet content
+                fwrite($_fileHandle, $mainContent);
+                
+                // end sheet
+                $t1 = file_get_contents($templateFileName4);
+                fwrite($_fileHandle, $t1);
+            }
         }
         
         return;

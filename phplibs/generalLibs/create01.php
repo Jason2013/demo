@@ -1,6 +1,6 @@
 <?php
 
-return;
+//return;
 
 include_once "code01.php";
 include_once "dopdo.php";
@@ -17,7 +17,7 @@ function db_create_data_table($testID)
 }
 
 $sql1 = $db_create_db01;
-$tmpLink = mysql_connect( "127.0.0.1", $db_username, $db_password );
+$tmpLink = mysql_connect( $db_server, $db_username, $db_password );
 //echo "" . $this->dbUN . "-" . $this->dbPW;
 if( ! $tmpLink )
 {

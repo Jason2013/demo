@@ -40,7 +40,7 @@ if ($userChecker->isManager())
     // manager login
     $params1 = array();
     $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
-            "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") ORDER BY insert_time DESC LIMIT 1";
+            "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\" OR batch_group=\"4\") ORDER BY insert_time DESC LIMIT 1";
             //"WHERE batch_state=\"1\" AND batch_group=\"1\" ORDER BY insert_time DESC LIMIT 1";
 }
 else
@@ -125,7 +125,7 @@ foreach ($machineIDList as $tmpMachineID)
         $sql1 = "SELECT DISTINCT (t0.batch_id), t1.insert_time FROM mis_table_result_list t0 " .
                 "LEFT JOIN mis_table_batch_list t1 USING (batch_id) " .
                 "WHERE t0.machine_id = ? AND t0.batch_id IN (SELECT batch_id FROM mis_table_batch_list " .
-                "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") " .
+                "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\" OR batch_group=\"4\") " .
                 "ORDER BY insert_time DESC) LIMIT 5";
     }
     else

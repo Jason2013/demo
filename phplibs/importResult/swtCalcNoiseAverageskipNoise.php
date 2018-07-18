@@ -431,7 +431,15 @@ else
             {
                 fseek($tmpFileHandle, $tmpFileDataOffset, SEEK_SET);
                 $t1 = fread($tmpFileHandle, $tmpDataSize + $tmpDataIDSize);
-                $valSet = unpack("i1subTestID/d1dataValue", $t1);
+                $valSet = array();
+                if (strlen($t1) < ($tmpDataSize + $tmpDataIDSize))
+                {
+                    continue;
+                }
+                else
+                {
+                    $valSet = unpack("i1subTestID/d1dataValue", $t1);
+                }
                 
                 $tmpSubTestID = $valSet["subTestID"];
                 

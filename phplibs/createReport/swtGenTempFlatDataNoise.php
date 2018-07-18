@@ -100,7 +100,8 @@ if ($returnSet["parseFinished"] == 1)
         $returnMsg["" . $tmpKey] = $tmpVal;
     }
     echo json_encode($returnMsg);
-    return $returnSet;
+    //return $returnSet;
+    return;
 }
 
 $reportFolder = $returnSet["reportFolder"];
@@ -360,9 +361,9 @@ if ($fileID <= count($uniqueCardNameList))
     $pairResultFileHandleList = array();
     for ($i = 0; $i < count($curCardNameList); $i++)
     {
-        $curTmpFileName = $allFileList[$curCardNameList[$i]];
-        $resultFileHandle = fopen($curTmpFileName, "r"); 
-        array_push($resultFileHandleList, $resultFileHandle);
+        //$curTmpFileName = $allFileList[$curCardNameList[$i]];
+        //$resultFileHandle = fopen($curTmpFileName, "r");
+        //array_push($resultFileHandleList, $resultFileHandle);
     }
     
     if ($curPairMachineID != -1)
@@ -370,11 +371,16 @@ if ($fileID <= count($uniqueCardNameList))
         // if has compare card
         for ($i = 0; $i < count($pairCardNameList); $i++)
         {
-            $curTmpFileName = $allFileList[$pairCardNameList[$i]];
-            $resultFileHandle = fopen($curTmpFileName, "r"); 
-            array_push($pairResultFileHandleList, $resultFileHandle);
+            //$curTmpFileName = $allFileList[$pairCardNameList[$i]];
+            //$resultFileHandle = fopen($curTmpFileName, "r");
+            //array_push($pairResultFileHandleList, $resultFileHandle);
         }
     }
+    
+    $returnMsg["curCardNameList_c"] = count($curCardNameList);
+    $returnMsg["resultFileHandleList_c"] = count($resultFileHandleList);
+    $returnMsg["pairCardNameList_c"] = count($pairCardNameList);
+    $returnMsg["pairResultFileHandleList_c"] = count($pairResultFileHandleList);
     
     // write result file lines to tmp file
     $flatDataGen->dumpLines($visitedTestNameList,
@@ -393,25 +399,14 @@ if ($fileID <= count($uniqueCardNameList))
     // close all src files
     foreach ($resultFileHandleList as $tmpHandle)
     {
-        fclose($tmpHandle);
+        //fclose($tmpHandle);
     }
     
     foreach ($pairResultFileHandleList as $tmpHandle)
     {
-        fclose($tmpHandle);
+        //fclose($tmpHandle);
     }
 
-    // write max column & linenum
-    //$t1 = file_get_contents($templateFileName1);
-    //$t1 = sprintf($t1, 1, 2);
-    //$n1 = strpos($t1, "00001");
-    //$n2 = strpos($t1, "0000000002");
-    //$t1 = sprintf("%05d", $columnNum);
-    //$t2 = sprintf("%010d", $rowNum);
-    //fseek($fileHandle, $n1, SEEK_SET);
-    //fwrite($fileHandle, $t1);
-    //fseek($fileHandle, $n2, SEEK_SET);
-    //fwrite($fileHandle, $t2);
     fclose($fileHandle);
     
     $columnNum = 0;

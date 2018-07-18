@@ -16,7 +16,9 @@ $logFolderName = cleaninput($_POST["logFolderName"], 128);
 $nextResultFileID = intval($_POST["nextResultFileID"]);
 $resultFileNum = intval($_POST["resultFileNum"]);
 $batchID = intval($_POST["batchID"]);
-$reportGroup = intval($_POST["reportGroup"]);
+//$reportGroup = intval($_POST["reportGroup"]);
+// skynet report
+$reportGroup = 4;
 $nextLineID = intval($_POST["nextLineID"]);
 $curTestID = intval($_POST["curTestID"]);
 $nextSubTestID = intval($_POST["nextSubTestID"]);

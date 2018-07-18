@@ -41,7 +41,7 @@ else
 $params1 = array();
 $sql1 = "SELECT * " .
         "FROM mis_table_batch_list " .
-        "WHERE " . $t1 . " AND batch_group=\"1\" " .
+        "WHERE " . $t1 . " AND (batch_group=\"1\" OR batch_group=\"4\") " .
         "ORDER BY insert_time ASC";
 if ($db->QueryDB($sql1, $params1) == null)
 {

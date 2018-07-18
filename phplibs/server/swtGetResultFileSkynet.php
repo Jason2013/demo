@@ -42,7 +42,7 @@ if ($db->getError() != null)
 $params1 = array();
 $sql1 = "SELECT t0.batch_id, t0.path_id, t1.path_name FROM mis_table_batch_list t0 " .
         "LEFT JOIN mis_table_path_info t1 USING(path_id) " .
-        "WHERE t0.batch_group=\"1\" AND YEARWEEK(t0.insert_time)=YEARWEEK(NOW()) ORDER BY t0.batch_id DESC ";
+        "WHERE t0.batch_group=\"4\" AND YEARWEEK(t0.insert_time)=YEARWEEK(NOW()) ORDER BY t0.batch_id DESC ";
 if ($db->QueryDB($sql1, $params1) == null)
 {
     $returnMsg["errorCode"] = 0;
@@ -109,7 +109,7 @@ if ($row1 == false)
     $params1 = array($pathID);
     $sql1 = "INSERT INTO mis_table_batch_list " .
             "(insert_time, batch_state, batch_group, path_id) " .
-            "VALUES (NOW(), \"1\", \"1\", ?)";
+            "VALUES (NOW(), \"1\", \"4\", ?)";
     if ($db->QueryDB($sql1, $params1) == null)
     {
         $returnMsg["errorCode"] = 0;
@@ -185,7 +185,7 @@ if ($zip->open($targetFile) === TRUE)
         @mkdir($tmpDestPath, 0777, true);
     }
     
-    $zip->extractTo($tmpDestPath);
+    @$zip->extractTo($tmpDestPath);
     $returnMsg["tmpDestPath"] = $tmpDestPath;
     $zip->close();
     

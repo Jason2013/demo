@@ -16,12 +16,13 @@ class CPdoMySQL
     
 	public function __construct()
 	{
+        global $db_server;
         global $db_dbname;
         global $db_username;
         global $db_password;
 
         $this->dbResult = null;
-        $dsn = "mysql:dbname=" . $db_dbname . ";host=127.0.0.1";
+        $dsn = "mysql:dbname=" . $db_dbname . ";host=" . $db_server;
         
         $this->dbError = null;
         try
