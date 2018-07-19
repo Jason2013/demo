@@ -25,18 +25,20 @@ $params1 = array();
 $sql1 = "";
 if ($batchNum == -1)
 {
-    $params1 = array($batchGroup, $batchState);
+    //$params1 = array($batchGroup, $batchState);
+    $params1 = array($batchState);
     $sql1 = "SELECT * " .
             "FROM mis_table_batch_list " .
-            "WHERE batch_group = ? AND batch_state = ? " .
+            "WHERE (batch_group=1 OR batch_group=4) AND batch_state = ? " .
             "ORDER BY insert_time DESC";
 }
 else
 {
-    $params1 = array($batchGroup, $batchState, $batchNum);
+    //$params1 = array($batchGroup, $batchState, $batchNum);
+    $params1 = array($batchState, $batchNum);
     $sql1 = "SELECT * " .
             "FROM mis_table_batch_list " .
-            "WHERE batch_group = ? AND batch_state = ? " .
+            "WHERE (batch_group=1 OR batch_group=4) AND batch_state = ? " .
             "ORDER BY insert_time DESC LIMIT ?";
 }
 
