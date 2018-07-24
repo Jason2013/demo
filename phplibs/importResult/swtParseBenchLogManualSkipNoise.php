@@ -853,6 +853,15 @@ function swtParseLogFile($_pathName, $_machineID, $_noiseDataID, $_noiseDataNum)
             $data[$i] = trim($data[$i]);
         }
         $tmpName = trim($data[0]);
+        
+        // if info lines
+        if (strlen($data[0]) > 0)
+        {
+            if ($data[0][0] == '[')
+            {
+                continue;
+            }
+        }
 
         if (strlen($tmpName) > 0)
         {
@@ -1092,6 +1101,15 @@ function swtParseLogFile($_pathName, $_machineID, $_noiseDataID, $_noiseDataNum)
             $data[$i] = trim($data[$i]);
         }
         $tmpName = $data[0];
+        
+        // if info lines
+        if (strlen($data[0]) > 0)
+        {
+            if ($data[0][0] == '[')
+            {
+                continue;
+            }
+        }
 
         if (strlen($tmpName) > 0)
         {

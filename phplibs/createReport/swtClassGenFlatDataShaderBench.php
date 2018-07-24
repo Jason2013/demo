@@ -643,6 +643,16 @@ class CGenReportFlatData
                 if ($dataSetSize > 0)
                 {
                     $tmpTestName = trim($dataSet[0]);
+                    
+                    // if info lines
+                    if (strlen($dataSet[0]) > 0)
+                    {
+                        if ($dataSet[0][0] == '[')
+                        {
+                            continue;
+                        }
+                    }
+                    
                     if (strlen($tmpTestName) > 0)
                     {
                         $testStartPosList[$i][$tmpTestName] = $tmpPos;
@@ -723,6 +733,15 @@ class CGenReportFlatData
             {
                 $tmpSrcTestName = trim($dataSet[0]);
                 
+                // if info lines
+                if (strlen($dataSet[0]) > 0)
+                {
+                    if ($dataSet[0][0] == '[')
+                    {
+                        continue;
+                    }
+                }
+                
                 if (strlen($tmpSrcTestName) > 0)
                 {
                     // start of a test
@@ -766,6 +785,15 @@ class CGenReportFlatData
             if ($dataSetSize > 0)
             {
                 $tmpSrcTestName = trim($dataSet[0]);
+                
+                // if info lines
+                if (strlen($dataSet[0]) > 0)
+                {
+                    if ($dataSet[0][0] == '[')
+                    {
+                        continue;
+                    }
+                }
                 
                 if (strlen($tmpSrcTestName) > 0)
                 {

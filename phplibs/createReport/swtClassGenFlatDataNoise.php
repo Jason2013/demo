@@ -653,6 +653,15 @@ class CGenReportFlatData
                 {
                     $tmpTestName = trim($dataSet[0]);
                     
+                    // if info lines
+                    if (strlen($dataSet[0]) > 0)
+                    {
+                        if ($dataSet[0][0] == '[')
+                        {
+                            continue;
+                        }
+                    }
+                    
                     $isValid = true;
                     $tmpArr = array();
                     $tmpArr[$tmpTestName] = $tmpPos;
@@ -719,6 +728,15 @@ class CGenReportFlatData
             if ($dataSetSize > 0)
             {
                 $tmpSrcTestName = trim($dataSet[0]);
+                
+                // if info lines
+                if (strlen($dataSet[0]) > 0)
+                {
+                    if ($dataSet[0][0] == '[')
+                    {
+                        continue;
+                    }
+                }
                 
                 if (strlen($tmpSrcTestName) > 0)
                 {

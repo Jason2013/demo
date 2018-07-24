@@ -755,6 +755,16 @@ class CGenReportFlatData
                         array_push($dataSet, trim($tmpData));
                     }
                     $curTestName = $dataSet[0];
+                    
+                    // if info lines
+                    if (strlen($dataSet[0]) > 0)
+                    {
+                        if ($dataSet[0][0] == '[')
+                        {
+                            continue;
+                        }
+                    }
+                    
                     if (strlen($curTestName) > 0)
                     {
                         // test title line
@@ -919,6 +929,16 @@ class CGenReportFlatData
                         array_push($dataSet, trim($tmpData));
                     }
                     $curTestName = $dataSet[0];
+                    
+                    // if info lines
+                    if (strlen($dataSet[0]) > 0)
+                    {
+                        if ($dataSet[0][0] == '[')
+                        {
+                            continue;
+                        }
+                    }
+                    
                     if (strlen($curTestName) > 0)
                     {
                         // test title line
