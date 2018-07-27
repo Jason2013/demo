@@ -91,8 +91,10 @@ if ($returnSet === null)
 }
 $batchID = $returnSet["batchID"];
 $batchIDList = $returnSet["batchIDList"];
+$batchDateTextList = $returnSet["batchDateTextList"];
 $returnMsg["batchID"] = $batchID;
 $returnMsg["batchIDList"] = $batchIDList;
+$returnMsg["batchDateTextList"] = $batchDateTextList;
 
 // set up folder for report xml
 $returnSet = $xmlWriter->prepareReportFolder($reportType, $batchID, $curReportFolder);
