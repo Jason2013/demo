@@ -450,6 +450,12 @@ else
                 }
             }
             
+            if (intval($tmpSubTestID) == -1)
+            {
+                // if invalid test case id
+                continue;
+            }
+            
             $tmpAvg = 0.0;
             $tmpVariance = 0.0;
             
