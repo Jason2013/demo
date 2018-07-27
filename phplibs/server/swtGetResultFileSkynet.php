@@ -199,7 +199,10 @@ else
     return;
 }
 
-unlink($targetFile);
+if (is_writable($targetFile))
+{
+    @unlink($targetFile);
+}
 
 
 // delete old reports
