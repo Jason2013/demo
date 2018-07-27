@@ -448,6 +448,7 @@ class CGenReport
         $db = $_db;
         $batchID = $_batchID;
         $batchIDList = array();
+        $batchDateTextList = array();
 
         $b1 = true;
         if ($_batchID == -1)
@@ -496,7 +497,7 @@ class CGenReport
                     ($tmpBatchGroup == 4))
                 {
                     // routine report & skynet report
-                    $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
+                    $sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
                             "WHERE batch_state=\"1\" AND " .
                             "(batch_group=\"1\" OR batch_group=\"4\") " .
                             "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
@@ -504,7 +505,7 @@ class CGenReport
                 else
                 {
                     // temp report
-                    $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
+                    $sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
                             //"WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
                             "WHERE batch_state=\"1\" AND (batch_group=\"2\") ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
                 }
@@ -538,7 +539,7 @@ class CGenReport
                 {
                     // routine report
                     $params1 = array($_batchID);
-                    $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
+                    $sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
                             "WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"4\") " .
                             "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
                 }
@@ -546,7 +547,7 @@ class CGenReport
                 {
                     // temp report
                     $params1 = array($_batchID);
-                    $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
+                    $sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
                             //"WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") " .
                             "WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group=\"2\") " .
                             "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
@@ -561,7 +562,9 @@ class CGenReport
             {
                 // if not assign current batch id
                 $params1 = array($userID);
-                $sql1 = "SELECT t0.batch_id FROM mis_table_user_batch_info t0 " .
+                $sql1 = "SELECT t0.batch_id, DATE_FORMAT(t2.insert_time, \"%b %e\") FROM mis_table_user_batch_info t0 " .
+                        "LEFT JOIN mis_table_batch_list t2 " .
+                        "USING (batch_id) " .
                         "WHERE t0.user_id = ? AND t0.batch_id IN " .
                         "(SELECT t1.batch_id FROM mis_table_batch_list t1 " .
                         "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
@@ -571,7 +574,9 @@ class CGenReport
             {
                 // if assign current batch id
                 $params1 = array($userID, $_batchID);
-                $sql1 = "SELECT t0.batch_id FROM mis_table_user_batch_info t0 " .
+                $sql1 = "SELECT t0.batch_id, DATE_FORMAT(t2.insert_time, \"%b %e\") FROM mis_table_user_batch_info t0 " .
+                        "LEFT JOIN mis_table_batch_list t2 " .
+                        "USING (batch_id) " .
                         "WHERE t0.user_id = ? AND t0.batch_id <= ? AND t0.batch_id IN " .
                         "(SELECT t1.batch_id FROM mis_table_batch_list t1 " .
                         "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
@@ -590,15 +595,22 @@ class CGenReport
         while ($row1 = $db->fetchRow())
         {
             array_push($batchIDList, intval($row1[0]));
+            array_push($batchDateTextList, $row1[1]);
         }
         if (count($batchIDList) > 0)
         {
             $batchID = $batchIDList[0];
         }
         
+        for ($i = count($batchDateTextList); $i < $historyBatchMaxNum; $i++)
+        {
+            array_push($batchDateTextList, "");
+        }
+        
         $returnSet = array();
         $returnSet["batchID"] = $batchID;
         $returnSet["batchIDList"] = $batchIDList;
+        $returnSet["batchDateTextList"] = $batchDateTextList;
         return $returnSet;
     }
     
@@ -2144,6 +2156,7 @@ class CGenReport
         global $reportUmdNum;
         global $db;
         global $historyBatchMaxNum;
+        global $batchDateTextList;
         
         
         $allDataList = array();
@@ -2178,7 +2191,8 @@ class CGenReport
         $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 10) . "\"><Data ss:Type=\"String\">Variance</Data></Cell>\n";
         for ($i = 0; $i < $historyBatchMaxNum; $i++)
         {
-            $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 12) . "\"><Data ss:Type=\"String\">" . $ordinalNameList[$i] . "</Data></Cell>\n";
+            //$sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 12) . "\"><Data ss:Type=\"String\">" . $ordinalNameList[$i] . "</Data></Cell>\n";
+            $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 12) . "\"><Data ss:Type=\"String\">" . $batchDateTextList[$i] . "</Data></Cell>\n";
             if ($i < ($historyBatchMaxNum - 1))
             {
                 $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 12) . "\"><Data ss:Type=\"String\"></Data></Cell>\n";
@@ -4834,6 +4848,7 @@ class CGenReport
         global $tableName01;
         global $resultIDList;
         global $resultPos;
+        global $batchDateTextList;
 
         $db = $_db;
         $lineNum = $_lineNum;
@@ -4917,8 +4932,10 @@ class CGenReport
             
             for ($i = 0; $i < $historyBatchMaxNum; $i++)
             {
+                //$tmpCode5 .= "<Cell ss:StyleID=\"s" . ($startStyleID + 12) . "\"><Data ss:Type=\"String\">" . 
+                //             $ordinalNameList[$i] . "</Data></Cell>\n";
                 $tmpCode5 .= "<Cell ss:StyleID=\"s" . ($startStyleID + 12) . "\"><Data ss:Type=\"String\">" . 
-                             $ordinalNameList[$i] . "</Data></Cell>\n";
+                             $batchDateTextList[$i] . "</Data></Cell>\n";
                              
                 if ($i < ($historyBatchMaxNum - 1))
                 {
