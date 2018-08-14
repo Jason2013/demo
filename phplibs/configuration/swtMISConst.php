@@ -43,7 +43,7 @@ $swtClientMachineConfigurationNames = array("machineName",
 $swtUmdNameList = array("D3D11", "D3D12", "Vulkan", "OpenGL", "Metal");
 $swtUmdNameList_old =   array("DX11",  "DX12",  "Vulkan", "OpenGL", "OGL",    "D3D11_NATIVE", "Metal");
 $swtUmdNameList_final = array("D3D11", "D3D12", "Vulkan", "OpenGL", "OpenGL", "D3D11",        "Metal");
-$swtUmdStandardOrder = array("Vulkan", "D3D12", "D3D11", "OpenGL", "Metal");
+$swtUmdStandardOrder = array("Vulkan", "D3D11", "D3D12", "OpenGL", "Metal");
 
 $swtUmdNameList_sb = array("SCPC", "LLPC", "RADV", "NVIDIA", "OPT1");
 $swtUmdStandardOrder_sb = array("SCPC", "LLPC", "RADV", "NVIDIA", "OPT1");
