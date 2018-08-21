@@ -238,7 +238,7 @@ function swtDelFileTree($dir)
          else
              @unlink($file);
      }
-     rmdir($dir);
+     @rmdir($dir);
 }
 
 // copy folder
