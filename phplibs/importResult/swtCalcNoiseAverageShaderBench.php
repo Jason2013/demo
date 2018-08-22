@@ -14,6 +14,8 @@ $batchID = intval($_POST["batchID"]);
 $resultPos = intval($_POST["resultPos"]);
 $testPos = intval($_POST["testPos"]);
 $testCasePos = intval($_POST["testCasePos"]);
+$curTestCaseNum = intval($_POST["curTestCaseNum"]);
+$curTestNoiseNum = intval($_POST["curTestNoiseNum"]);
 
 $returnMsg = array();
 $returnMsg["errorCode"] = 1;
@@ -231,78 +233,124 @@ else
     $returnMsg["tmpTableName02"] = $tmpTableName02;
     
     // clear expired 5 noise data
-    if (($resultPos == 0) &&
-        ($testCasePos == 0))
-    {
-        $params1 = array();
-        $sql1 = "SELECT DISTINCT t0.result_id, " .
-                "DATEDIFF(NOW(), (SELECT t1.insert_time FROM mis_table_result_list t1 WHERE t1.result_id=t0.result_id)) " .
-                "FROM " . $tmpTableName02 . " t0;";
-        
-        if ($db->QueryDB($sql1, $params1) == null)
-        {
-            $returnMsg["errorCode"] = 0;
-            $returnMsg["sql1"] = $sql1;
-            $returnMsg["tmpTableName02"] = $tmpTableName02;
-            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-            echo json_encode($returnMsg);
-            return null;
-        }
-        
-        $expiredResultIDList = array();
-        
-        while ($row1 = $db->fetchRow())
-        {
-            $tmpDays = intval($row1[1]);
-            
-            if ($tmpDays >= $swtNoiseDataExpireDayNum)
-            {
-                array_push($expiredResultIDList, $row1[0]);
-            }
-        }
-        
-        foreach ($expiredResultIDList as $tmpResultID)
-        {
-            $params1 = array($tmpResultID);
-            $sql1 = "DELETE FROM " . $tmpTableName02 . " " .
-                    "WHERE result_id=?";
-            if ($db->QueryDB($sql1, $params1) == null)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-                echo json_encode($returnMsg);
-                return null;
-            }
-        }
-    }
+    //if (($resultPos == 0) &&
+    //    ($testCasePos == 0))
+    //{
+    //    $params1 = array();
+    //    $sql1 = "SELECT DISTINCT t0.result_id, " .
+    //            "DATEDIFF(NOW(), (SELECT t1.insert_time FROM mis_table_result_list t1 WHERE t1.result_id=t0.result_id)) " .
+    //            "FROM " . $tmpTableName02 . " t0;";
+    //    
+    //    if ($db->QueryDB($sql1, $params1) == null)
+    //    {
+    //        $returnMsg["errorCode"] = 0;
+    //        $returnMsg["sql1"] = $sql1;
+    //        $returnMsg["tmpTableName02"] = $tmpTableName02;
+    //        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+    //        echo json_encode($returnMsg);
+    //        return null;
+    //    }
+    //    
+    //    $expiredResultIDList = array();
+    //    
+    //    while ($row1 = $db->fetchRow())
+    //    {
+    //        $tmpDays = intval($row1[1]);
+    //        
+    //        if ($tmpDays >= $swtNoiseDataExpireDayNum)
+    //        {
+    //            array_push($expiredResultIDList, $row1[0]);
+    //        }
+    //    }
+    //    
+    //    foreach ($expiredResultIDList as $tmpResultID)
+    //    {
+    //        $params1 = array($tmpResultID);
+    //        $sql1 = "DELETE FROM " . $tmpTableName02 . " " .
+    //                "WHERE result_id=?";
+    //        if ($db->QueryDB($sql1, $params1) == null)
+    //        {
+    //            $returnMsg["errorCode"] = 0;
+    //            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+    //            echo json_encode($returnMsg);
+    //            return null;
+    //        }
+    //    }
+    //}
     
     // calc and insert average
     
-    $params1 = array($resultIDList[$resultPos]);
-    $sql1 = "SELECT COUNT(*) FROM " . $tmpTableName02 . " " .
-            "WHERE result_id=? AND noise_id=0";
+    //$params1 = array($resultIDList[$resultPos]);
+    //$sql1 = "SELECT COUNT(*) FROM " . $tmpTableName02 . " " .
+    //        "WHERE result_id=? AND noise_id=0";
+    //
+    //if ($db->QueryDB($sql1, $params1) == null)
+    //{
+    //    $returnMsg["errorCode"] = 0;
+    //    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+    //    echo json_encode($returnMsg);
+    //    return null;
+    //}
+    //
+    //$row1 = $db->fetchRow();
+    //
+    //if ($row1 == false)
+    //{
+    //    $returnMsg["errorCode"] = 0;
+    //    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+    //    echo json_encode($returnMsg);
+    //    return null;
+    //}
+    //
+    //$curTestCaseNum = intval($row1[0]);
 
-    if ($db->QueryDB($sql1, $params1) == null)
+    //$returnMsg["curTestCaseNum"] = $curTestCaseNum;
+    
+    if ($testCasePos == 0)
     {
-        $returnMsg["errorCode"] = 0;
-        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-        echo json_encode($returnMsg);
-        return null;
+        
+        $tmpBatchFolder = $swtTempFilesDir . "/batch" . $batchID;
+        
+        $tmpNoiseNum = 0;
+        while (true)
+        {
+            $tmpFileName = $tmpBatchFolder . "/dataFile_" . 
+                                             $resultIDList[$resultPos]  . "_" .
+                                             $curTestName               . "_" .
+                                             $tmpNoiseNum               . ".txt";
+                                             
+            if (file_exists($tmpFileName) == false)
+            {
+                break;
+            }
+            $tmpNoiseNum++;
+        }
+        $tmpDataNum = 0;
+        if ($tmpNoiseNum > 0)
+        {
+            $tmpFileName = $tmpBatchFolder . "/dataFile_" . 
+                                             $resultIDList[$resultPos]  . "_" .
+                                             $curTestName               . "_" .
+                                             0                          . ".txt";
+                                             
+            $n1 = filesize($tmpFileName);
+            
+            $t1 = pack("d", 0.0);
+            $tmpDataSize = strlen($t1);
+            $t1 = pack("i", 0);
+            $tmpDataIDSize = strlen($t1);
+            
+            $tmpDataNum = intval($n1 / ($tmpDataSize * 4 + $tmpDataIDSize * 2));
+        }
+        
+        
+        $curTestCaseNum = $tmpDataNum;
+        $returnMsg["curTestCaseNum"] = $curTestCaseNum;
+        
+        $curTestNoiseNum = $tmpNoiseNum;
+        $returnMsg["curTestNoiseNum"] = $curTestNoiseNum;
     }
     
-    $row1 = $db->fetchRow();
-    
-    if ($row1 == false)
-    {
-        $returnMsg["errorCode"] = 0;
-        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-        echo json_encode($returnMsg);
-        return null;
-    }
-    
-    $curTestCaseNum = intval($row1[0]);
-    
-    $returnMsg["curTestCaseNum"] = $curTestCaseNum;
     
     if ($testCasePos >= $curTestCaseNum)
     {
@@ -320,82 +368,201 @@ else
         
         // get noise num
         
-        $params1 = array($resultIDList[$resultPos]);
-        $sql1 = "SELECT MAX(noise_id) FROM " . $tmpTableName02 . " " .
-                "WHERE result_id=?";
-        if ($db->QueryDB($sql1, $params1) == null)
-        {
-            $returnMsg["errorCode"] = 0;
-            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-            echo json_encode($returnMsg);
-            return null;
-        }
+        //$params1 = array($resultIDList[$resultPos]);
+        //$sql1 = "SELECT MAX(noise_id) FROM " . $tmpTableName02 . " " .
+        //        "WHERE result_id=?";
+        //if ($db->QueryDB($sql1, $params1) == null)
+        //{
+        //    $returnMsg["errorCode"] = 0;
+        //    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+        //    echo json_encode($returnMsg);
+        //    return null;
+        //}
+        //
+        //$row1 = $db->fetchRow();
+        //if ($row1 == false)
+        //{
+        //    $returnMsg["errorCode"] = 0;
+        //    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+        //    echo json_encode($returnMsg);
+        //    return;
+        //}
+        //$tmpNoiseNum = intval($row1[0]) + 1;
+        //$returnMsg["tmpNoiseNum"] = $tmpNoiseNum;
+        //
+        //$tmpList = array();
+        //$tmpCode2 = "";
+        //for ($i = 0; $i < $tmpNoiseNum; $i++)
+        //{
+        //    $t1 = " t" . $i . ".data_value1," . " t" . $i . ".data_value2," .
+        //          " t" . $i . ".data_value3," . " t" . $i . ".data_value4";
+        //    $tmpCode2 .= " LEFT JOIN " . $tmpTableName02 . " t" . $i . " " .
+        //                 "ON (t" . $i . ".result_id=t100.result_id AND " .
+        //                 "t" . $i . ".sub_id=t100.sub_id AND " .
+        //                 "t" . $i . ".noise_id=" . $i . ") ";
+        //          
+        //    $tmpList []= $t1;
+        //}
+        //
+        //$tmpCode1 = implode(",", $tmpList);
+        //
+        //$params1 = array($resultIDList[$resultPos]);
+        //$sql1 = "SELECT t100.result_id, t100.sub_id, t100.test_case_id, t100.group_id, " . $tmpCode1 . " " .
+        //        "FROM " . $tmpTableName02 . " t100 " .
+        //        $tmpCode2 . " " .
+        //        "WHERE (t100.result_id=? AND t100.noise_id=0) ORDER BY t100.data_id ASC " .
+        //        "LIMIT " . $testCasePos . ", " . $tmpDoTestCaseNum;
+        //
+        //$returnMsg["sql1"] = $sql1;
+        //        
+        //if ($db->QueryDB($sql1, $params1) == null)
+        //{
+        //    $returnMsg["errorCode"] = 0;
+        //    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+        //    $returnMsg["sql1"] = $sql1;
+        //    $returnMsg["tmpCode1"] = $tmpCode1;
+        //    $returnMsg["tmpCode2"] = $tmpCode2;
+        //    echo json_encode($returnMsg);
+        //    return null;
+        //}
+        //
+        //$testAverageData = "";
+        //while ($row1 = $db->fetchRow())
+        //{  
+        //    $tmpResultID = $row1[0];
+        //    $tmpSubTestID = $row1[1];
+        //    $tmpTestCaseID = $row1[2];
+        //    $tmpGroupID = $row1[3];
+        //    
+        //    $sortArrayList = array();
+        //    $sortArrayList2 = array();
+        //    $sortArrayList3 = array();
+        //    $sortArrayList4 = array();
+        //    for ($i = 0; $i < $tmpNoiseNum; $i++)
+        //    {
+        //        $sortArrayList []= $row1[4 + $i * 4];
+        //        $sortArrayList2 []= $row1[5 + $i * 4];
+        //        $sortArrayList3 []= $row1[6 + $i * 4];
+        //        $sortArrayList4 []= $row1[7 + $i * 4];
+        //    }
+        //
+        //    $averageIndexList = swtGetAverageDataList($sortArrayList);
+        //    $averageIndexList2 = swtGetAverageDataList($sortArrayList2);
+        //    $averageIndexList3 = swtGetAverageDataList($sortArrayList3);
+        //    $averageIndexList4 = swtGetAverageDataList($sortArrayList4);
+        //    
+        //    $tmpRet = swtGetAverageAndVariance($sortArrayList, $averageIndexList);
+        //    $tmpAvg = $tmpRet["tmpAvg"];
+        //    $tmpVariance = $tmpRet["tmpVariance"];
+        //    $tmpRet = swtGetAverageAndVariance($sortArrayList2, $averageIndexList2);
+        //    $tmpAvg2 = $tmpRet["tmpAvg"];
+        //    $tmpVariance2 = $tmpRet["tmpVariance"];
+        //    $tmpRet = swtGetAverageAndVariance($sortArrayList3, $averageIndexList3);
+        //    $tmpAvg3 = $tmpRet["tmpAvg"];
+        //    $tmpVariance3 = $tmpRet["tmpVariance"];
+        //    $tmpRet = swtGetAverageAndVariance($sortArrayList4, $averageIndexList4);
+        //    $tmpAvg4 = $tmpRet["tmpAvg"];
+        //    $tmpVariance4 = $tmpRet["tmpVariance"];
+        //    
+        //    
+        //    $testAverageData .= "" . $resultIDList[$resultPos] . "," .
+        //                        $tmpSubTestID . "," . 
+        //                        $tmpAvg . "," . 
+        //                        $tmpVariance . "," . 
+        //                        $tmpAvg2 . "," . 
+        //                        $tmpVariance2 . "," . 
+        //                        $tmpAvg3 . "," . 
+        //                        $tmpVariance3 . "," . 
+        //                        $tmpAvg4 . "," . 
+        //                        $tmpVariance4 . "," . 
+        //                        $tmpTestCaseID . "," .
+        //                        $tmpGroupID . "\n";
+        //    
+        //}
         
-        $row1 = $db->fetchRow();
-        if ($row1 == false)
-        {
-            $returnMsg["errorCode"] = 0;
-            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-            echo json_encode($returnMsg);
-            return;
-        }
-        $tmpNoiseNum = intval($row1[0]) + 1;
-        $returnMsg["tmpNoiseNum"] = $tmpNoiseNum;
         
-        $tmpList = array();
-        $tmpCode2 = "";
-        for ($i = 0; $i < $tmpNoiseNum; $i++)
-        {
-            $t1 = " t" . $i . ".data_value1," . " t" . $i . ".data_value2," .
-                  " t" . $i . ".data_value3," . " t" . $i . ".data_value4";
-            $tmpCode2 .= " LEFT JOIN " . $tmpTableName02 . " t" . $i . " " .
-                         "ON (t" . $i . ".result_id=t100.result_id AND " .
-                         "t" . $i . ".sub_id=t100.sub_id AND " .
-                         "t" . $i . ".noise_id=" . $i . ") ";
-                  
-            $tmpList []= $t1;
-        }
+        $tmpBatchFolder = $swtTempFilesDir . "/batch" . $batchID;
         
-        $tmpCode1 = implode(",", $tmpList);
+        $t1 = pack("d", 0.0);
+        $tmpDataSize = strlen($t1);
+        $t1 = pack("i", 0);
+        $tmpDataIDSize = strlen($t1);
         
-        $params1 = array($resultIDList[$resultPos]);
-        $sql1 = "SELECT t100.result_id, t100.sub_id, t100.test_case_id, t100.group_id, " . $tmpCode1 . " " .
-                "FROM " . $tmpTableName02 . " t100 " .
-                $tmpCode2 . " " .
-                "WHERE (t100.result_id=? AND t100.noise_id=0) ORDER BY t100.data_id ASC " .
-                "LIMIT " . $testCasePos . ", " . $tmpDoTestCaseNum;
-
-        $returnMsg["sql1"] = $sql1;
-                
-        if ($db->QueryDB($sql1, $params1) == null)
+        $tmpFileHandleList = array();
+        for ($i = 0; $i < $curTestNoiseNum; $i++)
         {
-            $returnMsg["errorCode"] = 0;
-            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-            $returnMsg["sql1"] = $sql1;
-            $returnMsg["tmpCode1"] = $tmpCode1;
-            $returnMsg["tmpCode2"] = $tmpCode2;
-            echo json_encode($returnMsg);
-            return null;
+            $tmpFileName2 = $tmpBatchFolder . "/dataFile_" . 
+                                             $resultIDList[$resultPos]  . "_" .
+                                             $curTestName               . "_" .
+                                             $i                         . ".txt";
+                                             
+            $tmpFileHandle = fopen($tmpFileName2, "r");
+            if ($tmpFileHandle === false)
+            {
+                break;
+            }
+            $tmpFileHandleList []= $tmpFileHandle;
         }
         
         $testAverageData = "";
-        while ($row1 = $db->fetchRow())
-        {  
-            $tmpResultID = $row1[0];
-            $tmpSubTestID = $row1[1];
-            $tmpTestCaseID = $row1[2];
-            $tmpGroupID = $row1[3];
+        for ($j = 0; $j < $tmpDoTestCaseNum; $j++)
+        {
+            $tmpSubTestID = -1;
+            $tmpTestCaseID = -1;
+            $tmpGroupID = -1;
+            
+            $tmpFileDataPos = $testCasePos + $j;
+            $tmpFileDataOffset = $tmpFileDataPos * ($tmpDataSize * 4 + $tmpDataIDSize * 2);
+            $tmpTestCaseID = $tmpFileDataPos;
             
             $sortArrayList = array();
             $sortArrayList2 = array();
             $sortArrayList3 = array();
             $sortArrayList4 = array();
-            for ($i = 0; $i < $tmpNoiseNum; $i++)
+            
+            foreach ($tmpFileHandleList as $tmpFileHandle)
             {
-                $sortArrayList []= $row1[4 + $i * 4];
-                $sortArrayList2 []= $row1[5 + $i * 4];
-                $sortArrayList3 []= $row1[6 + $i * 4];
-                $sortArrayList4 []= $row1[7 + $i * 4];
+                fseek($tmpFileHandle, $tmpFileDataOffset, SEEK_SET);
+                $t1 = fread($tmpFileHandle, $tmpDataSize * 4 + $tmpDataIDSize * 2);
+                $valSet = array();
+                if (strlen($t1) < ($tmpDataSize * 4 + $tmpDataIDSize * 2))
+                {
+                    continue;
+                }
+                else
+                {
+                    $valSet = unpack("i1subTestID/d1dataValue1/d1dataValue2/d1dataValue3/d1dataValue4/i1groupID", $t1);
+                }
+                
+                $tmpSubTestID = $valSet["subTestID"];
+                $tmpGroupID = $valSet["groupID"];
+                
+                $f1 = floatval($valSet["dataValue1"]);
+                if ($f1 >= 0.0)
+                {
+                    $sortArrayList []= $f1;
+                }
+                $f1 = floatval($valSet["dataValue2"]);
+                if ($f1 >= 0.0)
+                {
+                    $sortArrayList2 []= $f1;
+                }
+                $f1 = floatval($valSet["dataValue3"]);
+                if ($f1 >= 0.0)
+                {
+                    $sortArrayList3 []= $f1;
+                }
+                $f1 = floatval($valSet["dataValue4"]);
+                if ($f1 >= 0.0)
+                {
+                    $sortArrayList4 []= $f1;
+                }
+            }
+            
+            if (intval($tmpSubTestID) == -1)
+            {
+                // if invalid test case id
+                continue;
             }
         
             $averageIndexList = swtGetAverageDataList($sortArrayList);
@@ -416,32 +583,6 @@ else
             $tmpAvg4 = $tmpRet["tmpAvg"];
             $tmpVariance4 = $tmpRet["tmpVariance"];
             
-            /*
-            $tmpSum = 0.0;
-            for ($i = 0; $i < count($averageIndexList); $i++)
-            {
-                $tmpSum += floatval($sortArrayList[$averageIndexList[$i]]);
-            }
-            $tmpAvg = $tmpSum / count($averageIndexList);
-            
-            $tmpSum = 0.0;
-            
-            for ($i = 0; $i < count($averageIndexList); $i++)
-            {
-                if ($tmpAvg == 0.0)
-                {
-                    $f2 = 0.0;
-                }
-                else
-                {
-                    $f1 = floatval($sortArrayList[$averageIndexList[$i]]);
-                    $f2 = ($f1 - $tmpAvg) / $tmpAvg;
-                    $tmpSum += ($f2 * $f2);
-                }
-            }
-            
-            $tmpVariance = sqrt($tmpSum / count($averageIndexList));
-            //*/
             
             $testAverageData .= "" . $resultIDList[$resultPos] . "," .
                                 $tmpSubTestID . "," . 
@@ -455,8 +596,14 @@ else
                                 $tmpVariance4 . "," . 
                                 $tmpTestCaseID . "," .
                                 $tmpGroupID . "\n";
-            
         }
+        
+        foreach ($tmpFileHandleList as $tmpFileHandle)
+        {
+            fclose($tmpFileHandle);
+        }
+        $tmpFileHandleList = array();
+        
         
         if (strlen($testAverageData) > 0)
         {
@@ -515,6 +662,8 @@ $returnMsg["testPos"] = $testPos;
 $returnMsg["testCasePos"] = $testCasePos;
 $returnMsg["resultNum"] = count($resultIDList);
 $returnMsg["testNum"] = count($testNameList);
+$returnMsg["curTestCaseNum"] = $curTestCaseNum;
+$returnMsg["curTestNoiseNum"] = $curTestNoiseNum;
 
 echo json_encode($returnMsg);
 return;

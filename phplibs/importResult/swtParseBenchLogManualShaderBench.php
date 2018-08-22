@@ -239,6 +239,7 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
     global $returnMsg;
     global $db_mis_table_name_string002;
     global $swtTempFilesDir;
+    global $batchID;
 
     if (strlen($_testName) == 0)
     {
@@ -372,35 +373,115 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
             return -1;
         }
 
-        $tableName02 = $db_mis_table_name_string002 . cleaninput($_testName, 256) . "_noise";
+        //$tableName02 = $db_mis_table_name_string002 . cleaninput($_testName, 256) . "_noise";
                 
         //$sql1 = "INSERT IGNORE INTO " . $tableName02 . " " .
-        //        "(result_id, sub_id, data_value, test_case_id, noise_id) " .
-        //        "(SELECT t0.result_id, t1.test_id, t0.data_value, t0.test_case_id, \"" . $_noiseDataID . "\" " .
-        //        "FROM tmp_table_test_data1 t0, mis_table_test_info t1 " .
-        //        "WHERE t0.sub_name=t1.test_name AND t1.test_type=\"2\" " .
+        //        "(result_id, sub_id, data_value1, data_value2, data_value3, data_value4, test_case_id, noise_id, group_id) " .
+        //        "(SELECT t0.result_id, t1.test_id, t0.data_value1, t0.data_value2, t0.data_value3, t0.data_value4," .
+        //        " t0.test_case_id, \"" . $_noiseDataID . "\", t2.test_id " .
+        //        "FROM tmp_table_test_data1 t0 " .
+        //        "LEFT JOIN mis_table_test_info t1 " .
+        //        "ON (t0.sub_name=t1.test_name AND t1.test_type=\"2\") " .
+        //        "LEFT JOIN mis_table_test_info t2 " .
+        //        "ON (t0.group_name=t2.test_name AND t2.test_type=\"4\") " .
         //        "ORDER BY t0.data_id ASC);";
+        //        
+        //$returnMsg["noise_sql1"] = $sql1;
+        //$returnMsg["noise_id"] = $_noiseDataID;
+        //        
+        //if ($db->QueryDBNoResult($sql1) == null)
+        //{
+        //    $returnMsg["errorCode"] = 0;
+        //    $returnMsg["sql1"] = $sql1;
+        //    $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
+        //    return -1;
+        //}
+        
+        $tmpBatchFolder = $swtTempFilesDir . "/batch" . $batchID;
+        
+        if (file_exists($tmpBatchFolder) == false)
+        {
+            mkdir($tmpBatchFolder);
+        }
                 
-        $sql1 = "INSERT IGNORE INTO " . $tableName02 . " " .
-                "(result_id, sub_id, data_value1, data_value2, data_value3, data_value4, test_case_id, noise_id, group_id) " .
-                "(SELECT t0.result_id, t1.test_id, t0.data_value1, t0.data_value2, t0.data_value3, t0.data_value4," .
-                " t0.test_case_id, \"" . $_noiseDataID . "\", t2.test_id " .
+        $sql1 = "SELECT t0.result_id, t1.test_id, " .
+                "t0.data_value1, t0.data_value2, t0.data_value3, t0.data_value4, t0.test_case_id, t2.test_id " .
                 "FROM tmp_table_test_data1 t0 " .
                 "LEFT JOIN mis_table_test_info t1 " .
                 "ON (t0.sub_name=t1.test_name AND t1.test_type=\"2\") " .
                 "LEFT JOIN mis_table_test_info t2 " .
                 "ON (t0.group_name=t2.test_name AND t2.test_type=\"4\") " .
-                "ORDER BY t0.data_id ASC);";
+                "ORDER BY t0.data_id ASC;";
                 
-        $returnMsg["noise_sql1"] = $sql1;
-        $returnMsg["noise_id"] = $_noiseDataID;
-                
-        if ($db->QueryDBNoResult($sql1) == null)
+        if ($db->QueryDB($sql1) == null)
         {
             $returnMsg["errorCode"] = 0;
             $returnMsg["sql1"] = $sql1;
             $returnMsg["errorMsg"] = "query mysql table failed #4, line: " . __LINE__ . ", error: " . $db->dbError;
             return -1;
+        }
+        
+        $tmpFileHandle = false;
+        $lastResultID = -1;
+        $lastTestName = "";
+        $lastNoiseDataID = -1;
+        
+        while ($row1 = $db->FetchResult())
+        {
+            $tmpResultID = $row1[0];
+            $tmpSubTestID = intval($row1[1]);
+            $dataValue1 = floatval($row1[2]);
+            $dataValue2 = floatval($row1[3]);
+            $dataValue3 = floatval($row1[4]);
+            $dataValue4 = floatval($row1[5]);
+            $testCaseID = intval($row1[6]);
+            $groupID = intval($row1[7]);
+            
+            $tmpFileName2 = $tmpBatchFolder . "/dataFile_" . 
+                                             $tmpResultID  . "_" .
+                                             $_testName    . "_" .
+                                             $_noiseDataID . ".txt";
+                                             
+                                             
+            if (($tmpFileHandle == false) ||
+                ($tmpResultID != $lastResultID) ||
+                ($_testName   != $lastTestName) ||
+                ($_noiseDataID != $lastNoiseDataID))
+            {
+                if ($tmpFileHandle != false)
+                {
+                    fclose($tmpFileHandle);
+                }
+                $tmpFileHandle = fopen($tmpFileName2, "a");
+                
+                $lastResultID = $tmpResultID;
+                $lastTestName = $_testName;
+                $lastNoiseDataID = $_noiseDataID;
+            }
+            
+            fseek($tmpFileHandle, 0, SEEK_END);
+            $tmpFileSize = ftell($tmpFileHandle);
+            $t1 = pack("d", 0.0);
+            $tmpDataSize = strlen($t1);
+            $t1 = pack("i", 0);
+            $tmpDataIDSize = strlen($t1);
+            
+            $tmpFileDataNum = intval($tmpFileSize / ($tmpDataSize * 4 + $tmpDataIDSize * 2));
+            
+            $n1 = $testCaseID - $tmpFileDataNum;
+            for ($i = 0; $i < $n1; $i++)
+            {
+                $t1 = pack("iddddi", -1, 0.0, 0.0, 0.0, 0.0, -1);
+                fwrite($tmpFileHandle, $t1);
+            }
+            
+            fseek($tmpFileHandle, $testCaseID * ($tmpDataSize * 4 + $tmpDataIDSize * 2), SEEK_SET);
+            $t1 = pack("iddddi", $tmpSubTestID, $dataValue1, $dataValue2, $dataValue3, $dataValue4, $groupID);
+            fwrite($tmpFileHandle, $t1);
+        }
+        if ($tmpFileHandle != false)
+        {
+            fclose($tmpFileHandle);
         }
 
         if (is_writable($tmpFileName))

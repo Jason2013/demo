@@ -1917,7 +1917,8 @@ class CGenReport
                 $tmpTableName = $db_mis_table_name_string002 . $testNameList[$i];
                 //$params1 = array($resultIDList[0][$_resultPos]);
                 $params1 = array($resultIDList[0][$cardStandardResultPos]);
-                $sql1 = "SELECT COUNT(*) FROM " . $tmpTableName . "_noise WHERE (result_id=? AND noise_id=0)";
+                //$sql1 = "SELECT COUNT(*) FROM " . $tmpTableName . "_noise WHERE (result_id=? AND noise_id=0)";
+                $sql1 = "SELECT COUNT(*) FROM " . $tmpTableName . " WHERE (result_id=? AND sub_id>0)";
                 if ($db->QueryDB($sql1, $params1) == null)
                 {
                     $returnMsg["errorCode"] = 0;

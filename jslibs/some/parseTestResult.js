@@ -427,6 +427,8 @@ function swtDoSubmitTestResultsShaderBench(_inputTagName,
                                     json.batchID,
                                     0,
                                     0,
+                                    0,
+                                    0,
                                     0
                                     );
             }
@@ -542,7 +544,9 @@ function swtCalcNoiseAverageShaderBench(_inputTagName,
                              _batchID,
                              _resultPos,
                              _testPos,
-                             _testCasePos
+                             _testCasePos,
+                             _curTestCaseNum,
+                             _curTestNoiseNum
                              )
 {
     $.post("../phplibs/importResult/swtCalcNoiseAverageShaderBench.php",
@@ -550,7 +554,9 @@ function swtCalcNoiseAverageShaderBench(_inputTagName,
         batchID:     _batchID,
         resultPos:   _resultPos,
         testPos:     _testPos,
-        testCasePos: _testCasePos
+        testCasePos: _testCasePos,
+        curTestCaseNum:  _curTestCaseNum,
+        curTestNoiseNum: _curTestNoiseNum
     }, 
     function(data,status) 
     {
@@ -577,7 +583,9 @@ function swtCalcNoiseAverageShaderBench(_inputTagName,
                                     _batchID,
                                     json.resultPos,
                                     json.testPos,
-                                    json.testCasePos
+                                    json.testCasePos,
+                                    json.curTestCaseNum,
+                                    json.curTestNoiseNum
                                     );
                                     
                 var tmpResultPos = parseFloat(json.resultPos);
