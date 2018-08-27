@@ -1105,7 +1105,7 @@ function swtParseLogFile($_pathName, $_machineID, $_noiseDataID, $_noiseDataNum)
         if ($num <= $dataKeyAPI)
         {
             // invalid line column num
-            continue;
+            //continue;
         }
         for ($i = 0; $i < count($data); $i++)
         {
