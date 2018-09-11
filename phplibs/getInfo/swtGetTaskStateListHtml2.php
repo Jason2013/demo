@@ -145,9 +145,16 @@ while ($row1 = $db->fetchRow())
     }
     array_push($batchStateNameList, $t1);
     
-    if ($row1[3] < count($swtTestBatchGroupString))
+    $t1 = "not clear";
+    $batchGroupID = intval($row1[3]);
+    if ($batchGroupID < count($swtTestBatchGroupString))
     {
-        $t1 = $swtTestBatchGroupString[$row1[3]];
+        $t1 = $swtTestBatchGroupString[$batchGroupID];
+    }
+    else if (($batchGroupID >= 100) && ($batchGroupID < (100 + count($swtTestBatchGroupStringEx))))
+    {
+        $n1 = $batchGroupID - 100;
+        $t1 = $swtTestBatchGroupStringEx[$n1];
     }
     array_push($batchGroupNameList, $t1);
 }

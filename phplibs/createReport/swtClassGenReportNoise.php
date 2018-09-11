@@ -473,7 +473,8 @@ class CGenReport
                 // if not assign current batch id
                 $sql1 = "SELECT batch_id, batch_group FROM mis_table_batch_list " .
                         "WHERE batch_state=\"1\" AND " .
-                        "(batch_group=\"1\" OR batch_group=\"2\" OR batch_group=\"4\") " .
+                        //"(batch_group=\"1\" OR batch_group=\"2\" OR batch_group=\"4\") " .
+                        "(batch_group IN (1, 2, 4, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109)) " .
                         "ORDER BY batch_id DESC LIMIT 1";
                 
                 if ($db->QueryDB($sql1, $params1) == null)
@@ -499,14 +500,22 @@ class CGenReport
                     // routine report & skynet report
                     $sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
                             "WHERE batch_state=\"1\" AND " .
-                            "(batch_group=\"1\" OR batch_group=\"4\") " .
+                            "(batch_group IN (1, 4)) " .
+                            "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
+                }
+                else if (($tmpBatchGroup >= 100) && 
+                         ($tmpBatchGroup <  110))
+                {
+                    // routine report & skynet report
+                    $sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
+                            "WHERE batch_state=\"1\" AND " .
+                            "(batch_group=\"" . $tmpBatchGroup . "\") " .
                             "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
                 }
                 else
                 {
                     // temp report
                     $sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
-                            //"WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
                             "WHERE batch_state=\"1\" AND (batch_group=\"2\") ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
                 }
             }
@@ -540,7 +549,17 @@ class CGenReport
                     // routine report
                     $params1 = array($_batchID);
                     $sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
-                            "WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"4\") " .
+                            "WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group IN (1, 4)) " .
+                            "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
+                }
+                else if (($tmpBatchGroup >= 100) && 
+                         ($tmpBatchGroup <  110))
+                {
+                    // routine report
+                    $params1 = array($_batchID);
+                    $sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
+                            "WHERE batch_id<=? AND batch_state=\"1\" AND " .
+                            "(batch_group=\"" . $tmpBatchGroup . "\") " .
                             "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
                 }
                 else
@@ -548,7 +567,6 @@ class CGenReport
                     // temp report
                     $params1 = array($_batchID);
                     $sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
-                            //"WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") " .
                             "WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group=\"2\") " .
                             "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
                 }
@@ -798,7 +816,8 @@ class CGenReport
         $params1 = array($_batchID);
         $sql1 = "SELECT COUNT(*) FROM mis_table_batch_list " .
                 "WHERE batch_id=? AND batch_state=\"1\" AND " .
-                "(batch_group=\"1\" OR batch_group=\"2\" OR batch_group=\"0\" OR batch_group=\"4\")";
+                //"(batch_group=\"1\" OR batch_group=\"2\" OR batch_group=\"0\" OR batch_group=\"4\" OR " .
+                "(batch_group IN (0, 1, 2, 4, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109))";
         if ($db->QueryDB($sql1, $params1) == null)
         {
             $returnMsg["errorCode"] = 0;

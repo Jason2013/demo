@@ -6,7 +6,7 @@ $html1 = new CSwtHtmlTemple("Grapher Import Results", "../");
 $html1->outPageHead("", "" .
                         "<script type=\"text/javascript\" src=\"../jslibs/some/genFuncs.js\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/jquery-cookie/jquery.cookie.js\"></script>\n" .
-                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=3\"></script>\n");
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=4\"></script>\n");
 
 $html1->outPageBodyStart();
 
@@ -25,9 +25,25 @@ $html1->outPageBodyStart();
                 report Type:&nbsp&nbsp&nbsp
             </td>
             <td>
+            <!--
                 <input type="radio" name="reportGroup" value="routineReport" checked="checked">routine report (shown in Graphs)
                 <br>
                 <input type="radio" name="reportGroup" value="tempReport">temp report (not shown in Graphs)
+            -->
+                <select id="reportGroup" name="reportGroup">
+                    <option value="routineReport" selected="selected">routine report</option>
+                    <option value="tempReport">temp report</option>
+                    <option value="reportSlot00">report slot01</option>
+                    <option value="reportSlot01">report slot02</option>
+                    <option value="reportSlot02">report slot03</option>
+                    <option value="reportSlot03">report slot04</option>
+                    <option value="reportSlot04">report slot05</option>
+                    <option value="reportSlot05">report slot06</option>
+                    <option value="reportSlot06">report slot07</option>
+                    <option value="reportSlot07">report slot08</option>
+                    <option value="reportSlot08">report slot09</option>
+                    <option value="reportSlot09">report slot10</option>
+                </select>
             </td>
         </tr>
         <tr>

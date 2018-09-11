@@ -12,7 +12,6 @@ include_once __dir__ . "/../configuration/swtUIStrings.php";
 $db_server = "Srdcvmysqldp1";
 $db_username = "davychen";
 $db_password = "davychen7$";
-//$db_dbname = "db_gfxbench1";
 $db_dbname = "db_gfxbench";
 
 
@@ -63,6 +62,17 @@ $swtTestBatchGroupString = array("out user",
                                  "temp report",
                                  "shaderBench",
                                  "skynet report");
+                                 
+$swtTestBatchGroupStringEx = array("report slot01",
+                                   "report slot02",
+                                   "report slot03",
+                                   "report slot04",
+                                   "report slot05",
+                                   "report slot06",
+                                   "report slot07",
+                                   "report slot08",
+                                   "report slot09",
+                                   "report slot10");
 
 // show tables like 'mis_table_data_test_%'
 // show columns from tablename
@@ -193,6 +203,7 @@ array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_batch_list 
                                                                 // 2 for temp report, 
                                                                 // 3 for shaderBench report
                                                                 // 4 for skynet report
+                                                                // 100 - 109 report slot01 - report slot10
                                "  path_id INT UNSIGNED )");     // in use, log file path
 //*/
 // mis_table_task_list 6 

@@ -29,7 +29,10 @@ function swtSubmitTestResultsMannual2(_inputTagName,
 {
     var t5 = $("input[name='reportGroup']:checked").val();
     
-    var reportGroupName = $("input[name='reportGroup']:checked").val();
+    //var reportGroupName = $("input[name='reportGroup']:checked").val();
+    var reportGroupName = $("#reportGroup").val();
+    
+    var reportGroupNameHead = reportGroupName.substr(0, 10);
     var reportGroup = 1;
     if (reportGroupName == "routineReport")
     {
@@ -38,6 +41,12 @@ function swtSubmitTestResultsMannual2(_inputTagName,
     else if (reportGroupName == "tempReport")
     {
         reportGroup = 2;
+    }
+    else if (reportGroupNameHead == "reportSlot")
+    {
+        var t1 = reportGroupName.substr(10, 2);
+        var n1 = parseInt(t1, 10);
+        reportGroup = 100 + n1;
     }
     
     $("#" + _percentTagName).html("copying files: 0%");
