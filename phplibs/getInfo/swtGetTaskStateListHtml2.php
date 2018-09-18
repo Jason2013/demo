@@ -156,6 +156,11 @@ while ($row1 = $db->fetchRow())
         $n1 = $batchGroupID - 100;
         $t1 = $swtTestBatchGroupStringEx[$n1];
     }
+    else if (($batchGroupID >= 200) && ($batchGroupID < (200 + count($swtTestBatchGroupStringEx2))))
+    {
+        $n1 = $batchGroupID - 200;
+        $t1 = $swtTestBatchGroupStringEx2[$n1];
+    }
     array_push($batchGroupNameList, $t1);
 }
 

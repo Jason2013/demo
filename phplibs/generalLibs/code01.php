@@ -73,6 +73,17 @@ $swtTestBatchGroupStringEx = array("report slot01",
                                    "report slot08",
                                    "report slot09",
                                    "report slot10");
+                                   
+$swtTestBatchGroupStringEx2 = array("shader slot01",
+                                    "shader slot02",
+                                    "shader slot03",
+                                    "shader slot04",
+                                    "shader slot05",
+                                    "shader slot06",
+                                    "shader slot07",
+                                    "shader slot08",
+                                    "shader slot09",
+                                    "shader slot10");
 
 // show tables like 'mis_table_data_test_%'
 // show columns from tablename
@@ -204,6 +215,7 @@ array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_batch_list 
                                                                 // 3 for shaderBench report
                                                                 // 4 for skynet report
                                                                 // 100 - 109 report slot01 - report slot10
+                                                                // 200 - 209 shader slot01 - shader slot10
                                "  path_id INT UNSIGNED )");     // in use, log file path
 //*/
 // mis_table_task_list 6 
@@ -371,6 +383,26 @@ $db_mis_table_create_string003 = "CREATE TABLE IF NOT EXISTS mis_table_data_shad
                                  "  UNIQUE (result_id, sub_id, noise_id))";// value
 
 $db_mis_table_name_string002 = "mis_table_data_shadertest_";
+
+$db_mis_table_create_string005 = "CREATE TABLE IF NOT EXISTS mis_table_data_frametest_%s " .
+                                 "( data_id INT UNSIGNED AUTO_INCREMENT, " .
+                                 "  result_id INT UNSIGNED, " .  // driver index 
+                                 "  sub_id INT UNSIGNED,    " .  // sub test index
+                                 "  data_value1 DOUBLE," .       // Time[Execution](ms)
+                                 "  variance_value1 DOUBLE," .
+                                 "  data_value2 DOUBLE," .       // Time[Record](ms)
+                                 "  variance_value2 DOUBLE," .
+                                 "  data_value3 DOUBLE," .       // 
+                                 "  variance_value3 DOUBLE," .
+                                 "  data_value4 DOUBLE," .       // 
+                                 "  variance_value4 DOUBLE," .
+                                 "  test_case_id INT," .
+                                 "  group_id INT," .
+                                 "  verify_status INT," .        // 0 for N/A, 1 for pass, 2 for fail
+                                 "  PRIMARY KEY (data_id), " .
+                                 "  UNIQUE (result_id, sub_id))";// value
+                                 
+$db_mis_table_name_string003 = "mis_table_data_frametest_";
                  
 // show columns from mis_table_data_test_alu_noise;
 // ALTER TABLE mis_table_data_test_vertexfetch_noise MODIFY COLUMN data_value DOUBLE;

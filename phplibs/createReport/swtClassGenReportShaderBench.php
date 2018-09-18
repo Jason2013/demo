@@ -472,15 +472,74 @@ class CGenReport
             if ($b1 == false)
             {
                 // if not assign current batch id
+                //$sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
+                //        //"WHERE batch_state=\"1\" AND batch_group=\"3\" ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
+                //        "WHERE batch_state=\"1\" AND (batch_group IN (3, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209)) " .
+                //        "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
+                        
+                $sql1 = "SELECT batch_id, batch_group FROM mis_table_batch_list " .
+                        "WHERE batch_state=\"1\" AND " .
+                        "(batch_group IN (3, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209)) " .
+                        "ORDER BY batch_id DESC LIMIT 1";
+                
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return null;
+                }
+                $row1 = $db->fetchRow();
+                if ($row1 == false)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return null;
+                }
+                $tmpBatchGroup = intval($row1[1]);
+
+                // shaderbench report
                 $sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
-                        "WHERE batch_state=\"1\" AND batch_group=\"3\" ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
+                        "WHERE batch_state=\"1\" AND " .
+                        "(batch_group=\"" . $tmpBatchGroup . "\") " .
+                        "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
             }
             else
             {
                 // if assign current batch id
+                //$params1 = array($_batchID);
+                //$sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
+                //        //"WHERE batch_id<=? AND batch_state=\"1\" AND batch_group=\"3\" " .
+                //        "WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group IN (3, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209)) " .
+                //        "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
+                        
+                $params1 = array($_batchID);
+                $sql1 = "SELECT batch_id, batch_group FROM mis_table_batch_list " .
+                        "WHERE batch_id=?";
+                
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return null;
+                }
+                $row1 = $db->fetchRow();
+                if ($row1 == false)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return null;
+                }
+                $tmpBatchGroup = intval($row1[1]);
+                
+                // routine report
                 $params1 = array($_batchID);
                 $sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
-                        "WHERE batch_id<=? AND batch_state=\"1\" AND batch_group=\"3\" " .
+                        "WHERE batch_id<=? AND batch_state=\"1\" AND " .
+                        "(batch_group=\"" . $tmpBatchGroup . "\") " .
                         "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
             }
         }
@@ -727,7 +786,8 @@ class CGenReport
         $db = $_db;
         $params1 = array($_batchID);
         $sql1 = "SELECT COUNT(*) FROM mis_table_batch_list " .
-                "WHERE batch_id=? AND batch_state=\"1\" AND (batch_group=\"3\")";
+                //"WHERE batch_id=? AND batch_state=\"1\" AND (batch_group=\"3\")";
+                "WHERE batch_id=? AND batch_state=\"1\" AND (batch_group IN (3, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209))";
         if ($db->QueryDB($sql1, $params1) == null)
         {
             $returnMsg["errorCode"] = 0;

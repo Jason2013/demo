@@ -114,7 +114,25 @@ function swtSubmitTestResultsMannualShaderBench(_inputTagName,
                                       _passwordTagName,
                                       _targetTagName)
 {
+    //var reportGroup = 3;
+    
+    var reportGroupName = $("#reportGroup").val();
+    
+    var reportGroupNameHead = reportGroupName.substr(0, 10);
     var reportGroup = 3;
+    if (reportGroupName == "shaderReport")
+    {
+        reportGroup = 3;
+    }
+    else if (reportGroupNameHead == "shaderSlot")
+    {
+        var t1 = reportGroupName.substr(10, 2);
+        var n1 = parseInt(t1, 10);
+        reportGroup = 200 + n1;
+    }
+    
+    //alert("reportGroup: " + reportGroup);
+    //console.log("reportGroup: " + reportGroup);
     
     $("#" + _percentTagName).html("copying files: 0%");
     var t1 = $("#" + _inputTagName).val();
