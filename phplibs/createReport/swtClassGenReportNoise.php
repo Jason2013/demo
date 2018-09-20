@@ -1128,6 +1128,7 @@ class CGenReport
 
             $umdIndex = 0;
             $cardIndex = -1;
+            $cardIndexBackUp = -1;
             $curCardID = -1;
             $curSysID = -1;
             $umdNum = count($umdNameList);
@@ -1191,23 +1192,28 @@ class CGenReport
                         $curCardID = $tmpCardID;
                         $curSysID = $tmpSysID;
                         $cardIndex++;
-                        // hold enough space
-                        for ($j = 0; $j < $umdNum; $j++)
+                        
+                        $curCardNum = intval(count($tmpResultIDList) / $umdNum);
+                        if ($cardIndex >= $curCardNum)
                         {
-                            array_push($tmpResultIDList, PHP_INT_MAX);
-                            array_push($tmpMachineIDList, PHP_INT_MAX);
-                            array_push($tmpCardNameList, $row1[20]);
-                            array_push($tmpDriverNameList, $umdNameList[$j]);
-                            array_push($tmpChangeListNumList, PHP_INT_MAX);
-                            array_push($tmpCpuNameList, "");
-                            array_push($tmpSysNameList, $row1[23]);
-                            array_push($tmpMainLineNameList, "");
-                            array_push($tmpSClockNameList, "");
-                            array_push($tmpMClockNameList, "");
-                            array_push($tmpGpuMemNameList, "");
-                            array_push($tmpResultTimeList, "");
-                            array_push($tmpMachineNameList, "");
-                            array_push($tmpSysMemNameList, "");
+                            // hold enough space
+                            for ($j = 0; $j < $umdNum; $j++)
+                            {
+                                array_push($tmpResultIDList, PHP_INT_MAX);
+                                array_push($tmpMachineIDList, PHP_INT_MAX);
+                                array_push($tmpCardNameList, $row1[20]);
+                                array_push($tmpDriverNameList, $umdNameList[$j]);
+                                array_push($tmpChangeListNumList, PHP_INT_MAX);
+                                array_push($tmpCpuNameList, "");
+                                array_push($tmpSysNameList, $row1[23]);
+                                array_push($tmpMainLineNameList, "");
+                                array_push($tmpSClockNameList, "");
+                                array_push($tmpMClockNameList, "");
+                                array_push($tmpGpuMemNameList, "");
+                                array_push($tmpResultTimeList, "");
+                                array_push($tmpMachineNameList, "");
+                                array_push($tmpSysMemNameList, "");
+                            }
                         }
                         $umdIndex = 0;
                     }
@@ -1231,7 +1237,65 @@ class CGenReport
                 }
                 if ($tmpIndex !== false)
                 {
+                    $cardIndexBackUp = $cardIndex;
+                    if (count($resultIDList) > 0)
+                    {
+                        // need align card, system pos with latest batch
+                        
+                        $arr1 = array_keys($cardNameList[0], $row1[20]);
+                        $arr2 = array_keys($sysNameList[0], $row1[23]);
+                        $arr3 = array_intersect($arr1, $arr2);
+                        
+                        $arr4 = array();
+                        foreach ($arr3 as $tmpName)
+                        {
+                            $arr4 []= $tmpName;
+                        }
+                        if (count($arr4) > 0)
+                        {
+                            $cardIndex = intval($arr4[0] / $umdNum);
+                            $returnMsg["cardIndex"] = $cardIndex;
+                            
+                            $curCardNum = intval(count($tmpResultIDList) / $umdNum);
+                            
+                            if ($cardIndex >= $curCardNum)
+                            {
+                                // hold enough space
+                                for ($m = 0; $m < ($cardIndex - $curCardNum + 1); $m++)
+                                {
+                                    for ($j = 0; $j < $umdNum; $j++)
+                                    {
+                                        array_push($tmpResultIDList, PHP_INT_MAX);
+                                        array_push($tmpMachineIDList, PHP_INT_MAX);
+                                        array_push($tmpCardNameList, $row1[20]);
+                                        array_push($tmpDriverNameList, $umdNameList[$j]);
+                                        array_push($tmpChangeListNumList, PHP_INT_MAX);
+                                        array_push($tmpCpuNameList, "");
+                                        array_push($tmpSysNameList, $row1[23]);
+                                        array_push($tmpMainLineNameList, "");
+                                        array_push($tmpSClockNameList, "");
+                                        array_push($tmpMClockNameList, "");
+                                        array_push($tmpGpuMemNameList, "");
+                                        array_push($tmpResultTimeList, "");
+                                        array_push($tmpMachineNameList, "");
+                                        array_push($tmpSysMemNameList, "");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
                     $n1 = $cardIndex * $umdNum + $tmpIndex;
+                    
+                    //if ($tmpIndex == 0)
+                    {
+                        for ($j = 0; $j < $umdNum; $j++)
+                        {
+                            $tmpCardNameList[$n1 - $tmpIndex + $j] = $row1[20];
+                            $tmpSysNameList[$n1 - $tmpIndex + $j] = $row1[23];
+                        }
+                    }
+                    
                     $tmpResultIDList[$n1] = $row1[0];
                     $tmpMachineIDList[$n1] = $row1[1];
                     $tmpCardNameList[$n1] = $row1[20];
@@ -1246,6 +1310,8 @@ class CGenReport
                     $tmpResultTimeList[$n1] = $row1[7];
                     $tmpMachineNameList[$n1] = $row1[28];
                     $tmpSysMemNameList[$n1] = $row1[29];
+                    
+                    $cardIndex = $cardIndexBackUp;
                 }
                 if ($umdIndex != $tmpIndex)
                 {
