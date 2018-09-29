@@ -89,6 +89,8 @@ class CSwtHtmlTemple
             echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportBatchID.php\">MicroBench Report</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFiles3.php\">ShaderBench Import</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportShaderBench.php\">ShaderBench Report</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFiles4.php\">perFrame Import</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportPerFrame.php\">perFrame Report</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportAll.php\">Generate All Reports</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/userLogOut.php\">Logout</a>\n";
         }

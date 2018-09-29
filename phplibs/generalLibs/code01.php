@@ -61,7 +61,8 @@ $swtTestBatchGroupString = array("out user",
                                  "routine report",
                                  "temp report",
                                  "shaderBench",
-                                 "skynet report");
+                                 "skynet report",
+                                 "perFrame");
                                  
 $swtTestBatchGroupStringEx = array("report slot01",
                                    "report slot02",
@@ -214,6 +215,7 @@ array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_batch_list 
                                                                 // 2 for temp report, 
                                                                 // 3 for shaderBench report
                                                                 // 4 for skynet report
+                                                                // 5 for perFrame
                                                                 // 100 - 109 report slot01 - report slot10
                                                                 // 200 - 209 shader slot01 - shader slot10
                                "  path_id INT UNSIGNED )");     // in use, log file path
@@ -384,7 +386,7 @@ $db_mis_table_create_string003 = "CREATE TABLE IF NOT EXISTS mis_table_data_shad
 
 $db_mis_table_name_string002 = "mis_table_data_shadertest_";
 
-$db_mis_table_create_string005 = "CREATE TABLE IF NOT EXISTS mis_table_data_frametest_%s " .
+$db_mis_table_create_string005 = "CREATE TABLE IF NOT EXISTS mis_table_data_perframe_%s " .
                                  "( data_id INT UNSIGNED AUTO_INCREMENT, " .
                                  "  result_id INT UNSIGNED, " .  // driver index 
                                  "  sub_id INT UNSIGNED,    " .  // sub test index
@@ -398,11 +400,12 @@ $db_mis_table_create_string005 = "CREATE TABLE IF NOT EXISTS mis_table_data_fram
                                  "  variance_value4 DOUBLE," .
                                  "  test_case_id INT," .
                                  "  group_id INT," .
+                                 "  frame_id INT," .
                                  "  verify_status INT," .        // 0 for N/A, 1 for pass, 2 for fail
                                  "  PRIMARY KEY (data_id), " .
                                  "  UNIQUE (result_id, sub_id))";// value
                                  
-$db_mis_table_name_string003 = "mis_table_data_frametest_";
+$db_mis_table_name_string003 = "mis_table_data_perframe_";
                  
 // show columns from mis_table_data_test_alu_noise;
 // ALTER TABLE mis_table_data_test_vertexfetch_noise MODIFY COLUMN data_value DOUBLE;

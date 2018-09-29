@@ -159,6 +159,39 @@ function swtSubmitTestResultsMannualShaderBench(_inputTagName,
                          reportGroup);
 }
 
+function swtSubmitTestResultsMannualPerFrame(_inputTagName,
+                                      _percentTagName,
+                                      _usernameTagName,
+                                      _passwordTagName,
+                                      _targetTagName)
+{
+    var reportGroup = 5;
+    
+    $("#" + _percentTagName).html("copying files: 0%");
+    var t1 = $("#" + _inputTagName).val();
+    if (t1.length == 0)
+    {
+        alert("please fill in folder name");
+        return;
+    }
+    var t2 = $("#" + _usernameTagName).val();
+    var t3 = $("#" + _passwordTagName).val();
+    //var t4 = $("#" + _targetTagName).val();
+    $.cookie('benchMaxUsername', t2);
+    $.cookie('benchMaxPassword', t3);
+    swtDoCopyResultFilesPerFrame(_inputTagName,
+                         _percentTagName,
+                         -1, // batch ID
+                         t1,
+                         t2,
+                         t3,
+                         "",
+                         0,
+                         "",
+                         "",
+                         reportGroup);
+}
+
 function swtDoCopyResultFiles(_inputTagName,
                               _percentTagName,
                               _batchID,
@@ -290,6 +323,83 @@ function swtDoCopyResultFilesShaderBench(_inputTagName,
             else
             {
                 swtDoCopyResultFilesShaderBench(_inputTagName,
+                                     _percentTagName,
+                                     _batchID,
+                                     _logFolderName,
+                                     _username,
+                                     _password,
+                                     json.allFileListString,
+                                     json.fileID,
+                                     json.parentFolder,
+                                     json.parentFolderOnly,
+                                     _reportGroup);
+                if (json.fileID <= json.fileNum)
+                {
+                    $("#" + _percentTagName).html("copying files: " + ((json.fileID / json.fileNum) * 100.0 ).toFixed(1) + "%");
+                }
+            }
+        }
+        else if (json.errorCode == "0")
+        {
+            alert(json.errorMsg);
+        }
+    });
+}
+
+function swtDoCopyResultFilesPerFrame(_inputTagName,
+                              _percentTagName,
+                              _batchID,
+                              _logFolderName,
+                              _username,
+                              _password,
+                              _allFileListString,
+                              _fileID,
+                              _parentFolder,
+                              _parentFolderOnly,
+                              _reportGroup)
+{
+    $.post("../phplibs/getInfo/swtGetFolderAllFileNames.php", 
+    {
+        batchID:           _batchID,
+        logFolderName:     _logFolderName,
+        username:          _username,
+        password:          _password,
+        allFileListString: _allFileListString,
+        fileID:            _fileID,
+        parentFolder:      _parentFolder,
+        parentFolderOnly:  _parentFolderOnly
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+        console.log(data);
+        var json = eval("(" + data + ")");
+
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            //alert(json.errorMsg);
+            if (json.copyFileFinished == "1")
+            {
+                //$("#" + _inputTagName).val("");
+                $("#" + _percentTagName).html("copying files: 100%");
+                // copying result files finished,
+                // start to feed data into database
+                swtDoSubmitTestResultsPerFrame(_inputTagName,
+                                       _percentTagName,
+                                       json.parentFolderOnly,
+                                       0,
+                                       0,
+                                       0,
+                                       0,
+                                       0,
+                                       0,
+                                       _batchID,
+                                       _reportGroup);
+            }
+            else
+            {
+                swtDoCopyResultFilesPerFrame(_inputTagName,
                                      _percentTagName,
                                      _batchID,
                                      _logFolderName,
@@ -499,6 +609,99 @@ function swtDoSubmitTestResultsShaderBench(_inputTagName,
     });
 }
 
+function swtDoSubmitTestResultsPerFrame(_inputTagName,
+                                _percentTagName,
+                                _logFolderName,
+                                _nextResultFileID,
+                                _nextLineID,
+                                _curFileLineNum,
+                                _resultFileNum,
+                                _curTestID,
+                                _nextSubTestID,
+                                _batchID,
+                                _reportGroup)
+{
+    //$.post("../phplibs/importResult/swtParseBenchLogManualShaderBench.php",
+    $.post("../phplibs/importResult/swtParseBenchLogManualPerFrame.php",
+    {
+        logFolderName:    _logFolderName,
+        nextResultFileID: _nextResultFileID,
+        nextLineID:       _nextLineID,
+        curFileLineNum:   _curFileLineNum,
+        resultFileNum:    _resultFileNum,
+        curTestID:        _curTestID,
+        nextSubTestID:    _nextSubTestID,
+        batchID:          _batchID,
+        reportGroup:      _reportGroup
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+        console.log(data);
+        var json = eval("(" + data + ")");
+
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            //alert(json.errorMsg);
+            if (json.parseFinished == "1")
+            {
+                //$("#" + _inputTagName).val("");
+                $("#" + _percentTagName).html("feeding database: 100%");
+                //alert("import success");
+                //swtGotoPage('./sepStartPage.php');
+                //location.reload(true);
+                
+                swtCalcNoiseAveragePerFrame(_inputTagName,
+                                    _percentTagName,
+                                    json.batchID,
+                                    0,
+                                    0,
+                                    0,
+                                    0,
+                                    0
+                                    );
+            }
+            else
+            {
+                swtDoSubmitTestResultsPerFrame(_inputTagName,
+                                       _percentTagName,
+                                       _logFolderName,
+                                       json.nextResultFileID,
+                                       json.nextLineID,
+                                       json.curFileLineNum,
+                                       json.resultFileNum,
+                                       json.curTestID,
+                                       json.nextSubTestID,
+                                       json.batchID,
+                                       _reportGroup);
+                if (parseInt(_resultFileNum) > 0)
+                {
+                    var resultFileNum = parseFloat(_resultFileNum);
+                    var nextResultFileID = parseFloat(json.nextResultFileID);
+                    var nextLineID = parseFloat(json.nextLineID);
+                    var curFileLineNum = parseFloat(json.curFileLineNum);
+                    var f1 = 0.0;
+                    if (resultFileNum > 0)
+                    {
+                        f1 = 1.0 / resultFileNum;
+                    }
+                    var f2 = 0.0;
+                    
+                    if ((curFileLineNum > 0) && (curFileLineNum > nextLineID))
+                    {
+                        f2 = nextLineID / curFileLineNum;
+                    }
+                    var f3 = f1 * f2;
+                    var f4 = nextResultFileID * f1;
+                    // parseFloat(s).toFixed(1);
+                    $("#" + _percentTagName).html("feeding database: " + ((f3 + f4) * 100.0 ).toFixed(1) + "%");
+                }
+            }
+        }
+    });
+}
+
 function swtCalcNoiseAverage(_inputTagName,
                              _percentTagName,
                              _batchID,
@@ -606,6 +809,72 @@ function swtCalcNoiseAverageShaderBench(_inputTagName,
             else
             {
                 swtCalcNoiseAverageShaderBench(_inputTagName,
+                                    _percentTagName,
+                                    _batchID,
+                                    json.resultPos,
+                                    json.testPos,
+                                    json.testCasePos,
+                                    json.curTestCaseNum,
+                                    json.curTestNoiseNum
+                                    );
+                                    
+                var tmpResultPos = parseFloat(json.resultPos);
+                var tmpResultNum = parseFloat(json.resultNum);
+                var tmpTestPos = parseFloat(json.testPos);
+                var tmpTestNum = parseFloat(json.testNum);
+                var f1 = tmpResultPos / tmpResultNum;
+                var f2 = tmpTestPos / tmpTestNum;
+                var f3 = f2 / tmpResultNum;
+                $("#" + _percentTagName).html("calc average: " + ((f1 + f3) * 100.0 ).toFixed(1) + "%");
+            }
+        }
+        else
+        {
+            console.log(json.errorMsg);
+        }
+    });
+}
+
+function swtCalcNoiseAveragePerFrame(_inputTagName,
+                             _percentTagName,
+                             _batchID,
+                             _resultPos,
+                             _testPos,
+                             _testCasePos,
+                             _curTestCaseNum,
+                             _curTestNoiseNum
+                             )
+{
+    $.post("../phplibs/importResult/swtCalcNoiseAveragePerFrame.php",
+    {
+        batchID:     _batchID,
+        resultPos:   _resultPos,
+        testPos:     _testPos,
+        testCasePos: _testCasePos,
+        curTestCaseNum:  _curTestCaseNum,
+        curTestNoiseNum: _curTestNoiseNum
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+        console.log(data);
+        var json = eval("(" + data + ")");
+
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            //alert(json.errorMsg);
+            if (json.parseFinished == "1")
+            {
+                //$("#" + _inputTagName).val("");
+                $("#" + _percentTagName).html("calc average: 100%");
+                alert("import success");
+                //swtGotoPage('./sepStartPage.php');
+                //location.reload(true);
+            }
+            else
+            {
+                swtCalcNoiseAveragePerFrame(_inputTagName,
                                     _percentTagName,
                                     _batchID,
                                     json.resultPos,
@@ -1431,6 +1700,116 @@ function swtGenerateRoutineReportShaderBench(_percentTagName, _reportListTag, _r
                           );
 }
 
+function swtGenerateRoutineReportPerFrame(_percentTagName, _reportListTag, _reportType, _batchID, _crossType)
+{
+    $("#" + _percentTagName).html("0% (generating is started...)");
+    
+    $("#" + _reportListTag).html("");
+
+    var t1 = $("#valMachineIDList").val();
+    //console.log("valMachineIDList: " + t1);
+    var machineIDList = [];
+    if (t1.length > 0)
+    {
+        machineIDList = t1.split(",");
+    }
+    var machineIDPair = [];
+    var checkedMachineIDList = [];
+    var t2 = "";
+    var t3 = "";
+    //if (_reportType == 0)
+    //{
+    //    // generating latest report
+    //    for (var i = 0; i < machineIDList.length; i++)
+    //    {
+    //        t1 = $("#selMachineID" + machineIDList[i]).val();
+    //        var b1 = $("#checkMachineID" + machineIDList[i]).is(":checked");
+    //        //console.log(b1);
+    //        if (b1 == false)
+    //        {
+    //            //console.log("skip" + i);
+    //            continue;
+    //        }
+    //        var n1 = parseInt(t1);
+    //        if (n1 != -1)
+    //        {
+    //            machineIDPair.push(parseInt(machineIDList[i]));
+    //            machineIDPair.push(n1);
+    //            // if cross asic, pair are machineID, machineID
+    //            // if cross build, pair are machineID, batch
+    //        }
+    //        else if ((_crossType == 1) || 
+    //                 (_crossType == 2))
+    //        {
+    //            // cross ASIC, SYS
+    //            // cross build
+    //            continue;
+    //        }
+    //        checkedMachineIDList.push(parseInt(machineIDList[i]));
+    //    }
+    //    t2 = swtImplode(machineIDPair, ",");
+    //    t3 = swtImplode(checkedMachineIDList, ",");
+    //}
+    
+    t1 = $("#valDriverNameList").val();
+    var driverNameList = [];
+    if (t1.length > 0)
+    {
+        driverNameList = t1.split(",");
+    }
+    
+    var curDriverName = "";
+    var curDriverIndex = -1;
+    
+    var colCardNameOrderList = [];
+    var colCardNameOrderIndexList = [];
+    
+    for (var i = 0; i < driverNameList.length; i++)
+    {
+        if (curDriverName != driverNameList[i])
+        {
+            curDriverName = driverNameList[i];
+            curDriverIndex++;
+        }
+        else
+        {
+            continue;
+        }
+        
+        for (var k = 0; k < driverNameList.length; k++)
+        {
+            if (curDriverName == driverNameList[k])
+            {
+                var t4 = "selCardSysName_" + curDriverIndex + "_" + k;
+                
+                var tmpCardSysName = $("#" + t4).val();
+                
+                colCardNameOrderList.push(tmpCardSysName);
+                colCardNameOrderIndexList.push(curDriverIndex);
+            }
+        }
+    }
+    console.info (colCardNameOrderList);
+    console.info (colCardNameOrderIndexList);
+    
+    var t4 = swtImplode(colCardNameOrderList, ",");
+    var t5 = swtImplode(colCardNameOrderIndexList, ",");
+
+    //console.log("---: " + t2);
+
+    swtDoGenerateFlatDataPerFrame(_percentTagName,
+                          _reportListTag,
+                          _batchID,
+                          _reportType,
+                          _crossType,
+                          -1,
+                          t2,
+                          t3,
+                          t4,
+                          t5
+                          );
+}
+
 function swtDoGenerateFlatData(_percentTagName,
                                _reportListTag,
                                _batchID,
@@ -1594,6 +1973,101 @@ function swtDoGenerateFlatDataShaderBench(_percentTagName,
                                       json.curReportFolder,
                                       _machineIDPair,
                                       _machineIDList
+                                      );
+                if (json.fileID <= json.fileNum)
+                {
+                    $("#" + _percentTagName).html("gen flatData: " + ((json.fileID / json.fileNum) * 100.0 ).toFixed(1) + "%");
+                }
+            }
+        }
+        else if (json.errorCode == "0")
+        {
+            console.log("tmp---08:" + json.errorMsg);
+            alert(json.errorMsg);
+        }
+    });
+}
+
+function swtDoGenerateFlatDataPerFrame(_percentTagName,
+                               _reportListTag,
+                               _batchID,
+                               _reportType,
+                               _crossType,
+                               _curReportFolder,
+                               _machineIDPair,
+                               _machineIDList,
+                               _colCardNameOrderList,
+                               _colCardNameOrderIndexList
+                               )
+{
+    var tmpMachineIDPair = _machineIDPair;
+    if (_crossType == 2)
+    {
+        // cross build
+        tmpMachineIDPair = "";
+    }
+    
+    console.log("tmp---07:" + _crossType);
+    
+    //$.post("../phplibs/createReport/swtGenTempFlatDataShaderBench.php",
+    $.post("../phplibs/createReport/swtGenTempFlatDataPerFrame.php",
+    {
+        batchID:               _batchID,
+        reportType:            _reportType,
+        crossType:             _crossType,
+        curReportFolder:       _curReportFolder,
+        machineIDPair:         tmpMachineIDPair, //_machineIDPair,
+        machineIDList:         _machineIDList
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+        console.log(data);
+        var json = eval("(" + data + ")");
+
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            //alert(json.errorMsg);
+            if (json.parseFinished == "1")
+            {
+                //console.log("----");
+                swtDoGenerateRoutineReportPerFrame(_percentTagName,
+                                           _reportListTag,
+                                           _batchID,
+                                           _machineIDList,
+                                           _machineIDPair,
+                                           _colCardNameOrderList,
+                                           _colCardNameOrderIndexList,
+                                           1,
+                                           _reportType,
+                                           _crossType,
+                                           0,
+                                           0,
+                                           0,
+                                           0,
+                                           0,
+                                           0,
+                                           0,
+                                           json.curReportFolder,
+                                           -1,
+                                           -1,
+                                           0
+                                           //""
+                                           );
+            }
+            else
+            {
+                swtDoGenerateFlatDataPerFrame(_percentTagName,
+                                      _reportListTag,
+                                      _batchID,
+                                      _reportType,
+                                      _crossType,
+                                      json.curReportFolder,
+                                      _machineIDPair,
+                                      _machineIDList,
+                                      _colCardNameOrderList,
+                                      _colCardNameOrderIndexList
                                       );
                 if (json.fileID <= json.fileNum)
                 {
@@ -2330,6 +2804,110 @@ function swtDoGenerateRoutineReportShaderBench(_percentTagName,
     });
 }
 
+function swtDoGenerateRoutineReportPerFrame(_percentTagName,
+                                    _reportListTag,
+                                    _batchID,
+                                    _machineIDList,
+                                    _machineIDPair,
+                                    _colCardNameOrderList,
+                                    _colCardNameOrderIndexList,
+                                    _forceGenReport,
+                                    _reportType,
+                                    _crossType,
+                                    _resultPos,
+                                    _curTestPos,
+                                    _nextSubTestPos,
+                                    _subTestNum,
+                                    _lineNumPos,
+                                    _tempFileLineNumPos,
+                                    _reportToken,
+                                    _curReportFolder,
+                                    _firstTestPos,
+                                    _firstSubTestPos,
+                                    _sheetLinePos
+                                    //_subTestUmdDataMaskList
+                                    )
+{
+    //$.post("../phplibs/createReport/swtCompileReportAdditionShaderBench.php",
+    $.post("../phplibs/createReport/swtCompileReportAdditionPerFrame.php",
+    {
+        batchID:        _batchID,
+        machineIDPair:  _machineIDPair,
+        machineIDList:  _machineIDList,
+        colCardNameOrderList:       _colCardNameOrderList,
+        colCardNameOrderIndexList:  _colCardNameOrderIndexList,
+        forceGenReport: _forceGenReport,
+        reportType:     _reportType,
+        crossType:      _crossType,
+        resultPos:      _resultPos,
+        curTestPos:     _curTestPos,
+        nextSubTestPos: _nextSubTestPos,
+        subTestNum:     _subTestNum,
+        lineNumPos:     _lineNumPos,
+        tempFileLineNumPos: _tempFileLineNumPos,
+        reportToken:        _reportToken,
+        curReportFolder:    _curReportFolder,
+        firstTestPos:       _firstTestPos,
+        firstSubTestPos:    _firstSubTestPos,
+        sheetLinePos:       _sheetLinePos
+        //subTestUmdDataMaskList: _subTestUmdDataMaskList
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+        console.log(data);
+        var json = eval("(" + data + ")");
+
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            //alert(json.errorMsg);
+            if (json.compileFinished == "1")
+            {
+                $("#" + _percentTagName).html("converting XML to XLSX, please wait...");
+                swtXLSXBatchReport(_percentTagName,
+                                   _reportListTag,
+                                   json.batchID, _reportType, 0, _curReportFolder, _crossType);
+            }
+            else
+            {   
+                swtDoGenerateRoutineReportPerFrame(_percentTagName,
+                                           _reportListTag,
+                                           _batchID,
+                                           _machineIDList,
+                                           _machineIDPair,
+                                           _colCardNameOrderList,
+                                           _colCardNameOrderIndexList,
+                                           0,
+                                           _reportType,
+                                           _crossType,
+                                           json.resultPos,
+                                           json.curTestPos,
+                                           json.nextSubTestPos,
+                                           json.subTestNum,
+                                           json.lineNumPos,
+                                           json.tempFileLineNumPos,
+                                           json.reportToken,
+                                           json.curReportFolder,
+                                           json.firstTestPos,
+                                           json.firstSubTestPos,
+                                           json.sheetLinePos
+                                           //json.subTestUmdDataMaskList
+                                           );
+                if ((json.resultNum > 0) &&
+                    (json.testNum   > 0))
+                {
+                    var f1 = 1.0 / json.resultNum;
+                    var f2 = f1 * json.curTestPos / json.testNum;
+                    var f3 = f1 * json.resultPos;
+                    var f4 = (f3 + f2) * 100.0;
+                    $("#" + _percentTagName).html("gen report: " + f4.toFixed(1) + "%");
+                }
+            }
+        }
+    });
+}
+
 function swtSetMachineReportProgress(_crossType, _phaseTag, _machineID, _value)
 {
     if (_crossType == 10)
@@ -3014,6 +3592,242 @@ function swtGetCardChoiceCodeShaderBench(_divTag, _reportTag)
             $("#" + _reportTag).html(reportListCode);
         }
     });
+}
+
+function swtGetCardChoiceCodePerFrame(_divTag, _reportTag)
+{
+    
+    $.post("../phplibs/getInfo/swtGetBatchMachinesInfoPerFrame.php", 
+    {
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+		console.log("<<<");
+		console.log(data);
+		console.log("<<<");
+        var json = eval("(" + data + ")");
+
+        
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            //alert(json.errorMsg);
+            swtLastBatchMachineIDList = json.machineIDList;
+            //var t4 = "";
+            var t1 = "<table>\n";
+            var curDriverName = "";
+            var curDriverIndex = -1;
+
+            for (var i = 0; i < json.driverNameList.length; i++)
+            {
+                if (curDriverName != json.driverNameList[i])
+                {
+                    curDriverName = json.driverNameList[i];
+                    curDriverIndex++;
+                }
+                else
+                {
+                    continue;
+                }
+                
+                t1 += "<tr>\n";
+                t1 += "<td>\n";
+                t1 += "-&nbsp&nbsp";
+                t1 += curDriverName;
+                t1 += "&nbsp&nbsp";
+                t1 += "</td>\n";
+                t1 += "<td>\n";
+                
+                for (var k = 0; k < json.driverNameList.length; k++)
+                {
+                    if (curDriverName == json.driverNameList[k])
+                    {
+                        var t3 = "selCardSysName_" + curDriverIndex + "_" + k;
+                        var t2 = "<td>";
+                        
+                        if (k > 0)
+                        {
+                            t2 += " - ";
+                        }
+                        
+                        t2 += "<select id=\"" + t3 + "\" name=\"" + t3 + "\" onchange=\"swtUpdateCardChoicePerFrame();\">\n";
+                        for (var j = 0; j < json.driverNameList.length; j++)
+                        {
+                            if (curDriverName == json.driverNameList[j])
+                            {
+                                var t4 = json.cardNameList[j] + "_" + json.systemNameList[j];
+                                
+                                t2 += "<option value=\"" + t4 + "\">" + t4 + "</option>\n";
+                            }
+                        }
+                        
+                        t2 += "</select></td>\n";
+                        t1 += t2;
+                    }
+                }
+
+                
+                
+                t1 += "</td>\n";
+                t1 += "<tr>\n";
+                
+                
+
+                //t1 += "<tr>\n";
+                //t1 += "<td>\n";
+                //t1 += "-&nbsp&nbsp";
+                //t1 += curDriverName;
+                //t1 += "&nbsp&nbsp";
+                //t1 += "</td>\n";
+                //t1 += "<td>\n";
+                //var t3 = "selMachineID" + json.machineIDList[i];
+                //var t5 = "checkMachineID" + json.machineIDList[i];
+                //var t2 = "<select id=\"" + t3 + "\" name=\"" + t3 + "\">\n" +
+                //         "<option value=\"-1\">no comparison</option>\n";
+                //t4 += json.machineIDList[i];
+                //if (i < (json.machineIDList.length - 1))
+                //{
+                //    t4 += ",";
+                //}
+                //for (var j = 0; j < json.machineIDList.length; j++)
+                //{
+                //    if (i == j)
+                //    {
+                //        continue;
+                //    }
+                //    t2 += "<option value=\"" + json.machineIDList[j] + "\">" + json.cardNameList[j] + " - " + json.systemNameList[j] + "</option>";
+                //}
+                //t2 += "</select>\n";
+                //
+                //t1 += t2;
+                //
+                //t1 += "</td>\n";
+                //
+                //t1 += "<td>\n";
+                //t1 += "&nbsp&nbsp";
+                //t1 += "<input id=\"" + t5 + "\" name=\"" + t5 + "\" type=\"checkbox\" checked=\"checked\">\n";
+                //t1 += "</td>\n";
+                //
+                //t1 += "<tr>\n";
+            }
+            //console.log("machines: " + t4);
+            
+            t1 += "</table>\n";
+            
+            var t2 = swtImplode(json.machineIDList, ",");
+            t1 += "<input type=\"hidden\" id=\"valMachineIDList\" name=\"valMachineIDList\" value=\"" + t2 + "\" />\n";
+            
+            t2 = swtImplode(json.driverNameList, ",");
+            t1 += "<input type=\"hidden\" id=\"valDriverNameList\" name=\"valDriverNameList\" value=\"" + t2 + "\" />\n";
+            
+            $("#" + _divTag).html(t1);
+            
+            var reportListCode = "";
+            for (var i = 0; i < json.reportFileNameList.length; i++)
+            {
+                var tmpList = json.reportFileNameList[i].split("/");
+                var t1 = "";
+                if (tmpList.length > 0)
+                {
+                    t1 = tmpList[tmpList.length - 1];
+                }
+                
+                reportListCode += "<p><a href=\"" + json.reportFileNameList[i] + "\">" +
+                                  t1 +
+                                  "</a></p>\n";
+            }
+            $("#" + _reportTag).html(reportListCode);
+            
+            swtUpdateCardChoicePerFrame();
+        }
+    });
+}
+
+function swtUpdateCardChoicePerFrame()
+{
+    var driverNameList = [];
+    var t1 = $("#valDriverNameList").val();
+    if (t1.length > 0)
+    {
+        driverNameList = t1.split(",");
+    }
+    
+    var curDriverName = "";
+    var curDriverIndex = -1;
+    
+    for (var i = 0; i < driverNameList.length; i++)
+    {
+        if (curDriverName != driverNameList[i])
+        {
+            curDriverName = driverNameList[i];
+            curDriverIndex++;
+        }
+        else
+        {
+            continue;
+        }
+        
+        //var t2 = "selCardSysName_" + curDriverIndex + "_0";
+        var fullCardSysNameList = [];
+        var usedCardSysNameList = [];
+        
+        var tmpCardSysIndex = 0;
+        for (var k = 0; k < driverNameList.length; k++)
+        {
+            if (curDriverName == driverNameList[k])
+            {
+                var t2 = "selCardSysName_" + curDriverIndex + "_" + k;
+
+                if (tmpCardSysIndex == 0)
+                {
+                    $("#" + t2 + " option").each(function(){
+                            var v1 = $(this).val();
+                            fullCardSysNameList.push(v1);
+                        });
+                    var t3 = $("#" + t2).val();
+                    usedCardSysNameList.push(t3);
+                }
+                else
+                {
+                    var tmpCardSysNameList = [];
+                    $("#" + t2 + " option").each(function(){
+                            var v1 = $(this).val();
+                            tmpCardSysNameList.push(v1);
+                        });
+                    var t3 = $("#" + t2).val();
+                    
+                    var freeCardSysNameList = [];
+                    
+                    for (var j = 0; j < fullCardSysNameList.length; j++)
+                    {
+                        var tmpIndex = usedCardSysNameList.indexOf(fullCardSysNameList[j]);
+                        if (tmpIndex == -1)
+                        {
+                            freeCardSysNameList.push(fullCardSysNameList[j]);
+                        }
+                    }
+
+                    $t4 = tmpCardSysNameList.sort().toString();
+                    $t5 = freeCardSysNameList.sort().toString();
+                    
+                    if ($t4 != $t5)
+                    {
+                        $("#" + t2).empty();
+                        
+                        for (var j = 0; j < freeCardSysNameList.length; j++)
+                        {
+                            $("#" + t2).append("<option value=\"" + freeCardSysNameList[j] + "\">" + freeCardSysNameList[j] + "</option>\n");
+                        }
+                    }
+                    t3 = $("#" + t2).val();
+                    usedCardSysNameList.push(t3);
+                }
+                tmpCardSysIndex++;
+            }
+        }
+    }
+    
 }
 
 function swtGetCardChoiceCodeVer2(_reportTag)
