@@ -41,7 +41,7 @@ if ($userChecker->isManager())
     $params1 = array();
     $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
             //"WHERE batch_state=\"1\" AND (batch_group=\"3\") ORDER BY insert_time DESC LIMIT 1";
-            "WHERE batch_state=\"1\" AND (batch_group IN (5)) " .
+            "WHERE batch_state=\"1\" AND (batch_group IN (5, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309)) " .
             "ORDER BY insert_time DESC LIMIT 1";
 }
 else
@@ -142,7 +142,7 @@ foreach ($machineIDList as $tmpMachineID)
                 "LEFT JOIN mis_table_batch_list t1 USING (batch_id) " .
                 "WHERE t0.machine_id = ? AND t0.batch_id IN (SELECT batch_id FROM mis_table_batch_list " .
                 //"WHERE batch_state=\"1\" AND (batch_group=\"3\") " .
-                "WHERE batch_state=\"1\" AND (batch_group IN (5)) " .
+                "WHERE batch_state=\"1\" AND (batch_group IN (5, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309)) " .
                 "ORDER BY insert_time DESC) LIMIT 5";
     }
     else

@@ -165,7 +165,22 @@ function swtSubmitTestResultsMannualPerFrame(_inputTagName,
                                       _passwordTagName,
                                       _targetTagName)
 {
+    //var reportGroup = 5;
+    
+    var reportGroupName = $("#reportGroup").val();
+    
+    var reportGroupNameHead = reportGroupName.substr(0, 9);
     var reportGroup = 5;
+    if (reportGroupName == "frameReport")
+    {
+        reportGroup = 5;
+    }
+    else if (reportGroupNameHead == "frameSlot")
+    {
+        var t1 = reportGroupName.substr(9, 2);
+        var n1 = parseInt(t1, 10);
+        reportGroup = 300 + n1;
+    }
     
     $("#" + _percentTagName).html("copying files: 0%");
     var t1 = $("#" + _inputTagName).val();

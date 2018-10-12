@@ -46,7 +46,7 @@ class CGenReportFlatData
                         "USING (path_id) " .
                         "WHERE t0.batch_state=\"1\" AND " .
                         //"(t0.batch_group=\"1\" OR t0.batch_group=\"2\" OR t0.batch_group=\"4\") " .
-                        "(t0.batch_group IN (5)) " .
+                        "(t0.batch_group IN (5, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309)) " .
                         "ORDER BY t0.insert_time DESC LIMIT 1";
                 if ($db->QueryDB($sql1, $params1) == null)
                 {

@@ -62,7 +62,7 @@ $swtTestBatchGroupString = array("out user",
                                  "temp report",
                                  "shaderBench",
                                  "skynet report",
-                                 "perFrame");
+                                 "frameBench");
                                  
 $swtTestBatchGroupStringEx = array("report slot01",
                                    "report slot02",
@@ -85,6 +85,17 @@ $swtTestBatchGroupStringEx2 = array("shader slot01",
                                     "shader slot08",
                                     "shader slot09",
                                     "shader slot10");
+                                    
+$swtTestBatchGroupStringEx3 = array("frame slot01",
+                                    "frame slot02",
+                                    "frame slot03",
+                                    "frame slot04",
+                                    "frame slot05",
+                                    "frame slot06",
+                                    "frame slot07",
+                                    "frame slot08",
+                                    "frame slot09",
+                                    "frame slot10");
 
 // show tables like 'mis_table_data_test_%'
 // show columns from tablename
@@ -218,6 +229,7 @@ array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_batch_list 
                                                                 // 5 for perFrame
                                                                 // 100 - 109 report slot01 - report slot10
                                                                 // 200 - 209 shader slot01 - shader slot10
+                                                                // 300 - 309 frame slot01 - frame slot10
                                "  path_id INT UNSIGNED )");     // in use, log file path
 //*/
 // mis_table_task_list 6 

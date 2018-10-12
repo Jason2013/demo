@@ -44,6 +44,7 @@ $swtUmdNameList = array("D3D11", "D3D12", "Vulkan", "OpenGL", "Metal");
 $swtUmdNameList_old =   array("DX11",  "DX12",  "Vulkan", "OpenGL", "OGL",    "D3D11_NATIVE", "Metal");
 $swtUmdNameList_final = array("D3D11", "D3D12", "Vulkan", "OpenGL", "OpenGL", "D3D11",        "Metal");
 $swtUmdStandardOrder = array("Vulkan", "D3D11", "D3D12", "OpenGL", "Metal");
+//$swtUmdStandardOrder = array("D3D11", "D3D12", "Vulkan", "OpenGL", "Metal");
 
 $swtUmdNameList_sb = array("SCPC", "LLPC", "RADV", "NVIDIA", "OPT1");
 $swtUmdStandardOrder_sb = array("SCPC", "LLPC", "RADV", "NVIDIA", "OPT1");
@@ -51,6 +52,10 @@ $swtUmdStandardOrder_sb = array("SCPC", "LLPC", "RADV", "NVIDIA", "OPT1");
 $swtPreSheetName_sb = array("compileTime", "executionTime");
 $swtPreSheetNameTitle_sb = array("Compile Time", "Execution Time");
 $swtPreSheetNameShort_sb = array("compTime", "execTime");
+
+$swtPreSheetName_pf = array("executionTime", "compileTime");
+$swtPreSheetNameTitle_pf = array("Execution Time", "Compile Time");
+$swtPreSheetNameShort_pf = array("execTime", "compTime");
 
 //$swtUmdNameList = array("VG10_40CU_1600e_945m",
 //                        "VG10_64CU_1600e_945m",
