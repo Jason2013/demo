@@ -105,4 +105,6 @@ define("maxAverageStyleRate", 100);
 
 $swtNoiseDataExpireDayNum = 200;
 
+$swtMicrobenchDocsTestNameUrl = "http://gfxbench/docs/TestPlan/%s.html";
+
 ?>

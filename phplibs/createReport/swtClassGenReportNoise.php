@@ -4934,6 +4934,7 @@ class CGenReport
         global $resultIDList;
         global $resultPos;
         global $batchDateTextList;
+        global $swtMicrobenchDocsTestNameUrl;
 
         $db = $_db;
         $lineNum = $_lineNum;
@@ -5042,9 +5043,12 @@ class CGenReport
                   $tmpCode3 .
                   $tmpCode5 .
                   "</Row>\n";
+                  
+            $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $testNameList[$_curTestPos]);
+            $tmpSet = "ss:HRef=\"" . $tmpUrl . "\"";
             
             $t1 .= "<Row ss:StyleID=\"Default\">\n" .
-                   " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" .
+                   " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\" " . $tmpSet . "><Data ss:Type=\"String\">" .
                    "" . $testNameList[$_curTestPos] . "</Data></Cell>\n" .
                    $tmpCode .
                    $tmpCode4 .
@@ -5085,7 +5089,7 @@ class CGenReport
                 $sheetLinePos++;
                        
                 $t3 = "<Row>\n" .
-                      " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" .
+                      " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\" " . $tmpSet . "><Data ss:Type=\"String\">" .
                       "" . $testNameList[$_curTestPos] . "</Data></Cell>\n" .
                       $tmpCode;
                        
@@ -5110,7 +5114,7 @@ class CGenReport
                     // if comparison with other cards
                     
                     $t3 = "<Row>\n" .
-                          " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" .
+                          " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\" " . $tmpSet . "><Data ss:Type=\"String\">" .
                           "" . $testNameList[$_curTestPos] . "</Data></Cell>\n" .
                           $tmpCode;
                     
@@ -5322,6 +5326,7 @@ class CGenReport
         global $cardStandardResultPos;
         global $db_username;
         global $db_password;
+        global $swtMicrobenchDocsTestNameUrl;
 
         $db = $_db;
         $lineNum = $_lineNum;
@@ -5589,9 +5594,12 @@ class CGenReport
             $tmpCode1 = "<Cell ss:StyleID=\"s" . ($startStyleID + 13) . "\" " .
                         "><Data ss:Type=\"Number\">" . $tmpData2 . "</Data></Cell>";
             
+            $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $testName);
+            $tmpSet = "ss:HRef=\"" . $tmpUrl . "\"";
+            
             // api sheet comparison
             $t1 .= "<Row ss:StyleID=\"Default\">\n" .
-                   " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\"><Data ss:Type=\"String\">" . $testName . "</Data></Cell>\n" .
+                   " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\" " . $tmpSet . "><Data ss:Type=\"String\">" . $testName . "</Data></Cell>\n" .
                    $tmpCode .
                    $tmpCode1 .
                    $tmpCode2 .
@@ -5899,6 +5907,7 @@ class CGenReport
         global $curResultTime;
         global $cmpBatchTime;
         global $batchIDList;
+        global $swtMicrobenchDocsTestNameUrl;
 
         $db = $_db;
         $tempFileHandle = $_tempFileHandle;
@@ -6254,9 +6263,12 @@ class CGenReport
                 }
                 $tmpCode = implode("", $tmpList);
                 
+                $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $testName);
+                $tmpSet = "ss:HRef=\"" . $tmpUrl . "\"";
+                
                 // data rows for api comparison
                 $t3 = "<Row>\n" .
-                      " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\"><Data ss:Type=\"String\">" . $testName . "</Data></Cell>\n" .
+                      " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\" " . $tmpSet . "><Data ss:Type=\"String\">" . $testName . "</Data></Cell>\n" .
                       $tmpCode;
                        
                 $tmpDataColumnNum = 0;
@@ -6390,7 +6402,7 @@ class CGenReport
                 {
                     // data rows for asic comparison
                     $t3 = "<Row>\n" .
-                          " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\"><Data ss:Type=\"String\">" . $testName . "</Data></Cell>\n" .
+                          " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\" " . $tmpSet . "><Data ss:Type=\"String\">" . $testName . "</Data></Cell>\n" .
                           $tmpCode;
                     
                     $tmpDataColumnNum = 0;
