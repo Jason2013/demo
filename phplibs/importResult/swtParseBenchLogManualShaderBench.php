@@ -542,6 +542,8 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
     $dataKeyAPI = -1;
     $testCaseIDKeyAPI = -1;
     $dataKeyDataColumnID = -1;
+    $dataKeyDataColumnOffsetExe = 0;
+    $dataKeyDataColumnOffsetCom = 0;
     $subTestNameFilterNum = 0;
     
     $subTestSubject = "";
@@ -661,11 +663,26 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                 }
                 
                 $unitNameList = array();
+                $exeUnit = "";
+                $comUnit = "";
                 for ($i = 0; $i < 4; $i++)
                 {
                     // Compile Time(ms), Execution Time(ms), Shaders/s, FPS,
-                    array_push($unitNameList, $data[$dataKeyDataColumnID + $i]);
+                    //array_push($unitNameList, $data[$dataKeyDataColumnID + $i]);
+                    $t1 = strtolower($data[$dataKeyDataColumnID + $i]);
+                    if (strpos($t1, "exe") !== false)
+                    {
+                        $exeUnit = $data[$dataKeyDataColumnID + $i];
+                        $dataKeyDataColumnOffsetExe = $i;
+                    }
+                    else if (strpos($t1, "com") !== false)
+                    {
+                        $comUnit = $data[$dataKeyDataColumnID + $i];
+                        $dataKeyDataColumnOffsetCom = $i;
+                    }
                 }
+                $unitNameList []= $comUnit;
+                $unitNameList []= $exeUnit;
                 
                 $subTestSubject = implode("_", $tmpNameList);
                 $subTestSubjectFilter = implode("|", $tmpNameList);
@@ -1050,8 +1067,8 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                     //                     $data[$dataKeyDataColumnID + 2],
                     //                     $data[$dataKeyDataColumnID + 3]);
                                          
-                    $dataValList = array($data[$dataKeyDataColumnID],
-                                         $data[$dataKeyDataColumnID + 1]);
+                    $dataValList = array($data[$dataKeyDataColumnID + $dataKeyDataColumnOffsetCom],
+                                         $data[$dataKeyDataColumnID + $dataKeyDataColumnOffsetExe]);
                                          
                     $b1 = true;
                     foreach ($dataValList as $tmpVal)
