@@ -333,35 +333,38 @@ class CGenReport
         if (file_exists($tmpFileName))
         {
             $t1 = file_get_contents($tmpFileName);
-            $tmpJson = json_decode($t1);
-            foreach ($tmpJson as $tmpKey => $tmpVal)
-            {
-                $returnSet["" . $tmpKey] = $tmpVal;
-            }
+            $returnSet = json_decode($t1, true);
+            //$tmpJson = json_decode($t1);
+            //foreach ($tmpJson as $tmpKey => $tmpVal)
+            //{
+            //    $returnSet["" . $tmpKey] = $tmpVal;
+            //}
+            //
+            //if (isset($returnSet["testCaseNumMap"]))
+            //{
+            //    $tmpJson = $returnSet["testCaseNumMap"];
+            //    $tmpArray = array();
+            //    foreach ($tmpJson as $tmpKey => $tmpVal)
+            //    {
+            //        $tmpArray["" . $tmpKey] = $tmpVal;
+            //    }
+            //    $returnSet["testCaseNumMap"] = $tmpArray;
+            //}
+            //
+            //$tmpJson = $returnSet["allFileReportUmdNameList"];
+            //$tmpArray = array();
+            //foreach ($tmpJson as $tmpKey => $tmpVal)
+            //{
+            //    $tmpV1 = array();
+            //    foreach ($tmpVal as $k1 => $v1)
+            //    {
+            //        $tmpV1[$k1] = $v1;
+            //    }
+            //    $tmpArray[$tmpKey] = $tmpV1;
+            //}
+            //$returnSet["allFileReportUmdNameList"] = $tmpArray;
             
-            if (isset($returnSet["testCaseNumMap"]))
-            {
-                $tmpJson = $returnSet["testCaseNumMap"];
-                $tmpArray = array();
-                foreach ($tmpJson as $tmpKey => $tmpVal)
-                {
-                    $tmpArray["" . $tmpKey] = $tmpVal;
-                }
-                $returnSet["testCaseNumMap"] = $tmpArray;
-            }
-            
-            $tmpJson = $returnSet["allFileReportUmdNameList"];
-            $tmpArray = array();
-            foreach ($tmpJson as $tmpKey => $tmpVal)
-            {
-                $tmpV1 = array();
-                foreach ($tmpVal as $k1 => $v1)
-                {
-                    $tmpV1[$k1] = $v1;
-                }
-                $tmpArray[$tmpKey] = $tmpV1;
-            }
-            $returnSet["allFileReportUmdNameList"] = $tmpArray;
+            // splitter
             
             //$tmpJson = $returnSet["allFileTestPosList"];
             //$tmpArray = array();
@@ -2370,6 +2373,7 @@ class CGenReport
         global $defaultGraphDataLineBuff;
         global $connectDataSet;
         global $isFolderFinished;
+        global $swtMicrobenchDocsTestNameUrl;
 
         //$lineNum = $_lineNum;
         $sheetLinePos = $_sheetLinePos;
@@ -2441,9 +2445,12 @@ class CGenReport
                 
                 $t1 .= "</Row>\n";
                 $sheetLinePos++;
+                
+                $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $_curTestName);
+                $tmpSet = "ss:HRef=\"" . $tmpUrl . "\"";
                        
                 $t3 = "<Row>\n" .
-                      " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" .
+                      " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\" " . $tmpSet . "><Data ss:Type=\"String\">" .
                       "" . $_curTestName . "</Data></Cell>\n" .
                       $tmpCode;
                        
@@ -2466,7 +2473,7 @@ class CGenReport
                 {
                     // if comparison with other cards
                     $t3 = "<Row>\n" .
-                          " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" .
+                          " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\" " . $tmpSet . "><Data ss:Type=\"String\">" .
                           "" . $_curTestName . "</Data></Cell>\n" .
                           $tmpCode;
                     
@@ -2898,6 +2905,90 @@ class CGenReport
         return true;
     }
     
+	public function checkTestNameInSkipList($_curTestName, $_isMainMachineID)
+	{
+        global $returnMsg;
+        global $connectDataSet;
+        global $folderID;
+        
+        if (strlen($_curTestName) == 0)
+        {
+            return false;
+        }
+        
+        $tmpKey = $_isMainMachineID ? "testNameSkipListMain" : "testNameSkipListCmp";
+        
+        if (isset($connectDataSet[$tmpKey]))
+        {
+            if (isset($connectDataSet[$tmpKey][$folderID]))
+            {
+                $tmpRes = array_search($_curTestName, $connectDataSet[$tmpKey][$folderID]);
+                if ($tmpRes === false)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+        return true;
+    }
+    
+	public function addTestNameInSkipList($_curTestName, $_isMainMachineID)
+	{
+        global $returnMsg;
+        global $connectDataSet;
+        global $folderID;
+        
+        //$returnMsg["checktest01"] = 1;
+        //$returnMsg["_curTestName"] = $_curTestName;
+        
+        if (strlen($_curTestName) == 0)
+        {
+            return false;
+        }
+        
+        $tmpKey = $_isMainMachineID ? "testNameSkipListMain" : "testNameSkipListCmp";
+        
+        //$returnMsg["checktest01"] = 1;
+        
+        if (isset($connectDataSet[$tmpKey]))
+        {
+            //$returnMsg["checktest02"] = 1;
+            if (isset($connectDataSet[$tmpKey][$folderID]))
+            {
+                //$returnMsg["checktest03"] = 1;
+                $tmpRes = array_search($_curTestName, $connectDataSet[$tmpKey][$folderID]);
+                if ($tmpRes === false)
+                {
+                    $connectDataSet[$tmpKey][$folderID] []= $_curTestName;
+                    $returnMsg[$tmpKey] = $connectDataSet[$tmpKey];
+                    return true;
+                }
+            }
+            else
+            {
+                $connectDataSet[$tmpKey][$folderID] = array($_curTestName);
+                $returnMsg[$tmpKey] = $connectDataSet[$tmpKey];
+                return true;
+            }
+        }
+        else
+        {
+            $connectDataSet[$tmpKey] = array();
+            $connectDataSet[$tmpKey][$folderID] = array($_curTestName);
+            $returnMsg[$tmpKey] = $connectDataSet[$tmpKey];
+            return true;
+        }
+        return false;
+    }
+    
 	public function getTestResultData2($_tmpMachineID, 
                                        $_tmpFolderFileID,
                                        $_tmpFileOffset,
@@ -2918,6 +3009,7 @@ class CGenReport
         global $swtUmdNameList;
         global $curTestPos;
         global $tmpFileName1;
+        global $isOutputFlatData;
         
         if ($_tmpMachineID == -1)
         {
@@ -2965,6 +3057,7 @@ class CGenReport
         {
             $tmpResultFileName = $connectDataSet["allFileList"][$tmpKeys[$j]];
             
+            $returnMsg["tmpResultFileName"] = $tmpResultFileName;
             $handle = fopen($tmpResultFileName, "r");
             
             fseek($handle, $tmpFileOffset, SEEK_SET);
@@ -2998,9 +3091,21 @@ class CGenReport
                 {
                     $data[$i] = trim($data[$i]);
                 }
+                
+                // if info lines
+                if (strlen($data[0]) > 0)
+                {
+                    if ($data[0][0] == '[')
+                    {
+                        continue;
+                    }
+                }
+                
                 $tmpName = $data[0];
                 if (strlen($tmpName) > 0)
                 {
+                    $this->addTestNameInSkipList($curTestName, $_isMainMachineID);
+                    
                     // if this line is title line of each test
                     if ($_isMainMachineID == false)
                     {
@@ -3023,19 +3128,16 @@ class CGenReport
                     }
                     
                     $curTestName = $tmpName;
+                    $returnMsg["curTestName"] = $curTestName;
                     
-                    if ($_fileHandleFlatData !== null)
-                    {   
-                        if (($_isMainMachineID == true) &&
-                            ($isSecondRound    == false))
-                        {
-                            // base card test sheet start
-                            $this->testWriteFlatDataReportSheetStart($curTestName, $_fileHandleFlatData);
-                            
-                            $flatDataSheetStartOffset = ftell($_fileHandleFlatData);
-                        }
+                    $b1 = $this->checkTestNameInSkipList($curTestName, $_isMainMachineID);
+                    if ($b1)
+                    {
+                        // need skip testname for more than 1 instance
+                        continue;
                     }
                     
+
                     $dataKeyAPI = array_search("API", $data);
                     $testCaseIDKeyAPI = array_search("TestCaseId#", $data);
                     
@@ -3053,6 +3155,33 @@ class CGenReport
                             // data column id
                             $dataKeyDataColumnID = $i;
                             break;
+                        }
+                        else if ($data[$i] == "TestResult") // SP1
+                        {
+                            // data column id
+                            $dataKeyDataColumnID = $i;
+                            break;
+                        }
+                    }
+                    
+                    if ($dataKeyDataColumnID == -1)
+                    {
+                        continue;
+                    }
+                    
+                    if ($_fileHandleFlatData !== null)
+                    {   
+                        if (($_isMainMachineID == true) &&
+                            ($isSecondRound    == false))
+                        {
+                            //$this->addTestNameInSkipList($curTestName);
+                            
+                            // base card test sheet start
+                            $this->testWriteFlatDataReportSheetStart($curTestName, $_fileHandleFlatData);
+                            
+                            $isOutputFlatData = true;
+                            
+                            $flatDataSheetStartOffset = ftell($_fileHandleFlatData);
                         }
                     }
 
@@ -3075,6 +3204,13 @@ class CGenReport
                     }
                     if ($dataKeyDataColumnID == -1)
                     {
+                        continue;
+                    }
+                    
+                    $b1 = $this->checkTestNameInSkipList($curTestName, $_isMainMachineID);
+                    if ($b1)
+                    {
+                        // need skip testname for more than 1 instance
                         continue;
                     }
                     
@@ -3191,6 +3327,8 @@ class CGenReport
                     }
                 }
             }
+            
+            $this->addTestNameInSkipList($curTestName, $_isMainMachineID);
             fclose($handle);
             
             if ($isReadStart == true)
@@ -3263,6 +3401,10 @@ class CGenReport
             
             $tmpMask = $this->getTestCaseUmdDataMask($tmpUmdTestCaseNumList);
             
+            $returnMsg["tmpTestCaseNum"] = $tmpTestCaseNum;
+            $returnMsg["curTestPos2"] = $curTestPos;
+            $returnMsg["testCaseIDList"] = $testCaseIDList;
+            
             if (($_isMainMachineID == true) &&
                 ($tmpTestCaseNum   >  0))
             {
@@ -3274,6 +3416,8 @@ class CGenReport
                     $connectDataSet["testCaseNumMap"] = array();
                     $connectDataSet["testCaseNumMap"][$curTestName] = $tmpTestCaseNum;
                     $connectDataSet["graphDataBlankBuffOffset"] = array();
+                    
+                    $returnMsg["enterTest"] = 1;
                 }
                 else
                 {
@@ -3357,6 +3501,16 @@ class CGenReport
             {
                 $data[$i] = trim($data[$i]);
             }
+            
+            // if info lines
+            if (strlen($data[0]) > 0)
+            {
+                if ($data[0][0] == '[')
+                {
+                    continue;
+                }
+            }
+            
             $tmpName = $data[0];
             if (strlen($tmpName) > 0)
             {
@@ -3376,6 +3530,7 @@ class CGenReport
                                                    $_reportFolder,
                                                    $_isCompStandard)
 	{
+        global $returnMsg;
         global $subjectNameFilterNumMax;
         global $dataColumnNum;
         global $swtSheetColumnIDList;
@@ -3459,6 +3614,12 @@ class CGenReport
         {
             $tmpBuffList = $connectDataSet["graphDataBlankBuffOffset"];
             $tmpBuffNum = count($tmpBuffList);
+            $returnMsg["tmpBuffList"] = $tmpBuffList;
+            $returnMsg["graphCellsNum"] = $graphCellsNum;
+            $returnMsg["tmpBuffNum"] = $tmpBuffNum;
+            
+            $n1 = 0;
+            $n2 = 0;
             
             for ($i = 0; $i < $tmpBuffNum; $i++)
             {
@@ -3470,10 +3631,15 @@ class CGenReport
                 fseek($_tempFileHandle, $tmpBuffList[$i], SEEK_SET);
                 if (strlen($graphCells[$i]) >= $defaultGraphDataLineLen)
                 {
+                    $n1++;
                     continue;
                 }
+                $n2++;
                 fwrite($_tempFileHandle, $graphCells[$i]);
             }
+            
+            $returnMsg["writeGraphN1"] = $n1;
+            $returnMsg["writeGraphN2"] = $n2;
         }
     }
     
@@ -3515,6 +3681,7 @@ class CGenReport
         global $defaultGraphDataLineNum;
         global $defaultGraphDataLineBuff;
         global $connectDataSet;
+        global $swtMicrobenchDocsTestNameUrl;
 
         $tempFileHandle = $_tempFileHandle;
         $reportUmdNumn = count($umdNameList);
@@ -3684,9 +3851,12 @@ class CGenReport
                 }
                 $tmpCode = implode("", $tmpList);
                 
+                $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $testName);
+                $tmpSet = "ss:HRef=\"" . $tmpUrl . "\"";
+                
                 // data rows for api comparison
                 $t3 = "<Row>\n" .
-                      " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\"><Data ss:Type=\"String\">" . $testName . "</Data></Cell>\n" .
+                      " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\" " . $tmpSet . "><Data ss:Type=\"String\">" . $testName . "</Data></Cell>\n" .
                       $tmpCode;
 
                 if ($tmpDataColumnNum == 1)
@@ -3748,7 +3918,7 @@ class CGenReport
                 {
                     // data rows for asic comparison
                     $t3 = "<Row>\n" .
-                          " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\"><Data ss:Type=\"String\">" . $testName . "</Data></Cell>\n" .
+                          " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\" " . $tmpSet . "><Data ss:Type=\"String\">" . $testName . "</Data></Cell>\n" .
                           $tmpCode;
                     
                     $tmpDataColumnNum = 0;

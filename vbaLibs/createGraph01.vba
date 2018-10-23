@@ -31,7 +31,10 @@ Public Sub createGraph01()
         myNumFormat = "0X"
     End If
     
-    Worksheets("Variance").Move before := Worksheets(1)
+    If WorksheetExists("Variance") = True Then
+        Worksheets("Variance").Move before := Worksheets(1)
+    End If
+    
     destSheet.Move before := Worksheets(1)
     destSheet.Activate
 

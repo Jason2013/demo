@@ -32,6 +32,8 @@ $curFileOffset = intval($_POST["curFileOffset"]);
 $cmpFolderFileID = intval($_POST["cmpFolderFileID"]);
 $cmpFileOffset = intval($_POST["cmpFileOffset"]);
 
+//$visitedTestNameList = cleanText($_POST["visitedTestNameList"], 1000000);
+
 // default values
 $startStyleID = $swtStartStyleID;
 $startSheetLineNum = 11;
@@ -43,7 +45,7 @@ $maxSubTestNumOnce = 5000;
 
 // pre saved graph data into report file
 // will be replaced by real data after traversed all test
-$defaultGraphDataLineLen = 1600;
+$defaultGraphDataLineLen = 5000;
 $defaultGraphDataLineNum = 50;
 $defaultGraphDataLineBuff = str_pad("", $defaultGraphDataLineLen);
 
@@ -107,6 +109,7 @@ if ($connectDataSet === null)
     echo "error line: " . __LINE__;
     return;
 }
+$returnMsg["connectDataSet"] = $connectDataSet;
 //$allFileReportUmdNameList = $connectDataSet["allFileReportUmdNameList"];
 //$machineIDList = $connectDataSet["machineIDList"];
 //$returnMsg["reportUmdNameList"] = $reportUmdNameList;
@@ -157,6 +160,11 @@ if (($cmpMachineID                != -1) &&
 {
     $reportUmdListRef = $cmpReportUmdNameList;
 }
+
+$returnMsg["reportUmdListRef"] = $reportUmdListRef;
+$returnMsg["umdNameList"] = $umdNameList;
+$returnMsg["curReportUmdNameList"] = $curReportUmdNameList;
+$returnMsg["cmpReportUmdNameList"] = $cmpReportUmdNameList;
 
 for ($i = 0; $i < $reportUmdNum; $i++)
 {
@@ -274,6 +282,8 @@ $cmpToVisitFileSizeSum = 0;
 $returnMsg["curFolderFileID"] = $curFolderFileID;
 $returnMsg["curFileOffset"] = $curFileOffset;
 
+$isOutputFlatData = false;
+
 $returnSet = $xmlWriter->getTestResultData2($curMachineID, 
                                             $curFolderFileID, 
                                             $curFileOffset,
@@ -368,6 +378,8 @@ if ($isFolderFinished == true)
                                                     $curCardName, $cmpCardName, $graphCells,
                                                     $curSysName, $cmpSysName);
     $graphCells = $returnSet["graphCells"];
+    //$returnMsg["graphCells"] = $graphCells;
+    //$connectDataSet["graphCells"] = $graphCells;
     $averageColumnHasVal = $returnSet["averageColumnHasVal"];
     
     // write graph data into json for call from vba script
@@ -397,7 +409,7 @@ $curTestPos++;
 
 
 // test if finish flatdata file "*.tmp1"
-if ($isProduceFlatData)
+if ($isProduceFlatData && ($isOutputFlatData || $isFolderFinished))
 {
     $xmlWriter->testWriteFlatDataReportEnd($isFolderFinished, $tmpFileName1);
 }

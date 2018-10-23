@@ -787,6 +787,13 @@ class CGenReportFlatData
                                 $subTestNameFilterNum = $dataKeyDataColumnID - 1;
                                 break;
                             }
+                            else if ($dataSet[$j] == "TestResult") // SP1
+                            {
+                                // data column id
+                                $dataKeyDataColumnID = $j;
+                                $subTestNameFilterNum = $dataKeyDataColumnID - 1;
+                                break;
+                            }
                         }
                         $subTestNameFilterNumMax = $subTestNameFilterNumMax < $subTestNameFilterNum ? 
                                                    $subTestNameFilterNum : $subTestNameFilterNumMax;
@@ -959,6 +966,12 @@ class CGenReportFlatData
                                 break;
                             }
                             else if ($dataSet[$j] == "FPS") // randomsphere
+                            {
+                                // data column id
+                                $dataKeyDataColumnID = $j;
+                                break;
+                            }
+                            else if ($dataSet[$j] == "TestResult") // SP1
                             {
                                 // data column id
                                 $dataKeyDataColumnID = $j;
