@@ -389,25 +389,27 @@ class CGenReportFlatData
                     $tmpSrcPath = $tmpSrcFolder . $resultFileName3;
                     $tmpDestFolder = $reportFolder . "/" . $_cardName;
                     $tmpDestPath = $tmpDestFolder . "/" . $resultFileName3;
-                    if (file_exists($tmpSrcPath))
+                    if (file_exists($tmpSrcPath) == false)
                     {
-                        $allRunLogFileList []= $tmpSrcPath;
-                        // copy runlog.txt to report folder
-                        // will be attached to report later
-                        if (is_dir($tmpDestFolder) == false)
-                        {
-                            //$returnMsg["tmp---006:"] .= $tmpDestFolder . ",";
-                            mkdir($tmpDestFolder);
-                        }
-                        copy($tmpSrcPath, $tmpDestPath);
+                        file_put_contents($tmpSrcPath, "");
                     }
-                    else
+                    $allRunLogFileList []= $tmpSrcPath;
+                    // copy runlog.txt to report folder
+                    // will be attached to report later
+                    if (is_dir($tmpDestFolder) == false)
                     {
-                        $returnMsg["errorCode"] = 0;
-                        $returnMsg["errorMsg"] = "file: " . $resultFileName3 . " missing, line: " . __LINE__;
-                        echo json_encode($returnMsg);
-                        return false;
+                        //$returnMsg["tmp---006:"] .= $tmpDestFolder . ",";
+                        mkdir($tmpDestFolder);
                     }
+                    copy($tmpSrcPath, $tmpDestPath);
+                    //else
+                    //{
+                    //    $returnMsg["errorCode"] = 0;
+                    //    $returnMsg["errorMsg"] = "file: " . $resultFileName3 . " missing, line: " . __LINE__;
+                    //    $returnMsg["tmpSrcPath"] = $tmpSrcPath;
+                    //    echo json_encode($returnMsg);
+                    //    return false;
+                    //}
                 }
             }
         }
