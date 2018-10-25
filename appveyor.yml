@@ -1,0 +1,20 @@
+#language: cpp
+
+# install: true
+
+matrix:
+  fast_finish: true     # set this flag to immediately finish build once one of the jobs fails.
+  allow_failures:
+    - platform: x86
+      configuration: Debug
+    - platform: x86
+      configuration: Release
+    - platform: x64
+      configuration: Debug
+    - platform: x64
+      configuration: Release
+
+before_build:
+  - cmd: cmake --version
+#build_script:
+#  - cmd: cmake --version
