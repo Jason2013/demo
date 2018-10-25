@@ -18,10 +18,13 @@ public:
 };
 
 #define REGISTER_TEST(testname) \
-BaseTest * testname ## Factory() \
+namespace \
 { \
-    return new testname(); \
-} \
-TestReg TestReg ## testname(# testname, testname ## Factory);
+    BaseTest * testname ## Factory() \
+    {\
+        return new testname(); \
+    } \
+    TestReg TestReg ## testname(# testname, testname ## Factory); \
+}
 
 #endif // __BASE_TEST_H
