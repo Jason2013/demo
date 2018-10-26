@@ -32,5 +32,6 @@ build:
 before_build:
   - cmd: cmake --version
   - cmd: git --version
+  - cmd: set
 #build_script:
 #  - cmd: cmake --version
