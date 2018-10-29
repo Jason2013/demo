@@ -35,3 +35,9 @@ before_build:
   - cmd: set
 #build_script:
 #  - cmd: cmake --version
+build:
+  - cmd: mkdir build
+  - cmd: cd build
+  - cmd: cmake ..
+  - cmd: cmake --build .
+  - cmd: cd ..
