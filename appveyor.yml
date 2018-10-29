@@ -25,9 +25,9 @@ configuration:
   - Debug
   - Release
 
-# build:
-#   parallel: true
-#   project: demo.sln
+build:
+  parallel: true
+  # project: demo.sln
 
 before_build:
   - cmd: cmake --version
@@ -35,7 +35,7 @@ before_build:
   - cmd: set
 #build_script:
 #  - cmd: cmake --version
-build:
+build_script:
   - cmd: mkdir build
   - cmd: cd build
   - cmd: cmake ..
