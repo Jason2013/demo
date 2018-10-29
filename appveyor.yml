@@ -36,8 +36,9 @@ before_build:
 #build_script:
 #  - cmd: cmake --version
 build_script:
-  - cmd: mkdir build
-  - cmd: cd build
-  - cmd: cmake -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake ..
-  - cmd: cmake --build .
-  - cmd: cd ..
+  - cmd: C:\Python36-x64\python.exe build.py
+  - cmd: build.bat
+  # - cmd: cd build
+  # - cmd: cmake -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake ..
+  # - cmd: cmake --build .
+  # - cmd: cd ..
