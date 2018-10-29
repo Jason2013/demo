@@ -37,7 +37,7 @@ Generator = VS_MAP[VS]
 if Platform == "x64":
     Generator += " Win64"
 
-CMAKE_COMMAND1 = 'cmake -G"{GENERATOR} ..'.format(GENERATOR=Generator)
+CMAKE_COMMAND1 = 'cmake -G"{GENERATOR}" ..'.format(GENERATOR=Generator)
 CMAKE_COMMAND2 = 'cmake --build . --config ' + Config
 
 CMAKE_COMMANDS = ["mkdir build",
