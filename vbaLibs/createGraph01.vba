@@ -74,6 +74,7 @@ Public Sub createGraph01()
     End With
 
     ActiveChart.Axes(xlCategory).TickLabels.Font.Color = RGB(200, 200, 200)
+    ActiveChart.Axes(xlCategory).TickLabelPosition = xlLow
 
     ActiveChart.Axes(xlValue).TickLabels.Font.Color = RGB(200, 200, 200)
 

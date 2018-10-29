@@ -190,6 +190,12 @@ if ($fileID < count($oldReportXLSXList))
                     $codePiece1 = sprintf($t5, $t6, $n1);
                 }
                 
+                if (isset($vbaConfig->shrinkColumnArea))
+                {
+                    $codePiece1 .= "\n";
+                    $codePiece1 .= "Columns(\"" . $vbaConfig->shrinkColumnArea . "\").ColumnWidth = 0\n";
+                }
+                
                 // $vbaConfig->graphDataArea
                 $t2 = sprintf($t2, $t4, $tmpCardName, $vbaConfig->graphDataAreaNoBlank, $codePiece1);
                 file_put_contents($tmpVBAPath, $t2);

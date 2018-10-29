@@ -1063,7 +1063,7 @@ class CGenReport
                             {
                                 // black font
                                 $t3 = "s94";
-                                $t2 = sprintf("[%d%%, %d%%], %d%% test cases drop and %d%% test cases gain",
+                                $t2 = sprintf("[%d%%, %d%%], %d%% cases down and %d%% cases up",
                                               $tmpMinRate, $tmpMaxRate,
                                               $tmpDownRate, $tmpUpRate);
                                 $isEven = false;

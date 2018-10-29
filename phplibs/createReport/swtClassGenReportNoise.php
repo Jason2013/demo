@@ -338,6 +338,12 @@ class CGenReport
                                "<Interior ss:Color=\"#800000\" ss:Pattern=\"Solid\"/>\n" .
                                "</Style>\n";
                                
+        $styleRateDefault = "<Style ss:ID=\"s%d\">\n" .
+                            "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>\n" .
+                            "<Interior/>\n" .
+                            "<NumberFormat ss:Format=\"Percent\"/>\n" .
+                            "</Style>\n";
+                               
              
         $appendStyleList = array($styleBlackBar, $styleBlank,
                                  $styleA, $styleB,
@@ -349,7 +355,7 @@ class CGenReport
                                  $styleSummaryTitle01, $styleSummaryTitle02,
                                  $styleSummaryLine01, $styleSummaryLine02, $styleSummaryLine03,
                                  $stylePlatformInfoName, $stylePlatformInfoValue,
-                                 $styleSummaryTitle03);
+                                 $styleSummaryTitle03, $styleRateDefault);
                                  
         $allStylesEndTag = "</Styles>\n";
         $allSheetsEndTag = "</Workbook>";
@@ -3097,7 +3103,7 @@ class CGenReport
                     {
                         // black font
                         $t3 = "s94";
-                        $t2 = sprintf("[%d%%, %d%%], %d%% test cases drop and %d%% test cases gain",
+                        $t2 = sprintf("[%d%%, %d%%], %d%% cases down and %d%% cases up",
                                       $tmpMinRate, $tmpMaxRate,
                                       $tmpDownRate, $tmpUpRate);
                         $isEven = false;
@@ -4335,7 +4341,7 @@ class CGenReport
                     $tmpIndexCode = "";
                     if ($isFirstColumn)
                     {
-                        $tmpAverageDataCode = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1) . 
+                        $tmpAverageDataCode = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * 2 + 1) . 
                                               "\" ss:StyleID=\"Default\"/>\n";
                         $tmpIndexCode = "ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + 2 + $graphDataColumnNum) . "\"";
                         $tmpGraphDataCode = " <Cell ss:Index=\"" . 
@@ -4343,11 +4349,14 @@ class CGenReport
                                             "\" ss:StyleID=\"Default\"/>\n";
                         $isFirstColumn = false;
                     }
-                    
+
                     $tmpAverageDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
                                            $addCurCardSysName . "</Data></Cell>\n";
-                    $tmpCompAverageDataCode .= " <Cell " . $tmpIndexCode .
-                                               " ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
+
+                    //$tmpCompAverageDataCode .= " <Cell " . $tmpIndexCode .
+                    //                           " ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
+                    //                           $addCmpCardSysName . "</Data></Cell>\n";
+                    $tmpCompAverageDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
                                                $addCmpCardSysName . "</Data></Cell>\n";
                     $tmpGraphDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
                                          $addCurCardSysName . "</Data></Cell>\n" .
@@ -4355,7 +4364,8 @@ class CGenReport
                                          $addCmpCardSysName . "</Data></Cell>\n";
                 }
                 
-                $t1 = $tmpAverageDataCode . $tmpCompAverageDataCode . $tmpGraphDataCode;
+                //$t1 = $tmpAverageDataCode . $tmpCompAverageDataCode . $tmpGraphDataCode;
+                $t1 = $tmpAverageDataCode . $tmpCompAverageDataCode;
             }
             else
             {
@@ -4385,10 +4395,10 @@ class CGenReport
                     if ($isFirstColumn)
                     {
                         $tmpAverageDataCode = " <Cell ss:Index=\"" . 
-                                              ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1) . 
+                                              ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum + 1) . 
                                               "\" ss:StyleID=\"Default\"/>\n";
                         $tmpGraphDataCode = " <Cell ss:Index=\"" . 
-                                            ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum + 2) . 
+                                            ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum + 1 + $graphDataColumnNum + 2) . 
                                             "\" ss:StyleID=\"Default\"/>\n";
                         $isFirstColumn = false;
                     }
@@ -4398,7 +4408,8 @@ class CGenReport
                                          "</Data></Cell>\n";
                 }
                 
-                $t1 = $tmpAverageDataCode . $tmpGraphDataCode;
+                //$t1 = $tmpAverageDataCode . $tmpGraphDataCode;
+                $t1 = $tmpAverageDataCode;
             }
             array_push($graphCells, $t1);
             
@@ -4466,52 +4477,31 @@ class CGenReport
                         {
                             $tmpIndexCode = "ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + 2 + $graphDataColumnNum) . "\"";
                             $isFirstColumn = false;
+                            
+                            $tmpValHas[$k] = " <Cell ss:StyleID=\"Default\" " .
+                                            "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) .
+                                            ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) . 
+                                            ")\">" .
+                                            "<Data ss:Type=\"Number\"></Data></Cell>\n";
                         }
-                        $tmpValHas[$k] = " <Cell ss:StyleID=\"Default\" " .
-                                        "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $tmpColumnNum * 3) .
-                                        ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $tmpColumnNum * 3) . 
-                                        ")\">" .
-                                        "<Data ss:Type=\"Number\"></Data></Cell>\n";
+                        else
+                        {
+                            $tmpValHas[$k] = " <Cell ss:StyleID=\"Default\" " .
+                                            "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) .
+                                            ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) . 
+                                            ")+RC" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * 2 + 2) . "\">" .
+                                            "<Data ss:Type=\"Number\"></Data></Cell>\n";
+                        }
                                         
-                        $tmpValHas[$reportUmdNum + $k] = " <Cell " . ($tmpIndexCode) . " ss:StyleID=\"Default\" " .
-                                                         "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 5 + $tmpColumnNum * 3) .
-                                                         ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 5 + $tmpColumnNum * 3) . 
-                                                         ")\">" .
+                        $tmpValHas[$reportUmdNum + $k] = " <Cell ss:StyleID=\"Default\" " .
+                                                         "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum +  $tmpColumnNum) .
+                                                         ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum + $tmpColumnNum) . 
+                                                         ")+RC" . (($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * 2 + 2)) . "\">" .
                                                          "<Data ss:Type=\"Number\"></Data></Cell>\n";
                                                          
                         $tmpColumnNum++;
                     }
                     
-                    //$tmpValHas[0] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3) . // 6
-                    //                ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3) . 
-                    //                ")\">" .
-                    //                "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                    //$tmpValHas[1] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 6) . // 9
-                    //                ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 6) . 
-                    //                ")\">" .
-                    //                "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                    //$tmpValHas[2] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 9) . // 12
-                    //                ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 9) . 
-                    //                ")\">" .
-                    //                "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                    //$tmpValHas[3] = " <Cell ss:Index=\"" . (25 + $subjectNameFilterNumMax) . "\" ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 5) . // 8
-                    //                ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 5) . 
-                    //                ")\">" .
-                    //                "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                    //$tmpValHas[4] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 8) . // 11
-                    //                ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 8) . 
-                    //                ")\">" .
-                    //                "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                    //$tmpValHas[5] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 11) . // 14
-                    //                ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 11) . 
-                    //                ")\">" .
-                    //                "<Data ss:Type=\"Number\"></Data></Cell>\n";
                     
                     for ($j = 0; $j < $reportUmdNum; $j++)
                     {
@@ -4519,12 +4509,7 @@ class CGenReport
                         $tmpVal[$j] = "";
                         if ($j == 0)
                         {
-                            // spaces between cur card & cmp card
-                            //$tmpVal[$reportUmdNum + $j] = " <Cell ss:Index=\"" . (25 + $subjectNameFilterNumMax) . "\" ss:StyleID=\"Default\" />\n";
-                            //$tmpVal[$reportUmdNum + $j] = " <Cell ss:Index=\"" . 
-                            //                             ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + 2 + $graphDataColumnNum) . 
-                            //                              "\" ss:StyleID=\"Default\" />\n";
-                            $tmpVal[$reportUmdNum + $j] = "<Cell ss:StyleID=\"Default\"></Cell>\n";
+                            $tmpVal[$reportUmdNum + $j] = "";//"<Cell ss:StyleID=\"Default\"></Cell>\n";
                         }
                         else
                         {
@@ -4575,27 +4560,21 @@ class CGenReport
                         }
                     }
                         
-                    //$t1 = " <Cell ss:Index=\"" . (20 + $subjectNameFilterNumMax) . "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
-                    //      $testNameList[$i] . "</Data></Cell>\n";
-                    $t1 = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1) . 
+                    $t1 = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * 2 + 1) . 
                           "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
                           $testNameList[$i] . "</Data></Cell>\n";
                           
-                    for ($k = 0; $k < $reportUmdNum; $k++)
+                    $isFirstColumn = true;
+                    for ($k = 0; $k < $reportUmdNum * 2; $k++)
                     {
-                        $j = $k * 2;
-                        $t1 .= $tmpVal[$j];
-                        $t1 .= $tmpVal[$j + 1];
+                        //$j = $k * 2;
+                        //$t1 .= $tmpVal[$j];
+                        $t1 .= $tmpVal[$k];
+                        //$t1 .= $tmpVal[$j + 1];
                     }
                           
-                    //$t1 .= $tmpVal[0];
-                    //$t1 .= $tmpVal[1];
-                    //$t1 .= $tmpVal[2];
-                    //
-                    //$t1 .= $tmpVal[3];
-                    //$t1 .= $tmpVal[4];
-                    //$t1 .= $tmpVal[5];
                            
+                    // below code needs be skipped
                     $tmpColumnNum = 0;
                     
                     $tmpValHas2 = "<Cell ss:StyleID=\"Default\"></Cell>\n";
@@ -4637,25 +4616,6 @@ class CGenReport
                         $tmpColumnNum++;
                     }
                            
-            
-                    //$tmpValHas[0] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=RC[-9]/RC[-" . (9 - $startIndex) .
-                    //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
-                    //$tmpValHas[1] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=RC[-6]/RC[-" . (10 - $startIndex) .
-                    //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
-                    //$tmpValHas[2] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=RC[-10]/RC[-" . (11 - $startIndex) .
-                    //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
-                    //$tmpValHas[3] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=RC[-7]/RC[-" . (12 - $startIndex) .
-                    //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
-                    //$tmpValHas[4] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=RC[-11]/RC[-" . (13 - $startIndex) .
-                    //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
-                    //$tmpValHas[5] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=RC[-8]/RC[-" . (14 - $startIndex) .
-                    //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
                     
                     
                     for ($k = 0; $k < $reportUmdNum; $k++)
@@ -4687,28 +4647,18 @@ class CGenReport
                     }
                     
                     
-                      
-                    //$t1 .= " <Cell ss:Index=\"" . (29 + $subjectNameFilterNumMax) . "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
+                    //$t1 .= " <Cell ss:Index=\"" . 
+                    //       ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + 2 + $graphDataColumnNum * 2 + 1) . 
+                    //       "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
                     //       $testNameList[$i] . "</Data></Cell>\n";
-                    $t1 .= " <Cell ss:Index=\"" . 
-                           ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + 2 + $graphDataColumnNum * 2 + 1) . 
-                           "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
-                           $testNameList[$i] . "</Data></Cell>\n";
-                           
-                    for ($k = 0; $k < $reportUmdNum; $k++)
-                    {
-                        $j = $k * 2;
-                        $t1 .= $tmpVal[$j];
-                        $t1 .= $tmpVal[$j + 1];
-                    }
-                           
-                    //$t1 .= $tmpVal[0];
-                    //$t1 .= $tmpVal[1];
-                    //$t1 .= $tmpVal[2];
-                    //$t1 .= $tmpVal[3];
-                    //$t1 .= $tmpVal[4];
-                    //$t1 .= $tmpVal[5];
-                    
+                    //       
+                    //for ($k = 0; $k < $reportUmdNum; $k++)
+                    //{
+                    //    $j = $k * 2;
+                    //    $t1 .= $tmpVal[$j];
+                    //    $t1 .= $tmpVal[$j + 1];
+                    //}
+
                 }
                 else
                 {
@@ -4739,31 +4689,27 @@ class CGenReport
                             // absent api
                             continue;
                         }
-                        $tmpValHas[$k] = " <Cell ss:StyleID=\"Default\" " .
-                                         "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $tmpColumnNum * 2) . // 6
-                                         ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $tmpColumnNum * 2) . 
-                                         ")\">" .
-                                         "<Data ss:Type=\"Number\"></Data></Cell>\n";
+                        if ($isFirstColumn)
+                        {
+                            $tmpValHas[$k] = " <Cell ss:StyleID=\"Default\" " .
+                                             "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) . // 6
+                                             ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) . 
+                                             ")\">" .
+                                             "<Data ss:Type=\"Number\"></Data></Cell>\n";
+                            $isFirstColumn = false;
+                        }
+                        else
+                        {
+                            $tmpValHas[$k] = " <Cell ss:StyleID=\"Default\" " .
+                                             "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) . // 6
+                                             ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) . 
+                                             ")+RC" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum + 2) . "\">" .
+                                             "<Data ss:Type=\"Number\"></Data></Cell>\n";
+                        }
                         
                         $tmpColumnNum++;
                     }
                     
-                    
-                    //$tmpValHas[0] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3) . // 6
-                    //                ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3) . 
-                    //                ")\">" .
-                    //                "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                    //$tmpValHas[1] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 5) . // 8
-                    //                ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 5) . 
-                    //                ")\">" .
-                    //                "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                    //$tmpValHas[2] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 7) . // 10
-                    //                ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 7) . 
-                    //                ")\">" .
-                    //                "<Data ss:Type=\"Number\"></Data></Cell>\n";
                     
                     for ($j = 0; $j < $reportUmdNum; $j++)
                     {
@@ -4816,10 +4762,8 @@ class CGenReport
                             $tmpVal[$j] = "";
                         }
                     }
-                        
-                    //$t1 = " <Cell ss:Index=\"" . (14 + $subjectNameFilterNumMax) . "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
-                    //      $testNameList[$i] . "</Data></Cell>\n";
-                    $t1 = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1) . 
+
+                    $t1 = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum + 1) . 
                           "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
                           $testNameList[$i] . "</Data></Cell>\n";
                           
@@ -4827,11 +4771,8 @@ class CGenReport
                     {
                         $t1 .= $tmpVal[$k];
                     }
-                          
-                    //$t1 .= $tmpVal[0];
-                    //$t1 .= $tmpVal[1];
-                    //$t1 .= $tmpVal[2];
                     
+                    // below no more need
                     $tmpColumnNum = 0;
                     for ($k = 0; $k < $reportUmdNum; $k++)
                     {
@@ -4860,15 +4801,6 @@ class CGenReport
                         $tmpColumnNum++;
                     }
                     
-                    //$tmpValHas[0] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=RC[-5]/RC[-" . (5 - $startIndex) .
-                    //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
-                    //$tmpValHas[1] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=RC[-5]/RC[-" . (6 - $startIndex) .
-                    //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
-                    //$tmpValHas[2] = " <Cell ss:StyleID=\"Default\" " .
-                    //                "ss:Formula=\"=RC[-5]/RC[-" . (7 - $startIndex) .
-                    //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
                     
                     
                     for ($j = 0; $j < $reportUmdNum; $j++)
@@ -4884,19 +4816,15 @@ class CGenReport
                         }
                     }
                     
-                    $t1 .= " <Cell ss:Index=\"" . 
-                           ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum + 2) . 
-                           "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
-                           $testNameList[$i] . "</Data></Cell>\n";
-                           
-                    for ($k = 0; $k < $reportUmdNum; $k++)
-                    {
-                        $t1 .= $tmpVal[$k];
-                    }
-                           
-                    //$t1 .= $tmpVal[0];
-                    //$t1 .= $tmpVal[1];
-                    //$t1 .= $tmpVal[2];
+                    //$t1 .= " <Cell ss:Index=\"" . 
+                    //       ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum + 1 + $graphDataColumnNum + 2) . 
+                    //       "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
+                    //       $testNameList[$i] . "</Data></Cell>\n";
+                    //       
+                    //for ($k = 0; $k < $reportUmdNum; $k++)
+                    //{
+                    //    $t1 .= $tmpVal[$k];
+                    //}
                         
                 }
                 array_push($graphCells, $t1);
@@ -5044,7 +4972,7 @@ class CGenReport
                   $tmpCode5 .
                   "</Row>\n";
                   
-            $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $testNameList[$_curTestPos]);
+            $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $testNameList[$_curTestPos], $testNameList[$_curTestPos]);
             $tmpSet = "ss:HRef=\"" . $tmpUrl . "\"";
             
             $t1 .= "<Row ss:StyleID=\"Default\">\n" .
@@ -5594,7 +5522,7 @@ class CGenReport
             $tmpCode1 = "<Cell ss:StyleID=\"s" . ($startStyleID + 13) . "\" " .
                         "><Data ss:Type=\"Number\">" . $tmpData2 . "</Data></Cell>";
             
-            $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $testName);
+            $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $testName, $testName);
             $tmpSet = "ss:HRef=\"" . $tmpUrl . "\"";
             
             // api sheet comparison
@@ -5925,11 +5853,13 @@ class CGenReport
             $graphDataColumnNum = intval($dataColumnNum / 2);
         }
                          
-        $graphDataArea = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum + 1] . 
+        $graphDataArea = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum] . 
                          graphDataStartLineID . ":" . 
-                         $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum + 1 + $graphDataColumnNum] .
+                         $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum + $graphDataColumnNum] .
                          (intval(graphDataStartLineID) + count($graphCells) - 1);
                          
+        $shrinkColumnArea = ""  . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum] . 
+                            ":" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + $graphDataColumnNum];
                          
         $returnMsg["tmp_graphCells"] = $graphCells;
         $returnMsg["tmp_graphCellsNum"] = count($graphCells);
@@ -5945,16 +5875,22 @@ class CGenReport
                                     
             $graphDataColumnNum = intval($dataColumnNum / 3);
                                     
-            $graphDataAreaNoBlank = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + 2 + $graphDataColumnNum * 2] .
+            $graphDataAreaNoBlank = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * 2] .
                                     graphDataStartLineIDCompare . ":" . 
-                                    $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + 2 + $graphDataColumnNum * 2 + $graphDataColumnNum * 2] .
+                                    $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * 2 + $graphDataColumnNum * 2] .
                                     (intval(graphDataStartLineIDCompare) + count($graphCells) - 1);
+                                    
+            $shrinkColumnArea = ""  . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum] . 
+                                ":" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + $graphDataColumnNum * 2];
             
             $graphDataArea = $graphDataAreaNoBlank;
         }
         
+        //file_put_contents("test01.txt", $shrinkColumnArea);
+        
         $tmpJson = array();
         $tmpJson["graphDataArea"] = $graphDataArea;
+        $tmpJson["shrinkColumnArea"] = $shrinkColumnArea;
         $tmpJson["graphDataAreaNoBlank"] = $graphDataAreaNoBlank;
         $tmpJson["curCardName"] = $curCardName;
         $tmpJson["cmpCardName"] = $cmpCardName;
@@ -6263,7 +6199,7 @@ class CGenReport
                 }
                 $tmpCode = implode("", $tmpList);
                 
-                $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $testName);
+                $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $testName, $testName);
                 $tmpSet = "ss:HRef=\"" . $tmpUrl . "\"";
                 
                 // data rows for api comparison
@@ -6286,55 +6222,18 @@ class CGenReport
                     $tmpDataColumnNum++;
                 }
 
-                /*
-                
-                if ($tmpDataColumnNum == 1)
-                {
-                    // 1 api
-                    $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\" " .
-                           "ss:Formula=\"=D3D11!R[-3]C[" . 1 . "]\">" .
-                           "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                }
-                else
-                {
-                    // more than 1 api
-                    
-                    for ($i = 0; $i < $tmpDataColumnNum; $i++)
-                    {
-                        if ($i < ($tmpDataColumnNum - 1))
-                        {
-                            // 
-                            $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\" " .
-                                   "ss:Formula=\"=D3D11!R[-3]C[" . (1 - 2 * $i) . "]\">" .
-                                   "<Data ss:Type=\"Number\"></Data></Cell>\n" .
-                                   " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                                   "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 5 + $i * 2) . // 8
-                                                "-RC" . ($subjectNameFilterNumMax + 3 + $i * 2) . // 6
-                                                ")/RC" . ($subjectNameFilterNumMax + 3 + $i * 2) . "\">" .
-                                                "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                        }
-                        else
-                        {
-                            // 
-                            $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\" " .
-                                   "ss:Formula=\"=D3D11!R[-3]C[" . (1 - 2 * $i) . "]\">" .
-                                   "<Data ss:Type=\"Number\"></Data></Cell>\n" .
-                                   " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                                   "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 3 + $i * 2) . // 8
-                                                "-RC" . ($subjectNameFilterNumMax + 3) . // 6
-                                                ")/RC" . ($subjectNameFilterNumMax + 3) . "\">" .
-                                                "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                        }
-                    }
-                }
-                
-                //*/
-                
+                $t4 = "";
+                $t5 = "";
+
                 if ($tmpDataColumnNum == 1)
                 {
                     // 1 api
                     $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
                            "" . $tmpDataList[0] . "</Cell>\n";
+                           
+                    $t4 = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $tmpDataColumnNum + 1) . 
+                                  "\" ss:StyleID=\"Default\">" .
+                                  "<Data ss:Type=\"Number\">1</Data></Cell>\n";
                 }
                 else
                 {
@@ -6347,14 +6246,6 @@ class CGenReport
                             // 
                             $rcID1 = ($subjectNameFilterNumMax + 5 + $i * 2);
                             $rcID2 = ($subjectNameFilterNumMax + 3 + $i * 2);
-                            
-                            //$t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
-                            //       "" . $tmpDataList[$i] . "</Cell>\n" .
-                            //       " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                            //       "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 5 + $i * 2) . // 8
-                            //                    "-RC" . ($subjectNameFilterNumMax + 3 + $i * 2) . // 6
-                            //                    ")/RC" . ($subjectNameFilterNumMax + 3 + $i * 2) . "\">" .
-                            //                    "<Data ss:Type=\"Number\"></Data></Cell>\n";
                                                 
                             $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
                                    "" . $tmpDataList[$i] . "</Cell>\n" .
@@ -6387,6 +6278,30 @@ class CGenReport
                                                 ")/RC" . $rcID2 . ")\">" .
                                                 "<Data ss:Type=\"Number\"></Data></Cell>\n";
                         }
+                        
+                        if ($i == 0)
+                        {
+                            $t4 = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $tmpDataColumnNum * 2 + 1) . 
+                                          "\" ss:StyleID=\"Default\">" .
+                                          "<Data ss:Type=\"Number\">1</Data></Cell>\n";
+                        }
+                        else
+                        {
+                            $rcID1 = ($subjectNameFilterNumMax + 3 + $i * 2);
+                            $rcID2 = ($subjectNameFilterNumMax + 3);
+                            
+                            $t4 .= " <Cell ss:StyleID=\"Default\" " .
+                                       "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
+                                                    "RC" . $rcID2 . "=&quot;&quot;," .
+                                                    "RC" . $rcID1 . "=0," .
+                                                    "RC" . $rcID2 . "=0" .
+                                                    "),&quot;&quot;," .
+                                                    "(RC" . $rcID1 . // 8
+                                                    "-RC" . $rcID2 . // 6
+                                                    ")/RC" . $rcID2 . ")\">" .
+                                                    "<Data ss:Type=\"Number\"></Data></Cell>\n";
+                        }
+
                     }
                 }
                 
@@ -6397,6 +6312,7 @@ class CGenReport
                 // for summary sheet2, cur & last batch
                 $summaryDataVal2 = array_fill(0, $reportUmdNumn * 2, -1);
                 $cmpPartName2 = array_fill(0, $reportUmdNumn * 2, "");
+                
                 if (($_cmpStartResultID != -1) ||
                     ($crossType == 2))
                 {
@@ -6404,6 +6320,8 @@ class CGenReport
                     $t3 = "<Row>\n" .
                           " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\" " . $tmpSet . "><Data ss:Type=\"String\">" . $testName . "</Data></Cell>\n" .
                           $tmpCode;
+                    $t4 = "";
+                    $t5 = "";
                     
                     $tmpDataColumnNum = 0;
                     $tmpDataList = array();
@@ -6431,33 +6349,9 @@ class CGenReport
                         array_push($tmpDataValList, $tmpDataValList2[$i]);
                     }
                     
-                    /*
                     
                     for ($i = 0; $i < $tmpDataColumnNum; $i++)
                     {
-                        $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\" " .
-                               "ss:Formula=\"=D3D11!R[-3]C[" . (1 - 2 * $i) . "]\">" .
-                               "<Data ss:Type=\"Number\"></Data></Cell>\n" .
-                               " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                               "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 5 + $i * 3) . // 8
-                               "-RC" . ($subjectNameFilterNumMax + 3 + $i * 3) . // 6
-                               ")/RC" . ($subjectNameFilterNumMax + 3 + $i * 3) . "\"><Data ss:Type=\"Number\"></Data></Cell>\n" .
-                               " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
-                               "" . $tmpDataList[$tmpDataColumnNum + $i] . "</Cell>\n";
-                    }
-                    //*/
-                    
-                    for ($i = 0; $i < $tmpDataColumnNum; $i++)
-                    {
-                        //$t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
-                        //       "" . $tmpDataList[$i] . "</Cell>\n" .
-                        //       " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
-                        //       "ss:Formula=\"=(RC" . ($subjectNameFilterNumMax + 5 + $i * 3) . // 8
-                        //       "-RC" . ($subjectNameFilterNumMax + 3 + $i * 3) . // 6
-                        //       ")/RC" . ($subjectNameFilterNumMax + 3 + $i * 3) . "\"><Data ss:Type=\"Number\"></Data></Cell>\n" .
-                        //       " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
-                        //       "" . $tmpDataList[$tmpDataColumnNum + $i] . "</Cell>\n";
-                               
                         $rcID1 = ($subjectNameFilterNumMax + 5 + $i * 3);
                         $rcID2 = ($subjectNameFilterNumMax + 3 + $i * 3);
                                
@@ -6474,8 +6368,56 @@ class CGenReport
                                ")/RC" . $rcID2 . ")\"><Data ss:Type=\"Number\"></Data></Cell>\n" .
                                " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
                                "" . $tmpDataList[$tmpDataColumnNum + $i] . "</Cell>\n";
+                               
+                        if ($i == 0)
+                        {
+                            $t4 = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $tmpDataColumnNum * 3 + 1) . 
+                                          "\" ss:StyleID=\"Default\">" .
+                                          "<Data ss:Type=\"Number\">1</Data></Cell>\n";
+                                          
+                            $rcID1 = ($subjectNameFilterNumMax + 3 + $i * 3);
+                            $rcID2 = ($subjectNameFilterNumMax + 3);
+                            $rcID3 = ($subjectNameFilterNumMax + 5 + $i * 3);
+                                   
+                            $t5 = " <Cell ss:StyleID=\"Default\" " .
+                                   "ss:Formula=\"=IF(OR(RC" . $rcID2 . "=&quot;&quot;," .
+                                   "RC" . $rcID3 . "=&quot;&quot;," .
+                                   "RC" . $rcID2 . "=0," .
+                                   "RC" . $rcID3 . "=0" .
+                                   "),&quot;&quot;," .
+                                   "(RC" . $rcID3 . // 8
+                                   "-RC" . $rcID2 . // 6
+                                   ")/RC" . $rcID2 . ")\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                        }
+                        else
+                        {
+                            $rcID1 = ($subjectNameFilterNumMax + 3 + $i * 3);
+                            $rcID2 = ($subjectNameFilterNumMax + 3);
+                            $rcID3 = ($subjectNameFilterNumMax + 5 + $i * 3);
+                                   
+                            $t4 .= " <Cell ss:StyleID=\"Default\" " .
+                                   "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
+                                   "RC" . $rcID2 . "=&quot;&quot;," .
+                                   "RC" . $rcID1 . "=0," .
+                                   "RC" . $rcID2 . "=0" .
+                                   "),&quot;&quot;," .
+                                   "(RC" . $rcID1 . // 8
+                                   "-RC" . $rcID2 . // 6
+                                   ")/RC" . $rcID2 . ")\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                                   
+                            $t5 .= " <Cell ss:StyleID=\"Default\" " .
+                                   "ss:Formula=\"=IF(OR(RC" . $rcID3 . "=&quot;&quot;," .
+                                   "RC" . $rcID2 . "=&quot;&quot;," .
+                                   "RC" . $rcID3 . "=0," .
+                                   "RC" . $rcID2 . "=0" .
+                                   "),&quot;&quot;," .
+                                   "(RC" . $rcID3 . // 8
+                                   "-RC" . $rcID2 . // 6
+                                   ")/RC" . $rcID2 . ")\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                        }
                     }
-                    //*/
+                    
+                    $t4 .= $t5;
                     
                     $rateVal = array_fill(0, $reportUmdNumn, -1);
                     $summaryDataVal = array_fill(0, $reportUmdNumn * 2, -1);
@@ -6588,7 +6530,7 @@ class CGenReport
                                                                $n1);
                 
                 
-                $t1 .= $t3;
+                $t1 .= $t3 . $t4;
                 if (count($graphCells) > 0)
                 {
                     $n2 = $sheetLinePos - $_startGraphDataLinePos;
