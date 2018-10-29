@@ -38,6 +38,6 @@ before_build:
 build_script:
   - cmd: mkdir build
   - cmd: cd build
-  - cmd: cmake -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake ...
+  - cmd: cmake -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake ..
   - cmd: cmake --build .
   - cmd: cd ..
