@@ -4350,22 +4350,26 @@ class CGenReport
                         $isFirstColumn = false;
                     }
 
-                    $tmpAverageDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
-                                           $addCurCardSysName . "</Data></Cell>\n";
-
-                    //$tmpCompAverageDataCode .= " <Cell " . $tmpIndexCode .
-                    //                           " ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
+                    //$tmpAverageDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
+                    //                       $addCurCardSysName . "</Data></Cell>\n";
+                    //
+                    //$tmpCompAverageDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
                     //                           $addCmpCardSysName . "</Data></Cell>\n";
-                    $tmpCompAverageDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
-                                               $addCmpCardSysName . "</Data></Cell>\n";
-                    $tmpGraphDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
-                                         $addCurCardSysName . "</Data></Cell>\n" .
-                                         " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
-                                         $addCmpCardSysName . "</Data></Cell>\n";
+                                               
+                    $tmpAverageDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
+                                           $addCurCardSysName . "</Data></Cell>\n" . 
+                                           " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
+                                           $addCmpCardSysName . "</Data></Cell>\n";
+                                               
+                    //$tmpGraphDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
+                    //                     $addCurCardSysName . "</Data></Cell>\n" .
+                    //                     " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
+                    //                     $addCmpCardSysName . "</Data></Cell>\n";
                 }
                 
                 //$t1 = $tmpAverageDataCode . $tmpCompAverageDataCode . $tmpGraphDataCode;
-                $t1 = $tmpAverageDataCode . $tmpCompAverageDataCode;
+                //$t1 = $tmpAverageDataCode . $tmpCompAverageDataCode;
+                $t1 = $tmpAverageDataCode;
             }
             else
             {
@@ -4565,12 +4569,19 @@ class CGenReport
                           $testNameList[$i] . "</Data></Cell>\n";
                           
                     $isFirstColumn = true;
-                    for ($k = 0; $k < $reportUmdNum * 2; $k++)
+                    //for ($k = 0; $k < $reportUmdNum * 2; $k++)
+                    //{
+                    //    //$j = $k * 2;
+                    //    //$t1 .= $tmpVal[$j];
+                    //    $t1 .= $tmpVal[$k];
+                    //    //$t1 .= $tmpVal[$j + 1];
+                    //}
+                    
+                    for ($k = 0; $k < $reportUmdNum; $k++)
                     {
                         //$j = $k * 2;
-                        //$t1 .= $tmpVal[$j];
                         $t1 .= $tmpVal[$k];
-                        //$t1 .= $tmpVal[$j + 1];
+                        $t1 .= $tmpVal[$reportUmdNum + $k];
                     }
                           
                            
