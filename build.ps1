@@ -5,8 +5,6 @@ try {
     if (!$?) { throw 'Error running cmake' }
     cmake --build . --config RelWithDebInfo
     if (!$?) { throw 'Error building with cmake' }
-    ctest .
-    if (!$?) { throw 'ctest execution error' }
 } finally {
     Pop-Location
 }
