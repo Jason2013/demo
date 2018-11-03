@@ -35,4 +35,5 @@ build_script:
   - cmd: C:\Python36-x64\python.exe build.py
   - cmd: type build.bat
   - cmd: build.bat
+  - cmd: exit 1
   # - cmd: cmake -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake ..
