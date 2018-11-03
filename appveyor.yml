@@ -36,4 +36,7 @@ build_script:
   - cmd: type build.bat
   - cmd: build.bat
   - cmd: exit 1
+
+test_script:
+  - cmd: exit 1
   # - cmd: cmake -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake ..
