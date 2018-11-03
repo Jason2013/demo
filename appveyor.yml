@@ -35,7 +35,7 @@ build_script:
   - cmd: C:\Python36-x64\python.exe build.py
   - cmd: type build.ps1
   # - cmd: build.bat
-  - ps: build.ps1
+  - ps: .\build.ps1
 
 test_script:
   - cmd: exit 2
