@@ -23,8 +23,8 @@ configuration:
   - Debug
   - Release
 
-build:
-  parallel: true
+build: off
+  # parallel: true
 
 before_build:
   - cmd: cmake --version
