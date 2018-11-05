@@ -28,12 +28,34 @@ VerificationInfo
 }
 
 有待改进：
-----------
+==========
+
+
+--------------------------------------------------------------------------------
 
 d:\work\dev\dk_upgrade_dev\framework\src\GllBaseTest.cpp:556
 void GllBaseTest::RegisterFramebuffer(gll::IFramebuffer* pFramebuffer, AttachmentIndex attachmentIndex, RegisterPurpose purpose, uint32_t levelOffset, uint32_t sliceOffset, uint32_t numVerificationRegions, mb::Region* pVerificationRegion)
 
 其中的 if 语句与其 `GllBaseTest::RegisterImageView` 中的 if 语句重复，可以删除。
+
+--------------------------------------------------------------------------------
+
+d:\work\dev\dk_upgrade_dev\framework\src\BaseTest.cpp:778
+
+        for (decltype(nRefApiSize) i = 0; i < nRefApiSize; i++)
+        {
+            ApiList::iterator iterFindInApiList = std::find(m_apiList.begin(), m_apiList.end(), m_refApiList[i]);
+            ApiList::iterator iterFindInRefApiList = std::find(m_wholeApiList.begin(), m_wholeApiList.end(), m_refApiList[i]);
+            if (iterFindInApiList == m_apiList.end() && iterFindInRefApiList == m_wholeApiList.end())
+            {
+                m_wholeApiList.push_back(m_refApiList[i]);
+            }
+        }
+
+其目的是将 m_apiList 和 m_refApiList 合并到 m_wholeApiList 中。其中对 m_apiList 的检查是多余的，因为 m_wholeApiList 的初值为 m_apiList 。
+
+--------------------------------------------------------------------------------
+
 
 调用顺序：
 
@@ -86,3 +108,7 @@ VerificationStatusInfo
     uint32_t refTestOrdinal;
     VerificationStatus status;
 }
+
+        statusInfo.status = m_pTestHelper->GetTestCaseVerificationStatus(m_testCaseId, reason);
+
+函数 GetTestCaseVerificationStatus 仅在 TexDimensiion 和 TexFetch 中被改写。全图比较时，也需要禁用掉。
