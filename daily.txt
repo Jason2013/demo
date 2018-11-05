@@ -2,8 +2,8 @@ VerificationInfo
 {
     VerificationImageView
     {
-        m_imageView;
-        m_mipOffset;
+        m_pImageView;
+        m_levelOffset;
         m_sliceOffset;
         Region
         {
@@ -14,7 +14,7 @@ VerificationInfo
     }
     VerificationBuffer
     {
-        m_buffer;
+        m_pBuffer;
         Range
         {
             offset;
@@ -24,7 +24,7 @@ VerificationInfo
     }
     m_imageViews;
     m_buffers;
-    m_index;
+    m_regionIdx;
 }
 
 
