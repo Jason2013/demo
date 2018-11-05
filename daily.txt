@@ -26,3 +26,48 @@ VerificationInfo
     m_buffers;
     m_regionIdx;
 }
+
+有待改进：
+----------
+
+d:\work\dev\dk_upgrade_dev\framework\src\GllBaseTest.cpp:556
+void GllBaseTest::RegisterFramebuffer(gll::IFramebuffer* pFramebuffer, AttachmentIndex attachmentIndex, RegisterPurpose purpose, uint32_t levelOffset, uint32_t sliceOffset, uint32_t numVerificationRegions, mb::Region* pVerificationRegion)
+
+其中的 if 语句与其 `GllBaseTest::RegisterImageView` 中的 if 语句重复，可以删除。
+
+调用顺序：
+
+OnStartTestCase
+    RegisterFramebuffer
+        RegisterImageView
+
+1. `RegisterImageView` 注册 `VerificationView` 时，将其存入 `m_verificationInfo` 变量。因此，也需要添加一个类似的成员变量，存放图像比较的内容。
+2.
+
+GllBaseTest::m_verificationInfo;
+
+在基类 BaseTest 中设置了注册的 ImageView 的数量，暂时不知道有什么用处理。
+BaseTest::m_registeredImageViewCount;
+BaseTest::SetRegisteredImageViewCount(count);
+BaseTest::GetRegisteredImageViewCount();
+
+仅设置验证的结果，真正的验证步骤在 TestProxy::OnVerifyResult() 函数中。
+BaseTest::SetVerificationStatus
+TestResult::SetVerificationStatus
+
+猜测调用关系如下：
+TestProxy::OnVerifyResult
+    TestProxy::VerifyPixelData
+    TestProxy::VerifyBufferData
+
+在 TestContext::RunTestCase 调用 TestProxy::OnVerifyResult 。
+
+相关变量：
+
+m_pHalTests
+m_pRefTests
+
+猜测：当前验证模式为 MULTI_PASS ，因此 m_pHalTests 和 m_pRefTests 的大小为 1 。如果是 SINGLE_PASS ，它们的大小应该是比较的的 API 的个数。
+
+m_pHalTestApiOrdinals
+m_pRefTestApiOrdinals
