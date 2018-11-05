@@ -1,0 +1,30 @@
+VerificationInfo
+{
+    VerificationImageView
+    {
+        m_imageView;
+        m_mipOffset;
+        m_sliceOffset;
+        Region
+        {
+            x, y;
+            width, height;
+        }
+        m_regions;
+    }
+    VerificationBuffer
+    {
+        m_buffer;
+        Range
+        {
+            offset;
+            size;
+        }
+        m_ranges;
+    }
+    m_imageViews;
+    m_buffers;
+    m_index;
+}
+
+
