@@ -26,5 +26,3 @@ VerificationInfo
     m_buffers;
     m_regionIdx;
 }
-
-
