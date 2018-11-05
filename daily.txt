@@ -71,3 +71,18 @@ m_pRefTests
 
 m_pHalTestApiOrdinals
 m_pRefTestApiOrdinals
+
+VerificationStatus
+{
+    NA,
+    FAIL,
+    PASS,
+    AUTO,
+}
+
+VerificationStatusInfo
+{
+    uint32_t halTestOrdinal;
+    uint32_t refTestOrdinal;
+    VerificationStatus status;
+}
