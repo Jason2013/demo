@@ -112,3 +112,16 @@ VerificationStatusInfo
         statusInfo.status = m_pTestHelper->GetTestCaseVerificationStatus(m_testCaseId, reason);
 
 函数 GetTestCaseVerificationStatus 仅在 TexDimensiion 和 TexFetch 中被改写。全图比较时，也需要禁用掉。
+
+BaseTest::GetCurrentFrameIndex() 返回当前帧的索引号。
+
+TestProxy::SetApiOrdinal(apiOrdinal)
+    TestHelper::SetCurrentApiOrdinal(apiOrdinal)
+        m_currApi = apiOrdinal;
+
+TestProxy::SetApiOrdinal 看起来和 BaseTest::OnGetVerificationData 有关系。因为在后者之前设置，在后者调用完成后恢复。
+??? 没看到有啥关系。
+
+明天研读该函数：
+TestProxy::VerifyPixelData
+
