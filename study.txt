@@ -1,5 +1,12 @@
 glGetError()
 
+返回前一个 GL 操作的错误状态码。如果有一个错误，返回该错误并清除相应的位。如果有多个错误，随机返回一个错误，并清除相应位，其余错误位保持不变。
+因此，如果有多个错误，应当多次调用 glGetError ，直到无错误值返回。
+
+如果 glGetError 返回错误值，前一个 GL 操作被忽略。（除 GL_OUT_OF_MEMORY 返回值外）
+
+如果 glGetError 自身发生错误，返回 0 。（当返回 0 时，没办法区分究竟是前一个操作正确，还是 glGetError 自身发生错误。）
+
 glEnableVertexAttribArray
 glDisableVertexAttribArray
 
@@ -13,3 +20,4 @@ glVertexAttriPointer(GLuint index,
 normalized 如果 为 GL_FALSE ，直接使用该值；如果为 GL_TRUE ，那么将无符号整数用 UNORM 转换为 [0, 1] 的浮点数，有符号整数用 SNORM 转换为 [-1, 1] 的浮点数。
 stride 如果为 0 ，等价于 size*sizeof(type) 。
 
+glEnableVertexAttribArray 和 glBindBuffer 需要在 glVertexAttribPointer 之前调用。而前两者的调用顺序，可以调换而不影响执行结果。
