@@ -1,0 +1,15 @@
+glGetError()
+
+glEnableVertexAttribArray
+glDisableVertexAttribArray
+
+glVertexAttriPointer(GLuint index,
+    GLint size,
+    GLenum type,
+    GLboolean normalized,
+    GLsizei stride,
+    const GLvoid* offset);
+
+normalized 如果 为 GL_FALSE ，直接使用该值；如果为 GL_TRUE ，那么将无符号整数用 UNORM 转换为 [0, 1] 的浮点数，有符号整数用 SNORM 转换为 [-1, 1] 的浮点数。
+stride 如果为 0 ，等价于 size*sizeof(type) 。
+
