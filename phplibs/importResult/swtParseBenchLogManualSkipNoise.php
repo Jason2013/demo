@@ -21,6 +21,7 @@ $nextLineID = intval($_POST["nextLineID"]);
 $curTestID = intval($_POST["curTestID"]);
 $nextSubTestID = intval($_POST["nextSubTestID"]);
 $curFileLineNum = intval($_POST["curFileLineNum"]);
+$importDate = cleanDateTime($_POST["importDate"]);
 
 //$targetLogFileName = "test_results.txt";
 //$targetLogFileName2 = "test_results.csv";
@@ -116,6 +117,7 @@ function swtGetBatchID($_state)
     global $returnMsg;
     global $logFolderName;
     global $reportGroup;
+    global $importDate;
     
     $db = new CPdoMySQL();
     if ($db->getError() != null)
@@ -161,10 +163,18 @@ function swtGetBatchID($_state)
         $pathID = $row1[0];
     }
     
+    $tmpInsertTime = "NOW()";
+    if (strlen($importDate) > 0)
+    {
+        $datetime = new DateTime($importDate);
+        $tmpInsertTime = $datetime->format('Y-m-d H:i:s');
+        $tmpInsertTime = "\"" . $tmpInsertTime . "\"";
+    }
+    
     $params1 = array($_state, $batchGroup, $pathID);
     $sql1 = "INSERT INTO mis_table_batch_list " .
             "(insert_time, batch_state, batch_group, path_id) " .
-            "VALUES (NOW(), ?, ?, ?)";
+            "VALUES (" . $tmpInsertTime . ", ?, ?, ?)";
     if ($db->QueryDB($sql1, $params1) == null)
     {
         $returnMsg["errorCode"] = 0;

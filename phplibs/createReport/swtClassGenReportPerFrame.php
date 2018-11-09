@@ -478,7 +478,7 @@ class CGenReport
                 $sql1 = "SELECT batch_id, batch_group FROM mis_table_batch_list " .
                         "WHERE batch_state=\"1\" AND " .
                         "(batch_group IN (5, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309)) " .
-                        "ORDER BY batch_id DESC LIMIT 1";
+                        "ORDER BY insert_time DESC LIMIT 1";
                 
                 if ($db->QueryDB($sql1, $params1) == null)
                 {
@@ -501,7 +501,7 @@ class CGenReport
                 $sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
                         "WHERE batch_state=\"1\" AND " .
                         "(batch_group=\"" . $tmpBatchGroup . "\") " .
-                        "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
+                        "ORDER BY insert_time DESC LIMIT " . $historyBatchMaxNum;
             }
             else
             {
@@ -512,7 +512,7 @@ class CGenReport
                 //        "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
                 
                 $params1 = array($_batchID);
-                $sql1 = "SELECT batch_id, batch_group FROM mis_table_batch_list " .
+                $sql1 = "SELECT batch_id, batch_group, insert_time FROM mis_table_batch_list " .
                         "WHERE batch_id=?";
                 
                 if ($db->QueryDB($sql1, $params1) == null)
@@ -531,13 +531,14 @@ class CGenReport
                     return null;
                 }
                 $tmpBatchGroup = intval($row1[1]);
+                $tmpInsertTime = $row1[2];
                 
                 // routine report
-                $params1 = array($_batchID);
+                $params1 = array($tmpInsertTime);
                 $sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
-                        "WHERE batch_id<=? AND batch_state=\"1\" AND " .
+                        "WHERE insert_time<=? AND batch_state=\"1\" AND " .
                         "(batch_group=\"" . $tmpBatchGroup . "\") " .
-                        "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
+                        "ORDER BY insert_time DESC LIMIT " . $historyBatchMaxNum;
             }
         }
         else
@@ -554,7 +555,7 @@ class CGenReport
                         "WHERE t0.user_id = ? AND t0.batch_id IN " .
                         "(SELECT t1.batch_id FROM mis_table_batch_list t1 " .
                         "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
-                        "ORDER BY t0.batch_id DESC LIMIT " . $historyBatchMaxNum . "";
+                        "ORDER BY t0.insert_time DESC LIMIT " . $historyBatchMaxNum . "";
             }
             else
             {
@@ -563,10 +564,12 @@ class CGenReport
                 $sql1 = "SELECT t0.batch_id, DATE_FORMAT(t2.insert_time, \"%b %e\") FROM mis_table_user_batch_info t0 " .
                         "LEFT JOIN mis_table_batch_list t2 " .
                         "USING (batch_id) " .
-                        "WHERE t0.user_id = ? AND t0.batch_id <= ? AND t0.batch_id IN " .
+                        "WHERE t0.user_id = ? AND (t0.insert_time <= " .
+                        "(SELECT insert_time FROM mis_table_batch_list WHERE batch_id = ? LIMIT 1)) " .
+                        "AND t0.batch_id IN " .
                         "(SELECT t1.batch_id FROM mis_table_batch_list t1 " .
                         "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
-                        "ORDER BY t0.batch_id DESC LIMIT " . $historyBatchMaxNum . "";
+                        "ORDER BY t0.insert_time DESC LIMIT " . $historyBatchMaxNum . "";
             }
         }
 
@@ -874,7 +877,6 @@ class CGenReport
         $db = $_db;
         $params1 = array($_batchID);
         $sql1 = "SELECT COUNT(*) FROM mis_table_batch_list " .
-                //"WHERE batch_id=? AND batch_state=\"1\" AND (batch_group=\"5\")";
                 "WHERE batch_id=? AND batch_state=\"1\" AND (batch_group IN (5, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309))";
         if ($db->QueryDB($sql1, $params1) == null)
         {

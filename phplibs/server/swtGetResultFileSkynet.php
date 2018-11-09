@@ -42,7 +42,7 @@ if ($db->getError() != null)
 $params1 = array();
 $sql1 = "SELECT t0.batch_id, t0.path_id, t1.path_name FROM mis_table_batch_list t0 " .
         "LEFT JOIN mis_table_path_info t1 USING(path_id) " .
-        "WHERE t0.batch_group=\"4\" AND YEARWEEK(t0.insert_time)=YEARWEEK(NOW()) ORDER BY t0.batch_id DESC ";
+        "WHERE t0.batch_group=\"4\" AND YEARWEEK(t0.insert_time)=YEARWEEK(NOW()) ORDER BY t0.insert_time DESC ";
 if ($db->QueryDB($sql1, $params1) == null)
 {
     $returnMsg["errorCode"] = 0;

@@ -40,7 +40,6 @@ if ($userChecker->isManager())
     // manager login
     $params1 = array();
     $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
-            //"WHERE batch_state=\"1\" AND (batch_group=\"3\") ORDER BY insert_time DESC LIMIT 1";
             "WHERE batch_state=\"1\" AND (batch_group IN (5, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309)) " .
             "ORDER BY insert_time DESC LIMIT 1";
 }
@@ -51,7 +50,7 @@ else
     $sql1 = "SELECT t0.batch_id FROM mis_table_user_batch_info t0 " .
             "WHERE t0.user_id = ? AND t0.batch_id IN (SELECT t1.batch_id FROM mis_table_batch_list t1 " .
             "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
-            "ORDER BY t0.batch_id DESC LIMIT 1";
+            "ORDER BY t0.insert_time DESC LIMIT 1";
 }
 if ($db->QueryDB($sql1, $params1) == null)
 {
@@ -141,7 +140,6 @@ foreach ($machineIDList as $tmpMachineID)
         $sql1 = "SELECT DISTINCT (t0.batch_id), t1.insert_time FROM mis_table_result_list t0 " .
                 "LEFT JOIN mis_table_batch_list t1 USING (batch_id) " .
                 "WHERE t0.machine_id = ? AND t0.batch_id IN (SELECT batch_id FROM mis_table_batch_list " .
-                //"WHERE batch_state=\"1\" AND (batch_group=\"3\") " .
                 "WHERE batch_state=\"1\" AND (batch_group IN (5, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309)) " .
                 "ORDER BY insert_time DESC) LIMIT 5";
     }
@@ -162,7 +160,7 @@ foreach ($machineIDList as $tmpMachineID)
                 "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
                 "AND t0.batch_id IN (SELECT t2.batch_id FROM mis_table_result_list t2 " .
                 "WHERE t2.machine_id = ?) " .
-                "ORDER BY t0.batch_id DESC LIMIT 5";
+                "ORDER BY t0.insert_time DESC LIMIT 5";
     }
     
     if ($db->QueryDB($sql1, $params1) == null)

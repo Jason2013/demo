@@ -81,7 +81,7 @@ $userID = intval($row1[0]);
 $params1 = array($userID, $batchNum);
 $sql1 = "SELECT * FROM mis_table_user_batch_info " .
         "WHERE user_id = ? AND batch_id IN (SELECT batch_id FROM mis_table_batch_list) " .
-        "ORDER BY batch_id DESC LIMIT ?";
+        "ORDER BY insert_time DESC LIMIT ?";
 
 if ($db->QueryDB($sql1, $params1) == null)
 {

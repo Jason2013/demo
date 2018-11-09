@@ -49,6 +49,8 @@ function swtSubmitTestResultsMannual2(_inputTagName,
         reportGroup = 100 + n1;
     }
     
+    var importDate = $("#importDate").val();
+    
     $("#" + _percentTagName).html("copying files: 0%");
     var t1 = $("#" + _inputTagName).val();
     if (t1.length == 0)
@@ -71,7 +73,8 @@ function swtSubmitTestResultsMannual2(_inputTagName,
                          0,
                          "",
                          "",
-                         reportGroup);
+                         reportGroup,
+                         importDate);
 }
 
 function swtSubmitTestResultsMannualOutUser(_inputTagName,
@@ -105,7 +108,8 @@ function swtSubmitTestResultsMannualOutUser(_inputTagName,
                          0,
                          "",
                          "",
-                         reportGroup);
+                         reportGroup, 
+                         "");
 }
 
 function swtSubmitTestResultsMannualShaderBench(_inputTagName,
@@ -134,6 +138,8 @@ function swtSubmitTestResultsMannualShaderBench(_inputTagName,
     //alert("reportGroup: " + reportGroup);
     //console.log("reportGroup: " + reportGroup);
     
+    var importDate = $("#importDate").val();
+    
     $("#" + _percentTagName).html("copying files: 0%");
     var t1 = $("#" + _inputTagName).val();
     if (t1.length == 0)
@@ -156,7 +162,8 @@ function swtSubmitTestResultsMannualShaderBench(_inputTagName,
                          0,
                          "",
                          "",
-                         reportGroup);
+                         reportGroup,
+                         importDate);
 }
 
 function swtSubmitTestResultsMannualPerFrame(_inputTagName,
@@ -182,6 +189,8 @@ function swtSubmitTestResultsMannualPerFrame(_inputTagName,
         reportGroup = 300 + n1;
     }
     
+    var importDate = $("#importDate").val();
+    
     $("#" + _percentTagName).html("copying files: 0%");
     var t1 = $("#" + _inputTagName).val();
     if (t1.length == 0)
@@ -204,7 +213,8 @@ function swtSubmitTestResultsMannualPerFrame(_inputTagName,
                          0,
                          "",
                          "",
-                         reportGroup);
+                         reportGroup,
+                         importDate);
 }
 
 function swtDoCopyResultFiles(_inputTagName,
@@ -217,7 +227,8 @@ function swtDoCopyResultFiles(_inputTagName,
                               _fileID,
                               _parentFolder,
                               _parentFolderOnly,
-                              _reportGroup)
+                              _reportGroup,
+                              _importDate)
 {
     $.post("../phplibs/getInfo/swtGetFolderAllFileNames.php", 
     {
@@ -256,7 +267,8 @@ function swtDoCopyResultFiles(_inputTagName,
                                        0,
                                        0,
                                        _batchID,
-                                       _reportGroup);
+                                       _reportGroup,
+                                       _importDate);
             }
             else
             {
@@ -270,7 +282,8 @@ function swtDoCopyResultFiles(_inputTagName,
                                      json.fileID,
                                      json.parentFolder,
                                      json.parentFolderOnly,
-                                     _reportGroup);
+                                     _reportGroup,
+                                     _importDate);
                 if (json.fileID <= json.fileNum)
                 {
                     $("#" + _percentTagName).html("copying files: " + ((json.fileID / json.fileNum) * 100.0 ).toFixed(1) + "%");
@@ -294,7 +307,8 @@ function swtDoCopyResultFilesShaderBench(_inputTagName,
                               _fileID,
                               _parentFolder,
                               _parentFolderOnly,
-                              _reportGroup)
+                              _reportGroup,
+                              _importDate)
 {
     $.post("../phplibs/getInfo/swtGetFolderAllFileNames.php", 
     {
@@ -333,7 +347,8 @@ function swtDoCopyResultFilesShaderBench(_inputTagName,
                                        0,
                                        0,
                                        _batchID,
-                                       _reportGroup);
+                                       _reportGroup,
+                                       _importDate);
             }
             else
             {
@@ -347,7 +362,8 @@ function swtDoCopyResultFilesShaderBench(_inputTagName,
                                      json.fileID,
                                      json.parentFolder,
                                      json.parentFolderOnly,
-                                     _reportGroup);
+                                     _reportGroup,
+                                     _importDate);
                 if (json.fileID <= json.fileNum)
                 {
                     $("#" + _percentTagName).html("copying files: " + ((json.fileID / json.fileNum) * 100.0 ).toFixed(1) + "%");
@@ -371,7 +387,8 @@ function swtDoCopyResultFilesPerFrame(_inputTagName,
                               _fileID,
                               _parentFolder,
                               _parentFolderOnly,
-                              _reportGroup)
+                              _reportGroup,
+                              _importDate)
 {
     $.post("../phplibs/getInfo/swtGetFolderAllFileNames.php", 
     {
@@ -410,7 +427,8 @@ function swtDoCopyResultFilesPerFrame(_inputTagName,
                                        0,
                                        0,
                                        _batchID,
-                                       _reportGroup);
+                                       _reportGroup,
+                                       _importDate);
             }
             else
             {
@@ -424,7 +442,8 @@ function swtDoCopyResultFilesPerFrame(_inputTagName,
                                      json.fileID,
                                      json.parentFolder,
                                      json.parentFolderOnly,
-                                     _reportGroup);
+                                     _reportGroup,
+                                     _importDate);
                 if (json.fileID <= json.fileNum)
                 {
                     $("#" + _percentTagName).html("copying files: " + ((json.fileID / json.fileNum) * 100.0 ).toFixed(1) + "%");
@@ -448,7 +467,8 @@ function swtDoSubmitTestResults(_inputTagName,
                                 _curTestID,
                                 _nextSubTestID,
                                 _batchID,
-                                _reportGroup)
+                                _reportGroup,
+                                _importDate)
 {
     //$.post("../phplibs/importResult/swtParseBenchLogManualVer3.php",
     $.post("../phplibs/importResult/swtParseBenchLogManualSkipNoise.php",
@@ -461,7 +481,8 @@ function swtDoSubmitTestResults(_inputTagName,
         curTestID:        _curTestID,
         nextSubTestID:    _nextSubTestID,
         batchID:          _batchID,
-        reportGroup:      _reportGroup
+        reportGroup:      _reportGroup,
+        importDate:       _importDate
     }, 
     function(data,status) 
     {
@@ -503,7 +524,8 @@ function swtDoSubmitTestResults(_inputTagName,
                                        json.curTestID,
                                        json.nextSubTestID,
                                        json.batchID,
-                                       _reportGroup);
+                                       _reportGroup,
+                                       _importDate);
                 if (parseInt(_resultFileNum) > 0)
                 {
                     var resultFileNum = parseFloat(_resultFileNum);
@@ -541,7 +563,8 @@ function swtDoSubmitTestResultsShaderBench(_inputTagName,
                                 _curTestID,
                                 _nextSubTestID,
                                 _batchID,
-                                _reportGroup)
+                                _reportGroup,
+                                _importDate)
 {
     //$.post("../phplibs/importResult/swtParseBenchLogManual.php",
     $.post("../phplibs/importResult/swtParseBenchLogManualShaderBench.php",
@@ -554,7 +577,8 @@ function swtDoSubmitTestResultsShaderBench(_inputTagName,
         curTestID:        _curTestID,
         nextSubTestID:    _nextSubTestID,
         batchID:          _batchID,
-        reportGroup:      _reportGroup
+        reportGroup:      _reportGroup,
+        importDate:       _importDate
     }, 
     function(data,status) 
     {
@@ -596,7 +620,8 @@ function swtDoSubmitTestResultsShaderBench(_inputTagName,
                                        json.curTestID,
                                        json.nextSubTestID,
                                        json.batchID,
-                                       _reportGroup);
+                                       _reportGroup,
+                                       _importDate);
                 if (parseInt(_resultFileNum) > 0)
                 {
                     var resultFileNum = parseFloat(_resultFileNum);
@@ -634,7 +659,8 @@ function swtDoSubmitTestResultsPerFrame(_inputTagName,
                                 _curTestID,
                                 _nextSubTestID,
                                 _batchID,
-                                _reportGroup)
+                                _reportGroup,
+                                _importDate)
 {
     //$.post("../phplibs/importResult/swtParseBenchLogManualShaderBench.php",
     $.post("../phplibs/importResult/swtParseBenchLogManualPerFrame.php",
@@ -647,7 +673,8 @@ function swtDoSubmitTestResultsPerFrame(_inputTagName,
         curTestID:        _curTestID,
         nextSubTestID:    _nextSubTestID,
         batchID:          _batchID,
-        reportGroup:      _reportGroup
+        reportGroup:      _reportGroup,
+        importDate:       _importDate
     }, 
     function(data,status) 
     {
@@ -689,7 +716,8 @@ function swtDoSubmitTestResultsPerFrame(_inputTagName,
                                        json.curTestID,
                                        json.nextSubTestID,
                                        json.batchID,
-                                       _reportGroup);
+                                       _reportGroup,
+                                       _importDate);
                 if (parseInt(_resultFileNum) > 0)
                 {
                     var resultFileNum = parseFloat(_resultFileNum);

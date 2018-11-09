@@ -26,7 +26,7 @@ if ($db->getError() != null)
 
 $params1 = array();
 $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
-        "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"4\") ORDER BY batch_id ASC";
+        "WHERE batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"4\") ORDER BY insert_time ASC";
 if ($db->QueryDB($sql1, $params1) == null)
 {
     $returnMsg["errorCode"] = 0;

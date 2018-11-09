@@ -257,7 +257,9 @@ class CGenReport
                 // if assign current batch id
                 $params1 = array($_batchID);
                 $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
-                        "WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") " .
+                        "WHERE (insert_time <= " .
+                        "(SELECT insert_time FROM mis_table_batch_list WHERE batch_id = ? LIMIT 1)) " .
+                        "AND batch_state=\"1\" AND (batch_group=\"1\" OR batch_group=\"2\") " .
                         "ORDER BY insert_time DESC LIMIT " . $historyBatchMaxNum;
             }
         }
@@ -273,17 +275,19 @@ class CGenReport
                         "WHERE t0.user_id = ? AND t0.batch_id IN " .
                         "(SELECT t1.batch_id FROM mis_table_batch_list t1 " .
                         "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
-                        "ORDER BY t0.batch_id DESC LIMIT " . $historyBatchMaxNum . "";
+                        "ORDER BY t0.insert_time DESC LIMIT " . $historyBatchMaxNum . "";
             }
             else
             {
                 // if assign current batch id
                 $params1 = array($userID, $_batchID);
                 $sql1 = "SELECT t0.batch_id FROM mis_table_user_batch_info t0 " .
-                        "WHERE t0.user_id = ? AND t0.batch_id <= ? AND t0.batch_id IN " .
+                        "WHERE t0.user_id = ? AND (t0.insert_time <= " .
+                        "(SELECT insert_time FROM mis_table_batch_list WHERE batch_id = ? LIMIT 1)) " .
+                        "AND t0.batch_id IN " .
                         "(SELECT t1.batch_id FROM mis_table_batch_list t1 " .
                         "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
-                        "ORDER BY t0.batch_id DESC LIMIT " . $historyBatchMaxNum . "";
+                        "ORDER BY t0.insert_time DESC LIMIT " . $historyBatchMaxNum . "";
             }
         }
 

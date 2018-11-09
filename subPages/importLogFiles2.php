@@ -6,7 +6,7 @@ $html1 = new CSwtHtmlTemple("Grapher Import Results", "../");
 $html1->outPageHead("", "" .
                         "<script type=\"text/javascript\" src=\"../jslibs/some/genFuncs.js\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/jquery-cookie/jquery.cookie.js\"></script>\n" .
-                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=4\"></script>\n");
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=1101\"></script>\n");
 
 $html1->outPageBodyStart();
 
@@ -22,7 +22,7 @@ $html1->outPageBodyStart();
         <table>
         <tr>
             <td>
-                report Type:&nbsp&nbsp&nbsp
+                Report Type:&nbsp&nbsp&nbsp
             </td>
             <td>
             <!--
@@ -48,7 +48,7 @@ $html1->outPageBodyStart();
         </tr>
         <tr>
             <td>
-                target batch ID:&nbsp&nbsp&nbsp
+                Target Batch ID:&nbsp&nbsp&nbsp
             </td>
             <td>
                 <div id="targetBatchID"></div>
@@ -56,7 +56,15 @@ $html1->outPageBodyStart();
         </tr>
         <tr>
             <td>
-                folder name:&nbsp&nbsp&nbsp
+                Import Date:&nbsp&nbsp&nbsp
+            </td>
+            <td>
+                <input type="text" id="importDate">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Folder Name:&nbsp&nbsp&nbsp
             </td>
             <td>
                 <input id="inputFolderName" type="text" name="foldername" size="64" />&nbsp&nbsp&nbsp
@@ -64,11 +72,11 @@ $html1->outPageBodyStart();
         </tr>
         <tr>
             <td>
-                username:&nbsp&nbsp&nbsp
+                User Name:&nbsp&nbsp&nbsp
             </td>
             <td>
                 <input id="inputUsername" type="text" name="username" size="16" />&nbsp&nbsp&nbsp
-                password:&nbsp&nbsp&nbsp
+                Pass Word:&nbsp&nbsp&nbsp
                 <input id="inputPassword" type="password" name="password" size="16" />&nbsp&nbsp&nbsp
             </td>
         </tr>
@@ -104,6 +112,8 @@ $("#inputUsername").val(t2);
 $("#inputPassword").val(t3);
 
 swtGetShortBatchIDList("targetBatchID");
+
+$( "#importDate" ).datepicker();
 
 </script>
 

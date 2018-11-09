@@ -44,7 +44,6 @@ class CGenReportFlatData
                 $sql1 = "SELECT t0.*, t1.* FROM mis_table_batch_list t0 " .
                         "LEFT JOIN mis_table_path_info t1 " .
                         "USING (path_id) " .
-                        //"WHERE t0.batch_state=\"1\" AND (t0.batch_group=\"3\") ORDER BY t0.insert_time DESC LIMIT 1";
                         "WHERE t0.batch_state=\"1\" AND (t0.batch_group IN (3, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209)) " .
                         "ORDER BY t0.insert_time DESC LIMIT 1";
                 if ($db->QueryDB($sql1, $params1) == null)
@@ -79,7 +78,7 @@ class CGenReportFlatData
                         "ON (t1.path_id = t2.path_id) " .
                         "WHERE t0.user_id = ? AND t0.batch_id IN " .
                         "(SELECT t3.batch_id FROM mis_table_batch_list t3 WHERE t3.batch_state = \"1\" AND t3.batch_group = \"0\") " .
-                        "ORDER BY t0.batch_id DESC LIMIT 1";
+                        "ORDER BY t0.insert_time DESC LIMIT 1";
                 if ($db->QueryDB($sql1, $params1) == null)
                 {
                     $returnMsg["errorCode"] = 0;

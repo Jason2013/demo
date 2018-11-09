@@ -6,7 +6,7 @@ $html1 = new CSwtHtmlTemple("Grapher Import Results", "../");
 $html1->outPageHead("", "" .
                         "<script type=\"text/javascript\" src=\"../jslibs/some/genFuncs.js\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/jquery-cookie/jquery.cookie.js\"></script>\n" .
-                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=4\"></script>\n");
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=1101\"></script>\n");
 
 $html1->outPageBodyStart();
 
@@ -41,7 +41,14 @@ $html1->outPageBodyStart();
                 </select>
             </td>
         </tr>
-        
+        <tr>
+            <td>
+                Import Date:&nbsp&nbsp&nbsp
+            </td>
+            <td>
+                <input type="text" id="importDate">
+            </td>
+        </tr>
         <tr>
             <td>
                 folder name:&nbsp&nbsp&nbsp
@@ -92,6 +99,8 @@ $("#inputUsername").val(t2);
 $("#inputPassword").val(t3);
 
 //swtGetShortBatchIDList("targetBatchID");
+
+$( "#importDate" ).datepicker();
 
 </script>
 

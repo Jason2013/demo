@@ -51,7 +51,7 @@ function cleanText( $str, $len)
 
 function cleanDateTime($str)
 {
- $str = preg_replace( "/[^". chr(0xa1) ."-". chr(0xff) ."a-zA-Z0-9-:\s]/", "", $str);
+ $str = preg_replace( "/[^". chr(0xa1) ."-". chr(0xff) ."a-zA-Z0-9-:\s\\/]/", "", $str);
  $n = strlen( $str);
  $len = 19;
  if( $n > $len)
