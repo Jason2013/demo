@@ -6653,9 +6653,12 @@ class CGenReport
                         }
                         else
                         {
-                            $rcID1 = ($subjectNameFilterNumMax + 5 + $i * 2 - 2);
-                            //$rcID2 = ($subjectNameFilterNumMax + 3 + $i * 2 - 2);
-                            $rcID2 = ($subjectNameFilterNumMax + 3);
+                            //$rcID1 = ($subjectNameFilterNumMax + 5 + $i * 2 - 2);
+                            //$rcID2 = ($subjectNameFilterNumMax + 3);
+                            
+                            $rcID3 = ($subjectNameFilterNumMax + 3);
+                            $rcID2 = ($subjectNameFilterNumMax + 3 + $i * 2 - 2);
+                            $rcID1 = ($subjectNameFilterNumMax + 3 + $i * 2);
                         
                             $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
                                    "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
@@ -6672,13 +6675,13 @@ class CGenReport
                                    
                             $t4 .= " <Cell ss:StyleID=\"Default\" " .
                                    "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
-                                                "RC" . $rcID2 . "=&quot;&quot;," .
+                                                "RC" . $rcID3 . "=&quot;&quot;," .
                                                 "RC" . $rcID1 . "=0," .
-                                                "RC" . $rcID2 . "=0" .
+                                                "RC" . $rcID3 . "=0" .
                                                 "),&quot;&quot;," .
                                                 "(RC" . $rcID1 . // 8
-                                                "-RC" . $rcID2 . // 6
-                                                ")/RC" . $rcID2 . ")\">" .
+                                                "-RC" . $rcID3 . // 6
+                                                ")/RC" . $rcID3 . ")\">" .
                                                 "<Data ss:Type=\"Number\"></Data></Cell>\n";
                         }
                     }
@@ -6699,9 +6702,12 @@ class CGenReport
                         }
                         else
                         {
-                            $rcID1 = ($subjectNameFilterNumMax + 5 + ($tmpDataColumnNum * 2 - 1) + $i * 2 + 1 - 2);
-                            //$rcID2 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2 - 1) + $i * 2 + 1 - 2);
-                            $rcID2 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2 - 1) + 1);
+                            //$rcID1 = ($subjectNameFilterNumMax + 5 + ($tmpDataColumnNum * 2 - 1) + $i * 2 + 1 - 2);
+                            //$rcID2 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2 - 1) + 1);
+                            
+                            $rcID3 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2 - 1) + 1);
+                            $rcID2 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2 - 1) + $i * 2 + 1 - 2);
+                            $rcID1 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2 - 1) + $i * 2 + 1);
                         
                             $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
                                    "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
@@ -6718,13 +6724,13 @@ class CGenReport
                                    
                             $t4 .= " <Cell ss:StyleID=\"Default\" " .
                                    "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
-                                                "RC" . $rcID2 . "=&quot;&quot;," .
+                                                "RC" . $rcID3 . "=&quot;&quot;," .
                                                 "RC" . $rcID1 . "=0," .
-                                                "RC" . $rcID2 . "=0" .
+                                                "RC" . $rcID3 . "=0" .
                                                 "),&quot;&quot;," .
                                                 "(RC" . $rcID1 . // 8
-                                                "-RC" . $rcID2 . // 6
-                                                ")/RC" . $rcID2 . ")\">" .
+                                                "-RC" . $rcID3 . // 6
+                                                ")/RC" . $rcID3 . ")\">" .
                                                 "<Data ss:Type=\"Number\"></Data></Cell>\n";
                         }
                     }

@@ -49,9 +49,13 @@ $swtUmdStandardOrder = array("Vulkan", "D3D11", "D3D12", "OpenGL", "Metal");
 $swtUmdNameList_sb = array("SCPC", "LLPC", "RADV", "NVIDIA", "OPT1");
 $swtUmdStandardOrder_sb = array("SCPC", "LLPC", "RADV", "NVIDIA", "OPT1");
 
-$swtPreSheetName_sb = array("compileTime", "executionTime");
-$swtPreSheetNameTitle_sb = array("Compile Time", "Execution Time");
-$swtPreSheetNameShort_sb = array("compTime", "execTime");
+//$swtPreSheetName_sb = array("compileTime", "executionTime");
+//$swtPreSheetNameTitle_sb = array("Compile Time", "Execution Time");
+//$swtPreSheetNameShort_sb = array("compTime", "execTime");
+
+$swtPreSheetName_sb = array("executionTime", "compileTime");
+$swtPreSheetNameTitle_sb = array("Execution Time", "Compile Time");
+$swtPreSheetNameShort_sb = array("execTime", "compTime");
 
 $swtPreSheetName_pf = array("executionTime", "compileTime");
 $swtPreSheetNameTitle_pf = array("Execution Time", "Compile Time");
