@@ -1491,7 +1491,7 @@ function swtGenerateRoutineReport(_percentTagName, _reportListTag, _reportType, 
     $("#" + _reportListTag).html("");
 
     var t1 = $("#valMachineIDList").val();
-    //console.log("valMachineIDList: " + t1);
+
     var machineIDList = [];
     if (t1.length > 0)
     {
@@ -1536,10 +1536,16 @@ function swtGenerateRoutineReport(_percentTagName, _reportListTag, _reportType, 
     }
 
     console.log("---: " + t2);
+    var tmpBatchID = _batchID;
+    var t4 = $("#inputBatchID").val();
+    if (t4.length > 0)
+    {
+        tmpBatchID = parseInt(t4);
+    }
 
     swtDoGenerateFlatData(_percentTagName,
                           _reportListTag,
-                          _batchID,
+                          tmpBatchID,
                           _reportType,
                           _crossType,
                           -1,
@@ -1731,10 +1737,16 @@ function swtGenerateRoutineReportShaderBench(_percentTagName, _reportListTag, _r
     }
 
     console.log("---: " + t2);
+    var tmpBatchID = _batchID;
+    var t4 = $("#inputBatchID").val();
+    if (t4.length > 0)
+    {
+        tmpBatchID = parseInt(t4);
+    }
 
     swtDoGenerateFlatDataShaderBench(_percentTagName,
                           _reportListTag,
-                          _batchID,
+                          tmpBatchID,
                           _reportType,
                           _crossType,
                           -1,
@@ -1760,40 +1772,7 @@ function swtGenerateRoutineReportPerFrame(_percentTagName, _reportListTag, _repo
     var checkedMachineIDList = [];
     var t2 = "";
     var t3 = "";
-    //if (_reportType == 0)
-    //{
-    //    // generating latest report
-    //    for (var i = 0; i < machineIDList.length; i++)
-    //    {
-    //        t1 = $("#selMachineID" + machineIDList[i]).val();
-    //        var b1 = $("#checkMachineID" + machineIDList[i]).is(":checked");
-    //        //console.log(b1);
-    //        if (b1 == false)
-    //        {
-    //            //console.log("skip" + i);
-    //            continue;
-    //        }
-    //        var n1 = parseInt(t1);
-    //        if (n1 != -1)
-    //        {
-    //            machineIDPair.push(parseInt(machineIDList[i]));
-    //            machineIDPair.push(n1);
-    //            // if cross asic, pair are machineID, machineID
-    //            // if cross build, pair are machineID, batch
-    //        }
-    //        else if ((_crossType == 1) || 
-    //                 (_crossType == 2))
-    //        {
-    //            // cross ASIC, SYS
-    //            // cross build
-    //            continue;
-    //        }
-    //        checkedMachineIDList.push(parseInt(machineIDList[i]));
-    //    }
-    //    t2 = swtImplode(machineIDPair, ",");
-    //    t3 = swtImplode(checkedMachineIDList, ",");
-    //}
-    
+
     t1 = $("#valDriverNameList").val();
     var driverNameList = [];
     if (t1.length > 0)
@@ -1839,10 +1818,16 @@ function swtGenerateRoutineReportPerFrame(_percentTagName, _reportListTag, _repo
     var t5 = swtImplode(colCardNameOrderIndexList, ",");
 
     //console.log("---: " + t2);
+    var tmpBatchID = _batchID;
+    var t6 = $("#inputBatchID").val();
+    if (t6.length > 0)
+    {
+        tmpBatchID = parseInt(t6);
+    }
 
     swtDoGenerateFlatDataPerFrame(_percentTagName,
                           _reportListTag,
-                          _batchID,
+                          tmpBatchID,
                           _reportType,
                           _crossType,
                           -1,
@@ -3465,11 +3450,17 @@ function swtSetBatchLogPath(_batchTag, _pathTag)
     });
 }
 
-function swtGetCardChoiceCode(_divTag, _reportTag)
+function swtGetCardChoiceCode(_divTag, _reportTag, _batchIDTag)
 {
+    var tmpBatchID = $("#" + _batchIDTag).val();
+    if (tmpBatchID.length == 0)
+    {
+        tmpBatchID = -1;
+    }
     
     $.post("../phplibs/getInfo/swtGetBatchMachinesInfo.php", 
     {
+        batchID: tmpBatchID
     }, 
     function(data,status) 
     {
@@ -3551,11 +3542,17 @@ function swtGetCardChoiceCode(_divTag, _reportTag)
     });
 }
 
-function swtGetCardChoiceCodeShaderBench(_divTag, _reportTag)
+function swtGetCardChoiceCodeShaderBench(_divTag, _reportTag, _batchIDTag)
 {
+    var tmpBatchID = $("#" + _batchIDTag).val();
+    if (tmpBatchID.length == 0)
+    {
+        tmpBatchID = -1;
+    }
     
     $.post("../phplibs/getInfo/swtGetBatchMachinesInfoShaderBench.php", 
     {
+        batchID: tmpBatchID
     }, 
     function(data,status) 
     {
@@ -3637,11 +3634,17 @@ function swtGetCardChoiceCodeShaderBench(_divTag, _reportTag)
     });
 }
 
-function swtGetCardChoiceCodePerFrame(_divTag, _reportTag)
+function swtGetCardChoiceCodePerFrame(_divTag, _reportTag, _batchIDTag)
 {
+    var tmpBatchID = $("#" + _batchIDTag).val();
+    if (tmpBatchID.length == 0)
+    {
+        tmpBatchID = -1;
+    }
     
     $.post("../phplibs/getInfo/swtGetBatchMachinesInfoPerFrame.php", 
     {
+        batchID: tmpBatchID
     }, 
     function(data,status) 
     {

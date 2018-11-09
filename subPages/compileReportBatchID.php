@@ -6,7 +6,7 @@ $html1 = new CSwtHtmlTemple("Grapher Generate Routine Report", "../");
 $html1->outPageHead("", "" .
                         "<script type=\"text/javascript\" src=\"../jslibs/some/genFuncs.js?v=201706291520\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/jquery-cookie/jquery.cookie.js\"></script>\n" .
-                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=1\"></script>\n");
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=1107\"></script>\n");
 
 $html1->outPageBodyStart();
 
@@ -21,12 +21,11 @@ $html1->outPageBodyStart();
         <p>Gen Options:</p>
         <p>Comparison in Report:</p>
         <p><div id="cardChoice"></div></p>
-        <!--
+        
         <p>Batch ID:&nbsp&nbsp&nbsp
-           <input id="inputBatchID" type="text" name="foldername" size="16" />&nbsp&nbsp&nbsp
+           <input id="inputBatchID" type="text" name="foldername" size="16" 
+            oninput="swtGetCardChoiceCode('cardChoice', 'reportList', 'inputBatchID');" />
         </p>
-        <p>like: 193</p>
-        -->
         
         <p>please <span style="background-color: #FF0000; color: #FFFFFF;">don't close this page in process of generating report!</span></p>
         
@@ -53,7 +52,7 @@ $html1->outPageBodyNext();
     
 <script>
 
-swtGetCardChoiceCode("cardChoice", "reportList");
+swtGetCardChoiceCode("cardChoice", "reportList", "inputBatchID");
 
 </script>
 

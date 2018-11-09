@@ -9,6 +9,8 @@ include_once "../generalLibs/genfuncs.php";
 include_once "../generalLibs/code01.php";
 include_once "../userManage/swtUserManager.php";
 
+$batchID = intval($_POST["batchID"]);
+
 $returnMsg = array();
 $returnMsg["errorCode"] = 1;
 $returnMsg["errorMsg"] = "compile report success";
@@ -33,45 +35,48 @@ if ($userChecker->isUser() == false)
     return;
 }
 
-$params1 = array();
-$sql1 = "";
-if ($userChecker->isManager())
+if ($batchID == -1)
 {
-    // manager login
     $params1 = array();
-    $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
-            "WHERE batch_state=\"1\" AND (batch_group IN (5, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309)) " .
-            "ORDER BY insert_time DESC LIMIT 1";
-}
-else
-{
-    $userID = $userChecker->getUserID();
-    $params1 = array($userID);
-    $sql1 = "SELECT t0.batch_id FROM mis_table_user_batch_info t0 " .
-            "WHERE t0.user_id = ? AND t0.batch_id IN (SELECT t1.batch_id FROM mis_table_batch_list t1 " .
-            "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
-            "ORDER BY t0.insert_time DESC LIMIT 1";
-}
-if ($db->QueryDB($sql1, $params1) == null)
-{
-    $returnMsg["errorCode"] = 0;
-    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
-    $returnMsg["userID"] = $userID;
-    $returnMsg["sql1"] = $sql1;
-    echo json_encode($returnMsg);
-    return;
-}
-$row1 = $db->fetchRow();
+    $sql1 = "";
+    if ($userChecker->isManager())
+    {
+        // manager login
+        $params1 = array();
+        $sql1 = "SELECT batch_id FROM mis_table_batch_list " .
+                "WHERE batch_state=\"1\" AND (batch_group IN (5, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309)) " .
+                "ORDER BY insert_time DESC LIMIT 1";
+    }
+    else
+    {
+        $userID = $userChecker->getUserID();
+        $params1 = array($userID);
+        $sql1 = "SELECT t0.batch_id FROM mis_table_user_batch_info t0 " .
+                "WHERE t0.user_id = ? AND t0.batch_id IN (SELECT t1.batch_id FROM mis_table_batch_list t1 " .
+                "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
+                "ORDER BY t0.insert_time DESC LIMIT 1";
+    }
+    if ($db->QueryDB($sql1, $params1) == null)
+    {
+        $returnMsg["errorCode"] = 0;
+        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+        $returnMsg["userID"] = $userID;
+        $returnMsg["sql1"] = $sql1;
+        echo json_encode($returnMsg);
+        return;
+    }
+    $row1 = $db->fetchRow();
 
-if ($row1 == false)
-{
-    $returnMsg["errorCode"] = 0;
-    $returnMsg["errorMsg"] = "no batch found, line: " . __LINE__;
-    echo json_encode($returnMsg);
-    return;
-}
+    if ($row1 == false)
+    {
+        $returnMsg["errorCode"] = 0;
+        $returnMsg["errorMsg"] = "no batch found, line: " . __LINE__;
+        echo json_encode($returnMsg);
+        return;
+    }
 
-$batchID = $row1[0];
+    $batchID = $row1[0];
+}
 
 $params1 = array($batchID);
 //$sql1 = "SELECT DISTINCT (t0.machine_id), t1.card_id, t2.env_name, t3.env_name " .
