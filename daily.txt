@@ -1,3 +1,12 @@
+
+-Global VerificationMode=1 -Tests PrimSetup -PrimSetup VertexCount=100000
+-Global VerificationMode=2 -Tests PrimSetup -PrimSetup VertexCount=100000
+
+-Global VerificationMode=1 Api=D3D11,D3D12 RefApi=D3D12,D3D11 -Tests PrimSetup -PrimSetup VertexCount=100000 TestCaseId=0-10
+-Global VerificationMode=2 -Tests PrimSetup -PrimSetup VertexCount=100000
+
+--------------------------------------------------------------------------------
+
 VerificationInfo
 {
     VerificationImageView
@@ -56,6 +65,18 @@ d:\work\dev\dk_upgrade_dev\framework\src\BaseTest.cpp:778
 
 --------------------------------------------------------------------------------
 
+d:\work\dev\dk_upgrade_dev\framework\src\BaseTest.cpp:2344
+
+            if (halVerificationDataList[iData].m_bufferData.empty() && (halVerificationDataList[iData].m_format == GfxFormat::UNDEFINED || halVerificationDataList[iData].m_pixelData.size() == 0))
+            {
+                m_pHalTests[index]->SetVerificationStatus(m_halTestApiOrdinals[index], statusInfo);
+            }
+
+该 if 语句中的 SetVerificationStatus 的调用是不必要的，因为在循环结束之后，又调用了一次。
+
+--------------------------------------------------------------------------------
+
+
 
 调用顺序：
 
@@ -78,9 +99,10 @@ BaseTest::SetVerificationStatus
 TestResult::SetVerificationStatus
 
 猜测调用关系如下：
-TestProxy::OnVerifyResult
-    TestProxy::VerifyPixelData
-    TestProxy::VerifyBufferData
+TestProxy::OnVerifyResult()
+    TestProxy::VerifyPixelData()
+        PixelFormatter::CheckPixel()
+    TestProxy::VerifyBufferData()
 
 在 TestContext::RunTestCase 调用 TestProxy::OnVerifyResult 。
 
@@ -122,6 +144,28 @@ TestProxy::SetApiOrdinal(apiOrdinal)
 TestProxy::SetApiOrdinal 看起来和 BaseTest::OnGetVerificationData 有关系。因为在后者之前设置，在后者调用完成后恢复。
 ??? 没看到有啥关系。
 
+struct VerificationData
+{
+    GfxFormat m_format;
+    std::vector<uint8_t> m_pixelData;
+    std::vector<uint8_t> m_bufferData;
+};
+
+typedef std::vector<VerificationData> VerificationDataList;
+
+BaseTest::OnGetVerificationData() 得到要验证的区域的 format 和 pixel 的数据及 buffer 数据。
+通过 GllBaseTest::m_verificationInfo 获取以上数据。
+
 明天研读该函数：
 TestProxy::VerifyPixelData
 
+TestProxy::OnStartTestCase(testCase) 设置 m_randomFrameIndexForVerification 为随机值：
+    m_randomFrameIndexForVerification = Math::rand() % m_pTestHelper->GetTestFrames()
+
+TestProxy::OnRunTestCase(testCase) 如果没有注册的 Verification View ，并且不需要 Present 或者 Dump ，则不运行 REF_TEST_OPERATION 。
+
+德国威能服务热线 4007001890
+
+构造参考 API 列表的函数。如果参考 API 列表中，只有 1 个元素，那么调整参考 API 列表大小与 API 列表大小相同，并复制该唯一元素到参考 API 中的所有元素。
+
+void TestHelper::ConstructRefApiList()
