@@ -21,3 +21,5 @@ normalized 如果 为 GL_FALSE ，直接使用该值；如果为 GL_TRUE ，那�
 stride 如果为 0 ，等价于 size*sizeof(type) 。
 
 glEnableVertexAttribArray 和 glBindBuffer 需要在 glVertexAttribPointer 之前调用。而前两者的调用顺序，可以调换而不影响执行结果。
+
+OpenGL 4.3 支持 glDebugMessageCallback 函数，用于错误处理。

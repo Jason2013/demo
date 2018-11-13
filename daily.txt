@@ -168,4 +168,48 @@ TestProxy::OnRunTestCase(testCase) 如果没有注册的 Verification View ，�
 
 构造参考 API 列表的函数。如果参考 API 列表中，只有 1 个元素，那么调整参考 API 列表大小与 API 列表大小相同，并复制该唯一元素到参考 API 中的所有元素。
 
+
 void TestHelper::ConstructRefApiList()
+
+
+疑问：
+
+当 VerificationMode 启用时，并且 DumpImage 也启用时，如何 Dump 多个 API 的图片？
+
+Sch
+
+TestContext 包含如下 Test 上下文相关的成员变量：
+
+相关的对象：
+
+    BenchApp       m_pApp
+    TestContainer* m_pTestContainer
+    TestHelper*    m_pTestHelper
+    TestProxy*     m_pTestProxy
+    TestResult*    m_pTestResult
+    TestStatistic* m_pTestStatistic
+    MessageLog*    m_pLog
+
+当前的状态：
+
+    m_currApiOrdinal
+    m_curApi
+    m_curTestCaseId
+    m_curFrameIdx
+
+Test 、 TestCase 及 Api 相关状态：
+
+    PerTestFlags     m_perTestFlags
+    PerApiFlags      m_perApiFlags
+    PerTestCaseFlags m_perTestCaseFlags
+
+计时器、设置状态：
+
+    Timers m_timers
+    Settings m_settings
+
+杂项：
+
+    std::list m_crashTestCases
+
+
