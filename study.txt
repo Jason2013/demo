@@ -23,3 +23,42 @@ stride 如果为 0 ，等价于 size*sizeof(type) 。
 glEnableVertexAttribArray 和 glBindBuffer 需要在 glVertexAttribPointer 之前调用。而前两者的调用顺序，可以调换而不影响执行结果。
 
 OpenGL 4.3 支持 glDebugMessageCallback 函数，用于错误处理。
+
+11/14/2018 3:25:49 PM
+
+如下代码：
+
+#define F(x, ...) X = x and VA_ARGS = __VA_ARGS__
+#define G(...) F(__VA_ARGS__)
+F(1, 2, 3)
+G(1, 2, 3)
+
+期待的两个宏展开后的输出是：X = 1 and VA_ARGS = 2, 3
+GCC 的结果是我想要的，然而 MSVC 的展开是这样的：
+
+X = 1 and VA_ARGS = 2, 3
+X = 1, 2, 3 and VA_ARGS =
+
+__VA_ARGS__ 被当作单独的参数展开，而不是被展开成多个参数。
+
+变通的办法是：
+
+#define EXPAND( x ) x
+#define F(x, ...) X = x and VA_ARGS = __VA_ARGS__
+#define G(...) EXPAND( F(__VA_ARGS__) )
+
+宏 F() 的定义并不是这个问题的重点，它和生成的结果与预期不符无关。
+这里演示了预处理器针对宏的行为。尤其是，它展示了 MSVC 在变长宏中展开 __VA_ARGS__ 成一个单一符号。变通的办法是，强制展开两次。
+
+举例来说，在变通的定义中，预处理器首先展开
+
+G(1, 2, 3)
+
+为
+
+EXPAND( F(1, 2, 3) )
+
+在这里， 1, 2, 3 被当作单独的符号。当预处理器再次扫描其它替换时，这个符号化的办法就没有影响了，它把 1, 2, 3 当做分别的参数传递给宏 F() ，然后把展开的结果当作宏 EXPAND() 的参数，最终的结果是它自身。
+
+__VA_ARGS__ expansion using MSVC
+https://stackoverflow.com/questions/32399191/va-args-expansion-using-msvc
