@@ -57,6 +57,9 @@ if ($fileID < count($oldReportXLSXList))
     if (file_exists($tmpVBAConfigPath))
     {
         $t1 = file_get_contents($tmpVBAConfigPath);
+        
+        //file_put_contents("H:\\wamp64\\www\\benchMax\\test01.json", $t1);
+        
         $vbaConfig = json_decode($t1);
         
         if (isset($vbaConfig->curMachineID))
@@ -140,6 +143,30 @@ if ($fileID < count($oldReportXLSXList))
                     $t4 = implode(",", $tmpRange);
                     $t4 = "Application.Union(" . $t4 . ")";
                 }
+                
+                $tmpArea2 = explode(",", $vbaConfig->graphDataArea);
+                if (isset($vbaConfig->graphDataArea2))
+                {
+                    $tmpArea2 = explode(",", $vbaConfig->graphDataArea2);
+                }
+                
+                $tmpRange = array();
+                $t4a = "";
+                if (count($tmpArea2) == 1)
+                {
+                    $t4a = "destSheet.Range(\"" . $tmpArea2[0] . "\")";
+                }
+                else
+                {
+                    for ($i = 0; $i < count($tmpArea2); $i++)
+                    {
+                        $t3 = "destSheet.Range(\"" . $tmpArea2[$i] . "\")";
+                        array_push($tmpRange, $t3);
+                    }
+                    $t4a = implode(",", $tmpRange);
+                    $t4a = "Application.Union(" . $t4a . ")";
+                }
+                
                 // dropArea
                 $codePiece1 = "";
                 //for ($i = 0; $i < count($vbaConfig->dropArea); $i++)
@@ -196,8 +223,18 @@ if ($fileID < count($oldReportXLSXList))
                     $codePiece1 .= "Columns(\"" . $vbaConfig->shrinkColumnArea . "\").ColumnWidth = 0\n";
                 }
                 
+                // framebench
+                if (($vbaConfig->reportType == 3) &&
+                    ($vbaConfig->testBarNum == 2))
+                {
+                    $codePiece1 .= "\n";
+                    $codePiece1 .= "setCharBarColor(" . $vbaConfig->testNameNum . ")\n";
+                }
+                
                 // $vbaConfig->graphDataArea
-                $t2 = sprintf($t2, $t4, $tmpCardName, $vbaConfig->graphDataAreaNoBlank, $codePiece1);
+                $t2 = sprintf($t2, $t4, $vbaConfig->graphTitle . $tmpCardName, 
+                              $t4a, $vbaConfig->graphTitle . $tmpCardName, 
+                              $vbaConfig->graphDataAreaNoBlank, $codePiece1);
                 file_put_contents($tmpVBAPath, $t2);
                 
                 $workBook->VBProject->VBComponents->Item(1)->CodeModule->AddFromFile(__dir__ . "\\" . $tmpVBAPath);

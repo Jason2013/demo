@@ -3383,7 +3383,7 @@ class CGenReport
                     $t1 = "";
                     $tmpRange = array("R6C" . ($subjectNameFilterNumMax + 4) . ":R1000000C" . ($subjectNameFilterNumMax + 4) . "");
                     
-                    for ($i = 1; $i < intval($dataColumnNum / 2); $i++)
+                    for ($i = 1; $i < intval(($dataColumnNum + 1) / 2); $i++)
                     {
                         array_push($tmpRange, "R6C" . ($subjectNameFilterNumMax + (4 + $i * 2)) . ":R1000000C" . ($subjectNameFilterNumMax + (4 + $i * 2)) . "");
                     }
@@ -3391,7 +3391,7 @@ class CGenReport
                     $tmpRange []= "R6C" . ($subjectNameFilterNumMax + 4 + $dataColumnNum + 1) . 
                                   ":R1000000C" . ($subjectNameFilterNumMax + 4 + $dataColumnNum + 1) . "";
                     
-                    for ($i = 1; $i < intval($dataColumnNum / 2); $i++)
+                    for ($i = 1; $i < intval(($dataColumnNum + 1) / 2); $i++)
                     {
                         array_push($tmpRange, "R6C" . ($subjectNameFilterNumMax + (4 + $dataColumnNum + 1 + $i * 2)) . 
                                    ":R1000000C" . ($subjectNameFilterNumMax + (4 + $dataColumnNum + 1 + $i * 2)) . "");
@@ -4470,7 +4470,7 @@ class CGenReport
                 }
                 
                 $tmpAverageDataCode = "";
-                $tmpGraphDataCode = "";
+                $tmpAverageDataCode2 = "";
                 
                 $isFirstColumn = true;
                 // average & graph data title
@@ -4486,19 +4486,18 @@ class CGenReport
                         $tmpAverageDataCode = " <Cell ss:Index=\"" . 
                                               ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + 1 + $graphDataColumnNum * 2 + 2) . 
                                               "\" ss:StyleID=\"Default\"/>\n";
-                        $tmpGraphDataCode = " <Cell ss:Index=\"" . 
-                                            ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + 2 + $graphDataColumnNum + 2) . 
-                                            "\" ss:StyleID=\"Default\"/>\n";
+
                         $isFirstColumn = false;
+                    }
+                    else
+                    {
+                        $tmpAverageDataCode2 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . 
+                                               "</Data></Cell>\n";
                     }
                     $tmpAverageDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . 
                                            "</Data></Cell>\n";
-                    $tmpGraphDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . 
-                                         "</Data></Cell>\n";
                 }
-                
-                //$t1 = $tmpAverageDataCode . $tmpGraphDataCode;
-                $t1 = $tmpAverageDataCode;
+                $t1 = $tmpAverageDataCode . $tmpAverageDataCode2;
             }
             array_push($graphCells, $t1);
             
@@ -4803,10 +4802,17 @@ class CGenReport
                     $reportUmdNum = count($umdNameList);
                     //$tmpVal = array("", "", "");
                     //$tmpValHas = array("", "", "");
+                    // graph1 data source
                     $tmpVal = array_fill(0, $reportUmdNum, "");
                     $tmpValHas = array_fill(0, $reportUmdNum, "");
                     $tmpVal2 = array_fill(0, $reportUmdNum, "");
                     $tmpValHas2 = array_fill(0, $reportUmdNum, "");
+                    
+                    // graph2 data source
+                    $tmpVal3 = array_fill(0, $reportUmdNum, "");
+                    $tmpValHas3 = array_fill(0, $reportUmdNum, "");
+                    $tmpVal4 = array_fill(0, $reportUmdNum, "");
+                    $tmpValHas4 = array_fill(0, $reportUmdNum, "");
                     $startIndex = -1;
                     
                     if ($dataColumnNum == 1)
@@ -4818,132 +4824,115 @@ class CGenReport
                         $graphDataColumnNum = intval(($dataColumnNum + 1) / 2);
                     }
                     
-                    $isFirstColumn = true;
-                    $tmpColumnNum = 0;
-                    for ($k = 0; $k < $reportUmdNum; $k++)
-                    {
-                        if ($resultUmdOrder[$k] == -1)
-                        {
-                            // absent api
-                            continue;
-                        }
-                        // comp time
-                        $tmpValHas[$k] = " <Cell ss:StyleID=\"Default\" " .
-                                         "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $tmpColumnNum * 2) . // 6
-                                         ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $tmpColumnNum * 2) . 
-                                         ")\">" .
-                                         "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                        // exec time
-                        $tmpValHas2[$k] = " <Cell ss:StyleID=\"Default\" " .
-                                         "ss:Formula=\"=AVERAGE(R[" . ($n1 - $tmpRealTestNum) . "]C" . 
-                                         ($subjectNameFilterNumMax + 3 + 
-                                         $dataColumnNum + 1 + $tmpColumnNum * 2) . // 6
-                                         ":R[" . ($n2 - $tmpRealTestNum) . "]C" . 
-                                         ($subjectNameFilterNumMax + 3 + 
-                                         $dataColumnNum + 1 + $tmpColumnNum * 2) . 
-                                         ")\">" .
-                                         "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                        
-                        $tmpColumnNum++;
-                    }
-                    
-                    for ($j = 0; $j < $reportUmdNum; $j++)
-                    {
-                        $tmpVal[$j] = "";
-                        $tmpVal2[$j] = "";
-                    }
-                    for ($j = 0; $j < $reportUmdNum; $j++)
-                    {
-                        if ($resultUmdOrder[$j] != -1)
-                        {
-                            $tmpVal[$j] = $tmpValHas[$j];
-                            $tmpVal2[$j] = $tmpValHas2[$j];
-                            //if ($startIndex == -1)
-                            //{
-                            //    $startIndex = $j;
-                            //}
-                            if ($startIndex == -1)
-                            {
-                                // $startIndex = $j;
-                                $startIndex = 0;
-                                $tmpMask = $subTestUmdDataMaskList[$i];
-                                $checkMask = 1;
-                                for ($l = 0; $l < $reportUmdNum; $l++)
-                                {
-                                    if ($resultUmdOrder[$l] == -1)
-                                    {
-                                        $checkMask *= 10;
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
-                                $tmpAdd = 0;
-                                for ($l = 0; $l < $umdNum; $l++)
-                                {
-                                    if ($tmpMask & $checkMask)
-                                    {
-                                        // jump to DX12, if DX11 is null, jump to vulkan if DX12 is null in this test
-                                        $startIndex += $tmpAdd;
-                                        break;
-                                    }
-                                    $tmpAdd++;
-                                    $checkMask *= 10;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            $tmpVal[$j] = "";
-                            $tmpVal2[$j] = "";
-                        }
-                    }
-                        
-                          
-                    $t1 = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + 1) . 
-                          "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
-                          $tmpGroupName . "</Data></Cell>\n";
-                          
-                    $t1a = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + 1) . 
-                          "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
-                          $tmpGroupName . "</Data></Cell>\n";
-                          
-                    for ($k = 0; $k < $reportUmdNum; $k++)
-                    {
-                        $t1 .= $tmpVal[$k];
-                        $t1a .= $tmpVal2[$k];
-                    }
+                    //$isFirstColumn = true;
+                    //$tmpColumnNum = 0;
+                    //for ($k = 0; $k < $reportUmdNum; $k++)
+                    //{
+                    //    if ($resultUmdOrder[$k] == -1)
+                    //    {
+                    //        // absent api
+                    //        continue;
+                    //    }
+                    //    // comp time
+                    //    $tmpValHas[$k] = " <Cell ss:StyleID=\"Default\" " .
+                    //                     "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $tmpColumnNum * 2) . // 6
+                    //                     ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $tmpColumnNum * 2) . 
+                    //                     ")\">" .
+                    //                     "<Data ss:Type=\"Number\"></Data></Cell>\n";
+                    //    // exec time
+                    //    $tmpValHas2[$k] = " <Cell ss:StyleID=\"Default\" " .
+                    //                     "ss:Formula=\"=AVERAGE(R[" . ($n1 - $tmpRealTestNum) . "]C" . 
+                    //                     ($subjectNameFilterNumMax + 3 + 
+                    //                     $dataColumnNum + 1 + $tmpColumnNum * 2) . // 6
+                    //                     ":R[" . ($n2 - $tmpRealTestNum) . "]C" . 
+                    //                     ($subjectNameFilterNumMax + 3 + 
+                    //                     $dataColumnNum + 1 + $tmpColumnNum * 2) . 
+                    //                     ")\">" .
+                    //                     "<Data ss:Type=\"Number\"></Data></Cell>\n";
+                    //    
+                    //    $tmpColumnNum++;
+                    //}
+                    //
+                    //for ($j = 0; $j < $reportUmdNum; $j++)
+                    //{
+                    //    $tmpVal[$j] = "";
+                    //    $tmpVal2[$j] = "";
+                    //}
+                    //for ($j = 0; $j < $reportUmdNum; $j++)
+                    //{
+                    //    if ($resultUmdOrder[$j] != -1)
+                    //    {
+                    //        $tmpVal[$j] = $tmpValHas[$j];
+                    //        $tmpVal2[$j] = $tmpValHas2[$j];
+                    //        //if ($startIndex == -1)
+                    //        //{
+                    //        //    $startIndex = $j;
+                    //        //}
+                    //        if ($startIndex == -1)
+                    //        {
+                    //            // $startIndex = $j;
+                    //            $startIndex = 0;
+                    //            $tmpMask = $subTestUmdDataMaskList[$i];
+                    //            $checkMask = 1;
+                    //            for ($l = 0; $l < $reportUmdNum; $l++)
+                    //            {
+                    //                if ($resultUmdOrder[$l] == -1)
+                    //                {
+                    //                    $checkMask *= 10;
+                    //                }
+                    //                else
+                    //                {
+                    //                    break;
+                    //                }
+                    //            }
+                    //            $tmpAdd = 0;
+                    //            for ($l = 0; $l < $umdNum; $l++)
+                    //            {
+                    //                if ($tmpMask & $checkMask)
+                    //                {
+                    //                    // jump to DX12, if DX11 is null, jump to vulkan if DX12 is null in this test
+                    //                    $startIndex += $tmpAdd;
+                    //                    break;
+                    //                }
+                    //                $tmpAdd++;
+                    //                $checkMask *= 10;
+                    //            }
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        $tmpVal[$j] = "";
+                    //        $tmpVal2[$j] = "";
+                    //    }
+                    //}
+                    //    
+                    //      
+                    //$t1 = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + 1) . 
+                    //      "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
+                    //      $tmpGroupName . "</Data></Cell>\n";
+                    //      
+                    //$t1a = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + 1) . 
+                    //      "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
+                    //      $tmpGroupName . "</Data></Cell>\n";
+                    //      
+                    //for ($k = 0; $k < $reportUmdNum; $k++)
+                    //{
+                    //    $t1 .= $tmpVal[$k];
+                    //    $t1a .= $tmpVal2[$k];
+                    //}
 
                     $tmpColumnNum = 0;
                     for ($k = 0; $k < $reportUmdNum; $k++)
                     {
                         $tmpValHas[$k] = "";
                         $tmpValHas2[$k] = "";
+                        $tmpValHas3[$k] = "";
+                        $tmpValHas4[$k] = "";
                         if ($resultUmdOrder[$k] == -1)
                         {
                             // absent api
                             continue;
                         }
-                        
-                        //$tmpValHas[$k] = " <Cell ss:StyleID=\"Default\" " .
-                        //                "ss:Formula=\"=RC[-" . (2 + $graphDataColumnNum + 1) . "]/RC[-" . 
-                        //                (2 + $graphDataColumnNum - $startIndex + $tmpColumnNum + 1) .
-                        //                "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
-                        //                
-                        //$tmpValHas2[$k] = $tmpValHas[$k];
-                        //
-                        //// replace NV card DX12 into DX11
-                        //if (($this->testTempChange2($testNameList[$i])                     == true) &&
-                        //    (strcmp(strtolower($tmpReportUmdInfo[$k]), strtolower("DX12")) == 0))
-                        //{
-                        //    $tmpValHas[$k] = " <Cell ss:StyleID=\"Default\" " .
-                        //                    "ss:Formula=\"=RC[-" . (2 + $graphDataColumnNum + 1 + 1) . "]/RC[-" . 
-                        //                    (2 + $graphDataColumnNum - $startIndex + $tmpColumnNum + 1) .
-                        //                    "]\"><Data ss:Type=\"Number\"></Data></Cell>\n";
-                        //                    
-                        //    $tmpValHas2[$k] = $tmpValHas[$k];
-                        //}
                         
                         if ($tmpColumnNum == 0)
                         {
@@ -4964,6 +4953,9 @@ class CGenReport
                                              ($dataColumnNum * 2) + 2 + $graphDataColumnNum + $tmpColumnNum) . 
                                              ")\">" .
                                              "<Data ss:Type=\"Number\"></Data></Cell>\n";
+                                             
+                            $tmpValHas3[$k] = "";
+                            $tmpValHas4[$k] = "";
                         }
                         else
                         {
@@ -4986,6 +4978,24 @@ class CGenReport
                                              ")+RC" . ($subjectNameFilterNumMax + 3 + 
                                              ($dataColumnNum * 2) + 2 + $graphDataColumnNum * 2 + 3) . "\">" .
                                              "<Data ss:Type=\"Number\"></Data></Cell>\n";
+                                             
+                            // comp time
+                            $tmpValHas3[$k] = " <Cell ss:StyleID=\"Default\" " .
+                                             "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 2 +
+                                             $tmpColumnNum) . // 6
+                                             ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 2 + $tmpColumnNum) . 
+                                             ")\">" .
+                                             "<Data ss:Type=\"Number\"></Data></Cell>\n";
+                            // exec time
+                            $tmpValHas4[$k] = " <Cell ss:StyleID=\"Default\" " .
+                                             "ss:Formula=\"=AVERAGE(R[" . ($n1 - $tmpRealTestNum) . "]C" . 
+                                             ($subjectNameFilterNumMax + 3 + 
+                                             ($dataColumnNum * 2) + 2 + $graphDataColumnNum + $tmpColumnNum) . // 6
+                                             ":R[" . ($n2 - $tmpRealTestNum) . "]C" . 
+                                             ($subjectNameFilterNumMax + 3 + 
+                                             ($dataColumnNum * 2) + 2 + $graphDataColumnNum + $tmpColumnNum) . 
+                                             ")\">" .
+                                             "<Data ss:Type=\"Number\"></Data></Cell>\n";
                         }
                         
                         $tmpColumnNum++;
@@ -4997,11 +5007,17 @@ class CGenReport
                         {
                             $tmpVal[$j] = $tmpValHas[$j];
                             $tmpVal2[$j] = $tmpValHas2[$j];
+                            
+                            $tmpVal3[$j] = $tmpValHas3[$j];
+                            $tmpVal4[$j] = $tmpValHas4[$j];
                         }
                         else
                         {
                             $tmpVal[$j] = "";
                             $tmpVal2[$j] = "";
+                            
+                            $tmpVal3[$j] = "";
+                            $tmpVal4[$j] = "";
                         }
                     }
                     
@@ -5045,7 +5061,12 @@ class CGenReport
                         $t1 .= $tmpVal[$k];
                         $t1a .= $tmpVal2[$k];
                     }
-                            
+                    
+                    for ($k = 0; $k < $reportUmdNum; $k++)
+                    {
+                        $t1 .= $tmpVal3[$k];
+                        $t1a .= $tmpVal4[$k];
+                    }
                 }
                 array_push($graphCells, $t1);
                 array_push($graphCells2, $t1a);
@@ -6200,25 +6221,36 @@ class CGenReport
         }
         else
         {
-            $graphDataColumnNum = intval($dataColumnNum / 2);
+            $graphDataColumnNum = intval(($dataColumnNum + 1) / 2);
         }
                          
-        $graphDataArea = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + 1 + $graphDataColumnNum * 2 + 2] . 
+        $graphDataArea = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 1] . 
                          graphDataStartLineID . ":" . 
-                         $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + 2 + $graphDataColumnNum * 2 + 3 + $graphDataColumnNum] .
+                         $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 1 + 2 + $graphDataColumnNum - 1] .
                          (intval(graphDataStartLineID) + count($graphCells) - 1);
                          
+        $graphDataArea2 = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 1] . 
+                         graphDataStartLineID . ":" . 
+                         $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
+                                               ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 2] .
+                         (intval(graphDataStartLineID) + count($graphCells) - 1) . "," .
+                         $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
+                                               ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 3 + $graphDataColumnNum] . 
+                         graphDataStartLineID . ":" . 
+                         $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
+                                               ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 3 + $graphDataColumnNum * 2 - 2] .
+                         (intval(graphDataStartLineID) + count($graphCells) - 1);
+                                         
+                         
+        $graphDataAreaNoBlank = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
+                                                           ($dataColumnNum * 2) + 1 + 1 + $graphDataColumnNum * 2 + 2] . 
+                         graphDataStartLineID . ":" . 
+                         $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
+                                               ($dataColumnNum * 2) + 1 + 2 + $graphDataColumnNum * 2 + 3 + $graphDataColumnNum * 2] .
+                         (intval(graphDataStartLineID) + count($graphCells) - 1);
+        
         $shrinkColumnArea = ""  . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1] . 
-                            ":" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + 1 + $graphDataColumnNum * 2 + 1];
-                            
-        //file_put_contents("test01.txt", $shrinkColumnArea);
-                         
-        $returnMsg["tmp_graphCells"] = $graphCells;
-        $returnMsg["tmp_graphCellsNum"] = count($graphCells);
-        $returnMsg["tmp_n1"] = (intval(graphDataStartLineID) + count($graphCells) - 1);
-        $returnMsg["tmp_n2"] = (intval(graphDataStartLineIDCompare) + count($graphCells) - 1);
-                         
-        $graphDataAreaNoBlank = $graphDataArea;
+                            ":" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2];
         
         //if (($_cmpStartResultID != -1) ||
         //    ($crossType == 2))
@@ -6240,8 +6272,15 @@ class CGenReport
         
         $tmpJson = array();
         $tmpJson["graphDataArea"] = $graphDataArea;
+        $tmpJson["graphDataArea2"] = $graphDataArea2;
+        $tmpJson["dataColumnNum"] = $dataColumnNum;
+        $tmpJson["graphDataColumnNum"] = $graphDataColumnNum;
         $tmpJson["shrinkColumnArea"] = $shrinkColumnArea;
         $tmpJson["graphDataAreaNoBlank"] = $graphDataAreaNoBlank;
+        $tmpJson["graphTitle"] = "FrameBench Average ExecutionTime & RecordTime - ";
+        $tmpJson["reportType"] = 3;
+        $tmpJson["testNameNum"] = count($testNameList);
+        $tmpJson["testBarNum"] = $graphDataColumnNum;
         $tmpJson["curCardName"] = $curCardName;
         $tmpJson["cmpCardName"] = $cmpCardName;
         $tmpJson["curSysName"] = $tmpSysName;
