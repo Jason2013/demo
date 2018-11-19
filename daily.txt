@@ -212,4 +212,43 @@ Test 、 TestCase 及 Api 相关状态：
 
     std::list m_crashTestCases
 
+11/15/2018 4:43:52 PM
+将 OpenGL 资料，保存。
 
+记录临时解决办法：
+1、FOR_GOLDENMAP
+2、VerificationInfo 包含不需要的 buffer 信息。
+3、图片先获取一张。
+
+
+11/16/2018 10:44:52 AM
+1、将 TestProxy::OnVerifyResult() 的获取 render target view 数据的部分，
+复制到 OnFramePresent （ GLL 、 GAL 都需要）
+
+疑问：TestProxy->m_pTestHelper 与 BaseTest->m_pTestHelper是否相同？
+如何从 BaseTest 中，访问到 TestProxy ?
+
+添加 GLL 、 GAL 成员函数：（OnGoldenMapVerify）
+
+2、获取图片的数据。（可以先获取一张）
+
+GetImageSizeInBytes(dumpImageFormat, width, height)
+获得宽、高为 width 、 height 的图片，以 dumpImageFormat 保存时，所需要的缓冲区大小，以字节数为单位。
+
+common\src\ImageProcess.cpp:785
+bool DumpImage(const std::string& fileName, const ImageFileInfo& imageFileInfo)
+
+common\src\ImageProcess.cpp:780
+bool LoadImage(const std::string& fileName, ImageFileInfo& imageFileInfo, bool bFlipVertically)
+
+DumpImage 将 imageFileInfo 中的图片数据，写入到名为 fileName 的文件中。
+LoadImage 将名为 fileName 的文件中的图片数据，读取到 imageFileInfo 结构中。
+
+3、比较图片的数据。
+
+
+"D:\\work\\dev\\dk_upgrade_dev\\build\\microbench\\Dump\\PrimSetup\\D3D11\\PrimSetup_[Case00000][Snake_NoCulling_PointList_Indexed]_RTV0_R8G8B8A8_UNORM.bmp"
+
+比较数据需要用到 TestProxy::VerifyPixelData 方法。但在 BaseTest 的方法中，无法访问到 TestProxy 。
+
+4、将比较的结果输出到 TestResults.txt 文件。（工作量较大）
