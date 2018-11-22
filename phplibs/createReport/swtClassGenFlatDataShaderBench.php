@@ -133,6 +133,44 @@ class CGenReportFlatData
         return $returnSet;
     }
     
+	public function getDriver2NameList($_db, $_batchID)
+	{
+        global $returnMsg;
+        
+        $db = $_db;
+        
+        $params1 = array($_batchID);
+        $sql1 = "SELECT t0.umd_id, t1.env_name FROM mis_table_result_list t0 " .
+                "LEFT JOIN mis_table_environment_info t1 ON (t0.umd_id = t1.env_id) " .
+                "WHERE t0.batch_id = ?";
+        if ($db->QueryDB($sql1, $params1) == null)
+        {
+            $returnMsg["errorCode"] = 0;
+            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+            echo json_encode($returnMsg);
+            return false;
+        }
+        $driver2NameList = array();
+        while ($row1 = $db->fetchRow())
+        {
+            $tmpArr = explode("_", $row1[1]);
+            $tmpDriver2Name = "Vulkan";
+            if (count($tmpArr) > 1)
+            {
+                $tmpDriver2Name = $tmpArr[1];
+            }
+            
+            if (array_search($tmpDriver2Name, $driver2NameList) === false)
+            {
+                $driver2NameList []= $tmpDriver2Name;
+            }
+        }
+
+        $returnSet = array();
+        $returnSet["driver2NameList"] = $driver2NameList;
+        return $returnSet;
+    }
+    
 	public function getReportFolder($_batchID, $_reportType, $_curReportFolder)
 	{
         global $returnMsg;
@@ -524,25 +562,27 @@ class CGenReportFlatData
         global $columnNum;
         global $rowNum;
         global $xmlWriter;
+        global $driver2NameList;
 
         if ($_fileID == 0)
         {
             // add sheet head to tmp file
             foreach ($_uniqueCardNameList as $tmpName)
             {
-                $tmpFileName = sprintf($_reportFolder . "/" . $tmpName . $_outFileNameLater, $_batchID);
-                $fileHandle = fopen($tmpFileName, "w");
-                
-                // report head
-                $t1 = file_get_contents($templateFileName0);
-                fwrite($fileHandle, $t1);
-                // style end tag
-                $xmlWriter->writeAdditionalStyles($fileHandle);
-                //$t1 = file_get_contents($templateFileName3);
-                ////$t1 = sprintf($t1, 0, 0);
-                //fwrite($fileHandle, $t1);
-                
-                fclose($fileHandle);
+                foreach ($driver2NameList as $tmpName2)
+                {
+                    $tmpFileName = sprintf($_reportFolder . "/" . $tmpName . "_" . $tmpName2 .
+                                           $_outFileNameLater, $_batchID);
+                    $fileHandle = fopen($tmpFileName, "w");
+                    
+                    // report head
+                    $t1 = file_get_contents($templateFileName0);
+                    fwrite($fileHandle, $t1);
+                    // style end tag
+                    $xmlWriter->writeAdditionalStyles($fileHandle);
+                    
+                    fclose($fileHandle);
+                }
             }
             $columnNum = 0;
             $rowNum = 0;
@@ -566,12 +606,26 @@ class CGenReportFlatData
         if ($_fileID >= count($_uniqueCardNameList))
         {
             // add sheet end
-            foreach ($_uniqueCardNameList as $tmpName)
+            //foreach ($_uniqueCardNameList as $tmpName)
+            //{
+            //    $tmpFileName = sprintf($_reportFolder . "/" . $tmpName . $_outFileNameLater, $_batchID);
+            //    $fileHandle = fopen($tmpFileName, "r+");
+            //    fseek($fileHandle, 0, SEEK_END);
+            //
+            //    fwrite($fileHandle, $allSheetsEndTag);
+            //    
+            //    fclose($fileHandle);
+            //}
+            
+            $tmpFileNamePart = $_reportFolder . "/" . "*.tmp1";
+            $tmpFileNameList = glob($tmpFileNamePart);
+            
+            foreach ($tmpFileNameList as $tmpName)
             {
-                $tmpFileName = sprintf($_reportFolder . "/" . $tmpName . $_outFileNameLater, $_batchID);
-                $fileHandle = fopen($tmpFileName, "r+");
+                //$tmpFileName = sprintf($_reportFolder . "/" . $tmpName . $_outFileNameLater, $_batchID);
+                $fileHandle = fopen($tmpName, "r+");
                 fseek($fileHandle, 0, SEEK_END);
-                //$t1 = file_get_contents($templateFileName2);
+
                 fwrite($fileHandle, $allSheetsEndTag);
                 
                 fclose($fileHandle);
@@ -684,7 +738,7 @@ class CGenReportFlatData
     }
     
     public function addLinesToFlatData($_srcFileHandle,
-                                       $_destFileHandle,
+                                       //$_destFileHandle,
                                        $_tmpCardName,
                                        $_tmpTestName,
                                        $_isComp,
@@ -700,8 +754,14 @@ class CGenReportFlatData
         global $testCaseIDColumnName;
         global $cardNameList;
         global $compilerNameList;
+        global $swtUmdNameList;
+        global $reportFolder;
+        global $outFileNameLater;
+        global $batchID;
+        global $usedFileNameList;
+        global $usedFileHandleList;
+        global $templateFileName3;
         
-        //$tmpList = explode("_", $_tmpCardName);
         $curSysName = $cardNameList[$_curCardNameList[$_curCardNameIndex]];
         $curCompilerName = $compilerNameList[$_curCardNameList[$_curCardNameIndex]];
         $tmpList = explode("_", $curSysName);
@@ -756,7 +816,16 @@ class CGenReportFlatData
                         $dataKeyAPI = array_search("API", $dataSet);
                         if ($dataKeyAPI == false)
                         {
-                            $dataKeyAPI = array_search("Vulkan", $dataSet);
+                            //$dataKeyAPI = array_search("Vulkan", $dataSet);
+                            
+                            for ($i = 0; $i < count($swtUmdNameList); $i++)
+                            {
+                                $dataKeyAPI = array_search($swtUmdNameList[$i], $dataSet);
+                                if ($dataKeyAPI !== false)
+                                {
+                                    break;
+                                }
+                            }
                         }
                         else
                         {
@@ -770,6 +839,7 @@ class CGenReportFlatData
         }
         
         fseek($_srcFileHandle, $tmpFileOffset, SEEK_SET);
+
         while($dataSet = fgetcsv($_srcFileHandle, 0, ","))
         {
             $tmpDataSet = $dataSet;
@@ -826,8 +896,19 @@ class CGenReportFlatData
                             $t1 = "<Row ss:StyleID=\"Default\">\n";
                             $t1 .= "<Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\"></Data></Cell>\n";
                             $t1 .= "</Row>\n";
-                            fwrite($_destFileHandle, $t1);
-                            $rowNum++;
+                            
+                            $tmpFileName = sprintf($reportFolder . "/" . $_tmpCardName . "_" . 
+                                                   $dataSet[$dataKeyAPI] . $outFileNameLater, $batchID);
+                                                   
+                            $tmpKey = array_search($tmpFileName, $usedFileNameList);
+                            if ($tmpKey !== false)
+                            {
+                                $tmpHandle = $usedFileHandleList[$tmpKey];
+                                fwrite($tmpHandle, $t1);
+                                $rowNum++;
+                            }
+                            //fwrite($_destFileHandle, $t1);
+                            //$rowNum++;
                         }
                         //$isFileShift = true;
                         break;
@@ -927,17 +1008,6 @@ class CGenReportFlatData
                     //$t3 .= "<Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . $t2 . "</Data></Cell>\n";
                 }
                 
-                //if (($curCardName == "Fiji XT") &&
-                //    ($isDX12      == true) &&
-                //    ($i == 9))
-                //{
-                //    //$t3 = "<Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . (floatval($t2) / 1.000) . "</Data></Cell>\n";
-                //}
-                //else
-                //{
-                //    $t3 = "<Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . $t2 . "</Data></Cell>\n";
-                //}
-                
                 if ((strlen(trim($dataSet[0])) == 0) &&
                     (strlen($_apiAddText) > 0) &&
                     ($i == 16))
@@ -950,13 +1020,24 @@ class CGenReportFlatData
                 $i++;
             }
             $t1 .= "</Row>\n";
-            fwrite($_destFileHandle, $t1);
-            $rowNum++;
+            //fwrite($_destFileHandle, $t1);
             
-            //if ($isFileShift)
-            //{
-            //    break;
-            //}
+            if (array_search($dataSet[$dataKeyAPI], $swtUmdNameList) == false)
+            {
+                // if invalid api name
+                continue;
+            }
+            
+            $tmpFileName = sprintf($reportFolder . "/" . $_tmpCardName . "_" . 
+                                   $dataSet[$dataKeyAPI] . $outFileNameLater, $batchID);
+                                   
+            $tmpKey = array_search($tmpFileName, $usedFileNameList);
+            if ($tmpKey !== false)
+            {
+                $tmpHandle = $usedFileHandleList[$tmpKey];
+                fwrite($tmpHandle, $t1);
+                $rowNum++;
+            }
         }
     }
     
@@ -965,7 +1046,7 @@ class CGenReportFlatData
                               $_pairCardNameList,
                               $_testStartPosList,
                               $_pairTestStartPosList,
-                              $_fileHandle,
+                              //$_fileHandle,
                               $_resultFileHandleList,
                               $_pairResultFileHandleList,
                               $_tmpCardName,
@@ -975,7 +1056,16 @@ class CGenReportFlatData
         global $returnMsg;
         global $templateFileName3;
         global $templateFileName4;
+        global $reportFolder;
+        global $usedFileNameList;
+        global $usedFileHandleList;
+        global $outFileNameLater;
+        global $driver2NameList;
+        global $batchID;
 
+        
+        $usedFileNameList = array();
+        $usedFileHandleList = array();
         // add rows to tmp file
         foreach ($_visitedTestNameList as $tmpTestName)
         {
@@ -984,25 +1074,39 @@ class CGenReportFlatData
                 continue;
             }
             
-            //$hasLines = false;
-            //for ($i = 0; $i < count($_curCardNameList); $i++)
-            //{
-            //    if (array_key_exists($tmpTestName, $_testStartPosList[$i]))
-            //    {
-            //        $hasLines = true;
-            //        break;
-            //    }
-            //}
-            //
-            //if ($hasLines == false)
-            //{
-            //    continue;
-            //}
-            
             // add new sheet
+            
             $t1 = file_get_contents($templateFileName3);
             $t1 = sprintf($t1, $tmpTestName);
-            fwrite($_fileHandle, $t1);
+            foreach ($driver2NameList as $tmpName)
+            {
+                $tmpFileName = sprintf($reportFolder . "/" . $_tmpCardName . "_" . $tmpName .
+                                       $outFileNameLater, $batchID);
+                                       
+                $fileHandle = false;
+                $tmpKey = array_search($tmpFileName, $usedFileNameList);
+                if ($tmpKey === false)
+                {
+                    $fileHandle = fopen($tmpFileName, "r+");
+                    $usedFileNameList []= $tmpFileName;
+                    $usedFileHandleList []= $fileHandle;
+                }
+                else
+                {
+                    $fileHandle = $usedFileHandleList[$tmpKey];
+                }
+                
+                fseek($fileHandle, 0, SEEK_END);
+                fwrite($fileHandle, $t1);
+            }
+            
+            $returnMsg["driver2NameList2"] = $driver2NameList;
+            $returnMsg["usedFileNameList"] = $usedFileNameList;
+            $returnMsg["usedFileHandleListNum"] = count($usedFileHandleList);
+            
+            //$t1 = file_get_contents($templateFileName3);
+            //$t1 = sprintf($t1, $tmpTestName);
+            //fwrite($_fileHandle, $t1);
             
             for ($i = 0; $i < count($_curCardNameList); $i++)
             {
@@ -1014,7 +1118,7 @@ class CGenReportFlatData
                     if ($i == 0)
                     {
                         $this->addLinesToFlatData($_resultFileHandleList[$i],
-                                                  $_fileHandle,
+                                                  //$_fileHandle,
                                                   $_tmpCardName,
                                                   $tmpTestName,
                                                   false,
@@ -1025,7 +1129,7 @@ class CGenReportFlatData
                     else
                     {
                         $this->addLinesToFlatData($_resultFileHandleList[$i],
-                                                  $_fileHandle,
+                                                  //$_fileHandle,
                                                   $_tmpCardName,
                                                   $tmpTestName,
                                                   true,
@@ -1054,7 +1158,7 @@ class CGenReportFlatData
                         fseek($_pairResultFileHandleList[$i], $tmpPos, SEEK_SET);
 
                         $this->addLinesToFlatData($_pairResultFileHandleList[$i],
-                                                  $_fileHandle,
+                                                  //$_fileHandle,
                                                   $_machineIDCardNameSysNameDict[$_curPairMachineID],
                                                   $tmpTestName,
                                                   true,
@@ -1066,9 +1170,28 @@ class CGenReportFlatData
             }
             
             // end sheet
+            
             $t1 = file_get_contents($templateFileName4);
-            fwrite($_fileHandle, $t1);
+            foreach ($usedFileHandleList as $tmpHandle)
+            {
+                fseek($tmpHandle, 0, SEEK_END);
+                fwrite($tmpHandle, $t1);
+            }
+            
+            $returnMsg["driver2NameList3"] = $driver2NameList;
+            $returnMsg["usedFileNameList2"] = $usedFileNameList;
+            $returnMsg["usedFileHandleListNum2"] = count($usedFileHandleList);
         }
+        
+        foreach ($usedFileHandleList as $tmpHandle)
+        {
+            if ($tmpHandle !== false)
+            {
+                fclose($tmpHandle);
+            }
+        }
+        $usedFileNameList = array();
+        $usedFileHandleList = array();
         
         return;
     }

@@ -42,14 +42,23 @@ if ($fileID < count($oldReportXLSXList))
     $tmpFileNameSection = explode("_", $tmpFileName);
     $tmpCardName = "";
     $tmpSysName = "";
+    $tmpUmd2Name = "";
     if (count($tmpFileNameSection) >= 2)
     {
         $tmpCardName = $tmpFileNameSection[0];
         $tmpSysName = $tmpFileNameSection[1];
     }
+    if (count($tmpFileNameSection) >= 3)
+    {
+        if (array_search($tmpFileNameSection[2], $swtUmdNameList) !== false)
+        {
+            $tmpUmd2Name = $tmpFileNameSection[2] . "_";
+        }
+    }
 
     $tmpVBAConfigPath = $reportFolder . "/" . $tmpFileNameSection[0] .
-                        "_" . $tmpFileNameSection[1] . "/" . $swtTempVBAConfigJsonName;
+                        "_" . $tmpFileNameSection[1] .
+                        "/" . $tmpUmd2Name . $swtTempVBAConfigJsonName;
     $tmpVBAPath = $reportFolder . "/" . $swtTempVBAName;
     
     $vbaConfig = null;

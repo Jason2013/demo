@@ -162,6 +162,7 @@ $resultIDList = $returnSet["resultIDList"];
 $machineIDList = $returnSet["machineIDList"];
 $cardNameList = $returnSet["cardNameList"];
 $driverNameList = $returnSet["driverNameList"];
+$driver2NameList = $returnSet["driver2NameList"];
 $changeListNumList = $returnSet["changeListNumList"];
 $cpuNameList = $returnSet["cpuNameList"];
 $sysNameList = $returnSet["sysNameList"];
@@ -175,21 +176,6 @@ $sysMemNameList = $returnSet["sysMemNameList"];
 
 $cardNameRealList = $returnSet["cardNameRealList"];
 $sysNameRealList = $returnSet["sysNameRealList"];
-
-//$t1 = "H:/wamp64/www/benchMax/test01.json";
-//if (file_exists($t1) == false)
-//{
-//    $tmpArr = array();
-//    $tmpArr["resultIDList"] = $resultIDList;
-//    $tmpArr["machineIDList"] = $machineIDList;
-//    $tmpArr["cardNameList"] = $cardNameList;
-//    $tmpArr["cpuNameList"] = $cpuNameList;
-//    $tmpArr["driverNameList"] = $driverNameList;
-//    $tmpArr["sysNameList"] = $sysNameList;
-//    
-//    $t2 = json_encode($tmpArr);
-//    file_put_contents($t1, $t2);
-//}
 
 $returnMsg["changeListNumList"] = $changeListNumList;
 
@@ -220,6 +206,8 @@ $returnMsg["sysNameList"] = $sysNameList[0];
 $returnMsg["sysNameListAll"] = $sysNameList;
 $returnMsg["mainLineNameList"] = $mainLineNameList;
 $returnMsg["gpuMemNameList"] = $gpuMemNameList;
+$returnMsg["driverNameList"] = $driverNameList;
+$returnMsg["driver2NameList"] = $driver2NameList;
 
 $returnSet = $xmlWriter->getBatchEnvironmentInfo($db, $batchID);
 $envDefaultInfo = $returnSet["envDefaultInfo"];
@@ -394,11 +382,13 @@ $dataColumnNum = $returnSet["dataColumnNum"];
 $returnMsg["dataColumnNum"] = $dataColumnNum;
 
 $tmpUmdName = "";
+$tmpUmd2Name = "";
 $tmpCardName = "";
 $tmpSysName = "";
 if ($resultPos < count($resultIDList[0]))
 {
     $tmpUmdName = $driverNameList[0][$resultPos];
+    $tmpUmd2Name = $driver2NameList[0][$resultPos];
     $tmpCardName = $cardNameList[0][$resultPos];
     $tmpSysName = $sysNameList[0][$resultPos];
 }
@@ -406,6 +396,7 @@ if ($resultPos < count($resultIDList[0]))
 $returnMsg["uniqueUmdNameList"] = $uniqueUmdNameList;
 $returnMsg["umdStandardOrder"] = $umdStandardOrder;
 $returnMsg["tmpUmdName"] = $tmpUmdName;
+$returnMsg["tmpUmd2Name"] = $tmpUmd2Name;
 $returnMsg["tmpCardName"] = $tmpCardName;
 $returnMsg["tmpSysName"] = $tmpSysName;
 $returnMsg["driverNameList[0]"] = $driverNameList[0];

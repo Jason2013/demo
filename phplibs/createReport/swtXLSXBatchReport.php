@@ -1,6 +1,7 @@
 <?php
 
 include_once "../configuration/swtConfig.php";
+include_once "../configuration/swtMISConst.php";
 include_once "../generalLibs/genfuncs.php";
 
 $batchID = intval($_POST["batchID"]);
@@ -40,18 +41,28 @@ if ($fileID < count($oldReportXMLList))
     $tmpFileNameSection = explode("_", $tmpFileName);
     $tmpCardName = "";
     $tmpSysName = "";
+    $tmpUmd2Name = "";
     if (count($tmpFileNameSection) >= 2)
     {
         $tmpCardName = $tmpFileNameSection[0];
         $tmpSysName = $tmpFileNameSection[1];
     }
+    if (count($tmpFileNameSection) >= 3)
+    {
+        if (array_search($tmpFileNameSection[2], $swtUmdNameList) !== false)
+        {
+            $tmpUmd2Name = $tmpFileNameSection[2] . "_";
+        }
+    }
+    
     $isFlatData = strpos($tmpFileName, "(FlatData)");
     
     $tmpSrcFolder = substr($filename, 0, strlen($filename) - strlen($tmpFileName));
     $tmpSrcFolder2 = $tmpSrcFolder . $tmpCardName . "_" . $tmpSysName;
     $tmpSrcFilePath = $tmpSrcFolder2 . "/" . $resultFileName3;
     $tmpVBAConfigPath = $reportFolder . "/" . $tmpFileNameSection[0] .
-                        "_" . $tmpFileNameSection[1] . "/" . $swtTempVBAConfigJsonName;
+                        "_" . $tmpFileNameSection[1] .
+                        "/" . $tmpUmd2Name . $swtTempVBAConfigJsonName;
     $tmpVBAPath = $reportFolder . "/" . $swtTempVBAName;
     
     try

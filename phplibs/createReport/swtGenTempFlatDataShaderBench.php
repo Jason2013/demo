@@ -81,6 +81,11 @@ $batchID = $returnSet["batchID"];
 $pathName = $returnSet["pathName"];
 $returnMsg["batchID"] = $batchID;
 $returnMsg["pathName"] = $pathName;
+
+$returnSet = $flatDataGen->getDriver2NameList($db, $batchID);
+$driver2NameList = $returnSet["driver2NameList"];
+$returnMsg["driver2NameList"] = $driver2NameList;
+
 $returnSet = $flatDataGen->getReportFolder($batchID,
                                            $reportType,
                                            $curReportFolder);
@@ -377,8 +382,8 @@ if ($fileID <= count($uniqueCardNameList))
     
     $tmpFileName = sprintf($reportFolder . "/" . $tmpCardName . $outFileNameLater, $batchID);
     // open dest file
-    $fileHandle = fopen($tmpFileName, "r+");
-    fseek($fileHandle, 0, SEEK_END);
+    //$fileHandle = fopen($tmpFileName, "r+");
+    //fseek($fileHandle, 0, SEEK_END);
     
     $returnMsg["tmpStr1"] = "";
     
@@ -404,19 +409,21 @@ if ($fileID <= count($uniqueCardNameList))
         }
     }
     
+    $usedFileNameList = array();
+    $usedFileHandleList = array();
+    
     // write result file lines to tmp file
     $flatDataGen->dumpLines($visitedTestNameList,
                             $curCardNameList,
                             $pairCardNameList,
                             $testStartPosList,
                             $pairTestStartPosList,
-                            $fileHandle,
+                            //$fileHandle,
                             $resultFileHandleList,
                             $pairResultFileHandleList,
                             $tmpCardName,
                             $curPairMachineID,
                             $machineIDCardNameSysNameDict);
-
 
     // close all src files
     foreach ($resultFileHandleList as $tmpHandle)
@@ -429,18 +436,7 @@ if ($fileID <= count($uniqueCardNameList))
         fclose($tmpHandle);
     }
 
-    // write max column & linenum
-    //$t1 = file_get_contents($templateFileName1);
-    //$t1 = sprintf($t1, 1, 2);
-    //$n1 = strpos($t1, "00001");
-    //$n2 = strpos($t1, "0000000002");
-    //$t1 = sprintf("%05d", $columnNum);
-    //$t2 = sprintf("%010d", $rowNum);
-    //fseek($fileHandle, $n1, SEEK_SET);
-    //fwrite($fileHandle, $t1);
-    //fseek($fileHandle, $n2, SEEK_SET);
-    //fwrite($fileHandle, $t2);
-    fclose($fileHandle);
+    //fclose($fileHandle);
     
     $columnNum = 0;
     $rowNum = 0;

@@ -1062,7 +1062,7 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                 if ($dataKeyAPI !== false)
                 {
                     //$umdName = $data[$dataKeyAPI];
-                    $umdName = $_compilerName;
+                    $umdName = $_compilerName . "_" . $data[$dataKeyAPI];
                 }
                 if ($testCaseIDKeyAPI !== -1)
                 {
@@ -1122,7 +1122,8 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                     }
                     
                     // like changeListDX11, changeListDX12, changeListVulkan
-                    $t1 = $changeListJsonTag . $umdName;
+                    //$t1 = $changeListJsonTag . $umdName;
+                    $t1 = $changeListJsonTag . $_compilerName;
                     if (array_key_exists($t1, $defaultInfo) == false)
                     {
                         $tmpCount = intval(count($swtOldUmdNameMatchList) / 2);
@@ -1179,16 +1180,6 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                         //$dataRow++;
                         
                         $feedSubTestNameString .= "\"" . $subTestName . "\",2," . $subTestFilterName . "\n";
-
-                        //$feedSubTestDataString .= "" . $resultIDList[$tmpKey] . ",\"" . $subTestName . "\"," .
-                        //                          $dataValue . ", " . $testCaseID . "\n";
-                                                  
-                        //$feedSubTestDataString .= "" . $resultIDList[$tmpKey] . ",\"" . $subTestName . "\"," .
-                        //                          $dataValList[0] . ", " . 
-                        //                          $dataValList[1] . ", " . 
-                        //                          $dataValList[2] . ", " . 
-                        //                          $dataValList[3] . ", " . 
-                        //                          $testCaseID . ",\"" . $groupName . "\"\n";
                                                   
                         $feedSubTestDataString .= "" . $resultIDList[$tmpKey] . ",\"" . $subTestName . "\"," .
                                                   $dataValList[0] . ", " . 
