@@ -59,8 +59,8 @@ $returnMsg = array();
 $returnMsg["errorCode"] = 1;
 $returnMsg["errorMsg"] = "compile report success";
 
-$umdNameList = $swtUmdNameList_sb;
-$umdStandardOrder = $swtUmdStandardOrder_sb;
+$returnMsg["colCardNameOrderList"] = $colCardNameOrderList;
+$returnMsg["colCardNameOrderIndexList"] = $colCardNameOrderIndexList;
 
 // check input card, system selection
 //$machineIDPair = "";
@@ -187,6 +187,7 @@ $resultIDList = $returnSet["resultIDList"];
 $machineIDList = $returnSet["machineIDList"];
 $cardNameList = $returnSet["cardNameList"];
 $driverNameList = $returnSet["driverNameList"];
+$driver2NameList = $returnSet["driver2NameList"];
 $changeListNumList = $returnSet["changeListNumList"];
 $cpuNameList = $returnSet["cpuNameList"];
 $sysNameList = $returnSet["sysNameList"];
@@ -245,6 +246,8 @@ $returnMsg["sysNameList"] = $sysNameList[0];
 $returnMsg["sysNameListAll"] = $sysNameList;
 $returnMsg["mainLineNameList"] = $mainLineNameList;
 $returnMsg["gpuMemNameList"] = $gpuMemNameList;
+$returnMsg["driverNameList"] = $driverNameList;
+$returnMsg["driver2NameList"] = $driver2NameList;
 
 $returnSet = $xmlWriter->getBatchEnvironmentInfo($db, $batchID);
 $envDefaultInfo = $returnSet["envDefaultInfo"];
@@ -419,11 +422,13 @@ $dataColumnNum = $returnSet["dataColumnNum"];
 $returnMsg["dataColumnNum"] = $dataColumnNum;
 
 $tmpUmdName = "";
+$tmpUmd2Name = "";
 $tmpCardName = "";
 $tmpSysName = "";
 if ($resultPos < count($resultIDList[0]))
 {
     $tmpUmdName = $driverNameList[0][$resultPos];
+    $tmpUmd2Name = $driver2NameList[0][$resultPos];
     $tmpCardName = $cardNameList[0][$resultPos];
     $tmpSysName = $sysNameList[0][$resultPos];
 }
@@ -431,6 +436,7 @@ if ($resultPos < count($resultIDList[0]))
 $returnMsg["uniqueUmdNameList"] = $uniqueUmdNameList;
 $returnMsg["umdStandardOrder"] = $umdStandardOrder;
 $returnMsg["tmpUmdName"] = $tmpUmdName;
+$returnMsg["tmpUmd2Name"] = $tmpUmd2Name;
 $returnMsg["tmpCardName"] = $tmpCardName;
 $returnMsg["tmpSysName"] = $tmpSysName;
 $returnMsg["driverNameList[0]"] = $driverNameList[0];

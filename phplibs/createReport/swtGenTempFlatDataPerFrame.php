@@ -82,6 +82,11 @@ $batchID = $returnSet["batchID"];
 $pathName = $returnSet["pathName"];
 $returnMsg["batchID"] = $batchID;
 $returnMsg["pathName"] = $pathName;
+
+$returnSet = $flatDataGen->getDriver2NameList($db, $batchID);
+$driver2NameList = $returnSet["driver2NameList"];
+$returnMsg["driver2NameList"] = $driver2NameList;
+
 $returnSet = $flatDataGen->getReportFolder($batchID,
                                            $reportType,
                                            $curReportFolder);
@@ -351,8 +356,8 @@ if ($fileID <= count($uniqueCardNameList))
     
     $tmpFileName = sprintf($reportFolder . "/" . $tmpCardName . $outFileNameLater, $batchID);
     // open dest file
-    $fileHandle = fopen($tmpFileName, "r+");
-    fseek($fileHandle, 0, SEEK_END);
+    //$fileHandle = fopen($tmpFileName, "r+");
+    //fseek($fileHandle, 0, SEEK_END);
     
     $returnMsg["tmpStr1"] = "";
     
@@ -383,13 +388,17 @@ if ($fileID <= count($uniqueCardNameList))
     $returnMsg["pairCardNameList_c"] = count($pairCardNameList);
     $returnMsg["pairResultFileHandleList_c"] = count($pairResultFileHandleList);
     
+    $usedFileNameList = array();
+    $usedFileHandleList = array();
+    $mainContentList = array();
+    
     // write result file lines to tmp file
     $flatDataGen->dumpLines($visitedTestNameList,
                             $curCardNameList,
                             $pairCardNameList,
                             $testStartPosList,
                             $pairTestStartPosList,
-                            $fileHandle,
+                            //$fileHandle,
                             $resultFileHandleList,
                             $pairResultFileHandleList,
                             $tmpCardName,
@@ -408,7 +417,7 @@ if ($fileID <= count($uniqueCardNameList))
         //fclose($tmpHandle);
     }
 
-    fclose($fileHandle);
+    //fclose($fileHandle);
     
     $columnNum = 0;
     $rowNum = 0;
