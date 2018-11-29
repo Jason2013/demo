@@ -251,4 +251,92 @@ LoadImage 将名为 fileName 的文件中的图片数据，读取到 imageFileIn
 
 比较数据需要用到 TestProxy::VerifyPixelData 方法。但在 BaseTest 的方法中，无法访问到 TestProxy 。
 
+****
+2018-11-29 进行如下改动：
+
+1. 对比的图片文件名，动态获取。即按照当前的 TEST 及 TEST CASE 获取。
+2. 将结果输出到文件。
+3. 对代码进行优化。
+
+
+
 4、将比较的结果输出到 TestResults.txt 文件。（工作量较大）
+
+-Global EnableGoldenMapVerify=1 VerificationMode=0 EnableDumpImage=1 Api=D3D11,D3D12 RefApi=Vulkan -Tests PrimSetup -PrimSetup VertexCount=10000 TestCaseId=0-10
+
+D:\work\dev\dk_upgrade_dev\build\microbench\test_results_ChangeConstant.txt
+
+11/27/2018 1:31:21 PM
+=====================
+D3D12 344
+Vulkan 344
+
+
+void GllBaseTest::OnGoldenMapVerifiy(/*TestProxy *pProxy, *//*uint32_t testCaseId*/)
+{
+    TestProxy *pProxy = m_pTestHelper->GetTestProxy();
+    //uint32_t testID = pProxy->SetTestCaseId(0);
+    // 1. Get data from m_pHalTests and m_pRefTests
+    // 2. Compare the data
+    if (!m_pTestHelper->GetEnableGoldenMapVerify())
+    {
+        return;
+    }
+
+
+GllBaseTest::OnGoldenMapVerifiy
+
+11/29/2018 4:15:19 PM
+---------------------
+GllBaseTest::OnGoldenMapVerifiy()
+??? 输出 verify 的结果
+
+command line backup
+-------------------
+-Global EnableGoldenMapVerify=0 EnableDumpImage=0  Api=D3D11 -Tests PrimSetup -PrimSetup TestCaseId=0-200 VertexCount=100000
+
+
+11/29/2018 2:44:36 PM
+---------------------
+Add GoldenImageDir
+
+11/29/2018 2:53:24 PM
+---------------------
+Add `GoldenImageDir` simulate from `DumpDir`.
+D:\work\dev\dk_upgrade_dev\common\include\DumpFile.h(16):std::string GenerateImageFileFullPath(const std::string& dumpFolder, const std::string& dumpImageFileNamePrefix, const void* pImageView, uint32_t viewIdx, ImageViewType type, GfxFormat format,
+  D:\work\dev\dk_upgrade_dev\common\include\DumpFile.h(20):std::string GenerateBufferFileFullPath(const std::string& dumpFolder, const std::string& dumpFileNamePrefix, uint32_t idx, DumpFileNaming naming);
+  D:\work\dev\dk_upgrade_dev\common\include\ResourceUtil.h(44):    * @param dumpFolder    a string indicating the path to the dump folder
+  D:\work\dev\dk_upgrade_dev\common\include\ResourceUtil.h(46):    * @remark dumpFolder is located at c:/dump/ or ./ by default depending on setting of default.ini, with test name and API name as sub directory name
+  D:\work\dev\dk_upgrade_dev\common\include\ResourceUtil.h(48):    void SetDumpFolder(const std::string& dumpFolder);
+  D:\work\dev\dk_upgrade_dev\common\include\ResourceUtil.h(151):        m_dumpFolder("./"),
+  D:\work\dev\dk_upgrade_dev\common\include\ResourceUtil.h(319):    std::string m_dumpFolder; // the folder where the dump data located
+  D:\work\dev\dk_upgrade_dev\common\src\DumpFile.cpp(69):std::string GenerateImageFileFullPath(const std::string& dumpFolder, const std::string& dumpImageFileNamePrefix, const void* pImageView, uint32_t viewIdx, ImageViewType type, GfxFormat format,
+  D:\work\dev\dk_upgrade_dev\common\src\DumpFile.cpp(88):    std::string imageFilePath = dumpFolder + adjustedDumpImageFileNamePrefix;
+  D:\work\dev\dk_upgrade_dev\common\src\DumpFile.cpp(105):std::string GenerateBufferFileFullPath(const std::string& dumpFolder, const std::string& dumpFileNamePrefix, uint32_t idx, DumpFileNaming naming)
+  D:\work\dev\dk_upgrade_dev\common\src\DumpFile.cpp(115):    std::string bufferFilePath = dumpFolder + dumpFileNamePrefix;
+  D:\work\dev\dk_upgrade_dev\common\src\ResourceUtil.cpp(57):void ResourceUtil::SetDumpFolder(const std::string& dumpFolder)
+  D:\work\dev\dk_upgrade_dev\common\src\ResourceUtil.cpp(59):    if (m_dumpFolder != dumpFolder)
+  D:\work\dev\dk_upgrade_dev\common\src\ResourceUtil.cpp(61):        if (MakeDirectory(dumpFolder.c_str()) == false)
+  D:\work\dev\dk_upgrade_dev\common\src\ResourceUtil.cpp(63):            CM_DEBUG_OUTPUT("Failed to create dump folder: %s.\n", dumpFolder.c_str());
+  D:\work\dev\dk_upgrade_dev\common\src\ResourceUtil.cpp(65):        m_dumpFolder = dumpFolder;
+  D:\work\dev\dk_upgrade_dev\api\dx11\src\Dx11ResourceUtil.cpp(91):            const auto& imageFilePath = GenerateImageFileFullPath(m_dumpFolder, m_dumpFileNamePrefix, pSrcImageView, viewIdx, viewDesc.viewType, MapDXGIFormatToGfxFormat(srcFormat),
+  D:\work\dev\dk_upgrade_dev\api\dx11\src\Dx11ResourceUtil.cpp(389):    const auto& bufferFilePath = GenerateBufferFileFullPath(m_dumpFolder, m_dumpFileNamePrefix, idx, m_dumpFileNaming);
+  D:\work\dev\dk_upgrade_dev\framework\include\BaseTest.h(544):    std::string GetCurDumpFolder();
+* D:\work\dev\dk_upgrade_dev\framework\src\BaseTest.cpp(1472):std::string BaseTest::GetCurDumpFolder()
+  D:\work\dev\dk_upgrade_dev\framework\src\BaseTest.cpp(1476):    std::string dumpFolder = globalConf.GetValue<std::string>("DumpFolder");
+  D:\work\dev\dk_upgrade_dev\framework\src\BaseTest.cpp(1477):    dumpFolder += std::string(1, '/') + m_pApp->GetCurrentTest()->GetTestName() + "/";
+  D:\work\dev\dk_upgrade_dev\framework\src\BaseTest.cpp(1482):        dumpFolder += m_pTestHelper->GetCurrentApiName() + "/";
+  D:\work\dev\dk_upgrade_dev\framework\src\BaseTest.cpp(1485):    return dumpFolder;
+  D:\work\dev\dk_upgrade_dev\framework\src\GalBaseTest.cpp(259):        pResourceUtil->SetDumpFolder(GetCurDumpFolder());
+  D:\work\dev\dk_upgrade_dev\framework\src\GllBaseTest.cpp(239):        pResourceUtil->SetDumpFolder(GetCurDumpFolder());
+  D:\work\dev\dk_upgrade_dev\api\galu\src\galuResourceUtil.cpp(118):            const auto& imageFilePath = GenerateImageFileFullPath(m_dumpFolder, m_dumpFileNamePrefix, pSrcImageView, viewIdx, pSrcImageView->GetViewType(), pSrcImageView->GetFormat(),
+  D:\work\dev\dk_upgrade_dev\api\galu\src\galuResourceUtil.cpp(327):    const auto& bufferFilePath = GenerateBufferFileFullPath(m_dumpFolder, m_dumpFileNamePrefix, idx, m_dumpFileNaming);
+  D:\work\dev\dk_upgrade_dev\api\gllu\src\glluResourceUtil.cpp(108):            const auto& imageFilePath = GenerateImageFileFullPath(m_dumpFolder, m_dumpFileNamePrefix, pSrcImageView, viewIdx, pSrcImageView->GetViewType(), pSrcImageView->GetFormat(),
+  D:\work\dev\dk_upgrade_dev\api\gllu\src\glluResourceUtil.cpp(392):    const auto& bufferFilePath = GenerateBufferFileFullPath(m_dumpFolder, m_dumpFileNamePrefix, idx, m_dumpFileNaming);
+
+        const char* pFileName = "D:\\work\\dev\\dk_upgrade_dev\\build\\microbench\\Dump\\PrimSetup\\D3D11\\PrimSetup_[Case00000][Snake_NoCulling_PointList_Indexed]_RTV0_R8G8B8A8_UNORM.bmp";
+
+d:\work\dev\dk_upgrade_dev\framework\src\GllBaseTest.cpp:239
+        pResourceUtil->SetDumpFolder(GetCurDumpFolder());
+        pResourceUtil->SetDumpFileNamePrefix(GetCurDumpFileNamePrefix());
+        pResourceUtil->SetImagePresentOrDumpType(m_pTestHelper->GetDumpImageFileType(), m_pTestHelper->GetDepthPresentOrDumpType());

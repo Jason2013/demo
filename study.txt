@@ -1,3 +1,52 @@
+11/28/2018 2:11:53 PM
+=====================
+Vulkan Device Document
+Picking a physical device
+queue family properties: queueFlags, queueCount, timestampValidBits, minImageTranserGranularity
+VkQueueFlagBits
+VK_QUEUE_GRAPHICS/COMPUTE/TRANSFER/SPARSE_BINDING/_BIT
+GetPhysicalDeviceQueueFamilyProperties
+
+* The logical device is a key object used later to direct graphics commands to the hardware
+
+11/28/2018 2:22:00 PM
+---------------------
+Physical Device (1 : n) Device Queue Family (1:1) Queue Type
+Physical Device (1 : n) Device Queue Family (1:n) Queue Type
+* It is important to note that a queue family is not represented with a handle, but with an index instead.
+
+11/28/2018 2:30:27 PM
+---------------------
+VkDeviceQueueCreateInfo
+VkQueueCreateInfo
+
+11/28/2018 2:33:56 PM
+---------------------
+Build OvervVulkanSamples
+Severity	Code	Description	Project	File	Line	Suppression State
+Error (active)	E1696	cannot open source file "stb_image.h"	23_texture_image	d:\study\OvervVulkantutorial\code\23_texture_image.cpp	9	
+Error	C1083	Cannot open include file: 'stb_image.h': No such file or directory	23_texture_image	d:\study\overvvulkantutorial\code\23_texture_image.cpp	9	
+Error	C1083	Cannot open include file: 'stb_image.h': No such file or directory	24_sampler	d:\study\overvvulkantutorial\code\24_sampler.cpp	9	
+Error	C1083	Cannot open include file: 'stb_image.h': No such file or directory	25_texture_mapping	d:\study\overvvulkantutorial\code\25_texture_mapping.cpp	9	
+Error	C1083	Cannot open include file: 'stb_image.h': No such file or directory	26_depth_buffering	d:\study\overvvulkantutorial\code\26_depth_buffering.cpp	10	
+Error	C1083	Cannot open include file: 'stb_image.h': No such file or directory	28_mipmapping	d:\study\overvvulkantutorial\code\28_mipmapping.cpp	12	
+Error	C1083	Cannot open include file: 'stb_image.h': No such file or directory	27_model_loading	d:\study\overvvulkantutorial\code\27_model_loading.cpp	12	
+Error	C1083	Cannot open include file: 'stb_image.h': No such file or directory	29_multisampling	d:\study\overvvulkantutorial\code\29_multisampling.cpp	12	
+
+11/28/2018 2:44:57 PM
+---------------------
+Try to resolve `stb_image.h` issue
+
+11/28/2018 2:49:59 PM
+---------------------
+Move submodules
+git submodule add --reference /d/study/vulkna/glm ./code/external/glm
+cd /d/study/vulkna/glm
+git remote show origin
+git submodule add --reference /d/study/vulkan/glm https://github.com/g-truc/glm.git code/external/glm
+https://github.com/glfw/glfw.git 
+git submodule add --reference /d/study/vulkan/glfw https://github.com/glfw/glfw.git code/external/glfw
+
 glGetError()
 
 返回前一个 GL 操作的错误状态码。如果有一个错误，返回该错误并清除相应的位。如果有多个错误，随机返回一个错误，并清除相应位，其余错误位保持不变。
