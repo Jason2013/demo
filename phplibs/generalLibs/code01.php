@@ -62,7 +62,9 @@ $swtTestBatchGroupString = array("out user",
                                  "temp report",
                                  "shaderBench",
                                  "skynet report",
-                                 "frameBench");
+                                 "frameBench",
+                                 "shaderBench outuser",
+                                 "frameBench outuser");
                                  
 $swtTestBatchGroupStringEx = array("report slot01",
                                    "report slot02",
@@ -227,6 +229,8 @@ array_push($db_create_table01, "CREATE TABLE IF NOT EXISTS mis_table_batch_list 
                                                                 // 3 for shaderBench report
                                                                 // 4 for skynet report
                                                                 // 5 for perFrame
+                                                                // 6 for shaderBench outuser
+                                                                // 7 for frameBench outuser
                                                                 // 100 - 109 report slot01 - report slot10
                                                                 // 200 - 209 shader slot01 - shader slot10
                                                                 // 300 - 309 frame slot01 - frame slot10

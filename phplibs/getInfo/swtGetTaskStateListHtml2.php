@@ -47,9 +47,13 @@ if ($userChecker->isManager())
 else
 {
     $params1 = array($userID);
+    //$sql1 = "SELECT COUNT(*) " .
+    //        "FROM mis_table_user_batch_info t0 " .
+    //        "WHERE t0.user_id = ? AND t0.batch_id IN (SELECT t1.batch_id FROM mis_table_batch_list t1 ORDER BY t1.insert_time DESC)";
+            
     $sql1 = "SELECT COUNT(*) " .
             "FROM mis_table_user_batch_info t0 " .
-            "WHERE t0.user_id = ? AND t0.batch_id IN (SELECT t1.batch_id FROM mis_table_batch_list t1 ORDER BY t1.insert_time DESC)";
+            "WHERE t0.user_id = ? ORDER BY t0.insert_time DESC";
     if ($db->QueryDB($sql1, $params1) == null)
     {
         $returnMsg["errorCode"] = 0;
@@ -94,12 +98,13 @@ if ($reportType == 0)
     {
         // not all batches
         // if batch_group == 0, for outside users
-        $params1 = array($batchGroup, $userID, $itemStart, ($itemEnd - $itemStart));
+        //$params1 = array($batchGroup, $userID, $itemStart, ($itemEnd - $itemStart));
+        $params1 = array($userID, $itemStart, ($itemEnd - $itemStart));
         $sql1 = "SELECT t0.*, t1.path_name " .
                 "FROM mis_table_batch_list t0 " .
                 "LEFT JOIN mis_table_path_info t1 " .
                 "USING (path_id) " .
-                "WHERE t0.batch_group = ? AND " .
+                "WHERE (t0.batch_group IN (0, 6)) AND " .
                 "t0.batch_id IN (SELECT t2.batch_id FROM mis_table_user_batch_info t2 WHERE t2.user_id = ? ORDER BY t2.insert_time DESC) " .
                 "ORDER BY t0.insert_time DESC LIMIT ?, ?";
                 
@@ -120,6 +125,11 @@ if ($db->QueryDB($sql1, $params1) == null)
 {
     $returnMsg["errorCode"] = 0;
     $returnMsg["errorMsg"] = "query mysql table failed #1, line: " . __LINE__ . ", itemStart: " . $itemStart;
+    $returnMsg["itemStart"] = $itemStart;
+    $returnMsg["itemEnd"] = $itemEnd;
+    $returnMsg["pageID"] = $pageID;
+    $returnMsg["batchNum"] = $batchNum;
+    $returnMsg["userID"] = $userID;
     echo json_encode($returnMsg);
     return;
 }

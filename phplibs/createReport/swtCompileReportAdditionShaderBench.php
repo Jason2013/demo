@@ -152,6 +152,11 @@ $selectedSysIDList = $returnSet["selectedSysIDList"];
 $testName = $testNameList[$curTestPos];
 $tableName01 = $db_mis_table_name_string002 . $testName;
 
+$returnMsg["testNameList"] = $testNameList;
+$returnMsg["curTestPos"] = $curTestPos;
+$returnMsg["testName"] = $testName;
+$returnMsg["tableName01"] = $tableName01;
+
 $returnMsg["returnLine"] = "line: " . __LINE__;
 $returnSet = $xmlWriter->getBatchInfo($db, $batchIDList);
 if ($returnSet === null)
@@ -409,9 +414,9 @@ for ($i = 0; $i < count($umdStandardOrder); $i++)
     $isSkip = false;
     for ($j = 0; $j < $reportUmdNum; $j++)
     {
-        if ($umdStandardOrder[$i] == $driverNameList[0][$j])
+        if ($umdStandardOrder[$i] == $driverNameList[0][$j + $startResultID])
         {
-            if ($resultIDList[0][$j] == PHP_INT_MAX)
+            if ($resultIDList[0][$j + $startResultID] == PHP_INT_MAX)
             {
                 // if API missing
                 $isSkip = true;
@@ -489,6 +494,9 @@ if (($subTestNum == 0) ||
 {
     // if this test has no sub test
     // or if this test is finished
+    $returnMsg["nextSubTestPos_old"] = $nextSubTestPos;
+    $returnMsg["subTestNum_old"] = $subTestNum;
+    
     $curTestPos++;
     $nextSubTestPos = 0;
     $subTestNum = 0;

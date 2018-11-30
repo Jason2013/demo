@@ -471,12 +471,6 @@ class CGenReport
             // manager login
             if ($b1 == false)
             {
-                // if not assign current batch id
-                //$sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
-                //        //"WHERE batch_state=\"1\" AND batch_group=\"3\" ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
-                //        "WHERE batch_state=\"1\" AND (batch_group IN (3, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209)) " .
-                //        "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
-                        
                 $sql1 = "SELECT batch_id, batch_group FROM mis_table_batch_list " .
                         "WHERE batch_state=\"1\" AND " .
                         "(batch_group IN (3, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209)) " .
@@ -507,13 +501,6 @@ class CGenReport
             }
             else
             {
-                // if assign current batch id
-                //$params1 = array($_batchID);
-                //$sql1 = "SELECT batch_id, DATE_FORMAT(insert_time, \"%b %e\") FROM mis_table_batch_list " .
-                //        //"WHERE batch_id<=? AND batch_state=\"1\" AND batch_group=\"3\" " .
-                //        "WHERE batch_id<=? AND batch_state=\"1\" AND (batch_group IN (3, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209)) " .
-                //        "ORDER BY batch_id DESC LIMIT " . $historyBatchMaxNum;
-                        
                 $params1 = array($_batchID);
                 $sql1 = "SELECT batch_id, batch_group, insert_time FROM mis_table_batch_list " .
                         "WHERE batch_id=?";
@@ -557,7 +544,7 @@ class CGenReport
                         "USING (batch_id) " .
                         "WHERE t0.user_id = ? AND t0.batch_id IN " .
                         "(SELECT t1.batch_id FROM mis_table_batch_list t1 " .
-                        "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
+                        "WHERE t1.batch_state=\"1\" AND (t1.batch_group IN (6))) " .
                         "ORDER BY t0.insert_time DESC LIMIT " . $historyBatchMaxNum . "";
             }
             else
@@ -568,10 +555,10 @@ class CGenReport
                         "LEFT JOIN mis_table_batch_list t2 " .
                         "USING (batch_id) " .
                         "WHERE t0.user_id = ? AND (t0.insert_time <= " .
-                        "(SELECT insert_time FROM mis_table_batch_list WHERE batch_id = ? LIMIT 1)) " .
+                        "(SELECT insert_time FROM mis_table_user_batch_info WHERE batch_id = ? LIMIT 1)) " .
                         "AND t0.batch_id IN " .
                         "(SELECT t1.batch_id FROM mis_table_batch_list t1 " .
-                        "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
+                        "WHERE t1.batch_state=\"1\" AND (t1.batch_group IN (6))) " .
                         "ORDER BY t0.insert_time DESC LIMIT " . $historyBatchMaxNum . "";
             }
         }
@@ -683,9 +670,9 @@ class CGenReport
             $isSkip = false;
             for ($j = 0; $j < $reportUmdNum; $j++)
             {
-                if ($umdStandardOrder[$i] == $driverNameList[0][$j])
+                if ($umdStandardOrder[$i] == $driverNameList[0][$_startResultID + $j])
                 {
-                    if ($resultIDList[0][$j] == PHP_INT_MAX)
+                    if ($resultIDList[0][$_startResultID + $j] == PHP_INT_MAX)
                     {
                         // if API missing
                         $isSkip = true;
@@ -788,8 +775,20 @@ class CGenReport
         global $returnMsg;
         $db = $_db;
         $params1 = array($_batchID);
-        $sql1 = "SELECT COUNT(*) FROM mis_table_batch_list " .
-                "WHERE batch_id=? AND batch_state=\"1\" AND (batch_group IN (3, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209))";
+        
+        $userChecker = new CUserManger();
+        if ($userChecker->isManager())
+        {
+            $sql1 = "SELECT COUNT(*) FROM mis_table_batch_list " .
+                    "WHERE batch_id=? AND batch_state=\"1\" AND (batch_group IN (3, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209))";
+        }
+        else
+        {
+            $sql1 = "SELECT COUNT(*) FROM mis_table_batch_list " .
+                    "WHERE batch_id=? AND batch_state=\"1\" AND (batch_group IN (6))";
+        
+        }
+                
         if ($db->QueryDB($sql1, $params1) == null)
         {
             $returnMsg["errorCode"] = 0;
