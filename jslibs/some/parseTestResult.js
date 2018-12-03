@@ -1575,7 +1575,8 @@ function swtGenerateRoutineReport(_percentTagName, _reportListTag, _reportType, 
     console.log("---: " + t2);
     var tmpBatchID = _batchID;
     var t4 = $("#inputBatchID").val();
-    if (t4.length > 0)
+    console.log(t4);
+    if ((typeof(t4) != "undefined") && (t4.length > 0))
     {
         tmpBatchID = parseInt(t4);
     }
