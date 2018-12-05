@@ -2296,7 +2296,7 @@ class CGenReport
         return $tmpTestCaseList;
     }
     
-    public function writePlatformInfo($_fileHandle)
+    public function writePlatformInfo2($_fileHandle)
     {
         global $envDefaultInfo;
         global $resultPos;
@@ -2527,6 +2527,193 @@ class CGenReport
             $sheetCode .= "<Row ss:Height=\"20.0\">\n" .
                           "<Cell ss:StyleID=\"s" . ($startStyleID + 20) . "\"><Data ss:Type=\"String\">" . $tmpKey . "</Data></Cell>\n" .
                           "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $tmpVal . "</Data></Cell>\n" .
+                          $t1 .
+                          "</Row>\n";
+        }
+
+        fwrite($_fileHandle, $sheetCode);
+        $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet004B.txt");
+        fwrite($_fileHandle, $xmlSection);
+    }
+    
+    public function writePlatformInfo($_fileHandle)
+    {
+        global $returnMsg;
+        global $envDefaultInfo;
+        global $resultPos;
+        global $startResultID;
+        global $umdNum;
+        global $cmpStartResultID;
+        global $sysNameList;
+        global $cpuNameList;
+        global $cardNameList;
+        global $sClockNameList;
+        global $mClockNameList;
+        global $gpuMemNameList;
+        global $sysMemNameList;
+        global $changeListNumList;
+        global $driverNameList;
+        global $umdNameList;
+        global $reportTemplateDir;
+        global $startStyleID;
+        global $logStoreDir;
+        global $logFileFolder;
+
+        $tmpRootPath = $logStoreDir . "/" . $logFileFolder;
+        $cardFolderList = glob($tmpRootPath . "/*", GLOB_ONLYDIR);
+        
+        $machineInfoList = array();
+        
+        foreach ($cardFolderList as $tmpPath)
+        {
+            $tmpPath2 = $tmpPath . "/" . "machine_info.json";
+            if (file_exists($tmpPath2))
+            {
+                $machineInfoList []= $tmpPath2;
+            }
+        }
+        
+        $asicInfoList = array();
+        
+        $asicInfoList["Base_Driver_Version"] = array();
+        $asicInfoList["Base_Driver_Date"]    = array();
+        $asicInfoList["Vulkan_SDK_Version"]  = array();
+        $asicInfoList["Microbench_Version"]  = array();
+        $asicInfoList["Operating_System"]    = array();
+        $asicInfoList["Test_Date"]           = array();
+        $asicInfoList["Test_Time"]           = array();
+        $asicInfoList["CPU"]                 = array();
+        $asicInfoList["GPU"]                 = array();
+        $asicInfoList["GPU_Core_Clock"]      = array();
+        $asicInfoList["GPU_Memory_Clock"]    = array();
+        $asicInfoList["GPU_Memory"]          = array();
+        $asicInfoList["System_Memory"]       = array();
+        
+        foreach ($machineInfoList as $tmpPath)
+        {
+            $t1 = file_get_contents($tmpPath);
+            $tmpObj = json_decode($t1);
+            
+            $tmpObj2 = array();
+            foreach ($tmpObj as $tmpKey => $tmpVal)
+            {
+                $tmpObj2[$tmpKey] = $tmpVal;
+            }
+            
+            if (isset($tmpObj2["cpuName"]) &&
+                isset($tmpObj2["systemName"]) &&
+                isset($tmpObj2["videoCardName"]))
+            {
+                $cpuKeys = array_keys($asicInfoList["CPU"], $tmpObj2["cpuName"]);
+                $sysKeys = array_keys($asicInfoList["Operating_System"], $tmpObj2["systemName"]);
+                $gpuKeys = array_keys($asicInfoList["GPU"], $tmpObj2["videoCardName"]);
+                
+                $tmpKeyList = array_intersect($cpuKeys, $sysKeys, $gpuKeys);
+                
+                if (count($tmpKeyList) > 0)
+                {
+                    continue;
+                }
+                
+                //$b1 = false;
+                //for ($i = $startResultID; $i < ($startResultID + $umdNum); $i++)
+                //{
+                //    if (strtolower($tmpObj2["cpuName"]) == strtolower($cpuNameList[0][$i]))
+                //    {
+                //        $b1 = true;
+                //        break;
+                //    }
+                //}
+                //if ($b1 == false)
+                //{
+                //    continue;
+                //}
+                
+                $b1 = false;
+                for ($i = $startResultID; $i < ($startResultID + $umdNum); $i++)
+                {
+                    if (strtolower($tmpObj2["systemName"]) == strtolower($sysNameList[0][$i]))
+                    {
+                        $b1 = true;
+                        break;
+                    }
+                }
+                if ($b1 == false)
+                {
+                    continue;
+                }
+                
+                //$b1 = false;
+                //for ($i = $startResultID; $i < ($startResultID + $umdNum); $i++)
+                //{
+                //    if (strtolower($tmpObj2["videoCardName"]) == strtolower($cardNameList[0][$i]))
+                //    {
+                //        $b1 = true;
+                //        break;
+                //    }
+                //}
+                //if ($b1 == false)
+                //{
+                //    continue;
+                //}
+            }
+
+            $asicInfoList["Base_Driver_Version"] []= isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
+            $asicInfoList["Base_Driver_Date"]    []= isset($tmpObj2["baseDriverDate"]) ? $tmpObj2["baseDriverDate"] : "";
+            $asicInfoList["Vulkan_SDK_Version"]  []= isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
+            $asicInfoList["Microbench_Version"]  []= isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
+            $asicInfoList["Operating_System"]    []= isset($tmpObj2["systemName"]) ? $tmpObj2["systemName"] : "";
+            $asicInfoList["Test_Date"]           []= $envDefaultInfo["testingDate"];
+            $asicInfoList["Test_Time"]           []= $envDefaultInfo["testingTime"];
+            $asicInfoList["CPU"]                 []= isset($tmpObj2["cpuName"]) ? $tmpObj2["cpuName"] : "";
+            $asicInfoList["GPU"]                 []= isset($tmpObj2["videoCardName"]) ? $tmpObj2["videoCardName"] : "";
+            $asicInfoList["GPU_Core_Clock"]      []= isset($tmpObj2["sClockName"]) ? $tmpObj2["sClockName"] : "";
+            $asicInfoList["GPU_Memory_Clock"]    []= isset($tmpObj2["mClockName"]) ? $tmpObj2["mClockName"] : "";
+            $asicInfoList["GPU_Memory"]          []= isset($tmpObj2["gpuMemName"]) ? $tmpObj2["gpuMemName"] : "";
+            $asicInfoList["System_Memory"]       []= isset($tmpObj2["memoryName"]) ? $tmpObj2["memoryName"] : "";
+            
+        }
+        
+        $returnMsg["asicInfoList"] = $asicInfoList;
+        
+        $t1 = "";
+
+        for ($i = 0; $i < count($asicInfoList["GPU"]); $i++)
+        {
+            $t1 .= "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n";
+        }
+              
+        $sheetCode = "<Worksheet ss:Name=\"PlatformInfo\">\n" .
+                     "<Table x:FullColumns=\"1\" " .
+                     "x:FullRows=\"1\" ss:DefaultRowHeight=\"15\">\n" .
+                     "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n" . $t1;
+                     
+        $t1 = "";
+
+        for ($i = 0; $i < count($asicInfoList["GPU"]); $i++)
+        {
+            $t1 .= "<Cell ss:StyleID=\"s" . ($startStyleID + 16) . "\"><Data ss:Type=\"String\">" .
+                   $asicInfoList["GPU"][$i] .
+                   "</Data></Cell>\n";
+        }
+                       
+        $sheetCode .= "<Row ss:Height=\"20.0\">\n" .
+                      "<Cell ss:StyleID=\"s" . ($startStyleID + 22) . "\"><Data ss:Type=\"String\">Platform Info</Data></Cell>\n" .
+                      $t1 .
+                      "</Row>\n";
+                     
+        //foreach ($tableRowList as $tmpKey => $tmpVal)
+        foreach ($asicInfoList as $tmpKey => $tmpList)
+        {
+            $t1 = "";
+            
+            for ($i = 0; $i < count($asicInfoList["GPU"]); $i++)
+            {
+                $t1 .= "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $tmpList[$i] . "</Data></Cell>\n";
+            }
+            
+            $sheetCode .= "<Row ss:Height=\"20.0\">\n" .
+                          "<Cell ss:StyleID=\"s" . ($startStyleID + 20) . "\"><Data ss:Type=\"String\">" . $tmpKey . "</Data></Cell>\n" .
                           $t1 .
                           "</Row>\n";
         }
