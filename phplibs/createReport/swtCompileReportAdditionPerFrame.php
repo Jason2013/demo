@@ -489,12 +489,28 @@ for ($i = 0; $i < count($umdStandardOrder); $i++)
 $swtReportInfo = array_fill(0, $reportUmdNum, "");
 $swtReportUmdInfo = array_fill(0, $reportUmdNum, "");
 
+$tmpAPIList = array();
 for ($i = 0; $i < $reportUmdNum; $i++)
 {
     // loop all comparison batches of one umd
     $swtReportInfo[$i] = "CL#" . $changeListNumList[0][$startResultID + $i];
     $swtReportUmdInfo[$i] = $driverNameList[0][$startResultID + $i];
+    
+    if ($resultUmdOrder[$i] == -1)
+    {
+        // absent api
+        continue;
+    }
+    
+    $tmpArr = explode("_", $swtReportUmdInfo[$i]);
+    $tmpKey = array_search($tmpArr[0], $tmpAPIList);
+    if ($tmpKey === false)
+    {
+        array_push($tmpAPIList, ucfirst(strtolower($tmpArr[0])));
+    }
 }
+$tmpAPIList = array_reverse($tmpAPIList);
+$chartSecondTitle = implode("/", $tmpAPIList);
 
 $returnMsg["swtReportInfo"] = $swtReportInfo;
 $returnMsg["swtReportUmdInfo"] = $swtReportUmdInfo;

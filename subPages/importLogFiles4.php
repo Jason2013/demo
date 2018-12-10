@@ -13,7 +13,7 @@ $html1->outPageBodyStart();
 ?>
 
 <div class = "pageArticleTitle">
-    <p>Import ShaderBench Results:</p>
+    <p>Import FrameBench Results:</p>
 </div>
 <div id="pageArticleContent" class = "pageArticleContent">
 

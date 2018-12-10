@@ -5,24 +5,48 @@ End Function
 
 Function setCharBarColor(testNum As Integer)
     Dim i As Integer
+    Dim f1 As Single
+    Dim t1 As String
+    
     ActiveSheet.ChartObjects("chart02").Activate
     For i = 1 To testNum
         ActiveChart.SeriesCollection(1).Points(i).Select
-        With Selection.Format.Fill
-            .Visible = msoTrue
-            .ForeColor.RGB = RGB(146, 208, 80)
-            .Solid
-        End With
+        t1 = Selection.DataLabel.Text
+        t1 = Left(t1, Len(t1) - 1)
+        f1 = Val(t1)
+        If f1 < 0 Then
+            With Selection.Format.Fill
+                .Visible = msoTrue
+                .ForeColor.RGB = RGB(146, 208, 80)
+                .Solid
+            End With
+        Else
+            With Selection.Format.Fill
+                .Visible = msoTrue
+                .ForeColor.RGB = RGB(208, 0, 80)
+                .Solid
+            End With
+        End If
     Next
     For i = (testNum + 1) To (testNum + testNum)
         ActiveChart.SeriesCollection(1).Points(i).Select
-        With Selection.Format.Fill
-            .Visible = msoTrue
-            .ForeColor.RGB = RGB(208, 0, 80)
-            .Solid
-        End With
+        t1 = Selection.DataLabel.Text
+        t1 = Left(t1, Len(t1) - 1)
+        f1 = Val(t1)
+        If f1 < 0 Then
+            With Selection.Format.Fill
+                .Visible = msoTrue
+                .ForeColor.RGB = RGB(146, 208, 80)
+                .Solid
+            End With
+        Else
+            With Selection.Format.Fill
+                .Visible = msoTrue
+                .ForeColor.RGB = RGB(208, 0, 80)
+                .Solid
+            End With
+        End If
     Next
-    
     
     ActiveSheet.ChartObjects("chart01").Activate
     For i = 1 To testNum
@@ -41,6 +65,142 @@ Function setCharBarColor(testNum As Integer)
             .Solid
         End With
     Next
+    
+    'For i = 1 To testNum
+    '    ActiveChart.SeriesCollection(1).Points(i).Select
+    '    f1 = Selection.DataLabel.Text + 0.0
+    '    
+    '    With Selection.Format.Fill
+    '        .Visible = msoTrue
+    '        .ForeColor.RGB = RGB(146, 208, 80)
+    '        .Solid
+    '    End With
+    'Next
+    'For i = (testNum + 1) To (testNum + testNum)
+    '    ActiveChart.SeriesCollection(1).Points(i).Select
+    '    With Selection.Format.Fill
+    '        .Visible = msoTrue
+    '        .ForeColor.RGB = RGB(208, 0, 80)
+    '        .Solid
+    '    End With
+    'Next
+    
+    'ActiveSheet.ChartObjects("chart01").Activate
+    'For i = 1 To testNum
+    '    ActiveChart.SeriesCollection(2).Points(i).Select
+    '    With Selection.Format.Fill
+    '        .Visible = msoTrue
+    '        .ForeColor.RGB = RGB(146, 208, 80)
+    '        .Solid
+    '    End With
+    'Next
+    'For i = (testNum + 1) To (testNum + testNum)
+    '    ActiveChart.SeriesCollection(2).Points(i).Select
+    '    With Selection.Format.Fill
+    '        .Visible = msoTrue
+    '        .ForeColor.RGB = RGB(208, 0, 80)
+    '        .Solid
+    '    End With
+    'Next
+End Function
+
+Function setCharBarPercentTag(barNum1 As Integer, barNum2 As Integer)
+    Dim i As Integer
+    ActiveSheet.ChartObjects("chart02").Activate
+    'For i = 1 To barNum2
+    '    If (i Mod 2) = 1 Then
+    '        ActiveChart.SeriesCollection(i).Select
+    '        ActiveChart.SeriesCollection(i).ApplyDataLabels
+    '        ActiveChart.SeriesCollection(i).DataLabels.Select
+    '        Selection.NumberFormat = "0.00%%"
+    '    End If
+    'Next
+    ActiveChart.SeriesCollection(1).Select
+    ActiveChart.SeriesCollection(1).ApplyDataLabels
+    ActiveChart.SeriesCollection(1).DataLabels.Select
+    Selection.NumberFormat = "0.00%%"
+    
+    ActiveSheet.ChartObjects("chart01").Activate
+    'For i = 1 To barNum1
+    '    If (i Mod 2) = 1 Then
+    '        ActiveChart.SeriesCollection(i).Select
+    '        ActiveChart.SeriesCollection(i).ApplyDataLabels
+    '        ActiveChart.SeriesCollection(i).DataLabels.Select
+    '        Selection.NumberFormat = "0.00%%"
+    '    End If
+    'Next
+    ActiveChart.SeriesCollection(1).Select
+    ActiveChart.SeriesCollection(1).ApplyDataLabels
+    ActiveChart.SeriesCollection(1).DataLabels.Select
+    Selection.NumberFormat = "0.00%%"
+
+End Function
+
+Function removeChartLegend()
+    ActiveSheet.ChartObjects("chart02").Activate
+    ActiveChart.Legend.Select
+    Selection.Delete
+End Function
+
+Function setSecondTitleColor(MainTitle As String, SecondTitle As String)
+    Dim t1 As String
+    
+    ActiveSheet.ChartObjects("chart02").Activate
+    ActiveChart.ChartTitle.Select
+    ActiveChart.ChartTitle.Text = _
+        MainTitle & Chr(13) & SecondTitle
+    Selection.Format.TextFrame2.TextRange.Characters.Text = _
+        MainTitle & Chr(13) & SecondTitle
+    With Selection.Format.TextFrame2.TextRange.Characters(1, Len(MainTitle) + 1).ParagraphFormat
+        .TextDirection = msoTextDirectionLeftToRight
+        .Alignment = msoAlignCenter
+    End With
+    
+    With Selection.Format.TextFrame2.TextRange.Characters(Len(MainTitle)+ 2, Len(SecondTitle)).Font
+        .BaselineOffset = 0
+        .Bold = msoTrue
+        .NameComplexScript = "+mn-cs"
+        .NameFarEast = "+mn-ea"
+        .Fill.Visible = msoTrue
+        .Fill.ForeColor.RGB = RGB(255, 192, 0)
+        .Fill.Transparency = 0
+        .Fill.Solid
+        .Size = 18
+        .Italic = msoFalse
+        .Kerning = 12
+        .Name = "+mn-lt"
+        .UnderlineStyle = msoNoUnderline
+        .Strike = msoNoStrike
+    End With
+    
+    ActiveSheet.ChartObjects("chart01").Activate
+    ActiveChart.ChartTitle.Select
+    ActiveChart.ChartTitle.Text = _
+        MainTitle & Chr(13) & SecondTitle
+    Selection.Format.TextFrame2.TextRange.Characters.Text = _
+        MainTitle & Chr(13) & SecondTitle
+    With Selection.Format.TextFrame2.TextRange.Characters(1, Len(MainTitle) + 1).ParagraphFormat
+        .TextDirection = msoTextDirectionLeftToRight
+        .Alignment = msoAlignCenter
+    End With
+    
+    With Selection.Format.TextFrame2.TextRange.Characters(Len(MainTitle)+ 2, Len(SecondTitle)).Font
+        .BaselineOffset = 0
+        .Bold = msoTrue
+        .NameComplexScript = "+mn-cs"
+        .NameFarEast = "+mn-ea"
+        .Fill.Visible = msoTrue
+        .Fill.ForeColor.RGB = RGB(255, 192, 0)
+        .Fill.Transparency = 0
+        .Fill.Solid
+        .Size = 18
+        .Italic = msoFalse
+        .Kerning = 12
+        .Name = "+mn-lt"
+        .UnderlineStyle = msoNoUnderline
+        .Strike = msoNoStrike
+    End With
+
 End Function
 
 Public Sub createGraph01()
@@ -139,18 +299,10 @@ Public Sub createGraph01()
     Selection.TickLabels.Font.Bold = msoTrue
     Selection.MajorTickMark = xlNone
     
-    'With ActiveSheet.Shapes("chart01").Fill
-    '    .Visible = msoTrue
-    '    .ForeColor.RGB = RGB(0, 0, 0) 
-    '    .ForeColor.TintAndShade = 0.0
-    '    .ForeColor.Brightness = 0
-    '    .BackColor.RGB = RGB(0, 0, 0) 
-    '    .BackColor.TintAndShade = 0.05
-    '    .BackColor.Brightness = 0.05
-    '    .TwoColorGradient msoGradientVertical, 2
-    'End With
-    'ActiveChart.PlotArea.Format.Fill.Visible = msoFalse
-    
+    'ActiveChart.SeriesCollection(1).Select
+    'ActiveChart.SeriesCollection(1).ApplyDataLabels
+    'ActiveChart.SeriesCollection(1).DataLabels.Select
+    'Selection.NumberFormat = "0.00%%"
     
     Set myUnion = %s
     Set myChart = destSheet.ChartObjects.Add(800, 40, 1500, 400)
@@ -213,10 +365,10 @@ Public Sub createGraph01()
     Selection.TickLabels.Font.Bold = msoTrue
     Selection.MajorTickMark = xlNone
     
-    ActiveChart.SeriesCollection(1).Select
-    ActiveChart.SeriesCollection(1).ApplyDataLabels
-    ActiveChart.SeriesCollection(1).DataLabels.Select
-    Selection.NumberFormat = "0.00%%"
+    'ActiveChart.SeriesCollection(1).Select
+    'ActiveChart.SeriesCollection(1).ApplyDataLabels
+    'ActiveChart.SeriesCollection(1).DataLabels.Select
+    'Selection.NumberFormat = "0.00%%"
     
     'With ActiveSheet.Shapes("chart02").Fill
     '    .Visible = msoTrue

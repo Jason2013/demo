@@ -232,17 +232,54 @@ if ($fileID < count($oldReportXLSXList))
                     $codePiece1 .= "Columns(\"" . $vbaConfig->shrinkColumnArea . "\").ColumnWidth = 0\n";
                 }
                 
+                // shaderbench or framebench
+                // set first title & second title of charts
+                if (($vbaConfig->reportType == 2) ||
+                    ($vbaConfig->reportType == 3))
+                {
+                    if (isset($vbaConfig->graphTitle) &&
+                        isset($vbaConfig->chartSecondTitle))
+                    {
+                        // if has title & second title
+                        $codePiece1 .= "\n";
+                        $codePiece1 .= "Call setSecondTitleColor(\"" . $vbaConfig->graphTitle . "\", " .
+                                                                "\"" . $vbaConfig->chartSecondTitle . "\")\n";
+                    }
+                    
+                    if (isset($vbaConfig->graphDataBarNum) &&
+                        isset($vbaConfig->graphDataBarNum2))
+                    {
+                        // if has bars num in charts, set percent tag to bars
+                        $codePiece1 .= "\n";
+                        $codePiece1 .= "Call setCharBarPercentTag(" . $vbaConfig->graphDataBarNum . ", " .
+                                                                 "" . $vbaConfig->graphDataBarNum2 . ")\n";
+                    }
+                }
+                
                 // framebench
                 if (($vbaConfig->reportType == 3) &&
                     ($vbaConfig->testBarNum == 2))
                 {
                     $codePiece1 .= "\n";
                     $codePiece1 .= "setCharBarColor(" . $vbaConfig->testNameNum . ")\n";
+                    
+                    $codePiece1 .= "\n";
+                    $codePiece1 .= "Call removeChartLegend()\n";
                 }
                 
-                // $vbaConfig->graphDataArea
-                $t2 = sprintf($t2, $t4, $vbaConfig->graphTitle . $tmpCardName, 
-                              $t4a, $vbaConfig->graphTitle . $tmpCardName, 
+                $titleAdd = $tmpCardName;
+                if (($vbaConfig->reportType == 2) ||
+                    ($vbaConfig->reportType == 3))
+                {
+                    $titleAdd = "";
+                }
+
+                //$t2 = sprintf($t2, $t4, $vbaConfig->graphTitle . $tmpCardName, 
+                //              $t4a, $vbaConfig->graphTitle . $tmpCardName, 
+                //              $vbaConfig->graphDataAreaNoBlank, $codePiece1);
+                              
+                $t2 = sprintf($t2, $t4, $vbaConfig->graphTitle . $titleAdd, 
+                              $t4a, $vbaConfig->graphTitle . $titleAdd, 
                               $vbaConfig->graphDataAreaNoBlank, $codePiece1);
                 file_put_contents($tmpVBAPath, $t2);
                 

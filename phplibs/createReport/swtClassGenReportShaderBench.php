@@ -2536,7 +2536,7 @@ class CGenReport
         fwrite($_fileHandle, $xmlSection);
     }
     
-    public function writePlatformInfo($_fileHandle)
+    public function getPlatformInfo()
     {
         global $returnMsg;
         global $envDefaultInfo;
@@ -2588,6 +2588,7 @@ class CGenReport
         $asicInfoList["GPU_Memory_Clock"]    = array();
         $asicInfoList["GPU_Memory"]          = array();
         $asicInfoList["System_Memory"]       = array();
+        $asicInfoList["Compiler_Name"]       = array();
         
         foreach ($machineInfoList as $tmpPath)
         {
@@ -2671,10 +2672,158 @@ class CGenReport
             $asicInfoList["GPU_Memory_Clock"]    []= isset($tmpObj2["mClockName"]) ? $tmpObj2["mClockName"] : "";
             $asicInfoList["GPU_Memory"]          []= isset($tmpObj2["gpuMemName"]) ? $tmpObj2["gpuMemName"] : "";
             $asicInfoList["System_Memory"]       []= isset($tmpObj2["memoryName"]) ? $tmpObj2["memoryName"] : "";
-            
+            $asicInfoList["Compiler_Name"]       []= isset($tmpObj2["compilerName"]) ? $tmpObj2["compilerName"] : "";
         }
         
         $returnMsg["asicInfoList"] = $asicInfoList;
+        
+        $returnSet = array();
+        $returnSet["asicInfoList"] = $asicInfoList;
+        return $returnSet;
+    }
+    
+    public function writePlatformInfo($_fileHandle)
+    {
+        global $returnMsg;
+        global $envDefaultInfo;
+        global $resultPos;
+        global $startResultID;
+        global $umdNum;
+        global $cmpStartResultID;
+        global $sysNameList;
+        global $cpuNameList;
+        global $cardNameList;
+        global $sClockNameList;
+        global $mClockNameList;
+        global $gpuMemNameList;
+        global $sysMemNameList;
+        global $changeListNumList;
+        global $driverNameList;
+        global $umdNameList;
+        global $reportTemplateDir;
+        global $startStyleID;
+        global $logStoreDir;
+        global $logFileFolder;
+
+        //$tmpRootPath = $logStoreDir . "/" . $logFileFolder;
+        //$cardFolderList = glob($tmpRootPath . "/*", GLOB_ONLYDIR);
+        //
+        //$machineInfoList = array();
+        //
+        //foreach ($cardFolderList as $tmpPath)
+        //{
+        //    $tmpPath2 = $tmpPath . "/" . "machine_info.json";
+        //    if (file_exists($tmpPath2))
+        //    {
+        //        $machineInfoList []= $tmpPath2;
+        //    }
+        //}
+        //
+        //$asicInfoList = array();
+        //
+        //$asicInfoList["Base_Driver_Version"] = array();
+        //$asicInfoList["Base_Driver_Date"]    = array();
+        //$asicInfoList["Vulkan_SDK_Version"]  = array();
+        //$asicInfoList["Microbench_Version"]  = array();
+        //$asicInfoList["Operating_System"]    = array();
+        //$asicInfoList["Test_Date"]           = array();
+        //$asicInfoList["Test_Time"]           = array();
+        //$asicInfoList["CPU"]                 = array();
+        //$asicInfoList["GPU"]                 = array();
+        //$asicInfoList["GPU_Core_Clock"]      = array();
+        //$asicInfoList["GPU_Memory_Clock"]    = array();
+        //$asicInfoList["GPU_Memory"]          = array();
+        //$asicInfoList["System_Memory"]       = array();
+        //
+        //foreach ($machineInfoList as $tmpPath)
+        //{
+        //    $t1 = file_get_contents($tmpPath);
+        //    $tmpObj = json_decode($t1);
+        //    
+        //    $tmpObj2 = array();
+        //    foreach ($tmpObj as $tmpKey => $tmpVal)
+        //    {
+        //        $tmpObj2[$tmpKey] = $tmpVal;
+        //    }
+        //    
+        //    if (isset($tmpObj2["cpuName"]) &&
+        //        isset($tmpObj2["systemName"]) &&
+        //        isset($tmpObj2["videoCardName"]))
+        //    {
+        //        $cpuKeys = array_keys($asicInfoList["CPU"], $tmpObj2["cpuName"]);
+        //        $sysKeys = array_keys($asicInfoList["Operating_System"], $tmpObj2["systemName"]);
+        //        $gpuKeys = array_keys($asicInfoList["GPU"], $tmpObj2["videoCardName"]);
+        //        
+        //        $tmpKeyList = array_intersect($cpuKeys, $sysKeys, $gpuKeys);
+        //        
+        //        if (count($tmpKeyList) > 0)
+        //        {
+        //            continue;
+        //        }
+        //        
+        //        //$b1 = false;
+        //        //for ($i = $startResultID; $i < ($startResultID + $umdNum); $i++)
+        //        //{
+        //        //    if (strtolower($tmpObj2["cpuName"]) == strtolower($cpuNameList[0][$i]))
+        //        //    {
+        //        //        $b1 = true;
+        //        //        break;
+        //        //    }
+        //        //}
+        //        //if ($b1 == false)
+        //        //{
+        //        //    continue;
+        //        //}
+        //        
+        //        $b1 = false;
+        //        for ($i = $startResultID; $i < ($startResultID + $umdNum); $i++)
+        //        {
+        //            if (strtolower($tmpObj2["systemName"]) == strtolower($sysNameList[0][$i]))
+        //            {
+        //                $b1 = true;
+        //                break;
+        //            }
+        //        }
+        //        if ($b1 == false)
+        //        {
+        //            continue;
+        //        }
+        //        
+        //        //$b1 = false;
+        //        //for ($i = $startResultID; $i < ($startResultID + $umdNum); $i++)
+        //        //{
+        //        //    if (strtolower($tmpObj2["videoCardName"]) == strtolower($cardNameList[0][$i]))
+        //        //    {
+        //        //        $b1 = true;
+        //        //        break;
+        //        //    }
+        //        //}
+        //        //if ($b1 == false)
+        //        //{
+        //        //    continue;
+        //        //}
+        //    }
+        //
+        //    $asicInfoList["Base_Driver_Version"] []= isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
+        //    $asicInfoList["Base_Driver_Date"]    []= isset($tmpObj2["baseDriverDate"]) ? $tmpObj2["baseDriverDate"] : "";
+        //    $asicInfoList["Vulkan_SDK_Version"]  []= isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
+        //    $asicInfoList["Microbench_Version"]  []= isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
+        //    $asicInfoList["Operating_System"]    []= isset($tmpObj2["systemName"]) ? $tmpObj2["systemName"] : "";
+        //    $asicInfoList["Test_Date"]           []= $envDefaultInfo["testingDate"];
+        //    $asicInfoList["Test_Time"]           []= $envDefaultInfo["testingTime"];
+        //    $asicInfoList["CPU"]                 []= isset($tmpObj2["cpuName"]) ? $tmpObj2["cpuName"] : "";
+        //    $asicInfoList["GPU"]                 []= isset($tmpObj2["videoCardName"]) ? $tmpObj2["videoCardName"] : "";
+        //    $asicInfoList["GPU_Core_Clock"]      []= isset($tmpObj2["sClockName"]) ? $tmpObj2["sClockName"] : "";
+        //    $asicInfoList["GPU_Memory_Clock"]    []= isset($tmpObj2["mClockName"]) ? $tmpObj2["mClockName"] : "";
+        //    $asicInfoList["GPU_Memory"]          []= isset($tmpObj2["gpuMemName"]) ? $tmpObj2["gpuMemName"] : "";
+        //    $asicInfoList["System_Memory"]       []= isset($tmpObj2["memoryName"]) ? $tmpObj2["memoryName"] : "";
+        //    
+        //}
+        //
+        //$returnMsg["asicInfoList"] = $asicInfoList;
+        
+        $returnSet = $this->getPlatformInfo();
+        $asicInfoList = $returnSet["asicInfoList"];
         
         $t1 = "";
 
@@ -4327,7 +4476,7 @@ class CGenReport
             }
                   
             $t3 = "<Column ss:Index=\"" . ($subjectNameFilterNumMax + 3) . 
-                  "\" ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"100\"/>\n" .
+                  "\" ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"80\"/>\n" .
                   $tmpCode;
             
             //$t1 = sprintf($xmlSection, $_tmpUmdName, $startSheetLineNum, $t3);
@@ -6224,6 +6373,7 @@ class CGenReport
         global $returnMsg;
         global $resultIDList;
         global $driverNameList;
+        global $umdStandardOrder;
         global $umdNameList;
         global $umdOrder;
         global $resultUmdOrder;
@@ -6294,6 +6444,9 @@ class CGenReport
                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 1 + 2 + $graphDataColumnNum - 1] .
                          (intval(graphDataStartLineID) + count($graphCells) - 1);
                          
+        $graphDataBarNum = ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 1 + 2 + $graphDataColumnNum - 1) -
+                           ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 1) + 1 - 2;
+                         
         $graphDataArea2 = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 1] . 
                          graphDataStartLineID . ":" . 
                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
@@ -6305,6 +6458,11 @@ class CGenReport
                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
                                                ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 3 + $graphDataColumnNum * 2 - 2] .
                          (intval(graphDataStartLineID) + count($graphCells) - 1);
+                         
+        $graphDataBarNum2 = ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 2) -
+                           ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 1) + 1 +
+                           ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 3 + $graphDataColumnNum * 2 - 2) -
+                           ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 3 + $graphDataColumnNum) + 1 - 2;
                                          
                          
         $graphDataAreaNoBlank = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
@@ -6335,6 +6493,30 @@ class CGenReport
             $graphDataArea = $graphDataAreaNoBlank;
         }
         
+        $returnSet = $this->getPlatformInfo();
+        $asicInfoList = $returnSet["asicInfoList"];
+        
+        $tmpList = array();
+        for ($i = 0; $i < count($umdStandardOrder); $i++)
+        {
+            for ($j = 0; $j < count($asicInfoList["Compiler_Name"]); $j++)
+            {
+                if (strtolower($umdStandardOrder[$i]) == 
+                    strtolower($asicInfoList["Compiler_Name"][$j]))
+                {
+                    $tmpKey = array_search($asicInfoList["GPU"][$j], $tmpList);
+                    if ($tmpKey === false)
+                    {
+                        $tmpList []= ucfirst(strtolower($asicInfoList["GPU"][$j]));
+                    }
+                    break;
+                }
+            }
+        }
+        
+        $tmpList = array_reverse($tmpList);
+        $chartSecondTitle = implode("/", $tmpList);
+        
         $tmpJson = array();
         $tmpJson["graphDataArea"] = $graphDataArea;
         $tmpJson["graphDataArea2"] = $graphDataArea2;
@@ -6342,7 +6524,10 @@ class CGenReport
         $tmpJson["graphDataColumnNum"] = $graphDataColumnNum;
         $tmpJson["shrinkColumnArea"] = $shrinkColumnArea;
         $tmpJson["graphDataAreaNoBlank"] = $graphDataAreaNoBlank;
-        $tmpJson["graphTitle"] = "ShaderBench Performance relative to RADV - ";
+        $tmpJson["graphTitle"] = "ShaderBench Average ExecutionTime & CompileTime";
+        $tmpJson["chartSecondTitle"] = $chartSecondTitle;
+        $tmpJson["graphDataBarNum"] = $graphDataBarNum;
+        $tmpJson["graphDataBarNum2"] = $graphDataBarNum2;
         $tmpJson["reportType"] = 2;
         $tmpJson["curCardName"] = $curCardName;
         $tmpJson["cmpCardName"] = $cmpCardName;

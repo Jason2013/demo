@@ -56,12 +56,12 @@ $swtUmdStandardOrder_sb = array("RADV", "SCPC", "LLPC", "NVIDIA", "OPT1");
 //$swtPreSheetNameShort_sb = array("compTime", "execTime");
 
 $swtPreSheetName_sb = array("executionTime", "compileTime");
-$swtPreSheetNameTitle_sb = array("Execution Time", "Compile Time");
+$swtPreSheetNameTitle_sb = array("ExecutionTime", "CompileTime");
 $swtPreSheetNameShort_sb = array("execTime", "compTime");
 
-$swtPreSheetName_pf = array("executionTime", "compileTime");
-$swtPreSheetNameTitle_pf = array("Execution Time", "Compile Time");
-$swtPreSheetNameShort_pf = array("execTime", "compTime");
+$swtPreSheetName_pf = array("executionTime", "recordTime");
+$swtPreSheetNameTitle_pf = array("ExecutionTime", "RecordTime");
+$swtPreSheetNameShort_pf = array("execTime", "recoTime");
 
 //$swtUmdNameList = array("VG10_40CU_1600e_945m",
 //                        "VG10_64CU_1600e_945m",
