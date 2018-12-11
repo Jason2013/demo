@@ -372,19 +372,6 @@ $returnMsg["resultIDListAll"] = $resultIDList;
 $returnMsg["validUmdNum"] = $validUmdNum;
 
 $returnMsg["returnLine"] = "line: " . __LINE__;
-$returnSet = $xmlWriter->checkReportDataColumnNum();
-if ($returnSet === null)
-{
-    $returnMsg["errorCode"] = 0;
-    $returnMsg["errorMsg"] = "data column invalid";
-    $returnMsg["resultUmdOrder"] = $resultUmdOrder;
-    $returnMsg["reportUmdNum"] = $reportUmdNum;
-    $returnMsg["cmpMachineID"] = $cmpMachineID;
-    echo json_encode($returnMsg);
-}
-$returnMsg["reportUmdNum"] = $reportUmdNum;
-$dataColumnNum = $returnSet["dataColumnNum"];
-$returnMsg["dataColumnNum"] = $dataColumnNum;
 
 $tmpUmdName = "";
 $tmpUmd2Name = "";
@@ -406,6 +393,28 @@ $returnMsg["tmpCardName"] = $tmpCardName;
 $returnMsg["tmpSysName"] = $tmpSysName;
 $returnMsg["driverNameList[0]"] = $driverNameList[0];
 $returnMsg["driverNameList"] = $driverNameList;
+
+$isUbuntuSys = false;
+$t1 = strtolower($tmpSysName);
+$tmpPos = strpos($t1, $ubuntuCheckWord);
+$isUbuntuSys = $tmpPos !== false;
+
+$returnSet = $xmlWriter->checkReportDataColumnNum();
+if ($returnSet === null)
+{
+    $returnMsg["errorCode"] = 0;
+    $returnMsg["errorMsg"] = "data column invalid";
+    $returnMsg["resultUmdOrder"] = $resultUmdOrder;
+    $returnMsg["reportUmdNum"] = $reportUmdNum;
+    $returnMsg["cmpMachineID"] = $cmpMachineID;
+    echo json_encode($returnMsg);
+}
+$returnMsg["reportUmdNum"] = $reportUmdNum;
+$dataColumnNum = $returnSet["dataColumnNum"];
+$graphDataColumnNum = $returnSet["graphDataColumnNum"];
+$returnMsg["dataColumnNum"] = $dataColumnNum;
+$returnMsg["graphDataColumnNum"] = $graphDataColumnNum;
+
 
 $isCompStandard = false;
 for ($i = 0; $i < count($umdStandardOrder); $i++)
