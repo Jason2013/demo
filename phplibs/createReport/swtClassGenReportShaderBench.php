@@ -1025,6 +1025,15 @@ class CGenReport
         global $crossType;
         global $machineIDBatchPairList;
         global $swtOldUmdNameMatchList;
+        global $sortedCardCompilerList;
+        
+        $hasRepeatCompilerSys = count($sortedCardCompilerList) > 0;
+        
+        $tmpIndexList = array();
+        $tmpIndexList2 = array();
+        $tmpIndexList3 = array();
+        $tmpIndexList4 = array();
+        $tmpIndexListN = array();
         
         $db = $_db;
 
@@ -1054,6 +1063,7 @@ class CGenReport
         $cardIndexListFlat = array();
         $curCardIDListFlat = array();
 
+        $usedSysList = array();
         foreach ($_batchIDList as $tmpBatchID)
         {
             $tmpResultIDList      = array();
@@ -1123,7 +1133,7 @@ class CGenReport
             $curSysID = -1;
             $umdNum = count($umdNameList);
             
-            $usedSysList = array();
+            //$usedSysList = array();
             $usedDriver2List = array();
             $sysIndex = 0;
             $maxSysNum = 3;
@@ -1199,6 +1209,10 @@ class CGenReport
                 $tmpArr = explode("_", $row1[21]);
                 //$tmpDriverName = $row1[21];
                 $tmpDriverName = $tmpArr[0];
+                if ($hasRepeatCompilerSys)
+                {
+                    $tmpDriverName = $row1[20] . "_" . $tmpArr[0];
+                }
                 $tmpDriver2Name = "Vulkan";
                 if (count($tmpArr) > 1)
                 {
@@ -1210,41 +1224,24 @@ class CGenReport
                     $usedDriver2List []= $tmpDriver2Name;
                 }
                 
-                //if ($umdIndex == 0)
-                //{
-                //    $curCardID = $tmpCardID;
-                //    $curSysID = $tmpSysID;
-                //    $cardIndex++;
-                //    // hold enough space
-                //    for ($j = 0; $j < $umdNum; $j++)
-                //    {
-                //        $tmpDriverNameList[$j] = $umdNameList[$j];
-                //        //$tmpDriver2NameList[$j] = "";
-                //    }
-                //}
-                //else
-                //{
-                //    if (($curCardID != $tmpCardID) ||
-                //        ($curSysID  != $tmpSysID))
-                //    {
-                //        // next card
-                //        // e.g. tmpCardNameList:   jan26, jan31
-                //        //      tmpDriverNameList: DX12, DX12
-                //        $curCardID = $tmpCardID;
-                //        $curSysID = $tmpSysID;
-                //        $cardIndex++;
-                //        // hold enough space
-                //        for ($j = 0; $j < $umdNum; $j++)
-                //        {
-                //            $tmpDriverNameList[$j] = $umdNameList[$j];
-                //            //$tmpDriver2NameList[$j] = "";
-                //        }
-                //        $umdIndex = 0;
-                //    }
-                //}
 
-                $tmpIndex = array_search($tmpDriverName, $umdNameList);
+                //$tmpIndex = array_search($tmpDriverName, $umdNameList);
+                $tmpIndex = false;
+                for ($i = 0; $i < count($umdNameList); $i++)
+                {
+                    if (strtolower($tmpDriverName) == strtolower($umdNameList[$i]))
+                    {
+                        $tmpIndex = $i;
+                        break;
+                    }
+                }
                 $tmpIndex2 = array_search($tmpDriver2Name, $usedDriver2List);
+                
+                $tmpIndexList []= $tmpIndex;
+                $tmpIndexList2 []= $tmpIndex2;
+                $tmpIndexList3 []= $tmpDriverName;
+                $tmpIndexList4 []= $tmpDriver2Name;
+                
                 if ($tmpIndex === false)
                 {
                     $tmpCount = intval(count($swtOldUmdNameMatchList) / 2);
@@ -1270,6 +1267,8 @@ class CGenReport
                         $usedSysList []= $tmpSysName;
                     }
                     $n1 = $sysIndex * $umdNum + $tmpIndex;
+                    
+                    $tmpIndexListN []= $n1;
                     
                     $needUpdate = false;
                     for ($j = 0; $j < $umdNum; $j++)
@@ -1331,17 +1330,16 @@ class CGenReport
                     $tmpCardNameRealListSet [$tmpIndex2][$n1] = $row1[20];
                     $tmpSysNameRealListSet  [$tmpIndex2][$n1] = $row1[23];
                 }
-                //if ($umdIndex != $tmpIndex)
-                //{
-                //    $umdIndex = $tmpIndex;
-                //}
-                //
-                //$umdIndex++;
-                //if ($umdIndex >= count($umdNameList))
-                //{
-                //    $umdIndex = 0;
-                //}
             }
+            
+            $returnMsg["tmpIndexList"] = $tmpIndexList;
+            $returnMsg["tmpIndexList2"] = $tmpIndexList2;
+            $returnMsg["tmpIndexList3"] = $tmpIndexList3;
+            $returnMsg["tmpIndexList4"] = $tmpIndexList4;
+            $returnMsg["tmpIndexListN"] = $tmpIndexListN;
+            $returnMsg["usedSysList"] = $usedSysList;
+            $returnMsg["usedDriver2List"] = $usedDriver2List;
+            $returnMsg["umdNameList"] = $umdNameList;
             
             $usedSysNum = count($usedSysList);
             $usedDriver2Num = count($usedDriver2List);
@@ -2558,6 +2556,8 @@ class CGenReport
         global $startStyleID;
         global $logStoreDir;
         global $logFileFolder;
+        global $swtCardStandardOrder_sb;
+        global $swtUmdStandardOrder_sb;
 
         $tmpRootPath = $logStoreDir . "/" . $logFileFolder;
         $cardFolderList = glob($tmpRootPath . "/*", GLOB_ONLYDIR);
@@ -2590,16 +2590,12 @@ class CGenReport
         $asicInfoList["System_Memory"]       = array();
         $asicInfoList["Compiler_Name"]       = array();
         
+        
         foreach ($machineInfoList as $tmpPath)
         {
             $t1 = file_get_contents($tmpPath);
-            $tmpObj = json_decode($t1);
+            $tmpObj2 = json_decode($t1, true);
             
-            $tmpObj2 = array();
-            foreach ($tmpObj as $tmpKey => $tmpVal)
-            {
-                $tmpObj2[$tmpKey] = $tmpVal;
-            }
             
             if (isset($tmpObj2["cpuName"]) &&
                 isset($tmpObj2["systemName"]) &&
@@ -2615,21 +2611,7 @@ class CGenReport
                 {
                     continue;
                 }
-                
-                //$b1 = false;
-                //for ($i = $startResultID; $i < ($startResultID + $umdNum); $i++)
-                //{
-                //    if (strtolower($tmpObj2["cpuName"]) == strtolower($cpuNameList[0][$i]))
-                //    {
-                //        $b1 = true;
-                //        break;
-                //    }
-                //}
-                //if ($b1 == false)
-                //{
-                //    continue;
-                //}
-                
+
                 $b1 = false;
                 for ($i = $startResultID; $i < ($startResultID + $umdNum); $i++)
                 {
@@ -2643,20 +2625,6 @@ class CGenReport
                 {
                     continue;
                 }
-                
-                //$b1 = false;
-                //for ($i = $startResultID; $i < ($startResultID + $umdNum); $i++)
-                //{
-                //    if (strtolower($tmpObj2["videoCardName"]) == strtolower($cardNameList[0][$i]))
-                //    {
-                //        $b1 = true;
-                //        break;
-                //    }
-                //}
-                //if ($b1 == false)
-                //{
-                //    continue;
-                //}
             }
 
             $asicInfoList["Base_Driver_Version"] []= isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
@@ -2679,6 +2647,89 @@ class CGenReport
         
         $returnSet = array();
         $returnSet["asicInfoList"] = $asicInfoList;
+        return $returnSet;
+    }
+    
+    public function getCardCompilerInfo()
+    {
+        global $returnMsg;
+        global $logStoreDir;
+        global $logFileFolder;
+        global $swtCardStandardOrder_sb;
+        global $swtUmdStandardOrder_sb;
+
+        $tmpRootPath = $logStoreDir . "/" . $logFileFolder;
+        $cardFolderList = glob($tmpRootPath . "/*", GLOB_ONLYDIR);
+        
+        $machineInfoList = array();
+        
+        foreach ($cardFolderList as $tmpPath)
+        {
+            $tmpPath2 = $tmpPath . "/" . "machine_info.json";
+            if (file_exists($tmpPath2))
+            {
+                $machineInfoList []= $tmpPath2;
+            }
+        }
+        
+        $tmpCompilerSysList = array();
+        $tmpCompilerSysMap = array();
+        $tmpCardList = array();
+        $tmpCompilerList = array();
+        $tmpCardCompilerList = array();
+        $hasRepeatCompilerSys = false;
+        
+        foreach ($machineInfoList as $tmpPath)
+        {
+            $t1 = file_get_contents($tmpPath);
+            $tmpObj2 = json_decode($t1, true);
+            
+            $tmpCardList []= $tmpObj2["videoCardName"];
+            $tmpCompilerList []= $tmpObj2["compilerName"];
+            $tmpCardCompilerList []= strtolower($tmpObj2["videoCardName"] . "_" . $tmpObj2["compilerName"]);
+            $t1 = $tmpObj2["compilerName"] . "_" . $tmpObj2["systemName"];
+            $tmpCompilerSysList []= $t1;
+            if (isset($tmpCompilerSysMap[$t1]))
+            {
+                $hasRepeatCompilerSys = true;
+                $tmpCompilerSysMap[$t1]++;
+            }
+            else
+            {
+                $tmpCompilerSysMap[$t1] = 1;
+            }
+            
+        }
+        
+        $tmpArr = array();
+        
+        $sortedCardCompilerList = array();
+        if ($hasRepeatCompilerSys)
+        {
+            for ($i = 0; $i < count($swtCardStandardOrder_sb); $i++)
+            {
+                for ($j = 0; $j < count($swtUmdStandardOrder_sb); $j++)
+                {
+                    $t1 = $swtCardStandardOrder_sb[$i] . "_" . $swtUmdStandardOrder_sb[$j];
+                    
+                    $tmpArr []= $t1;
+                    if (array_search(strtolower($t1), $tmpCardCompilerList) !== false)
+                    {
+                        $sortedCardCompilerList []= $t1;
+                    }
+                }
+            }
+            $sortedCardCompilerList []= "OPT1";
+        }
+        
+        $returnMsg["sortedCardCompilerList"] = $sortedCardCompilerList;
+        $returnMsg["sortedCardCompilerList_tmpArr"] = $tmpArr;
+        $returnMsg["tmpCardCompilerList"] = $tmpCardCompilerList;
+        $returnMsg["hasRepeatCompilerSys"] = $hasRepeatCompilerSys;
+        $returnMsg["tmpCompilerSysMap"] = $tmpCompilerSysMap;
+        
+        $returnSet = array();
+        $returnSet["sortedCardCompilerList"] = $sortedCardCompilerList;
         return $returnSet;
     }
     

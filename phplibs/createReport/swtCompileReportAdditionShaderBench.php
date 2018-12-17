@@ -53,6 +53,7 @@ $returnMsg["errorMsg"] = "compile report success";
 
 $umdNameList = $swtUmdNameList_sb;
 $umdStandardOrder = $swtUmdStandardOrder_sb;
+$cardStandardOrder = $swtCardStandardOrder_sb;
 
 // check input card, system selection
 //$machineIDPair = "";
@@ -95,6 +96,18 @@ $batchDateTextList = $returnSet["batchDateTextList"];
 $returnMsg["batchID"] = $batchID;
 $returnMsg["batchIDList"] = $batchIDList;
 $returnMsg["batchDateTextList"] = $batchDateTextList;
+
+$returnSet = $xmlWriter->getBatchEnvironmentInfo($db, $batchID);
+$envDefaultInfo = $returnSet["envDefaultInfo"];
+$logFileFolder = $returnSet["logFileFolder"];
+
+$returnSet = $xmlWriter->getCardCompilerInfo();
+$sortedCardCompilerList = $returnSet["sortedCardCompilerList"];
+if (count($sortedCardCompilerList) > 0)
+{
+    $umdNameList = $sortedCardCompilerList;
+    $umdStandardOrder = $sortedCardCompilerList;
+}
 
 // set up folder for report xml
 $returnSet = $xmlWriter->prepareReportFolder($reportType, $batchID, $curReportFolder);
@@ -214,9 +227,9 @@ $returnMsg["gpuMemNameList"] = $gpuMemNameList;
 $returnMsg["driverNameList"] = $driverNameList;
 $returnMsg["driver2NameList"] = $driver2NameList;
 
-$returnSet = $xmlWriter->getBatchEnvironmentInfo($db, $batchID);
-$envDefaultInfo = $returnSet["envDefaultInfo"];
-$logFileFolder = $returnSet["logFileFolder"];
+//$returnSet = $xmlWriter->getBatchEnvironmentInfo($db, $batchID);
+//$envDefaultInfo = $returnSet["envDefaultInfo"];
+//$logFileFolder = $returnSet["logFileFolder"];
 
 for ($i = 0; $i < count($machineIDList); $i++)
 {
@@ -297,7 +310,17 @@ $validUmdNum = 0;
 
 for ($i = 0; $i < $reportUmdNum; $i++)
 {
-    $n3 = array_search($driverNameList[0][$i], $umdNameList);
+    //$n3 = array_search($driverNameList[0][$i], $umdNameList);
+    $n3 = false;
+    for ($j = 0; $j < count($umdNameList); $j++)
+    {
+        if (strtolower($driverNameList[0][$i]) == strtolower($umdNameList[$j]))
+        {
+            $n3 = $j;
+            break;
+        }
+    }
+    
     if ($n3 !== false)
     {
         $umdOrder[$i] = $n3;
