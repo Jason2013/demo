@@ -643,6 +643,11 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
                 $lastNoiseDataID = $_noiseDataID;
             }
             
+            if ($testCaseID == 0)
+            {
+                ftruncate($tmpFileHandle, 0);
+            }
+            
             fseek($tmpFileHandle, 0, SEEK_END);
             $tmpFileSize = ftell($tmpFileHandle);
             $t1 = pack("d", 0.0);
