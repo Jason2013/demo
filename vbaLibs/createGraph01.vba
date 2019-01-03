@@ -129,10 +129,12 @@ Function setCharBarPercentTag(barNum1 As Integer, barNum2 As Integer)
     '        Selection.NumberFormat = "0.00%%"
     '    End If
     'Next
-    ActiveChart.SeriesCollection(1).Select
-    ActiveChart.SeriesCollection(1).ApplyDataLabels
-    ActiveChart.SeriesCollection(1).DataLabels.Select
-    Selection.NumberFormat = "0.00%%"
+    If barNum1 > 1 Then
+        ActiveChart.SeriesCollection(2).Select
+        ActiveChart.SeriesCollection(2).ApplyDataLabels
+        ActiveChart.SeriesCollection(2).DataLabels.Select
+        Selection.NumberFormat = "0.00%%"
+    End If
 
 End Function
 

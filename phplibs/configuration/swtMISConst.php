@@ -56,13 +56,13 @@ $swtCardStandardOrder_sb = array("Vega10", "Ariel");
 //$swtPreSheetNameTitle_sb = array("Compile Time", "Execution Time");
 //$swtPreSheetNameShort_sb = array("compTime", "execTime");
 
-$swtPreSheetName_sb = array("executionTime", "compileTime");
+$swtPreSheetName_sb = array("ExecutionTime", "CompileTime");
 $swtPreSheetNameTitle_sb = array("ExecutionTime", "CompileTime");
-$swtPreSheetNameShort_sb = array("execTime", "compTime");
+$swtPreSheetNameShort_sb = array("ExecTime", "CompTime");
 
-$swtPreSheetName_pf = array("executionTime", "recordTime");
+$swtPreSheetName_pf = array("ExecutionTime", "RecordTime");
 $swtPreSheetNameTitle_pf = array("ExecutionTime", "RecordTime");
-$swtPreSheetNameShort_pf = array("execTime", "recoTime");
+$swtPreSheetNameShort_pf = array("ExecTime", "RecoTime");
 
 //$swtUmdNameList = array("VG10_40CU_1600e_945m",
 //                        "VG10_64CU_1600e_945m",
