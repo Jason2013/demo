@@ -129,10 +129,18 @@ class CGenReport
                          
         $styleVariance = "<Style ss:ID=\"s%d\">\n" .
                          "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Bottom\"/>\n" .
-                         "<Borders/>\n" .
-                         "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"12\" ss:Color=\"#000000\" " .
+                         "<Borders>\n" .
+                         "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" " .
+                         " ss:Color=\"#000000\"/>\n" .
+                         "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" " .
+                         " ss:Color=\"#000000\"/>\n" .
+                         "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" " .
+                         " ss:Color=\"#000000\"/>\n" .
+                         "</Borders>\n" .
+                         "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#000000\" " .
                          "ss:Bold=\"1\"/>\n" .
-                         "<Interior ss:Color=\"#A6A6A6\" ss:Pattern=\"Solid\"/>\n" .
+                         "<Interior ss:Color=\"#D9D9D9\" ss:Pattern=\"Solid\"/>\n" .
+                         "<NumberFormat ss:Format=\"Percent\"/>\n" .
                          "</Style>\n";
                          
         $styleAverage =  "<Style ss:ID=\"s%d\">\n" .
@@ -177,9 +185,9 @@ class CGenReport
                              "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" " .
                              " ss:Color=\"#000000\"/>\n" .
                              "</Borders>\n" .
-                             "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"12\" ss:Color=\"#000000\" " .
-                             "ss:Bold=\"1\"/>\n" .
-                             "<Interior ss:Color=\"#A6A6A6\" ss:Pattern=\"Solid\"/>\n" .
+                             "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#000000\" " .
+                             "/>\n" .
+                             "<Interior ss:Color=\"#D9D9D9\" ss:Pattern=\"Solid\"/>\n" .
                              "<NumberFormat ss:Format=\"Percent\"/>\n" .
                              "</Style>\n";
                              
@@ -2795,7 +2803,7 @@ class CGenReport
         //global $allUmdTestCaseNumList;
         global $startStyleID;
         
-        $sheetCode = "<Worksheet ss:Name=\"Variance\">\n" .
+        $sheetCode = "<Worksheet ss:Name=\"Variation\">\n" .
                      "<Table x:FullColumns=\"1\" " .
                      "x:FullRows=\"1\" ss:DefaultRowHeight=\"15\">\n" .
                      "<Column ss:AutoFitWidth=\"0\" ss:Width=\"50\"/>\n" .
@@ -3012,9 +3020,15 @@ class CGenReport
             $t1 = "";
             foreach ($summaryJson as $k=>$v)
             {
+                $tmpGameName = $k;
+                $tmpArr = explode("_", $k);
+                if (count($tmpArr) > 1)
+                {
+                    $tmpGameName = $tmpArr[1];
+                }
                 
                 $t1 .= "<Row ss:StyleID=\"Default\">\n";
-                $t1 .= "<Cell ss:MergeDown=\"1\" ss:StyleID=\"s93\"><Data ss:Type=\"String\">" . $k . "</Data></Cell>\n";
+                $t1 .= "<Cell ss:MergeDown=\"1\" ss:StyleID=\"s93\"><Data ss:Type=\"String\">" . $tmpGameName . "</Data></Cell>\n";
                 $t7 = "<Row ss:StyleID=\"Default\" ss:Height=\"30\">\n";
                 $t6 = "<Row ss:StyleID=\"Default\" >\n";
                 $t4 = "";
@@ -4908,17 +4922,10 @@ class CGenReport
             }
             $tmpCode = implode("", $tmpList);
             $tmpCode2 = implode("", $tmpList2);
-            
-            //$tmpCode3 = "<Cell ss:StyleID=\"s" . ($startStyleID + 10) . "\"><Data ss:Type=\"String\">Variance</Data></Cell>\n" .
-            //            "<Cell ss:StyleID=\"s" . ($startStyleID + 11) . "\"><Data ss:Type=\"String\">Average</Data></Cell>\n";
                         
-            $tmpCode3 = "<Cell ss:StyleID=\"s" . ($startStyleID + 10) . "\"><Data ss:Type=\"String\">Variance</Data></Cell>\n";
+            $tmpCode3 = "<Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n";
                         
-            //$tmpCode4 = "<Cell ss:StyleID=\"s" . ($startStyleID + 13) . "\"/>\n" .
-            //            "<Cell ss:StyleID=\"s" . ($startStyleID + 14) . "\"><Data ss:Type=\"String\">" . 
-            //            $unitNameList[$_curTestPos] . "</Data></Cell>\n";
-                        
-            $tmpCode4 = "<Cell ss:StyleID=\"s" . ($startStyleID + 13) . "\"/>\n";
+            $tmpCode4 = "<Cell ss:StyleID=\"s" . ($startStyleID + 10) . "\"><Data ss:Type=\"String\">Variation</Data></Cell>\n";
                         
             $ordinalNumberList = array("1st", 
                                        "2nd",
@@ -4945,16 +4952,6 @@ class CGenReport
                                        
             $tmpCode5 = "";
             $tmpCode6 = "";
-            //for ($i = 0; $i < $resultNoiseNum; $i++)
-            //{
-            //    $tmpCode5 .= "<Cell ss:StyleID=\"s" . ($startStyleID + 12) . "\"><Data ss:Type=\"String\">" . 
-            //                 $ordinalNumberList[$i] . " Run</Data></Cell>\n" .
-            //                 "<Cell ss:StyleID=\"s" . ($startStyleID + 12) . "\"/>\n";
-            //                 
-            //    $tmpCode6 .= "<Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">" .
-            //                 $unitNameList[$_curTestPos] . "</Data></Cell>\n" .
-            //                 " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\"/>\n";
-            //}
             
             for ($i = 0; $i < $historyBatchMaxNum; $i++)
             {
@@ -4983,6 +4980,15 @@ class CGenReport
                   $tmpCode3 .
                   $tmpCode5 .
                   "</Row>\n";
+            if ($_curTestPos > 0)
+            {
+                $t1 = "<Row ss:StyleID=\"Default\" ss:Height=\"3\">" .
+                      " <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n" .
+                      $tmpCode2 .
+                      $tmpCode3 .
+                      $tmpCode5 .
+                      "</Row>\n";
+            }
                   
             $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $testNameList[$_curTestPos], $testNameList[$_curTestPos]);
             $tmpSet = "ss:HRef=\"" . $tmpUrl . "\"";

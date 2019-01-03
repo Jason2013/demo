@@ -130,10 +130,18 @@ class CGenReport
                          
         $styleVariance = "<Style ss:ID=\"s%d\">\n" .
                          "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Bottom\"/>\n" .
-                         "<Borders/>\n" .
-                         "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"12\" ss:Color=\"#000000\" " .
+                         "<Borders>\n" .
+                         "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" " .
+                         " ss:Color=\"#000000\"/>\n" .
+                         "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" " .
+                         " ss:Color=\"#000000\"/>\n" .
+                         "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" " .
+                         " ss:Color=\"#000000\"/>\n" .
+                         "</Borders>\n" .
+                         "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#000000\" " .
                          "ss:Bold=\"1\"/>\n" .
-                         "<Interior ss:Color=\"#A6A6A6\" ss:Pattern=\"Solid\"/>\n" .
+                         "<Interior ss:Color=\"#D9D9D9\" ss:Pattern=\"Solid\"/>\n" .
+                         "<NumberFormat ss:Format=\"Percent\"/>\n" .
                          "</Style>\n";
                          
         $styleAverage =  "<Style ss:ID=\"s%d\">\n" .
@@ -178,9 +186,9 @@ class CGenReport
                              "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" " .
                              " ss:Color=\"#000000\"/>\n" .
                              "</Borders>\n" .
-                             "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"12\" ss:Color=\"#000000\" " .
-                             "ss:Bold=\"1\"/>\n" .
-                             "<Interior ss:Color=\"#A6A6A6\" ss:Pattern=\"Solid\"/>\n" .
+                             "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#000000\" " .
+                             "/>\n" .
+                             "<Interior ss:Color=\"#D9D9D9\" ss:Pattern=\"Solid\"/>\n" .
                              "<NumberFormat ss:Format=\"Percent\"/>\n" .
                              "</Style>\n";
                              
@@ -2393,7 +2401,7 @@ class CGenReport
         global $curCardName;
         global $tmpSysName;
         
-        $sheetCodeStart = "<Worksheet ss:Name=\"Variance\">\n" .
+        $sheetCodeStart = "<Worksheet ss:Name=\"Variation\">\n" .
                      "<Table x:FullColumns=\"1\" " .
                      "x:FullRows=\"1\" ss:DefaultRowHeight=\"15\">\n" .
                      "<Column ss:AutoFitWidth=\"0\" ss:Width=\"50\"/>\n" .
@@ -2733,9 +2741,15 @@ class CGenReport
             $t1 = "";
             foreach ($summaryJson as $k=>$v)
             {
+                $tmpGameName = $k;
+                $tmpArr = explode("_", $k);
+                if (count($tmpArr) > 1)
+                {
+                    $tmpGameName = $tmpArr[1];
+                }
                 
                 $t1 .= "<Row ss:StyleID=\"Default\">\n";
-                $t1 .= "<Cell ss:MergeDown=\"1\" ss:StyleID=\"s93\"><Data ss:Type=\"String\">" . $k . "</Data></Cell>\n";
+                $t1 .= "<Cell ss:MergeDown=\"1\" ss:StyleID=\"s93\"><Data ss:Type=\"String\">" . $tmpGameName . "</Data></Cell>\n";
                 $t7 = "<Row ss:StyleID=\"Default\" ss:Height=\"30\">\n";
                 $t6 = "<Row ss:StyleID=\"Default\" >\n";
                 $t4 = "";
@@ -3848,8 +3862,28 @@ class CGenReport
                       
                 $t1 .= "   </Row>";
                 
-                $t1 = $reportAPIComparisonHead . 
-                      "<Column ss:Index=\"" . ($n1 + 1) . "\" ss:AutoFitWidth=\"0\" ss:Width=\"5\"/>" . 
+                $n2 = 0;
+                for ($i = 0; $i < count($tmpAPIList); $i++)
+                {
+                    if (strlen($tmpAPIList[$i]) > $n2)
+                    {
+                        $n2 = strlen($tmpAPIList[$i]);
+                    }
+                }
+                
+                $n2 = $n2 < 6 ? 6 : $n2;
+                $n2 *= 8;
+                
+                $t2 = "";
+                $t3 = "";
+                for ($i = 0; $i < $dataColumnNum; $i++)
+                {
+                    $t2 .= "<Column ss:AutoFitWidth=\"0\" ss:Width=\"" . $n2 . "\"/>\n";
+                    $t3 .= "<Column ss:AutoFitWidth=\"0\" ss:Width=\"" . $n2 . "\"/>\n";
+                }
+                
+                $t1 = $reportAPIComparisonHead . $t2 .
+                      "<Column ss:Index=\"" . ($n1 + 1) . "\" ss:AutoFitWidth=\"0\" ss:Width=\"3\"/>\n" . $t3 .
                       $t1;
                 
             }
@@ -4257,7 +4291,7 @@ class CGenReport
                     $tmpAverageDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($t2) . 
                                            "</Data></Cell>\n";
                                            
-                    $lastColumnID = $i;
+                    //$lastColumnID = $i;
                 }
                 $t1 = $tmpAverageDataCode . $tmpAverageDataCode2;
             }
@@ -4806,9 +4840,10 @@ class CGenReport
             $tmpCode = implode("", $tmpList);
             $tmpCode2 = implode("", $tmpList2);
                     
-            $tmpCode3 = "<Cell ss:StyleID=\"s" . ($startStyleID + 10) . "\"><Data ss:Type=\"String\">Variance</Data></Cell>\n";
+            //$tmpCode3 = "<Cell ss:StyleID=\"s" . ($startStyleID + 10) . "\"><Data ss:Type=\"String\">Variance</Data></Cell>\n";
+            $tmpCode3 = "<Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n";
                         
-            $tmpCode4 = "<Cell ss:StyleID=\"s" . ($startStyleID + 13) . "\"/>\n";
+            $tmpCode4 = "<Cell ss:StyleID=\"s" . ($startStyleID + 10) . "\"><Data ss:Type=\"String\">Variation</Data></Cell>\n";
                         
             $ordinalNumberList = array("1st", 
                                        "2nd",
@@ -4877,6 +4912,15 @@ class CGenReport
                   $tmpCode3 .
                   $tmpCode5 .
                   "</Row>\n";
+            if ($_curTestPos > 0)
+            {
+                $t1 = "<Row ss:StyleID=\"Default\" ss:Height=\"3\">" .
+                      " <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n" .
+                      $tmpCode2 .
+                      $tmpCode3 .
+                      $tmpCode5 .
+                      "</Row>\n";
+            }
             
             $t2 = "<Row ss:StyleID=\"Default\">\n" .
                    " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" .
@@ -4906,7 +4950,7 @@ class CGenReport
                 // start of each test
                 // black bar & test subject bar
                       
-                $t1 = "<Row ss:StyleID=\"Default\" ss:AutoFitHeight=\"0\" ss:Height=\"5\">" .
+                $t1 = "<Row ss:StyleID=\"Default\" ss:AutoFitHeight=\"0\" ss:Height=\"3\">" .
                       " <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n" .
                       $tmpCode2;
                 // + 1 is for black column between comp * exec time
@@ -6389,13 +6433,13 @@ class CGenReport
                         
                             $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
                                    "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
-                                                "RC" . $rcID2 . "=&quot;&quot;," .
+                                                "RC" . $rcID3 . "=&quot;&quot;," .
                                                 "RC" . $rcID1 . "=0," .
-                                                "RC" . $rcID2 . "=0" .
+                                                "RC" . $rcID3 . "=0" .
                                                 "),&quot;&quot;," .
                                                 "(RC" . $rcID1 . // 8
-                                                "-RC" . $rcID2 . // 6
-                                                ")/RC" . $rcID2 . ")\">" .
+                                                "-RC" . $rcID3 . // 6
+                                                ")/RC" . $rcID3 . ")\">" .
                                                 "<Data ss:Type=\"Number\"></Data></Cell>\n" .
                                    " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
                                    "" . $tmpDataList[$i] . "</Cell>\n";
@@ -6438,13 +6482,13 @@ class CGenReport
                         
                             $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
                                    "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
-                                                "RC" . $rcID2 . "=&quot;&quot;," .
+                                                "RC" . $rcID3 . "=&quot;&quot;," .
                                                 "RC" . $rcID1 . "=0," .
-                                                "RC" . $rcID2 . "=0" .
+                                                "RC" . $rcID3 . "=0" .
                                                 "),&quot;&quot;," .
                                                 "(RC" . $rcID1 . // 8
-                                                "-RC" . $rcID2 . // 6
-                                                ")/RC" . $rcID2 . ")\">" .
+                                                "-RC" . $rcID3 . // 6
+                                                ")/RC" . $rcID3 . ")\">" .
                                                 "<Data ss:Type=\"Number\"></Data></Cell>\n" .
                                    " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
                                    "" . $tmpDataList2[$i] . "</Cell>\n";

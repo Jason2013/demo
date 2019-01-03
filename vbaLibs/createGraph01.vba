@@ -107,34 +107,40 @@ End Function
 Function setCharBarPercentTag(barNum1 As Integer, barNum2 As Integer)
     Dim i As Integer
     ActiveSheet.ChartObjects("chart02").Activate
-    'For i = 1 To barNum2
-    '    If (i Mod 2) = 1 Then
-    '        ActiveChart.SeriesCollection(i).Select
-    '        ActiveChart.SeriesCollection(i).ApplyDataLabels
-    '        ActiveChart.SeriesCollection(i).DataLabels.Select
-    '        Selection.NumberFormat = "0.00%%"
-    '    End If
-    'Next
-    ActiveChart.SeriesCollection(1).Select
-    ActiveChart.SeriesCollection(1).ApplyDataLabels
-    ActiveChart.SeriesCollection(1).DataLabels.Select
-    Selection.NumberFormat = "0.00%%"
+    For i = 1 To barNum2
+        'If (i Mod 2) = 1 Then
+            ActiveChart.SeriesCollection(i).Select
+            ActiveChart.SeriesCollection(i).ApplyDataLabels
+            ActiveChart.SeriesCollection(i).DataLabels.Select
+            Selection.NumberFormat = "0.00%%"
+            Selection.Format.TextFrame2.TextRange.Font.Size = 9
+        'End If
+    Next
     
     ActiveSheet.ChartObjects("chart01").Activate
-    'For i = 1 To barNum1
-    '    If (i Mod 2) = 1 Then
-    '        ActiveChart.SeriesCollection(i).Select
-    '        ActiveChart.SeriesCollection(i).ApplyDataLabels
-    '        ActiveChart.SeriesCollection(i).DataLabels.Select
-    '        Selection.NumberFormat = "0.00%%"
-    '    End If
-    'Next
-    If barNum1 > 1 Then
-        ActiveChart.SeriesCollection(2).Select
-        ActiveChart.SeriesCollection(2).ApplyDataLabels
-        ActiveChart.SeriesCollection(2).DataLabels.Select
-        Selection.NumberFormat = "0.00%%"
-    End If
+    For i = 1 To barNum1
+        'If (i Mod 2) = 1 Then
+            ActiveChart.SeriesCollection(i).Select
+            ActiveChart.SeriesCollection(i).ApplyDataLabels
+            ActiveChart.SeriesCollection(i).DataLabels.Select
+            Selection.NumberFormat = "0.00%%"
+            Selection.Format.TextFrame2.TextRange.Font.Size = 9
+        'End If
+    Next
+    
+    'ActiveSheet.ChartObjects("chart02").Activate
+    'ActiveChart.SeriesCollection(1).Select
+    'ActiveChart.SeriesCollection(1).ApplyDataLabels
+    'ActiveChart.SeriesCollection(1).DataLabels.Select
+    'Selection.NumberFormat = "0.00%%"
+    '
+    'ActiveSheet.ChartObjects("chart01").Activate
+    'If barNum1 > 1 Then
+    '    ActiveChart.SeriesCollection(2).Select
+    '    ActiveChart.SeriesCollection(2).ApplyDataLabels
+    '    ActiveChart.SeriesCollection(2).DataLabels.Select
+    '    Selection.NumberFormat = "0.00%%"
+    'End If
 
 End Function
 
@@ -149,6 +155,7 @@ Function setSecondTitleColor(MainTitle As String, SecondTitle As String)
     
     ActiveSheet.ChartObjects("chart02").Activate
     ActiveChart.ChartTitle.Select
+    Selection.Format.TextFrame2.TextRange.Font.Size = 14
     ActiveChart.ChartTitle.Text = _
         MainTitle & Chr(13) & SecondTitle
     Selection.Format.TextFrame2.TextRange.Characters.Text = _
@@ -167,16 +174,20 @@ Function setSecondTitleColor(MainTitle As String, SecondTitle As String)
         .Fill.ForeColor.RGB = RGB(255, 192, 0)
         .Fill.Transparency = 0
         .Fill.Solid
-        .Size = 18
+        .Size = 14
         .Italic = msoFalse
         .Kerning = 12
         .Name = "+mn-lt"
         .UnderlineStyle = msoNoUnderline
         .Strike = msoNoStrike
     End With
+    ActiveChart.Legend.Select
+    Selection.Format.TextFrame2.TextRange.Font.Size = 12
+    Selection.Position = xlTop
     
     ActiveSheet.ChartObjects("chart01").Activate
     ActiveChart.ChartTitle.Select
+    Selection.Format.TextFrame2.TextRange.Font.Size = 14
     ActiveChart.ChartTitle.Text = _
         MainTitle & Chr(13) & SecondTitle
     Selection.Format.TextFrame2.TextRange.Characters.Text = _
@@ -195,13 +206,16 @@ Function setSecondTitleColor(MainTitle As String, SecondTitle As String)
         .Fill.ForeColor.RGB = RGB(255, 192, 0)
         .Fill.Transparency = 0
         .Fill.Solid
-        .Size = 18
+        .Size = 14
         .Italic = msoFalse
         .Kerning = 12
         .Name = "+mn-lt"
         .UnderlineStyle = msoNoUnderline
         .Strike = msoNoStrike
     End With
+    ActiveChart.Legend.Select
+    Selection.Format.TextFrame2.TextRange.Font.Size = 12
+    Selection.Position = xlTop
 
 End Function
 
@@ -233,8 +247,8 @@ Public Sub createGraph01()
         myNumFormat = "0%%"
     End If
     
-    If WorksheetExists("Variance") = True Then
-        Worksheets("Variance").Move before := Worksheets(1)
+    If WorksheetExists("Variation") = True Then
+        Worksheets("Variation").Move before := Worksheets(1)
     End If
     
     destSheet.Move before := Worksheets(1)
@@ -301,10 +315,6 @@ Public Sub createGraph01()
     Selection.TickLabels.Font.Bold = msoTrue
     Selection.MajorTickMark = xlNone
     
-    'ActiveChart.SeriesCollection(1).Select
-    'ActiveChart.SeriesCollection(1).ApplyDataLabels
-    'ActiveChart.SeriesCollection(1).DataLabels.Select
-    'Selection.NumberFormat = "0.00%%"
     
     Set myUnion = %s
     Set myChart = destSheet.ChartObjects.Add(800, 40, 1500, 400)
@@ -367,23 +377,6 @@ Public Sub createGraph01()
     Selection.TickLabels.Font.Bold = msoTrue
     Selection.MajorTickMark = xlNone
     
-    'ActiveChart.SeriesCollection(1).Select
-    'ActiveChart.SeriesCollection(1).ApplyDataLabels
-    'ActiveChart.SeriesCollection(1).DataLabels.Select
-    'Selection.NumberFormat = "0.00%%"
-    
-    'With ActiveSheet.Shapes("chart02").Fill
-    '    .Visible = msoTrue
-    '    .ForeColor.RGB = RGB(0, 0, 0) 
-    '    .ForeColor.TintAndShade = 0.0
-    '    .ForeColor.Brightness = 0
-    '    .BackColor.RGB = RGB(0, 0, 0) 
-    '    .BackColor.TintAndShade = 0.2
-    '    .BackColor.Brightness = 0
-    '    .TwoColorGradient msoGradientVertical, 1
-    'End With
-    'ActiveChart.PlotArea.Format.Fill.Visible = msoFalse
-    
 
     Range("%s").Select
     Selection.FormatConditions.AddColorScale ColorScaleType:=3
@@ -408,6 +401,19 @@ Public Sub createGraph01()
         .TintAndShade = 0
     End With
     
+    ActiveSheet.ChartObjects("chart02").Activate
+    ActiveChart.ChartTitle.Select
+    Selection.Format.TextFrame2.TextRange.Font.Size = 14
+    ActiveChart.Legend.Select
+    Selection.Format.TextFrame2.TextRange.Font.Size = 12
+    Selection.Position = xlTop
+    
+    ActiveSheet.ChartObjects("chart01").Activate
+    ActiveChart.ChartTitle.Select
+    Selection.Format.TextFrame2.TextRange.Font.Size = 14
+    ActiveChart.Legend.Select
+    Selection.Format.TextFrame2.TextRange.Font.Size = 12
+    Selection.Position = xlTop
     
     %s
     
