@@ -1235,6 +1235,46 @@ class CGenReport
                         break;
                     }
                 }
+                
+                // connect with result before Dec 7, 2018,
+                //if ($tmpIndex === false)
+                //{
+                //    if ($tmpDriverName == "Ariel_NVIDIA")
+                //    {
+                //        $tmpDriverName = "Ariel_SCPC";
+                //        
+                //        for ($i = 0; $i < count($umdNameList); $i++)
+                //        {
+                //            if (strtolower($tmpDriverName) == strtolower($umdNameList[$i]))
+                //            {
+                //                $tmpIndex = $i;
+                //                break;
+                //            }
+                //        }
+                //    }
+                //}
+                
+                if ($tmpBatchID < 606)
+                {
+                    if ($tmpDriverName == "Ariel_NVIDIA")
+                    {
+                        $tmpDriverName = "Ariel_LLPC";
+                    }
+                    else if ($tmpDriverName == "Ariel_LLPC")
+                    {
+                        $tmpDriverName = "Ariel_SCPC";
+                    }
+                    
+                    for ($i = 0; $i < count($umdNameList); $i++)
+                    {
+                        if (strtolower($tmpDriverName) == strtolower($umdNameList[$i]))
+                        {
+                            $tmpIndex = $i;
+                            break;
+                        }
+                    }
+                }
+                
                 $tmpIndex2 = array_search($tmpDriver2Name, $usedDriver2List);
                 
                 $tmpIndexList []= $tmpIndex;
