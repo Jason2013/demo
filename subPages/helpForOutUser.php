@@ -19,10 +19,15 @@ $html1->outPageBodyStart();
     <p>1. you need to organize your microbench result files into a folders tree hierarchy, before start everything.</p>
     <p>&nbsp&nbsp&nbsp&nbsphere is an example: <a href="\\gfxbench\Grapher\result_example">\\gfxbench\Grapher\result_example</a></p>
     <p>2. open this link <a href="genReportOutUser.php">"generate report"</a> to import your results into our database, and start generating reports.</p>
-    <p>&nbsp&nbsp&nbsp&nbspby above example, please fill <span style="background-color: #FFFF00;">\\gfxbench\Grapher\result_example\2017-05-18-man00003</span> as folder name.</p>
-    <p>&nbsp&nbsp&nbsp&nbspand don't forget to click the <span style="background-color: #0000FF; color: #FFFFFF;">start generation</span> button </p>
-    <p>&nbsp&nbsp&nbsp&nbspduring the process of result importing, please <span style="background-color: #FF0000; color: #FFFFFF;">don't close current page or switch to other page!</span></p>
+    <p>&nbsp&nbsp&nbsp&nbspby above example, please fill \\gfxbench\Grapher\result_example\2017-05-18-man00003 as folder name.</p>
+    <p>&nbsp&nbsp&nbsp&nbspand don't forget to click the start generation button </p>
+    <p>&nbsp&nbsp&nbsp&nbspduring the process of result importing, please don't close current page or switch to other page!</p>
     <p>3. after reports generation is done, reports downloading links will be shown on current webpage.</p>
+    
+    <p>see an example here: \\oglserver\Incoming\Davy\deletable\benchMax\2017-08-11-man00001</p>
+    <p>please don't close this page in process of reports generation!</p>
+    
+    
 </div>
 
 <p></p>

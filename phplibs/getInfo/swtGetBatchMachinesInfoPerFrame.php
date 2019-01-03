@@ -53,7 +53,7 @@ if ($batchID == -1)
         $params1 = array($userID);
         $sql1 = "SELECT t0.batch_id FROM mis_table_user_batch_info t0 " .
                 "WHERE t0.user_id = ? AND t0.batch_id IN (SELECT t1.batch_id FROM mis_table_batch_list t1 " .
-                "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
+                "WHERE t1.batch_state=\"1\" AND (t1.batch_group IN (7))) " .
                 "ORDER BY t0.insert_time DESC LIMIT 1";
     }
     if ($db->QueryDB($sql1, $params1) == null)
@@ -162,7 +162,7 @@ foreach ($machineIDList as $tmpMachineID)
                 "LEFT JOIN mis_table_batch_list t3 USING (batch_id) " .
                 "WHERE t0.user_id = ? " .
                 "AND t0.batch_id IN (SELECT t1.batch_id FROM mis_table_batch_list t1 " .
-                "WHERE t1.batch_state=\"1\" AND t1.batch_group=\"0\") " .
+                "WHERE t1.batch_state=\"1\" AND (t1.batch_group IN (7))) " .
                 "AND t0.batch_id IN (SELECT t2.batch_id FROM mis_table_result_list t2 " .
                 "WHERE t2.machine_id = ?) " .
                 "ORDER BY t0.insert_time DESC LIMIT 5";

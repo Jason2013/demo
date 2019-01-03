@@ -254,6 +254,43 @@ function swtSubmitTestResultsMannualShaderBenchOutUser(_inputTagName,
                          importDate);
 }
 
+// frameBench outuser
+function swtSubmitTestResultsMannualPerFrameOutUser(_inputTagName,
+                                                    _percentTagName,
+                                                    _usernameTagName,
+                                                    _passwordTagName,
+                                                    _targetTagName)
+{
+    var reportGroup = 7;
+    
+    var importDate = "";
+    
+    $("#" + _percentTagName).html("copying files: 0%");
+    var t1 = $("#" + _inputTagName).val();
+    if (t1.length == 0)
+    {
+        alert("please fill in folder name");
+        return;
+    }
+    var t2 = $("#" + _usernameTagName).val();
+    var t3 = $("#" + _passwordTagName).val();
+    //var t4 = $("#" + _targetTagName).val();
+    $.cookie('benchMaxUsername', t2);
+    $.cookie('benchMaxPassword', t3);
+    swtDoCopyResultFilesPerFrame(_inputTagName,
+                         _percentTagName,
+                         -1, // batch ID
+                         t1,
+                         t2,
+                         t3,
+                         "",
+                         0,
+                         "",
+                         "",
+                         reportGroup,
+                         importDate);
+}
+
 function swtDoCopyResultFiles(_inputTagName,
                               _percentTagName,
                               _batchID,

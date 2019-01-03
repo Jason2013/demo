@@ -99,6 +99,8 @@ class CSwtHtmlTemple
             echo "        <a href=\"" . $this->pagePrePath . "subPages/genReportOutUserVer4.php\">Microbench Report</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFiles3OutUser.php\">ShaderBench Import</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportShaderBenchOutUser.php\">ShaderBench Report</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFiles4OutUser.php\">FrameBench Import</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportPerFrameOutUser.php\">FrameBench Report</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/batchListOutUser.php\">Batch List</a>\n";
             //echo "        <a href=\"" . $this->pagePrePath . "subPages/genReportOutUser.php\">generate Reports</a>\n";
             //echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFilesOutUser.php\">import results</a>\n";

@@ -104,7 +104,7 @@ if ($reportType == 0)
                 "FROM mis_table_batch_list t0 " .
                 "LEFT JOIN mis_table_path_info t1 " .
                 "USING (path_id) " .
-                "WHERE (t0.batch_group IN (0, 6)) AND " .
+                "WHERE (t0.batch_group IN (0, 6, 7)) AND " .
                 "t0.batch_id IN (SELECT t2.batch_id FROM mis_table_user_batch_info t2 WHERE t2.user_id = ? ORDER BY t2.insert_time DESC) " .
                 "ORDER BY t0.insert_time DESC LIMIT ?, ?";
                 

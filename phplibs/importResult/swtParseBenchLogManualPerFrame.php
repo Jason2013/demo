@@ -177,6 +177,48 @@ function swtGetBatchID($_state)
     }
     $batchID = $db->getInsertID();
 
+    if ($batchGroup == 7)
+    {
+        // for outside users
+        $userChecker = new CUserManger();
+        $userID = $userChecker->getUserID();
+        if ($userID != -1)
+        {
+            // valid user
+            
+            $params1 = array($userID, $batchID);
+            $sql1 = "SELECT COUNT(*) FROM mis_table_user_batch_info " .
+                    "WHERE user_id = ? AND batch_id = ?";
+            if ($db->QueryDB($sql1, $params1) == null)
+            {
+                $returnMsg["errorCode"] = 0;
+                $returnMsg["errorMsg"] = "query mysql table failed #3a, line: " . __LINE__;
+                return -1;
+            }
+            $row1 = $db->fetchRow();
+            if ($row1 == false)
+            {
+                $returnMsg["errorCode"] = 0;
+                $returnMsg["errorMsg"] = "query mysql table failed #3a, line: " . __LINE__;
+                return -1;
+            }
+            $userNum = intval($row1[0]);
+            if ($userNum == 0)
+            {
+                $params1 = array($userID, $batchID);
+                $sql1 = "INSERT INTO mis_table_user_batch_info " .
+                        "(user_id, batch_id, insert_time) " .
+                        "VALUES (?, ?, NOW())";
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3a, line: " . __LINE__;
+                    return -1;
+                }
+            }
+        }
+    }
+    
     return $batchID;
 }
 

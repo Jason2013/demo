@@ -449,9 +449,11 @@ for ($i = 0; $i < count($umdStandardOrder); $i++)
     $isSkip = false;
     for ($j = 0; $j < $reportUmdNum; $j++)
     {
-        if ($umdStandardOrder[$i] == $driverNameList[0][$j])
+        if ($umdStandardOrder[$i] == $driverNameList[0][$j + $startResultID])
+        //if ($umdStandardOrder[$i] == $driverNameList[0][$j])
         {
-            if ($resultIDList[0][$j] == PHP_INT_MAX)
+            if ($resultIDList[0][$j + $startResultID] == PHP_INT_MAX)
+            //if ($resultIDList[0][$j] == PHP_INT_MAX)
             {
                 // if API missing
                 $isSkip = true;
