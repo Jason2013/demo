@@ -1444,6 +1444,18 @@ function swtGetMachineID($_pathName)
     $json = file_get_contents($_pathName);
     $obj = json_decode($json, true);
     $obj["clientCmd"] = clientSendMachineInfo;
+    
+    if ((isset($obj["videoCardName"]) == false) ||
+        (isset($obj["systemName"])    == false))
+    {
+        return -1;
+    }
+    
+    if ((strlen($obj["videoCardName"]) == 0) ||
+        (strlen($obj["systemName"])    == 0))
+    {
+        return -1;
+    }
 
     $clientCmdParser = new CClientHeartBeat;
     $tmpMsg = $clientCmdParser->parseClientCmd($obj);
