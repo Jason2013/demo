@@ -868,6 +868,8 @@ class CGenReport
                     $returnMsg["errorCode"] = 0;
                     $returnMsg["errorMsg"] = "template file missing, line: " . __LINE__;
                     echo json_encode($returnMsg);
+                    fclose($_fileHandle);
+                    fclose($tmpFileHandle);
                     return null;
                 }
                 fwrite($_fileHandle, $xmlSection);
@@ -2450,7 +2452,7 @@ class CGenReport
                 $t1 .= "</Row>\n";
                 $sheetLinePos++;
                 
-                $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $_curTestName);
+                $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $_curTestName, $_curTestName);
                 $tmpSet = "ss:HRef=\"" . $tmpUrl . "\"";
                        
                 $t3 = "<Row>\n" .
@@ -3589,6 +3591,8 @@ class CGenReport
         $tmpJson = array();
         $tmpJson["graphDataArea"] = $graphDataArea;
         $tmpJson["graphDataAreaNoBlank"] = $graphDataAreaNoBlank;
+        $tmpJson["graphTitle"] = "Microbench Performance relative to DXX - ";
+        $tmpJson["reportType"] = 4;
         $tmpJson["curCardName"] = $curCardName;
         $tmpJson["cmpCardName"] = $cmpCardName;
         $tmpJson["curSysName"] = $curSysName;
@@ -3855,7 +3859,7 @@ class CGenReport
                 }
                 $tmpCode = implode("", $tmpList);
                 
-                $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $testName);
+                $tmpUrl = sprintf($swtMicrobenchDocsTestNameUrl, $testName, $testName);
                 $tmpSet = "ss:HRef=\"" . $tmpUrl . "\"";
                 
                 // data rows for api comparison

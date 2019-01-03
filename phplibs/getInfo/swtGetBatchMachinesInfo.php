@@ -9,7 +9,12 @@ include_once "../generalLibs/genfuncs.php";
 include_once "../generalLibs/code01.php";
 include_once "../userManage/swtUserManager.php";
 
-$batchID = intval($_POST["batchID"]);
+//$batchID = intval($_POST["batchID"]);
+$batchID = -1;
+if (isset($_POST["batchID"]))
+{
+    $batchID = intval($_POST["batchID"]);
+}
 
 $returnMsg = array();
 $returnMsg["errorCode"] = 1;

@@ -150,6 +150,12 @@ Function removeChartLegend()
     Selection.Delete
 End Function
 
+Function removeMBOutUserSecChart()
+    ActiveSheet.ChartObjects("chart01").Activate
+    ActiveChart.ChartArea.Select
+    ActiveChart.Parent.Delete
+End Function
+
 Function setSecondTitleColor(MainTitle As String, SecondTitle As String)
     Dim t1 As String
     

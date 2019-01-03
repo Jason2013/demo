@@ -109,7 +109,7 @@ if ($fileID < count($oldReportXLSXList))
         catch (Exception $e)
         {
             $returnMsg["errorCode"] = 0;
-            $returnMsg["errorMsg"] = $e->getMessage();
+            $returnMsg["errorMsg"] = $e->getMessage() . ", line: " . __LINE__;
             
             echo json_encode($returnMsg);
             return;
@@ -267,6 +267,13 @@ if ($fileID < count($oldReportXLSXList))
                     $codePiece1 .= "Call removeChartLegend()\n";
                 }
                 
+                // microbench outuser del one of chart
+                if ($vbaConfig->reportType == 4)
+                {
+                    $codePiece1 .= "\n";
+                    $codePiece1 .= "Call removeMBOutUserSecChart()\n";
+                }
+                
                 $titleAdd = $tmpCardName;
                 if (($vbaConfig->reportType == 2) ||
                     ($vbaConfig->reportType == 3))
@@ -302,7 +309,7 @@ if ($fileID < count($oldReportXLSXList))
         catch (Exception $e)
         {
             $returnMsg["errorCode"] = 0;
-            $returnMsg["errorMsg"] = $e->getMessage();
+            $returnMsg["errorMsg"] = $e->getMessage() . ", line: " . __LINE__;
             
             echo json_encode($returnMsg);
             return;

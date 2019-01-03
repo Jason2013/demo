@@ -2,7 +2,9 @@ Public Sub flatData01()
     
     For Each sh In Worksheets
         sh.Activate
-        ActiveSheet.UsedRange.AutoFilter
+        If IsEmpty(ActiveSheet.UsedRange) = False Then
+            ActiveSheet.UsedRange.AutoFilter
+        End If
     Next
 
 End Sub
