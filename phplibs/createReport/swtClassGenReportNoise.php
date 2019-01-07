@@ -5010,7 +5010,7 @@ class CGenReport
                 // start of each test
                 // black bar & test subject bar
                       
-                $t1 = "<Row ss:StyleID=\"Default\">" .
+                $t1 = "<Row ss:StyleID=\"Default\" ss:AutoFitHeight=\"0\" ss:Height=\"3\">" .
                       " <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n" .
                       //" <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n" .
                       $tmpCode2;
