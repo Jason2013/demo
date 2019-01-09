@@ -31,10 +31,10 @@ $html1->outPageBodyStart();
                 <input type="radio" name="reportGroup" value="tempReport">temp report (not shown in Graphs)
             -->
                 <select id="reportGroup" name="reportGroup">
-                    <option value="routineReport" selected="selected">routine report</option>
+                    <option value="routineReport" selected="selected">Manual Weekly Microbench</option>
                     <option value="tempReport">temp report</option>
-                    <option value="reportSlot00">report slot01</option>
-                    <option value="reportSlot01">report slot02</option>
+                    <option value="reportSlot00">Weekly Ariel Microbench</option>
+                    <option value="reportSlot01">Weekly Navi10 Microbench</option>
                     <option value="reportSlot02">report slot03</option>
                     <option value="reportSlot03">report slot04</option>
                     <option value="reportSlot04">report slot05</option>

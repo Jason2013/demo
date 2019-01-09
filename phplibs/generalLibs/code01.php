@@ -58,6 +58,50 @@ $swtTestBatchStateString = array("submitted",
                                  "reserved");
                                  
 $swtTestBatchGroupString = array("out user",
+                                 "Manual Weekly Microbench",
+                                 "temp report",
+                                 "Weekly Shaderbench",
+                                 "Skynet Weekly Microbench",
+                                 "Weekly Framebench",
+                                 "shaderBench outuser",
+                                 "frameBench outuser");
+                                 
+$swtTestBatchGroupStringEx = array("Weekly Ariel Microbench",
+                                   "Weekly Navi10 Microbench",
+                                   "report slot03",
+                                   "report slot04",
+                                   "report slot05",
+                                   "report slot06",
+                                   "report slot07",
+                                   "report slot08",
+                                   "report slot09",
+                                   "report slot10");
+                                   
+$swtTestBatchGroupStringEx2 = array("Weekly Ariel Shaderbench",
+                                    "Weekly Navi10 Shaderbench",
+                                    "shader slot03",
+                                    "shader slot04",
+                                    "shader slot05",
+                                    "shader slot06",
+                                    "shader slot07",
+                                    "shader slot08",
+                                    "shader slot09",
+                                    "shader slot10");
+                                    
+$swtTestBatchGroupStringEx3 = array("Weekly Ariel Framebench",
+                                    "Weekly Navi10 Framebench",
+                                    "frame slot03",
+                                    "frame slot04",
+                                    "frame slot05",
+                                    "frame slot06",
+                                    "frame slot07",
+                                    "frame slot08",
+                                    "frame slot09",
+                                    "frame slot10");
+
+/*
+
+$swtTestBatchGroupString = array("out user",
                                  "routine report",
                                  "temp report",
                                  "shaderBench",
@@ -99,6 +143,8 @@ $swtTestBatchGroupStringEx3 = array("frame slot01",
                                     "frame slot09",
                                     "frame slot10");
 
+*/
+                                    
 // show tables like 'mis_table_data_test_%'
 // show columns from tablename
                     

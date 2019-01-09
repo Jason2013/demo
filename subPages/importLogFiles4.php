@@ -27,9 +27,9 @@ $html1->outPageBodyStart();
             </td>
             <td>
                 <select id="reportGroup" name="reportGroup">
-                    <option value="frameReport" selected="selected">frame report</option>
-                    <option value="frameSlot00">frame slot01</option>
-                    <option value="frameSlot01">frame slot02</option>
+                    <option value="frameReport" selected="selected">Weekly Framebench</option>
+                    <option value="frameSlot00">Weekly Ariel Framebench</option>
+                    <option value="frameSlot01">Weekly Navi10 Framebench</option>
                     <option value="frameSlot02">frame slot03</option>
                     <option value="frameSlot03">frame slot04</option>
                     <option value="frameSlot04">frame slot05</option>

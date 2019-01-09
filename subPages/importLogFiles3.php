@@ -26,9 +26,9 @@ $html1->outPageBodyStart();
             </td>
             <td>
                 <select id="reportGroup" name="reportGroup">
-                    <option value="shaderReport" selected="selected">shader report</option>
-                    <option value="shaderSlot00">shader slot01</option>
-                    <option value="shaderSlot01">shader slot02</option>
+                    <option value="shaderReport" selected="selected">Weekly Shaderbench</option>
+                    <option value="shaderSlot00">Weekly Ariel Shaderbench</option>
+                    <option value="shaderSlot01">Weekly Navi10 Shaderbench</option>
                     <option value="shaderSlot02">shader slot03</option>
                     <option value="shaderSlot03">shader slot04</option>
                     <option value="shaderSlot04">shader slot05</option>
