@@ -87,6 +87,8 @@ $swtSheetColumnIDList = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
 
 define("graphDataStartLineID", "6");
 define("graphDataStartLineIDCompare", "6");
+//define("graphDataStartLineID", "5");
+//define("graphDataStartLineIDCompare", "5");
 define("graphDataStartCloumnID", "R");
 define("graphDataEndCloumnID", "U");
 define("graphDataStartCloumnIDIndex", 17);

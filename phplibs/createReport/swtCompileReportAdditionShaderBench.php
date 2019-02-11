@@ -42,7 +42,10 @@ $startSheetLineNum = 11;
 $tempFileStartSheetLineNum = 4;
 $compileFinished = 0;
 $historyBatchMaxNum = 4;
-$startGraphDataLinePos = 2;
+//$startGraphDataLinePos = 2;
+$startGraphDataLinePos = 1;
+$graphDataStartLineID = 5;
+$graphDataStartLineIDCompare = 5;
 $maxSubTestNumOnce = 3000;
 
 $subTestUmdDataMaskList = array();
@@ -757,20 +760,6 @@ else
     $standardSubTestNameList = $returnSet["standardSubTestNameList"];
     $standardSubTestFilterNameList = $returnSet["standardSubTestFilterNameList"];
     $standardTestCaseIDList = $returnSet["standardTestCaseIDList"];
-
-    
-    //fseek($fileHandle, $lineNumPos, SEEK_SET);
-    //// line num is 10 digis number, like: 0000000011
-    //$t1 = fread($fileHandle, 10);
-    //$n1 = intval($t1);
-    //$n1 += $lineNum;
-    //
-    //fseek($fileHandle, $lineNumPos, SEEK_SET);
-    //fseek($fileHandle2, $lineNumPos, SEEK_SET);
-    //$t1 = sprintf("%010d", $n1);
-    ////$t1 = "1234567890";
-    //fwrite($fileHandle, $t1);
-    //fwrite($fileHandle2, $t1);
     
     fclose($fileHandle);
     fclose($fileHandle2);

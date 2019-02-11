@@ -347,6 +347,72 @@ class CGenReport
                                "<Interior ss:Color=\"#800000\" ss:Pattern=\"Solid\"/>\n" .
                                "</Style>\n";
                                
+        $styleA_top_w2 = "<Style ss:ID=\"s%d\">\n" .
+                  "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>\n" .
+                  "<Borders>\n" .
+                  "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                  "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                  "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                  "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" ss:Color=\"#000000\"/>\n" .
+                  "</Borders>\n" .
+                  "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FFFFFF\" ss:Bold=\"1\"/>\n" .
+                  "<Interior ss:Color=\"#800000\" ss:Pattern=\"Solid\"/>\n" .
+                  "</Style>\n";
+
+        $styleBLeft_top_w2 = "<Style ss:ID=\"s%d\">\n" . // Center
+                      "<Alignment ss:Horizontal=\"Left\" ss:Vertical=\"Center\"/>\n" .
+                      "<Borders>\n" .
+                      "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                      "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                      "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                      "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" ss:Color=\"#000000\"/>\n" .
+                      "</Borders>\n" .
+                      "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FFFFFF\" ss:Bold=\"1\"/>\n" .
+                      "<Interior ss:Color=\"#A03300\" ss:Pattern=\"Solid\"/>\n" .
+                      "</Style>\n";
+
+        $styleData_top_w2 = "<Style ss:ID=\"s%d\">\n" .
+                     "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>\n" .
+                     "<Borders>\n" .
+                     "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" ss:Color=\"#000000\"/>\n" .
+                     "</Borders>\n" .
+                     "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
+                     //"<NumberFormat ss:Format=\"Fixed\"/>" .
+                     "<NumberFormat ss:Format=\"0.000\"/>" .
+                     "</Style>\n";
+                  
+        $styleRate_top_w2 = "<Style ss:ID=\"s%d\">\n" .
+                     "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>\n" .
+                     "<Borders>\n" .
+                     "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" ss:Color=\"#000000\"/>\n" .
+                     "</Borders>\n" .
+                     "<Interior ss:Color=\"#D0FFFF\" ss:Pattern=\"Solid\"/>\n" .
+                     "<NumberFormat ss:Format=\"Percent\"/>\n" .
+                     "</Style>\n";
+                               
+        $styleVarianceData_top_w2 = "<Style ss:ID=\"s%d\">\n" .
+                             "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Bottom\"/>\n" .
+                             "<Borders>\n" .
+                             "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" " .
+                             " ss:Color=\"#000000\"/>\n" .
+                             "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" " .
+                             " ss:Color=\"#000000\"/>\n" .
+                             "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" " .
+                             " ss:Color=\"#000000\"/>\n" .
+                             "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" " .
+                             " ss:Color=\"#000000\"/>\n" .
+                             "</Borders>\n" .
+                             "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#000000\" " .
+                             "/>\n" .
+                             "<Interior ss:Color=\"#D9D9D9\" ss:Pattern=\"Solid\"/>\n" .
+                             "<NumberFormat ss:Format=\"Percent\"/>\n" .
+                             "</Style>\n";
              
         $appendStyleList = array($styleBlackBar, $styleBlank,
                                  $styleA, $styleB,
@@ -358,7 +424,8 @@ class CGenReport
                                  $styleSummaryTitle01, $styleSummaryTitle02,
                                  $styleSummaryLine01, $styleSummaryLine02, $styleSummaryLine03,
                                  $stylePlatformInfoName, $stylePlatformInfoValue,
-                                 $styleSummaryTitle03);
+                                 $styleSummaryTitle03, // 22
+                                 $styleA_top_w2, $styleBLeft_top_w2, $styleData_top_w2, $styleRate_top_w2, $styleVarianceData_top_w2);
                                  
         $allStylesEndTag = "</Styles>\n";
         $allSheetsEndTag = "</Workbook>";
@@ -3030,7 +3097,7 @@ class CGenReport
                           
             $tmpUmdNameList []= $tmpReportUmdInfo[$i];
             
-            $sheetCodeColumnWidth .= "<Column ss:AutoFitWidth=\"0\" ss:Width=\"80\"/>\n";
+            $sheetCodeColumnWidth .= "<Column ss:AutoFitWidth=\"0\" ss:Width=\"90\"/>\n";
             
             $compTimeNum++;
         }
@@ -3054,7 +3121,7 @@ class CGenReport
                           
             $tmpUmdNameList []= $tmpReportUmdInfo[$i];
             
-            $sheetCodeColumnWidth .= "<Column ss:AutoFitWidth=\"0\" ss:Width=\"80\"/>\n";
+            $sheetCodeColumnWidth .= "<Column ss:AutoFitWidth=\"0\" ss:Width=\"90\"/>\n";
             
             $execTimeNum++;
         }
@@ -3120,7 +3187,7 @@ class CGenReport
                               
                 if ($standardUmdTestCaseNumList[$i] > 0)
                 {
-                    $tmpLineOffset[$j] += ($standardUmdTestCaseNumList[$i] + 1);
+                    $tmpLineOffset[$j] += ($standardUmdTestCaseNumList[$i] - 1);
                 }
                 else
                 {
@@ -3158,7 +3225,7 @@ class CGenReport
                               
                 if ($standardUmdTestCaseNumList[$i] > 0)
                 {
-                    $tmpLineOffset2[$j] += ($standardUmdTestCaseNumList[$i] + 1);
+                    $tmpLineOffset2[$j] += ($standardUmdTestCaseNumList[$i] - 1);
                 }
                 else
                 {
@@ -4466,7 +4533,7 @@ class CGenReport
                 }
                 
                 $n2 = $n2 < 6 ? 6 : $n2;
-                $n2 *= 8;
+                $n2 *= 7;
                 
                 $t2 = "";
                 $t3 = "";
@@ -4821,16 +4888,6 @@ class CGenReport
             {
                 // if no comparison
                 
-                //$graphDataColumnNum = 0;
-                //if ($dataColumnNum == 1)
-                //{
-                //    $graphDataColumnNum = 1;
-                //}
-                //else
-                //{
-                //    $graphDataColumnNum = intval(($dataColumnNum + 1) / 2);
-                //}
-                
                 $tmpAverageDataCode = "";
                 $tmpAverageDataCode2 = "";
                 
@@ -5178,16 +5235,6 @@ class CGenReport
                     $tmpValHas4 = array_fill(0, $reportUmdNum, "");
                     $startIndex = -1;
                     
-                    //if ($dataColumnNum == 1)
-                    //{
-                    //    $graphDataColumnNum = 1;
-                    //}
-                    //else
-                    //{
-                    //    $graphDataColumnNum = intval(($dataColumnNum + 1) / 2);
-                    //}
-                    
-
                     $tmpColumnNum = 0;
                     for ($k = 0; $k < $reportUmdNum; $k++)
                     {
@@ -5336,7 +5383,8 @@ class CGenReport
                 }
                 array_push($graphCells, $t1);
                 array_push($graphCells2, $t1a);
-                $n1 = $n2 + 2;
+                //$n1 = $n2 + 2;
+                $n1 = $n2;
             }
             
             foreach ($graphCells2 as $tmpVal)
@@ -5346,10 +5394,6 @@ class CGenReport
             
             $returnMsg["graphCells"] = $graphCells;
             
-            //$tmpArr = array();
-            //$tmpArr["graphCells"] = $graphCells;
-            //$t1 = json_encode($tmpArr);
-            //file_put_contents("H:/wamp64/www/benchMax/test01.json", $t1);
         }
         
 
@@ -5392,16 +5436,16 @@ class CGenReport
         if ($_nextSubTestPos == $_firstSubTestPos)
         {
             // start of each test
-            
-            $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + 3) . "\"/>\n");
+            // ($startStyleID + 3)
+            $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"/>\n");
             $tmpList2 = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n");
             
             
-            $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + 3) . "\"><Data ss:Type=\"String\">" .
+            $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" .
                            "TestCaseID</Data></Cell>\n";
             for ($i = 0; $i < count($subjectFilterNameList[$_curTestPos]); $i++)
             {
-                $tmpList[$i + 1] = " <Cell ss:StyleID=\"s" . ($startStyleID + 3) . "\"><Data ss:Type=\"String\">" .
+                $tmpList[$i + 1] = " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" .
                                "" . $subjectFilterNameList[$_curTestPos][$i] . "</Data></Cell>\n";
             }
             $tmpCode = implode("", $tmpList);
@@ -5467,8 +5511,10 @@ class CGenReport
                              
                 if ($i < ($historyBatchMaxNum - 1))
                 {
-                    $tmpCode6 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\"/>\n";
-                    $tmpCode6a .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\"/>\n";
+                    //$tmpCode6 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\"/>\n";
+                    //$tmpCode6a .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\"/>\n";
+                    $tmpCode6 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"/>\n";
+                    $tmpCode6a .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"/>\n";
                 }
             }
                   
@@ -5490,7 +5536,8 @@ class CGenReport
             
             $t2 = "<Row ss:StyleID=\"Default\">\n" .
                    " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" .
-                   "" . $singleGroupName . "</Data></Cell>\n" .
+                   //"" . $singleGroupName . "</Data></Cell>\n" .
+                   "</Data></Cell>\n" .
                    $tmpCode .
                    $tmpCode4 .
                    $tmpCode6 .
@@ -5498,142 +5545,156 @@ class CGenReport
                    
             $t2a = "<Row ss:StyleID=\"Default\">\n" .
                    " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" .
-                   "" . $singleGroupName . "</Data></Cell>\n" .
+                   //"" . $singleGroupName . "</Data></Cell>\n" .
+                   "</Data></Cell>\n" .
                    $tmpCode .
                    $tmpCode4 .
                    $tmpCode6a .
                    "</Row>\n";
             
-            
-            fwrite($_fileHandle, $t1 . $t2);
-            fwrite($_fileHandle2, $t1 . $t2a);
-            
-            $lineNum += 2;
+            if ($_curTestPos == 0)
+            {
+                fwrite($_fileHandle, $t1 . $t2);
+                fwrite($_fileHandle2, $t1 . $t2a);
+                
+                $lineNum += 2;
+            }
             
             if ($_isCompStandard)
             {
-                // write comparison to tmp file
-                // start of each test
-                // black bar & test subject bar
-                      
-                $t1 = "<Row ss:StyleID=\"Default\" ss:AutoFitHeight=\"0\" ss:Height=\"3\">" .
-                      " <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n" .
-                      $tmpCode2;
-                // + 1 is for black column between comp * exec time
-                for ($i = 0; $i < ($dataColumnNum * 2 + 1); $i++)
+                // only 1st test has blackbar & head row
+                if ($_curTestPos == 0)
                 {
-                    $t1 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n";
-                }
-
-                if (count($graphCells) > 0)
-                {
-                    $n2 = $sheetLinePos - $startGraphDataLinePos;
-                    if (($n2 >= 0) &&
-                        ($n2 <  count($graphCells)))
-                    {
-                        // add average data for graph to right
-                        // this is for each test start bar (2 lines)
-                        $t1 .= $graphCells[$n2];
-                    }
-                }
-                $t1 .= "</Row>\n";
-                $sheetLinePos++;
-                       
-                $t3 = "<Row>\n" .
-                      " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" .
-                      "" . $singleGroupName . "</Data></Cell>\n" .
-                      $tmpCode;
-                      
-                $t4 = "";
-                $t4a = "";
-                       
-                if ($dataColumnNum == 1)
-                {
-                    $t4 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">" .
-                           //"" . $unitNameList[$_curTestPos] . "</Data></Cell>\n";
-                           "" . $tmpList3[1] . "</Data></Cell>\n";
+                    // write comparison to tmp file
+                    // start of each test
+                    // black bar & test subject bar
+                          
+                    //$t1 = "<Row ss:StyleID=\"Default\" ss:AutoFitHeight=\"0\" ss:Height=\"0\">" .
+                    //      " <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n" .
+                    //      $tmpCode2;
+                    //// + 1 is for black column between comp * exec time
+                    //for ($i = 0; $i < ($dataColumnNum * 2 + 1); $i++)
+                    //{
+                    //    $t1 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n";
+                    //}
+                    //
+                    //if (count($graphCells) > 0)
+                    //{
+                    //    $n2 = $sheetLinePos - $startGraphDataLinePos;
+                    //    if (($n2 >= 0) &&
+                    //        ($n2 <  count($graphCells)))
+                    //    {
+                    //        // add average data for graph to right
+                    //        // this is for each test start bar (2 lines)
+                    //        $t1 .= $graphCells[$n2];
+                    //    }
+                    //}
+                    //$t1 .= "</Row>\n";
+                    //$sheetLinePos++;
+                    
+                    $t1 = "";
                            
-                    $t4a .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">" .
-                           //"" . $unitNameList[$_curTestPos] . "</Data></Cell>\n";
-                           "" . $tmpList3[0] . "</Data></Cell>\n";
-                }
-                else
-                {
-                    //for ($i = 0; $i < (($dataColumnNum + 1) / 2); $i++)
-                    for ($i = 0; $i < ($graphDataColumnNum); $i++)
-                    {
-                        if ($i > 0)
-                        {
-                            $t4 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\"/>\n";
-                                   
-                            $t4a .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\"/>\n";
-                        }
-                        $t4 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">" .
-                               //"" . $unitNameList[$_curTestPos] . "</Data></Cell>\n" .
-                               "" . $tmpList3[1] . "</Data></Cell>\n";
-                               
-                        $t4a .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">" .
-                               "" . $tmpList3[0] . "</Data></Cell>\n";
-                    }
-                    
-                    if (($isUbuntuSys == true) &&
-                        ($graphDataColumnNum > 2))
-                    {
-                        $t4 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\"/>\n";
-                               
-                        $t4a .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\"/>\n";
-                    }
-                }
-                       
-                if ($_cmpMachineID != -1)
-                {
-                    // if comparison with other cards
-                    
-                    $t4 = "";
-                    $t4a = "";
-                    
+                    //$t3 = "<Row>\n" .
+                    //      " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" .
+                    //      "" . $singleGroupName . "</Data></Cell>\n" .
+                    //      $tmpCode;
                     $t3 = "<Row>\n" .
                           " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" .
-                          "" . $singleGroupName . "</Data></Cell>\n" .
+                          "</Data></Cell>\n" .
                           $tmpCode;
-                    
-                    for ($i = 0; $i < ($dataColumnNum / 3); $i++)
+                          
+                    $t4 = "";
+                    $t4a = "";
+                           
+                    if ($dataColumnNum == 1)
                     {
                         $t4 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">" .
-                               //"" . $unitNameList[$_curTestPos] . "</Data></Cell>\n" .
-                               "" . $tmpList3[1] . "</Data></Cell>\n" .
-                               " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\"/>\n" .
-                               " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">" .
                                //"" . $unitNameList[$_curTestPos] . "</Data></Cell>\n";
                                "" . $tmpList3[1] . "</Data></Cell>\n";
                                
                         $t4a .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">" .
-                               "" . $tmpList3[0] . "</Data></Cell>\n" .
-                               " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\"/>\n" .
-                               " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">" .
+                               //"" . $unitNameList[$_curTestPos] . "</Data></Cell>\n";
                                "" . $tmpList3[0] . "</Data></Cell>\n";
                     }
-                }
-                // black column between comp & exec time
-                $t5 = "    <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>";
-                
-                $t1 .= ($t3 . $t4 . $t5 . $t4a);
-                if (count($graphCells) > 0)
-                {
-                    $n2 = $sheetLinePos - $startGraphDataLinePos;
-                    if (($n2 >= 0) &&
-                        ($n2 <  count($graphCells)))
+                    else
                     {
-                        // add average data for graph to right
-                        // this is for each test start bar (2 lines)
-                        $t1 .= $graphCells[$n2];
+                        //for ($i = 0; $i < (($dataColumnNum + 1) / 2); $i++)
+                        for ($i = 0; $i < ($graphDataColumnNum); $i++)
+                        {
+                            if ($i > 0)
+                            {
+                                $t4 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"/>\n";
+                                       
+                                $t4a .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"/>\n";
+                            }
+                            $t4 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">" .
+                                   //"" . $unitNameList[$_curTestPos] . "</Data></Cell>\n" .
+                                   "" . $tmpList3[1] . "</Data></Cell>\n";
+                                   
+                            $t4a .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">" .
+                                   "" . $tmpList3[0] . "</Data></Cell>\n";
+                        }
+                        
+                        if (($isUbuntuSys == true) &&
+                            ($graphDataColumnNum > 2))
+                        {
+                            $t4 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"/>\n";
+                                   
+                            $t4a .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"/>\n";
+                        }
                     }
+                           
+                    if ($_cmpMachineID != -1)
+                    {
+                        // if comparison with other cards
+                        
+                        $t4 = "";
+                        $t4a = "";
+                        
+                        $t3 = "<Row>\n" .
+                              " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\"><Data ss:Type=\"String\">" .
+                              "" . $singleGroupName . "</Data></Cell>\n" .
+                              $tmpCode;
+                        
+                        for ($i = 0; $i < ($dataColumnNum / 3); $i++)
+                        {
+                            $t4 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">" .
+                                   //"" . $unitNameList[$_curTestPos] . "</Data></Cell>\n" .
+                                   "" . $tmpList3[1] . "</Data></Cell>\n" .
+                                   " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\"/>\n" .
+                                   " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">" .
+                                   //"" . $unitNameList[$_curTestPos] . "</Data></Cell>\n";
+                                   "" . $tmpList3[1] . "</Data></Cell>\n";
+                                   
+                            $t4a .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">" .
+                                   "" . $tmpList3[0] . "</Data></Cell>\n" .
+                                   " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\"/>\n" .
+                                   " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\"><Data ss:Type=\"String\">" .
+                                   "" . $tmpList3[0] . "</Data></Cell>\n";
+                        }
+                    }
+                    // black column between comp & exec time
+                    $t5 = "    <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>";
+                    
+                    $t1 .= ($t3 . $t4 . $t5 . $t4a);
+                    if (count($graphCells) > 0)
+                    {
+                        $n2 = $sheetLinePos - $startGraphDataLinePos;
+                        if (($n2 >= 0) &&
+                            ($n2 <  count($graphCells)))
+                        {
+                            // add average data for graph to right
+                            // this is for each test start bar (2 lines)
+                            $t1 .= $graphCells[$n2];
+                        }
+                    }
+                    $t1 .= "</Row>\n";
+                    $sheetLinePos++;
+                    
+                    fwrite($_tempFileHandle, $t1);
+                    //$tempLineNum += 2;
+                    $tempLineNum++;
                 }
-                $t1 .= "</Row>\n";
-                $sheetLinePos++;
-                
-                fwrite($_tempFileHandle, $t1);
-                $tempLineNum += 2;
             }
         }
 
@@ -5895,6 +5956,7 @@ class CGenReport
         }
         
         $dataNum = 0;
+        $n2 = 0;
         $t1 = "";
         $standardSubTestIDList = array();
         $standardSubTestNameList = array();
@@ -5950,15 +6012,20 @@ class CGenReport
                 continue;
             }
             
+            $tmpStyleTag = 6;
+            if ($n2 == 0)
+            {
+                $tmpStyleTag = 24;
+            }
             
-            $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"/>\n");
+            $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"/>\n");
             
-            $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"><Data ss:Type=\"Number\">" .
+            $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"Number\">" .
                            $testCaseID .
                            "</Data></Cell>\n";
             for ($i = 0; $i < count($subTestFilterNameList); $i++)
             {
-                $tmpList[$i + 1] = " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"><Data ss:Type=\"String\">" .
+                $tmpList[$i + 1] = " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"String\">" .
                                $subTestFilterNameList[$i] .
                                "</Data></Cell>\n";
             }
@@ -5966,16 +6033,24 @@ class CGenReport
             
             $tmpCode2 = "";
             
+            $tmpStyleTag1 = 4;
+            $tmpStyleTag2 = 5;
+            if ($n2 == 0)
+            {
+                $tmpStyleTag1 = 25;
+                $tmpStyleTag2 = 26;
+            }
+            
             for ($i = 0; $i < $historyBatchMaxNum; $i++)
             {
                              
                 $rcID1 = ($subjectNameFilterNumMax + 4 + $i * 2);
                 $rcID2 = ($subjectNameFilterNumMax + 4 + $i * 2 + 2);
-                $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" . $tmpDataListXML[$i] . "</Cell>\n";
+                $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag1) . "\">" . $tmpDataListXML[$i] . "</Cell>\n";
                 
                 if ($i < ($historyBatchMaxNum - 1))
                 {
-                    $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
+                    $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag2) . "\" " .
                                  "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
                                  "RC" . $rcID2 . "=&quot;&quot;," .
                                  "RC" . $rcID1 . "=0," .
@@ -5987,12 +6062,23 @@ class CGenReport
                 }
             }
             
-            $tmpCode1 = "<Cell ss:StyleID=\"s" . ($startStyleID + 13) . "\" " .
+            $tmpStyleTag = 13;
+            if ($n2 == 0)
+            {
+                $tmpStyleTag = 27;
+            }
+            
+            $tmpCode1 = "<Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\" " .
                         "><Data ss:Type=\"Number\">" . $tmpData2 . "</Data></Cell>";
             
+            $tmpStyleTag = 8;
+            if ($n2 == 0)
+            {
+                $tmpStyleTag = 23;
+            }
             // api sheet comparison
             $t1 .= "<Row ss:StyleID=\"Default\">\n" .
-                   " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\"><Data ss:Type=\"String\">" . $singleGroupName . "</Data></Cell>\n" .
+                   " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"String\">" . $singleGroupName . "</Data></Cell>\n" .
                    $tmpCode .
                    $tmpCode1 .
                    $tmpCode2 .
@@ -6008,6 +6094,7 @@ class CGenReport
                 array_push($standardSubTestFilterNameList, $subTestFilterNameList);
                 array_push($standardTestCaseIDList, $testCaseID);
             }
+            $n2++;
         }
         
         
@@ -6080,6 +6167,7 @@ class CGenReport
         }
         
         $dataNum = 0;
+        $n2 = 0;
         $t1 = "";
         //$standardSubTestIDList = array();
         //$standardSubTestNameList = array();
@@ -6135,15 +6223,20 @@ class CGenReport
                 continue;
             }
             
+            $tmpStyleTag = 6;
+            if ($n2 == 0)
+            {
+                $tmpStyleTag = 24;
+            }
             
-            $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"/>\n");
+            $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"/>\n");
             
-            $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"><Data ss:Type=\"Number\">" .
+            $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"Number\">" .
                            $testCaseID .
                            "</Data></Cell>\n";
             for ($i = 0; $i < count($subTestFilterNameList); $i++)
             {
-                $tmpList[$i + 1] = " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"><Data ss:Type=\"String\">" .
+                $tmpList[$i + 1] = " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"String\">" .
                                $subTestFilterNameList[$i] .
                                "</Data></Cell>\n";
             }
@@ -6151,16 +6244,24 @@ class CGenReport
             
             $tmpCode2 = "";
             
+            $tmpStyleTag1 = 4;
+            $tmpStyleTag2 = 5;
+            if ($n2 == 0)
+            {
+                $tmpStyleTag1 = 25;
+                $tmpStyleTag2 = 26;
+            }
+            
             for ($i = 0; $i < $historyBatchMaxNum; $i++)
             {
                              
                 $rcID1 = ($subjectNameFilterNumMax + 4 + $i * 2);
                 $rcID2 = ($subjectNameFilterNumMax + 4 + $i * 2 + 2);
-                $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" . $tmpDataListXML[$i] . "</Cell>\n";
+                $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag1) . "\">" . $tmpDataListXML[$i] . "</Cell>\n";
                 
                 if ($i < ($historyBatchMaxNum - 1))
                 {
-                    $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
+                    $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag2) . "\" " .
                                  "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
                                  "RC" . $rcID2 . "=&quot;&quot;," .
                                  "RC" . $rcID1 . "=0," .
@@ -6172,17 +6273,30 @@ class CGenReport
                 }
             }
             
-            $tmpCode1 = "<Cell ss:StyleID=\"s" . ($startStyleID + 13) . "\" " .
+            $tmpStyleTag = 13;
+            if ($n2 == 0)
+            {
+                $tmpStyleTag = 27;
+            }
+            
+            $tmpCode1 = "<Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\" " .
                         "><Data ss:Type=\"Number\">" . $tmpData2 . "</Data></Cell>";
+            
+            $tmpStyleTag = 8;
+            if ($n2 == 0)
+            {
+                $tmpStyleTag = 23;
+            }
             
             // api sheet comparison
             $t1 .= "<Row ss:StyleID=\"Default\">\n" .
-                   " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\"><Data ss:Type=\"String\">" . $singleGroupName . "</Data></Cell>\n" .
+                   " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"String\">" . $singleGroupName . "</Data></Cell>\n" .
                    $tmpCode .
                    $tmpCode1 .
                    $tmpCode2 .
                    "</Row>\n";
 
+            $n2++;
         }
         
         
@@ -6445,6 +6559,7 @@ class CGenReport
         global $resultUmdOrder;
         global $tableName01;
         global $testName;
+        global $curTestPos;
         global $testNameList;
         global $subTestNumList;
         global $subTestNum;
@@ -6483,6 +6598,8 @@ class CGenReport
         global $tmpUmd2Name;
         global $isUbuntuSys;
         global $graphDataColumnNum;
+        global $graphDataStartLineID;
+        global $graphDataStartLineIDCompare;
         
         $singleGroupName = $testName;
         $tmpArr = explode("_", $singleGroupName);
@@ -6496,36 +6613,26 @@ class CGenReport
         $umdNum = $_umdNum;
         $reportUmdNumn = count($umdNameList);
         $sheetLinePos = $_sheetLinePos;
-
-        //$graphDataColumnNum = 0;
-        //if ($dataColumnNum == 1)
-        //{
-        //    $graphDataColumnNum = 1;
-        //}
-        //else
-        //{
-        //    $graphDataColumnNum = intval(($dataColumnNum + 1) / 2);
-        //}
                          
         $graphDataArea = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 1] . 
-                         graphDataStartLineID . ":" . 
+                         $graphDataStartLineID . ":" . 
                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 1 + 2 + $graphDataColumnNum - 1] .
-                         (intval(graphDataStartLineID) + count($graphCells) - 1);
+                         (intval($graphDataStartLineID) + count($graphCells) - 1);
                          
         $graphDataBarNum = ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 1 + 2 + $graphDataColumnNum - 1) -
                            ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 1) + 1 - 2;
                          
         $graphDataArea2 = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 1] . 
-                         graphDataStartLineID . ":" . 
+                         $graphDataStartLineID . ":" . 
                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
                                                ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 2] .
-                         (intval(graphDataStartLineID) + count($graphCells) - 1) . "," .
+                         (intval($graphDataStartLineID) + count($graphCells) - 1) . "," .
                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
                                                ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 3 + $graphDataColumnNum] . 
-                         graphDataStartLineID . ":" . 
+                         $graphDataStartLineID . ":" . 
                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
                                                ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 3 + $graphDataColumnNum * 2 - 2] .
-                         (intval(graphDataStartLineID) + count($graphCells) - 1);
+                         (intval($graphDataStartLineID) + count($graphCells) - 1);
                          
         $graphDataBarNum2 = ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 2) -
                            ($subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2 + 1) + 1 +
@@ -6535,10 +6642,10 @@ class CGenReport
                          
         $graphDataAreaNoBlank = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
                                                            ($dataColumnNum * 2) + 1 + 1 + $graphDataColumnNum * 2 + 2] . 
-                         graphDataStartLineID . ":" . 
+                         $graphDataStartLineID . ":" . 
                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
                                                ($dataColumnNum * 2) + 1 + 2 + $graphDataColumnNum * 2 + 3 + $graphDataColumnNum * 2] .
-                         (intval(graphDataStartLineID) + count($graphCells) - 1);
+                         (intval($graphDataStartLineID) + count($graphCells) - 1);
         
         $shrinkColumnArea = ""  . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1] . 
                             ":" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + $graphDataColumnNum * 2];
@@ -6555,10 +6662,10 @@ class CGenReport
                                     
             $graphDataAreaNoBlank = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + 2 + 
                                     $graphDataColumnNum * 2] .
-                                    graphDataStartLineIDCompare . ":" . 
+                                    $graphDataStartLineIDCompare . ":" . 
                                     $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + ($dataColumnNum * 2) + 1 + 2 + 
                                     $graphDataColumnNum * 2 + $graphDataColumnNum * 2] .
-                                    (intval(graphDataStartLineIDCompare) + count($graphCells) - 1);
+                                    (intval($graphDataStartLineIDCompare) + count($graphCells) - 1);
             
             $graphDataArea = $graphDataAreaNoBlank;
         }
@@ -6918,20 +7025,33 @@ class CGenReport
                     }
                 }
                 
-                $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"/>\n");
+                $tmpStyleTag = 6;
+                if ($n1 == 0)
+                {
+                    $tmpStyleTag = 24;
+                }
                 
-                $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"><Data ss:Type=\"Number\">" .
+                $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . 
+                                      ($startStyleID + $tmpStyleTag) . "\"/>\n");
+                
+                $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"Number\">" .
                                "" . $standardTestCaseIDList[$n1] . "</Data></Cell>\n";
                 for ($i = 0; $i < count($standardSubTestFilterNameList[$n1]); $i++)
                 {
-                    $tmpList[$i + 1] = " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"><Data ss:Type=\"String\">" .
+                    $tmpList[$i + 1] = " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"String\">" .
                                    "" . $standardSubTestFilterNameList[$n1][$i] . "</Data></Cell>\n";
                 }
                 $tmpCode = implode("", $tmpList);
                 
+                $tmpStyleTag = 8;
+                if ($n1 == 0)
+                {
+                    $tmpStyleTag = 23;
+                }
+                
                 // data rows for api comparison
                 $t3 = "<Row>\n" .
-                      " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\"><Data ss:Type=\"String\">" . $singleGroupName . "</Data></Cell>\n" .
+                      " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"String\">" . $singleGroupName . "</Data></Cell>\n" .
                       $tmpCode;
                       
                 $t4 = "";
@@ -6955,13 +7075,21 @@ class CGenReport
                     $tmpDataColumnNum++;
                 }
                 
+                $tmpStyleTag1 = 4;
+                $tmpStyleTag2 = 5;
+                if ($n1 == 0)
+                {
+                    $tmpStyleTag1 = 25;
+                    $tmpStyleTag2 = 26;
+                }
+                
                 if ($tmpDataColumnNum == 1)
                 {
                     // 1 api
-                    $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
+                    $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag1) . "\">" .
                            "" . $tmpDataList[0] . "</Cell>\n" .
                            " <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>" .
-                           " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
+                           " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag1) . "\">" .
                            "" . $tmpDataList2[0] . "</Cell>\n";
                            
                     $t4 = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + 3 + 1) . 
@@ -6976,7 +7104,7 @@ class CGenReport
                     {
                         if ($i == 0)
                         {
-                            $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
+                            $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag1) . "\">" .
                                    "" . $tmpDataList[$i] . "</Cell>\n";
                                    
                             $t4 = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2 - 1) * 2 + 1 + 1) . 
@@ -6996,7 +7124,7 @@ class CGenReport
                             $rcID2 = ($subjectNameFilterNumMax + 3 + $i * 2 - 2);
                             $rcID1 = ($subjectNameFilterNumMax + 3 + $i * 2);
 
-                            $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
+                            $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag2) . "\" " .
                                    "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
                                                 "RC" . $rcID3 . "=&quot;&quot;," .
                                                 "RC" . $rcID1 . "=0," .
@@ -7006,7 +7134,7 @@ class CGenReport
                                                 "-RC" . $rcID3 . // 6
                                                 ")/RC" . $rcID3 . ")\">" .
                                                 "<Data ss:Type=\"Number\"></Data></Cell>\n" .
-                                   " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
+                                   " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag1) . "\">" .
                                    "" . $tmpDataList[$i] . "</Cell>\n";
                                                 
                             $t4 .= " <Cell ss:StyleID=\"Default\" " .
@@ -7029,7 +7157,7 @@ class CGenReport
                         $rcID2 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum - 1) * 2 - 2);
                         $rcID1 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum - 1) * 2);
 
-                        $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
+                        $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag2) . "\" " .
                                "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
                                             "RC" . $rcID2 . "=&quot;&quot;," .
                                             "RC" . $rcID1 . "=0," .
@@ -7048,7 +7176,7 @@ class CGenReport
                     {
                         if ($i == 0)
                         {
-                            $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
+                            $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag1) . "\">" .
                                    "" . $tmpDataList2[$i] . "</Cell>\n";
                                                 
                             $t4 .= " <Cell ss:StyleID=\"Default\">" .
@@ -7068,7 +7196,7 @@ class CGenReport
                                 $rcID1 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2 - 1) + $i * 2 + 1 + 1);
                             }
 
-                            $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
+                            $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag2) . "\" " .
                                    "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
                                                 "RC" . $rcID3 . "=&quot;&quot;," .
                                                 "RC" . $rcID1 . "=0," .
@@ -7078,7 +7206,7 @@ class CGenReport
                                                 "-RC" . $rcID3 . // 6
                                                 ")/RC" . $rcID3 . ")\">" .
                                                 "<Data ss:Type=\"Number\"></Data></Cell>\n" .
-                                   " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" .
+                                   " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag1) . "\">" .
                                    "" . $tmpDataList2[$i] . "</Cell>\n";
                                                 
                             $t4 .= " <Cell ss:StyleID=\"Default\" " .
@@ -7101,7 +7229,7 @@ class CGenReport
                         $rcID2 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2 - 1) + ($tmpDataColumnNum - 1) * 2 + 1 - 2 + 1);
                         $rcID1 = ($subjectNameFilterNumMax + 3 + ($tmpDataColumnNum * 2 - 1) + ($tmpDataColumnNum - 1) * 2 + 1 + 1);
 
-                        $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 5) . "\" " .
+                        $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag2) . "\" " .
                                "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
                                             "RC" . $rcID2 . "=&quot;&quot;," .
                                             "RC" . $rcID1 . "=0," .
@@ -7385,30 +7513,7 @@ class CGenReport
                                                                $summaryDataVal2,
                                                                $cmpPartName2,
                                                                $n1);
-                                                               
-                //$tmpArr = array();
-                //$tmpArr["rateVal"] = $rateVal;
-                //$tmpArr["summaryDataVal"] = $summaryDataVal;
-                //$tmpArr["cmpPartName"] = $cmpPartName;
-                //$tmpArr["rateVal3"] = $rateVal3;
-                //$tmpArr["summaryDataVal2"] = $summaryDataVal2;
-                //$tmpArr["cmpPartName2"] = $cmpPartName2;
-                //$tmpArr["tmpDataVal"] = $tmpDataVal;
-                //$tmpArr["tmpDataVal2"] = $tmpDataVal2;
-                //$tmpArr["umdDataVal"] = $umdDataVal;
-                //$tmpArr["umdDataVal2"] = $umdDataVal2;
-                //$tmpArr["row1"] = $row1;
-                //$tmpArr["dataIndexList2"] = $dataIndexList2;
-                //$tmpArr["sql1"] = $sql1;
-                //$tmpArr["params1"] = $params1;
-                //$tmpArr["_startResultID"] = $_startResultID;
-                //$tmpArr["_historyStartResultID"] = $_historyStartResultID;
-                //$tmpArr["resultIDList"] = $resultIDList;
-                //
-                //$tx1 = json_encode($tmpArr);
-                //file_put_contents("H:/wamp64/www/benchMax/test01.json", $tx1);
-                                                               
-                                                               
+                                                                                     
                 // execution time
                 $summaryJson3 = $this->writeSummaryJsonPerTest($summaryJson3,
                                                               $variationJson,
@@ -7445,17 +7550,6 @@ class CGenReport
             }
             
             fwrite($tempFileHandle, $t1);
-            
-            //fseek($tempFileHandle, $_tempFileLineNumPos, SEEK_SET);
-            //// line num is 10 digis number, like: 0000000011
-            //$t1 = fread($tempFileHandle, 10);
-            //$n1 = intval($t1);
-            //$n1 += $_tempLineNum;
-            ////$sheetLinePos = $n1;
-            //fseek($tempFileHandle, $_tempFileLineNumPos, SEEK_SET);
-            //$t1 = sprintf("%010d", $n1);
-            ////$t1 = "1234567890";
-            //fwrite($tempFileHandle, $t1);
             
             //if ($_cmpStartResultID != -1)
             {

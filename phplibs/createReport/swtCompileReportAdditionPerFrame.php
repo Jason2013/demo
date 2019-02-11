@@ -50,7 +50,10 @@ $startSheetLineNum = 11;
 $tempFileStartSheetLineNum = 4;
 $compileFinished = 0;
 $historyBatchMaxNum = 4;
-$startGraphDataLinePos = 2;
+//$startGraphDataLinePos = 2;
+$startGraphDataLinePos = 1;
+$graphDataStartLineID = 5;
+$graphDataStartLineIDCompare = 5;
 $maxSubTestNumOnce = 3000;
 
 $subTestUmdDataMaskList = array();
