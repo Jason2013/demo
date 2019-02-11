@@ -327,8 +327,10 @@ else
             //$tmpTestCaseID = -1;
             $tmpFrameID = -1;
             $tmpGroupID = -1;
-            // 0 for N/A, 1 for pass, 2 for fail
+            // 0 for N/A, 1 for PASS, 2 for FAIL
             $tmpVerifyStatus = 0;
+            $tmpPassRate = 0.0;
+            $isFirstNoiseUpdated = false;
             
             $tmpFileDataPos = $testCasePos + $j;
             $tmpFileDataOffset = $tmpFileDataPos * ($tmpDataSize * 4 + $tmpDataIDSize * 5);
@@ -358,7 +360,13 @@ else
                 $tmpTestCaseID = $valSet["testCaseID"];
                 $tmpGroupID = $valSet["groupID"];
                 $tmpFrameID = $valSet["frameID"];
-                $tmpVerifyStatus = $valSet["verifyStatus"];
+                
+                if ($isFirstNoiseUpdated == false)
+                {
+                    $tmpVerifyStatus = $valSet["verifyStatus"];
+                    $tmpPassRate = floatval($valSet["dataValue3"]);
+                    $isFirstNoiseUpdated = true;
+                }
                 
                 $f1 = floatval($valSet["dataValue1"]);
                 if ($f1 >= 0.0)
@@ -413,7 +421,7 @@ else
                                 $tmpVariance . "," . 
                                 $tmpAvg2 . "," . 
                                 $tmpVariance2 . "," . 
-                                $tmpAvg3 . "," . 
+                                $tmpPassRate . "," . 
                                 $tmpVariance3 . "," . 
                                 $tmpAvg4 . "," . 
                                 $tmpVariance4 . "," . 

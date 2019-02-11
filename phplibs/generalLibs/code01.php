@@ -423,9 +423,9 @@ $db_mis_table_create_string004 = "CREATE TABLE IF NOT EXISTS mis_table_data_shad
                                  "  variance_value1 DOUBLE," .
                                  "  data_value2 DOUBLE," .       // Execution Time(ms)
                                  "  variance_value2 DOUBLE," .
-                                 "  data_value3 DOUBLE," .       // Shaders/s
-                                 "  variance_value3 DOUBLE," .
-                                 "  data_value4 DOUBLE," .       // FPS
+                                 "  data_value3 DOUBLE," .       // PassRate
+                                 "  variance_value3 DOUBLE," .   
+                                 "  data_value4 DOUBLE," .       // 0 for N/A, 1 for pass, 2 for fail
                                  "  variance_value4 DOUBLE," .
                                  "  test_case_id INT," .
                                  "  group_id INT," .
@@ -456,7 +456,7 @@ $db_mis_table_create_string005 = "CREATE TABLE IF NOT EXISTS mis_table_data_perf
                                  "  variance_value1 DOUBLE," .
                                  "  data_value2 DOUBLE," .       // Time[Record](ms)
                                  "  variance_value2 DOUBLE," .
-                                 "  data_value3 DOUBLE," .       // 
+                                 "  data_value3 DOUBLE," .       // PassRate
                                  "  variance_value3 DOUBLE," .
                                  "  data_value4 DOUBLE," .       // 
                                  "  variance_value4 DOUBLE," .

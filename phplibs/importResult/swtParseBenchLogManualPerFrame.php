@@ -580,6 +580,8 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
     $frameID = 0;
     $verifyStatusKey = -1;
     $verifyStatus = 0; // 0 for N/A, 1 for pass, 2 for fail
+    $passRateKey = -1;
+    $passRate = 0;
     $dataKeyDataColumnID = -1;
     $subTestNameFilterNum = 0;
     
@@ -638,6 +640,7 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
             //$testCaseIDKeyAPI = array_search("TestCaseId#", $data);
             $frameIDKeyAPI = array_search("FrameId#", $data);
             $verifyStatusKey = array_search("VerificationStatus", $data);
+            $passRateKey = array_search("PassRate", $data);
             $tmpTestID++;
             $tmpSubTestID = 0;
             
@@ -987,17 +990,17 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                 }
                 if ($verifyStatusKey !== -1)
                 {
-                    $t1 = $data[$verifyStatusKey];
+                    $t1 = strtoupper($data[$verifyStatusKey]);
                     
                     if ($t1 == "N/A")
                     {
                         $verifyStatus = 0;
                     }
-                    else if ($t1 == "pass")
+                    else if ($t1 == "PASS")
                     {
                         $verifyStatus = 1;
                     }
-                    else
+                    else if ($t1 == "FAIL")
                     {
                         $verifyStatus = 2;
                     }
@@ -1029,6 +1032,10 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                         }
                     }
                     $isDataValValid = $b1;
+                }
+                if ($passRateKey !== -1)
+                {
+                    $passRate = floatval($data[$passRateKey]);
                 }
                 if (strlen($umdName) == 0)
                 {
@@ -1117,7 +1124,7 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                         $feedSubTestDataString .= "" . $resultIDList[$tmpKey] . ",\"" . $subTestName . "\"," .
                                                   $dataValList[0] . ", " . 
                                                   $dataValList[1] . ", " . 
-                                                  "0.0, " . 
+                                                  $passRate . ", " . 
                                                   "0.0, " . 
                                                   //$testCaseID . ",\"" . $groupName . "\"\n";
                                                   "0,\"" . $groupName . "\", " . $frameID . ", " . $verifyStatus . "\n";

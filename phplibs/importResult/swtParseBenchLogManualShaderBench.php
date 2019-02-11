@@ -593,6 +593,10 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
     $umdIDMap = array();
     $dataKeyAPI = -1;
     $testCaseIDKeyAPI = -1;
+    $verifyStatusKey = -1;
+    $verifyStatus = 0; // 0 for N/A, 1 for pass, 2 for fail
+    $passRateKey = -1;
+    $passRate = 0;
     $dataKeyDataColumnID = -1;
     $dataKeyDataColumnOffsetExe = 0;
     $dataKeyDataColumnOffsetCom = 0;
@@ -651,6 +655,8 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
             $testName = $tmpName;
             $dataKeyAPI = array_search("API", $data);
             $testCaseIDKeyAPI = array_search("TestCaseId#", $data);
+            $verifyStatusKey = array_search("VerificationStatus", $data);
+            $passRateKey = array_search("PassRate", $data);
             $tmpTestID++;
             $tmpSubTestID = 0;
             
@@ -1114,6 +1120,23 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                 {
                     $testCaseID = $data[$testCaseIDKeyAPI];
                 }
+                if ($verifyStatusKey !== -1)
+                {
+                    $t1 = strtoupper($data[$verifyStatusKey]);
+                    
+                    if ($t1 == "N/A")
+                    {
+                        $verifyStatus = 0;
+                    }
+                    else if ($t1 == "PASS")
+                    {
+                        $verifyStatus = 1;
+                    }
+                    else if ($t1 == "FAIL")
+                    {
+                        $verifyStatus = 2;
+                    }
+                }
                 if ($dataKeyDataColumnID !== -1)
                 {
                     //$dataValue = $data[$dataKeyDataColumnID];
@@ -1141,6 +1164,10 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                         }
                     }
                     $isDataValValid = $b1;
+                }
+                if ($passRateKey !== -1)
+                {
+                    $passRate = floatval($data[$passRateKey]);
                 }
                 if (strlen($umdName) == 0)
                 {
@@ -1230,8 +1257,8 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                         $feedSubTestDataString .= "" . $resultIDList[$tmpKey] . ",\"" . $subTestName . "\"," .
                                                   $dataValList[0] . ", " . 
                                                   $dataValList[1] . ", " . 
-                                                  "0.0, " . 
-                                                  "0.0, " . 
+                                                  $passRate . ", " . 
+                                                  $verifyStatus . ", " . 
                                                   $testCaseID . ",\"" . $groupName . "\"\n";                    }
                 }
             }
