@@ -1033,6 +1033,17 @@ function swtParseLogFile($_pathName, $_machineID, $_noiseDataID, $_noiseDataNum)
                     $returnMsg["subTestNameFilterNum"] = $subTestNameFilterNum;
                     break;
                 }
+                else if (strpos($data[$i], "(") !== false) // CSLatency
+                {
+                    // data column id
+                    $dataKeyDataColumnID = $i;
+                    $subTestNameFilterNum = $dataKeyDataColumnID - 1;
+                    
+                    $returnMsg["testName"] = $testName;
+                    $returnMsg["dataKeyDataColumnID"] = $dataKeyDataColumnID;
+                    $returnMsg["subTestNameFilterNum"] = $subTestNameFilterNum;
+                    break;
+                }
             }
             if ($dataKeyDataColumnID == -1)
             {
