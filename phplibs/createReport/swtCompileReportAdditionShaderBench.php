@@ -166,7 +166,10 @@ $selectedCardIDList = $returnSet["selectedCardIDList"];
 $selectedSysIDList = $returnSet["selectedSysIDList"];
 
 $testName = $testNameList[$curTestPos];
-$tableName01 = $db_mis_table_name_string002 . $testName;
+$tmpTestName = str_replace(" ", "", $testName);
+$tmpTestName = cleaninput($tmpTestName, 256);
+//$tableName01 = $db_mis_table_name_string002 . $testName;
+$tableName01 = $db_mis_table_name_string002 . $tmpTestName;
 
 $returnMsg["testNameList"] = $testNameList;
 $returnMsg["curTestPos"] = $curTestPos;

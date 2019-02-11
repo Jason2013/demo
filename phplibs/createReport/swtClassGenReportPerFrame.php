@@ -2013,7 +2013,10 @@ class CGenReport
         {
             for ($i = 0; $i < count($testNameList); $i++)
             {
-                $tmpTableName = $db_mis_table_name_string003 . $testNameList[$i];
+                $tmpTestName = str_replace(" ", "", $testNameList[$i]);
+                $tmpTestName = cleaninput($tmpTestName, 256);
+                //$tmpTableName = $db_mis_table_name_string003 . $testNameList[$i];
+                $tmpTableName = $db_mis_table_name_string003 . $tmpTestName;
                 $params1 = array($resultIDList[0][$tmpStartResultID + $j]);
                 $sql1 = "SELECT COUNT(*) FROM " . $tmpTableName . " WHERE result_id=?";
                 if ($db->QueryDB($sql1, $params1) == null)
@@ -2049,7 +2052,10 @@ class CGenReport
         {
             for ($i = 0; $i < count($testNameList); $i++)
             {
-                $tmpTableName = $db_mis_table_name_string003 . $testNameList[$i];
+                $tmpTestName = str_replace(" ", "", $testNameList[$i]);
+                $tmpTestName = cleaninput($tmpTestName, 256);
+                //$tmpTableName = $db_mis_table_name_string003 . $testNameList[$i];
+                $tmpTableName = $db_mis_table_name_string003 . $tmpTestName;
                 //$params1 = array($resultIDList[0][$_resultPos]);
                 $params1 = array($resultIDList[0][$cardStandardResultPos]);
                 //$sql1 = "SELECT COUNT(*) FROM " . $tmpTableName . "_noise WHERE (result_id=? AND noise_id=0)";
@@ -2299,7 +2305,10 @@ class CGenReport
         $tmpTestCaseList = array();
         for ($i = 0; $i < count($testNameList); $i++)
         {
-            $tmpTableName = $db_mis_table_name_string003 . $testNameList[$i];
+            $tmpTestName = str_replace(" ", "", $testNameList[$i]);
+            $tmpTestName = cleaninput($tmpTestName, 256);
+            //$tmpTableName = $db_mis_table_name_string003 . $testNameList[$i];
+            $tmpTableName = $db_mis_table_name_string003 . $tmpTestName;
             $params1 = array($resultIDList[0][$cardStandardResultPos]);
             $sql1 = "SELECT COUNT(*) FROM " . $tmpTableName . " " .
                     "WHERE result_id=?;";

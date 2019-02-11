@@ -625,7 +625,8 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
             }
         }
         
-        $tmpName = str_replace(" ", "", $data[0]);
+        //$tmpName = str_replace(" ", "", $data[0]);
+        $tmpName = $data[0];
         $isTestCasesShow = $data[1] == "TestCase";
 
         if ((strlen($tmpName) >  0) &&
@@ -763,7 +764,8 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
             }
         }
         
-        $tmpName = str_replace(" ", "", $data[0]);
+        //$tmpName = str_replace(" ", "", $data[0]);
+        $tmpName = $data[0];
         $isTestCasesShow = $data[1] == "TestCase";
 
         if ((strlen($tmpName) >  0) &&
@@ -806,8 +808,11 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                 
                 $fullTestName = str_replace("-", "_", $fullTestName);
                 
+                $tmpTestName = str_replace(" ", "", $fullTestName);
+                $tmpTestName = cleaninput($tmpTestName, 256);
                 // create test table
-                $sql1 = sprintf($db_mis_table_create_string005, cleaninput($fullTestName, 256));
+                //$sql1 = sprintf($db_mis_table_create_string005, cleaninput($fullTestName, 256));
+                $sql1 = sprintf($db_mis_table_create_string005, $tmpTestName);
                 $params1 = array();
                 if ($db->QueryDB($sql1, $params1) == null)
                 {

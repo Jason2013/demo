@@ -225,7 +225,10 @@ else
     
     $curTestName = $testNameList[$testPos];
     
-    $tmpTableName01 = $db_mis_table_name_string003 . $curTestName;
+    $tmpTestName = str_replace(" ", "", $curTestName);
+    $tmpTestName = cleaninput($tmpTestName, 256);
+    //$tmpTableName01 = $db_mis_table_name_string003 . $curTestName;
+    $tmpTableName01 = $db_mis_table_name_string003 . $tmpTestName;
     //$tmpTableName02 = $db_mis_table_name_string003 . $curTestName . "_noise";
     
     $returnMsg["curTestName"] = $curTestName;

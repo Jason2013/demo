@@ -187,7 +187,10 @@ foreach ($batchIDList as $batchID)
         foreach ($testNameList as $tmpTestName)
         {
             $tableName = $db_mis_table_name_string001 . $tmpTestName;
-            $tableName2 = $db_mis_table_name_string002 . $tmpTestName;
+            //$tableName2 = $db_mis_table_name_string002 . $tmpTestName;
+            $tmpName = str_replace(" ", "", $tmpTestName);
+            $tmpName = cleaninput($tmpName, 256);
+            $tableName2 = $db_mis_table_name_string002 . $tmpName;
             
             $params1 = array();
             $sql1 = "DELETE FROM " . $tableName . " " .

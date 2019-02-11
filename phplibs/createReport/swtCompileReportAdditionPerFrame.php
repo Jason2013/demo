@@ -178,7 +178,10 @@ $selectedCardIDList = $returnSet["selectedCardIDList"];
 $selectedSysIDList = $returnSet["selectedSysIDList"];
 
 $testName = $testNameList[$curTestPos];
-$tableName01 = $db_mis_table_name_string003 . $testName;
+$tmpTestName = str_replace(" ", "", $testName);
+$tmpTestName = cleaninput($tmpTestName, 256);
+//$tableName01 = $db_mis_table_name_string003 . $testName;
+$tableName01 = $db_mis_table_name_string003 . $tmpTestName;
 
 $returnMsg["returnLine"] = "line: " . __LINE__;
 $returnSet = $xmlWriter->getBatchInfo($db, $batchIDList);

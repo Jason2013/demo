@@ -225,12 +225,14 @@ else
     
     $curTestName = $testNameList[$testPos];
     
-    $tmpTableName01 = $db_mis_table_name_string002 . $curTestName;
-    $tmpTableName02 = $db_mis_table_name_string002 . $curTestName . "_noise";
+    $tmpTestName = str_replace(" ", "", $curTestName);
+    $tmpTestName = cleaninput($tmpTestName, 256);
+    $tmpTableName01 = $db_mis_table_name_string002 . $tmpTestName;
+    //$tmpTableName02 = $db_mis_table_name_string002 . $curTestName . "_noise";
     
     $returnMsg["curTestName"] = $curTestName;
     $returnMsg["tmpTableName01"] = $tmpTableName01;
-    $returnMsg["tmpTableName02"] = $tmpTableName02;
+    //$returnMsg["tmpTableName02"] = $tmpTableName02;
     
     // clear expired 5 noise data
     //if (($resultPos == 0) &&
