@@ -104,6 +104,25 @@ $returnSet = $xmlWriter->getBatchEnvironmentInfo($db, $batchID);
 $envDefaultInfo = $returnSet["envDefaultInfo"];
 $logFileFolder = $returnSet["logFileFolder"];
 
+if ((isset($envDefaultInfo["shaderBenchCompilerList"]) == true) &&
+    (count($envDefaultInfo["shaderBenchCompilerList"]) > 0))
+{
+    $swtUmdNameList_sb = $envDefaultInfo["shaderBenchCompilerList"];
+    $swtUmdStandardOrder_sb = $envDefaultInfo["shaderBenchCompilerList"];
+    $swtUmdNameList_sb []= "OPT1";
+    $swtUmdStandardOrder_sb []= "OPT1";
+    
+    $umdNameList = $swtUmdNameList_sb;
+    $umdStandardOrder = $swtUmdStandardOrder_sb;
+}
+
+if ((isset($envDefaultInfo["shaderBenchCardList"]) == true) &&
+    (count($envDefaultInfo["shaderBenchCardList"]) > 0))
+{
+    $swtCardStandardOrder_sb = $envDefaultInfo["shaderBenchCardList"];
+    $cardStandardOrder = $swtCardStandardOrder_sb;
+}
+
 $returnSet = $xmlWriter->getCardCompilerInfo();
 $sortedCardCompilerList = $returnSet["sortedCardCompilerList"];
 if (count($sortedCardCompilerList) > 0)

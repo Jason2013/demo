@@ -221,7 +221,7 @@ class CGenReport
                                "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" " .
                                " ss:Color=\"#000000\"/>\n" .
                                "</Borders>\n" .
-                               "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"14\" ss:Color=\"#FFFFFF\" " .
+                               "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FFFFFF\" " .
                                "ss:Bold=\"1\"/>\n" .
                                "<Interior ss:Color=\"#800000\" ss:Pattern=\"Solid\"/>\n" .
                                "</Style>\n";
@@ -238,7 +238,7 @@ class CGenReport
                                "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" \n" .
                                " ss:Color=\"#000000\"/>\n" .
                                "</Borders>\n" .
-                               "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"14\" ss:Color=\"#000000\" \n" .
+                               "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#000000\" \n" .
                                "ss:Bold=\"1\"/>\n" .
                                "<Interior ss:Color=\"#FFC000\" ss:Pattern=\"Solid\"/>\n" .
                                "<NumberFormat/>\n" .
@@ -274,7 +274,7 @@ class CGenReport
                               "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" \n" .
                               " ss:Color=\"#000000\"/>\n" .
                               "</Borders>\n" .
-                              "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"12\" ss:Color=\"#000000\"/>\n" .
+                              "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#000000\"/>\n" .
                               "<Interior ss:Color=\"#D9D9D9\" ss:Pattern=\"Solid\"/>\n" .
                               "<NumberFormat ss:Format=\"Percent\"/>\n" .
                               "</Style>\n";
@@ -291,7 +291,7 @@ class CGenReport
                               "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" \n" .
                               " ss:Color=\"#000000\"/>\n" .
                               "</Borders>\n" .
-                              "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"12\" ss:Color=\"#FFFFFF\" \n" .
+                              "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FFFFFF\" \n" .
                               "ss:Bold=\"1\"/>\n" .
                               "<Interior ss:Color=\"#A03300\" ss:Pattern=\"Solid\"/>\n" .
                               "</Style>\n";
@@ -459,6 +459,54 @@ class CGenReport
                      "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
                      "<NumberFormat ss:Format=\"Percent\"/>\n" .
                      "</Style>\n";
+                     
+        $styleString_green = "<Style ss:ID=\"s%d\">\n" .
+                     "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>\n" .
+                     "<Borders>\n" .
+                     "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "</Borders>\n" .
+                     "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#00B050\" ss:Bold=\"1\"/>" .
+                     "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
+                     "</Style>\n";
+                     
+        $styleString_top_w2_green = "<Style ss:ID=\"s%d\">\n" .
+                     "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>\n" .
+                     "<Borders>\n" .
+                     "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" ss:Color=\"#000000\"/>\n" .
+                     "</Borders>\n" .
+                     "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#00B050\" ss:Bold=\"1\"/>" .
+                     "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
+                     "</Style>\n";
+                     
+        $styleString_red = "<Style ss:ID=\"s%d\">\n" .
+                     "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>\n" .
+                     "<Borders>\n" .
+                     "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "</Borders>\n" .
+                     "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FF0000\" ss:Bold=\"1\"/>" .
+                     "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
+                     "</Style>\n";
+                     
+        $styleString_top_w2_red = "<Style ss:ID=\"s%d\">\n" .
+                     "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>\n" .
+                     "<Borders>\n" .
+                     "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" ss:Color=\"#000000\"/>\n" .
+                     "</Borders>\n" .
+                     "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FF0000\" ss:Bold=\"1\"/>" .
+                     "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
+                     "</Style>\n";
              
         $appendStyleList = array($styleBlackBar, $styleBlank,
                                  $styleA, $styleB,
@@ -467,13 +515,14 @@ class CGenReport
                                  $styleC, $styleD,
                                  $styleVariance, $styleAverage, $styleOrdinal,
                                  $styleVarianceData, $styleAverageData,
-                                 $styleSummaryTitle01, $styleSummaryTitle02,
+                                 $styleSummaryTitle01, $styleSummaryTitle02, // 15, 16
                                  $styleSummaryLine01, $styleSummaryLine02, $styleSummaryLine03,
                                  $stylePlatformInfoName, $stylePlatformInfoValue,
                                  $styleSummaryTitle03, // 22
                                  $styleA_top_w2, $styleBLeft_top_w2, $styleData_top_w2, $styleRate_top_w2, $styleVarianceData_top_w2,
-                                 $styleString, $styleString_top_w2,
-                                 $styleStringRate, $styleStringRate_top_w2);
+                                 $styleString, $styleString_top_w2, // 28, 29
+                                 $styleStringRate, $styleStringRate_top_w2,
+                                 $styleString_green, $styleString_top_w2_green, $styleString_red, $styleString_top_w2_red);
                                  
         $allStylesEndTag = "</Styles>\n";
         $allSheetsEndTag = "</Workbook>";
@@ -1025,12 +1074,13 @@ class CGenReport
         {
             $t1 = file_get_contents($tmpPath);
             
-            $tmpObj = json_decode($t1);
+            //$tmpObj = json_decode($t1, true);
+            $envDefaultInfo = json_decode($t1, true);
             
-            foreach ($tmpObj as $tmpKey => $tmpVal)
-            {
-                $envDefaultInfo[$tmpKey] = $tmpVal;
-            }
+            //foreach ($tmpObj as $tmpKey => $tmpVal)
+            //{
+            //    $envDefaultInfo[$tmpKey] = $tmpVal;
+            //}
         }
         
         $params1 = array($_batchID);
@@ -2599,7 +2649,7 @@ class CGenReport
         $tableRowList["Base_Driver_Version"] = $tmpBaseDriverVersion;
         $tableRowList["Base_Driver_Date"]    = $tmpBaseDriverDate;
         $tableRowList["Vulkan_SDK_Version"] = isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
-        $tableRowList["Microbench_Version"] = isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
+        $tableRowList["Shaderbench_Version"] = isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
         
         $tableRowList["Operating_System"] = $sysNameList[0][$tmpResultPos];
         $tableRowList["Test_Date"] = $envDefaultInfo["testingDate"];
@@ -2616,7 +2666,7 @@ class CGenReport
             $cmpTableRowList["Base_Driver_Version"] = $cmpBaseDriverVersion;
             $cmpTableRowList["Base_Driver_Date"]    = $cmpBaseDriverDate;
             $cmpTableRowList["Vulkan_SDK_Version"] = isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
-            $cmpTableRowList["Microbench_Version"] = isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
+            $cmpTableRowList["Shaderbench_Version"] = isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
             
             $cmpTableRowList["Operating_System"] = $sysNameList[0][$cmpResultPos];
             $cmpTableRowList["Test_Date"] = $envDefaultInfo["testingDate"];
@@ -2750,7 +2800,7 @@ class CGenReport
         $asicInfoList["Base_Driver_Version"] = array();
         $asicInfoList["Base_Driver_Date"]    = array();
         $asicInfoList["Vulkan_SDK_Version"]  = array();
-        $asicInfoList["Microbench_Version"]  = array();
+        $asicInfoList["Shaderbench_Version"]  = array();
         $asicInfoList["Operating_System"]    = array();
         $asicInfoList["Test_Date"]           = array();
         $asicInfoList["Test_Time"]           = array();
@@ -2802,7 +2852,7 @@ class CGenReport
             $asicInfoList["Base_Driver_Version"] []= isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
             $asicInfoList["Base_Driver_Date"]    []= isset($tmpObj2["baseDriverDate"]) ? $tmpObj2["baseDriverDate"] : "";
             $asicInfoList["Vulkan_SDK_Version"]  []= isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
-            $asicInfoList["Microbench_Version"]  []= isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
+            $asicInfoList["Shaderbench_Version"]  []= isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
             $asicInfoList["Operating_System"]    []= isset($tmpObj2["systemName"]) ? $tmpObj2["systemName"] : "";
             $asicInfoList["Test_Date"]           []= $envDefaultInfo["testingDate"];
             $asicInfoList["Test_Time"]           []= $envDefaultInfo["testingTime"];
@@ -2927,123 +2977,6 @@ class CGenReport
         global $startStyleID;
         global $logStoreDir;
         global $logFileFolder;
-
-        //$tmpRootPath = $logStoreDir . "/" . $logFileFolder;
-        //$cardFolderList = glob($tmpRootPath . "/*", GLOB_ONLYDIR);
-        //
-        //$machineInfoList = array();
-        //
-        //foreach ($cardFolderList as $tmpPath)
-        //{
-        //    $tmpPath2 = $tmpPath . "/" . "machine_info.json";
-        //    if (file_exists($tmpPath2))
-        //    {
-        //        $machineInfoList []= $tmpPath2;
-        //    }
-        //}
-        //
-        //$asicInfoList = array();
-        //
-        //$asicInfoList["Base_Driver_Version"] = array();
-        //$asicInfoList["Base_Driver_Date"]    = array();
-        //$asicInfoList["Vulkan_SDK_Version"]  = array();
-        //$asicInfoList["Microbench_Version"]  = array();
-        //$asicInfoList["Operating_System"]    = array();
-        //$asicInfoList["Test_Date"]           = array();
-        //$asicInfoList["Test_Time"]           = array();
-        //$asicInfoList["CPU"]                 = array();
-        //$asicInfoList["GPU"]                 = array();
-        //$asicInfoList["GPU_Core_Clock"]      = array();
-        //$asicInfoList["GPU_Memory_Clock"]    = array();
-        //$asicInfoList["GPU_Memory"]          = array();
-        //$asicInfoList["System_Memory"]       = array();
-        //
-        //foreach ($machineInfoList as $tmpPath)
-        //{
-        //    $t1 = file_get_contents($tmpPath);
-        //    $tmpObj = json_decode($t1);
-        //    
-        //    $tmpObj2 = array();
-        //    foreach ($tmpObj as $tmpKey => $tmpVal)
-        //    {
-        //        $tmpObj2[$tmpKey] = $tmpVal;
-        //    }
-        //    
-        //    if (isset($tmpObj2["cpuName"]) &&
-        //        isset($tmpObj2["systemName"]) &&
-        //        isset($tmpObj2["videoCardName"]))
-        //    {
-        //        $cpuKeys = array_keys($asicInfoList["CPU"], $tmpObj2["cpuName"]);
-        //        $sysKeys = array_keys($asicInfoList["Operating_System"], $tmpObj2["systemName"]);
-        //        $gpuKeys = array_keys($asicInfoList["GPU"], $tmpObj2["videoCardName"]);
-        //        
-        //        $tmpKeyList = array_intersect($cpuKeys, $sysKeys, $gpuKeys);
-        //        
-        //        if (count($tmpKeyList) > 0)
-        //        {
-        //            continue;
-        //        }
-        //        
-        //        //$b1 = false;
-        //        //for ($i = $startResultID; $i < ($startResultID + $umdNum); $i++)
-        //        //{
-        //        //    if (strtolower($tmpObj2["cpuName"]) == strtolower($cpuNameList[0][$i]))
-        //        //    {
-        //        //        $b1 = true;
-        //        //        break;
-        //        //    }
-        //        //}
-        //        //if ($b1 == false)
-        //        //{
-        //        //    continue;
-        //        //}
-        //        
-        //        $b1 = false;
-        //        for ($i = $startResultID; $i < ($startResultID + $umdNum); $i++)
-        //        {
-        //            if (strtolower($tmpObj2["systemName"]) == strtolower($sysNameList[0][$i]))
-        //            {
-        //                $b1 = true;
-        //                break;
-        //            }
-        //        }
-        //        if ($b1 == false)
-        //        {
-        //            continue;
-        //        }
-        //        
-        //        //$b1 = false;
-        //        //for ($i = $startResultID; $i < ($startResultID + $umdNum); $i++)
-        //        //{
-        //        //    if (strtolower($tmpObj2["videoCardName"]) == strtolower($cardNameList[0][$i]))
-        //        //    {
-        //        //        $b1 = true;
-        //        //        break;
-        //        //    }
-        //        //}
-        //        //if ($b1 == false)
-        //        //{
-        //        //    continue;
-        //        //}
-        //    }
-        //
-        //    $asicInfoList["Base_Driver_Version"] []= isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
-        //    $asicInfoList["Base_Driver_Date"]    []= isset($tmpObj2["baseDriverDate"]) ? $tmpObj2["baseDriverDate"] : "";
-        //    $asicInfoList["Vulkan_SDK_Version"]  []= isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
-        //    $asicInfoList["Microbench_Version"]  []= isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
-        //    $asicInfoList["Operating_System"]    []= isset($tmpObj2["systemName"]) ? $tmpObj2["systemName"] : "";
-        //    $asicInfoList["Test_Date"]           []= $envDefaultInfo["testingDate"];
-        //    $asicInfoList["Test_Time"]           []= $envDefaultInfo["testingTime"];
-        //    $asicInfoList["CPU"]                 []= isset($tmpObj2["cpuName"]) ? $tmpObj2["cpuName"] : "";
-        //    $asicInfoList["GPU"]                 []= isset($tmpObj2["videoCardName"]) ? $tmpObj2["videoCardName"] : "";
-        //    $asicInfoList["GPU_Core_Clock"]      []= isset($tmpObj2["sClockName"]) ? $tmpObj2["sClockName"] : "";
-        //    $asicInfoList["GPU_Memory_Clock"]    []= isset($tmpObj2["mClockName"]) ? $tmpObj2["mClockName"] : "";
-        //    $asicInfoList["GPU_Memory"]          []= isset($tmpObj2["gpuMemName"]) ? $tmpObj2["gpuMemName"] : "";
-        //    $asicInfoList["System_Memory"]       []= isset($tmpObj2["memoryName"]) ? $tmpObj2["memoryName"] : "";
-        //    
-        //}
-        //
-        //$returnMsg["asicInfoList"] = $asicInfoList;
         
         $returnSet = $this->getPlatformInfo();
         $asicInfoList = $returnSet["asicInfoList"];
@@ -7236,12 +7169,16 @@ class CGenReport
                 $tmpStyleTag2 = 5;
                 $tmpStyleTag3 = 28;
                 $tmpStyleTag4 = 30;
+                $tmpStyleTag5 = 32;
+                $tmpStyleTag6 = 34;
                 if ($n1 == 0)
                 {
                     $tmpStyleTag1 = 25;
                     $tmpStyleTag2 = 26;
                     $tmpStyleTag3 = 29;
                     $tmpStyleTag4 = 31;
+                    $tmpStyleTag5 = 33;
+                    $tmpStyleTag6 = 35;
                 }
                 
                 if ($tmpDataColumnNum == 1)
@@ -7409,7 +7346,18 @@ class CGenReport
                     // VerifyStatus
                     for ($i = 0; $i < $tmpDataColumnNum; $i++)
                     {
-                        $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag3) . "\">" .
+                        $tmpTag = $tmpStyleTag3;
+                        if ($tmpVerifyStatusValList[$i] == 1)
+                        {
+                            // PASS
+                            $tmpTag = $tmpStyleTag5;
+                        }
+                        else if ($tmpVerifyStatusValList[$i] == 2)
+                        {
+                            // FAIL
+                            $tmpTag = $tmpStyleTag6;
+                        }
+                        $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpTag) . "\">" .
                                "" . $tmpVerifyStatusList[$i] . "</Cell>\n";
                     }
                 }

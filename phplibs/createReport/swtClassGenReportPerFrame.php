@@ -221,7 +221,7 @@ class CGenReport
                                "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" " .
                                " ss:Color=\"#000000\"/>\n" .
                                "</Borders>\n" .
-                               "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"14\" ss:Color=\"#FFFFFF\" " .
+                               "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FFFFFF\" " .
                                "ss:Bold=\"1\"/>\n" .
                                "<Interior ss:Color=\"#800000\" ss:Pattern=\"Solid\"/>\n" .
                                "</Style>\n";
@@ -238,7 +238,7 @@ class CGenReport
                                "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" \n" .
                                " ss:Color=\"#000000\"/>\n" .
                                "</Borders>\n" .
-                               "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"14\" ss:Color=\"#000000\" \n" .
+                               "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#000000\" \n" .
                                "ss:Bold=\"1\"/>\n" .
                                "<Interior ss:Color=\"#FFC000\" ss:Pattern=\"Solid\"/>\n" .
                                "<NumberFormat/>\n" .
@@ -274,7 +274,7 @@ class CGenReport
                               "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" \n" .
                               " ss:Color=\"#000000\"/>\n" .
                               "</Borders>\n" .
-                              "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"12\" ss:Color=\"#000000\"/>\n" .
+                              "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#000000\"/>\n" .
                               "<Interior ss:Color=\"#D9D9D9\" ss:Pattern=\"Solid\"/>\n" .
                               "<NumberFormat ss:Format=\"Percent\"/>\n" .
                               "</Style>\n";
@@ -291,7 +291,7 @@ class CGenReport
                               "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" \n" .
                               " ss:Color=\"#000000\"/>\n" .
                               "</Borders>\n" .
-                              "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"12\" ss:Color=\"#FFFFFF\" \n" .
+                              "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FFFFFF\" \n" .
                               "ss:Bold=\"1\"/>\n" .
                               "<Interior ss:Color=\"#A03300\" ss:Pattern=\"Solid\"/>\n" .
                               "</Style>\n";
@@ -459,6 +459,54 @@ class CGenReport
                      "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
                      "<NumberFormat ss:Format=\"Percent\"/>\n" .
                      "</Style>\n";
+                     
+        $styleString_green = "<Style ss:ID=\"s%d\">\n" .
+                     "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>\n" .
+                     "<Borders>\n" .
+                     "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "</Borders>\n" .
+                     "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#00B050\" ss:Bold=\"1\"/>" .
+                     "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
+                     "</Style>\n";
+                     
+        $styleString_top_w2_green = "<Style ss:ID=\"s%d\">\n" .
+                     "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>\n" .
+                     "<Borders>\n" .
+                     "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" ss:Color=\"#000000\"/>\n" .
+                     "</Borders>\n" .
+                     "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#00B050\" ss:Bold=\"1\"/>" .
+                     "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
+                     "</Style>\n";
+                     
+        $styleString_red = "<Style ss:ID=\"s%d\">\n" .
+                     "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>\n" .
+                     "<Borders>\n" .
+                     "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "</Borders>\n" .
+                     "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FF0000\" ss:Bold=\"1\"/>" .
+                     "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
+                     "</Style>\n";
+                     
+        $styleString_top_w2_red = "<Style ss:ID=\"s%d\">\n" .
+                     "<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>\n" .
+                     "<Borders>\n" .
+                     "<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
+                     "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" ss:Color=\"#000000\"/>\n" .
+                     "</Borders>\n" .
+                     "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FF0000\" ss:Bold=\"1\"/>" .
+                     "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
+                     "</Style>\n";
              
         $appendStyleList = array($styleBlackBar, $styleBlank,
                                  $styleA, $styleB,
@@ -467,13 +515,14 @@ class CGenReport
                                  $styleC, $styleD,
                                  $styleVariance, $styleAverage, $styleOrdinal,
                                  $styleVarianceData, $styleAverageData,
-                                 $styleSummaryTitle01, $styleSummaryTitle02,
+                                 $styleSummaryTitle01, $styleSummaryTitle02, // 15, 16
                                  $styleSummaryLine01, $styleSummaryLine02, $styleSummaryLine03,
                                  $stylePlatformInfoName, $stylePlatformInfoValue,
                                  $styleSummaryTitle03, // 22
                                  $styleA_top_w2, $styleBLeft_top_w2, $styleData_top_w2, $styleRate_top_w2, $styleVarianceData_top_w2,
-                                 $styleString, $styleString_top_w2,
-                                 $styleStringRate, $styleStringRate_top_w2);
+                                 $styleString, $styleString_top_w2, // 28, 29
+                                 $styleStringRate, $styleStringRate_top_w2,
+                                 $styleString_green, $styleString_top_w2_green, $styleString_red, $styleString_top_w2_red);
                                  
         $allStylesEndTag = "</Styles>\n";
         $allSheetsEndTag = "</Workbook>";
@@ -2423,7 +2472,7 @@ class CGenReport
         $asicInfoList["Base_Driver_Version"] = array();
         $asicInfoList["Base_Driver_Date"]    = array();
         $asicInfoList["Vulkan_SDK_Version"]  = array();
-        $asicInfoList["Microbench_Version"]  = array();
+        $asicInfoList["Framebench_Version"]  = array();
         $asicInfoList["Operating_System"]    = array();
         $asicInfoList["Test_Date"]           = array();
         $asicInfoList["Test_Time"]           = array();
@@ -2448,7 +2497,7 @@ class CGenReport
             $asicInfoList["Base_Driver_Version"] []= isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
             $asicInfoList["Base_Driver_Date"]    []= isset($tmpObj2["baseDriverDate"]) ? $tmpObj2["baseDriverDate"] : "";
             $asicInfoList["Vulkan_SDK_Version"]  []= isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
-            $asicInfoList["Microbench_Version"]  []= isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
+            $asicInfoList["Framebench_Version"]  []= isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
             $asicInfoList["Operating_System"]    []= isset($tmpObj2["systemName"]) ? $tmpObj2["systemName"] : "";
             $asicInfoList["Test_Date"]           []= $envDefaultInfo["testingDate"];
             $asicInfoList["Test_Time"]           []= $envDefaultInfo["testingTime"];
@@ -6664,12 +6713,16 @@ class CGenReport
                 $tmpStyleTag2 = 5;
                 $tmpStyleTag3 = 28;
                 $tmpStyleTag4 = 30;
+                $tmpStyleTag5 = 32;
+                $tmpStyleTag6 = 34;
                 if ($n1 == 0)
                 {
                     $tmpStyleTag1 = 25;
                     $tmpStyleTag2 = 26;
                     $tmpStyleTag3 = 29;
                     $tmpStyleTag4 = 31;
+                    $tmpStyleTag5 = 33;
+                    $tmpStyleTag6 = 35;
                 }
                 
                 if ($tmpDataColumnNum == 1)
@@ -6790,7 +6843,18 @@ class CGenReport
                     // VerifyStatus
                     for ($i = 0; $i < $tmpDataColumnNum; $i++)
                     {
-                        $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag3) . "\">" .
+                        $tmpTag = $tmpStyleTag3;
+                        if ($tmpVerifyStatusValList[$i] == 1)
+                        {
+                            // PASS
+                            $tmpTag = $tmpStyleTag5;
+                        }
+                        else if ($tmpVerifyStatusValList[$i] == 2)
+                        {
+                            // FAIL
+                            $tmpTag = $tmpStyleTag6;
+                        }
+                        $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpTag) . "\">" .
                                "" . $tmpVerifyStatusList[$i] . "</Cell>\n";
                     }
                     

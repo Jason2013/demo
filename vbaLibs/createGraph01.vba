@@ -113,7 +113,7 @@ Function setCharBarPercentTag(barNum1 As Integer, barNum2 As Integer)
             ActiveChart.SeriesCollection(i).ApplyDataLabels
             ActiveChart.SeriesCollection(i).DataLabels.Select
             Selection.NumberFormat = "0.00%%"
-            Selection.Format.TextFrame2.TextRange.Font.Size = 9
+            Selection.Format.TextFrame2.TextRange.Font.Size = 10
         'End If
     Next
     
@@ -124,7 +124,7 @@ Function setCharBarPercentTag(barNum1 As Integer, barNum2 As Integer)
             ActiveChart.SeriesCollection(i).ApplyDataLabels
             ActiveChart.SeriesCollection(i).DataLabels.Select
             Selection.NumberFormat = "0.00%%"
-            Selection.Format.TextFrame2.TextRange.Font.Size = 9
+            Selection.Format.TextFrame2.TextRange.Font.Size = 10
         'End If
     Next
     
@@ -413,6 +413,9 @@ Public Sub createGraph01()
     ActiveChart.Legend.Select
     Selection.Format.TextFrame2.TextRange.Font.Size = 12
     Selection.Position = xlTop
+    For Each tmpTag In ActiveChart.Axes
+        tmpTag.TickLabels.Font.Size = 12
+    Next
     
     ActiveSheet.ChartObjects("chart01").Activate
     ActiveChart.ChartTitle.Select
@@ -420,6 +423,9 @@ Public Sub createGraph01()
     ActiveChart.Legend.Select
     Selection.Format.TextFrame2.TextRange.Font.Size = 12
     Selection.Position = xlTop
+    For Each tmpTag In ActiveChart.Axes
+        tmpTag.TickLabels.Font.Size = 12
+    Next
     
     %s
     
