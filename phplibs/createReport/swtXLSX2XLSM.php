@@ -256,8 +256,9 @@ if ($fileID < count($oldReportXLSXList))
                     }
                 }
                 
-                // framebench
-                if (($vbaConfig->reportType == 3) &&
+                // shaderbench, framebench
+                if (($vbaConfig->reportType == 2 ||
+                     $vbaConfig->reportType == 3) &&
                     ($vbaConfig->testBarNum == 2))
                 {
                     $codePiece1 .= "\n";

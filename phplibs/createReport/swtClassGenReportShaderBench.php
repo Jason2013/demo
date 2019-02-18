@@ -6742,6 +6742,8 @@ class CGenReport
         $tmpJson["graphDataBarNum"] = $graphDataBarNum;
         $tmpJson["graphDataBarNum2"] = $graphDataBarNum2;
         $tmpJson["reportType"] = 2;
+        $tmpJson["testNameNum"] = count($testNameList);
+        $tmpJson["testBarNum"] = $graphDataColumnNum;
         $tmpJson["curCardName"] = $curCardName;
         $tmpJson["cmpCardName"] = $cmpCardName;
         $tmpJson["curSysName"] = $tmpSysName;

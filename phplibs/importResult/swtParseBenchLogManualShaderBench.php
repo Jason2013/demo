@@ -90,7 +90,7 @@ function swtGetResultID($_batchID, $_machineID, $_umdID, $_CL, $_state)
     $resultID = -1;
     if ($row1 == false)
     {
-        $params1 = array($_machineID, $_batchID, $_umdID, $_CL, $_state);
+        $params1 = array($_machineID, $_batchID, $_umdID, intval($_CL), $_state);
         $sql1 = "INSERT INTO mis_table_result_list " .
                 "(machine_id, batch_id, umd_id, cl_value, path_id, result_state, insert_time) " .
                 "VALUES (?, ?, ?, ?, \"0\", ?, NOW())";
@@ -98,7 +98,8 @@ function swtGetResultID($_batchID, $_machineID, $_umdID, $_CL, $_state)
         {
             $returnMsg["errorCode"] = 0;
             $returnMsg["sql1"] = $sql1;
-            $returnMsg["errorMsg"] = "query mysql table failed #2b, line: " . __LINE__ . implode(",", $params1);
+            //$returnMsg["errorMsg"] = "query mysql table failed #2b, line: " . __LINE__ . implode(",", $params1);
+            $returnMsg["errorMsg"] = "query mysql table failed #2b, line: " . __LINE__ . ", error: " . $db->getError()[2];
             return -1;
         }
         $resultID = $db->getInsertID();
