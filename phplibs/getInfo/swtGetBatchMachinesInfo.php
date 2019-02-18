@@ -205,6 +205,19 @@ function checkFilesInFolder($_path)
             array_push($reportFolderMatchList, $tmpFolderName);
         }
     }
+    
+    $tmpList = glob($_path . "/*.ini");
+    
+    if (count($tmpList) > 0)
+    {
+        foreach ($tmpList as $tmpName2)
+        {
+            $t1 = substr($tmpName2, strlen("../"));
+            array_push($reportFileNameList, $t1);
+            array_push($reportFolderMatchList, $tmpFolderName);
+        }
+    }
+    
     return count($tmpList);
 }
 

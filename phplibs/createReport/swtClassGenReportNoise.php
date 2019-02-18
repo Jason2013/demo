@@ -2037,6 +2037,8 @@ class CGenReport
         // summary data
         $jsonFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d.json", $_batchID);
         $jsonFileName2 = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d_2.json", $_batchID);
+        // alarm data file
+        $alarmFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d.ini", $_batchID);
         
         $returnSet = array();
         $returnSet["xmlFileName"] = $xmlFileName;
@@ -2046,6 +2048,7 @@ class CGenReport
         // summary json file for each card, has testNameList
         $returnSet["jsonFileName"] = $jsonFileName;
         $returnSet["jsonFileName2"] = $jsonFileName2;
+        $returnSet["alarmFileName"] = $alarmFileName;
         return $returnSet;
     }
     
@@ -2902,6 +2905,9 @@ class CGenReport
         global $crossType;
         global $resultUmdOrder;
         global $reportTemplateDir;
+        global $tmpCardName;
+        global $tmpSysName;
+        global $alarmFileName;
         
         if (file_exists($_tmpJsonFileName))
         {
@@ -3017,7 +3023,42 @@ class CGenReport
             $t1 = file_get_contents($reportTemplateDir . "/../reportConfig/summarySheet.json");
             $variationJson = json_decode($t1, true);
             
+            $tmpTestAlarmValueList = array();
+            $tmpTestNameList = array();
+            $tmpUmdNameList = array();
             $t1 = "";
+            
+            $tmpUmdNameList = array();
+            $tmpIndexList = array();
+            $tmpLoopNum = 0;
+            
+            // to deal with random api missing
+            if (($cmpStartResultID != -1) ||
+                ($crossType == 2))
+            {
+                for ($i = 0; $i < $reportUmdNum; $i++)
+                {
+                    array_push($tmpIndexList, $i);
+                    $tmpUmdNameList []= $tmpReportUmdInfo[$i];
+                    $tmpTestAlarmValueList []= array();
+                }
+                $tmpLoopNum = $reportUmdNum;
+            }
+            else
+            {
+                for ($i = 0; $i < $reportUmdNum; $i++)
+                {
+                    if ($resultUmdOrder[$i] == -1)
+                    {
+                        continue;
+                    }
+                    array_push($tmpIndexList, $i);
+                    $tmpUmdNameList []= $tmpReportUmdInfo[$i];
+                    $tmpTestAlarmValueList []= array();
+                }
+                $tmpLoopNum = count($tmpIndexList);
+            }
+            
             foreach ($summaryJson as $k=>$v)
             {
                 $tmpGameName = $k;
@@ -3026,6 +3067,9 @@ class CGenReport
                 {
                     $tmpGameName = $tmpArr[1];
                 }
+                
+                $tmpTestNameList []= $tmpGameName;
+                //$tmpAlarmValueList = array();
                 
                 $t1 .= "<Row ss:StyleID=\"Default\">\n";
                 $t1 .= "<Cell ss:MergeDown=\"1\" ss:StyleID=\"s93\"><Data ss:Type=\"String\">" . $tmpGameName . "</Data></Cell>\n";
@@ -3045,31 +3089,34 @@ class CGenReport
                 $hasContent = false;
                 $tmpColumnNum = 0;
                 
-                $tmpIndexList = array();
-                $tmpLoopNum = 0;
-                
-                // to deal with random api missing
-                if (($cmpStartResultID != -1) ||
-                    ($crossType == 2))
-                {
-                    for ($i = 0; $i < $reportUmdNum; $i++)
-                    {
-                        array_push($tmpIndexList, $i);
-                    }
-                    $tmpLoopNum = $reportUmdNum;
-                }
-                else
-                {
-                    for ($i = 0; $i < $reportUmdNum; $i++)
-                    {
-                        if ($resultUmdOrder[$i] == -1)
-                        {
-                            continue;
-                        }
-                        array_push($tmpIndexList, $i);
-                    }
-                    $tmpLoopNum = count($tmpIndexList);
-                }
+                //$tmpUmdNameList = array();
+                //$tmpIndexList = array();
+                //$tmpLoopNum = 0;
+                //
+                //// to deal with random api missing
+                //if (($cmpStartResultID != -1) ||
+                //    ($crossType == 2))
+                //{
+                //    for ($i = 0; $i < $reportUmdNum; $i++)
+                //    {
+                //        array_push($tmpIndexList, $i);
+                //        $tmpUmdNameList []= $tmpReportUmdInfo[$i];
+                //    }
+                //    $tmpLoopNum = $reportUmdNum;
+                //}
+                //else
+                //{
+                //    for ($i = 0; $i < $reportUmdNum; $i++)
+                //    {
+                //        if ($resultUmdOrder[$i] == -1)
+                //        {
+                //            continue;
+                //        }
+                //        array_push($tmpIndexList, $i);
+                //        $tmpUmdNameList []= $tmpReportUmdInfo[$i];
+                //    }
+                //    $tmpLoopNum = count($tmpIndexList);
+                //}
                 
                 for ($i = 0; $i < $tmpLoopNum; $i++)
                 {
@@ -3084,6 +3131,7 @@ class CGenReport
                         } 
                     }
                     
+                    $tmpAlarmValueList = array();
                     $j = $tmpIndexList[$i] * 2;
                     
                     $tmpMin = floatval($v[$tmpIndexList[$i] * 2]);
@@ -3202,7 +3250,11 @@ class CGenReport
                                               $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8 + 1],
                                               $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8 + 2], 
                                               $tmpMaxRate, $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8 + 3]);
-
+                                              
+                                if ($tmpMaxRate > 5)
+                                {
+                                    $tmpAlarmValueList []= $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8];
+                                }
                             }
                             else if ($tmpMaxRate == 0)
                             {
@@ -3212,6 +3264,11 @@ class CGenReport
                                               $v[$sectionPosList[3] + $tmpIndexList[$i] * 8 + 1],
                                               $v[$sectionPosList[3] + $tmpIndexList[$i] * 8 + 2], 
                                               $tmpMinRate, $v[$sectionPosList[3] + $tmpIndexList[$i] * 8 + 3]);
+                                              
+                                if ($tmpMinRate < -5)
+                                {
+                                    $tmpAlarmValueList []= $v[$sectionPosList[3] + $tmpIndexList[$i] * 8];
+                                }
                             }
                             else
                             {
@@ -3225,9 +3282,20 @@ class CGenReport
                                               $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8 + 1],
                                               $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8 + 2], 
                                               $tmpMaxRate, $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8 + 3]);
+                                              
+                                if ($tmpMinRate < -5)
+                                {
+                                    $tmpAlarmValueList []= $v[$sectionPosList[3] + $tmpIndexList[$i] * 8];
+                                }
+                                if ($tmpMaxRate > 5)
+                                {
+                                    $tmpAlarmValueList []= $v[$sectionPosList[3] + 4 + $tmpIndexList[$i] * 8];
+                                }
                             }
                         }
                     }
+                    
+                    $tmpTestAlarmValueList[$i] []= $tmpAlarmValueList;
                     
                     $t1 .= "<Cell ss:StyleID=\"" . $t3 . "\"><Data ss:Type=\"String\">" . $t2 . "</Data></Cell>\n";
                     // summary sheet
@@ -3263,6 +3331,35 @@ class CGenReport
             fwrite($_fileHandle, $xmlSection);
             
             unlink($_tmpJsonFileName);
+            
+            // generate alarm cases INI files for Rocky
+            $t1 = "";
+            for ($i = 0; $i < count($tmpUmdNameList); $i++)
+            {
+                if (count($tmpTestAlarmValueList[$i]) == 0)
+                {
+                    continue;
+                }
+                $t1 .= "[" . $tmpUmdNameList[$i] . "]\r\n";
+                $t1 .= "Tests=";
+                
+                $tmpSecList = array();
+                for ($j = 0; $j < count($tmpTestNameList); $j++)
+                {
+                    if (count($tmpTestAlarmValueList[$i][$j]) > 0)
+                    {
+                        $t2 = implode(",", $tmpTestAlarmValueList[$i][$j]);
+                        $t2 = $tmpTestNameList[$j] . "[" . $t2 . "]";
+                        
+                        $tmpSecList []= $t2;
+                    }
+                }
+                
+                $t2 = implode(" ", $tmpSecList);
+                $t1 .= $t2 . "\r\n";
+            }
+            
+            file_put_contents($alarmFileName, $t1);
         }
     }
     

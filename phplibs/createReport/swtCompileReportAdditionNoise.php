@@ -504,6 +504,8 @@ if (($subTestNum == 0) ||
         // summary
         $jsonFileName = $returnSet["jsonFileName"];
         $jsonFileName2 = $returnSet["jsonFileName2"];
+        // alarm ini
+        $alarmFileName = $returnSet["alarmFileName"];
 
         $returnMsg["checkShiftCard"] = "0";
         $returnMsg["resultPos"] = $resultPos;
@@ -608,6 +610,8 @@ else
     // summary
     $jsonFileName = $returnSet["jsonFileName"];
     $jsonFileName2 = $returnSet["jsonFileName2"];
+    // alarm ini
+    $alarmFileName = $returnSet["alarmFileName"];
     
     //$returnMsg["returnLine2"] = "line: " . __LINE__;
     
