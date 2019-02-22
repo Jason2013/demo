@@ -584,15 +584,15 @@ class CGenReportFlatData
                 {
                     $tmpFileName = sprintf($_reportFolder . "/" . $tmpName . "_" . $tmpName2 .
                                            $_outFileNameLater, $_batchID);
-                    $fileHandle = fopen($tmpFileName, "w");
+                    //$fileHandle = fopen($tmpFileName, "w");
                     
                     // report head
-                    $t1 = file_get_contents($templateFileName0);
-                    fwrite($fileHandle, $t1);
+                    //$t1 = file_get_contents($templateFileName0);
+                    //fwrite($fileHandle, $t1);
                     // style end tag
-                    $xmlWriter->writeAdditionalStyles($fileHandle);
+                    //$xmlWriter->writeAdditionalStyles($fileHandle);
                     
-                    fclose($fileHandle);
+                    //fclose($fileHandle);
                 }
             }
             $columnNum = 0;
@@ -617,29 +617,19 @@ class CGenReportFlatData
         if ($_fileID >= count($_uniqueCardNameList))
         {
             // add sheet end
-            //foreach ($_uniqueCardNameList as $tmpName)
+            
+            $tmpFileNamePart = $_reportFolder . "/" . "*.tmp1";
+            //$tmpFileNameList = glob($tmpFileNamePart);
+            //
+            //foreach ($tmpFileNameList as $tmpName)
             //{
-            //    $tmpFileName = sprintf($_reportFolder . "/" . $tmpName . $_outFileNameLater, $_batchID);
-            //    $fileHandle = fopen($tmpFileName, "r+");
+            //    $fileHandle = fopen($tmpName, "r+");
             //    fseek($fileHandle, 0, SEEK_END);
-            //    //$t1 = file_get_contents($templateFileName2);
+            //
             //    fwrite($fileHandle, $allSheetsEndTag);
             //    
             //    fclose($fileHandle);
             //}
-            
-            $tmpFileNamePart = $_reportFolder . "/" . "*.tmp1";
-            $tmpFileNameList = glob($tmpFileNamePart);
-            
-            foreach ($tmpFileNameList as $tmpName)
-            {
-                $fileHandle = fopen($tmpName, "r+");
-                fseek($fileHandle, 0, SEEK_END);
-
-                fwrite($fileHandle, $allSheetsEndTag);
-                
-                fclose($fileHandle);
-            }
             
             $returnMsg["parseFinished"] = 1;
             $returnMsg["curReportFolder"] = $_curReportFolder;

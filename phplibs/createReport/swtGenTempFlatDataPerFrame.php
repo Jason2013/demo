@@ -393,17 +393,17 @@ if ($fileID <= count($uniqueCardNameList))
     $mainContentList = array();
     
     // write result file lines to tmp file
-    $flatDataGen->dumpLines($visitedTestNameList,
-                            $curCardNameList,
-                            $pairCardNameList,
-                            $testStartPosList,
-                            $pairTestStartPosList,
-                            //$fileHandle,
-                            $resultFileHandleList,
-                            $pairResultFileHandleList,
-                            $tmpCardName,
-                            $curPairMachineID,
-                            $machineIDCardNameSysNameDict);
+    //$flatDataGen->dumpLines($visitedTestNameList,
+    //                        $curCardNameList,
+    //                        $pairCardNameList,
+    //                        $testStartPosList,
+    //                        $pairTestStartPosList,
+    //                        //$fileHandle,
+    //                        $resultFileHandleList,
+    //                        $pairResultFileHandleList,
+    //                        $tmpCardName,
+    //                        $curPairMachineID,
+    //                        $machineIDCardNameSysNameDict);
 
 
     // close all src files

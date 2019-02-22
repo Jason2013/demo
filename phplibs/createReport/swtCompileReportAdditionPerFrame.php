@@ -276,8 +276,8 @@ if ($resultPos >= count($resultIDList[0]))
     return;
 }
 
-$resultNoiseNum = $xmlWriter->getNoiseNum($db, $resultPos);
-$returnMsg["resultNoiseNum"] = $resultNoiseNum;
+//$resultNoiseNum = $xmlWriter->getNoiseNum($db, $resultPos);
+//$returnMsg["resultNoiseNum"] = $resultNoiseNum;
 
 $uniqueCardNameList = array_unique($cardNameList[0]);
 $cardNum = count($uniqueCardNameList);
