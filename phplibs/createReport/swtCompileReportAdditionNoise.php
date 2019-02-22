@@ -219,8 +219,8 @@ if ($resultPos >= count($resultIDList[0]))
     return;
 }
 
-$resultNoiseNum = $xmlWriter->getNoiseNum($db, $resultPos);
-$returnMsg["resultNoiseNum"] = $resultNoiseNum;
+//$resultNoiseNum = $xmlWriter->getNoiseNum($db, $resultPos);
+//$returnMsg["resultNoiseNum"] = $resultNoiseNum;
 
 $uniqueCardNameList = array_unique($cardNameList[0]);
 $cardNum = count($uniqueCardNameList);
@@ -461,6 +461,7 @@ $skipTestNameList = $returnSet["skipTestNameList"];
 $subTestUmdDataMaskList = $returnSet["subTestUmdDataMaskList"];
 
 $returnMsg["skipTestNameList"] = $skipTestNameList;
+$returnMsg["subTestNumList"] = $subTestNumList;
 
 //$allUmdTestCaseNumList = $xmlWriter->getAllUmdTestCaseNumList($db);
 //$returnMsg["allUmdTestCaseNumList"] = $allUmdTestCaseNumList;

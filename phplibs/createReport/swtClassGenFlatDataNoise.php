@@ -542,18 +542,15 @@ class CGenReportFlatData
             foreach ($_uniqueCardNameList as $tmpName)
             {
                 $tmpFileName = sprintf($_reportFolder . "/" . $tmpName . $_outFileNameLater, $_batchID);
-                $fileHandle = fopen($tmpFileName, "w");
+                //$fileHandle = fopen($tmpFileName, "w");
                 
                 // report head
-                $t1 = file_get_contents($templateFileName0);
-                fwrite($fileHandle, $t1);
-                // style end tag
-                $xmlWriter->writeAdditionalStyles($fileHandle);
-                //$t1 = file_get_contents($templateFileName3);
-                ////$t1 = sprintf($t1, 0, 0);
+                //$t1 = file_get_contents($templateFileName0);
                 //fwrite($fileHandle, $t1);
+                // style end tag
+                //$xmlWriter->writeAdditionalStyles($fileHandle);
                 
-                fclose($fileHandle);
+                //fclose($fileHandle);
             }
             $columnNum = 0;
             $rowNum = 0;
@@ -580,12 +577,11 @@ class CGenReportFlatData
             foreach ($_uniqueCardNameList as $tmpName)
             {
                 $tmpFileName = sprintf($_reportFolder . "/" . $tmpName . $_outFileNameLater, $_batchID);
-                $fileHandle = fopen($tmpFileName, "r+");
-                fseek($fileHandle, 0, SEEK_END);
-                //$t1 = file_get_contents($templateFileName2);
-                fwrite($fileHandle, $allSheetsEndTag);
+                //$fileHandle = fopen($tmpFileName, "r+");
+                //fseek($fileHandle, 0, SEEK_END);
+                //fwrite($fileHandle, $allSheetsEndTag);
                 
-                fclose($fileHandle);
+                //fclose($fileHandle);
             }
             
             $returnMsg["parseFinished"] = 1;
