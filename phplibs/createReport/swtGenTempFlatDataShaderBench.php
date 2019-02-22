@@ -389,52 +389,52 @@ if ($fileID <= count($uniqueCardNameList))
     
 
     // open all src files
-    $resultFileHandleList = array();
-    $pairResultFileHandleList = array();
-    for ($i = 0; $i < count($curCardNameList); $i++)
-    {
-        $curTmpFileName = $allFileList[$curCardNameList[$i]];
-        $resultFileHandle = fopen($curTmpFileName, "r"); 
-        array_push($resultFileHandleList, $resultFileHandle);
-    }
-    
-    if ($curPairMachineID != -1)
-    {
-        // if has compare card
-        for ($i = 0; $i < count($pairCardNameList); $i++)
-        {
-            $curTmpFileName = $allFileList[$pairCardNameList[$i]];
-            $resultFileHandle = fopen($curTmpFileName, "r"); 
-            array_push($pairResultFileHandleList, $resultFileHandle);
-        }
-    }
+    //$resultFileHandleList = array();
+    //$pairResultFileHandleList = array();
+    //for ($i = 0; $i < count($curCardNameList); $i++)
+    //{
+    //    $curTmpFileName = $allFileList[$curCardNameList[$i]];
+    //    $resultFileHandle = fopen($curTmpFileName, "r"); 
+    //    array_push($resultFileHandleList, $resultFileHandle);
+    //}
+    //
+    //if ($curPairMachineID != -1)
+    //{
+    //    // if has compare card
+    //    for ($i = 0; $i < count($pairCardNameList); $i++)
+    //    {
+    //        $curTmpFileName = $allFileList[$pairCardNameList[$i]];
+    //        $resultFileHandle = fopen($curTmpFileName, "r"); 
+    //        array_push($pairResultFileHandleList, $resultFileHandle);
+    //    }
+    //}
     
     $usedFileNameList = array();
     $usedFileHandleList = array();
     
     // write result file lines to tmp file
-    $flatDataGen->dumpLines($visitedTestNameList,
-                            $curCardNameList,
-                            $pairCardNameList,
-                            $testStartPosList,
-                            $pairTestStartPosList,
-                            //$fileHandle,
-                            $resultFileHandleList,
-                            $pairResultFileHandleList,
-                            $tmpCardName,
-                            $curPairMachineID,
-                            $machineIDCardNameSysNameDict);
+    //$flatDataGen->dumpLines($visitedTestNameList,
+    //                        $curCardNameList,
+    //                        $pairCardNameList,
+    //                        $testStartPosList,
+    //                        $pairTestStartPosList,
+    //                        //$fileHandle,
+    //                        $resultFileHandleList,
+    //                        $pairResultFileHandleList,
+    //                        $tmpCardName,
+    //                        $curPairMachineID,
+    //                        $machineIDCardNameSysNameDict);
 
     // close all src files
-    foreach ($resultFileHandleList as $tmpHandle)
-    {
-        fclose($tmpHandle);
-    }
-    
-    foreach ($pairResultFileHandleList as $tmpHandle)
-    {
-        fclose($tmpHandle);
-    }
+    //foreach ($resultFileHandleList as $tmpHandle)
+    //{
+    //    fclose($tmpHandle);
+    //}
+    //
+    //foreach ($pairResultFileHandleList as $tmpHandle)
+    //{
+    //    fclose($tmpHandle);
+    //}
 
     //fclose($fileHandle);
     
