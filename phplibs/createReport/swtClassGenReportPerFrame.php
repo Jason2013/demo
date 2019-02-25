@@ -2696,8 +2696,8 @@ class CGenReport
                 if ($standardUmdTestCaseNumList[$i] > 0)
                 {
                     $tmpArr = explode("_", $tmpReportUmdInfo[$j]);
-                    $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX(" . 
-                                  $tmpArr[0] . "_" . $swtPreSheetName_pf[0] . "!R[" . ($tmpLineOffset[$j] - 1) . 
+                    $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX('" . 
+                                  $tmpArr[0] . "_" . $swtPreSheetName_pf[0] . "'!R[" . ($tmpLineOffset[$j] - 1) . 
                                   "]C" . ($subjectNameFilterNumMax + 3) . 
                                   ":R[" . ($tmpLineOffset[$j] + $standardUmdTestCaseNumList[$i] - 1 - 1) . "]C" . 
                                   ($subjectNameFilterNumMax + 3) . ")\">" .
@@ -2735,8 +2735,8 @@ class CGenReport
                 if ($standardUmdTestCaseNumList[$i] > 0)
                 {
                     $tmpArr = explode("_", $tmpReportUmdInfo[$j]);
-                    $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX(" . 
-                                  $tmpArr[0] . "_" . $swtPreSheetName_pf[1] . "!R[" . ($tmpLineOffset2[$j] - 1) . 
+                    $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX('" . 
+                                  $tmpArr[0] . "_" . $swtPreSheetName_pf[1] . "'!R[" . ($tmpLineOffset2[$j] - 1) . 
                                   "]C" . ($subjectNameFilterNumMax + 3) . 
                                   ":R[" . ($tmpLineOffset2[$j] + $standardUmdTestCaseNumList[$i] - 1 - 1) . "]C" . 
                                   ($subjectNameFilterNumMax + 3) . ")\">" .
@@ -3939,7 +3939,7 @@ class CGenReport
                            "\" ><Data ss:Type=\"String\">" . $swtPreSheetNameTitle_pf[1] . "</Data></Cell>" .
                            "    <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>" .
                            "    <Cell ss:StyleID=\"s84\" ss:MergeAcross=\"" . ($graphDataColumnNum - 1) .
-                           "\" ><Data ss:Type=\"String\">VerifyStatus</Data></Cell>";
+                           "\" ><Data ss:Type=\"String\">RenderQuality</Data></Cell>";
                            
                     $n1 += $curFirstRowAPIColumnID * 2 - 1;
                 }
@@ -6822,13 +6822,13 @@ class CGenReport
                         
                             $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag2) . "\" " .
                                    "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
-                                                "RC" . $rcID3 . "=&quot;&quot;," .
+                                                "RC" . $rcID2 . "=&quot;&quot;," .
                                                 "RC" . $rcID1 . "=0," .
-                                                "RC" . $rcID3 . "=0" .
+                                                "RC" . $rcID2 . "=0" .
                                                 "),&quot;&quot;," .
                                                 "(RC" . $rcID1 . // 8
-                                                "-RC" . $rcID3 . // 6
-                                                ")/RC" . $rcID3 . ")\">" .
+                                                "-RC" . $rcID2 . // 6
+                                                ")/RC" . $rcID2 . ")\">" .
                                                 "<Data ss:Type=\"Number\"></Data></Cell>\n" .
                                    " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag1) . "\">" .
                                    "" . $tmpDataList[$i] . "</Cell>\n";
@@ -6871,13 +6871,13 @@ class CGenReport
                         
                             $t3 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag2) . "\" " .
                                    "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
-                                                "RC" . $rcID3 . "=&quot;&quot;," .
+                                                "RC" . $rcID2 . "=&quot;&quot;," .
                                                 "RC" . $rcID1 . "=0," .
-                                                "RC" . $rcID3 . "=0" .
+                                                "RC" . $rcID2 . "=0" .
                                                 "),&quot;&quot;," .
                                                 "(RC" . $rcID1 . // 8
-                                                "-RC" . $rcID3 . // 6
-                                                ")/RC" . $rcID3 . ")\">" .
+                                                "-RC" . $rcID2 . // 6
+                                                ")/RC" . $rcID2 . ")\">" .
                                                 "<Data ss:Type=\"Number\"></Data></Cell>\n" .
                                    " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag1) . "\">" .
                                    "" . $tmpDataList2[$i] . "</Cell>\n";

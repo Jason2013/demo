@@ -3161,8 +3161,8 @@ class CGenReport
                 
                 if ($standardUmdTestCaseNumList[$i] > 0)
                 {
-                    $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX(" . 
-                                  $tmpReportUmdInfo[$j] . "_" . $swtPreSheetName_sb[0] . "!R[" . ($tmpLineOffset[$j] - 1) . 
+                    $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX('" . 
+                                  $tmpReportUmdInfo[$j] . "_" . $swtPreSheetName_sb[0] . "'!R[" . ($tmpLineOffset[$j] - 1) . 
                                   "]C" . ($subjectNameFilterNumMax + 3) . 
                                   ":R[" . ($tmpLineOffset[$j] + $standardUmdTestCaseNumList[$i] - 1 - 1) . "]C" . 
                                   ($subjectNameFilterNumMax + 3) . ")\">" .
@@ -3199,8 +3199,8 @@ class CGenReport
                 
                 if ($standardUmdTestCaseNumList[$i] > 0)
                 {
-                    $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX(" . 
-                                  $tmpReportUmdInfo[$j] . "_" . $swtPreSheetName_sb[1] . "!R[" . ($tmpLineOffset2[$j] - 1) . 
+                    $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX('" . 
+                                  $tmpReportUmdInfo[$j] . "_" . $swtPreSheetName_sb[1] . "'!R[" . ($tmpLineOffset2[$j] - 1) . 
                                   "]C" . ($subjectNameFilterNumMax + 3) . 
                                   ":R[" . ($tmpLineOffset2[$j] + $standardUmdTestCaseNumList[$i] - 1 - 1) . "]C" . 
                                   ($subjectNameFilterNumMax + 3) . ")\">" .
@@ -4396,7 +4396,7 @@ class CGenReport
                            "\" ><Data ss:Type=\"String\">" . $swtPreSheetNameTitle_sb[1] . "</Data></Cell>" .
                            "    <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>" .
                            "    <Cell ss:StyleID=\"s84\" ss:MergeAcross=\"" . ($graphDataColumnNum - 1) .
-                           "\" ><Data ss:Type=\"String\">VerifyStatus</Data></Cell>";
+                           "\" ><Data ss:Type=\"String\">RenderQuality</Data></Cell>";
                            
                     $n1 += $dataColumnNum;
                 }

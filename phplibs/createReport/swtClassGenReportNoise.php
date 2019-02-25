@@ -2858,8 +2858,8 @@ class CGenReport
                 
                 if ($standardUmdTestCaseNumList[$i] > 0)
                 {
-                    $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX(" . 
-                                  $tmpReportUmdInfo[$j] . "!R[" . ($tmpLineOffset[$j]) . 
+                    $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX('" . 
+                                  $tmpReportUmdInfo[$j] . "'!R[" . ($tmpLineOffset[$j]) . 
                                   "]C" . ($subjectNameFilterNumMax + 3) . 
                                   ":R[" . ($tmpLineOffset[$j] + $standardUmdTestCaseNumList[$i] - 1) . "]C" . 
                                   ($subjectNameFilterNumMax + 3) . ")\">" .
