@@ -1197,21 +1197,22 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
                     
                     // like changeListDX11, changeListDX12, changeListVulkan
                     //$t1 = $changeListJsonTag . $umdName;
-                    $t1 = $changeListJsonTag . $_compilerName;
+                    $t1 = $changeListJsonTag . $_compilerName . $data[$dataKeyAPI];
                     if (array_key_exists($t1, $defaultInfo) == false)
                     {
-                        $tmpCount = intval(count($swtOldUmdNameMatchList) / 2);
-                        for ($j = 0; $j < $tmpCount; $j++)
-                        {
-                            if (strcmp($swtOldUmdNameMatchList[$j * 2], $umdName) == 0)
-                            {
-                                $t1 = $changeListJsonTag . $swtOldUmdNameMatchList[$j * 2 + 1];
-                                if (array_key_exists($t1, $defaultInfo) == true)
-                                {
-                                    break;
-                                }
-                            }
-                        }
+                        //$tmpCount = intval(count($swtOldUmdNameMatchList) / 2);
+                        //for ($j = 0; $j < $tmpCount; $j++)
+                        //{
+                        //    if (strcmp($swtOldUmdNameMatchList[$j * 2], $umdName) == 0)
+                        //    {
+                        //        $t1 = $changeListJsonTag . $swtOldUmdNameMatchList[$j * 2 + 1];
+                        //        if (array_key_exists($t1, $defaultInfo) == true)
+                        //        {
+                        //            break;
+                        //        }
+                        //    }
+                        //}
+                        $t1 = $changeListJsonTag . $_compilerName;
                     }
                     $changeList = "0";
                     if ((array_key_exists($t1, $defaultInfo)  == true) &&
