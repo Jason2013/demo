@@ -6,7 +6,7 @@ $html1 = new CSwtHtmlTemple("Grapher Generate Routine Report", "../");
 $html1->outPageHead("", "" .
                         "<script type=\"text/javascript\" src=\"../jslibs/some/genFuncs.js?v=201706291520\"></script>\n" .
                         "<script type=\"text/javascript\" src=\"../jslibs/jquery-cookie/jquery.cookie.js\"></script>\n" .
-                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=1107\"></script>\n");
+                        "<script type=\"text/javascript\" src=\"../jslibs/some/parseTestResult.js?v=022701\"></script>\n");
 
 $html1->outPageBodyStart();
 

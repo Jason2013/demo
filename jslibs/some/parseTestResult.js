@@ -1573,14 +1573,19 @@ function swtGenerateRoutineReport(_percentTagName, _reportListTag, _reportType, 
     }
     var machineIDPair = [];
     var checkedMachineIDList = [];
+    var colMachineIDOrderList = [];
+    var colMachineIDOrderIndexList = [];
     var t2 = "";
     var t3 = "";
+    var t5 = "";
+    var t6 = "";
     if (_reportType == 0)
     {
+        var tmpOrderIndex = 0;
         // generating latest report
         for (var i = 0; i < machineIDList.length; i++)
         {
-            t1 = $("#selMachineID" + machineIDList[i]).val();
+            var t1 = $("#selMachineID" + machineIDList[i] + "_0").val();
             var b1 = $("#checkMachineID" + machineIDList[i]).is(":checked");
             //console.log(b1);
             if (b1 == false)
@@ -1604,12 +1609,33 @@ function swtGenerateRoutineReport(_percentTagName, _reportListTag, _reportType, 
                 continue;
             }
             checkedMachineIDList.push(parseInt(machineIDList[i]));
+            
+            colMachineIDOrderList.push(machineIDList[i]);
+            colMachineIDOrderIndexList.push(tmpOrderIndex);
+            for (var j = 1; j < machineIDList.length; j++)
+            {
+                var t1 = $("#selMachineID" + machineIDList[i] + "_" + (j - 1)).val();
+                var n1 = parseInt(t1);
+                if (n1 == -1)
+                {
+                    break;
+                }
+                colMachineIDOrderList.push(n1);
+                colMachineIDOrderIndexList.push(tmpOrderIndex);
+            }
+            tmpOrderIndex++;
         }
         t2 = swtImplode(machineIDPair, ",");
         t3 = swtImplode(checkedMachineIDList, ",");
+        
+        t5 = swtImplode(colMachineIDOrderList, ",");
+        t6 = swtImplode(colMachineIDOrderIndexList, ",");
     }
 
     console.log("---: " + t2);
+    console.log("---: " + t3);
+    console.log("---: " + t5);
+    console.log("---: " + t6);
     var tmpBatchID = _batchID;
     var t4 = $("#inputBatchID").val();
     console.log(t4);
@@ -1625,138 +1651,140 @@ function swtGenerateRoutineReport(_percentTagName, _reportListTag, _reportType, 
                           _crossType,
                           -1,
                           t2,
-                          t3
+                          t3,
+                          t5,
+                          t6
                           );
 }
 
 // _crossType, 0 for cross API, 1 for cross ASIC, SYS, 2 for cross Builds, 
 //             10 for version 2 cross API, 11 for version 2 cross ASIC / build (cross machines)
 // _reportType, 0 for routine report, 1 for all reports
-function swtGenerateRoutineReportVer2(_percentTagName, _reportListTag, _reportType, _curReportFolder, _batchID, _crossType)
-{
-    var t1 = "" + $("#inputFolderName").val();
-    if (t1.length == 0)
-    {
-        //$("#" + _percentTagName).html("0%");
-        //alert("please fill in folder name");
-        //return;
-    }
-    
-    $("#" + _percentTagName).html("0% (generating is started...)");
-    
-    $("#" + _reportListTag).html("");
-
-    var t1 = "" + $("#valMachineIDList").val();
-    //console.log("valMachineIDList: " + t1);
-    var machineIDList = [];
-    if (t1.length > 0)
-    {
-        machineIDList = t1.split(",");
-    }
-    t1 = "" + $("#valFolderMachineNameList").val();
-    var folderMachineNameList = [];
-    if (t1.length > 0)
-    {
-        folderMachineNameList = t1.split(",");
-    }
-    
-    var machineIDPair = [];
-    var checkedMachineIDList = [];
-    var checkedMachineIDListCopy = [];
-    var t2 = "";
-    var t3 = "";
-    if (_crossType == 10)
-    {
-        // cross API
-        // generating latest report
-        for (var i = 0; i < machineIDList.length; i++)
-        {
-            var b1 = $("#checkMachineID" + machineIDList[i]).is(":checked");
-            //console.log(b1);
-            if (b1)
-            {
-                checkedMachineIDList.push(parseInt(machineIDList[i]));
-            }
-        }
-        console.log("tmp---002B:" + checkedMachineIDList.length);
-        if (checkedMachineIDList.length == 0)
-        {
-            // if cross api no machine selected go to next step
-            // goto cross machine
-            console.log("tmp---002A:" + checkedMachineIDList.length);
-            swtGenerateRoutineReportVer2(_percentTagName, _reportListTag, _reportType, _curReportFolder, _batchID, 11);
-            return;
-        }
-        console.log("tmp---002C:" + checkedMachineIDList.length);
-    }
-    else if (_crossType == 11)
-    {
-        // cross machines
-        // generating latest report
-        for (var i = 0; i < machineIDList.length; i++)
-        {
-            t1 = $("#selMachineID" + machineIDList[i]).val();
-
-            if ((t1 == null) ||
-                (t1 == undefined) ||
-                (t1.length == 0))
-            {
-                continue;
-            }
-            console.log("tmp---001:" + t1);
-            
-            var n1 = parseInt(t1);
-            if (n1 != -1)
-            {
-                checkedMachineIDList.push(parseInt(machineIDList[i]));
-                machineIDPair.push(parseInt(machineIDList[i]));
-                machineIDPair.push(n1);
-                // if cross asic, pair are machineID, machineID
-            }
-        }
-        for (var i = 0; i < machineIDList.length; i++)
-        {
-            var b1 = $("#checkMachineID" + machineIDList[i]).is(":checked");
-            //console.log(b1);
-            if (b1)
-            {
-                checkedMachineIDListCopy.push(parseInt(machineIDList[i]));
-            }
-        }
-        if (machineIDPair.length == 0)
-        {
-            // if no machine selected go back
-            $("#" + _percentTagName).html("0%");
-            
-            if (checkedMachineIDListCopy.length == 0)
-            {
-                console.log("tmp---008:" + checkedMachineIDList.length);
-                alert("please select report to generate");
-                return;
-            }
-            alert("generate success");
-            location.reload(true);
-            return;
-        }
-        console.log("tmp---002D:" + checkedMachineIDList.length);
-    }
-    t2 = swtImplode(machineIDPair, ",");
-    t3 = swtImplode(checkedMachineIDList, ",");
-
-    console.log("tmp---: " + t2);
-    console.log("tmp---: " + t3);
-    console.log("tmp---08:" + _crossType);
-
-    swtDoGenerateFlatData(_percentTagName,
-                          _reportListTag,
-                          _batchID,
-                          _reportType,
-                          _crossType,
-                          _curReportFolder,
-                          t2,
-                          t3
-                          );
-}
+//function swtGenerateRoutineReportVer2(_percentTagName, _reportListTag, _reportType, _curReportFolder, _batchID, _crossType)
+//{
+//    var t1 = "" + $("#inputFolderName").val();
+//    if (t1.length == 0)
+//    {
+//        //$("#" + _percentTagName).html("0%");
+//        //alert("please fill in folder name");
+//        //return;
+//    }
+//    
+//    $("#" + _percentTagName).html("0% (generating is started...)");
+//    
+//    $("#" + _reportListTag).html("");
+//
+//    var t1 = "" + $("#valMachineIDList").val();
+//    //console.log("valMachineIDList: " + t1);
+//    var machineIDList = [];
+//    if (t1.length > 0)
+//    {
+//        machineIDList = t1.split(",");
+//    }
+//    t1 = "" + $("#valFolderMachineNameList").val();
+//    var folderMachineNameList = [];
+//    if (t1.length > 0)
+//    {
+//        folderMachineNameList = t1.split(",");
+//    }
+//    
+//    var machineIDPair = [];
+//    var checkedMachineIDList = [];
+//    var checkedMachineIDListCopy = [];
+//    var t2 = "";
+//    var t3 = "";
+//    if (_crossType == 10)
+//    {
+//        // cross API
+//        // generating latest report
+//        for (var i = 0; i < machineIDList.length; i++)
+//        {
+//            var b1 = $("#checkMachineID" + machineIDList[i]).is(":checked");
+//            //console.log(b1);
+//            if (b1)
+//            {
+//                checkedMachineIDList.push(parseInt(machineIDList[i]));
+//            }
+//        }
+//        console.log("tmp---002B:" + checkedMachineIDList.length);
+//        if (checkedMachineIDList.length == 0)
+//        {
+//            // if cross api no machine selected go to next step
+//            // goto cross machine
+//            console.log("tmp---002A:" + checkedMachineIDList.length);
+//            swtGenerateRoutineReportVer2(_percentTagName, _reportListTag, _reportType, _curReportFolder, _batchID, 11);
+//            return;
+//        }
+//        console.log("tmp---002C:" + checkedMachineIDList.length);
+//    }
+//    else if (_crossType == 11)
+//    {
+//        // cross machines
+//        // generating latest report
+//        for (var i = 0; i < machineIDList.length; i++)
+//        {
+//            t1 = $("#selMachineID" + machineIDList[i]).val();
+//
+//            if ((t1 == null) ||
+//                (t1 == undefined) ||
+//                (t1.length == 0))
+//            {
+//                continue;
+//            }
+//            console.log("tmp---001:" + t1);
+//            
+//            var n1 = parseInt(t1);
+//            if (n1 != -1)
+//            {
+//                checkedMachineIDList.push(parseInt(machineIDList[i]));
+//                machineIDPair.push(parseInt(machineIDList[i]));
+//                machineIDPair.push(n1);
+//                // if cross asic, pair are machineID, machineID
+//            }
+//        }
+//        for (var i = 0; i < machineIDList.length; i++)
+//        {
+//            var b1 = $("#checkMachineID" + machineIDList[i]).is(":checked");
+//            //console.log(b1);
+//            if (b1)
+//            {
+//                checkedMachineIDListCopy.push(parseInt(machineIDList[i]));
+//            }
+//        }
+//        if (machineIDPair.length == 0)
+//        {
+//            // if no machine selected go back
+//            $("#" + _percentTagName).html("0%");
+//            
+//            if (checkedMachineIDListCopy.length == 0)
+//            {
+//                console.log("tmp---008:" + checkedMachineIDList.length);
+//                alert("please select report to generate");
+//                return;
+//            }
+//            alert("generate success");
+//            location.reload(true);
+//            return;
+//        }
+//        console.log("tmp---002D:" + checkedMachineIDList.length);
+//    }
+//    t2 = swtImplode(machineIDPair, ",");
+//    t3 = swtImplode(checkedMachineIDList, ",");
+//
+//    console.log("tmp---: " + t2);
+//    console.log("tmp---: " + t3);
+//    console.log("tmp---08:" + _crossType);
+//
+//    swtDoGenerateFlatData(_percentTagName,
+//                          _reportListTag,
+//                          _batchID,
+//                          _reportType,
+//                          _crossType,
+//                          _curReportFolder,
+//                          t2,
+//                          t3
+//                          );
+//}
 
 // _crossType, 0 for cross API, 1 for cross ASIC, SYS, 2 for cross Builds
 // _reportType, 0 for routine report, 1 for all reports
@@ -1920,7 +1948,9 @@ function swtDoGenerateFlatData(_percentTagName,
                                _crossType,
                                _curReportFolder,
                                _machineIDPair,
-                               _machineIDList
+                               _machineIDList,
+                               _colMachineIDOrderList,
+                               _colMachineIDOrderIndexList
                                )
 {
     var tmpMachineIDPair = _machineIDPair;
@@ -1960,6 +1990,8 @@ function swtDoGenerateFlatData(_percentTagName,
                                            _batchID,
                                            _machineIDList,
                                            _machineIDPair,
+                                           _colMachineIDOrderList,
+                                           _colMachineIDOrderIndexList,
                                            1,
                                            _reportType,
                                            _crossType,
@@ -1986,7 +2018,9 @@ function swtDoGenerateFlatData(_percentTagName,
                                       _crossType,
                                       json.curReportFolder,
                                       _machineIDPair,
-                                      _machineIDList
+                                      _machineIDList,
+                                      _colMachineIDOrderList,
+                                      _colMachineIDOrderIndexList
                                       );
                 if (json.fileID <= json.fileNum)
                 {
@@ -2637,6 +2671,8 @@ function swtDoGenerateRoutineReport(_percentTagName,
                                     _batchID,
                                     _machineIDList,
                                     _machineIDPair,
+                                    _colMachineIDOrderList,
+                                    _colMachineIDOrderIndexList,
                                     _forceGenReport,
                                     _reportType,
                                     _crossType,
@@ -2660,6 +2696,8 @@ function swtDoGenerateRoutineReport(_percentTagName,
         batchID:        _batchID,
         machineIDPair:  _machineIDPair,
         machineIDList:  _machineIDList,
+        colMachineIDOrderList:      _colMachineIDOrderList,
+        colMachineIDOrderIndexList: _colMachineIDOrderIndexList,
         forceGenReport: _forceGenReport,
         reportType:     _reportType,
         crossType:      _crossType,
@@ -2700,6 +2738,8 @@ function swtDoGenerateRoutineReport(_percentTagName,
                                            _batchID,
                                            _machineIDList,
                                            _machineIDPair,
+                                           _colMachineIDOrderList,
+                                           _colMachineIDOrderIndexList,
                                            0,
                                            _reportType,
                                            _crossType,
@@ -3551,51 +3591,101 @@ function swtGetCardChoiceCode(_divTag, _reportTag, _batchIDTag)
         {
             //alert(json.errorMsg);
             swtLastBatchMachineIDList = json.machineIDList;
-            var t4 = "";
+            var t4 = swtImplode(json.machineIDList, ",");
+            var tmpCardSysList = [];
             var t1 = "<table>\n";
+            //for (var i = 0; i < json.machineIDList.length; i++)
+            //{
+            //    t1 += "<tr>\n";
+            //    t1 += "<td>\n";
+            //    t1 += "-&nbsp&nbsp";
+            //    t1 += json.cardNameList[i] + " - " + json.systemNameList[i];
+            //    t1 += "&nbsp&nbsp";
+            //    t1 += "</td>\n";
+            //    t1 += "<td>\n";
+            //    var t3 = "selMachineID" + json.machineIDList[i];
+            //    var t5 = "checkMachineID" + json.machineIDList[i];
+            //    var t2 = "<select id=\"" + t3 + "\" name=\"" + t3 + "\">\n" +
+            //             "<option value=\"-1\">no comparison</option>\n";
+            //    t4 += json.machineIDList[i];
+            //    if (i < (json.machineIDList.length - 1))
+            //    {
+            //        t4 += ",";
+            //    }
+            //    for (var j = 0; j < json.machineIDList.length; j++)
+            //    {
+            //        if (i == j)
+            //        {
+            //            continue;
+            //        }
+            //        t2 += "<option value=\"" + json.machineIDList[j] + "\">" + json.cardNameList[j] + " - " + json.systemNameList[j] + "</option>";
+            //    }
+            //    t2 += "</select>\n";
+            //    
+            //    t1 += t2;
+            //    
+            //    t1 += "</td>\n";
+            //    
+            //    t1 += "<td>\n";
+            //    t1 += "&nbsp&nbsp";
+            //    t1 += "<input id=\"" + t5 + "\" name=\"" + t5 + "\" type=\"checkbox\" checked=\"checked\">\n";
+            //    t1 += "</td>\n";
+            //    
+            //    t1 += "<tr>\n";
+            //}
             for (var i = 0; i < json.machineIDList.length; i++)
             {
                 t1 += "<tr>\n";
                 t1 += "<td>\n";
-                t1 += "-&nbsp&nbsp";
-                t1 += json.cardNameList[i] + " - " + json.systemNameList[i];
+                t1 += "-&nbsp;";
+                t1 += json.cardNameList[i] + "_" + json.systemNameList[i];
                 t1 += "&nbsp&nbsp";
                 t1 += "</td>\n";
-                t1 += "<td>\n";
-                var t3 = "selMachineID" + json.machineIDList[i];
+                
+                tmpCardSysList.push(json.cardNameList[i] + "_" + json.systemNameList[i]);
+                
                 var t5 = "checkMachineID" + json.machineIDList[i];
-                var t2 = "<select id=\"" + t3 + "\" name=\"" + t3 + "\">\n" +
-                         "<option value=\"-1\">no comparison</option>\n";
-                t4 += json.machineIDList[i];
-                if (i < (json.machineIDList.length - 1))
+                
+                for (var k = 1; k < json.machineIDList.length; k++)
                 {
-                    t4 += ",";
-                }
-                for (var j = 0; j < json.machineIDList.length; j++)
-                {
-                    if (i == j)
+                    // get all comparison select control
+                    t1 += "<td>&nbsp;-&nbsp;\n";
+                    t1 += "</td>\n";
+                    
+                    var t3 = "selMachineID" + json.machineIDList[i] + "_" + (k - 1);
+                    t1 += "<td>\n";
+                    var t2 = "<select id=\"" + t3 + "\" name=\"" + t3 + "\">\n" +
+                             "<option value=\"-1\">skip</option>\n";
+
+                    for (var j = 0; j < json.machineIDList.length; j++)
                     {
-                        continue;
+                        if (i == j)
+                        {
+                            continue;
+                        }
+                        t2 += "<option value=\"" + json.machineIDList[j] + "\">" + json.cardNameList[j] + " - " + json.systemNameList[j] + "</option>";
                     }
-                    t2 += "<option value=\"" + json.machineIDList[j] + "\">" + json.cardNameList[j] + " - " + json.systemNameList[j] + "</option>";
+                    t2 += "</select>\n";
+                    
+                    t1 += t2;
+                    
+                    t1 += "</td>\n";
                 }
-                t2 += "</select>\n";
-                
-                t1 += t2;
-                
-                t1 += "</td>\n";
                 
                 t1 += "<td>\n";
                 t1 += "&nbsp&nbsp";
                 t1 += "<input id=\"" + t5 + "\" name=\"" + t5 + "\" type=\"checkbox\" checked=\"checked\">\n";
                 t1 += "</td>\n";
                 
-                t1 += "<tr>\n";
+                t1 += "</tr>\n";
             }
+            var t5 = swtImplode(tmpCardSysList, ",");
             console.log("machines: " + t4);
+            console.log("cardSysList: " + t5);
             
             t1 += "</table>\n";
             t1 += "<input type=\"hidden\" id=\"valMachineIDList\" name=\"valMachineIDList\" value=\"" + t4 + "\" />\n";
+            t1 += "<input type=\"hidden\" id=\"valCardSysList\" name=\"valCardSysList\" value=\"" + t5 + "\" />\n";
             $("#" + _divTag).html(t1);
             
             var reportListCode = "";

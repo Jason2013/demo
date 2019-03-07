@@ -28,6 +28,8 @@ $lineNumPos = intval($_POST["lineNumPos"]);
 $sheetLinePos = intval($_POST["sheetLinePos"]);
 $machineIDPair = cleanText($_POST["machineIDPair"], 256);
 $checkedMachineIDList = cleanText($_POST["machineIDList"], 256);
+$colMachineIDOrderList = cleanText($_POST["colMachineIDOrderList"], 256);
+$colMachineIDOrderIndexList = cleanText($_POST["colMachineIDOrderIndexList"], 256);
 //$subTestUmdDataMaskList = cleanText($_POST["subTestUmdDataMaskList"], 1024);
 $tempFileLineNumPos = intval($_POST["tempFileLineNumPos"]);
 $forceGenReport = intval($_POST["forceGenReport"]);
@@ -54,6 +56,8 @@ $returnMsg["errorMsg"] = "compile report success";
 $umdNameList = $swtUmdNameList;
 $umdStandardOrder = $swtUmdStandardOrder;
 
+$colMachineIDOrderList = explode(",", $colMachineIDOrderList);
+$colMachineIDOrderIndexList = explode(",", $colMachineIDOrderIndexList);
 // check input card, system selection
 $returnSet = $xmlWriter->checkInputMachineID($machineIDPair, $checkedMachineIDList);
 if ($returnSet == null)
@@ -173,25 +177,25 @@ $sysMemNameList = $returnSet["sysMemNameList"];
 
 $returnMsg["changeListNumList"] = $changeListNumList;
 
-$crossBuildResultIDList =      $returnSet["crossBuildResultIDList"];
-$crossBuildMachineIDList =     $returnSet["crossBuildMachineIDList"];
-$crossBuildCardNameList =      $returnSet["crossBuildCardNameList"];
-$crossBuildDriverNameList =    $returnSet["crossBuildDriverNameList"];
-$crossBuildChangeListNumList = $returnSet["crossBuildChangeListNumList"];
-$crossBuildCpuNameList =       $returnSet["crossBuildCpuNameList"];
-$crossBuildSysNameList =       $returnSet["crossBuildSysNameList"];
-$crossBuildMainLineNameList =  $returnSet["crossBuildMainLineNameList"];
-$crossBuildSClockNameList =    $returnSet["crossBuildSClockNameList"];
-$crossBuildMClockNameList =    $returnSet["crossBuildMClockNameList"];
-$crossBuildGpuMemNameList =    $returnSet["crossBuildGpuMemNameList"];
-$crossBuildResultTimeList =    $returnSet["crossBuildResultTimeList"];
-$crossBuildMachineNameList =   $returnSet["crossBuildMachineNameList"];
-
-$returnMsg["crossBuildResultIDList"] = $crossBuildResultIDList;
-$returnMsg["crossBuildMachineIDList"] = $crossBuildMachineIDList;
-$returnMsg["crossBuildCardNameList"] = $crossBuildCardNameList;
-$returnMsg["crossBuildDriverNameList"] = $crossBuildDriverNameList;
-$returnMsg["crossBuildSysNameList"] = $crossBuildSysNameList;
+//$crossBuildResultIDList =      $returnSet["crossBuildResultIDList"];
+//$crossBuildMachineIDList =     $returnSet["crossBuildMachineIDList"];
+//$crossBuildCardNameList =      $returnSet["crossBuildCardNameList"];
+//$crossBuildDriverNameList =    $returnSet["crossBuildDriverNameList"];
+//$crossBuildChangeListNumList = $returnSet["crossBuildChangeListNumList"];
+//$crossBuildCpuNameList =       $returnSet["crossBuildCpuNameList"];
+//$crossBuildSysNameList =       $returnSet["crossBuildSysNameList"];
+//$crossBuildMainLineNameList =  $returnSet["crossBuildMainLineNameList"];
+//$crossBuildSClockNameList =    $returnSet["crossBuildSClockNameList"];
+//$crossBuildMClockNameList =    $returnSet["crossBuildMClockNameList"];
+//$crossBuildGpuMemNameList =    $returnSet["crossBuildGpuMemNameList"];
+//$crossBuildResultTimeList =    $returnSet["crossBuildResultTimeList"];
+//$crossBuildMachineNameList =   $returnSet["crossBuildMachineNameList"];
+//
+//$returnMsg["crossBuildResultIDList"] = $crossBuildResultIDList;
+//$returnMsg["crossBuildMachineIDList"] = $crossBuildMachineIDList;
+//$returnMsg["crossBuildCardNameList"] = $crossBuildCardNameList;
+//$returnMsg["crossBuildDriverNameList"] = $crossBuildDriverNameList;
+//$returnMsg["crossBuildSysNameList"] = $crossBuildSysNameList;
 
 $returnMsg["checkedMachineIDList"] = $checkedMachineIDList;
 $returnMsg["cardNameList"] = $cardNameList[0];
@@ -242,11 +246,18 @@ $cmpStartResultID = $returnSet["cmpStartResultID"];
 $cmpCardName = $returnSet["cmpCardName"];
 $cmpSysName = $returnSet["cmpSysName"];
 $curCardName = $returnSet["curCardName"];
+$colMachineIDList = $returnSet["colMachineIDList"];
+$colStartResultIDPosList = $returnSet["colStartResultIDPosList"];
+$colCardNameList = $returnSet["colCardNameList"];
+$colSysNameList = $returnSet["colSysNameList"];
+$colMachineNum = count($colMachineIDList);
 
 $returnMsg["curMachineID"] = $curMachineID;
 $returnMsg["cmpMachineID"] = $cmpMachineID;
 $returnMsg["curMachineName"] = $curMachineName;
 $returnMsg["cmpMachineName"] = $cmpMachineName;
+$returnMsg["colMachineIDList"] = $colMachineIDList;
+$returnMsg["colStartResultIDPosList"] = $colStartResultIDPosList;
 
 // get subtest num of current test
 $returnMsg["returnLine"] = "line: " . __LINE__;
@@ -274,86 +285,110 @@ $curResultTestCaseNum = $returnSet["curResultTestCaseNum"];
 $returnSet = $xmlWriter->getHistoryNachineInfo($startResultID, $resultPos);
 $historyStartResultID = $returnSet["historyStartResultID"];
 
-$umdOrder = array_fill(0, $reportUmdNum * 2, -1);
-$resultUmdOrder = array_fill(0, $reportUmdNum * 2, -1);
+//$umdOrder = array_fill(0, $reportUmdNum * 2, -1);
+//$resultUmdOrder = array_fill(0, $reportUmdNum * 2, -1);
+//
+//$validUmdNum = 0;
+//
+//for ($i = 0; $i < $reportUmdNum; $i++)
+//{
+//    $n3 = array_search($driverNameList[0][$i], $umdNameList);
+//    if ($n3 !== false)
+//    {
+//        $umdOrder[$i] = $n3;
+//        $umdOrder[$reportUmdNum + $i] = $umdNum + $n3;
+//        
+//        if ($resultIDList[0][$startResultID + $i] != PHP_INT_MAX)
+//        {
+//            $resultUmdOrder[$i] = $n3;
+//            $validUmdNum++;
+//        }
+//        if ($cmpStartResultID != -1)
+//        {
+//            if ($resultIDList[0][$cmpStartResultID + $i] != PHP_INT_MAX)
+//            {
+//                $resultUmdOrder[$reportUmdNum + $i] = $n3;
+//            }
+//        }
+//    }
+//}
 
-$validUmdNum = 0;
+$tmpNum = $colMachineNum > 1 ? $colMachineNum : 2;
+
+$umdOrder = array_fill(0, $reportUmdNum * $tmpNum, -1);
+$resultUmdOrder = array_fill(0, $reportUmdNum * $tmpNum, -1);
+
+//$validUmdNum = 0;
 
 for ($i = 0; $i < $reportUmdNum; $i++)
 {
     $n3 = array_search($driverNameList[0][$i], $umdNameList);
     if ($n3 !== false)
     {
-        $umdOrder[$i] = $n3;
-        $umdOrder[$reportUmdNum + $i] = $umdNum + $n3;
-        
-        if ($resultIDList[0][$startResultID + $i] != PHP_INT_MAX)
+        for ($j = 0; $j < $colMachineNum; $j++)
         {
-            $resultUmdOrder[$i] = $n3;
-            $validUmdNum++;
-        }
-        if ($cmpStartResultID != -1)
-        {
-            if ($resultIDList[0][$cmpStartResultID + $i] != PHP_INT_MAX)
+            $umdOrder[$reportUmdNum * $j + $i] = $umdNum * $j + $n3;
+            if ($resultIDList[0][$colStartResultIDPosList[$j] + $i] != PHP_INT_MAX)
             {
-                $resultUmdOrder[$reportUmdNum + $i] = $n3;
+                $resultUmdOrder[$reportUmdNum * $j + $i] = $n3;
             }
         }
     }
 }
 
-if ($crossType == 2)
-{
-    $umdOrder = array_fill(0, $reportUmdNum * 2, -1);
-    $resultUmdOrder = array_fill(0, $reportUmdNum * 2, -1);
-    
-    for ($i = 0; $i < $reportUmdNum; $i++)
-    {
-        $n3 = array_search($driverNameList[0][$i], $umdNameList);
-        if ($n3 !== false)
-        {
-            $umdOrder[$i] = $n3;
-            $umdOrder[$reportUmdNum + $i] = $umdNum + $n3;
-            
-            if ($resultIDList[0][$startResultID + $i] != PHP_INT_MAX)
-            {
-                $resultUmdOrder[$i] = $n3;
-                $validUmdNum++;
-            }
-            $tmpIndex = -1;
-            for ($j = 0; $j < (count($machineIDBatchPairList) / 2); $j++)
-            {
-                if ($curMachineID == intval($machineIDBatchPairList[$j * 2]))
-                {
-                    $tmpIndex = $j;
-                    break;
-                }
-            }
-            if ($tmpIndex == -1)
-            {
-                continue;
-            }
-            if ($crossBuildResultIDList[$tmpIndex][$i] != PHP_INT_MAX)
-            {
-                $resultUmdOrder[$reportUmdNum + $i] = $n3;
-            }
-        }
-    }
-    
-    if ($curMachineID == PHP_INT_MAX)
-    {
-        for ($i = 0; $i < $reportUmdNum; $i++)
-        {
-            $resultUmdOrder[$reportUmdNum + $i] = $resultUmdOrder[$i];
-        }
-    }
-}
+
+//if ($crossType == 2)
+//{
+//    $umdOrder = array_fill(0, $reportUmdNum * 2, -1);
+//    $resultUmdOrder = array_fill(0, $reportUmdNum * 2, -1);
+//    
+//    for ($i = 0; $i < $reportUmdNum; $i++)
+//    {
+//        $n3 = array_search($driverNameList[0][$i], $umdNameList);
+//        if ($n3 !== false)
+//        {
+//            $umdOrder[$i] = $n3;
+//            $umdOrder[$reportUmdNum + $i] = $umdNum + $n3;
+//            
+//            if ($resultIDList[0][$startResultID + $i] != PHP_INT_MAX)
+//            {
+//                $resultUmdOrder[$i] = $n3;
+//                $validUmdNum++;
+//            }
+//            $tmpIndex = -1;
+//            for ($j = 0; $j < (count($machineIDBatchPairList) / 2); $j++)
+//            {
+//                if ($curMachineID == intval($machineIDBatchPairList[$j * 2]))
+//                {
+//                    $tmpIndex = $j;
+//                    break;
+//                }
+//            }
+//            if ($tmpIndex == -1)
+//            {
+//                continue;
+//            }
+//            if ($crossBuildResultIDList[$tmpIndex][$i] != PHP_INT_MAX)
+//            {
+//                $resultUmdOrder[$reportUmdNum + $i] = $n3;
+//            }
+//        }
+//    }
+//    
+//    if ($curMachineID == PHP_INT_MAX)
+//    {
+//        for ($i = 0; $i < $reportUmdNum; $i++)
+//        {
+//            $resultUmdOrder[$reportUmdNum + $i] = $resultUmdOrder[$i];
+//        }
+//    }
+//}
 
 $returnMsg["resultUmdOrder"] = $resultUmdOrder;
 $returnMsg["resultIDList[0]"] = $resultIDList[0];
 $returnMsg["startResultID"] = $startResultID;
 $returnMsg["resultIDListAll"] = $resultIDList;
-$returnMsg["validUmdNum"] = $validUmdNum;
+//$returnMsg["validUmdNum"] = $validUmdNum;
 
 $returnMsg["returnLine"] = "line: " . __LINE__;
 $returnSet = $xmlWriter->checkReportDataColumnNum();
@@ -366,9 +401,11 @@ if ($returnSet === null)
     $returnMsg["cmpMachineID"] = $cmpMachineID;
     echo json_encode($returnMsg);
 }
-$returnMsg["reportUmdNum"] = $reportUmdNum;
 $dataColumnNum = $returnSet["dataColumnNum"];
+$graphDataColumnNum = $returnSet["graphDataColumnNum"];
 $returnMsg["dataColumnNum"] = $dataColumnNum;
+$returnMsg["graphDataColumnNum"] = $graphDataColumnNum;
+$returnMsg["reportUmdNum"] = $reportUmdNum;
 
 $tmpUmdName = "";
 $tmpCardName = "";
@@ -413,13 +450,13 @@ for ($i = 0; $i < count($umdStandardOrder); $i++)
     {
         // asic comparison
         $tmpPos = array_search($umdStandardOrder[$i], $umdNameList);
-        if (($tmpPos === false) ||
-            ($resultUmdOrder[$tmpPos] == -1) ||
-            ($resultUmdOrder[$reportUmdNum + $tmpPos] == -1))
-        {
-            // win cmp ubuntu, skip none vulkan
-            //continue;
-        }
+        //if (($tmpPos === false) ||
+        //    ($resultUmdOrder[$tmpPos] == -1) ||
+        //    ($resultUmdOrder[$reportUmdNum + $tmpPos] == -1))
+        //{
+        //    // win cmp ubuntu, skip none vulkan
+        //    //continue;
+        //}
     }
     $tmpPos = array_search($umdStandardOrder[$i], $uniqueUmdNameList);
     if ($tmpPos !== false)
@@ -663,8 +700,8 @@ else
                                                     $tmpSysName, $cmpSysName);
     $graphCells = $returnSet["graphCells"];
     
-    $averageColumnHasVal = $returnSet["averageColumnHasVal"];
-    $returnMsg["averageColumnHasVal"] = $averageColumnHasVal;
+    //$averageColumnHasVal = $returnSet["averageColumnHasVal"];
+    //$returnMsg["averageColumnHasVal"] = $averageColumnHasVal;
     
     $returnSet = $xmlWriter->checkStartTest($db, $fileHandle, $tempFileHandle,
                                             $nextSubTestPos, $firstSubTestPos, $curTestPos, 
@@ -711,8 +748,7 @@ else
     $returnSet = $xmlWriter->writeReportCompareData($db, $tempFileHandle, $reportFolder,
                                                     $isCompStandard, $umdNum, $tempFileLineNumPos,
                                                     $startResultID, $cmpStartResultID, $historyStartResultID, $tempLineNum,
-                                                    $resultPos, $sheetLinePos, $startGraphDataLinePos,
-                                                    $averageColumnHasVal);
+                                                    $resultPos, $sheetLinePos, $startGraphDataLinePos);
     if ($returnSet === null)
     {
         return;
