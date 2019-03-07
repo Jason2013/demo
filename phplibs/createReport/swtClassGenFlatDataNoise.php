@@ -400,7 +400,11 @@ class CGenReportFlatData
                         //$returnMsg["tmp---006:"] .= $tmpDestFolder . ",";
                         mkdir($tmpDestFolder);
                     }
-                    copy($tmpSrcPath, $tmpDestPath);
+                    $t2 = basename($tmpSrcFolder);
+                    if (strlen($t2) > 1)
+                    {
+                        copy($tmpSrcPath, $tmpDestPath);
+                    }
                     //else
                     //{
                     //    $returnMsg["errorCode"] = 0;

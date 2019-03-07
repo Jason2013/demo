@@ -220,7 +220,7 @@ class CGenReport
                                "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" " .
                                " ss:Color=\"#000000\"/>\n" .
                                "</Borders>\n" .
-                               "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"14\" ss:Color=\"#FFFFFF\" " .
+                               "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FFFFFF\" " .
                                "ss:Bold=\"1\"/>\n" .
                                "<Interior ss:Color=\"#800000\" ss:Pattern=\"Solid\"/>\n" .
                                "</Style>\n";
@@ -237,7 +237,7 @@ class CGenReport
                                "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" \n" .
                                " ss:Color=\"#000000\"/>\n" .
                                "</Borders>\n" .
-                               "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"14\" ss:Color=\"#000000\" \n" .
+                               "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#000000\" \n" .
                                "ss:Bold=\"1\"/>\n" .
                                "<Interior ss:Color=\"#FFC000\" ss:Pattern=\"Solid\"/>\n" .
                                "<NumberFormat/>\n" .
@@ -273,7 +273,7 @@ class CGenReport
                               "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" \n" .
                               " ss:Color=\"#000000\"/>\n" .
                               "</Borders>\n" .
-                              "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"12\" ss:Color=\"#000000\"/>\n" .
+                              "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#000000\"/>\n" .
                               "<Interior ss:Color=\"#D9D9D9\" ss:Pattern=\"Solid\"/>\n" .
                               "<NumberFormat ss:Format=\"Percent\"/>\n" .
                               "</Style>\n";
@@ -290,7 +290,7 @@ class CGenReport
                               "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" \n" .
                               " ss:Color=\"#000000\"/>\n" .
                               "</Borders>\n" .
-                              "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"12\" ss:Color=\"#FFFFFF\" \n" .
+                              "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FFFFFF\" \n" .
                               "ss:Bold=\"1\"/>\n" .
                               "<Interior ss:Color=\"#A03300\" ss:Pattern=\"Solid\"/>\n" .
                               "</Style>\n";
@@ -2660,6 +2660,7 @@ class CGenReport
         global $sysNameList;
         global $cpuNameList;
         global $cardNameList;
+        global $machineIDList;
         global $sClockNameList;
         global $mClockNameList;
         global $gpuMemNameList;
@@ -2671,6 +2672,12 @@ class CGenReport
         global $startStyleID;
         global $logStoreDir;
         global $logFileFolder;
+        global $colMachineIDList;
+        global $colStartResultIDPosList;
+        global $colMachineNum;
+        global $colCardNameList;
+        global $colSysNameList;
+        global $umdNum;
         
         $tmpRootPath = $logStoreDir . "/" . $logFileFolder;
         $cardFolderList = glob($tmpRootPath . "/*", GLOB_ONLYDIR);
@@ -2686,132 +2693,204 @@ class CGenReport
             }
         }
         
-        $tmpResultPos = $startResultID;
+        //$tmpResultPos = $startResultID;
+        //
+        //for ($i = 0; $i < count($umdNameList); $i++)
+        //{
+        //    if (strlen($cpuNameList[0][$tmpResultPos]) > 0)
+        //    {
+        //        break;
+        //    }
+        //    $tmpResultPos++;
+        //}
+        //
+        //$cmpResultPos = $cmpStartResultID;
+        //
+        //if ($cmpStartResultID != -1)
+        //{
+        //    for ($i = 0; $i < count($umdNameList); $i++)
+        //    {
+        //        if (strlen($cpuNameList[0][$cmpResultPos]) > 0)
+        //        {
+        //            break;
+        //        }
+        //        $cmpResultPos++;
+        //    }
+        //}
+        //
+        //$tmpCardName = $cardNameList[0][$tmpResultPos];
+        //$tmpSysName = $sysNameList[0][$tmpResultPos];
+        //$cmpCardName = $cmpStartResultID == -1 ? -1 : $cardNameList[0][$cmpResultPos];
+        //$cmpSysName = $cmpStartResultID == -1 ? -1 : $sysNameList[0][$cmpResultPos];
+        //
+        //$tmpBaseDriverVersion = "";
+        //$tmpBaseDriverDate = "";
+        //$cmpBaseDriverVersion = "";
+        //$cmpBaseDriverDate = "";
+        //
+        //$tmpRead = false;
+        //$cmpRead = false;
+        //
+        //foreach ($machineInfoList as $tmpPath)
+        //{
+        //    $t1 = file_get_contents($tmpPath);
+        //    $tmpObj = json_decode($t1);
+        //    
+        //    $tmpObj2 = array();
+        //    foreach ($tmpObj as $tmpKey => $tmpVal)
+        //    {
+        //        $tmpObj2[$tmpKey] = $tmpVal;
+        //    }
+        //    
+        //    $tmpCardName1 = isset($tmpObj2["videoCardName"]) ? $tmpObj2["videoCardName"] : "";
+        //    $tmpSysName1 = isset($tmpObj2["systemName"]) ? $tmpObj2["systemName"] : "";
+        //    
+        //    $tmpCardNameLow = strtolower($tmpCardName);
+        //    $tmpSysNameLow  = strtolower($tmpSysName);
+        //    $tmpCardNameLow1 = strtolower($tmpCardName1);
+        //    $tmpSysNameLow1 = strtolower($tmpSysName1);
+        //    
+        //    if (($tmpCardNameLow == $tmpCardNameLow1) &&
+        //        ($tmpSysNameLow  == $tmpSysNameLow1))
+        //    {
+        //        $tmpBaseDriverVersion = isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
+        //        $tmpBaseDriverDate = isset($tmpObj2["baseDriverDate"]) ? $tmpObj2["baseDriverDate"] : "";
+        //        
+        //        $tmpRead = true;
+        //    }
+        //    
+        //    if ($cmpStartResultID != -1)
+        //    {
+        //        $tmpCardNameLow = strtolower($cmpCardName);
+        //        $tmpSysNameLow  = strtolower($cmpSysName);
+        //        $tmpCardNameLow1 = strtolower($tmpCardName1);
+        //        $tmpSysNameLow1 = strtolower($tmpSysName1);
+        //        
+        //        if (($tmpCardNameLow == $tmpCardNameLow1) &&
+        //            ($tmpSysNameLow  == $tmpSysNameLow1))
+        //        {
+        //            $cmpBaseDriverVersion = isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
+        //            $cmpBaseDriverDate = isset($tmpObj2["baseDriverDate"]) ? $tmpObj2["baseDriverDate"] : "";
+        //            
+        //            $cmpRead = true;
+        //        }
+        //    }
+        //    if ($tmpRead && $cmpRead)
+        //    {
+        //        break;
+        //    }
+        //    if (($cmpStartResultID == -1) && $tmpRead)
+        //    {
+        //        break;
+        //    }
+        //}
         
-        for ($i = 0; $i < count($umdNameList); $i++)
+        $tmpBaseDriverVersionList = array_fill(0, $colMachineNum, "");
+        $tmpBaseDriverDateList = array_fill(0, $colMachineNum, "");
+        
+        $colCardNameListLow = array();
+        $colSysNameListLow = array();
+        
+        for ($i = 0; $i < $colMachineNum; $i++)
         {
-            if (strlen($cpuNameList[0][$tmpResultPos]) > 0)
-            {
-                break;
-            }
-            $tmpResultPos++;
+            $colCardNameListLow []= strtolower($colCardNameList[$i]);
+            $colSysNameListLow []= strtolower($colSysNameList[$i]);
         }
-        
-        $cmpResultPos = $cmpStartResultID;
-        
-        if ($cmpStartResultID != -1)
-        {
-            for ($i = 0; $i < count($umdNameList); $i++)
-            {
-                if (strlen($cpuNameList[0][$cmpResultPos]) > 0)
-                {
-                    break;
-                }
-                $cmpResultPos++;
-            }
-        }
-        
-        $tmpCardName = $cardNameList[0][$tmpResultPos];
-        $tmpSysName = $sysNameList[0][$tmpResultPos];
-        $cmpCardName = $cmpStartResultID == -1 ? -1 : $cardNameList[0][$cmpResultPos];
-        $cmpSysName = $cmpStartResultID == -1 ? -1 : $sysNameList[0][$cmpResultPos];
-        
-        $tmpBaseDriverVersion = "";
-        $tmpBaseDriverDate = "";
-        $cmpBaseDriverVersion = "";
-        $cmpBaseDriverDate = "";
-        
-        $tmpRead = false;
-        $cmpRead = false;
         
         foreach ($machineInfoList as $tmpPath)
         {
             $t1 = file_get_contents($tmpPath);
-            $tmpObj = json_decode($t1);
+            $tmpObj = json_decode($t1, true);
             
-            $tmpObj2 = array();
-            foreach ($tmpObj as $tmpKey => $tmpVal)
-            {
-                $tmpObj2[$tmpKey] = $tmpVal;
-            }
+            $tmpCardName1 = isset($tmpObj["videoCardName"]) ? $tmpObj["videoCardName"] : "";
+            $tmpSysName1 = isset($tmpObj["systemName"]) ? $tmpObj["systemName"] : "";
             
-            $tmpCardName1 = isset($tmpObj2["videoCardName"]) ? $tmpObj2["videoCardName"] : "";
-            $tmpSysName1 = isset($tmpObj2["systemName"]) ? $tmpObj2["systemName"] : "";
-            
-            $tmpCardNameLow = strtolower($tmpCardName);
-            $tmpSysNameLow  = strtolower($tmpSysName);
             $tmpCardNameLow1 = strtolower($tmpCardName1);
             $tmpSysNameLow1 = strtolower($tmpSysName1);
             
-            if (($tmpCardNameLow == $tmpCardNameLow1) &&
-                ($tmpSysNameLow  == $tmpSysNameLow1))
+            $tmpKeys1 = array_keys($colCardNameListLow, $tmpCardNameLow1);
+            $tmpKeys2 = array_keys($colSysNameListLow, $tmpSysNameLow1);
+            $tmpKeys3 = array_intersect($tmpKeys1, $tmpKeys2);
+            $tmpKeys4 = array();
+            foreach ($tmpKeys3 as $v)
             {
-                $tmpBaseDriverVersion = isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
-                $tmpBaseDriverDate = isset($tmpObj2["baseDriverDate"]) ? $tmpObj2["baseDriverDate"] : "";
-                
-                $tmpRead = true;
+                $tmpKeys4 []= $v;
             }
             
-            if ($cmpStartResultID != -1)
+            if (count($tmpKeys4) > 0)
             {
-                $tmpCardNameLow = strtolower($cmpCardName);
-                $tmpSysNameLow  = strtolower($cmpSysName);
-                $tmpCardNameLow1 = strtolower($tmpCardName1);
-                $tmpSysNameLow1 = strtolower($tmpSysName1);
-                
-                if (($tmpCardNameLow == $tmpCardNameLow1) &&
-                    ($tmpSysNameLow  == $tmpSysNameLow1))
-                {
-                    $cmpBaseDriverVersion = isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
-                    $cmpBaseDriverDate = isset($tmpObj2["baseDriverDate"]) ? $tmpObj2["baseDriverDate"] : "";
-                    
-                    $cmpRead = true;
-                }
-            }
-            if ($tmpRead && $cmpRead)
-            {
-                break;
-            }
-            if (($cmpStartResultID == -1) && $tmpRead)
-            {
-                break;
+                $tmpBaseDriverVersionList[$tmpKeys4[0]] = isset($tmpObj["mainLineName"]) ? $tmpObj["mainLineName"] : "";
+                $tmpBaseDriverDateList[$tmpKeys4[0]] = isset($tmpObj["baseDriverDate"]) ? $tmpObj["baseDriverDate"] : "";
             }
         }
         
+        //$tableRowList = array();
+        //$cmpTableRowList = array();
+        //
+        //$tableRowList["Base_Driver_Version"] = $tmpBaseDriverVersion;
+        //$tableRowList["Base_Driver_Date"]    = $tmpBaseDriverDate;
+        //$tableRowList["Vulkan_SDK_Version"] = isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
+        //$tableRowList["Microbench_Version"] = isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
+        //
+        //$tableRowList["Operating_System"] = $sysNameList[0][$tmpResultPos];
+        //$tableRowList["Test_Date"] = $envDefaultInfo["testingDate"];
+        //$tableRowList["Test_Time"] = $envDefaultInfo["testingTime"];
+        //$tableRowList["CPU"] = $cpuNameList[0][$tmpResultPos];
+        //$tableRowList["GPU"] = $cardNameList[0][$tmpResultPos];
+        //$tableRowList["GPU_Core_Clock"] = $sClockNameList[0][$tmpResultPos];
+        //$tableRowList["GPU_Memory_Clock"] = $mClockNameList[0][$tmpResultPos];
+        //$tableRowList["GPU_Memory"] = $gpuMemNameList[0][$tmpResultPos];
+        //$tableRowList["System_Memory"] = $sysMemNameList[0][$tmpResultPos];
+        //
+        //if ($cmpStartResultID != -1)
+        //{
+        //    $cmpTableRowList["Base_Driver_Version"] = $cmpBaseDriverVersion;
+        //    $cmpTableRowList["Base_Driver_Date"]    = $cmpBaseDriverDate;
+        //    $cmpTableRowList["Vulkan_SDK_Version"] = isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
+        //    $cmpTableRowList["Microbench_Version"] = isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
+        //    
+        //    $cmpTableRowList["Operating_System"] = $sysNameList[0][$cmpResultPos];
+        //    $cmpTableRowList["Test_Date"] = $envDefaultInfo["testingDate"];
+        //    $cmpTableRowList["Test_Time"] = $envDefaultInfo["testingTime"];
+        //    $cmpTableRowList["CPU"] = $cpuNameList[0][$cmpResultPos];
+        //    $cmpTableRowList["GPU"] = $cardNameList[0][$cmpResultPos];
+        //    $cmpTableRowList["GPU_Core_Clock"] = $sClockNameList[0][$cmpResultPos];
+        //    $cmpTableRowList["GPU_Memory_Clock"] = $mClockNameList[0][$cmpResultPos];
+        //    $cmpTableRowList["GPU_Memory"] = $gpuMemNameList[0][$cmpResultPos];
+        //    $cmpTableRowList["System_Memory"] = $sysMemNameList[0][$cmpResultPos];
+        //}
+        
         $tableRowList = array();
-        $cmpTableRowList = array();
         
-        $tableRowList["Base_Driver_Version"] = $tmpBaseDriverVersion;
-        $tableRowList["Base_Driver_Date"]    = $tmpBaseDriverDate;
-        $tableRowList["Vulkan_SDK_Version"] = isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
-        $tableRowList["Microbench_Version"] = isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
-        
-        $tableRowList["Operating_System"] = $sysNameList[0][$tmpResultPos];
-        $tableRowList["Test_Date"] = $envDefaultInfo["testingDate"];
-        $tableRowList["Test_Time"] = $envDefaultInfo["testingTime"];
-        $tableRowList["CPU"] = $cpuNameList[0][$tmpResultPos];
-        $tableRowList["GPU"] = $cardNameList[0][$tmpResultPos];
-        $tableRowList["GPU_Core_Clock"] = $sClockNameList[0][$tmpResultPos];
-        $tableRowList["GPU_Memory_Clock"] = $mClockNameList[0][$tmpResultPos];
-        $tableRowList["GPU_Memory"] = $gpuMemNameList[0][$tmpResultPos];
-        $tableRowList["System_Memory"] = $sysMemNameList[0][$tmpResultPos];
-        
-        if ($cmpStartResultID != -1)
+        for ($i = 0; $i < $colMachineNum; $i++)
         {
-            $cmpTableRowList["Base_Driver_Version"] = $cmpBaseDriverVersion;
-            $cmpTableRowList["Base_Driver_Date"]    = $cmpBaseDriverDate;
-            $cmpTableRowList["Vulkan_SDK_Version"] = isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
-            $cmpTableRowList["Microbench_Version"] = isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
+            $tableRowList []= array();
             
-            $cmpTableRowList["Operating_System"] = $sysNameList[0][$cmpResultPos];
-            $cmpTableRowList["Test_Date"] = $envDefaultInfo["testingDate"];
-            $cmpTableRowList["Test_Time"] = $envDefaultInfo["testingTime"];
-            $cmpTableRowList["CPU"] = $cpuNameList[0][$cmpResultPos];
-            $cmpTableRowList["GPU"] = $cardNameList[0][$cmpResultPos];
-            $cmpTableRowList["GPU_Core_Clock"] = $sClockNameList[0][$cmpResultPos];
-            $cmpTableRowList["GPU_Memory_Clock"] = $mClockNameList[0][$cmpResultPos];
-            $cmpTableRowList["GPU_Memory"] = $gpuMemNameList[0][$cmpResultPos];
-            $cmpTableRowList["System_Memory"] = $sysMemNameList[0][$cmpResultPos];
+            $n1 = array_search($colMachineIDList[$i], $machineIDList[0]);
+            $tmpPos = -1;
+            if ($n1 !== false)
+            {
+                $tmpPos = intval($n1 / $umdNum) * $umdNum;
+            }
+            
+            if ($tmpPos == -1)
+            {
+                continue;
+            }
+            
+            $tableRowList[$i]["Base_Driver_Version"] = $tmpBaseDriverVersionList[$i];
+            $tableRowList[$i]["Base_Driver_Date"]    = $tmpBaseDriverDateList[$i];
+            $tableRowList[$i]["Vulkan_SDK_Version"] = isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
+            $tableRowList[$i]["Microbench_Version"] = isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
+            $tableRowList[$i]["Operating_System"] = $sysNameList[0][$tmpPos];
+            $tableRowList[$i]["Test_Date"] = $envDefaultInfo["testingDate"];
+            $tableRowList[$i]["Test_Time"] = $envDefaultInfo["testingTime"];
+            $tableRowList[$i]["CPU"] = $cpuNameList[0][$tmpPos];
+            $tableRowList[$i]["GPU"] = $cardNameList[0][$tmpPos];
+            $tableRowList[$i]["GPU_Core_Clock"] = $sClockNameList[0][$tmpPos];
+            $tableRowList[$i]["GPU_Memory_Clock"] = $mClockNameList[0][$tmpPos];
+            $tableRowList[$i]["GPU_Memory"] = $gpuMemNameList[0][$tmpPos];
+            $tableRowList[$i]["System_Memory"] = $sysMemNameList[0][$tmpPos];
         }
         
         $apiVersionList = array();
@@ -2827,46 +2906,57 @@ class CGenReport
         }
         
         $t1 = "";
-        if ($cmpStartResultID != -1)
+        //if ($cmpStartResultID != -1)
+        //{
+        //    $t1 = "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n";
+        //}
+        for ($i = 0; $i < $colMachineNum; $i++)
         {
-            $t1 = "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n";
+            $t1 .= "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n";
         }
         
         $sheetCode = "<Worksheet ss:Name=\"PlatformInfo\">\n" .
                      "<Table x:FullColumns=\"1\" " .
                      "x:FullRows=\"1\" ss:DefaultRowHeight=\"15\">\n" .
-                     "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n" .
                      "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n" . $t1;
                      
         $t1 = "";
-        if ($cmpStartResultID != -1)
+        //if ($cmpStartResultID != -1)
+        //{
+        //    $t1 = "<Cell ss:StyleID=\"s" . ($startStyleID + 16) . "\"><Data ss:Type=\"String\">" .
+        //          $cmpSysName . " - " . $cmpCardName .
+        //          "</Data></Cell>\n";
+        //}
+        for ($i = 0; $i < $colMachineNum; $i++)
         {
-            $t1 = "<Cell ss:StyleID=\"s" . ($startStyleID + 16) . "\"><Data ss:Type=\"String\">" .
-                  $cmpSysName . " - " . $cmpCardName .
-                  "</Data></Cell>\n";
+            $t1 .= "<Cell ss:StyleID=\"s" . ($startStyleID + 16) . "\"><Data ss:Type=\"String\">" .
+                   $colSysNameList[$i] . " - " . $colCardNameList[$i] .
+                   "</Data></Cell>\n";
         }
                      
         $sheetCode .= "<Row ss:Height=\"20.0\">\n" .
                       "<Cell ss:StyleID=\"s" . ($startStyleID + 22) . "\"><Data ss:Type=\"String\">Platform Info</Data></Cell>\n" .
-                      "<Cell ss:StyleID=\"s" . ($startStyleID + 16) . "\"><Data ss:Type=\"String\">" .
-                      $tmpSysName . " - " . $tmpCardName .
-                      "</Data></Cell>\n" .
                       $t1 .
                       "</Row>\n";
                      
-        foreach ($tableRowList as $tmpKey => $tmpVal)
+        foreach ($tableRowList[0] as $tmpKey => $tmpVal)
         {
             $t1 = "";
-            if ($cmpStartResultID != -1)
+            //if ($cmpStartResultID != -1)
+            //{
+            //    $cmpVal = isset($cmpTableRowList[$tmpKey]) ? $cmpTableRowList[$tmpKey] : "";
+            //    
+            //    $t1 = "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $cmpVal . "</Data></Cell>\n";
+            //}
+            
+            for ($i = 0; $i < $colMachineNum; $i++)
             {
-                $cmpVal = isset($cmpTableRowList[$tmpKey]) ? $cmpTableRowList[$tmpKey] : "";
-                
-                $t1 = "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $cmpVal . "</Data></Cell>\n";
+                $tmpVal2 = isset($tableRowList[$i][$tmpKey]) ? $tableRowList[$i][$tmpKey] : "";
+                $t1 .= "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $tmpVal2 . "</Data></Cell>\n";
             }
             
             $sheetCode .= "<Row ss:Height=\"20.0\">\n" .
                           "<Cell ss:StyleID=\"s" . ($startStyleID + 20) . "\"><Data ss:Type=\"String\">" . $tmpKey . "</Data></Cell>\n" .
-                          "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $tmpVal . "</Data></Cell>\n" .
                           $t1 .
                           "</Row>\n";
         }
@@ -2874,14 +2964,18 @@ class CGenReport
         foreach ($apiVersionList as $tmpKey => $tmpVal)
         {
             $t1 = "";
-            if ($cmpStartResultID != -1)
+            //if ($cmpStartResultID != -1)
+            //{
+            //    $t1 = "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $tmpVal . "</Data></Cell>\n";
+            //}
+            
+            for ($i = 0; $i < $colMachineNum; $i++)
             {
-                $t1 = "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $tmpVal . "</Data></Cell>\n";
+                $t1 .= "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $tmpVal . "</Data></Cell>\n";
             }
             
             $sheetCode .= "<Row ss:Height=\"20.0\">\n" .
                           "<Cell ss:StyleID=\"s" . ($startStyleID + 20) . "\"><Data ss:Type=\"String\">" . $tmpKey . "</Data></Cell>\n" .
-                          "<Cell ss:StyleID=\"s" . ($startStyleID + 21) . "\"><Data ss:Type=\"String\">" . $tmpVal . "</Data></Cell>\n" .
                           $t1 .
                           "</Row>\n";
         }
