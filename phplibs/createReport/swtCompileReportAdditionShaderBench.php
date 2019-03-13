@@ -220,27 +220,35 @@ $sysMemNameList = $returnSet["sysMemNameList"];
 $cardNameRealList = $returnSet["cardNameRealList"];
 $sysNameRealList = $returnSet["sysNameRealList"];
 
+$tmpList = array_unique($driver2NameList[0]);
+$uniqueDriver2NameList = array();
+foreach ($tmpList as $v)
+{
+    $uniqueDriver2NameList []= $v;
+}
+$returnMsg["uniqueDriver2NameList"] = $uniqueDriver2NameList;
+
 $returnMsg["changeListNumList"] = $changeListNumList;
 
-$crossBuildResultIDList =      $returnSet["crossBuildResultIDList"];
-$crossBuildMachineIDList =     $returnSet["crossBuildMachineIDList"];
-$crossBuildCardNameList =      $returnSet["crossBuildCardNameList"];
-$crossBuildDriverNameList =    $returnSet["crossBuildDriverNameList"];
-$crossBuildChangeListNumList = $returnSet["crossBuildChangeListNumList"];
-$crossBuildCpuNameList =       $returnSet["crossBuildCpuNameList"];
-$crossBuildSysNameList =       $returnSet["crossBuildSysNameList"];
-$crossBuildMainLineNameList =  $returnSet["crossBuildMainLineNameList"];
-$crossBuildSClockNameList =    $returnSet["crossBuildSClockNameList"];
-$crossBuildMClockNameList =    $returnSet["crossBuildMClockNameList"];
-$crossBuildGpuMemNameList =    $returnSet["crossBuildGpuMemNameList"];
-$crossBuildResultTimeList =    $returnSet["crossBuildResultTimeList"];
-$crossBuildMachineNameList =   $returnSet["crossBuildMachineNameList"];
-
-$returnMsg["crossBuildResultIDList"] = $crossBuildResultIDList;
-$returnMsg["crossBuildMachineIDList"] = $crossBuildMachineIDList;
-$returnMsg["crossBuildCardNameList"] = $crossBuildCardNameList;
-$returnMsg["crossBuildDriverNameList"] = $crossBuildDriverNameList;
-$returnMsg["crossBuildSysNameList"] = $crossBuildSysNameList;
+//$crossBuildResultIDList =      $returnSet["crossBuildResultIDList"];
+//$crossBuildMachineIDList =     $returnSet["crossBuildMachineIDList"];
+//$crossBuildCardNameList =      $returnSet["crossBuildCardNameList"];
+//$crossBuildDriverNameList =    $returnSet["crossBuildDriverNameList"];
+//$crossBuildChangeListNumList = $returnSet["crossBuildChangeListNumList"];
+//$crossBuildCpuNameList =       $returnSet["crossBuildCpuNameList"];
+//$crossBuildSysNameList =       $returnSet["crossBuildSysNameList"];
+//$crossBuildMainLineNameList =  $returnSet["crossBuildMainLineNameList"];
+//$crossBuildSClockNameList =    $returnSet["crossBuildSClockNameList"];
+//$crossBuildMClockNameList =    $returnSet["crossBuildMClockNameList"];
+//$crossBuildGpuMemNameList =    $returnSet["crossBuildGpuMemNameList"];
+//$crossBuildResultTimeList =    $returnSet["crossBuildResultTimeList"];
+//$crossBuildMachineNameList =   $returnSet["crossBuildMachineNameList"];
+//
+//$returnMsg["crossBuildResultIDList"] = $crossBuildResultIDList;
+//$returnMsg["crossBuildMachineIDList"] = $crossBuildMachineIDList;
+//$returnMsg["crossBuildCardNameList"] = $crossBuildCardNameList;
+//$returnMsg["crossBuildDriverNameList"] = $crossBuildDriverNameList;
+//$returnMsg["crossBuildSysNameList"] = $crossBuildSysNameList;
 
 $returnMsg["checkedMachineIDList"] = $checkedMachineIDList;
 $returnMsg["cardNameList"] = $cardNameList[0];
@@ -366,52 +374,52 @@ for ($i = 0; $i < $reportUmdNum; $i++)
     }
 }
 
-if ($crossType == 2)
-{
-    $umdOrder = array_fill(0, $reportUmdNum * 2, -1);
-    $resultUmdOrder = array_fill(0, $reportUmdNum * 2, -1);
-    
-    for ($i = 0; $i < $reportUmdNum; $i++)
-    {
-        $n3 = array_search($driverNameList[0][$i], $umdNameList);
-        if ($n3 !== false)
-        {
-            $umdOrder[$i] = $n3;
-            $umdOrder[$reportUmdNum + $i] = $umdNum + $n3;
-            
-            if ($resultIDList[0][$startResultID + $i] != PHP_INT_MAX)
-            {
-                $resultUmdOrder[$i] = $n3;
-                $validUmdNum++;
-            }
-            $tmpIndex = -1;
-            for ($j = 0; $j < (count($machineIDBatchPairList) / 2); $j++)
-            {
-                if ($curMachineID == intval($machineIDBatchPairList[$j * 2]))
-                {
-                    $tmpIndex = $j;
-                    break;
-                }
-            }
-            if ($tmpIndex == -1)
-            {
-                continue;
-            }
-            if ($crossBuildResultIDList[$tmpIndex][$i] != PHP_INT_MAX)
-            {
-                $resultUmdOrder[$reportUmdNum + $i] = $n3;
-            }
-        }
-    }
-    
-    if ($curMachineID == PHP_INT_MAX)
-    {
-        for ($i = 0; $i < $reportUmdNum; $i++)
-        {
-            $resultUmdOrder[$reportUmdNum + $i] = $resultUmdOrder[$i];
-        }
-    }
-}
+//if ($crossType == 2)
+//{
+//    $umdOrder = array_fill(0, $reportUmdNum * 2, -1);
+//    $resultUmdOrder = array_fill(0, $reportUmdNum * 2, -1);
+//    
+//    for ($i = 0; $i < $reportUmdNum; $i++)
+//    {
+//        $n3 = array_search($driverNameList[0][$i], $umdNameList);
+//        if ($n3 !== false)
+//        {
+//            $umdOrder[$i] = $n3;
+//            $umdOrder[$reportUmdNum + $i] = $umdNum + $n3;
+//            
+//            if ($resultIDList[0][$startResultID + $i] != PHP_INT_MAX)
+//            {
+//                $resultUmdOrder[$i] = $n3;
+//                $validUmdNum++;
+//            }
+//            $tmpIndex = -1;
+//            for ($j = 0; $j < (count($machineIDBatchPairList) / 2); $j++)
+//            {
+//                if ($curMachineID == intval($machineIDBatchPairList[$j * 2]))
+//                {
+//                    $tmpIndex = $j;
+//                    break;
+//                }
+//            }
+//            if ($tmpIndex == -1)
+//            {
+//                continue;
+//            }
+//            if ($crossBuildResultIDList[$tmpIndex][$i] != PHP_INT_MAX)
+//            {
+//                $resultUmdOrder[$reportUmdNum + $i] = $n3;
+//            }
+//        }
+//    }
+//    
+//    if ($curMachineID == PHP_INT_MAX)
+//    {
+//        for ($i = 0; $i < $reportUmdNum; $i++)
+//        {
+//            $resultUmdOrder[$reportUmdNum + $i] = $resultUmdOrder[$i];
+//        }
+//    }
+//}
 
 $returnMsg["resultUmdOrder"] = $resultUmdOrder;
 $returnMsg["resultIDList[0]"] = $resultIDList[0];
@@ -530,12 +538,15 @@ if ($returnSet === null)
     return;
 }
 $subTestNumList = $returnSet["subTestNumList"];
+$startSubTestID = $returnSet["startSubTestID"];
 $subTestNumMap = $returnSet["subTestNumMap"];
 $cmpSubTestNumList = $returnSet["cmpSubTestNumList"];
 // skip these test in report compare sheet and graph
 $skipTestNameList = $returnSet["skipTestNameList"];
 $subTestUmdDataMaskList = $returnSet["subTestUmdDataMaskList"];
 
+$returnMsg["subTestNumList"] = $subTestNumList;
+$returnMsg["startSubTestID"] = $startSubTestID;
 $returnMsg["skipTestNameList"] = $skipTestNameList;
 
 //$allUmdTestCaseNumList = $xmlWriter->getAllUmdTestCaseNumList($db);

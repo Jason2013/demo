@@ -50,7 +50,7 @@ $swtUmdStandardOrder = array("Vulkan", "D3D11", "D3D12", "OpenGL", "Metal");
 //$swtUmdStandardOrder_sb = array("SCPC", "LLPC", "RADV", "NVIDIA", "OPT1");
 $swtUmdNameList_sb = array("RADV", "SCPC", "LLPC", "NVIDIA", "OPT1");
 $swtUmdStandardOrder_sb = array("RADV", "SCPC", "LLPC", "NVIDIA", "OPT1");
-$swtCardStandardOrder_sb = array("Vega10", "Ariel", "Navi10", "GTX 1080");
+$swtCardStandardOrder_sb = array("Navi10", "Vega10", "Ariel", "GTX 1080");
 
 //$swtPreSheetName_sb = array("compileTime", "executionTime");
 //$swtPreSheetNameTitle_sb = array("Compile Time", "Execution Time");

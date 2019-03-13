@@ -29,6 +29,9 @@ $returnMsg["oldReportXLSXList"] = $oldReportXLSXList;
 $returnMsg["fileID"] = $fileID;
 $curMachineID = -1;
 
+$vulkanReportName = "";
+$vulkanReportFinalName = "";
+
 if ($fileID < count($oldReportXLSXList))
 {
     // zip one by one file
@@ -43,6 +46,7 @@ if ($fileID < count($oldReportXLSXList))
     $tmpCardName = "";
     $tmpSysName = "";
     $tmpUmd2Name = "";
+    $tmpUmd2Name_ = "";
     if (count($tmpFileNameSection) >= 2)
     {
         $tmpCardName = $tmpFileNameSection[0];
@@ -52,28 +56,59 @@ if ($fileID < count($oldReportXLSXList))
     {
         if (array_search($tmpFileNameSection[2], $swtUmdNameList) !== false)
         {
-            $tmpUmd2Name = $tmpFileNameSection[2] . "_";
+            $tmpUmd2Name = $tmpFileNameSection[2];
+            $tmpUmd2Name_ = $tmpFileNameSection[2] . "_";
         }
     }
 
     $tmpVBAConfigPath = $reportFolder . "/" . $tmpFileNameSection[0] .
                         "_" . $tmpFileNameSection[1] .
-                        "/" . $tmpUmd2Name . $swtTempVBAConfigJsonName;
+                        "/" . $tmpUmd2Name_ . $swtTempVBAConfigJsonName;
     $tmpVBAPath = $reportFolder . "/" . $swtTempVBAName;
     
     $vbaConfig = null;
+    $vbaConfigList = array();
+    $vbaConfigPathList = array();
+    $uniqueDriver2NameList = array();
     
     if (file_exists($tmpVBAConfigPath))
     {
         $t1 = file_get_contents($tmpVBAConfigPath);
-        
-        //file_put_contents("H:\\wamp64\\www\\benchMax\\test01.json", $t1);
         
         $vbaConfig = json_decode($t1);
         
         if (isset($vbaConfig->curMachineID))
         {
             $curMachineID = $vbaConfig->curMachineID;
+        }
+        
+        if (isset($vbaConfig->uniqueDriver2NameList))
+        {
+            $uniqueDriver2NameList = explode(",", $vbaConfig->uniqueDriver2NameList);
+            
+            for ($i = 0; $i < count($uniqueDriver2NameList); $i++)
+            {
+                $tmpPath2 = $reportFolder . "/" . $tmpFileNameSection[0] .
+                           "_" . $tmpFileNameSection[1] .
+                           "/" . $uniqueDriver2NameList[$i] . "_" . $swtTempVBAConfigJsonName;
+                           
+                $vbaConfigPathList []= $tmpPath2;
+                if (file_exists($tmpPath2))
+                {
+                    $t1 = file_get_contents($tmpPath2);
+                    $tmpConfig = json_decode($t1, true);
+                    
+                    $vbaConfigList []= $tmpConfig;
+                }
+            }
+        }
+        
+        $returnMsg["vbaConfigList"] = $vbaConfigList;
+        $returnMsg["vbaConfigPathList"] = $vbaConfigPathList;
+        
+        if (isset($vbaConfig->tmpUmd2Name))
+        {
+            $tmpUmd2Name = $vbaConfig->tmpUmd2Name;
         }
     }
     
@@ -133,6 +168,7 @@ if ($fileID < count($oldReportXLSXList))
                 //$vbaConfig = json_decode($t1);
                 
                 $t2 = file_get_contents("../../vbaLibs/createGraph01.vba");
+                $t2a = file_get_contents("../../vbaLibs/createGraphShaderBench.vba");
                 
                 $tmpArea = explode(",", $vbaConfig->graphDataArea);
                 
@@ -226,16 +262,17 @@ if ($fileID < count($oldReportXLSXList))
                     $codePiece1 = sprintf($t5, $t6, $n1);
                 }
                 
-                if (isset($vbaConfig->shrinkColumnArea))
+                if (($vbaConfig->reportType == 3) &&
+                    isset($vbaConfig->shrinkColumnArea))
                 {
+                    // framebench
                     $codePiece1 .= "\n";
                     $codePiece1 .= "Columns(\"" . $vbaConfig->shrinkColumnArea . "\").ColumnWidth = 0\n";
                 }
                 
-                // shaderbench or framebench
+                // framebench
                 // set first title & second title of charts
-                if (($vbaConfig->reportType == 2) ||
-                    ($vbaConfig->reportType == 3))
+                if ($vbaConfig->reportType == 3)
                 {
                     if (isset($vbaConfig->graphTitle) &&
                         isset($vbaConfig->chartSecondTitle))
@@ -254,11 +291,16 @@ if ($fileID < count($oldReportXLSXList))
                         $codePiece1 .= "Call setCharBarPercentTag(" . $vbaConfig->graphDataBarNum . ", " .
                                                                  "" . $vbaConfig->graphDataBarNum2 . ")\n";
                     }
+                    //else if (isset($vbaConfig->graphDataBarNum))
+                    //{
+                    //    $codePiece1 .= "\n";
+                    //    $codePiece1 .= "Call setCharBarPercentTag(" . $vbaConfig->graphDataBarNum . ", " .
+                    //                                             "0)\n";
+                    //}
                 }
                 
-                // shaderbench, framebench
-                if (($vbaConfig->reportType == 2 ||
-                     $vbaConfig->reportType == 3) &&
+                // framebench
+                if (($vbaConfig->reportType == 3) &&
                     ($vbaConfig->testBarNum == 2))
                 {
                     $codePiece1 .= "\n";
@@ -281,15 +323,61 @@ if ($fileID < count($oldReportXLSXList))
                 {
                     $titleAdd = "";
                 }
-
-                //$t2 = sprintf($t2, $t4, $vbaConfig->graphTitle . $tmpCardName, 
-                //              $t4a, $vbaConfig->graphTitle . $tmpCardName, 
-                //              $vbaConfig->graphDataAreaNoBlank, $codePiece1);
                               
                 $t2 = sprintf($t2, $t4, $vbaConfig->graphTitle . $titleAdd, 
                               $t4a, $vbaConfig->graphTitle . $titleAdd, 
                               $vbaConfig->graphDataAreaNoBlank, $codePiece1);
+                              
+                //$t2a = sprintf($t2a, $t4, $vbaConfig->graphTitle . $titleAdd, 
+                //              $t4a, $vbaConfig->graphTitle . $titleAdd, 
+                //              $vbaConfig->graphDataAreaNoBlank, $codePiece1);
+                              
                 file_put_contents($tmpVBAPath, $t2);
+                
+                if ($vbaConfig->reportType == 2)
+                {
+                    // shaderbench
+                    if ($tmpUmd2Name == $uniqueDriver2NameList[count($uniqueDriver2NameList) - 1])
+                    {
+                        // vulkan
+                        // Call SetSheetGraph("Vulkan", "X5:AA31", "888", "Z5:AA31")
+                        $t1 = "";
+                        for ($i = 0; $i < count($uniqueDriver2NameList); $i++)
+                        {
+                            $tmpArea2 = explode(",", $vbaConfigList[$i]["graphDataArea"]);
+                            $tmpArea3 = $vbaConfigList[$i]["graphDataAreaNoBlank"];
+                            
+                            $t1 .= "Call SetSheetGraph(\"" . $uniqueDriver2NameList[$i] . "\", \"" . $tmpArea2[0] . "\", " .
+                                   "\"" . $vbaConfig->graphTitle . $titleAdd . "\", \"" . $tmpArea3 . "\", " .
+                                   "\"" . $vbaConfig->graphTitle . "\", \"" . $vbaConfig->chartSecondTitle . "\")\n";
+                        }
+                        
+                        $codePiece1 = $t1 . $codePiece1;
+                        
+                        $tmpFileName2 = basename($filename2);
+                        $tmpFileNameSection2 = explode("_", $tmpFileName2);
+                        $t1 = substr($filename2, 0, strlen($filename2) - strlen($tmpFileName2));
+                        if (count($tmpFileNameSection2) >= 4)
+                        {
+                            $vulkanReportName = $filename2;
+                            $vulkanReportFinalName = $t1 . $tmpFileNameSection2[0] . "_" .
+                                                     $tmpFileNameSection2[1] . "_" .
+                                                     $tmpFileNameSection2[3];
+                        }
+                    }
+                    else
+                    {
+                        $t1 = "Call SetSheetGraph(\"" . $tmpUmd2Name . "\", \"" . $tmpArea[0] . "\", " .
+                              "\"" . $vbaConfig->graphTitle . $titleAdd . "\", \"" . $vbaConfig->graphDataAreaNoBlank . "\", " .
+                              "\"" . $vbaConfig->graphTitle . "\", \"" . $vbaConfig->chartSecondTitle . "\")\n";
+                               
+                        $codePiece1 = $t1 . $codePiece1;
+                    }
+                    
+                    $t2a = sprintf($t2a, $codePiece1);
+                    
+                    file_put_contents($tmpVBAPath, $t2a);
+                }
                 
                 $workBook->VBProject->VBComponents->Item(1)->CodeModule->AddFromFile(__dir__ . "\\" . $tmpVBAPath);
                 
@@ -303,7 +391,17 @@ if ($fileID < count($oldReportXLSXList))
                 $excel->WorkBooks->Close();
                 $excel->Quit();
                 
-                unlink($tmpVBAConfigPath);
+                if ((strlen($vulkanReportName) > 0) &&
+                    (strlen($vulkanReportFinalName) > 0))
+                {
+                    // for shaderbench
+                    if (file_exists($vulkanReportName))
+                    {
+                        rename($vulkanReportName, $vulkanReportFinalName);
+                    }
+                }
+                
+                //unlink($tmpVBAConfigPath);
                 unlink($tmpVBAPath);
             }
         }
@@ -344,6 +442,14 @@ if (($fileID + 1) >= count($oldReportXLSXList))
             swtDelFileTree($tmpPath);
         }
     }
+    
+    //for ($i = 0; $i < count($vulkanReportNameList); $i++)
+    //{
+    //    $vulkanReportName = $vulkanReportNameList[$i];
+    //    $vulkanReportFinalName = $vulkanReportFinalNameList[$i];
+    //    
+    //
+    //}
     
     // zip finished
     $returnMsg["errorCode"] = 1;
