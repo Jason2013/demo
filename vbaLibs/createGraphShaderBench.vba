@@ -106,18 +106,18 @@ End Function
 
 Function setCharBarPercentTag(barNum1 As Integer, barNum2 As Integer)
     Dim i As Integer
-    ActiveSheet.ChartObjects("chart02").Activate
-    For i = 1 To barNum2
-        'If (i Mod 2) = 1 Then
-            ActiveChart.SeriesCollection(i).Select
-            ActiveChart.SeriesCollection(i).ApplyDataLabels
-            ActiveChart.SeriesCollection(i).DataLabels.Select
-            Selection.NumberFormat = "0.00%%"
-            Selection.Format.TextFrame2.TextRange.Font.Size = 10
-        'End If
-    Next
+    'ActiveSheet.ChartObjects("chart02").Activate
+    'For i = 1 To barNum2
+    '    'If (i Mod 2) = 1 Then
+    '        ActiveChart.SeriesCollection(i).Select
+    '        ActiveChart.SeriesCollection(i).ApplyDataLabels
+    '        ActiveChart.SeriesCollection(i).DataLabels.Select
+    '        Selection.NumberFormat = "0.00%%"
+    '        Selection.Format.TextFrame2.TextRange.Font.Size = 10
+    '    'End If
+    'Next
     
-    ActiveSheet.ChartObjects("chart01").Activate
+    ActiveSheet.ChartObjects("chart03").Activate
     For i = 1 To barNum1
         'If (i Mod 2) = 1 Then
             ActiveChart.SeriesCollection(i).Select
@@ -193,7 +193,7 @@ Function setSecondTitleColor(MainTitle As String, SecondTitle As String)
 
 End Function
 
-Function SetSheetGraph(tmpSheetName As String, tmpUnion As String, tmpTitle As String, tmpNoBlank As String, MainTitle As String, SecondTitle As String)
+Function SetSheetGraph(tmpSheetName As String, tmpUnion As String, tmpTitle As String, tmpNoBlank As String, MainTitle As String, SecondTitle As String, barNum As Integer)
     
     Dim destSheet As Worksheet
     Dim myRange As Range
@@ -304,6 +304,8 @@ Function SetSheetGraph(tmpSheetName As String, tmpUnion As String, tmpTitle As S
     Next
     
     Call setSecondTitleColor(MainTitle, SecondTitle)
+    
+    Call setCharBarPercentTag(barNum, 0)
     
     Range("A1:A1").Select
     

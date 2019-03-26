@@ -262,53 +262,53 @@ if ($fileID < count($oldReportXLSXList))
                     $codePiece1 = sprintf($t5, $t6, $n1);
                 }
                 
-                if (($vbaConfig->reportType == 3) &&
-                    isset($vbaConfig->shrinkColumnArea))
-                {
-                    // framebench
-                    $codePiece1 .= "\n";
-                    $codePiece1 .= "Columns(\"" . $vbaConfig->shrinkColumnArea . "\").ColumnWidth = 0\n";
-                }
+                //if (($vbaConfig->reportType == 3) &&
+                //    isset($vbaConfig->shrinkColumnArea))
+                //{
+                //    // framebench
+                //    $codePiece1 .= "\n";
+                //    $codePiece1 .= "Columns(\"" . $vbaConfig->shrinkColumnArea . "\").ColumnWidth = 0\n";
+                //}
                 
                 // framebench
                 // set first title & second title of charts
-                if ($vbaConfig->reportType == 3)
-                {
-                    if (isset($vbaConfig->graphTitle) &&
-                        isset($vbaConfig->chartSecondTitle))
-                    {
-                        // if has title & second title
-                        $codePiece1 .= "\n";
-                        $codePiece1 .= "Call setSecondTitleColor(\"" . $vbaConfig->graphTitle . "\", " .
-                                                                "\"" . $vbaConfig->chartSecondTitle . "\")\n";
-                    }
-                    
-                    if (isset($vbaConfig->graphDataBarNum) &&
-                        isset($vbaConfig->graphDataBarNum2))
-                    {
-                        // if has bars num in charts, set percent tag to bars
-                        $codePiece1 .= "\n";
-                        $codePiece1 .= "Call setCharBarPercentTag(" . $vbaConfig->graphDataBarNum . ", " .
-                                                                 "" . $vbaConfig->graphDataBarNum2 . ")\n";
-                    }
-                    //else if (isset($vbaConfig->graphDataBarNum))
-                    //{
-                    //    $codePiece1 .= "\n";
-                    //    $codePiece1 .= "Call setCharBarPercentTag(" . $vbaConfig->graphDataBarNum . ", " .
-                    //                                             "0)\n";
-                    //}
-                }
+                //if ($vbaConfig->reportType == 3)
+                //{
+                //    if (isset($vbaConfig->graphTitle) &&
+                //        isset($vbaConfig->chartSecondTitle))
+                //    {
+                //        // if has title & second title
+                //        $codePiece1 .= "\n";
+                //        $codePiece1 .= "Call setSecondTitleColor(\"" . $vbaConfig->graphTitle . "\", " .
+                //                                                "\"" . $vbaConfig->chartSecondTitle . "\")\n";
+                //    }
+                //    
+                //    if (isset($vbaConfig->graphDataBarNum) &&
+                //        isset($vbaConfig->graphDataBarNum2))
+                //    {
+                //        // if has bars num in charts, set percent tag to bars
+                //        $codePiece1 .= "\n";
+                //        $codePiece1 .= "Call setCharBarPercentTag(" . $vbaConfig->graphDataBarNum . ", " .
+                //                                                 "" . $vbaConfig->graphDataBarNum2 . ")\n";
+                //    }
+                //    //else if (isset($vbaConfig->graphDataBarNum))
+                //    //{
+                //    //    $codePiece1 .= "\n";
+                //    //    $codePiece1 .= "Call setCharBarPercentTag(" . $vbaConfig->graphDataBarNum . ", " .
+                //    //                                             "0)\n";
+                //    //}
+                //}
                 
                 // framebench
-                if (($vbaConfig->reportType == 3) &&
-                    ($vbaConfig->testBarNum == 2))
-                {
-                    $codePiece1 .= "\n";
-                    $codePiece1 .= "setCharBarColor(" . $vbaConfig->testNameNum . ")\n";
-                    
-                    $codePiece1 .= "\n";
-                    $codePiece1 .= "Call removeChartLegend()\n";
-                }
+                //if (($vbaConfig->reportType == 3) &&
+                //    ($vbaConfig->testBarNum == 2))
+                //{
+                //    $codePiece1 .= "\n";
+                //    $codePiece1 .= "setCharBarColor(" . $vbaConfig->testNameNum . ")\n";
+                //    
+                //    $codePiece1 .= "\n";
+                //    $codePiece1 .= "Call removeChartLegend()\n";
+                //}
                 
                 // microbench outuser del one of chart
                 if ($vbaConfig->reportType == 4)
@@ -334,9 +334,10 @@ if ($fileID < count($oldReportXLSXList))
                               
                 file_put_contents($tmpVBAPath, $t2);
                 
-                if ($vbaConfig->reportType == 2)
+                if (($vbaConfig->reportType == 2) ||
+                    ($vbaConfig->reportType == 3))
                 {
-                    // shaderbench
+                    // shaderbench, framebench
                     if ($tmpUmd2Name == $uniqueDriver2NameList[count($uniqueDriver2NameList) - 1])
                     {
                         // vulkan
@@ -349,7 +350,8 @@ if ($fileID < count($oldReportXLSXList))
                             
                             $t1 .= "Call SetSheetGraph(\"" . $uniqueDriver2NameList[$i] . "\", \"" . $tmpArea2[0] . "\", " .
                                    "\"" . $vbaConfig->graphTitle . $titleAdd . "\", \"" . $tmpArea3 . "\", " .
-                                   "\"" . $vbaConfig->graphTitle . "\", \"" . $vbaConfig->chartSecondTitle . "\")\n";
+                                   "\"" . $vbaConfig->graphTitle . "\", \"" . $vbaConfig->chartSecondTitle . "\", " .
+                                   "" . $vbaConfig->graphDataBarNum . ")\n";
                         }
                         
                         $codePiece1 = $t1 . $codePiece1;
@@ -369,7 +371,8 @@ if ($fileID < count($oldReportXLSXList))
                     {
                         $t1 = "Call SetSheetGraph(\"" . $tmpUmd2Name . "\", \"" . $tmpArea[0] . "\", " .
                               "\"" . $vbaConfig->graphTitle . $titleAdd . "\", \"" . $vbaConfig->graphDataAreaNoBlank . "\", " .
-                              "\"" . $vbaConfig->graphTitle . "\", \"" . $vbaConfig->chartSecondTitle . "\")\n";
+                              "\"" . $vbaConfig->graphTitle . "\", \"" . $vbaConfig->chartSecondTitle . "\", " .
+                              "" . $vbaConfig->graphDataBarNum . ")\n";
                                
                         $codePiece1 = $t1 . $codePiece1;
                     }
@@ -442,14 +445,6 @@ if (($fileID + 1) >= count($oldReportXLSXList))
             swtDelFileTree($tmpPath);
         }
     }
-    
-    //for ($i = 0; $i < count($vulkanReportNameList); $i++)
-    //{
-    //    $vulkanReportName = $vulkanReportNameList[$i];
-    //    $vulkanReportFinalName = $vulkanReportFinalNameList[$i];
-    //    
-    //
-    //}
     
     // zip finished
     $returnMsg["errorCode"] = 1;

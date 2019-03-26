@@ -468,7 +468,7 @@ class CGenReport
                      "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
                      "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
                      "</Borders>\n" .
-                     "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#00B050\" ss:Bold=\"1\"/>" .
+                     "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#22B14C\" ss:Bold=\"1\"/>" .
                      "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
                      "</Style>\n";
                      
@@ -480,7 +480,7 @@ class CGenReport
                      "<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\" ss:Color=\"#000000\"/>\n" .
                      "<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\" ss:Color=\"#000000\"/>\n" .
                      "</Borders>\n" .
-                     "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#00B050\" ss:Bold=\"1\"/>" .
+                     "<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#22B14C\" ss:Bold=\"1\"/>" .
                      "<Interior ss:Color=\"#FFFFA0\" ss:Pattern=\"Solid\"/>\n" .
                      "</Style>\n";
                      
@@ -2584,6 +2584,8 @@ class CGenReport
         global $db_mis_table_name_string002;
         global $resultIDList;
         global $cardStandardResultPos;
+        global $uniqueDriver2NameList;
+        global $driver2NameList;
         
         $db = $_db;
         
@@ -2619,8 +2621,54 @@ class CGenReport
             
             $tmpTestCaseList []= $tmpSubTestNum;
         }
+        
+        $allAPITestCaseNumList = array();
+        
+        for ($j = 0; $j < count($uniqueDriver2NameList); $j++)
+        {
+            $tmpPos = array_search($uniqueDriver2NameList[$j], $driver2NameList[0]);
+            
+            if ($tmpPos !== false)
+            {
+                $tmpTestCaseNumList = array();
+                for ($i = 0; $i < count($testNameList); $i++)
+                {
+                    $tmpTestName = str_replace(" ", "", $testNameList[$i]);
+                    $tmpTestName = cleaninput($tmpTestName, 256);
+                    $tmpTableName = $db_mis_table_name_string002 . $tmpTestName;
+                    $params1 = array($resultIDList[0][$tmpPos]);
+                    $sql1 = "SELECT COUNT(*) FROM " . $tmpTableName . " " .
+                            "WHERE result_id=?;";
+                    if ($db->QueryDB($sql1, $params1) == null)
+                    {
+                        $returnMsg["errorCode"] = 0;
+                        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+                        echo json_encode($returnMsg);
+                        return null;
+                    }
+                    $row1 = $db->fetchRow();
+                    if ($row1 == false)
+                    {
+                        $returnMsg["errorCode"] = 0;
+                        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+                        echo json_encode($returnMsg);
+                        return null;
+                    }
+                    $tmpSubTestNum = intval($row1[0]);
+                    
+                    $tmpTestCaseNumList []= $tmpSubTestNum;
+                }
+                
+                $allAPITestCaseNumList []= $tmpTestCaseNumList;
+            }
+        }
 
-        return $tmpTestCaseList;
+        //return $tmpTestCaseList;
+        
+        $returnSet = array();
+        $returnSet["standardUmdTestCaseNumList"] = $tmpTestCaseList;
+        $returnSet["allAPITestCaseNumList"] = $allAPITestCaseNumList;
+        return $returnSet;
     }
     
     public function writePlatformInfo2($_fileHandle)
@@ -3137,6 +3185,7 @@ class CGenReport
     
     public function writeSummaryVariance($_fileHandle)
     {
+        global $returnMsg;
         global $reportUmdNum;
         global $resultUmdOrder;
         global $swtReportUmdInfo;
@@ -3151,6 +3200,11 @@ class CGenReport
         global $swtPreSheetNameTitle_sb;
         global $curCardName;
         global $tmpSysName;
+        global $allAPITestCaseNumList;
+        global $uniqueDriver2NameList;
+        global $tmpUmd2Name;
+        global $reportFolder;
+        global $batchID;
         
         $sheetCodeStart = "<Worksheet ss:Name=\"Variation\">\n" .
                      "<Table x:FullColumns=\"1\" " .
@@ -3240,21 +3294,88 @@ class CGenReport
         $tmpLineOffset = array_fill(0, $reportUmdNum, 1);
         $tmpLineOffset2 = array_fill(0, $reportUmdNum, 1);
         
+        $isCombineReport = $tmpUmd2Name == $uniqueDriver2NameList[count($uniqueDriver2NameList) - 1];
+        
+        $returnMsg["variation_tmpUmd2Name"] = $tmpUmd2Name;
+        $returnMsg["isCombineReport"] = $isCombineReport;
+        
         $showRowNum = 0;
         for ($i = 0; $i < count($testNameList); $i++)
         {
             $tmpArr = explode("_", $testNameList[$i]);
             $tmpGroupName = $testNameList[$i];
+            $tmpFullTestName = $testNameList[$i];
             if (count($tmpArr) > 1)
             {
                 $tmpGroupName = $tmpArr[1];
             }
             
+            $tmpTestCaseNum = $standardUmdTestCaseNumList[$i];
+            $tmpPos = array_search($tmpUmd2Name, $uniqueDriver2NameList);
+            if ($tmpPos !== false)
+            {
+                $tmpTestCaseNum = $allAPITestCaseNumList[$tmpPos][$i];
+            }
+            
+            $tmpRefReportFileName = "";
+            $tmpTestCaseStartNum = 0;
+            $testOut1 = "";
+            if ($tmpTestCaseNum == 0)
+            {
+                // current API testcase num is 0
+                for ($j = 0; $j < count($uniqueDriver2NameList); $j++)
+                {
+                    if ($tmpUmd2Name == $uniqueDriver2NameList[$j])
+                    {
+                        continue;
+                    }
+                                            
+                    if (isset($allAPITestCaseNumList[$j][$i]))
+                    {
+                        $tmpTestCaseNum = $allAPITestCaseNumList[$j][$i];
+                        if ($tmpTestCaseNum > 0)
+                        {
+                            $refUmd2Name = $uniqueDriver2NameList[$j];
+                            $tmpRefReportFileName = sprintf($curCardName . "_" . $tmpSysName   . "_" . $refUmd2Name . 
+                                                            "_batch%05d.xlsm", $batchID);
+                                                            
+                            for ($m = 0; $m < count($testNameList); $m++)
+                            {
+                                if ($tmpFullTestName == $testNameList[$m])
+                                {
+                                    break;
+                                }
+                                $tmpTestCaseStartNum += ($allAPITestCaseNumList[$j][$m] - 1);
+                                
+                                if ($tmpFullTestName == "ShaderTest_BattleField V")
+                                {
+                                    $testOut1 .= "" . $allAPITestCaseNumList[$j][$m] . ", ";
+                                }
+                            }
+                            if ($tmpFullTestName == "ShaderTest_BattleField V")
+                            {
+                                $returnMsg["testOut1"] = $testOut1;
+                                $returnMsg["tmpTestCaseStartNum"] = $tmpTestCaseStartNum;
+                            }
+                            break;
+                        }
+                    }
+                }
+                
+                if ($isCombineReport == false)
+                {
+                    $tmpTestCaseNum = 0;
+                }
+            }
+            
+            
             $sheetCode .= "<Row ss:Height=\"17.25\">\n" .
                           "<Cell ss:StyleID=\"s" . ($startStyleID + 17) . "\"><Data ss:Type=\"Number\">" . ($i + 1) . "</Data></Cell>\n" .
                           "<Cell ss:StyleID=\"s" . ($startStyleID + 19) . "\"><Data ss:Type=\"String\">" . $tmpGroupName . "</Data></Cell>\n" .
-                          "<Cell ss:StyleID=\"s" . ($startStyleID + 19) . "\"><Data ss:Type=\"Number\">" . $standardUmdTestCaseNumList[$i] . "</Data></Cell>\n";
-                          //"<Cell ss:StyleID=\"s" . ($startStyleID + 17) . "\"/>\n";
+                          //"<Cell ss:StyleID=\"s" . ($startStyleID + 19) . "\"><Data ss:Type=\"Number\">" . $standardUmdTestCaseNumList[$i] . 
+                          "<Cell ss:StyleID=\"s" . ($startStyleID + 19) . "\"><Data ss:Type=\"Number\">" . $tmpTestCaseNum . 
+                          "</Data></Cell>\n";
+
                           
             //$tmpLineOffset = array_fill(0, $reportUmdNum, 1);
             // compile time
@@ -3266,14 +3387,27 @@ class CGenReport
                     continue;
                 }
                 
-                if ($standardUmdTestCaseNumList[$i] > 0)
+                if ($tmpTestCaseNum > 0)
                 {
-                    $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX('" . 
-                                  $tmpReportUmdInfo[$j] . "_" . $swtPreSheetName_sb[0] . "'!R[" . ($tmpLineOffset[$j] - 1) . 
-                                  "]C" . ($subjectNameFilterNumMax + 3) . 
-                                  ":R[" . ($tmpLineOffset[$j] + $standardUmdTestCaseNumList[$i] - 1 - 1) . "]C" . 
-                                  ($subjectNameFilterNumMax + 3) . ")\">" .
-                                  "<Data ss:Type=\"Number\"></Data></Cell>";
+                    if (strlen($tmpRefReportFileName) == 0)
+                    {
+                        $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX('" . 
+                                      $tmpReportUmdInfo[$j] . "_" . $swtPreSheetName_sb[0] . "'!R[" . ($tmpLineOffset[$j] - 1) . 
+                                      "]C" . ($subjectNameFilterNumMax + 3) . 
+                                      ":R[" . ($tmpLineOffset[$j] + $tmpTestCaseNum - 1 - 1) . "]C" . 
+                                      ($subjectNameFilterNumMax + 3) . ")\">" .
+                                      "<Data ss:Type=\"Number\"></Data></Cell>";
+                    }
+                    else
+                    {
+                        $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX(" .
+                                      "'[" . $tmpRefReportFileName . "]" .
+                                      "" . $tmpReportUmdInfo[$j] . "_" . $swtPreSheetName_sb[0] . "'!R[" . ($tmpTestCaseStartNum - 1 - 1) . 
+                                      "]C" . ($subjectNameFilterNumMax + 3) . 
+                                      ":R[" . ($tmpTestCaseStartNum + $tmpTestCaseNum - 1 - 1 - 1) . "]C" . 
+                                      ($subjectNameFilterNumMax + 3) . ")\">" .
+                                      "<Data ss:Type=\"Number\"></Data></Cell>";
+                    }
                 }
                 else
                 {
@@ -3282,9 +3416,9 @@ class CGenReport
 
                 }
                               
-                if ($standardUmdTestCaseNumList[$i] > 0)
+                if ($tmpTestCaseNum > 0)
                 {
-                    $tmpLineOffset[$j] += ($standardUmdTestCaseNumList[$i] - 1);
+                    $tmpLineOffset[$j] += ($tmpTestCaseNum - 1);
                 }
                 else
                 {
@@ -3304,14 +3438,27 @@ class CGenReport
                     continue;
                 }
                 
-                if ($standardUmdTestCaseNumList[$i] > 0)
+                if ($tmpTestCaseNum > 0)
                 {
-                    $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX('" . 
-                                  $tmpReportUmdInfo[$j] . "_" . $swtPreSheetName_sb[1] . "'!R[" . ($tmpLineOffset2[$j] - 1) . 
-                                  "]C" . ($subjectNameFilterNumMax + 3) . 
-                                  ":R[" . ($tmpLineOffset2[$j] + $standardUmdTestCaseNumList[$i] - 1 - 1) . "]C" . 
-                                  ($subjectNameFilterNumMax + 3) . ")\">" .
-                                  "<Data ss:Type=\"Number\"></Data></Cell>";
+                    if (strlen($tmpRefReportFileName) == 0)
+                    {
+                        $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX('" . 
+                                      $tmpReportUmdInfo[$j] . "_" . $swtPreSheetName_sb[1] . "'!R[" . ($tmpLineOffset2[$j] - 1) . 
+                                      "]C" . ($subjectNameFilterNumMax + 3) . 
+                                      ":R[" . ($tmpLineOffset2[$j] + $tmpTestCaseNum - 1 - 1) . "]C" . 
+                                      ($subjectNameFilterNumMax + 3) . ")\">" .
+                                      "<Data ss:Type=\"Number\"></Data></Cell>";
+                    }
+                    else
+                    {
+                        $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX(" .
+                                      "'[" . $tmpRefReportFileName . "]" .
+                                      "" . $tmpReportUmdInfo[$j] . "_" . $swtPreSheetName_sb[1] . "'!R[" . ($tmpTestCaseStartNum - 1 - 1) . 
+                                      "]C" . ($subjectNameFilterNumMax + 3) . 
+                                      ":R[" . ($tmpTestCaseStartNum + $tmpTestCaseNum - 1 - 1 - 1) . "]C" . 
+                                      ($subjectNameFilterNumMax + 3) . ")\">" .
+                                      "<Data ss:Type=\"Number\"></Data></Cell>";
+                    }
                 }
                 else
                 {
@@ -3320,9 +3467,9 @@ class CGenReport
 
                 }
                               
-                if ($standardUmdTestCaseNumList[$i] > 0)
+                if ($tmpTestCaseNum > 0)
                 {
-                    $tmpLineOffset2[$j] += ($standardUmdTestCaseNumList[$i] - 1);
+                    $tmpLineOffset2[$j] += ($tmpTestCaseNum - 1);
                 }
                 else
                 {
@@ -5362,7 +5509,7 @@ class CGenReport
                   $tmpCode3 .
                   $tmpCode5 .
                   "</Row>\n";
-            if ($_curTestPos > 0)
+            if ($_curTestPos > $startSubTestID)
             {
                 $t1 = "<Row ss:StyleID=\"Default\" ss:Height=\"3\">" .
                       " <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n" .
@@ -5390,7 +5537,7 @@ class CGenReport
                    $tmpCode6a .
                    "</Row>\n";
             
-            if ($_curTestPos == 0)
+            if ($_curTestPos == $startSubTestID)
             {
                 fwrite($_fileHandle, $t1 . $t2);
                 fwrite($_fileHandle2, $t1 . $t2a);
@@ -6533,10 +6680,12 @@ class CGenReport
                          ($dataColumnNum * 2) + 1 + ($graphDataColumnNum) + $graphDataColumnNum - 1] .
                          (intval($graphDataStartLineID) + count($graphCells) - 1);
                          
-        $graphDataBarNum = ($subjectNameFilterNumMax + 3 + 
-                           ($dataColumnNum * 2) + 1 + ($graphDataColumnNum + 1) * 1 + $graphDataColumnNum * 2 + 1 + 2 + $graphDataColumnNum - 1) -
-                           ($subjectNameFilterNumMax + 3 + 
-                           ($dataColumnNum * 2) + 1 + ($graphDataColumnNum + 1) * 1 + $graphDataColumnNum * 2 + 1) + 1 - 2;
+        //$graphDataBarNum = ($subjectNameFilterNumMax + 3 + 
+        //                   ($dataColumnNum * 2) + 1 + ($graphDataColumnNum + 1) * 1 + $graphDataColumnNum * 2 + 1 + 2 + $graphDataColumnNum - 1) -
+        //                   ($subjectNameFilterNumMax + 3 + 
+        //                   ($dataColumnNum * 2) + 1 + ($graphDataColumnNum + 1) * 1 + $graphDataColumnNum * 2 + 1) + 1 - 2;
+                           
+        $graphDataBarNum = $graphDataColumnNum - 2;
                          
         $graphDataArea2 = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
                          ($dataColumnNum * 2) + 1 + ($graphDataColumnNum + 1) * 1 + $graphDataColumnNum * 2 + 1] . 
