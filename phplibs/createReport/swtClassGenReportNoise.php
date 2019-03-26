@@ -2127,16 +2127,16 @@ class CGenReport
         global $returnMsg;
 
         // main xml file
-        $xmlFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d.tmp2", $_batchID);
+        $xmlFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . ".tmp2", $_batchID);
         // comparison sheet
-        $tmpFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d.tmp", $_batchID);
+        $tmpFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . ".tmp", $_batchID);
         // flat data
-        $tmpFileName1 = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d.tmp1", $_batchID);
+        $tmpFileName1 = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . ".tmp1", $_batchID);
         // summary data
-        $jsonFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d.json", $_batchID);
-        $jsonFileName2 = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d_2.json", $_batchID);
+        $jsonFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . ".json", $_batchID);
+        $jsonFileName2 = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_2.json", $_batchID);
         // alarm data file
-        $alarmFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_batch%05d.ini", $_batchID);
+        $alarmFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . ".ini", $_batchID);
         
         $returnSet = array();
         $returnSet["xmlFileName"] = $xmlFileName;
@@ -2879,7 +2879,7 @@ class CGenReport
             }
             
             $tableRowList[$i]["Base_Driver_Version"] = $tmpBaseDriverVersionList[$i];
-            $tableRowList[$i]["Base_Driver_Date"]    = $tmpBaseDriverDateList[$i];
+            $tableRowList[$i]["Base_Driver_CL"]    = $tmpBaseDriverDateList[$i];
             $tableRowList[$i]["Vulkan_SDK_Version"] = isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
             $tableRowList[$i]["Microbench_Version"] = isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
             $tableRowList[$i]["Operating_System"] = $sysNameList[0][$tmpPos];
@@ -2912,13 +2912,13 @@ class CGenReport
         //}
         for ($i = 0; $i < $colMachineNum; $i++)
         {
-            $t1 .= "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n";
+            $t1 .= "<Column ss:AutoFitWidth=\"0\" ss:Width=\"120\"/>\n";
         }
         
         $sheetCode = "<Worksheet ss:Name=\"PlatformInfo\">\n" .
                      "<Table x:FullColumns=\"1\" " .
                      "x:FullRows=\"1\" ss:DefaultRowHeight=\"15\">\n" .
-                     "<Column ss:AutoFitWidth=\"0\" ss:Width=\"200\"/>\n" . $t1;
+                     "<Column ss:AutoFitWidth=\"0\" ss:Width=\"120\"/>\n" . $t1;
                      
         $t1 = "";
         //if ($cmpStartResultID != -1)
@@ -6169,7 +6169,10 @@ class CGenReport
 	{
         global $returnMsg;
         global $resultIDList;
+        global $cardNameList;
+        global $sysNameList;
         global $driverNameList;
+        global $driver2NameList;
         global $umdNameList;
         global $umdOrder;
         global $resultUmdOrder;
@@ -6290,9 +6293,36 @@ class CGenReport
             //$graphDataArea = $graphDataAreaNoBlank;
         }
         
-        //file_put_contents("test01.txt", $shrinkColumnArea);
+        $reportNameList = array();
+        $repCardNameList = array();
+        $repSysNameList = array();
+        $repDriver2NameList = array();
+        
+        for ($i = 0; $i < count($resultIDList[0]); $i++)
+        {
+            if ($resultIDList[0][$i] == PHP_INT_MAX)
+            {
+                continue;
+            }
+            //$t1 = $cardNameList[0][$i] . "_" . $sysNameList[0][$i] . "_" . $driver2NameList[0][$i];
+            $t1 = $cardNameList[0][$i] . "_" . $sysNameList[0][$i];
+            
+            $tmpPos = array_search($t1, $reportNameList);
+            if ($tmpPos === false)
+            {
+                $reportNameList []= $t1;
+                $repCardNameList []= $cardNameList[0][$i];
+                $repSysNameList []= $sysNameList[0][$i];
+                //$repDriver2NameList []= $driver2NameList[0][$i];
+                $repDriver2NameList []= "";
+            }
+        }
         
         $tmpJson = array();
+        $tmpJson["reportNameList"] = implode(",", $reportNameList);
+        $tmpJson["repCardNameList"] = implode(",", $repCardNameList);
+        $tmpJson["repSysNameList"] = implode(",", $repSysNameList);
+        $tmpJson["repDriver2NameList"] = implode(",", $repDriver2NameList);
         $tmpJson["graphDataArea"] = $graphDataArea;
         $tmpJson["graphDataArea2"] = $graphDataArea2;
         $tmpJson["shrinkColumnArea"] = $shrinkColumnArea;

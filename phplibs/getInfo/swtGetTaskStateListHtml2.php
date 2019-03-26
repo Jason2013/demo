@@ -12,7 +12,7 @@ $pageID = intval($_POST["pageID"]);
 $reportType = intval($_POST["reportType"]);
 $batchGroup = intval($_POST["batchGroup"]);
 
-$pageItemNum = 20;
+$pageItemNum = 200;
 //$allReportsDir = "../allReports";
 
 $returnMsg = array();

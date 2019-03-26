@@ -149,7 +149,7 @@ $templateFileName4 = $reportTemplateDir . "/sectionSheet005B.txt";
 //$allStylesEndTag = "</Styles>\n";
 //$allSheetsEndTag = "</Workbook>";
 
-$outFileNameLater = "_batch%05d.tmp1";
+$outFileNameLater = ".tmp1";
 
 $returnMsg["machineIDPair"] = $machineIDPair;
 

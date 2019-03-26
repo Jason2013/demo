@@ -42,28 +42,59 @@ if ($fileID < count($oldReportXLSXList))
     $filename2 = $t1 . "xlsm";
     
     $tmpFileName = basename($tmpPath);
-    $tmpFileNameSection = explode("_", $tmpFileName);
+    $tmpFileBaseName = basename($tmpPath, ".xlsx");
+    
+    $tmpPos = strpos($tmpFileBaseName, "(FlatData)");
+    $isFlatData = $tmpPos !== false;
+    
+    if ($isFlatData)
+    {
+        $tmpFileBaseName = substr($tmpFileBaseName, 0, strlen($tmpFileBaseName) - strlen("(FlatData)"));
+    }
+    
+    //$tmpFileNameSection = explode("_", $tmpFileName);
+    //$tmpCardName = "";
+    //$tmpSysName = "";
+    //$tmpUmd2Name = "";
+    //$tmpUmd2Name_ = "";
+    //if (count($tmpFileNameSection) >= 2)
+    //{
+    //    $tmpCardName = $tmpFileNameSection[0];
+    //    $tmpSysName = $tmpFileNameSection[1];
+    //}
+    //if (count($tmpFileNameSection) >= 3)
+    //{
+    //    if (array_search($tmpFileNameSection[2], $swtUmdNameList) !== false)
+    //    {
+    //        $tmpUmd2Name = $tmpFileNameSection[2];
+    //        $tmpUmd2Name_ = $tmpFileNameSection[2] . "_";
+    //    }
+    //}
+
+    //$tmpVBAConfigPath = $reportFolder . "/" . $tmpFileNameSection[0] .
+    //                    "_" . $tmpFileNameSection[1] .
+    //                    "/" . $tmpUmd2Name_ . $swtTempVBAConfigJsonName;
+                        
+    $tmpList = explode("_", $tmpFileBaseName);
+    $tmpUmd2Name = $tmpList[count($tmpList) - 1];
+    $tmpUmd2Name_ = strlen($tmpUmd2Name) > 0 ? $tmpUmd2Name . "_" : "";
+    $tmpFolderBaseName = substr($tmpFileBaseName, 0, strlen($tmpFileBaseName) - strlen($tmpUmd2Name) - 1);
+    if (is_dir($reportFolder . "/" . $tmpFileBaseName))
+    {
+        $tmpFolderBaseName = $tmpFileBaseName;
+        $tmpUmd2Name = "";
+        $tmpUmd2Name_ = "";
+    }
+    
+    $tmpVBAConfigPath = $reportFolder . "/" . $tmpFolderBaseName . "/" . $tmpUmd2Name_ . $swtTempVBAConfigJsonName;
+                        
+    //$tmpVBAConfigPath = $reportFolder . "/" . $tmpFileBaseName . "_" . $swtTempVBAConfigJsonName;
+    $vbaConfig = null;
     $tmpCardName = "";
     $tmpSysName = "";
     $tmpUmd2Name = "";
     $tmpUmd2Name_ = "";
-    if (count($tmpFileNameSection) >= 2)
-    {
-        $tmpCardName = $tmpFileNameSection[0];
-        $tmpSysName = $tmpFileNameSection[1];
-    }
-    if (count($tmpFileNameSection) >= 3)
-    {
-        if (array_search($tmpFileNameSection[2], $swtUmdNameList) !== false)
-        {
-            $tmpUmd2Name = $tmpFileNameSection[2];
-            $tmpUmd2Name_ = $tmpFileNameSection[2] . "_";
-        }
-    }
-
-    $tmpVBAConfigPath = $reportFolder . "/" . $tmpFileNameSection[0] .
-                        "_" . $tmpFileNameSection[1] .
-                        "/" . $tmpUmd2Name_ . $swtTempVBAConfigJsonName;
+                        
     $tmpVBAPath = $reportFolder . "/" . $swtTempVBAName;
     
     $vbaConfig = null;
@@ -77,6 +108,21 @@ if ($fileID < count($oldReportXLSXList))
         
         $vbaConfig = json_decode($t1);
         
+        $reportNameList = explode(",", $vbaConfig->reportNameList);
+        $repCardNameList = explode(",", $vbaConfig->repCardNameList);
+        $repSysNameList = explode(",", $vbaConfig->repSysNameList);
+        $repDriver2NameList = explode(",", $vbaConfig->repDriver2NameList);
+        
+        $tmpPos = array_search($tmpFileBaseName, $reportNameList);
+        
+        if ($tmpPos !== false)
+        {
+            $tmpCardName = $repCardNameList[$tmpPos];
+            $tmpSysName = $repSysNameList[$tmpPos];
+            $tmpUmd2Name = $repDriver2NameList[$tmpPos];
+            $tmpUmd2Name_ = $tmpUmd2Name . "_";
+        }
+        
         if (isset($vbaConfig->curMachineID))
         {
             $curMachineID = $vbaConfig->curMachineID;
@@ -88,8 +134,12 @@ if ($fileID < count($oldReportXLSXList))
             
             for ($i = 0; $i < count($uniqueDriver2NameList); $i++)
             {
-                $tmpPath2 = $reportFolder . "/" . $tmpFileNameSection[0] .
-                           "_" . $tmpFileNameSection[1] .
+                //$tmpPath2 = $reportFolder . "/" . $tmpFileNameSection[0] .
+                //           "_" . $tmpFileNameSection[1] .
+                //           "/" . $uniqueDriver2NameList[$i] . "_" . $swtTempVBAConfigJsonName;
+                           
+                $tmpPath2 = $reportFolder . "/" . $tmpCardName .
+                           "_" . $tmpSysName .
                            "/" . $uniqueDriver2NameList[$i] . "_" . $swtTempVBAConfigJsonName;
                            
                 $vbaConfigPathList []= $tmpPath2;
@@ -112,7 +162,7 @@ if ($fileID < count($oldReportXLSXList))
         }
     }
     
-    $isFlatData = strpos($tmpFileName, "(FlatData)");
+    //$isFlatData = strpos($tmpFileName, "(FlatData)");
     if ($isFlatData !== false)
     {
         // flat data
@@ -157,8 +207,28 @@ if ($fileID < count($oldReportXLSXList))
         {
             //echo $tmpVBAConfigPath;
             //if (file_exists($tmpVBAConfigPath))
+                
+    //{
+    //    $t1 = "";
+    //    $t2 = "H:\\wamp64\\www\\benchMax\\test01.txt";
+    //    if (file_exists($t2))
+    //    {
+    //        $t1 = file_get_contents($t2);
+    //    }
+    //
+    //    $t1 .= "\n";
+    //    $t1 .= $filename2 . "\n";
+    //    $t1 .= $tmpPath . "\n";
+    //    $t1 .= $tmpVBAConfigPath;
+    //    
+    //    file_put_contents($t2, $t1);
+    //}
+            
             if ($vbaConfig != null)
             {
+        
+
+        
                 // add graph
                 $excel = new COM("Excel.Application");
                 
@@ -356,16 +426,19 @@ if ($fileID < count($oldReportXLSXList))
                         
                         $codePiece1 = $t1 . $codePiece1;
                         
-                        $tmpFileName2 = basename($filename2);
-                        $tmpFileNameSection2 = explode("_", $tmpFileName2);
-                        $t1 = substr($filename2, 0, strlen($filename2) - strlen($tmpFileName2));
-                        if (count($tmpFileNameSection2) >= 4)
-                        {
-                            $vulkanReportName = $filename2;
-                            $vulkanReportFinalName = $t1 . $tmpFileNameSection2[0] . "_" .
-                                                     $tmpFileNameSection2[1] . "_" .
-                                                     $tmpFileNameSection2[3];
-                        }
+                        //$tmpFileName2 = basename($filename2);
+                        //$tmpFileNameSection2 = explode("_", $tmpFileName2);
+                        //$t1 = substr($filename2, 0, strlen($filename2) - strlen($tmpFileName2));
+                        //if (count($tmpFileNameSection2) >= 4)
+                        //{
+                        //    $vulkanReportName = $filename2;
+                        //    $vulkanReportFinalName = $t1 . $tmpFileNameSection2[0] . "_" .
+                        //                             $tmpFileNameSection2[1] . "_" .
+                        //                             $tmpFileNameSection2[3];
+                        //}
+                        $vulkanReportName = $filename2;
+                        $vulkanReportFinalName = $reportFolder . "/" . $tmpCardName .
+                                                 "_" . $tmpSysName . ".xlsm";
                     }
                     else
                     {
@@ -393,6 +466,7 @@ if ($fileID < count($oldReportXLSXList))
 
                 $excel->WorkBooks->Close();
                 $excel->Quit();
+                
                 
                 if ((strlen($vulkanReportName) > 0) &&
                     (strlen($vulkanReportFinalName) > 0))
