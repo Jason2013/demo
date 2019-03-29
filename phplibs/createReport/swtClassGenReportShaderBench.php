@@ -1213,6 +1213,7 @@ class CGenReport
         $resultIDList = array();
         $machineIDList = array();
         $cardNameList = array();
+        $card2NameList = array();
         $driverNameList = array();
         $driver2NameList = array();
         $changeListNumList = array();
@@ -1242,6 +1243,7 @@ class CGenReport
             $tmpResultIDList      = array();
             $tmpMachineIDList     = array();
             $tmpCardNameList      = array();
+            $tmpCard2NameList      = array();
             $tmpDriverNameList    = array();
             $tmpDriver2NameList   = array();
             $tmpChangeListNumList = array();
@@ -1260,6 +1262,7 @@ class CGenReport
             $tmpResultIDListSet      = array();
             $tmpMachineIDListSet     = array();
             $tmpCardNameListSet      = array();
+            $tmpCard2NameListSet      = array();
             $tmpDriverNameListSet    = array();
             $tmpDriver2NameListSet   = array();
             $tmpChangeListNumListSet = array();
@@ -1318,6 +1321,7 @@ class CGenReport
                 $tmpResultIDList[$j] = PHP_INT_MAX;
                 $tmpMachineIDList[$j] = PHP_INT_MAX;
                 $tmpCardNameList[$j] = "";
+                $tmpCard2NameList[$j] = "";
                 $tmpDriverNameList[$j] = $umdNameList[$j % $umdNum];
                 $tmpDriver2NameList[$j] = "";
                 $tmpChangeListNumList[$j] = PHP_INT_MAX;
@@ -1339,6 +1343,7 @@ class CGenReport
                 $tmpResultIDListSet      []= $tmpResultIDList;
                 $tmpMachineIDListSet     []= $tmpMachineIDList;
                 $tmpCardNameListSet      []= $tmpCardNameList;
+                $tmpCard2NameListSet      []= $tmpCard2NameList;
                 $tmpDriverNameListSet    []= $tmpDriverNameList;
                 $tmpDriver2NameListSet   []= $tmpDriver2NameList;
                 $tmpChangeListNumListSet []= $tmpChangeListNumList;
@@ -1529,6 +1534,7 @@ class CGenReport
                     $tmpResultIDListSet     [$tmpIndex2][$n1] = $row1[0];
                     $tmpMachineIDListSet    [$tmpIndex2][$n1] = $row1[1];
                     //$tmpDriverNameListSet [$tmpIndex2][$n1] = $row1[21];
+                    $tmpCard2NameListSet    [$tmpIndex2][$n1] = $row1[20];
                     $tmpDriverNameListSet   [$tmpIndex2][$n1] = $tmpDriverName;
                     $tmpDriver2NameListSet  [$tmpIndex2][$n1] = $tmpDriver2Name;
                     $tmpChangeListNumListSet[$tmpIndex2][$n1] = $row1[4];
@@ -1565,6 +1571,7 @@ class CGenReport
                     $tmpResultIDListSet      [$i]= array_slice($tmpResultIDListSet[$i],            0, $usedSysNum * $umdNum);
                     $tmpMachineIDListSet     [$i]= array_slice($tmpMachineIDListSet[$i],           0, $usedSysNum * $umdNum);
                     $tmpCardNameListSet      [$i]= array_slice($tmpCardNameListSet[$i],            0, $usedSysNum * $umdNum);
+                    $tmpCard2NameListSet     [$i]= array_slice($tmpCard2NameListSet[$i],           0, $usedSysNum * $umdNum);
                     $tmpDriverNameListSet    [$i]= array_slice($tmpDriverNameListSet[$i],          0, $usedSysNum * $umdNum);
                     $tmpDriver2NameListSet   [$i]= array_slice($tmpDriver2NameListSet[$i],         0, $usedSysNum * $umdNum);
                     $tmpChangeListNumListSet [$i]= array_slice($tmpChangeListNumListSet[$i],       0, $usedSysNum * $umdNum);
@@ -1585,6 +1592,8 @@ class CGenReport
             $tmpResultIDList      = array();
             $tmpMachineIDList     = array();
             $tmpCardNameList      = array();
+            $tmpCard2NameList     = array();
+            $tmpCard2NameList     = array();
             $tmpDriverNameList    = array();
             $tmpDriver2NameList   = array();
             $tmpChangeListNumList = array();
@@ -1605,6 +1614,7 @@ class CGenReport
                 $tmpResultIDList      = array_merge($tmpResultIDList     , $tmpResultIDListSet      [$i]);
                 $tmpMachineIDList     = array_merge($tmpMachineIDList    , $tmpMachineIDListSet     [$i]);
                 $tmpCardNameList      = array_merge($tmpCardNameList     , $tmpCardNameListSet      [$i]);
+                $tmpCard2NameList     = array_merge($tmpCard2NameList    , $tmpCard2NameListSet     [$i]);
                 $tmpDriverNameList    = array_merge($tmpDriverNameList   , $tmpDriverNameListSet    [$i]);
                 $tmpDriver2NameList   = array_merge($tmpDriver2NameList  , $tmpDriver2NameListSet   [$i]);
                 $tmpChangeListNumList = array_merge($tmpChangeListNumList, $tmpChangeListNumListSet [$i]);
@@ -1652,6 +1662,10 @@ class CGenReport
                             $t1 = $tmpCardNameList[$tmpTheLastIndex * $umdNum + $i];
                             $tmpCardNameList[$tmpTheLastIndex * $umdNum + $i] = $tmpCardNameList[$tmpPos * $umdNum + $i];
                             $tmpCardNameList[$tmpPos * $umdNum + $i] = $t1;
+                            
+                            $t1 = $tmpCard2NameList[$tmpTheLastIndex * $umdNum + $i];
+                            $tmpCard2NameList[$tmpTheLastIndex * $umdNum + $i] = $tmpCard2NameList[$tmpPos * $umdNum + $i];
+                            $tmpCard2NameList[$tmpPos * $umdNum + $i] = $t1;
                             
                             $t1 = $tmpDriverNameList[$tmpTheLastIndex * $umdNum + $i];
                             $tmpDriverNameList[$tmpTheLastIndex * $umdNum + $i] = $tmpDriverNameList[$tmpPos * $umdNum + $i];
@@ -1717,6 +1731,7 @@ class CGenReport
             array_push($resultIDList, $tmpResultIDList);
             array_push($machineIDList, $tmpMachineIDList);
             array_push($cardNameList, $tmpCardNameList);
+            array_push($card2NameList, $tmpCard2NameList);
             array_push($driverNameList, $tmpDriverNameList);
             array_push($driver2NameList, $tmpDriver2NameList);
             array_push($changeListNumList, $tmpChangeListNumList);
@@ -1937,6 +1952,7 @@ class CGenReport
         $returnSet["resultIDList"] = $resultIDList;
         $returnSet["machineIDList"] = $machineIDList;
         $returnSet["cardNameList"] = $cardNameList;
+        $returnSet["card2NameList"] = $card2NameList;
         $returnSet["driverNameList"] = $driverNameList;
         $returnSet["driver2NameList"] = $driver2NameList;
         $returnSet["changeListNumList"] = $changeListNumList;
@@ -2053,6 +2069,7 @@ class CGenReport
         global $returnMsg;
         global $cardNameList;
         global $sysNameList;
+        global $driverNameList;
         global $machineIDPairList;
         global $machineIDList;
         global $resultTimeList;
@@ -6602,6 +6619,7 @@ class CGenReport
         global $returnMsg;
         global $resultIDList;
         global $cardNameList;
+        global $card2NameList;
         global $sysNameList;
         global $driverNameList;
         global $driver2NameList;
@@ -6779,8 +6797,32 @@ class CGenReport
             }
         }
         
+        $relateCard2NameList = array();
+        $relateSysNameList = array();
+        $tmpMachineLabelList = array();
+        for ($i = 0; $i < count($card2NameList[0]); $i++)
+        {
+            if (strlen($card2NameList[0][$i]) == 0)
+            {
+                continue;
+            }
+            if ($sysNameList[0][$i] == $tmpSysName)
+            {
+                $tmpName = $card2NameList[0][$i] . "_" . $sysNameList[0][$i];
+                $tmpPos = array_search($tmpName, $tmpMachineLabelList);
+                
+                if ($tmpPos === false)
+                {
+                    $relateCard2NameList []= $card2NameList[0][$i];
+                    $relateSysNameList []= $sysNameList[0][$i];
+                    $tmpMachineLabelList []= $tmpName;
+                }
+            }
+        }
+        
         $tmpJson = array();
         $tmpJson["uniqueDriver2NameList"] = implode(",", $uniqueDriver2NameList);
+        $tmpJson["machineLabelList"] = implode(",", $tmpMachineLabelList);
         $tmpJson["tmpUmd2Name"] = $tmpUmd2Name;
         $tmpJson["reportNameList"] = implode(",", $reportNameList);
         $tmpJson["repCardNameList"] = implode(",", $repCardNameList);
@@ -6809,6 +6851,11 @@ class CGenReport
         $tmpJson["crossType"] = $crossType;
         $tmpJson["curResultTime"] = $curResultTime;
         $tmpJson["cmpBatchTime"] = $cmpBatchTime;
+        
+        $returnMsg["machineLabelList"] = $tmpMachineLabelList;
+        $returnMsg["relateCard2NameList"] = $relateCard2NameList;
+        $returnMsg["relateSysNameList"] = $relateSysNameList;
+        
         // use DX11, DX12, vulkan mask of Alu as overall mask
         // subTestUmdDataMaskList[0]
         $tmpMask = $subTestUmdDataMaskList[0];

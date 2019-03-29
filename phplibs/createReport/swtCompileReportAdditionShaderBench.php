@@ -204,6 +204,7 @@ if ($returnSet === null)
 $resultIDList = $returnSet["resultIDList"];
 $machineIDList = $returnSet["machineIDList"];
 $cardNameList = $returnSet["cardNameList"];
+$card2NameList = $returnSet["card2NameList"];
 $driverNameList = $returnSet["driverNameList"];
 $driver2NameList = $returnSet["driver2NameList"];
 $changeListNumList = $returnSet["changeListNumList"];
@@ -252,6 +253,7 @@ $returnMsg["changeListNumList"] = $changeListNumList;
 
 $returnMsg["checkedMachineIDList"] = $checkedMachineIDList;
 $returnMsg["cardNameList"] = $cardNameList[0];
+$returnMsg["card2NameList"] = $card2NameList[0];
 $returnMsg["cardNameListAll"] = $cardNameList;
 $returnMsg["sysNameList"] = $sysNameList[0];
 $returnMsg["sysNameListAll"] = $sysNameList;

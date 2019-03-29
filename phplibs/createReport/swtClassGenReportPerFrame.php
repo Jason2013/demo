@@ -6106,6 +6106,7 @@ class CGenReport
         global $graphDataStartLineIDCompare;
         global $tmpFileName1;
         global $uniqueDriver2NameList;
+        global $colCardSysNameList;
 
         $singleGroupName = $testName;
         $tmpArr = explode("_", $singleGroupName);
@@ -6209,8 +6210,19 @@ class CGenReport
             }
         }
         
+        $tmpMachineLabelList = array();
+        foreach ($umdNameList as $v)
+        {
+            if ($v == "OPT1")
+            {
+                continue;
+            }
+            $tmpMachineLabelList []= $v;
+        }
+        
         $tmpJson = array();
         $tmpJson["uniqueDriver2NameList"] = implode(",", $uniqueDriver2NameList);
+        $tmpJson["machineLabelList"] = implode(",", $tmpMachineLabelList);
         $tmpJson["tmpUmd2Name"] = $tmpUmd2Name;
         $tmpJson["reportNameList"] = implode(",", $reportNameList);
         $tmpJson["repCardNameList"] = implode(",", $repCardNameList);

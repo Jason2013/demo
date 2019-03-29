@@ -66,6 +66,9 @@ if ($fileID < count($oldReportXMLList))
     $tmpUmd2Name = "";
     $tmpUmd2Name_ = "";
     
+    $repCardNameList = array();
+    $repSysNameList = array();
+    
     if (file_exists($tmpVBAConfigPath))
     {
         $t1 = file_get_contents($tmpVBAConfigPath);
@@ -132,6 +135,39 @@ if ($fileID < count($oldReportXMLList))
             
             $tmpSheet = $excel->ActiveWorkbook->Sheets($excel->ActiveWorkbook->Sheets->Count);
             $tmpSheet->OLEObjects->Add(null, "" . __dir__ . "/" . $tmpSrcFilePath);
+            
+            if (($vbaConfig->reportType == 2) ||
+                ($vbaConfig->reportType == 3))
+            {
+                // shaderbench, framebench
+                $tmpMachineLabelList = explode(",", $vbaConfig->machineLabelList);
+                
+                for ($i = 0; $i < count($tmpMachineLabelList); $i++)
+                {
+                    $tmpName = $tmpMachineLabelList[$i];
+                    
+                    //$t1 = "H:\\wamp64\\www\\benchMax\\test01.txt";
+                    //$t2 = "";
+                    //if (file_exists($t1))
+                    //{
+                    //    $t2 = file_get_contents($t1);
+                    //}
+                    //$t2 .= $tmpName . "\n\r";
+                    //file_put_contents($t1, $t2);
+                    
+                    if ($tmpName == ($tmpCardName . "_" . $tmpSysName))
+                    {
+                        continue;
+                    }
+                    
+                    $tmpPath = $tmpSrcFolder . $tmpName . "/" . $resultFileName3;
+                    
+                    if (file_exists($tmpPath))
+                    {
+                        $tmpSheet->OLEObjects->Add(null, "" . __dir__ . "/" . $tmpPath);
+                    }
+                }
+            }
             
         }
         
