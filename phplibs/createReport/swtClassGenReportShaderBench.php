@@ -4538,14 +4538,32 @@ class CGenReport
                 }
                 else if ($curFirstRowAPIColumnID > 1)
                 {
-                    $t1 .= "    <Cell ss:StyleID=\"s84\" ss:MergeAcross=\"" . ($dataColumnNum - 1) . 
-                           "\" ><Data ss:Type=\"String\">" . $swtPreSheetNameTitle_sb[0] . "</Data></Cell>" .
-                           "    <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>" .
-                           "    <Cell ss:StyleID=\"s84\" ss:MergeAcross=\"" . ($dataColumnNum - 1) . 
-                           "\" ><Data ss:Type=\"String\">" . $swtPreSheetNameTitle_sb[1] . "</Data></Cell>" .
-                           "    <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>" .
-                           "    <Cell ss:StyleID=\"s84\" ss:MergeAcross=\"" . ($graphDataColumnNum - 2) .
-                           "\" ><Data ss:Type=\"String\">RenderQuality</Data></Cell>";
+
+                           
+                    if (($isUbuntuSys == true) &&
+                        ($graphDataColumnNum > 2))
+                    {
+                        $t1 .= "    <Cell ss:StyleID=\"s84\" ss:MergeAcross=\"" . ($dataColumnNum + 1 - 1) . 
+                               "\" ><Data ss:Type=\"String\">" . $swtPreSheetNameTitle_sb[0] . "</Data></Cell>" .
+                               "    <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>" .
+                               "    <Cell ss:StyleID=\"s84\" ss:MergeAcross=\"" . ($dataColumnNum + 1 - 1) . 
+                               "\" ><Data ss:Type=\"String\">" . $swtPreSheetNameTitle_sb[1] . "</Data></Cell>" .
+                               "    <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>" .
+                               "    <Cell ss:StyleID=\"s84\" ss:MergeAcross=\"" . ($graphDataColumnNum - 2) .
+                               "\" ><Data ss:Type=\"String\">RenderQuality</Data></Cell>";
+
+                    }
+                    else
+                    {
+                        $t1 .= "    <Cell ss:StyleID=\"s84\" ss:MergeAcross=\"" . ($dataColumnNum - 1) . 
+                               "\" ><Data ss:Type=\"String\">" . $swtPreSheetNameTitle_sb[0] . "</Data></Cell>" .
+                               "    <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>" .
+                               "    <Cell ss:StyleID=\"s84\" ss:MergeAcross=\"" . ($dataColumnNum - 1) . 
+                               "\" ><Data ss:Type=\"String\">" . $swtPreSheetNameTitle_sb[1] . "</Data></Cell>" .
+                               "    <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>" .
+                               "    <Cell ss:StyleID=\"s84\" ss:MergeAcross=\"" . ($graphDataColumnNum - 2) .
+                               "\" ><Data ss:Type=\"String\">RenderQuality</Data></Cell>";
+                    }
                            
                     $n1 += $dataColumnNum;
                 }
@@ -4777,6 +4795,14 @@ class CGenReport
                     $t2 .= "<Column ss:AutoFitWidth=\"0\" ss:Width=\"" . $n2 . "\"/>\n";
                     $t3 .= "<Column ss:AutoFitWidth=\"0\" ss:Width=\"" . $n2 . "\"/>\n";
                 }
+                
+                if (($isUbuntuSys == true) &&
+                    ($graphDataColumnNum > 2))
+                {
+                    $t2 .= "<Column ss:AutoFitWidth=\"0\" ss:Width=\"" . $n2 . "\"/>\n";
+                    $t3 .= "<Column ss:AutoFitWidth=\"0\" ss:Width=\"" . $n2 . "\"/>\n";
+                }
+                
                 $t4 = "";
                 //$t5 = "";
                 // VerifyStatus & PassRate
@@ -5047,6 +5073,7 @@ class CGenReport
         global $cmpMachineName;
         global $swtPreSheetName_sb;
         global $swtPreSheetNameShort_sb;
+        global $isUbuntuSys;
 
         $graphCells = $_graphCells;
         // columns have values (if true, not blank in excel table)
@@ -5112,6 +5139,15 @@ class CGenReport
                                               ($subjectNameFilterNumMax + 3 + 
                                               ($dataColumnNum * 2) + 1 + 1 + ($graphDataColumnNum) + 1) . 
                                               "\" ss:StyleID=\"Default\"/>\n";
+                                              
+                        if (($isUbuntuSys == true) &&
+                            ($graphDataColumnNum > 2))
+                        {
+                            $tmpAverageDataCode = " <Cell ss:Index=\"" . 
+                                                  ($subjectNameFilterNumMax + 3 + 
+                                                  ($dataColumnNum * 2) + 1 + 1 + ($graphDataColumnNum) + 1 + 2) . 
+                                                  "\" ss:StyleID=\"Default\"/>\n";
+                        }
 
                         $isFirstColumn = false;
                     }
@@ -5252,22 +5288,34 @@ class CGenReport
                         }
                         else
                         {
+                            $tmpIndex1 = $subjectNameFilterNumMax + 3 + 
+                                             1 + $tmpColumnNum * 2;
+                                             
+                            $tmpIndex2 = $subjectNameFilterNumMax + 3 + 
+                                             $dataColumnNum + 2 + $tmpColumnNum * 2;
+                                             
+                            if (($isUbuntuSys == true) &&
+                                ($graphDataColumnNum > 2))
+                            {
+                                $tmpIndex1 = $subjectNameFilterNumMax + 3 + 
+                                                 1 + $tmpColumnNum * 2;
+                                                 
+                                $tmpIndex2 = $subjectNameFilterNumMax + 3 + 
+                                                 $dataColumnNum + 2 + $tmpColumnNum * 2 + 1;
+                            }
+                            
                             // comp time
                             $tmpValHas[$k] = " <Cell ss:StyleID=\"Default\" " .
-                                             "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + 
-                                             1 + $tmpColumnNum * 2) . // 6
-                                             ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + 
-                                             1 + $tmpColumnNum * 2) . 
+                                             "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($tmpIndex1) . // 6
+                                             ":R[" . $n2 . "]C" . ($tmpIndex1) . 
                                              ")\">" .
                                              "<Data ss:Type=\"Number\"></Data></Cell>\n";
                             // exec time
                             $tmpValHas2[$k] = " <Cell ss:StyleID=\"Default\" " .
                                              "ss:Formula=\"=AVERAGE(R[" . ($n1 - $tmpRealTestNum) . "]C" . 
-                                             ($subjectNameFilterNumMax + 3 + 
-                                             $dataColumnNum + 2 + $tmpColumnNum * 2) . // 6
+                                             ($tmpIndex2) . // 6
                                              ":R[" . ($n2 - $tmpRealTestNum) . "]C" . 
-                                             ($subjectNameFilterNumMax + 3 + 
-                                             $dataColumnNum + 2 + $tmpColumnNum * 2) . 
+                                             ($tmpIndex2) . 
                                              ")\">" .
                                              "<Data ss:Type=\"Number\"></Data></Cell>\n";
                                              
@@ -5324,17 +5372,25 @@ class CGenReport
                     {
                         // comp time or exec time line
                         
+                        $tmpIndex = $subjectNameFilterNumMax + 3 + 
+                                    ($dataColumnNum * 2) + 1 + 1 + ($graphDataColumnNum);
+                                    
+                        if (($isUbuntuSys == true) &&
+                            ($graphDataColumnNum > 2))
+                        {
+                            $tmpIndex = $subjectNameFilterNumMax + 3 + 
+                                        ($dataColumnNum * 2) + 1 + 1 + ($graphDataColumnNum) + 2;
+                        }
+                        
                         $t1 .= " <Cell ss:Index=\"" . 
-                               ($subjectNameFilterNumMax + 3 + 
-                               ($dataColumnNum * 2) + 1 + 1 + ($graphDataColumnNum)) . 
+                               ($tmpIndex) . 
                                "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
                                $swtPreSheetName_sb[0] . "</Data></Cell>\n" .
                                " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
                                $tmpGroupName . "</Data></Cell>\n";
                                
                         $t1a .= " <Cell ss:Index=\"" . 
-                               ($subjectNameFilterNumMax + 3 + 
-                               ($dataColumnNum * 2) + 1 + 1 + ($graphDataColumnNum)) . 
+                               ($tmpIndex) . 
                                "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
                                $swtPreSheetName_sb[1] . "</Data></Cell>\n" .
                                " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
@@ -5342,15 +5398,23 @@ class CGenReport
                     }
                     else
                     {
+                        $tmpIndex = $subjectNameFilterNumMax + 3 + 
+                                    ($dataColumnNum * 2) + 1 + 1 + ($graphDataColumnNum) + 1;
+                                    
+                        if (($isUbuntuSys == true) &&
+                            ($graphDataColumnNum > 2))
+                        {
+                            $tmpIndex = $subjectNameFilterNumMax + 3 + 
+                                        ($dataColumnNum * 2) + 1 + 1 + ($graphDataColumnNum) + 1 + 2;
+                        }
+                        
                         $t1 .= " <Cell ss:Index=\"" . 
-                               ($subjectNameFilterNumMax + 3 + 
-                               ($dataColumnNum * 2) + 1 + 1 + ($graphDataColumnNum) + 1) . 
+                               ($tmpIndex) . 
                                "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
                                $tmpGroupName . "</Data></Cell>\n";
                                
                         $t1a .= " <Cell ss:Index=\"" . 
-                               ($subjectNameFilterNumMax + 3 + 
-                               ($dataColumnNum * 2) + 1 + 1 + ($graphDataColumnNum) + 1) . 
+                               ($tmpIndex) . 
                                "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
                                $tmpGroupName . "</Data></Cell>\n";
                     }
@@ -6701,6 +6765,17 @@ class CGenReport
                          ($dataColumnNum * 2) + 1 + ($graphDataColumnNum) + $graphDataColumnNum - 1] .
                          (intval($graphDataStartLineID) + count($graphCells) - 1);
                          
+        if (($isUbuntuSys == true) &&
+            ($graphDataColumnNum > 2))
+        {
+            $graphDataArea = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
+                             ($dataColumnNum * 2) + 1 + ($graphDataColumnNum) + 2] . 
+                             $graphDataStartLineID . ":" . 
+                             $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
+                             ($dataColumnNum * 2) + 1 + ($graphDataColumnNum) + 2 + $graphDataColumnNum - 1] .
+                             (intval($graphDataStartLineID) + count($graphCells) - 1);
+        }
+                         
         //$graphDataBarNum = ($subjectNameFilterNumMax + 3 + 
         //                   ($dataColumnNum * 2) + 1 + ($graphDataColumnNum + 1) * 1 + $graphDataColumnNum * 2 + 1 + 2 + $graphDataColumnNum - 1) -
         //                   ($subjectNameFilterNumMax + 3 + 
@@ -6744,6 +6819,17 @@ class CGenReport
                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
                          ($dataColumnNum * 2) + 1 + ($graphDataColumnNum) + $graphDataColumnNum - 1] .
                          (intval($graphDataStartLineID) + count($graphCells) - 1);
+                         
+        if (($isUbuntuSys == true) &&
+            ($graphDataColumnNum > 2))
+        {
+            $graphDataAreaNoBlank = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
+                                    ($dataColumnNum * 2) + 1 + ($graphDataColumnNum) + 2 + 2] . 
+                             $graphDataStartLineID . ":" . 
+                             $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
+                             ($dataColumnNum * 2) + 1 + ($graphDataColumnNum) + 2 + $graphDataColumnNum - 1] .
+                             (intval($graphDataStartLineID) + count($graphCells) - 1);
+        }
         
         $shrinkColumnArea = ""  . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + 
                             ($dataColumnNum * 2) + 1 + ($graphDataColumnNum + 1) * 1] . 
