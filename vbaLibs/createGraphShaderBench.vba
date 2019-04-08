@@ -210,7 +210,7 @@ Function SetSheetGraph(tmpSheetName As String, tmpUnion As String, tmpTitle As S
     destSheet.Activate
 
     Set myUnion = destSheet.Range(tmpUnion)
-    Set myChart = destSheet.ChartObjects.Add(800, 40, 1500, 400)
+    Set myChart = destSheet.ChartObjects.Add(1300, 150, 750, 350)
 
     myChart.Chart.ChartType = xlColumnClustered
     myChart.Chart.SetSourceData Source:=myUnion, PlotBy:=xlColumns
@@ -265,6 +265,9 @@ Function SetSheetGraph(tmpSheetName As String, tmpUnion As String, tmpTitle As S
     ActiveChart.Axes(xlValue).Select
     Selection.TickLabels.Font.Size = 11
     Selection.TickLabels.Font.Bold = msoTrue
+    'Selection.Format.TextFrame2.TextRange.Font.Bold = msoFalse
+    'Selection.Format.TextFrame2.TextRange.Font.Size = 11
+    
     ActiveChart.Axes(xlCategory).Select
     Selection.TickLabels.Font.Size = 11
     Selection.TickLabels.Font.Bold = msoTrue
@@ -299,8 +302,10 @@ Function SetSheetGraph(tmpSheetName As String, tmpUnion As String, tmpTitle As S
     ActiveChart.Legend.Select
     Selection.Format.TextFrame2.TextRange.Font.Size = 12
     Selection.Position = xlTop
+    
     For Each tmpTag In ActiveChart.Axes
-        tmpTag.TickLabels.Font.Size = 12
+        tmpTag.TickLabels.Font.Size = 11
+        tmpTag.TickLabels.Font.Bold = msoFalse
     Next
     
     Call setSecondTitleColor(MainTitle, SecondTitle)

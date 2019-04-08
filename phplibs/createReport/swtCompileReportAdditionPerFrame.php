@@ -506,13 +506,28 @@ for ($i = 0; $i < count($umdStandardOrder); $i++)
 }
 
 $swtReportInfo = array_fill(0, $reportUmdNum, "");
+$swtReportInfoPre = array_fill(0, $reportUmdNum, "");
 $swtReportUmdInfo = array_fill(0, $reportUmdNum, "");
+$swtReportUmdInfoASICOnly = array_fill(0, $reportUmdNum, "");
 
 $tmpAPIList = array();
 for ($i = 0; $i < $reportUmdNum; $i++)
 {
     // loop all comparison batches of one umd
-    $swtReportInfo[$i] = "CL#" . $changeListNumList[0][$startResultID + $i];
+    //$swtReportInfo[$i] = "CL#" . $changeListNumList[0][$startResultID + $i];
+    $swtReportInfo[$i] = "" . $changeListNumList[0][$startResultID + $i];
+    
+    $tmpBatchIndex = (count($changeListNumList) <= 1) ? 0 : 1;
+    if (count($changeListNumList[$tmpBatchIndex]) > ($startResultID + $i))
+    {
+        $swtReportInfoPre[$i] = "" . $changeListNumList[$tmpBatchIndex][$startResultID + $i];
+    }
+    else
+    {
+        $swtReportInfoPre[$i] = "" . $changeListNumList[0][$startResultID + $i];
+    }
+    //$swtReportInfoPre[$i] = "" . $changeListNumList[$tmpBatchIndex][$tmpResultIndex];
+    
     $swtReportUmdInfo[$i] = $driverNameList[0][$startResultID + $i];
     
     if ($resultUmdOrder[$i] == -1)
@@ -530,6 +545,42 @@ for ($i = 0; $i < $reportUmdNum; $i++)
 }
 $tmpAPIList = array_reverse($tmpAPIList);
 $chartSecondTitle = implode("/", $tmpAPIList);
+
+$swtReportUmdInfoASICOnly = array();
+for ($i = 0; $i < count($swtReportUmdInfo); $i++)
+{
+    //$tmpList = explode("_", $swtReportUmdInfo[$i]);
+    //
+    //if (count($tmpList) > 0)
+    //{
+    //    $swtReportUmdInfoASICOnly []= $tmpList[0];
+    //}
+    
+    $tmpPos = strrpos($swtReportUmdInfo[$i], "_");
+    if ($tmpPos === false)
+    {
+        $swtReportUmdInfoASICOnly []= $swtReportUmdInfo[$i];
+    }
+    else
+    {
+        //$swtReportUmdInfoASICOnly []= substr($swtReportUmdInfo[$i], 0, $tmpPos);
+        $swtReportUmdInfoASICOnly []= str_replace(" ", "", substr($swtReportUmdInfo[$i], 0, $tmpPos));
+    }
+}
+$hasRepeat = false;
+for ($i = 0; $i < count($swtReportUmdInfoASICOnly); $i++)
+{
+    $tmpKeys = array_keys($swtReportUmdInfoASICOnly, $swtReportUmdInfoASICOnly[$i]);
+    if (count($tmpKeys) > 1)
+    {
+        $hasRepeat = true;
+        break;
+    }
+}
+if ($hasRepeat == true)
+{
+    $swtReportUmdInfoASICOnly = $swtReportUmdInfo;
+}
 
 $returnMsg["swtReportInfo"] = $swtReportInfo;
 $returnMsg["swtReportUmdInfo"] = $swtReportUmdInfo;
