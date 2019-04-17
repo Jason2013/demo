@@ -605,8 +605,10 @@ $returnMsg["skipTestNameList"] = $skipTestNameList;
 $returnSet = $xmlWriter->getStandardUmdTestCaseNumList($db);
 $standardUmdTestCaseNumList = $returnSet["standardUmdTestCaseNumList"];
 $allAPITestCaseNumList = $returnSet["allAPITestCaseNumList"];
+$allAPITestCaseNumSumList = $returnSet["allAPITestCaseNumSumList"];
 $returnMsg["standardUmdTestCaseNumList"] = $standardUmdTestCaseNumList;
 $returnMsg["allAPITestCaseNumList"] = $allAPITestCaseNumList;
+$returnMsg["allAPITestCaseNumSumList"] = $allAPITestCaseNumSumList;
 
 // generate seperate cards report
 if (($subTestNum == 0) ||
