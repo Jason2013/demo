@@ -2196,28 +2196,14 @@ class CGenReport
             }
             
             $tmpList = array();
-            //for ($i = 0; $i < $resultNoiseNum; $i++)
-            //{
-            //    $tmpList []= "R1C" . ($subjectNameFilterNumMax + 6 + $i * 2) . 
-            //                 ":R1000000C" . ($subjectNameFilterNumMax + 6 + $i * 2);
-            //}
             
             for ($i = 0; $i < ($historyBatchMaxNum - 1); $i++)
             {
-                $tmpList []= "R1C" . ($subjectNameFilterNumMax + 5 + $i * 2) . 
-                             ":R1000000C" . ($subjectNameFilterNumMax + 5 + $i * 2);
+                $tmpList []= "R1C" . ($subjectNameFilterNumMax + 4 + $i * 2) . 
+                             ":R1000000C" . ($subjectNameFilterNumMax + 4 + $i * 2);
             }
             $t1 = implode(",", $tmpList);
         
-            //$xmlSection = sprintf($xmlSection, 
-            //                      $subjectNameFilterNumMax + 4, $subjectNameFilterNumMax + 4,
-            //                      $subjectNameFilterNumMax + 6, $subjectNameFilterNumMax + 6,
-            //                      $subjectNameFilterNumMax + 8, $subjectNameFilterNumMax + 8);
-            //                      
-            //$xmlSection = sprintf($xmlSection, 
-            //                      $subjectNameFilterNumMax + 6, $subjectNameFilterNumMax + 6,
-            //                      $subjectNameFilterNumMax + 8, $subjectNameFilterNumMax + 8,
-            //                      $subjectNameFilterNumMax + 10, $subjectNameFilterNumMax + 10);
             $xmlSection = sprintf($xmlSection, 
                                   $t1);
                                   
@@ -2997,6 +2983,7 @@ class CGenReport
         global $standardUmdTestCaseNumList;
         //global $allUmdTestCaseNumList;
         global $startStyleID;
+        global $historyBatchMaxNum;
         
         $sheetCode = "<Worksheet ss:Name=\"Variation\">\n" .
                      "<Table x:FullColumns=\"1\" " .
@@ -3052,9 +3039,9 @@ class CGenReport
                 {
                     $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX('" . 
                                   $tmpReportUmdInfo[$j] . "'!R[" . ($tmpLineOffset[$j]) . 
-                                  "]C" . ($subjectNameFilterNumMax + 3) . 
+                                  "]C" . ($subjectNameFilterNumMax + 3 + $historyBatchMaxNum * 2 - 1) . 
                                   ":R[" . ($tmpLineOffset[$j] + $standardUmdTestCaseNumList[$i] - 1) . "]C" . 
-                                  ($subjectNameFilterNumMax + 3) . ")\">" .
+                                  ($subjectNameFilterNumMax + 3 + $historyBatchMaxNum * 2 - 1) . ")\">" .
                                   "<Data ss:Type=\"Number\"></Data></Cell>";
                 }
                 else
@@ -4554,15 +4541,19 @@ class CGenReport
             }
             
             $tmpCode = "";
-            //for ($i = 0; $i < $resultNoiseNum; $i++)
-            //{
-            //    $tmpCode .= "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"120\"/>\n" .
-            //                "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"50\"/>\n";
-            //}
             
             for ($i = 0; $i < $historyBatchMaxNum; $i++)
             {
-                $tmpCode .= "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"120\"/>\n";
+                //$tmpCode .= "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"120\"/>\n";
+                if ($i == 0)
+                {
+                    $tmpCode = "<Column ss:Index=\"" . ($subjectNameFilterNumMax + 3) . 
+                               "\" ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"120\"/>\n";
+                }
+                else
+                {
+                    $tmpCode .= "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"120\"/>\n";
+                }
                 if ($i < ($historyBatchMaxNum - 1))
                 {
                     $tmpCode .= "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"50\"/>\n";
@@ -4571,22 +4562,10 @@ class CGenReport
             
             //$t3 = "<Column ss:Index=\"" . ($subjectNameFilterNumMax + 3) . 
             //      "\" ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"100\"/>\n" .
-            //      "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"100\"/>\n" .
             //      $tmpCode;
+            $t3 = $tmpCode .
+                  "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"100\"/>\n";
                   
-            $t3 = "<Column ss:Index=\"" . ($subjectNameFilterNumMax + 3) . 
-                  "\" ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"100\"/>\n" .
-                  $tmpCode;
-                  
-            //$t3 = "<Column ss:Index=\"" . ($subjectNameFilterNumMax + 3) . 
-            //      "\" ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"100\"/>\n" .
-            //      "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"100\"/>\n" .
-            //      "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"120\"/>\n" .
-            //      "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"50\"/>\n" .
-            //      "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"120\"/>\n" .
-            //      "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"50\"/>\n" .
-            //      "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"120\"/>\n" .
-            //      "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"50\"/>\n";
             
             $t1 = sprintf($xmlSection, $_tmpUmdName, $startSheetLineNum, $t3);
                           
@@ -5304,16 +5283,18 @@ class CGenReport
             $t1 = "<Row ss:StyleID=\"Default\">" .
                   " <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n" .
                   $tmpCode2 .
-                  $tmpCode3 .
+                  //$tmpCode3 .
                   $tmpCode5 .
+                  $tmpCode3 .
                   "</Row>\n";
             if ($_curTestPos > 0)
             {
                 $t1 = "<Row ss:StyleID=\"Default\" ss:Height=\"3\">" .
                       " <Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n" .
                       $tmpCode2 .
-                      $tmpCode3 .
+                      //$tmpCode3 .
                       $tmpCode5 .
+                      $tmpCode3 .
                       "</Row>\n";
             }
                   
@@ -5324,8 +5305,9 @@ class CGenReport
                    " <Cell ss:StyleID=\"s" . ($startStyleID + 2) . "\" " . $tmpSet . "><Data ss:Type=\"String\">" .
                    "" . $testNameList[$_curTestPos] . "</Data></Cell>\n" .
                    $tmpCode .
-                   $tmpCode4 .
+                   //$tmpCode4 .
                    $tmpCode6 .
+                   $tmpCode4 .
                    "</Row>\n";
             fwrite($_fileHandle, $t1);
             
@@ -5875,8 +5857,8 @@ class CGenReport
             for ($i = 0; $i < $historyBatchMaxNum; $i++)
             {
                              
-                $rcID1 = ($subjectNameFilterNumMax + 4 + $i * 2);
-                $rcID2 = ($subjectNameFilterNumMax + 4 + $i * 2 + 2);
+                $rcID1 = ($subjectNameFilterNumMax + 3 + $i * 2);
+                $rcID2 = ($subjectNameFilterNumMax + 3 + $i * 2 + 2);
                 $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + 4) . "\">" . $tmpDataListXML[$i] . "</Cell>\n";
                 
                 if ($i < ($historyBatchMaxNum - 1))
@@ -5903,8 +5885,9 @@ class CGenReport
             $t1 .= "<Row ss:StyleID=\"Default\">\n" .
                    " <Cell ss:StyleID=\"s" . ($startStyleID + 8) . "\" " . $tmpSet . "><Data ss:Type=\"String\">" . $testName . "</Data></Cell>\n" .
                    $tmpCode .
-                   $tmpCode1 .
+                   //$tmpCode1 .
                    $tmpCode2 .
+                   $tmpCode1 .
                    "</Row>\n";
 
             $lineNum++;
