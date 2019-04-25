@@ -151,6 +151,9 @@ if ($returnSet === null)
 $selectedCardIDList = $returnSet["selectedCardIDList"];
 $selectedSysIDList = $returnSet["selectedSysIDList"];
 
+$returnMsg["selectedCardIDList"] = $selectedCardIDList;
+$returnMsg["selectedSysIDList"] = $selectedSysIDList;
+
 $testName = $testNameList[$curTestPos];
 $tableName01 = $db_mis_table_name_string001 . $testName;
 

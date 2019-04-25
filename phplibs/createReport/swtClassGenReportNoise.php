@@ -1010,6 +1010,8 @@ class CGenReport
 	public function getSelectedMachineInfo($_db, $_batchID, $_checkedMachineIDListString)
 	{
         global $returnMsg;
+        global $swtOldCardNameMatchList;
+        
         $db = $_db;
         
         $checkedMachineIDListString = $_checkedMachineIDListString;
@@ -1069,6 +1071,93 @@ class CGenReport
             array_push($selectedSysIDList, intval($row1[1]));
         }
         
+        $swtOldCardIDMatchList = array();
+        foreach ($swtOldCardNameMatchList as $tmpName)
+        {
+            $params1 = array($tmpName);
+            $sql1 = "SELECT env_id " .
+                    "FROM mis_table_environment_info " .
+                    "WHERE env_name=? AND env_type=\"0\"";
+            if ($db->QueryDB($sql1, $params1) == null)
+            {
+                $returnMsg["errorCode"] = 0;
+                $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+                echo json_encode($returnMsg);
+                return null;
+            }
+            $row1 = $db->fetchRow();
+            if ($row1 == false)
+            {
+                $swtOldCardIDMatchList []= -1;
+            }
+            else
+            {
+                $swtOldCardIDMatchList []= intval($row1[0]);
+            }
+        }
+        
+        $tmpCardIDList = array();
+        $tmpSysIDList = array();
+        for ($i = 0; $i < count($selectedCardIDList); $i++)
+        {
+            $tmpPos = array_search($selectedCardIDList[$i], $swtOldCardIDMatchList);
+            
+            if ($tmpPos !== false)
+            {
+                $tmpCheck = $tmpPos % 2;
+                //if ($tmpCheck == 1)
+                //{
+                //    // old cardNameID
+                //    $newCardID = $swtOldCardIDMatchList[$tmpPos - 1];
+                //    $sysID = $selectedSysIDList[$i];
+                //    
+                //    if ($newCardID !== -1)
+                //    {
+                //        // there is new cardName
+                //        $tmpPos2 = array_search($newCardID, $tmpCardIDList);
+                //        if ($tmpPos2 === false)
+                //        {
+                //            $tmpCardIDList []= $newCardID;
+                //            $tmpSysIDList []= $sysID;
+                //        }
+                //    }
+                //}
+                if ($tmpCheck == 1)
+                {
+                    // old cardNameID
+                    $newCardID = $swtOldCardIDMatchList[$tmpPos - 1];
+                    $sysID = $selectedSysIDList[$i];
+                }
+                else
+                {
+                    $newCardID = $swtOldCardIDMatchList[$tmpPos + 1];
+                    $sysID = $selectedSysIDList[$i];
+                }
+                    
+                if ($newCardID !== -1)
+                {
+                    // there is new cardName
+                    $tmpPos2 = array_search($newCardID, $tmpCardIDList);
+                    if ($tmpPos2 === false)
+                    {
+                        $tmpCardIDList []= $newCardID;
+                        $tmpSysIDList []= $sysID;
+                    }
+                }
+            }
+        }
+        
+        for ($i = 0; $i < count($tmpCardIDList); $i++)
+        {
+            $tmpPos = array_search($tmpCardIDList[$i], $selectedCardIDList);
+            
+            if ($tmpPos === false)
+            {
+                $selectedCardIDList []= $tmpCardIDList[$i];
+                $selectedSysIDList []= $tmpSysIDList[$i];
+            }
+        }
+        
         $returnSet = array();
         $returnSet["selectedCardIDList"] = $selectedCardIDList;
         $returnSet["selectedSysIDList"] = $selectedSysIDList;
@@ -1084,6 +1173,7 @@ class CGenReport
         global $crossType;
         global $machineIDBatchPairList;
         global $swtOldUmdNameMatchList;
+        global $swtOldCardNameMatchList;
         
         $db = $_db;
 
@@ -1163,7 +1253,23 @@ class CGenReport
             {
                 $tmpMachineID = intval($row1[1]);
                 
-                array_push($cardNameListFlat, $row1[20]);
+                $properCardName = $row1[20];
+                
+                for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
+                {
+                    if (strtolower($properCardName) == strtolower($swtOldCardNameMatchList[$i]))
+                    {
+                        // cardName match
+                        $tmpCheck = $i % 2;
+                        if ($tmpCheck == 1)
+                        {
+                            // old cardName used
+                            $properCardName = $swtOldCardNameMatchList[$i - 1];
+                        }
+                    }
+                }
+                
+                array_push($cardNameListFlat, $properCardName);
                 array_push($driverNameListFlat, $row1[21]);
                 
                 array_push($umdIndexListFlat, $umdIndex);
@@ -1194,7 +1300,7 @@ class CGenReport
                     {
                         array_push($tmpResultIDList, PHP_INT_MAX);
                         array_push($tmpMachineIDList, PHP_INT_MAX);
-                        array_push($tmpCardNameList, $row1[20]);
+                        array_push($tmpCardNameList, $properCardName);
                         array_push($tmpDriverNameList, $umdNameList[$j]);
                         array_push($tmpChangeListNumList, PHP_INT_MAX);
                         array_push($tmpCpuNameList, "");
@@ -1228,7 +1334,7 @@ class CGenReport
                             {
                                 array_push($tmpResultIDList, PHP_INT_MAX);
                                 array_push($tmpMachineIDList, PHP_INT_MAX);
-                                array_push($tmpCardNameList, $row1[20]);
+                                array_push($tmpCardNameList, $properCardName);
                                 array_push($tmpDriverNameList, $umdNameList[$j]);
                                 array_push($tmpChangeListNumList, PHP_INT_MAX);
                                 array_push($tmpCpuNameList, "");
@@ -1269,7 +1375,7 @@ class CGenReport
                     {
                         // need align card, system pos with latest batch
                         
-                        $arr1 = array_keys($cardNameList[0], $row1[20]);
+                        $arr1 = array_keys($cardNameList[0], $properCardName);
                         $arr2 = array_keys($sysNameList[0], $row1[23]);
                         $arr3 = array_intersect($arr1, $arr2);
                         
@@ -1294,7 +1400,7 @@ class CGenReport
                                     {
                                         array_push($tmpResultIDList, PHP_INT_MAX);
                                         array_push($tmpMachineIDList, PHP_INT_MAX);
-                                        array_push($tmpCardNameList, $row1[20]);
+                                        array_push($tmpCardNameList, $properCardName);
                                         array_push($tmpDriverNameList, $umdNameList[$j]);
                                         array_push($tmpChangeListNumList, PHP_INT_MAX);
                                         array_push($tmpCpuNameList, "");
@@ -1318,14 +1424,14 @@ class CGenReport
                     {
                         for ($j = 0; $j < $umdNum; $j++)
                         {
-                            $tmpCardNameList[$n1 - $tmpIndex + $j] = $row1[20];
+                            $tmpCardNameList[$n1 - $tmpIndex + $j] = $properCardName;
                             $tmpSysNameList[$n1 - $tmpIndex + $j] = $row1[23];
                         }
                     }
                     
                     $tmpResultIDList[$n1] = $row1[0];
                     $tmpMachineIDList[$n1] = $row1[1];
-                    $tmpCardNameList[$n1] = $row1[20];
+                    $tmpCardNameList[$n1] = $properCardName;
                     $tmpDriverNameList[$n1] = $row1[21];
                     $tmpChangeListNumList[$n1] = $row1[4];
                     $tmpCpuNameList[$n1] = $row1[22];
@@ -2664,6 +2770,7 @@ class CGenReport
         global $colCardNameList;
         global $colSysNameList;
         global $umdNum;
+        global $swtOldCardNameMatchList;
         
         $tmpRootPath = $logStoreDir . "/" . $logFileFolder;
         $cardFolderList = glob($tmpRootPath . "/*", GLOB_ONLYDIR);
@@ -2678,98 +2785,6 @@ class CGenReport
                 $machineInfoList []= $tmpPath2;
             }
         }
-        
-        //$tmpResultPos = $startResultID;
-        //
-        //for ($i = 0; $i < count($umdNameList); $i++)
-        //{
-        //    if (strlen($cpuNameList[0][$tmpResultPos]) > 0)
-        //    {
-        //        break;
-        //    }
-        //    $tmpResultPos++;
-        //}
-        //
-        //$cmpResultPos = $cmpStartResultID;
-        //
-        //if ($cmpStartResultID != -1)
-        //{
-        //    for ($i = 0; $i < count($umdNameList); $i++)
-        //    {
-        //        if (strlen($cpuNameList[0][$cmpResultPos]) > 0)
-        //        {
-        //            break;
-        //        }
-        //        $cmpResultPos++;
-        //    }
-        //}
-        //
-        //$tmpCardName = $cardNameList[0][$tmpResultPos];
-        //$tmpSysName = $sysNameList[0][$tmpResultPos];
-        //$cmpCardName = $cmpStartResultID == -1 ? -1 : $cardNameList[0][$cmpResultPos];
-        //$cmpSysName = $cmpStartResultID == -1 ? -1 : $sysNameList[0][$cmpResultPos];
-        //
-        //$tmpBaseDriverVersion = "";
-        //$tmpBaseDriverDate = "";
-        //$cmpBaseDriverVersion = "";
-        //$cmpBaseDriverDate = "";
-        //
-        //$tmpRead = false;
-        //$cmpRead = false;
-        //
-        //foreach ($machineInfoList as $tmpPath)
-        //{
-        //    $t1 = file_get_contents($tmpPath);
-        //    $tmpObj = json_decode($t1);
-        //    
-        //    $tmpObj2 = array();
-        //    foreach ($tmpObj as $tmpKey => $tmpVal)
-        //    {
-        //        $tmpObj2[$tmpKey] = $tmpVal;
-        //    }
-        //    
-        //    $tmpCardName1 = isset($tmpObj2["videoCardName"]) ? $tmpObj2["videoCardName"] : "";
-        //    $tmpSysName1 = isset($tmpObj2["systemName"]) ? $tmpObj2["systemName"] : "";
-        //    
-        //    $tmpCardNameLow = strtolower($tmpCardName);
-        //    $tmpSysNameLow  = strtolower($tmpSysName);
-        //    $tmpCardNameLow1 = strtolower($tmpCardName1);
-        //    $tmpSysNameLow1 = strtolower($tmpSysName1);
-        //    
-        //    if (($tmpCardNameLow == $tmpCardNameLow1) &&
-        //        ($tmpSysNameLow  == $tmpSysNameLow1))
-        //    {
-        //        $tmpBaseDriverVersion = isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
-        //        $tmpBaseDriverDate = isset($tmpObj2["baseDriverDate"]) ? $tmpObj2["baseDriverDate"] : "";
-        //        
-        //        $tmpRead = true;
-        //    }
-        //    
-        //    if ($cmpStartResultID != -1)
-        //    {
-        //        $tmpCardNameLow = strtolower($cmpCardName);
-        //        $tmpSysNameLow  = strtolower($cmpSysName);
-        //        $tmpCardNameLow1 = strtolower($tmpCardName1);
-        //        $tmpSysNameLow1 = strtolower($tmpSysName1);
-        //        
-        //        if (($tmpCardNameLow == $tmpCardNameLow1) &&
-        //            ($tmpSysNameLow  == $tmpSysNameLow1))
-        //        {
-        //            $cmpBaseDriverVersion = isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
-        //            $cmpBaseDriverDate = isset($tmpObj2["baseDriverDate"]) ? $tmpObj2["baseDriverDate"] : "";
-        //            
-        //            $cmpRead = true;
-        //        }
-        //    }
-        //    if ($tmpRead && $cmpRead)
-        //    {
-        //        break;
-        //    }
-        //    if (($cmpStartResultID == -1) && $tmpRead)
-        //    {
-        //        break;
-        //    }
-        //}
         
         $tmpBaseDriverVersionList = array_fill(0, $colMachineNum, "");
         $tmpBaseDriverDateList = array_fill(0, $colMachineNum, "");
@@ -2787,6 +2802,26 @@ class CGenReport
         {
             $t1 = file_get_contents($tmpPath);
             $tmpObj = json_decode($t1, true);
+            
+            if (isset($tmpObj["videoCardName"]))
+            {
+                $properCardName = $tmpObj["videoCardName"];
+                
+                for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
+                {
+                    if (strtolower($properCardName) == strtolower($swtOldCardNameMatchList[$i]))
+                    {
+                        // cardName match
+                        $tmpCheck = $i % 2;
+                        if ($tmpCheck == 1)
+                        {
+                            // old cardName used
+                            $properCardName = $swtOldCardNameMatchList[$i - 1];
+                            $tmpObj["videoCardName"] = $properCardName;
+                        }
+                    }
+                }
+            }
             
             $tmpCardName1 = isset($tmpObj["videoCardName"]) ? $tmpObj["videoCardName"] : "";
             $tmpSysName1 = isset($tmpObj["systemName"]) ? $tmpObj["systemName"] : "";
@@ -2809,42 +2844,6 @@ class CGenReport
                 $tmpBaseDriverDateList[$tmpKeys4[0]] = isset($tmpObj["baseDriverDate"]) ? $tmpObj["baseDriverDate"] : "";
             }
         }
-        
-        //$tableRowList = array();
-        //$cmpTableRowList = array();
-        //
-        //$tableRowList["Base_Driver_Version"] = $tmpBaseDriverVersion;
-        //$tableRowList["Base_Driver_Date"]    = $tmpBaseDriverDate;
-        //$tableRowList["Vulkan_SDK_Version"] = isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
-        //$tableRowList["Microbench_Version"] = isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
-        //
-        //$tableRowList["Operating_System"] = $sysNameList[0][$tmpResultPos];
-        //$tableRowList["Test_Date"] = $envDefaultInfo["testingDate"];
-        //$tableRowList["Test_Time"] = $envDefaultInfo["testingTime"];
-        //$tableRowList["CPU"] = $cpuNameList[0][$tmpResultPos];
-        //$tableRowList["GPU"] = $cardNameList[0][$tmpResultPos];
-        //$tableRowList["GPU_Core_Clock"] = $sClockNameList[0][$tmpResultPos];
-        //$tableRowList["GPU_Memory_Clock"] = $mClockNameList[0][$tmpResultPos];
-        //$tableRowList["GPU_Memory"] = $gpuMemNameList[0][$tmpResultPos];
-        //$tableRowList["System_Memory"] = $sysMemNameList[0][$tmpResultPos];
-        //
-        //if ($cmpStartResultID != -1)
-        //{
-        //    $cmpTableRowList["Base_Driver_Version"] = $cmpBaseDriverVersion;
-        //    $cmpTableRowList["Base_Driver_Date"]    = $cmpBaseDriverDate;
-        //    $cmpTableRowList["Vulkan_SDK_Version"] = isset($envDefaultInfo["vulkanSDKVersion"]) ? $envDefaultInfo["vulkanSDKVersion"] : "";
-        //    $cmpTableRowList["Microbench_Version"] = isset($envDefaultInfo["microbenchVersion"]) ? $envDefaultInfo["microbenchVersion"] : "";
-        //    
-        //    $cmpTableRowList["Operating_System"] = $sysNameList[0][$cmpResultPos];
-        //    $cmpTableRowList["Test_Date"] = $envDefaultInfo["testingDate"];
-        //    $cmpTableRowList["Test_Time"] = $envDefaultInfo["testingTime"];
-        //    $cmpTableRowList["CPU"] = $cpuNameList[0][$cmpResultPos];
-        //    $cmpTableRowList["GPU"] = $cardNameList[0][$cmpResultPos];
-        //    $cmpTableRowList["GPU_Core_Clock"] = $sClockNameList[0][$cmpResultPos];
-        //    $cmpTableRowList["GPU_Memory_Clock"] = $mClockNameList[0][$cmpResultPos];
-        //    $cmpTableRowList["GPU_Memory"] = $gpuMemNameList[0][$cmpResultPos];
-        //    $cmpTableRowList["System_Memory"] = $sysMemNameList[0][$cmpResultPos];
-        //}
         
         $tableRowList = array();
         

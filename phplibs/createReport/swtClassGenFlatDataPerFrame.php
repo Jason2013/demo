@@ -402,6 +402,7 @@ class CGenReportFlatData
         global $cardSysNameMachineIDDictNew;
         global $machineIDPair;
         global $crossType;
+        global $swtOldCardNameMatchList;
         
         $fileList = glob($_parentFolder . "\\*");
         $folderList = array();
@@ -473,6 +474,24 @@ class CGenReportFlatData
                 // use json
                 $t2 = file_get_contents($t1);
                 $obj = json_decode($t2);
+                
+                $properCardName = $obj->videoCardName;
+                
+                for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
+                {
+                    if (strtolower($properCardName) == strtolower($swtOldCardNameMatchList[$i]))
+                    {
+                        // cardName match
+                        $tmpCheck = $i % 2;
+                        if ($tmpCheck == 1)
+                        {
+                            // old cardName used
+                            $properCardName = $swtOldCardNameMatchList[$i - 1];
+                            $obj->videoCardName = $properCardName;
+                        }
+                    }
+                }
+                
                 $cardName = $obj->videoCardName . "_" . $obj->systemName;
                 
                 if (count($machineIDPair) >= 2)

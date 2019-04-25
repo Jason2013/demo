@@ -1199,6 +1199,7 @@ class CGenReport
         global $machineIDBatchPairList;
         global $swtOldUmdNameMatchList;
         global $sortedCardCompilerList;
+        global $swtOldCardNameMatchList;
         
         $hasRepeatCompilerSys = count($sortedCardCompilerList) > 0;
         
@@ -1364,7 +1365,23 @@ class CGenReport
             {
                 $tmpMachineID = intval($row1[1]);
                 
-                array_push($cardNameListFlat, $row1[20]);
+                $properCardName = $row1[20];
+                
+                for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
+                {
+                    if (strtolower($properCardName) == strtolower($swtOldCardNameMatchList[$i]))
+                    {
+                        // cardName match
+                        $tmpCheck = $i % 2;
+                        if ($tmpCheck == 1)
+                        {
+                            // old cardName used
+                            $properCardName = $swtOldCardNameMatchList[$i - 1];
+                        }
+                    }
+                }
+                
+                array_push($cardNameListFlat, $properCardName);
                 array_push($driverNameListFlat, $row1[21]);
                 
                 //array_push($umdIndexListFlat, $umdIndex);
@@ -1381,7 +1398,7 @@ class CGenReport
                 if (count($tmpKeys3) == 0)
                 {
                     // skip unselected cards
-                    continue;
+                    //continue;
                 }
                 
                 $tmpArr = explode("_", $row1[21]);
@@ -1389,7 +1406,7 @@ class CGenReport
                 $tmpDriverName = $tmpArr[0];
                 if ($hasRepeatCompilerSys)
                 {
-                    $tmpDriverName = $row1[20] . "_" . $tmpArr[0];
+                    $tmpDriverName = $properCardName . "_" . $tmpArr[0];
                 }
                 $tmpDriver2Name = "Vulkan";
                 if (count($tmpArr) > 1)
@@ -1507,7 +1524,7 @@ class CGenReport
                     {
                         for ($j = 0; $j < $umdNum; $j++)
                         {
-                            $tmpCardNameListSet[$tmpIndex2][$sysIndex * $umdNum + $j] = $row1[20];
+                            $tmpCardNameListSet[$tmpIndex2][$sysIndex * $umdNum + $j] = $properCardName;
                             $tmpSysNameListSet[$tmpIndex2][$sysIndex * $umdNum + $j] = $row1[23];
                         }
                     }
@@ -1534,7 +1551,7 @@ class CGenReport
                     $tmpResultIDListSet     [$tmpIndex2][$n1] = $row1[0];
                     $tmpMachineIDListSet    [$tmpIndex2][$n1] = $row1[1];
                     //$tmpDriverNameListSet [$tmpIndex2][$n1] = $row1[21];
-                    $tmpCard2NameListSet    [$tmpIndex2][$n1] = $row1[20];
+                    $tmpCard2NameListSet    [$tmpIndex2][$n1] = $properCardName;
                     $tmpDriverNameListSet   [$tmpIndex2][$n1] = $tmpDriverName;
                     $tmpDriver2NameListSet  [$tmpIndex2][$n1] = $tmpDriver2Name;
                     $tmpChangeListNumListSet[$tmpIndex2][$n1] = $row1[4];
@@ -1546,7 +1563,7 @@ class CGenReport
                     $tmpResultTimeListSet   [$tmpIndex2][$n1] = $row1[7];
                     $tmpMachineNameListSet  [$tmpIndex2][$n1] = $row1[28];
                     $tmpSysMemNameListSet   [$tmpIndex2][$n1] = $row1[29];
-                    $tmpCardNameRealListSet [$tmpIndex2][$n1] = $row1[20];
+                    $tmpCardNameRealListSet [$tmpIndex2][$n1] = $properCardName;
                     $tmpSysNameRealListSet  [$tmpIndex2][$n1] = $row1[23];
                 }
             }
@@ -2743,6 +2760,7 @@ class CGenReport
         global $startStyleID;
         global $logStoreDir;
         global $logFileFolder;
+        global $swtOldCardNameMatchList;
         
         $tmpRootPath = $logStoreDir . "/" . $logFileFolder;
         $cardFolderList = glob($tmpRootPath . "/*", GLOB_ONLYDIR);
@@ -2805,6 +2823,26 @@ class CGenReport
             foreach ($tmpObj as $tmpKey => $tmpVal)
             {
                 $tmpObj2[$tmpKey] = $tmpVal;
+            }
+            
+            if (isset($tmpObj2["videoCardName"]))
+            {
+                $properCardName = $tmpObj2["videoCardName"];
+                
+                for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
+                {
+                    if (strtolower($properCardName) == strtolower($swtOldCardNameMatchList[$i]))
+                    {
+                        // cardName match
+                        $tmpCheck = $i % 2;
+                        if ($tmpCheck == 1)
+                        {
+                            // old cardName used
+                            $properCardName = $swtOldCardNameMatchList[$i - 1];
+                            $tmpObj2["videoCardName"] = $properCardName;
+                        }
+                    }
+                }
             }
             
             $tmpCardName1 = isset($tmpObj2["videoCardName"]) ? $tmpObj2["videoCardName"] : "";
@@ -2987,6 +3025,7 @@ class CGenReport
         global $logFileFolder;
         global $swtCardStandardOrder_sb;
         global $swtUmdStandardOrder_sb;
+        global $swtOldCardNameMatchList;
 
         $tmpRootPath = $logStoreDir . "/" . $logFileFolder;
         $cardFolderList = glob($tmpRootPath . "/*", GLOB_ONLYDIR);
@@ -3025,6 +3064,25 @@ class CGenReport
             $t1 = file_get_contents($tmpPath);
             $tmpObj2 = json_decode($t1, true);
             
+            if (isset($tmpObj2["videoCardName"]))
+            {
+                $properCardName = $tmpObj2["videoCardName"];
+                
+                for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
+                {
+                    if (strtolower($properCardName) == strtolower($swtOldCardNameMatchList[$i]))
+                    {
+                        // cardName match
+                        $tmpCheck = $i % 2;
+                        if ($tmpCheck == 1)
+                        {
+                            // old cardName used
+                            $properCardName = $swtOldCardNameMatchList[$i - 1];
+                            $tmpObj2["videoCardName"] = $properCardName;
+                        }
+                    }
+                }
+            }
             
             if (isset($tmpObj2["cpuName"]) &&
                 isset($tmpObj2["systemName"]) &&
@@ -3086,6 +3144,7 @@ class CGenReport
         global $logFileFolder;
         global $swtCardStandardOrder_sb;
         global $swtUmdStandardOrder_sb;
+        global $swtOldCardNameMatchList;
 
         $tmpRootPath = $logStoreDir . "/" . $logFileFolder;
         $cardFolderList = glob($tmpRootPath . "/*", GLOB_ONLYDIR);
@@ -3112,6 +3171,26 @@ class CGenReport
         {
             $t1 = file_get_contents($tmpPath);
             $tmpObj2 = json_decode($t1, true);
+            
+            if (isset($tmpObj2["videoCardName"]))
+            {
+                $properCardName = $tmpObj2["videoCardName"];
+                
+                for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
+                {
+                    if (strtolower($properCardName) == strtolower($swtOldCardNameMatchList[$i]))
+                    {
+                        // cardName match
+                        $tmpCheck = $i % 2;
+                        if ($tmpCheck == 1)
+                        {
+                            // old cardName used
+                            $properCardName = $swtOldCardNameMatchList[$i - 1];
+                            $tmpObj2["videoCardName"] = $properCardName;
+                        }
+                    }
+                }
+            }
             
             $tmpCardList []= $tmpObj2["videoCardName"];
             $tmpCompilerList []= $tmpObj2["compilerName"];
@@ -7002,10 +7081,11 @@ class CGenReport
                 if (strtolower($tmpName) == 
                     strtolower($asicInfoList["Compiler_Name"][$j]))
                 {
-                    $tmpKey = array_search($asicInfoList["GPU"][$j], $tmpList);
+                    $tmpName2 = ucfirst(strtolower($asicInfoList["GPU"][$j]));
+                    $tmpKey = array_search($tmpName2, $tmpList);
                     if ($tmpKey === false)
                     {
-                        $tmpList []= ucfirst(strtolower($asicInfoList["GPU"][$j]));
+                        $tmpList []= $tmpName2;
                     }
                     //break;
                 }

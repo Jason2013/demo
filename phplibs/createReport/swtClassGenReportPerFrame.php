@@ -774,6 +774,7 @@ class CGenReport
         global $resultPos;
         global $colCardNameOrderList;
         global $colCardNameOrderIndexList;
+        global $swtOldCardNameMatchList;
         
         $db = $_db;
         $batchID = $_batchID;
@@ -855,6 +856,56 @@ class CGenReport
         }
         
         $tmpCardSysNameList []= "OPT1";
+        
+        for ($j = 0; $j < count($tmpCardSysNameList); $j++)
+        {
+            $properName = $tmpCardSysNameList[$j];
+            
+            for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
+            {
+                $tmpName1 = strtolower($swtOldCardNameMatchList[$i]);
+                $tmpName2 = strtolower($properName);
+                
+                $tmpPos = strpos($tmpName2, $tmpName1);
+                
+                if ($tmpPos !== false)
+                {
+                    // cardName match
+                    $tmpCheck = $i % 2;
+                    if ($tmpCheck == 1)
+                    {
+                        // old cardName used
+                        $properName = $swtOldCardNameMatchList[$i - 1] . substr($properName, strlen($tmpName1));
+                        $tmpCardSysNameList[$j] = $properName;
+                    }
+                }
+            }
+        }
+        
+        //for ($j = 0; $j < count($tmpCardNameList); $j++)
+        //{
+        //    $properName = $tmpCardNameList[$j];
+        //    
+        //    for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
+        //    {
+        //        $tmpName1 = strtolower($swtOldCardNameMatchList[$i]);
+        //        $tmpName2 = strtolower($properName);
+        //        
+        //        $tmpPos = strpos($tmpName2, $tmpName1);
+        //        
+        //        if ($tmpPos !== false)
+        //        {
+        //            // cardName match
+        //            $tmpCheck = $i % 2;
+        //            if ($tmpCheck == 1)
+        //            {
+        //                // old cardName used
+        //                $properName = $swtOldCardNameMatchList[$i - 1] . substr($properName, strlen($tmpName1));
+        //                $tmpCardNameList[$j] = $properName;
+        //            }
+        //        }
+        //    }
+        //}
         
         $returnSet = array();
         $returnSet["colCardSysNameList"] = $tmpCardSysNameList;
@@ -1297,6 +1348,7 @@ class CGenReport
         global $crossType;
         global $machineIDBatchPairList;
         global $swtOldUmdNameMatchList;
+        global $swtOldCardNameMatchList;
         
         $db = $_db;
 
@@ -1413,7 +1465,23 @@ class CGenReport
             {
                 $tmpMachineID = intval($row1[1]);
                 
-                array_push($cardNameListFlat, $row1[20]);
+                $properCardName = $row1[20];
+                
+                for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
+                {
+                    if (strtolower($properCardName) == strtolower($swtOldCardNameMatchList[$i]))
+                    {
+                        // cardName match
+                        $tmpCheck = $i % 2;
+                        if ($tmpCheck == 1)
+                        {
+                            // old cardName used
+                            $properCardName = $swtOldCardNameMatchList[$i - 1];
+                        }
+                    }
+                }
+                
+                array_push($cardNameListFlat, $properCardName);
                 array_push($driverNameListFlat, $row1[21]);
                 
                 array_push($umdIndexListFlat, $umdIndex);
@@ -1422,7 +1490,7 @@ class CGenReport
                 array_push($cardIndexListFlat, $cardIndex);
                 array_push($curCardIDListFlat, $curCardID);
                 
-                $tmpCardSysName = $row1[20] . "_" . $row1[23];
+                $tmpCardSysName = $properCardName . "_" . $row1[23];
 
                 $tmpIndex = array_search($tmpCardSysName, $umdNameList);
 
@@ -1459,7 +1527,7 @@ class CGenReport
                     {
                         for ($j = 0; $j < $umdNum; $j++)
                         {
-                            $tmpCardNameList[$driverIndex * $umdNum + $j] = $row1[20];
+                            $tmpCardNameList[$driverIndex * $umdNum + $j] = $properCardName;
                             $tmpSysNameList[$driverIndex * $umdNum + $j] = $row1[23];
                         }
                     }
@@ -1499,7 +1567,7 @@ class CGenReport
                     $tmpMachineNameList[$n1] = $row1[28];
                     $tmpSysMemNameList[$n1] = $row1[29];
                     
-                    $tmpCardNameRealList[$n1] = $row1[20];
+                    $tmpCardNameRealList[$n1] = $properCardName;
                     $tmpSysNameRealList[$n1] = $row1[23];
                 }
             }
@@ -2557,6 +2625,7 @@ class CGenReport
         global $startStyleID;
         global $logStoreDir;
         global $logFileFolder;
+        global $swtOldCardNameMatchList;
         
         $tmpRootPath = $logStoreDir . "/" . $logFileFolder;
         $cardFolderList = glob($tmpRootPath . "/*", GLOB_ONLYDIR);
@@ -2597,6 +2666,26 @@ class CGenReport
             foreach ($tmpObj as $tmpKey => $tmpVal)
             {
                 $tmpObj2[$tmpKey] = $tmpVal;
+            }
+            
+            if (isset($tmpObj2["videoCardName"]))
+            {
+                $properCardName = $tmpObj2["videoCardName"];
+                
+                for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
+                {
+                    if (strtolower($properCardName) == strtolower($swtOldCardNameMatchList[$i]))
+                    {
+                        // cardName match
+                        $tmpCheck = $i % 2;
+                        if ($tmpCheck == 1)
+                        {
+                            // old cardName used
+                            $properCardName = $swtOldCardNameMatchList[$i - 1];
+                            $tmpObj2["videoCardName"] = $properCardName;
+                        }
+                    }
+                }
             }
 
             $asicInfoList["Base_Driver_Version"] []= isset($tmpObj2["mainLineName"]) ? $tmpObj2["mainLineName"] : "";
