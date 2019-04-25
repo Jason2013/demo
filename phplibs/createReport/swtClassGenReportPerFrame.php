@@ -2185,6 +2185,7 @@ class CGenReport
         global $returnMsg;
         global $resultIDList;
         global $cardStandardResultPos;
+        global $reportUmdNum;
         $db = $_db;
 
         $subTestNum = $_subTestNum;
@@ -2212,27 +2213,49 @@ class CGenReport
             }
             $curResultTestCaseNum = $row1[0];
             
-            $params1 = array($resultIDList[0][$cardStandardResultPos]);
-            $sql1 = "SELECT COUNT(*) FROM " . $_tableName01 . " " .
-                    "WHERE result_id=?";
-            if ($db->QueryDB($sql1, $params1) == null)
+            $resultStandardPosList = array();
+            $resultStandardPosList []= $cardStandardResultPos;
+            
+            $tmpUmdTypeNum = intval(count($resultIDList[0]) / $reportUmdNum);
+            $tmpIndex = intval($cardStandardResultPos / $reportUmdNum);
+            if (($tmpIndex + 1) >= ($tmpUmdTypeNum))
             {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
-                echo json_encode($returnMsg);
-                return null;
+                // Vulkan
+                for ($i = 0; $i < ($tmpUmdTypeNum - 1); $i++)
+                {
+                    $resultStandardPosList []= ($cardStandardResultPos % $reportUmdNum) + $i * $reportUmdNum;
+                }
             }
-            $row1 = $db->fetchRow();
+            
             $subTestNum = 0;
-            if ($row1 == false)
+            
+            for ($i = 0; $i < count($resultStandardPosList); $i++)
             {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
-                echo json_encode($returnMsg);
-                return null;
+                //$params1 = array($resultIDList[0][$cardStandardResultPos]);
+                $params1 = array($resultIDList[0][$resultStandardPosList[$i]]);
+                $sql1 = "SELECT COUNT(*) FROM " . $_tableName01 . " " .
+                        "WHERE result_id=?";
+                if ($db->QueryDB($sql1, $params1) == null)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return null;
+                }
+                $row1 = $db->fetchRow();
+                //$subTestNum = 0;
+                if ($row1 == false)
+                {
+                    $returnMsg["errorCode"] = 0;
+                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
+                    echo json_encode($returnMsg);
+                    return null;
+                }
+                //$standardTestCaseNum = $row1[0];
+                $subTestNum += $row1[0];
             }
-            $standardTestCaseNum = $row1[0];
-            $subTestNum = $standardTestCaseNum;
+            $standardTestCaseNum = $subTestNum;
+            //$subTestNum = $standardTestCaseNum;
         }
 
 
@@ -2566,6 +2589,8 @@ class CGenReport
         global $db_mis_table_name_string003;
         global $resultIDList;
         global $cardStandardResultPos;
+        global $uniqueDriver2NameList;
+        global $driver2NameList;
         
         $db = $_db;
         
@@ -2602,7 +2627,64 @@ class CGenReport
             $tmpTestCaseList []= $tmpSubTestNum;
         }
 
-        return $tmpTestCaseList;
+        $allAPITestCaseNumList = array();
+        $allAPITestCaseNumSumList = array();
+        
+        for ($j = 0; $j < count($uniqueDriver2NameList); $j++)
+        {
+            $tmpPos = array_search($uniqueDriver2NameList[$j], $driver2NameList[0]);
+            
+            if ($tmpPos !== false)
+            {
+                $tmpTestCaseNumList = array();
+                for ($i = 0; $i < count($testNameList); $i++)
+                {
+                    $tmpTestName = str_replace(" ", "", $testNameList[$i]);
+                    $tmpTestName = cleaninput($tmpTestName, 256);
+                    $tmpTableName = $db_mis_table_name_string003 . $tmpTestName;
+                    $params1 = array($resultIDList[0][$tmpPos]);
+                    $sql1 = "SELECT COUNT(*) FROM " . $tmpTableName . " " .
+                            "WHERE result_id=?;";
+                    if ($db->QueryDB($sql1, $params1) == null)
+                    {
+                        $returnMsg["errorCode"] = 0;
+                        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+                        echo json_encode($returnMsg);
+                        return null;
+                    }
+                    $row1 = $db->fetchRow();
+                    if ($row1 == false)
+                    {
+                        $returnMsg["errorCode"] = 0;
+                        $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+                        echo json_encode($returnMsg);
+                        return null;
+                    }
+                    $tmpSubTestNum = intval($row1[0]);
+                    
+                    $tmpTestCaseNumList []= $tmpSubTestNum;
+                    
+                    if ($j == 0)
+                    {
+                        $allAPITestCaseNumSumList []= $tmpSubTestNum;
+                    }
+                    else
+                    {
+                        $allAPITestCaseNumSumList[$i] += $tmpSubTestNum;
+                    }
+                }
+                
+                $allAPITestCaseNumList []= $tmpTestCaseNumList;
+            }
+        }
+
+        //return $tmpTestCaseList;
+        
+        $returnSet = array();
+        $returnSet["standardUmdTestCaseNumList"] = $tmpTestCaseList;
+        $returnSet["allAPITestCaseNumList"] = $allAPITestCaseNumList;
+        $returnSet["allAPITestCaseNumSumList"] = $allAPITestCaseNumSumList;
+        return $returnSet;
     }
     
     public function writePlatformInfo($_fileHandle)
@@ -2753,6 +2835,7 @@ class CGenReport
     
     public function writeSummaryVariance($_fileHandle)
     {
+        global $returnMsg;
         global $reportUmdNum;
         global $resultUmdOrder;
         global $swtReportUmdInfo;
@@ -2768,6 +2851,12 @@ class CGenReport
         global $swtPreSheetNameTitle_pf;
         global $curCardName;
         global $tmpSysName;
+        global $allAPITestCaseNumList;
+        global $allAPITestCaseNumSumList;
+        global $uniqueDriver2NameList;
+        global $tmpUmd2Name;
+        global $reportFolder;
+        global $batchID;
         
         $sheetCodeStart = "<Worksheet ss:Name=\"Variation\">\n" .
                      "<Table x:FullColumns=\"1\" " .
@@ -2863,6 +2952,11 @@ class CGenReport
         $tmpLineOffset = array_fill(0, $reportUmdNum, 1);
         $tmpLineOffset2 = array_fill(0, $reportUmdNum, 1);
         
+        $isCombineReport = $tmpUmd2Name == $uniqueDriver2NameList[count($uniqueDriver2NameList) - 1];
+        
+        $returnMsg["variation_tmpUmd2Name"] = $tmpUmd2Name;
+        $returnMsg["isCombineReport"] = $isCombineReport;
+        
         $showRowNum = 0;
         for ($i = 0; $i < count($testNameList); $i++)
         {
@@ -2873,11 +2967,31 @@ class CGenReport
                 $tmpGroupName = $tmpArr[1];
             }
             
+            $tmpTestCaseNum = 0;
+            if ($isCombineReport)
+            {
+                $tmpTestCaseNum = $allAPITestCaseNumSumList[$i];
+            }
+            else
+            {
+                $tmpTestCaseNum = $standardUmdTestCaseNumList[$i];
+            }
+            
+            if ($tmpTestCaseNum == 0)
+            {
+                continue;
+            }
+            
+            $tmpRefReportFileName = "";
+            $tmpTestCaseStartNum = 0;
+            
             $sheetCode .= "<Row ss:Height=\"17.25\">\n" .
                           "<Cell ss:StyleID=\"s" . ($startStyleID + 17) . "\"><Data ss:Type=\"Number\">" . ($i + 1) . "</Data></Cell>\n" .
                           "<Cell ss:StyleID=\"s" . ($startStyleID + 19) . "\"><Data ss:Type=\"String\">" . $tmpGroupName . "</Data></Cell>\n" .
-                          "<Cell ss:StyleID=\"s" . ($startStyleID + 19) . "\"><Data ss:Type=\"Number\">" . $standardUmdTestCaseNumList[$i] . "</Data></Cell>\n";
-                          //"<Cell ss:StyleID=\"s" . ($startStyleID + 17) . "\"/>\n";
+                          //"<Cell ss:StyleID=\"s" . ($startStyleID + 19) . "\"><Data ss:Type=\"Number\">" . $standardUmdTestCaseNumList[$i] .
+                          "<Cell ss:StyleID=\"s" . ($startStyleID + 19) . "\"><Data ss:Type=\"Number\">" . $tmpTestCaseNum . 
+                          "</Data></Cell>\n";
+                          
                           
             //$tmpLineOffset = array_fill(0, $reportUmdNum, 1);
             // compile time
@@ -2889,13 +3003,14 @@ class CGenReport
                     continue;
                 }
                 
-                if ($standardUmdTestCaseNumList[$i] > 0)
+                //if ($standardUmdTestCaseNumList[$i] > 0)
+                if ($tmpTestCaseNum > 0)
                 {
                     $tmpArr = explode("_", $tmpReportUmdInfo[$j]);
                     $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX('" . 
                                   $tmpArr[0] . "_" . $swtPreSheetName_pf[0] . "'!R[" . ($tmpLineOffset[$j] - 1) . 
                                   "]C" . ($subjectNameFilterNumMax + 10) . 
-                                  ":R[" . ($tmpLineOffset[$j] + $standardUmdTestCaseNumList[$i] - 1 - 1) . "]C" . 
+                                  ":R[" . ($tmpLineOffset[$j] + $tmpTestCaseNum - 1 - 1) . "]C" . 
                                   ($subjectNameFilterNumMax + 10) . ")\">" .
                                   "<Data ss:Type=\"Number\"></Data></Cell>";
                 }
@@ -2906,9 +3021,11 @@ class CGenReport
 
                 }
                               
-                if ($standardUmdTestCaseNumList[$i] > 0)
+                //if ($standardUmdTestCaseNumList[$i] > 0)
+                if ($tmpTestCaseNum > 0)
                 {
-                    $tmpLineOffset[$j] += ($standardUmdTestCaseNumList[$i] - 1);
+                    //$tmpLineOffset[$j] += ($standardUmdTestCaseNumList[$i] - 1);
+                    $tmpLineOffset[$j] += ($tmpTestCaseNum - 1);
                 }
                 else
                 {
@@ -2928,13 +3045,14 @@ class CGenReport
                     continue;
                 }
                 
-                if ($standardUmdTestCaseNumList[$i] > 0)
+                //if ($standardUmdTestCaseNumList[$i] > 0)
+                if ($tmpTestCaseNum > 0)
                 {
                     $tmpArr = explode("_", $tmpReportUmdInfo[$j]);
                     $sheetCode .= "<Cell ss:StyleID=\"s" . ($startStyleID + 18) . "\" ss:Formula=\"=MAX('" . 
                                   $tmpArr[0] . "_" . $swtPreSheetName_pf[1] . "'!R[" . ($tmpLineOffset2[$j] - 1) . 
                                   "]C" . ($subjectNameFilterNumMax + 10) . 
-                                  ":R[" . ($tmpLineOffset2[$j] + $standardUmdTestCaseNumList[$i] - 1 - 1) . "]C" . 
+                                  ":R[" . ($tmpLineOffset2[$j] + $tmpTestCaseNum - 1 - 1) . "]C" . 
                                   ($subjectNameFilterNumMax + 10) . ")\">" .
                                   "<Data ss:Type=\"Number\"></Data></Cell>";
                 }
@@ -2945,9 +3063,11 @@ class CGenReport
 
                 }
                               
-                if ($standardUmdTestCaseNumList[$i] > 0)
+                //if ($standardUmdTestCaseNumList[$i] > 0)
+                if ($tmpTestCaseNum > 0)
                 {
-                    $tmpLineOffset2[$j] += ($standardUmdTestCaseNumList[$i] - 1);
+                    //$tmpLineOffset2[$j] += ($standardUmdTestCaseNumList[$i] - 1);
+                    $tmpLineOffset2[$j] += ($tmpTestCaseNum - 1);
                 }
                 else
                 {
@@ -5482,6 +5602,7 @@ class CGenReport
         global $returnMsg;
         global $startStyleID;
         global $resultIDList;
+        global $reportUmdNum;
         global $historyResultIDList;
         global $tableName01;
         global $testName;
@@ -5512,441 +5633,494 @@ class CGenReport
         
         // compile time
         
-        $t1 = "";
-        $tmpList = array();
-
-        $noiseResultIDList = array();
-        
-        for ($i = 0; $i < $historyBatchMaxNum; $i++)
-        {
-            $t2 = "t" . (3 + $i);
-            
-            array_push($tmpList, $t2 . ".data_value1");
-            $t1 .= "LEFT JOIN " . $tableName01 . " " . $t2 . " " .
-                   "ON (" . $t2 . ".result_id=? AND " .
-                   "t0.sub_id=" . $t2 . ".sub_id) ";
-            if (($i < count($resultIDList)) && 
-                ($_resultPos < count($resultIDList[$i])))
-            {
-                $noiseResultIDList []= $resultIDList[$i][$_resultPos];
-            }
-            else
-            {
-                $noiseResultIDList []= PHP_INT_MAX;
-                //array_unshift($noiseResultIDList, PHP_INT_MAX);
-            }
-        }
-        
-        // variance data
-        $t2 = "t" . (3);
-        array_push($tmpList, $t2 . ".variance_value1");
-        
-        $noiseResultIDList []= $resultIDList[0][$cardStandardResultPos];
-        
-        $t3 = implode(",", $tmpList);
-        //array_push($historyResultIDList, $resultIDList[0][$_resultPos]);
-        
-        if (strlen($t3) > 0)
-        {
-            $t3 = ", " . $t3;
-        }
-        
-        // save this test to report
-        // following line has no error, many question marks
-        //$params1 = $historyResultIDList;
-        $params1 = $noiseResultIDList;
-        $returnMsg["noiseResultIDList"] = $noiseResultIDList;
-        $sql1 = "SELECT t0.result_id, t0.sub_id, t0.data_value1, t0.test_case_id, " .
-                "(SELECT t1.test_name FROM mis_table_test_info t1 WHERE t1.test_id=t0.sub_id) AS subTestName, " .
-                "(SELECT t100.test_filter FROM mis_table_test_info t100 WHERE t100.test_id=t0.sub_id) AS subTestFilterName " .
-                "" . $t3 . " " .
-                "FROM " . $tableName01 . " t0 " .
-                "" . $t1 . " " .
-                "WHERE (t0.result_id=?) ORDER BY t0.data_id ASC LIMIT " . $nextSubTestPos . ", " . $maxSubTestNumOnce;
-        if ($db->QueryDB($sql1, $params1) == null)
-        {
-            fclose($_fileHandle);
-            fclose($_fileHandle2);
-            fclose($_tempFileHandle);
-            $returnMsg["errorCode"] = 0;
-            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-            $returnMsg["sql1"] = $sql1;
-            $returnMsg["params1"] = $params1;
-            echo json_encode($returnMsg);
-            return null;
-        }
-        
         $dataNum = 0;
         $n2 = 0;
-        $t1 = "";
+        
         $standardSubTestIDList = array();
         $standardSubTestNameList = array();
         $standardSubTestFilterNameList = array();
         $standardTestCaseIDList = array();
-        $tmpDataList = array("", "", "", "", "",
-                             "", "", "", "", "",
-                             "", "", "", "", "");
-
-        $testAverageData = "";
         
-        $tmpTestCaseID = 0;
+        $resultPosList = array();
+        $resultStandardPosList = array();
         
-        for ($i = 0; $i < $curTestPos; $i++)
+        $resultPosList []= $_resultPos;
+        $resultStandardPosList []= $cardStandardResultPos;
+        
+        $tmpUmdTypeNum = intval(count($resultIDList[0]) / $reportUmdNum);
+        $tmpIndex = intval($cardStandardResultPos / $reportUmdNum);
+        if (($tmpIndex + 1) >= ($tmpUmdTypeNum))
         {
-            $tmpTestCaseID += $subTestNumList[$i];
+            // Vulkan
+            for ($i = 0; $i < ($tmpUmdTypeNum - 1); $i++)
+            {
+                $resultPosList []= ($_resultPos % $reportUmdNum) + $i * $reportUmdNum;
+                $resultStandardPosList []= ($cardStandardResultPos % $reportUmdNum) + $i * $reportUmdNum;
+            }
         }
         
-        while ($row1 = $db->fetchRow())
+        for ($l = 0; $l < $tmpUmdTypeNum; $l++)
         {
-            $tmpDataListXML = array("", "", "", "", "",
-                                    "", "", "", "", "",
-                                    "", "", "", "", "");
-            $tmpData2 = "";
-                                    
-            //$subTestResultID = $row1[0];
-            $subTestID = $row1[1];
-            $subTestName = $row1[4];
-            $subTestFilterName = $row1[5];
-            $subTestFilterNameList = explode("|", str_replace("\"", "", $row1[5]));
-            $dataValue = "" . $row1[2];
-            $testCaseID = $row1[3];
+            if ($l >= count($resultPosList))
+            {
+                break;
+            }
+        
+            $t1 = "";
+            $tmpList = array();
+
+            $noiseResultIDList = array();
             
             for ($i = 0; $i < $historyBatchMaxNum; $i++)
             {
-                $n1 = 6 + $i;
+                $t2 = "t" . (3 + $i);
+                
+                array_push($tmpList, $t2 . ".data_value1");
+                $t1 .= "LEFT JOIN " . $tableName01 . " " . $t2 . " " .
+                       "ON (" . $t2 . ".result_id=? AND " .
+                       "t0.sub_id=" . $t2 . ".sub_id) ";
+                if (($i < count($resultIDList)) && 
+                    (($resultPosList[$l]) < count($resultIDList[$i])))
+                    //($_resultPos < count($resultIDList[$i])))
+                {
+                    //$noiseResultIDList []= $resultIDList[$i][$_resultPos];
+                    $noiseResultIDList []= $resultIDList[$i][$resultPosList[$l]];
+                }
+                else
+                {
+                    $noiseResultIDList []= PHP_INT_MAX;
+                    //array_unshift($noiseResultIDList, PHP_INT_MAX);
+                }
+            }
+            
+            // variance data
+            $t2 = "t" . (3);
+            array_push($tmpList, $t2 . ".variance_value1");
+            
+            //$noiseResultIDList []= $resultIDList[0][$cardStandardResultPos];
+            $noiseResultIDList []= $resultIDList[0][$resultStandardPosList[$l]];
+            
+            $t3 = implode(",", $tmpList);
+            //array_push($historyResultIDList, $resultIDList[0][$_resultPos]);
+            
+            if (strlen($t3) > 0)
+            {
+                $t3 = ", " . $t3;
+            }
+            
+            // save this test to report
+            // following line has no error, many question marks
+            //$params1 = $historyResultIDList;
+            $params1 = $noiseResultIDList;
+            $returnMsg["noiseResultIDList"] = $noiseResultIDList;
+            $sql1 = "SELECT t0.result_id, t0.sub_id, t0.data_value1, t0.test_case_id, " .
+                    "(SELECT t1.test_name FROM mis_table_test_info t1 WHERE t1.test_id=t0.sub_id) AS subTestName, " .
+                    "(SELECT t100.test_filter FROM mis_table_test_info t100 WHERE t100.test_id=t0.sub_id) AS subTestFilterName " .
+                    "" . $t3 . " " .
+                    "FROM " . $tableName01 . " t0 " .
+                    "" . $t1 . " " .
+                    "WHERE (t0.result_id=?) ORDER BY t0.data_id ASC LIMIT " . $nextSubTestPos . ", " . $maxSubTestNumOnce;
+            if ($db->QueryDB($sql1, $params1) == null)
+            {
+                fclose($_fileHandle);
+                fclose($_fileHandle2);
+                fclose($_tempFileHandle);
+                $returnMsg["errorCode"] = 0;
+                $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+                $returnMsg["sql1"] = $sql1;
+                $returnMsg["params1"] = $params1;
+                echo json_encode($returnMsg);
+                return null;
+            }
+            
+            //$dataNum = 0;
+            //$n2 = 0;
+            $t1 = "";
+            //$standardSubTestIDList = array();
+            //$standardSubTestNameList = array();
+            //$standardSubTestFilterNameList = array();
+            //$standardTestCaseIDList = array();
+            $tmpDataList = array("", "", "", "", "",
+                                 "", "", "", "", "",
+                                 "", "", "", "", "");
+
+            $testAverageData = "";
+            
+            $tmpTestCaseID = 0;
+            
+            for ($i = 0; $i < $curTestPos; $i++)
+            {
+                $tmpTestCaseID += $subTestNumList[$i];
+            }
+            
+            while ($row1 = $db->fetchRow())
+            {
+                $tmpDataListXML = array("", "", "", "", "",
+                                        "", "", "", "", "",
+                                        "", "", "", "", "");
+                $tmpData2 = "";
+                                        
+                //$subTestResultID = $row1[0];
+                $subTestID = $row1[1];
+                $subTestName = $row1[4];
+                $subTestFilterName = $row1[5];
+                $subTestFilterNameList = explode("|", str_replace("\"", "", $row1[5]));
+                $dataValue = "" . $row1[2];
+                $testCaseID = $row1[3];
+                
+                for ($i = 0; $i < $historyBatchMaxNum; $i++)
+                {
+                    $n1 = 6 + $i;
+                    if ($n1 < count($row1))
+                    {
+                        $tmpDataList[$i] = "" . $row1[$n1];
+                        
+                        if (strlen($tmpDataList[$i]) > 0)
+                        {
+                            $tmpDataListXML[$i] = "<Data ss:Type=\"Number\">" . $tmpDataList[$i] . "</Data>";
+                        }
+                    }
+                    //$sortArrayList []= $row1[$n1];
+                }
+                
+                $n1 = 6 + $historyBatchMaxNum;
                 if ($n1 < count($row1))
                 {
-                    $tmpDataList[$i] = "" . $row1[$n1];
+                    $tmpData2 = $row1[$n1];
+                }
+
+                $dataNum++;
+                
+                if ((strlen($subTestName) == 0) ||
+                    (strlen($dataValue)   == 0))
+                {
+                    // if invalid subtest
+                    continue;
+                }
+                
+                $tmpStyleTag = 6;
+                if ($n2 == 0)
+                {
+                    $tmpStyleTag = 24;
+                }
+                
+                $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"/>\n");
+                
+                $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"Number\">" .
+                               //$testCaseID .
+                               ($tmpTestCaseID) .
+                               "</Data></Cell>\n";
+                for ($i = 0; $i < count($subTestFilterNameList); $i++)
+                {
+                    $tmpList[$i + 1] = " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"String\">" .
+                                   $subTestFilterNameList[$i] .
+                                   "</Data></Cell>\n";
+                }
+                $tmpCode = implode("", $tmpList);
+                
+                $tmpCode2 = "";
+                
+                $tmpStyleTag1 = 4;
+                $tmpStyleTag2 = 5;
+                if ($n2 == 0)
+                {
+                    $tmpStyleTag1 = 25;
+                    $tmpStyleTag2 = 26;
+                }
+                
+                for ($i = 0; $i < $historyBatchMaxNum; $i++)
+                {
+                                 
+                    $rcID1 = ($subjectNameFilterNumMax + 3 + $i * 2);
+                    $rcID2 = ($subjectNameFilterNumMax + 3 + $i * 2 + 2);
+                    $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag1) . "\">" . $tmpDataListXML[$i] . "</Cell>\n";
                     
-                    if (strlen($tmpDataList[$i]) > 0)
+                    if ($i < ($historyBatchMaxNum - 1))
                     {
-                        $tmpDataListXML[$i] = "<Data ss:Type=\"Number\">" . $tmpDataList[$i] . "</Data>";
+                        $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag2) . "\" " .
+                                     "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
+                                     "RC" . $rcID2 . "=&quot;&quot;," .
+                                     "RC" . $rcID1 . "=0," .
+                                     "RC" . $rcID2 . "=0" .
+                                     "),&quot;&quot;," .
+                                     "(RC" . $rcID1 . // 4
+                                     "-RC" . $rcID2 . // 6
+                                     ")/RC" . $rcID2 . ")\"><Data ss:Type=\"Number\"></Data></Cell>\n";
                     }
                 }
-                //$sortArrayList []= $row1[$n1];
-            }
-            
-            $n1 = 6 + $historyBatchMaxNum;
-            if ($n1 < count($row1))
-            {
-                $tmpData2 = $row1[$n1];
-            }
-
-            $dataNum++;
-            
-            if ((strlen($subTestName) == 0) ||
-                (strlen($dataValue)   == 0))
-            {
-                // if invalid subtest
-                continue;
-            }
-            
-            $tmpStyleTag = 6;
-            if ($n2 == 0)
-            {
-                $tmpStyleTag = 24;
-            }
-            
-            $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"/>\n");
-            
-            $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"Number\">" .
-                           //$testCaseID .
-                           ($tmpTestCaseID) .
-                           "</Data></Cell>\n";
-            for ($i = 0; $i < count($subTestFilterNameList); $i++)
-            {
-                $tmpList[$i + 1] = " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"String\">" .
-                               $subTestFilterNameList[$i] .
-                               "</Data></Cell>\n";
-            }
-            $tmpCode = implode("", $tmpList);
-            
-            $tmpCode2 = "";
-            
-            $tmpStyleTag1 = 4;
-            $tmpStyleTag2 = 5;
-            if ($n2 == 0)
-            {
-                $tmpStyleTag1 = 25;
-                $tmpStyleTag2 = 26;
-            }
-            
-            for ($i = 0; $i < $historyBatchMaxNum; $i++)
-            {
-                             
-                $rcID1 = ($subjectNameFilterNumMax + 3 + $i * 2);
-                $rcID2 = ($subjectNameFilterNumMax + 3 + $i * 2 + 2);
-                $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag1) . "\">" . $tmpDataListXML[$i] . "</Cell>\n";
                 
-                if ($i < ($historyBatchMaxNum - 1))
+                $tmpStyleTag = 13;
+                if ($n2 == 0)
                 {
-                    $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag2) . "\" " .
-                                 "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
-                                 "RC" . $rcID2 . "=&quot;&quot;," .
-                                 "RC" . $rcID1 . "=0," .
-                                 "RC" . $rcID2 . "=0" .
-                                 "),&quot;&quot;," .
-                                 "(RC" . $rcID1 . // 4
-                                 "-RC" . $rcID2 . // 6
-                                 ")/RC" . $rcID2 . ")\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                    $tmpStyleTag = 27;
                 }
-            }
-            
-            $tmpStyleTag = 13;
-            if ($n2 == 0)
-            {
-                $tmpStyleTag = 27;
-            }
-            // variation
-            $tmpCode1 = "<Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\" " .
-                        "><Data ss:Type=\"Number\">" . $tmpData2 . "</Data></Cell>";
-            
-            $tmpStyleTag = 8;
-            if ($n2 == 0)
-            {
-                $tmpStyleTag = 23;
-            }
-            
-            // api sheet comparison
-            $t1 .= "<Row ss:StyleID=\"Default\">\n" .
-                   " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"String\">" . $singleGroupName . "</Data></Cell>\n" .
-                   $tmpCode .
-                   //$tmpCode1 .
-                   $tmpCode2 .
-                   $tmpCode1 .
-                   "</Row>\n";
+                // variation
+                $tmpCode1 = "<Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\" " .
+                            "><Data ss:Type=\"Number\">" . $tmpData2 . "</Data></Cell>";
+                
+                $tmpStyleTag = 8;
+                if ($n2 == 0)
+                {
+                    $tmpStyleTag = 23;
+                }
+                
+                // api sheet comparison
+                $t1 .= "<Row ss:StyleID=\"Default\">\n" .
+                       " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"String\">" . $singleGroupName . "</Data></Cell>\n" .
+                       $tmpCode .
+                       //$tmpCode1 .
+                       $tmpCode2 .
+                       $tmpCode1 .
+                       "</Row>\n";
 
-            $lineNum++;
+                $lineNum++;
 
-            if ($_isCompStandard)
-            {
-                //$tmpPos = array_search($testName, );
-                array_push($standardSubTestIDList, $subTestID);
-                array_push($standardSubTestNameList, $subTestName);
-                array_push($standardSubTestFilterNameList, $subTestFilterNameList);
-                //array_push($standardTestCaseIDList, $testCaseID);
-                array_push($standardTestCaseIDList, $tmpTestCaseID);
+                if ($_isCompStandard)
+                {
+                    //$tmpPos = array_search($testName, );
+                    array_push($standardSubTestIDList, $subTestID);
+                    array_push($standardSubTestNameList, $subTestName);
+                    array_push($standardSubTestFilterNameList, $subTestFilterNameList);
+                    //array_push($standardTestCaseIDList, $testCaseID);
+                    array_push($standardTestCaseIDList, $tmpTestCaseID);
+                }
+                $tmpTestCaseID++;
+                $n2++;
             }
-            $tmpTestCaseID++;
-            $n2++;
+            
+            
+            $returnMsg["dataNum"] = $dataNum;
+            
+            fwrite($_fileHandle, $t1);
         }
-        
-        
-        $returnMsg["dataNum"] = $dataNum;
-        
-        fwrite($_fileHandle, $t1);
         
         // execution time
         
-        $t1 = "";
-        $tmpList = array();
-
-        $noiseResultIDList = array();
-        
-        for ($i = 0; $i < $historyBatchMaxNum; $i++)
-        {
-            $t2 = "t" . (3 + $i);
-            
-            array_push($tmpList, $t2 . ".data_value2");
-            $t1 .= "LEFT JOIN " . $tableName01 . " " . $t2 . " " .
-                   "ON (" . $t2 . ".result_id=? AND " .
-                   "t0.sub_id=" . $t2 . ".sub_id) ";
-            if (($i < count($resultIDList)) && 
-                ($_resultPos < count($resultIDList[$i])))
-            {
-                $noiseResultIDList []= $resultIDList[$i][$_resultPos];
-            }
-            else
-            {
-                $noiseResultIDList []= PHP_INT_MAX;
-            }
-        }
-        
-        // variance data
-        $t2 = "t" . (3);
-        array_push($tmpList, $t2 . ".variance_value2");
-        
-        $noiseResultIDList []= $resultIDList[0][$cardStandardResultPos];
-        
-        $t3 = implode(",", $tmpList);
-        //array_push($historyResultIDList, $resultIDList[0][$_resultPos]);
-        
-        if (strlen($t3) > 0)
-        {
-            $t3 = ", " . $t3;
-        }
-        
-        // save this test to report
-        // following line has no error, many question marks
-        //$params1 = $historyResultIDList;
-        $params1 = $noiseResultIDList;
-        $sql1 = "SELECT t0.result_id, t0.sub_id, t0.data_value2, t0.test_case_id, " .
-                "(SELECT t1.test_name FROM mis_table_test_info t1 WHERE t1.test_id=t0.sub_id) AS subTestName, " .
-                "(SELECT t100.test_filter FROM mis_table_test_info t100 WHERE t100.test_id=t0.sub_id) AS subTestFilterName " .
-                "" . $t3 . " " .
-                "FROM " . $tableName01 . " t0 " .
-                "" . $t1 . " " .
-                "WHERE (t0.result_id=?) ORDER BY t0.data_id ASC LIMIT " . $nextSubTestPos . ", " . $maxSubTestNumOnce;
-        if ($db->QueryDB($sql1, $params1) == null)
-        {
-            fclose($_fileHandle);
-            fclose($_fileHandle2);
-            fclose($_tempFileHandle);
-            $returnMsg["errorCode"] = 0;
-            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-            $returnMsg["sql1"] = $sql1;
-            $returnMsg["params1"] = $params1;
-            echo json_encode($returnMsg);
-            return null;
-        }
-        
-        $dataNum = 0;
         $n2 = 0;
-        $t1 = "";
-        //$standardSubTestIDList = array();
-        //$standardSubTestNameList = array();
-        //$standardSubTestFilterNameList = array();
-        //$standardTestCaseIDList = array();
-        $tmpDataList = array("", "", "", "", "",
-                             "", "", "", "", "",
-                             "", "", "", "", "");
-
-        $testAverageData = "";
-        while ($row1 = $db->fetchRow())
+        
+        for ($l = 0; $l < $tmpUmdTypeNum; $l++)
         {
-            $tmpDataListXML = array("", "", "", "", "",
-                                    "", "", "", "", "",
-                                    "", "", "", "", "");
-            $tmpData2 = "";
-                                    
-            //$subTestResultID = $row1[0];
-            $subTestID = $row1[1];
-            $subTestName = $row1[4];
-            $subTestFilterName = $row1[5];
-            $subTestFilterNameList = explode("|", str_replace("\"", "", $row1[5]));
-            $dataValue = "" . $row1[2];
-            $testCaseID = $row1[3];
+            if ($l >= count($resultPosList))
+            {
+                break;
+            }
+        
+            $t1 = "";
+            $tmpList = array();
+
+            $noiseResultIDList = array();
             
             for ($i = 0; $i < $historyBatchMaxNum; $i++)
             {
-                $n1 = 6 + $i;
+                $t2 = "t" . (3 + $i);
+                
+                array_push($tmpList, $t2 . ".data_value2");
+                $t1 .= "LEFT JOIN " . $tableName01 . " " . $t2 . " " .
+                       "ON (" . $t2 . ".result_id=? AND " .
+                       "t0.sub_id=" . $t2 . ".sub_id) ";
+                if (($i < count($resultIDList)) && 
+                    ($resultPosList[$l] < count($resultIDList[$i])))
+                    //($_resultPos < count($resultIDList[$i])))
+                {
+                    //$noiseResultIDList []= $resultIDList[$i][$_resultPos];
+                    $noiseResultIDList []= $resultIDList[$i][$resultPosList[$l]];
+                }
+                else
+                {
+                    $noiseResultIDList []= PHP_INT_MAX;
+                }
+            }
+            
+            // variance data
+            $t2 = "t" . (3);
+            array_push($tmpList, $t2 . ".variance_value2");
+            
+            //$noiseResultIDList []= $resultIDList[0][$cardStandardResultPos];
+            $noiseResultIDList []= $resultIDList[0][$resultStandardPosList[$l]];
+            
+            $t3 = implode(",", $tmpList);
+            //array_push($historyResultIDList, $resultIDList[0][$_resultPos]);
+            
+            if (strlen($t3) > 0)
+            {
+                $t3 = ", " . $t3;
+            }
+            
+            // save this test to report
+            // following line has no error, many question marks
+            //$params1 = $historyResultIDList;
+            $params1 = $noiseResultIDList;
+            $sql1 = "SELECT t0.result_id, t0.sub_id, t0.data_value2, t0.test_case_id, " .
+                    "(SELECT t1.test_name FROM mis_table_test_info t1 WHERE t1.test_id=t0.sub_id) AS subTestName, " .
+                    "(SELECT t100.test_filter FROM mis_table_test_info t100 WHERE t100.test_id=t0.sub_id) AS subTestFilterName " .
+                    "" . $t3 . " " .
+                    "FROM " . $tableName01 . " t0 " .
+                    "" . $t1 . " " .
+                    "WHERE (t0.result_id=?) ORDER BY t0.data_id ASC LIMIT " . $nextSubTestPos . ", " . $maxSubTestNumOnce;
+            if ($db->QueryDB($sql1, $params1) == null)
+            {
+                fclose($_fileHandle);
+                fclose($_fileHandle2);
+                fclose($_tempFileHandle);
+                $returnMsg["errorCode"] = 0;
+                $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
+                $returnMsg["sql1"] = $sql1;
+                $returnMsg["params1"] = $params1;
+                echo json_encode($returnMsg);
+                return null;
+            }
+            
+            //$dataNum = 0;
+            //$n2 = 0;
+            $t1 = "";
+            //$standardSubTestIDList = array();
+            //$standardSubTestNameList = array();
+            //$standardSubTestFilterNameList = array();
+            //$standardTestCaseIDList = array();
+            $tmpDataList = array("", "", "", "", "",
+                                 "", "", "", "", "",
+                                 "", "", "", "", "");
+                                 
+            $tmpTestCaseID = 0;
+            
+            for ($i = 0; $i < $curTestPos; $i++)
+            {
+                $tmpTestCaseID += $subTestNumList[$i];
+            }
+
+            $testAverageData = "";
+            while ($row1 = $db->fetchRow())
+            {
+                $tmpDataListXML = array("", "", "", "", "",
+                                        "", "", "", "", "",
+                                        "", "", "", "", "");
+                $tmpData2 = "";
+                                        
+                //$subTestResultID = $row1[0];
+                $subTestID = $row1[1];
+                $subTestName = $row1[4];
+                $subTestFilterName = $row1[5];
+                $subTestFilterNameList = explode("|", str_replace("\"", "", $row1[5]));
+                $dataValue = "" . $row1[2];
+                $testCaseID = $row1[3];
+                
+                for ($i = 0; $i < $historyBatchMaxNum; $i++)
+                {
+                    $n1 = 6 + $i;
+                    if ($n1 < count($row1))
+                    {
+                        $tmpDataList[$i] = "" . $row1[$n1];
+                        
+                        if (strlen($tmpDataList[$i]) > 0)
+                        {
+                            $tmpDataListXML[$i] = "<Data ss:Type=\"Number\">" . $tmpDataList[$i] . "</Data>";
+                        }
+                    }
+                    //$sortArrayList []= $row1[$n1];
+                }
+                
+                $n1 = 6 + $historyBatchMaxNum;
                 if ($n1 < count($row1))
                 {
-                    $tmpDataList[$i] = "" . $row1[$n1];
+                    $tmpData2 = $row1[$n1];
+                }
+
+                //$dataNum++;
+                
+                if ((strlen($subTestName) == 0) ||
+                    (strlen($dataValue)   == 0))
+                {
+                    // if invalid subtest
+                    continue;
+                }
+                
+                $tmpStyleTag = 6;
+                if ($n2 == 0)
+                {
+                    $tmpStyleTag = 24;
+                }
+                
+                $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"/>\n");
+                
+                $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"Number\">" .
+                               //$testCaseID .
+                               $tmpTestCaseID .
+                               "</Data></Cell>\n";
+                for ($i = 0; $i < count($subTestFilterNameList); $i++)
+                {
+                    $tmpList[$i + 1] = " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"String\">" .
+                                   $subTestFilterNameList[$i] .
+                                   "</Data></Cell>\n";
+                }
+                $tmpCode = implode("", $tmpList);
+                
+                $tmpCode2 = "";
+                
+                $tmpStyleTag1 = 4;
+                $tmpStyleTag2 = 5;
+                if ($n2 == 0)
+                {
+                    $tmpStyleTag1 = 25;
+                    $tmpStyleTag2 = 26;
+                }
+                
+                for ($i = 0; $i < $historyBatchMaxNum; $i++)
+                {
+                                 
+                    $rcID1 = ($subjectNameFilterNumMax + 3 + $i * 2);
+                    $rcID2 = ($subjectNameFilterNumMax + 3 + $i * 2 + 2);
+                    $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag1) . "\">" . $tmpDataListXML[$i] . "</Cell>\n";
                     
-                    if (strlen($tmpDataList[$i]) > 0)
+                    if ($i < ($historyBatchMaxNum - 1))
                     {
-                        $tmpDataListXML[$i] = "<Data ss:Type=\"Number\">" . $tmpDataList[$i] . "</Data>";
+                        $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag2) . "\" " .
+                                     "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
+                                     "RC" . $rcID2 . "=&quot;&quot;," .
+                                     "RC" . $rcID1 . "=0," .
+                                     "RC" . $rcID2 . "=0" .
+                                     "),&quot;&quot;," .
+                                     "(RC" . $rcID1 . // 4
+                                     "-RC" . $rcID2 . // 6
+                                     ")/RC" . $rcID2 . ")\"><Data ss:Type=\"Number\"></Data></Cell>\n";
                     }
                 }
-                //$sortArrayList []= $row1[$n1];
-            }
-            
-            $n1 = 6 + $historyBatchMaxNum;
-            if ($n1 < count($row1))
-            {
-                $tmpData2 = $row1[$n1];
-            }
-
-            $dataNum++;
-            
-            if ((strlen($subTestName) == 0) ||
-                (strlen($dataValue)   == 0))
-            {
-                // if invalid subtest
-                continue;
-            }
-            
-            $tmpStyleTag = 6;
-            if ($n2 == 0)
-            {
-                $tmpStyleTag = 24;
-            }
-            
-            $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"/>\n");
-            
-            $tmpList[0] = " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"Number\">" .
-                           $testCaseID .
-                           "</Data></Cell>\n";
-            for ($i = 0; $i < count($subTestFilterNameList); $i++)
-            {
-                $tmpList[$i + 1] = " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"String\">" .
-                               $subTestFilterNameList[$i] .
-                               "</Data></Cell>\n";
-            }
-            $tmpCode = implode("", $tmpList);
-            
-            $tmpCode2 = "";
-            
-            $tmpStyleTag1 = 4;
-            $tmpStyleTag2 = 5;
-            if ($n2 == 0)
-            {
-                $tmpStyleTag1 = 25;
-                $tmpStyleTag2 = 26;
-            }
-            
-            for ($i = 0; $i < $historyBatchMaxNum; $i++)
-            {
-                             
-                $rcID1 = ($subjectNameFilterNumMax + 3 + $i * 2);
-                $rcID2 = ($subjectNameFilterNumMax + 3 + $i * 2 + 2);
-                $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag1) . "\">" . $tmpDataListXML[$i] . "</Cell>\n";
                 
-                if ($i < ($historyBatchMaxNum - 1))
+                $tmpStyleTag = 13;
+                if ($n2 == 0)
                 {
-                    $tmpCode2 .= " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag2) . "\" " .
-                                 "ss:Formula=\"=IF(OR(RC" . $rcID1 . "=&quot;&quot;," .
-                                 "RC" . $rcID2 . "=&quot;&quot;," .
-                                 "RC" . $rcID1 . "=0," .
-                                 "RC" . $rcID2 . "=0" .
-                                 "),&quot;&quot;," .
-                                 "(RC" . $rcID1 . // 4
-                                 "-RC" . $rcID2 . // 6
-                                 ")/RC" . $rcID2 . ")\"><Data ss:Type=\"Number\"></Data></Cell>\n";
+                    $tmpStyleTag = 27;
                 }
-            }
-            
-            $tmpStyleTag = 13;
-            if ($n2 == 0)
-            {
-                $tmpStyleTag = 27;
-            }
-            // variation
-            $tmpCode1 = "<Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\" " .
-                        "><Data ss:Type=\"Number\">" . $tmpData2 . "</Data></Cell>";
-            
-            $tmpStyleTag = 8;
-            if ($n2 == 0)
-            {
-                $tmpStyleTag = 23;
-            }
-            
-            // api sheet comparison
-            $t1 .= "<Row ss:StyleID=\"Default\">\n" .
-                   " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"String\">" . $singleGroupName . "</Data></Cell>\n" .
-                   $tmpCode .
-                   //$tmpCode1 .
-                   $tmpCode2 .
-                   $tmpCode1 .
-                   "</Row>\n";
+                // variation
+                $tmpCode1 = "<Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\" " .
+                            "><Data ss:Type=\"Number\">" . $tmpData2 . "</Data></Cell>";
+                
+                $tmpStyleTag = 8;
+                if ($n2 == 0)
+                {
+                    $tmpStyleTag = 23;
+                }
+                
+                // api sheet comparison
+                $t1 .= "<Row ss:StyleID=\"Default\">\n" .
+                       " <Cell ss:StyleID=\"s" . ($startStyleID + $tmpStyleTag) . "\"><Data ss:Type=\"String\">" . $singleGroupName . "</Data></Cell>\n" .
+                       $tmpCode .
+                       //$tmpCode1 .
+                       $tmpCode2 .
+                       $tmpCode1 .
+                       "</Row>\n";
 
-            $n2++;
+                $tmpTestCaseID++;
+                $n2++;
+            }
+            
+            //$returnMsg["dataNum"] = $dataNum;
+            
+            fwrite($_fileHandle2, $t1);
         }
-        
-        
-        $returnMsg["dataNum"] = $dataNum;
-        
-        fwrite($_fileHandle2, $t1);
-        
         
 
         $nextSubTestPos += $dataNum;
         
-        //if ($dataNum == 0)
-        //{
-        //    $nextSubTestPos = $subTestNum;
-        //}
 
         $returnSet = array();
         $returnSet["nextSubTestPos"] = $nextSubTestPos;
