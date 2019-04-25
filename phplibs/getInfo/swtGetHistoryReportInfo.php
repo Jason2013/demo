@@ -286,6 +286,16 @@ for ($i = 0; $i < count($batchIDList); $i++)
                            $tmpName1 . "_" . $tmpName2 . "_batch%05d.zip",
                            $batchIDList[$i]);
                            
+            if (file_exists($xmlFileName) == false)
+            {
+                $xmlFileNameFromRoot = sprintf($allReportsDirFromRoot . "/" . $batchName . "/" .
+                                       $tmpName1 . "_" . $tmpName2 . ".zip",
+                                       $batchIDList[$i]);
+                $xmlFileName = sprintf($allReportsDir . "/" . $batchName . "/" .
+                               $tmpName1 . "_" . $tmpName2 . ".zip",
+                               $batchIDList[$i]);
+            }
+                           
             if (file_exists($xmlFileName))
             {
                 $tmpKeys1 = array_keys($cardNameList[$i], $tmpName1);
