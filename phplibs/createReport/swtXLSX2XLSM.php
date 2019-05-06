@@ -259,28 +259,28 @@ if ($fileID < count($oldReportXLSXList))
                     $t4 = "Application.Union(" . $t4 . ")";
                 }
                 
-                $tmpArea2 = explode(",", $vbaConfig->graphDataArea);
-                if (isset($vbaConfig->graphDataArea2))
-                {
-                    $tmpArea2 = explode(",", $vbaConfig->graphDataArea2);
-                }
+                //$tmpArea2 = explode(",", $vbaConfig->graphDataArea);
+                //if (isset($vbaConfig->graphDataArea2))
+                //{
+                //    $tmpArea2 = explode(",", $vbaConfig->graphDataArea2);
+                //}
                 
                 $tmpRange = array();
                 $t4a = "";
-                if (count($tmpArea2) == 1)
-                {
-                    $t4a = "destSheet.Range(\"" . $tmpArea2[0] . "\")";
-                }
-                else
-                {
-                    for ($i = 0; $i < count($tmpArea2); $i++)
-                    {
-                        $t3 = "destSheet.Range(\"" . $tmpArea2[$i] . "\")";
-                        array_push($tmpRange, $t3);
-                    }
-                    $t4a = implode(",", $tmpRange);
-                    $t4a = "Application.Union(" . $t4a . ")";
-                }
+                //if (count($tmpArea2) == 1)
+                //{
+                //    $t4a = "destSheet.Range(\"" . $tmpArea2[0] . "\")";
+                //}
+                //else
+                //{
+                //    for ($i = 0; $i < count($tmpArea2); $i++)
+                //    {
+                //        $t3 = "destSheet.Range(\"" . $tmpArea2[$i] . "\")";
+                //        array_push($tmpRange, $t3);
+                //    }
+                //    $t4a = implode(",", $tmpRange);
+                //    $t4a = "Application.Union(" . $t4a . ")";
+                //}
                 
                 // dropArea
                 $codePiece1 = "";
@@ -395,7 +395,7 @@ if ($fileID < count($oldReportXLSXList))
                 }
                               
                 $t2 = sprintf($t2, $t4, $vbaConfig->graphTitle . $titleAdd, 
-                              $t4a, $vbaConfig->graphTitle . $titleAdd, 
+                              //$t4a, $vbaConfig->graphTitle . $titleAdd, 
                               $vbaConfig->graphDataAreaNoBlank, $codePiece1);
                               
                 //$t2a = sprintf($t2a, $t4, $vbaConfig->graphTitle . $titleAdd, 
