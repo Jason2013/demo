@@ -141,23 +141,23 @@ function swtSubmitTestResultsMannualShaderBench(_inputTagName,
     var importDate = $("#importDate").val();
     
     $("#" + _percentTagName).html("copying files: 0%");
-    var t1 = $("#" + _inputTagName).val();
-    if (t1.length == 0)
+    var t_inputfolder = $("#" + _inputTagName).val();
+    if (t_inputfolder.length == 0)
     {
         alert("please fill in folder name");
         return;
     }
-    var t2 = $("#" + _usernameTagName).val();
-    var t3 = $("#" + _passwordTagName).val();
+    var t_username = $("#" + _usernameTagName).val();
+    var t_password = $("#" + _passwordTagName).val();
     //var t4 = $("#" + _targetTagName).val();
-    $.cookie('benchMaxUsername', t2);
-    $.cookie('benchMaxPassword', t3);
+    $.cookie('benchMaxUsername', t_username);
+    $.cookie('benchMaxPassword', t_password);
     swtDoCopyResultFilesShaderBench(_inputTagName,
                          _percentTagName,
                          -1, // batch ID
-                         t1,
-                         t2,
-                         t3,
+                         t_inputfolder,
+                         t_username,
+                         t_password,
                          "",
                          0,
                          "",
