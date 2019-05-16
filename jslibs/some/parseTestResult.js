@@ -398,7 +398,7 @@ function swtDoCopyResultFilesShaderBench(_inputTagName,
     function(data,status) 
     {
         //alert(data);
-        console.log(data);
+        // console.log(data);
         var json = eval("(" + data + ")");
 
         //alert(json.errorMsg);
