@@ -190,11 +190,10 @@ if (count($allFileList) > 0)
     // copy one single file each loop
     if ($fileID < count($allFileList))
     {
-        $tmpName = $allFileList[$fileID];
-        $n1 = strlen($logFolderName) - (substr($logFolderName, -1) == "\\" ? 1 : 0);
-        $t2 = file_get_contents($tmpName);
-        $t1 = substr($tmpName, $n1);
-        file_put_contents($parentFolder . $t1, $t2);
+        $source = $allFileList[$fileID];
+        $len = strlen($logFolderName) - (substr($logFolderName, -1) == "\\" ? 1 : 0);
+        $dest = $parentFolder . substr($source, $len);
+        copy($source, $dest);
         $fileID++;
     }
     else
