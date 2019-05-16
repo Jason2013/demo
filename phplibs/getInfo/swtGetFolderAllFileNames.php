@@ -191,7 +191,7 @@ if (count($allFileList) > 0)
     if ($fileID < count($allFileList))
     {
         $tmpName = $allFileList[$fileID];
-        $n1 = strlen($logFolderName);
+        $n1 = strlen($logFolderName) - (substr($logFolderName, -1) == "\\" ? 1 : 0);
         $t2 = file_get_contents($tmpName);
         $t1 = substr($tmpName, $n1);
         file_put_contents($parentFolder . $t1, $t2);
