@@ -51,19 +51,13 @@ else
 
 if (count($allFileList) == 0)
 {
-    $n1 = strlen($logFolderName);
-    $t1 = substr($logFolderName, $n1 - 1);
-    $tmpName = $logFolderName;
-
-    $tmpName = str_replace("/", "\\", $tmpName);
-
-    if (strcmp($t1, "\\") == 0)
+    // Normalize log folder name
+    $normLogFolderName = str_replace("/", "\\", $logFolderName); // Replace '/' with '\'
+    $lastChar = substr($normLogFolderName, -1);
+    if (strcmp($lastChar, "\\") == 0)
     {
-        $tmpName = substr($tmpName, 0, $n1 - 1);
+        $normLogFolderName = substr($normLogFolderName, 0, -1); // Remove trailing '\' character
     }
-    $tmpUpperName = $tmpName;
-
-
 
     $allFolderList = array();
 
@@ -92,7 +86,7 @@ if (count($allFileList) == 0)
         //print_r($folderList);
     }
 
-    checkFiles($tmpUpperName);
+    checkFiles($normLogFolderName);
 
     //print_r($allFileList);
     
@@ -169,7 +163,7 @@ if (count($allFileList) == 0)
     
     $parentFolder = $fullFolder01;
 
-    $n1 = strlen($tmpUpperName);
+    $n1 = strlen($normLogFolderName);
 
     foreach ($allFolderList as $tmpName)
     {
