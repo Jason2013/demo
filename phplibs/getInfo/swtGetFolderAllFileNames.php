@@ -49,16 +49,16 @@ else
     }
 }
 
+// Normalize log folder name
+$normLogFolderName = str_replace("/", "\\", $logFolderName); // Replace '/' with '\'
+$lastChar = substr($normLogFolderName, -1);
+if (strcmp($lastChar, "\\") == 0)
+{
+    $normLogFolderName = substr($normLogFolderName, 0, -1); // Remove trailing '\' character
+}
+
 if (count($allFileList) == 0)
 {
-    // Normalize log folder name
-    $normLogFolderName = str_replace("/", "\\", $logFolderName); // Replace '/' with '\'
-    $lastChar = substr($normLogFolderName, -1);
-    if (strcmp($lastChar, "\\") == 0)
-    {
-        $normLogFolderName = substr($normLogFolderName, 0, -1); // Remove trailing '\' character
-    }
-
     $allFolderList = array();
 
     function checkFiles($_parentFolder)
@@ -178,14 +178,13 @@ if (count($allFileList) == 0)
     }
 
 }
-
-if (count($allFileList) > 0)
+else /* count($allFileList) > 0 */
 {
     // copy one single file each loop
     if ($fileID < count($allFileList))
     {
         $source = $allFileList[$fileID];
-        $len = strlen($logFolderName) - (substr($logFolderName, -1) == "\\" ? 1 : 0);
+        $len = strlen($normLogFolderName);
         $dest = $parentFolder . substr($source, $len);
         copy($source, $dest);
         $fileID++;
