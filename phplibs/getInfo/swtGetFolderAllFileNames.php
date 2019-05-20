@@ -31,6 +31,14 @@ $returnMsg["copyFileFinished"] = 0;
 
 $targetFolder = $logStoreDir;
 
+// Normalize log folder name
+$logFolderName = str_replace("/", "\\", $logFolderName); // Replace '/' with '\'
+$lastChar = substr($logFolderName, -1);
+if (strcmp($lastChar, "\\") == 0)
+{
+    $logFolderName = substr($logFolderName, 0, -1); // Remove trailing '\' character
+}
+
 if ((strlen($username) > 0) && (strlen($password) > 0))
 {
     system ( "net use \"" . $logFolderName . "\" " . $password . " /user:" . $username . " /persistent:no>nul 2>&1" );
@@ -47,14 +55,6 @@ else
         $username = $userChecker->getUserName();
         system ( "net use \"" . $logFolderName . "\" " . $password . " /user:" . $username . " /persistent:no>nul 2>&1" );
     }
-}
-
-// Normalize log folder name
-$normLogFolderName = str_replace("/", "\\", $logFolderName); // Replace '/' with '\'
-$lastChar = substr($normLogFolderName, -1);
-if (strcmp($lastChar, "\\") == 0)
-{
-    $normLogFolderName = substr($normLogFolderName, 0, -1); // Remove trailing '\' character
 }
 
 if (count($allFileList) == 0)
@@ -86,7 +86,7 @@ if (count($allFileList) == 0)
         //print_r($folderList);
     }
 
-    checkFiles($normLogFolderName);
+    checkFiles($logFolderName);
 
     //print_r($allFileList);
     
@@ -163,7 +163,7 @@ if (count($allFileList) == 0)
     
     $parentFolder = $fullFolder01;
 
-    $n1 = strlen($normLogFolderName);
+    $n1 = strlen($logFolderName);
 
     foreach ($allFolderList as $tmpName)
     {
@@ -184,7 +184,7 @@ else /* count($allFileList) > 0 */
     if ($fileID < count($allFileList))
     {
         $source = $allFileList[$fileID];
-        $len = strlen($normLogFolderName);
+        $len = strlen($logFolderName);
         $dest = $parentFolder . substr($source, $len);
         copy($source, $dest);
         $fileID++;
