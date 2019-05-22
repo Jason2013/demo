@@ -519,7 +519,8 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
             $t1 = pack("i", 0);
             $tmpDataIDSize = strlen($t1);
             
-            $tmpFileDataNum = intval($tmpFileSize / ($tmpDataSize * 4 + $tmpDataIDSize * 2));
+            $recordSize = $tmpDataSize * 4 + $tmpDataIDSize * 2;
+            $tmpFileDataNum = intval($tmpFileSize / $recordSize);
             
             $n1 = $testCaseID - $tmpFileDataNum;
             for ($i = 0; $i < $n1; $i++)
@@ -528,7 +529,7 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
                 fwrite($tmpFileHandle, $t1);
             }
             
-            fseek($tmpFileHandle, $testCaseID * ($tmpDataSize * 4 + $tmpDataIDSize * 2), SEEK_SET);
+            fseek($tmpFileHandle, $testCaseID * $recordSize, SEEK_SET);
             $t1 = pack("iddddi", $tmpSubTestID, $dataValue1, $dataValue2, $dataValue3, $dataValue4, $groupID);
             fwrite($tmpFileHandle, $t1);
         }
