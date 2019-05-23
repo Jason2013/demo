@@ -199,11 +199,11 @@ class CClientHeartBeat
             return $returnMsg;
         }
         $row1 = $db->fetchRow();
-        $b1 = false;
+        $hasNullValue = false;
         // check, if new names occur
         if ($row1 == false)
         {
-            $b1 = true;
+            $hasNullValue = true;
             for ($i = 0; $i < count($envNameList); $i++)
             {
                 $envIDList[$i] = -1;
@@ -215,7 +215,7 @@ class CClientHeartBeat
             {
                 if ($row1[$i] == NULL)
                 {
-                    $b1 = true;
+                    $hasNullValue = true;
                     $envIDList[$i] = -1;
                 }
                 else
@@ -224,7 +224,7 @@ class CClientHeartBeat
                 }
             }
         }
-        if ($b1 == false)
+        if ($hasNullValue == false)
         {
             // if all names are not new, get machine id
             $params1 = ($envIDList);
@@ -242,12 +242,12 @@ class CClientHeartBeat
             $row1 = $db->fetchRow();
             if ($row1 == false)
             {
-                $b1 = true;
+                $hasNullValue = true;
             }
             $machineID = $row1[0];
         }
         
-        if ($b1)
+        if ($hasNullValue)
         {
             // no such machine ever online
             // insert new
@@ -458,11 +458,11 @@ class CClientHeartBeat
             return $returnMsg;
         }
         $row1 = $db->fetchRow();
-        $b1 = false;
+        $hasNullValue = false;
         // check, if new names occur
         if ($row1 == false)
         {
-            $b1 = true;
+            $hasNullValue = true;
             for ($i = 0; $i < count($envNameList); $i++)
             {
                 $envIDList[$i] = -1;
@@ -474,7 +474,7 @@ class CClientHeartBeat
             {
                 if ($row1[$i] == NULL)
                 {
-                    $b1 = true;
+                    $hasNullValue = true;
                     $envIDList[$i] = -1;
                 }
                 else
@@ -483,7 +483,7 @@ class CClientHeartBeat
                 }
             }
         }
-        if ($b1 == false)
+        if ($hasNullValue == false)
         {
             // if all names are not new, get machine id
             $params1 = ($envIDList);
@@ -501,12 +501,12 @@ class CClientHeartBeat
             $row1 = $db->fetchRow();
             if ($row1 == false)
             {
-                $b1 = true;
+                $hasNullValue = true;
             }
             $machineID = $row1[0];
         }
         
-        if ($b1)
+        if ($hasNullValue)
         {
             // no such machine ever online
             // insert new
@@ -636,11 +636,11 @@ class CClientHeartBeat
             return $returnMsg;
         }
         $row1 = $db->fetchRow();
-        $b1 = false;
+        $hasNullValue = false;
         // check, if new names occur
         if ($row1 == false)
         {
-            $b1 = true;
+            $hasNullValue = true;
             for ($i = 0; $i < count($envNameList); $i++)
             {
                 $envIDList[$i] = -1;
@@ -652,7 +652,7 @@ class CClientHeartBeat
             {
                 if ($row1[$i] == NULL)
                 {
-                    $b1 = true;
+                    $hasNullValue = true;
                     $envIDList[$i] = -1;
                 }
                 else
@@ -661,7 +661,7 @@ class CClientHeartBeat
                 }
             }
         }
-        if ($b1 == false)
+        if ($hasNullValue == false)
         {
             // if all names are not new, get machine id
             $params1 = ($envIDList);
@@ -679,12 +679,12 @@ class CClientHeartBeat
             $row1 = $db->fetchRow();
             if ($row1 == false)
             {
-                $b1 = true;
+                $hasNullValue = true;
             }
             $machineID = $row1[0];
         }
         
-        if ($b1)
+        if ($hasNullValue)
         {
             // no such machine ever online
             // insert new
