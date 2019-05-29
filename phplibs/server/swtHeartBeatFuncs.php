@@ -190,7 +190,7 @@ class CClientHeartBeat
                 "(SELECT tei.env_id FROM mis_table_environment_info tei WHERE tei.env_type=\"9\" AND tei.env_name=?) AS sClockNameID, " .
                 "(SELECT tei.env_id FROM mis_table_environment_info tei WHERE tei.env_type=\"10\" AND tei.env_name=?) AS mClockNameID, " .
                 "(SELECT tei.env_id FROM mis_table_environment_info tei WHERE tei.env_type=\"11\" AND tei.env_name=?) AS gpuMemNameID " .
-                "FROM mis_table_environment_info tei";
+                "FROM mis_table_environment_info tei limit 1";
                 
         if ($db->QueryDB($sql1, $params1) == null)
         {
