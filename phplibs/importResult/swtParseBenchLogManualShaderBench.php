@@ -1313,6 +1313,21 @@ function swtGetMachineID($_pathName)
     return $tmpMsg;
 }
 
+function swtTargetLogFileExists($path)
+{
+    global $targetLogFileName;
+    global $targetLogFileName2;
+    foreach ([$targetLogFileName, $targetLogFileName2] as $file)
+    {
+        $filename = $path . '/' . $file;
+        if (file_exists($filename))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 // start parse, above are globals & functions
 if (strlen($logFolderName) == 0)
 {
