@@ -129,7 +129,7 @@ function swtGetBatchID($_state)
     $batchGroup = $reportGroup;
     
     $params1 = array($logFolderName);
-    $sql1 = "SELECT * FROM mis_table_path_info " .
+    $sql1 = "SELECT path_id FROM mis_table_path_info " .
             "WHERE path_name=?";
     if ($db->QueryDB($sql1, $params1) == null)
     {
