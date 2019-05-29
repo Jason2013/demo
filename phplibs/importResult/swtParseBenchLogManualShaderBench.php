@@ -1384,21 +1384,7 @@ if ($resultFileNum == 0)
             {
                 // no piece folder
                 // maybe log files not in piece folder
-                $t1 = $tmpPath . "/" . $targetLogFileName;
-                $tmpResult = -1;
-                if (file_exists($t1))
-                {
-                    $tmpResult = 1;
-                }
-                if ($tmpResult == -1)
-                {
-                    $t1 = $tmpPath . "/" . $targetLogFileName2;
-                }
-                if (file_exists($t1))
-                {
-                    $tmpResult = 1;
-                }
-                if ($tmpResult == 1)
+                if (swtTargetLogFileExists($tmpPath))
                 {
                     $resultFileNum++;
                 }
@@ -1408,21 +1394,7 @@ if ($resultFileNum == 0)
                 // log file in piece folders
                 foreach ($pieceFolderList as $piecePath)
                 {
-                    $t1 = $piecePath . "/" . $targetLogFileName;
-                    $tmpResult = -1;
-                    if (file_exists($t1))
-                    {
-                        $tmpResult = 1;
-                    }
-                    if ($tmpResult == -1)
-                    {
-                        $t1 = $piecePath . "/" . $targetLogFileName2;
-                    }
-                    if (file_exists($t1))
-                    {
-                        $tmpResult = 1;
-                    }
-                    if ($tmpResult == 1)
+                    if (swtTargetLogFileExists($piecePath))
                     {
                         $resultFileNum++;
                     }
