@@ -1313,11 +1313,9 @@ function swtGetMachineID($_pathName)
     return $tmpMsg;
 }
 
-function swtTargetLogFileExists($path)
+function swtTargetLogFileExists($path, $files)
 {
-    global $targetLogFileName;
-    global $targetLogFileName2;
-    foreach ([$targetLogFileName, $targetLogFileName2] as $file)
+    foreach ($files as $file)
     {
         $filename = $path . '/' . $file;
         if (file_exists($filename))
@@ -1376,6 +1374,7 @@ if ($resultFileNum == 0)
         }
         $noiseFolderList = glob($tmpCardPath . "/*", GLOB_ONLYDIR);
         //$returnMsg["noiseFolderList"] = $noiseFolderList;
+        $files = [$targetLogFileName, $targetLogFileName2];
         foreach ($noiseFolderList as $tmpPath)
         {
             $pieceFolderList = glob($tmpPath . "/*", GLOB_ONLYDIR);
@@ -1384,7 +1383,7 @@ if ($resultFileNum == 0)
             {
                 // no piece folder
                 // maybe log files not in piece folder
-                if (swtTargetLogFileExists($tmpPath))
+                if (swtTargetLogFileExists($tmpPath, $files))
                 {
                     $resultFileNum++;
                 }
@@ -1394,7 +1393,7 @@ if ($resultFileNum == 0)
                 // log file in piece folders
                 foreach ($pieceFolderList as $piecePath)
                 {
-                    if (swtTargetLogFileExists($piecePath))
+                    if (swtTargetLogFileExists($piecePath, $files))
                     {
                         $resultFileNum++;
                     }
