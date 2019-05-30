@@ -1313,7 +1313,7 @@ function swtGetMachineID($_pathName)
     return $tmpMsg;
 }
 
-function swtTargetLogFileExists($path, $files)
+function TargetLogFileExists($path, $files)
 {
     foreach ($files as $file)
     {
@@ -1383,7 +1383,7 @@ if ($resultFileNum == 0)
             {
                 // no piece folder
                 // maybe log files not in piece folder
-                if (swtTargetLogFileExists($tmpPath, $files))
+                if (TargetLogFileExists($tmpPath, $files))
                 {
                     $resultFileNum++;
                 }
@@ -1393,7 +1393,7 @@ if ($resultFileNum == 0)
                 // log file in piece folders
                 foreach ($pieceFolderList as $piecePath)
                 {
-                    if (swtTargetLogFileExists($piecePath, $files))
+                    if (TargetLogFileExists($piecePath, $files))
                     {
                         $resultFileNum++;
                     }
