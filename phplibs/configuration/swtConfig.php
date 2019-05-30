@@ -10,6 +10,7 @@ $driverStoreDir = "../../driverStore";
 $downloadReportDir = "../../report";
 $swtTempFilesDir = "../../tmpFiles";
 $swtTempResultPath = "../../tmpResultFile";
+$userDefinedReportTemplateDir = "../../reportTemplate";
 
 $swtLogStoreDirServerDBA = "\\\\srdcvmysqldp1\\PHPresultfiles\\benchMax\\logStore";
 //$usernameServerDBA = "amd\\davychen";

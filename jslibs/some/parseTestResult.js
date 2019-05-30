@@ -1854,8 +1854,139 @@ function swtGenerateRoutineReportShaderBench(_percentTagName, _reportListTag, _r
                           _crossType,
                           -1,
                           t2,
-                          t3
+                          t3,
+                          ""
                           );
+}
+
+function swtGenerateRoutineReportUserTemplate(_percentTagName, _reportListTag, _reportType, _batchID, _crossType)
+{
+    $("#" + _percentTagName).html("0% (generating is started...)");
+    
+    $("#" + _reportListTag).html("");
+
+    var t1 = $("#valMachineIDList").val();
+
+    var machineIDList = [];
+    //if (t1.length > 0)
+    //{
+    //    machineIDList = t1.split(",");
+    //}
+    var machineIDPair = [];
+    var checkedMachineIDList = [];
+    var t2 = "";
+    var t3 = "";
+    if (_reportType == 0)
+    {
+        // generating latest report
+        for (var i = 0; i < machineIDList.length; i++)
+        {
+            t1 = $("#selMachineID" + machineIDList[i]).val();
+            var b1 = $("#checkMachineID" + machineIDList[i]).is(":checked");
+            //console.log(b1);
+            if (b1 == false)
+            {
+                //console.log("skip" + i);
+                continue;
+            }
+            var n1 = parseInt(t1);
+            if (n1 != -1)
+            {
+                machineIDPair.push(parseInt(machineIDList[i]));
+                machineIDPair.push(n1);
+                // if cross asic, pair are machineID, machineID
+                // if cross build, pair are machineID, batch
+            }
+            else if ((_crossType == 1) || 
+                     (_crossType == 2))
+            {
+                // cross ASIC, SYS
+                // cross build
+                continue;
+            }
+            checkedMachineIDList.push(parseInt(machineIDList[i]));
+        }
+        t2 = swtImplode(machineIDPair, ",");
+        t3 = swtImplode(checkedMachineIDList, ",");
+    }
+
+    console.log("---: " + t2);
+    var tmpBatchID = _batchID;
+    var t4 = $("#inputBatchID").val();
+    if (t4.length > 0)
+    {
+        tmpBatchID = parseInt(t4);
+    }
+    
+    var inputPathName = $("#inputPathName").val();
+    if (inputPathName.length == 0)
+    {
+        alert("please fill in user template path");
+        return;
+    }
+    
+    var tmpUserName = $("#inputUsername").val();
+    var tmpPassWord = $("#inputPassword").val();
+    //var t4 = $("#" + _targetTagName).val();
+    $.cookie('benchMaxUsername', tmpUserName);
+    $.cookie('benchMaxPassword', tmpPassWord);
+    
+    // check Shaderbench or Framebench
+    $.post("../phplibs/getInfo/swtGetUserTemplateInfo.php", 
+    {
+        userTemplatePathName: inputPathName,
+        username:             tmpUserName,
+        password:             tmpPassWord
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+        console.log(data);
+        var json = eval("(" + data + ")");
+
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            var userTemplatePath = json.parentFolder + "/" + json.userTemplateFileName;
+            if (json.ReportSort == "ShaderBench")
+            {
+                swtDoGenerateFlatDataShaderBench(_percentTagName,
+                                                 _reportListTag,
+                                                 tmpBatchID,
+                                                 _reportType,
+                                                 _crossType,
+                                                 -1,
+                                                 t2,
+                                                 t3,
+                                                 userTemplatePath
+                                                 );
+            }
+            else if (json.ReportSort == "FrameBench")
+            {
+                swtDoGenerateFlatDataPerFrame(_percentTagName,
+                                              _reportListTag,
+                                              tmpBatchID,
+                                              _reportType,
+                                              _crossType,
+                                              -1,
+                                              t2,
+                                              t3,
+                                              "",
+                                              "",
+                                              userTemplatePath
+                                              );
+            }
+            else
+            {
+                alert("Report type not supported");
+            }
+        }
+        else if (json.errorCode == "0")
+        {
+            alert(json.errorMsg);
+        }
+    });
+    
 }
 
 function swtGenerateRoutineReportPerFrame(_percentTagName, _reportListTag, _reportType, _batchID, _crossType)
@@ -1937,7 +2068,8 @@ function swtGenerateRoutineReportPerFrame(_percentTagName, _reportListTag, _repo
                           t2,
                           t3,
                           t4,
-                          t5
+                          t5,
+                          ""
                           );
 }
 
@@ -2043,7 +2175,8 @@ function swtDoGenerateFlatDataShaderBench(_percentTagName,
                                _crossType,
                                _curReportFolder,
                                _machineIDPair,
-                               _machineIDList
+                               _machineIDList,
+                               _userTemplatePath
                                )
 {
     var tmpMachineIDPair = _machineIDPair;
@@ -2055,7 +2188,6 @@ function swtDoGenerateFlatDataShaderBench(_percentTagName,
     
     console.log("tmp---07:" + _crossType);
     
-    //$.post("../phplibs/createReport/swtGenTempFlatData.php", 
     $.post("../phplibs/createReport/swtGenTempFlatDataShaderBench.php", 
     {
         batchID:               _batchID,
@@ -2096,8 +2228,8 @@ function swtDoGenerateFlatDataShaderBench(_percentTagName,
                                            json.curReportFolder,
                                            -1,
                                            -1,
-                                           0
-                                           //""
+                                           0,
+                                           _userTemplatePath
                                            );
             }
             else
@@ -2109,7 +2241,8 @@ function swtDoGenerateFlatDataShaderBench(_percentTagName,
                                       _crossType,
                                       json.curReportFolder,
                                       _machineIDPair,
-                                      _machineIDList
+                                      _machineIDList,
+                                      _userTemplatePath
                                       );
                 if (json.fileID <= json.fileNum)
                 {
@@ -2134,7 +2267,8 @@ function swtDoGenerateFlatDataPerFrame(_percentTagName,
                                _machineIDPair,
                                _machineIDList,
                                _colCardNameOrderList,
-                               _colCardNameOrderIndexList
+                               _colCardNameOrderIndexList,
+                               _userTemplatePath
                                )
 {
     var tmpMachineIDPair = _machineIDPair;
@@ -2189,8 +2323,8 @@ function swtDoGenerateFlatDataPerFrame(_percentTagName,
                                            json.curReportFolder,
                                            -1,
                                            -1,
-                                           0
-                                           //""
+                                           0,
+                                           _userTemplatePath
                                            );
             }
             else
@@ -2204,7 +2338,8 @@ function swtDoGenerateFlatDataPerFrame(_percentTagName,
                                       _machineIDPair,
                                       _machineIDList,
                                       _colCardNameOrderList,
-                                      _colCardNameOrderIndexList
+                                      _colCardNameOrderIndexList,
+                                      _userTemplatePath
                                       );
                 if (json.fileID <= json.fileNum)
                 {
@@ -2868,11 +3003,25 @@ function swtDoGenerateRoutineReportShaderBench(_percentTagName,
                                     _curReportFolder,
                                     _firstTestPos,
                                     _firstSubTestPos,
-                                    _sheetLinePos
-                                    //_subTestUmdDataMaskList
+                                    _sheetLinePos,
+                                    _userTemplatePath
                                     )
 {
-    $.post("../phplibs/createReport/swtCompileReportAdditionShaderBench.php",
+    var tmpVisitLink = "";
+    if (_userTemplatePath.length == 0)
+    {
+        // old way of gen report
+        tmpVisitLink = "../phplibs/createReport/swtCompileReportAdditionShaderBench.php";
+    }
+    else
+    {
+        // use user template to gen report
+        tmpVisitLink = "../phplibs/createReport/swtCompileReportAdditionShaderBenchTemplate.php";
+    }
+    
+    //$.post("../phplibs/createReport/swtCompileReportAdditionShaderBench.php",
+    //$.post("../phplibs/createReport/swtCompileReportAdditionShaderBenchTemplate.php",
+    $.post(tmpVisitLink,
     {
         batchID:        _batchID,
         machineIDPair:  _machineIDPair,
@@ -2890,8 +3039,8 @@ function swtDoGenerateRoutineReportShaderBench(_percentTagName,
         curReportFolder:    _curReportFolder,
         firstTestPos:       _firstTestPos,
         firstSubTestPos:    _firstSubTestPos,
-        sheetLinePos:       _sheetLinePos
-        //subTestUmdDataMaskList: _subTestUmdDataMaskList
+        sheetLinePos:       _sheetLinePos,
+        userTemplatePath:   _userTemplatePath
     }, 
     function(data,status) 
     {
@@ -2930,8 +3079,8 @@ function swtDoGenerateRoutineReportShaderBench(_percentTagName,
                                            json.curReportFolder,
                                            json.firstTestPos,
                                            json.firstSubTestPos,
-                                           json.sheetLinePos
-                                           //json.subTestUmdDataMaskList
+                                           json.sheetLinePos,
+                                           _userTemplatePath
                                            );
                 if ((json.resultNum > 0) &&
                     (json.testNum   > 0))
@@ -2967,12 +3116,24 @@ function swtDoGenerateRoutineReportPerFrame(_percentTagName,
                                     _curReportFolder,
                                     _firstTestPos,
                                     _firstSubTestPos,
-                                    _sheetLinePos
-                                    //_subTestUmdDataMaskList
+                                    _sheetLinePos,
+                                    _userTemplatePath
                                     )
 {
-    //$.post("../phplibs/createReport/swtCompileReportAdditionShaderBench.php",
-    $.post("../phplibs/createReport/swtCompileReportAdditionPerFrame.php",
+    var tmpVisitLink = "";
+    if (_userTemplatePath.length == 0)
+    {
+        // old way of gen report
+        tmpVisitLink = "../phplibs/createReport/swtCompileReportAdditionPerFrame.php";
+    }
+    else
+    {
+        // use user template to gen report
+        tmpVisitLink = "../phplibs/createReport/swtCompileReportAdditionPerFrameTemplate.php";
+    }
+
+    //$.post("../phplibs/createReport/swtCompileReportAdditionPerFrame.php",
+    $.post(tmpVisitLink,
     {
         batchID:        _batchID,
         machineIDPair:  _machineIDPair,
@@ -2992,8 +3153,8 @@ function swtDoGenerateRoutineReportPerFrame(_percentTagName,
         curReportFolder:    _curReportFolder,
         firstTestPos:       _firstTestPos,
         firstSubTestPos:    _firstSubTestPos,
-        sheetLinePos:       _sheetLinePos
-        //subTestUmdDataMaskList: _subTestUmdDataMaskList
+        sheetLinePos:       _sheetLinePos,
+        userTemplatePath:   _userTemplatePath
     }, 
     function(data,status) 
     {
@@ -3034,8 +3195,8 @@ function swtDoGenerateRoutineReportPerFrame(_percentTagName,
                                            json.curReportFolder,
                                            json.firstTestPos,
                                            json.firstSubTestPos,
-                                           json.sheetLinePos
-                                           //json.subTestUmdDataMaskList
+                                           json.sheetLinePos,
+                                           _userTemplatePath
                                            );
                 if ((json.resultNum > 0) &&
                     (json.testNum   > 0))
@@ -3794,6 +3955,93 @@ function swtGetCardChoiceCodeShaderBench(_divTag, _reportTag, _batchIDTag)
                                   t1 +
                                   "</a></p>\n";
             }
+            $("#" + _reportTag).html(reportListCode);
+        }
+    });
+}
+
+function swtGetCardChoiceCodeUserTemplate(_divTag, _reportTag, _batchIDTag)
+{
+    var tmpBatchID = $("#" + _batchIDTag).val();
+    if (tmpBatchID.length == 0)
+    {
+        tmpBatchID = -1;
+    }
+    
+    $.post("../phplibs/getInfo/swtGetBatchMachinesInfoTemplate.php", 
+    {
+        batchID: tmpBatchID
+    }, 
+    function(data,status) 
+    {
+        //alert(data);
+		console.log("<<<");
+		console.log(data);
+		console.log("<<<");
+        var json = eval("(" + data + ")");
+
+        
+        //alert(json.errorMsg);
+        if (json.errorCode == "1")
+        {
+            var reportListCode = "";
+            
+            if (json.reportSortList.length == 0)
+            {
+                // assigned batch id
+                for (var i = 0; i < json.reportAllList[0].length; i++)
+                {
+                    var tmpList = json.reportAllList[0][i].split("/");
+                    var t1 = "";
+                    if (tmpList.length > 0)
+                    {
+                        t1 = tmpList[tmpList.length - 1];
+                    }
+                    
+                    reportListCode += "<p><a href=\"" + json.reportAllList[0][i] + "\">" +
+                                      t1 +
+                                      "</a></p>\n";
+                }
+            }
+            else if (json.reportSortList.length == 2)
+            {
+                // latest sb & fb batchID
+                
+                reportListCode += "<p><span style=\"background-color: #bdb76b; height: 16px;\">&nbsp;" + 
+                                  json.reportSortList[0] + " Reports:&nbsp;</span></p>\n";
+                
+                for (var i = 0; i < json.reportAllList[0].length; i++)
+                {
+                    var tmpList = json.reportAllList[0][i].split("/");
+                    var t1 = "";
+                    if (tmpList.length > 0)
+                    {
+                        t1 = tmpList[tmpList.length - 1];
+                    }
+                    
+                    reportListCode += "<p><a href=\"" + json.reportAllList[0][i] + "\">" +
+                                      t1 +
+                                      "</a></p>\n";
+                }
+                
+                reportListCode += "<p><span style=\"background-color: #bdb76b; height: 16px;\">&nbsp;" + 
+                                  json.reportSortList[1] + " Reports:&nbsp;</span></p>\n";
+                
+                for (var i = 0; i < json.reportAllList[1].length; i++)
+                {
+                    var tmpList = json.reportAllList[1][i].split("/");
+                    var t1 = "";
+                    if (tmpList.length > 0)
+                    {
+                        t1 = tmpList[tmpList.length - 1];
+                    }
+                    
+                    reportListCode += "<p><a href=\"" + json.reportAllList[1][i] + "\">" +
+                                      t1 +
+                                      "</a></p>\n";
+                }
+            }
+            
             $("#" + _reportTag).html(reportListCode);
         }
     });

@@ -112,6 +112,9 @@ $graphDataStartCloumnIDCompareList = array("AB", "AC", "AD", "AE", "AF", "AG", "
 
 $ubuntuCheckWord = "ubuntu";
 $reportFolderCheckWord = "report_";
+$templateMacroTag = "#";
+$templateExpSepTag = ";";
+$templateExpSetTag = ":";
 
 $swtStartStyleID = 117;
 define("reportStyleRedStart", 101);

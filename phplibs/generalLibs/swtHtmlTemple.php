@@ -74,6 +74,13 @@ class CSwtHtmlTemple
         echo "        <div id=\"simpleCalender01\" class=\"simpleCalender\"></div>\n";
         echo "        <a href=\"" . $this->pagePrePath . "subPages/drawGraph2.php\">Historical Graphs</a>\n";
         echo "        <a href=\"" . $this->pagePrePath . "./\">Report Archive</a>\n";
+        //echo "        <a href=\"" . $this->pagePrePath . "docs/\">Microbench Docs</a>\n";
+        echo "    </div>\n";
+        echo "    <h3>Microbench Docs</h3>\n";
+        echo "    <div>\n";
+        echo "        <a href=\"" . $this->pagePrePath . "docs/MicroBench/\">MicroBench</a>\n";
+        echo "        <a href=\"" . $this->pagePrePath . "docs/ShaderBench/\">ShaderBench</a>\n";
+        echo "        <a href=\"" . $this->pagePrePath . "docs/FrameBench/\">FrameBench</a>\n";
         echo "    </div>\n";
         echo "    <h3>Administration</h3>\n";
         echo "    <div>\n";
@@ -91,6 +98,7 @@ class CSwtHtmlTemple
             echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportShaderBench.php\">ShaderBench Report</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/importLogFiles4.php\">FrameBench Import</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportPerFrame.php\">FrameBench Report</a>\n";
+            echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportUserTemplate.php\">Gen Reports With Tmplt</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/compileReportAll.php\">Generate All Reports</a>\n";
             echo "        <a href=\"" . $this->pagePrePath . "subPages/userLogOut.php\">Logout</a>\n";
         }
