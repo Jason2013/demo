@@ -203,7 +203,8 @@ class CGenTemplteReport
         $tmpArr = explode("_", $testName);
         if (count($tmpArr) > 1)
         {
-            $this->macroList["TestName"] = ucwords($tmpArr[1]);
+            unset($tmpArr[0]);
+            $this->macroList["TestName"] = ucwords(implode("_", $tmpArr));
         }
         
         // #ChangeList, #ChangeList_Prev
