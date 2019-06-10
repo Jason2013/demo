@@ -1378,14 +1378,6 @@ class CGenReport
                 
                 $tmpCardID = intval($row1[10]);
                 $tmpSysID = intval($row1[12]);
-                $tmpKeys1 = array_keys($selectedCardIDList, $tmpCardID);
-                $tmpKeys2 = array_keys($selectedSysIDList, $tmpSysID);
-                $tmpKeys3 = array_intersect($tmpKeys1, $tmpKeys2);
-                if (count($tmpKeys3) == 0)
-                {
-                    // skip unselected cards
-                    //continue;
-                }
                 
                 $tmpArr = explode("_", $row1[21]);
                 //$tmpDriverName = $row1[21];
