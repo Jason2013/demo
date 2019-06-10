@@ -3122,7 +3122,6 @@ class CGenReport
         global $logFileFolder;
         global $swtCardStandardOrder_sb;
         global $swtUmdStandardOrder_sb;
-        global $swtOldCardNameMatchList;
 
         $tmpRootPath = $logStoreDir . "/" . $logFileFolder;
         $cardFolderList = glob($tmpRootPath . "/*", GLOB_ONLYDIR);
@@ -3152,27 +3151,12 @@ class CGenReport
             
             if (isset($tmpObj2["videoCardName"]))
             {
-                $properCardName = $tmpObj2["videoCardName"];
-                
-                for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
-                {
-                    if (strtolower($properCardName) == strtolower($swtOldCardNameMatchList[$i]))
-                    {
-                        // cardName match
-                        $tmpCheck = $i % 2;
-                        if ($tmpCheck == 1)
-                        {
-                            // old cardName used
-                            $properCardName = $swtOldCardNameMatchList[$i - 1];
-                            $tmpObj2["videoCardName"] = $properCardName;
-                        }
-                    }
-                }
+                $tmpObj2["videoCardName"] = ReplaceOldCardName($tmpObj2["videoCardName"]);
             }
             
             $tmpCardList []= $tmpObj2["videoCardName"];
             $tmpCompilerList []= $tmpObj2["compilerName"];
-            $tmpCardCompilerList []= strtolower($tmpObj2["videoCardName"] . "_" . $tmpObj2["compilerName"]);
+            $tmpCardCompilerList []= $tmpObj2["videoCardName"] . "_" . $tmpObj2["compilerName"];
             $t1 = $tmpObj2["compilerName"] . "_" . $tmpObj2["systemName"];
             $tmpCompilerSysList []= $t1;
             if (isset($tmpCompilerSysMap[$t1]))
@@ -3192,19 +3176,8 @@ class CGenReport
         $sortedCardCompilerList = array();
         if ($hasRepeatCompilerSys)
         {
-            for ($i = 0; $i < count($swtCardStandardOrder_sb); $i++)
-            {
-                for ($j = 0; $j < count($swtUmdStandardOrder_sb); $j++)
-                {
-                    $t1 = $swtCardStandardOrder_sb[$i] . "_" . $swtUmdStandardOrder_sb[$j];
-                    
-                    $tmpArr []= $t1;
-                    if (array_search(strtolower($t1), $tmpCardCompilerList) !== false)
-                    {
-                        $sortedCardCompilerList []= $t1;
-                    }
-                }
-            }
+            $sortedCardCompilerList = $tmpCardCompilerList;
+            usort($sortedCardCompilerList, "CmpCardUmd_SB");
             $sortedCardCompilerList []= "OPT1";
         }
         
