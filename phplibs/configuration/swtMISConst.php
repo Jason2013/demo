@@ -52,6 +52,41 @@ $swtUmdNameList_sb = array("RADV", "SCPC", "LLPC", "NVIDIA", "OPT1");
 $swtUmdStandardOrder_sb = array("RADV", "SCPC", "LLPC", "NVIDIA", "OPT1");
 $swtCardStandardOrder_sb = array("Navi10", "Vega10", "Ariel", "GTX1080", "RTX2070");
 
+function ValueOrder($value, &$arr)
+{
+    foreach ($arr as $key => $val)
+    {
+        if (strtolower($value) == strtolower($val))
+        {
+            return $key;
+        }
+    }
+    return 100;
+}
+
+function CardOrder_SB($card)
+{
+    global $swtCardStandardOrder_sb;
+    return ValueOrder($card, $swtCardStandardOrder_sb);
+}
+
+function UmdOrder_SB($umd)
+{
+    global $swtUmdStandardOrder_sb;
+    return ValueOrder($umd, $swtUmdStandardOrder_sb);
+}
+
+function CmpCardUmd_SB($lhs, $rhs)
+{
+    $lhs_parts = explode("_", $lhs);
+    $lhs_value = CardOrder_SB($lhs_parts[0])*100 + UmdOrder_SB($lhs_parts[1]);
+
+    $rhs_parts = explode("_", $rhs);
+    $rhs_value = CardOrder_SB($rhs_parts[0])*100 + UmdOrder_SB($rhs_parts[1]);
+
+    return $lhs_value - $rhs_value;
+}
+
 //$swtPreSheetName_sb = array("compileTime", "executionTime");
 //$swtPreSheetNameTitle_sb = array("Compile Time", "Execution Time");
 //$swtPreSheetNameShort_sb = array("compTime", "execTime");
