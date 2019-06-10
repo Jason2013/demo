@@ -76,6 +76,24 @@ $swtPreSheetNameShort_pf = array("ExecTime", "RecoTime");
 $swtOldUmdNameMatchList = array("D3D11", "DX11", "D3D12", "DX12");
 $swtOldCardNameMatchList = array("GTX1080", "GTX 1080", "RTX2070", "GTX2070");
 
+function ReplaceOldCardName($cardName)
+{
+    $OldCardNameMatchMap = [
+        "GTX 1080" => "GTX1080",
+        "GTX2070" => "RTX2070"
+    ];
+
+    foreach ($OldCardNameMatchMap as $key => $val)
+    {
+        if (strtolower($cardName) == strtolower($key))
+        {
+            return $val;
+        }
+    }
+
+    return $cardName;
+}
+
 //$swtUmdNameList = array("DX11", "DX12", "Vulkan");
 //$swtUmdStandardOrder = array("Vulkan", "DX12", "DX11");
 

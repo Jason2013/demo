@@ -1365,22 +1365,8 @@ class CGenReport
             {
                 $tmpMachineID = intval($row1[1]);
                 
-                $properCardName = $row1[20];
-                
-                for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
-                {
-                    if (strtolower($properCardName) == strtolower($swtOldCardNameMatchList[$i]))
-                    {
-                        // cardName match
-                        $tmpCheck = $i % 2;
-                        if ($tmpCheck == 1)
-                        {
-                            // old cardName used
-                            $properCardName = $swtOldCardNameMatchList[$i - 1];
-                        }
-                    }
-                }
-                
+                $properCardName = ReplaceOldCardName($row1[20]);
+
                 array_push($cardNameListFlat, $properCardName);
                 array_push($driverNameListFlat, $row1[21]);
                 
