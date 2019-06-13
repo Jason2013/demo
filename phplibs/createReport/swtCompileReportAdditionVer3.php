@@ -199,7 +199,7 @@ $returnSet = $xmlWriter->checkReportDataColumnNum();
 if ($returnSet === null)
 {
     $returnMsg["errorCode"] = 0;
-    $returnMsg["errorMsg"] = "data column invalid";
+    $returnMsg["errorMsg"] = "data column invalid, line: " . __LINE__;
     $returnMsg["resultUmdOrder"] = $resultUmdOrder;
     $returnMsg["reportUmdNum"] = $reportUmdNum;
     $returnMsg["cmpMachineID"] = $cmpMachineID;
@@ -260,6 +260,11 @@ $returnSet = $xmlWriter->genAverageDataForGraph($isCompStandard, $cmpMachineID,
 $graphCells = $returnSet["graphCells"];
 $averageColumnHasVal = $returnSet["averageColumnHasVal"];
 $returnMsg["averageColumnHasVal"] = $averageColumnHasVal;
+
+if (file_exists("graphCells.txt") == false)
+{
+    //file_put_contents("graphCells.txt", $graphCells);
+}
 
 $flatDataBuffer = "";
 
