@@ -1,0 +1,2 @@
+﻿脚本里写密码不安全，可以编辑/etc/sudoers，将用root免密码执行某命令的权限付给普通用户，这样用户通过sudo就可以root权限执行命令：
+比如：sudo -u root yourcommand、sudo -u root su

@@ -1,0 +1,14 @@
+1) comment #secure_file_priv="H:/wamp/tmp" in mysql.ini
+
+2) memory_limit = 128M -> 500M in php.ini
+
+
+10.237.71.18
+test@123
+
+10.237.70.52
+
+Administrator
+   
+test@123
+

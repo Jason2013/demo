@@ -1,0 +1,21 @@
+Ok this solved it for me
+
+if you’ve got IIS configured try this:
+
+Run “dcomcnfg” to get to Component Services
+Open Component Services > Computers > My Computer > DCOM Config
+Search for Microsoft Excel Application or the appropriate application you working with on COM
+Right-Click on it and open the properties
+Choose “Identity” tab
+Normally this is set to “the launching user” by default. You have to change this to “the interactive user”.
+Apply these new settings and test your COM application. It should work fine now.
+http://www.php.net/manual/en/class.com.php
+
+shareimprove this answer
+
+
+add everyone, network service, davychen
+
+
+office plus 10
+64 bit
