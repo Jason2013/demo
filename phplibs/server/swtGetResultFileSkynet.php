@@ -199,7 +199,7 @@ else
     return;
 }
 
-if (is_writable($targetFile))
+if (@is_writable($targetFile))
 {
     @unlink($targetFile);
 }
