@@ -407,64 +407,6 @@ if ($fileID <= count($uniqueCardNameList))
     $returnMsg["pairTestStartPosList"] = $pairTestStartPosList;
     
     
-    /*
-    $tmpFileName = sprintf($reportFolder . "/" . $tmpCardName . $outFileNameLater, $batchID);
-    // open dest file
-    $fileHandle = fopen($tmpFileName, "r+");
-    fseek($fileHandle, 0, SEEK_END);
-    
-    $returnMsg["tmpStr1"] = "";
-    
-
-    // open all src files
-    $resultFileHandleList = array();
-    $pairResultFileHandleList = array();
-    for ($i = 0; $i < count($curCardNameList); $i++)
-    {
-        $curTmpFileName = $allFileList[$curCardNameList[$i]];
-        $resultFileHandle = fopen($curTmpFileName, "r"); 
-        array_push($resultFileHandleList, $resultFileHandle);
-    }
-    
-    if ($curPairMachineID != -1)
-    {
-        // if has compare card
-        for ($i = 0; $i < count($pairCardNameList); $i++)
-        {
-            $curTmpFileName = $allFileList[$pairCardNameList[$i]];
-            $resultFileHandle = fopen($curTmpFileName, "r"); 
-            array_push($pairResultFileHandleList, $resultFileHandle);
-        }
-    }
-    
-    // write result file lines to tmp file
-    $flatDataGen->dumpLines($visitedTestNameList,
-                            $curCardNameList,
-                            $pairCardNameList,
-                            $testStartPosList,
-                            $pairTestStartPosList,
-                            $fileHandle,
-                            $resultFileHandleList,
-                            $pairResultFileHandleList,
-                            $tmpCardName,
-                            $curPairMachineID,
-                            $machineIDCardNameSysNameDict);
-
-
-    // close all src files
-    foreach ($resultFileHandleList as $tmpHandle)
-    {
-        fclose($tmpHandle);
-    }
-    
-    foreach ($pairResultFileHandleList as $tmpHandle)
-    {
-        fclose($tmpHandle);
-    }
-
-    fclose($fileHandle);
-    
-    //*/
     
     $columnNum = 0;
     $rowNum = 0;
