@@ -82,7 +82,7 @@ $html1->outPageBodyStart();
         
         <p><span style="background-color: #FFFF00;">folder name</span> must be a windows server folder can be accessed by our server.</p>
 
-        <p>like: <span style="background-color: #FFFF00;">\\oglserver\Incoming\Davy\deletable\benchMax\2017-05-18-man00003</span></p>
+        <p>like: <span style="background-color: #FFFF00;">\\oglserver\Incoming\Davy\deletable\benchMax\2017-08-11-man00001</span></p>
         <p>please <span style="background-color: #FF0000; color: #FFFFFF;">don't close this page in process of reports generation!</span></p>
         
         <p>finishing state: <div id="finishPercentBar" >0%</div></p>
