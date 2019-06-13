@@ -1376,9 +1376,6 @@ class CGenReport
                 array_push($cardIndexListFlat, $cardIndex);
                 array_push($curCardIDListFlat, $curCardID);
                 
-                $tmpCardID = intval($row1[10]);
-                $tmpSysID = intval($row1[12]);
-                
                 $tmpArr = explode("_", $row1[21]);
                 //$tmpDriverName = $row1[21];
                 $tmpDriverName = $tmpArr[0];
