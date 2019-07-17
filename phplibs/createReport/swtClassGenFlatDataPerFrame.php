@@ -45,7 +45,7 @@ class CGenReportFlatData
                         "LEFT JOIN mis_table_path_info t1 " .
                         "USING (path_id) " .
                         "WHERE t0.batch_state=\"1\" AND " .
-                        "(t0.batch_group IN (5, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309)) " .
+                        "(t0.batch_group IN (7, 5, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309)) " .
                         "ORDER BY t0.insert_time DESC LIMIT 1";
                 if ($db->QueryDB($sql1, $params1) == null)
                 {

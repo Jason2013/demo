@@ -646,7 +646,7 @@ class CGenReport
                 // if not assign current batch id
                 $sql1 = "SELECT batch_id, batch_group FROM mis_table_batch_list " .
                         "WHERE batch_state=\"1\" AND " .
-                        "(batch_group IN (5, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309)) " .
+                        "(batch_group IN (7, 5, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309)) " .
                         "ORDER BY insert_time DESC LIMIT 1";
                 
                 if ($db->QueryDB($sql1, $params1) == null)
@@ -1103,7 +1103,7 @@ class CGenReport
         if ($userChecker->isManager())
         {
             $sql1 = "SELECT COUNT(*) FROM mis_table_batch_list " .
-                    "WHERE batch_id=? AND batch_state=\"1\" AND (batch_group IN (5, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309))";
+                    "WHERE batch_id=? AND batch_state=\"1\" AND (batch_group IN (7, 5, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309))";
         }
         else
         {
