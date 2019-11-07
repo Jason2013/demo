@@ -1,3 +1,1080 @@
+D:\dev\p4\oglp_dk\depot\dk\lnx\codeSanitizer\scripts\tools\lnx\unifdef
+D:\dev\p4\oglp_dk\depot\dk\win\codeSanitizer\scripts\tools\lnx\unifdef
+
+D:\dev\p4\oglp_dk\depot\dk\win\codeSanitizer
+D:\dev\p4\oglp_dk\depot\dk\lnx\codeSanitizer
+
+D:\work\temp\020
+
+`sd` means `source drops`
+
+set DkRoot=D:/dev/p4/oglp_dk/win
+set Sdmake=d:\dev\p4\oglp_dk\depot\dk\win\ati\bin\sdmake.pl
+set WorkDir=D:\work\temp
+set path=%DkRoot%\perl\5.16.1\bin;%path%
+
+cd %WorkDir%
+if exist 020_tmp rmdir /s/q 020_tmp
+xcopy /I /E 020 020_tmp
+cd 020_tmp
+
+set CS_CUST_CONFIG=customerSS
+set DK_ROOT=%DkRoot%
+set CS_SANITIZE=1
+set SDMAKE_POSTBUILD=0
+perl %Sdmake% -run
+
+D:\work\temp\020_tmp\main\drivers\oglp_tmp\icd\imported\sc\Src\Dev\Tools\scripts\codeSanitizerSC.py:29
+    with open(filename, "w", encoding='utf-8') as out:
+
+D:\work\temp\020_tmp\main\drivers\oglp_tmp\icd\imported\sc\Src\Dev\Tools\scripts\codeSanitizerSC.py:193
+    sanitize_iropcode_cmd = ["python",
+
+.................................................................................................................................................................................................
+
+D:\work\dev\chanchen_oglp_sync_only2\depot\stg\sandbox\pal\mariner\csim717_lsa\oglp
+
+/D/work/dev/chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp
+
+git worktree add /D/work/dev/chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp 012_Sanitized_P4_1
+
+SWDEV-1 - 
+
+.................................................................................................................................................................................................
+
+//depot/stg/pal/inc/core/palPipelineAbi.h //chanchen_oglp_sync_only2/stg/pal/inc/core/palPipelineAbi.h
+
+//depot/stg/pal/inc/util/palElfProcessor.h //chanchen_oglp_sync_only2/stg/pal/inc/util/palElfProcessor.h
+
+
+-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/Src/Dev/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/Src/Dev/...
+
+find . -type f,d -exec touch -t 1910280000 {} \;
+
+2015272
+
+
+.................................................................................................................................................................................................
+
+cmake -GNinja -DBOOST_FROM_DK=0 -DCMAKE_BUILD_TYPE=Release ..
+cmake -GNinja -DBOOST_FROM_DK=0 -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 -DCMAKE_BUILD_TYPE=Release ..
+cmake -GNinja -DBOOST_FROM_DK=0 -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 -DCMAKE_BUILD_TYPE=Debug ..
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release ..
+cmake -GNinja -DCMAKE_BUILD_TYPE=Debug ..
+cmake –-build .
+
+cd main\drivers\oglp
+mkdir build
+cd build 
+cmake -G"Visual Studio 15 2017 Win64" -DTARGET_ARCHITECTURE_BITS=64 -DWIN_VC_DIR="C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023" -DWIN_WDK_INCLUDE="C:/Program Files (x86)/Windows Kits/10/Include/10.0.17763.0" -DBOOST_DIR=D:/work/temp/006/boost_1_70_0_install -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 ..
+cmake –-build . --config Release
+
+.................................................................................................................................................................................................
+
+
+workspace name: chanchen_oglp_sync_only2
+workspace root: D:\work\dev\sync_oglp_only2
+
+-//depot/main/make/... //chanchen_oglp_sync_only2/make/...
+//depot/main/drivers/adl/... //chanchen_oglp_sync_only2/main/drivers/adl/...
+//depot/main/drivers/inc/... //chanchen_oglp_sync_only2/main/drivers/inc/...
+//depot/main/drivers/pxproxy/... //chanchen_oglp_sync_only2/main/drivers/pxproxy/...
+-//depot/stg/make/... //chanchen_oglp_sync_only2/make/...
+-//depot/main/make/cmake/... //chanchen_oglp_sync_only2/main/make/cmake/...
+//depot/stg/oglp/drivers/oglp/... //chanchen_oglp_sync_only2/main/drivers/oglp/...
+-//depot/stg/sc_prm/... //chanchen_oglp_sync_only2/sc_prm/...
+//depot/main/cmake/... //chanchen_oglp_sync_only2/main/cmake/...
+
+//depot/main/drivers/inc/asic_reg/... //chanchen_oglp_sync_only2/main/drivers/inc/asic_reg/...
+
+atishareioctldef.h
+cwddeci.h
+cwddedi.h
+cwddepm.h
+cwddeva.h
+
+//depot/main/drivers/inc/asic_reg/atishareioctldef.h //chanchen_oglp_sync_only2/main/drivers/inc/asic_reg/atishareioctldef.h
+//depot/main/drivers/inc/asic_reg/cwddeci.h //chanchen_oglp_sync_only2/main/drivers/inc/asic_reg/cwddeci.h
+//depot/main/drivers/inc/asic_reg/cwddedi.h //chanchen_oglp_sync_only2/main/drivers/inc/asic_reg/cwddedi.h
+//depot/main/drivers/inc/asic_reg/cwddepm.h //chanchen_oglp_sync_only2/main/drivers/inc/asic_reg/cwddepm.h
+//depot/main/drivers/inc/asic_reg/cwddeva.h //chanchen_oglp_sync_only2/main/drivers/inc/asic_reg/cwddeva.h
+
+.................................................................................................................................................................................................
+
+workspace name: chanchen_oglp_sync_only
+workspace root: D:\work\dev\sync_oglp_only
+
+-//depot/main/make/... //chanchen_oglp_sync_only/make/...
+//depot/main/drivers/adl/... //chanchen_oglp_sync_only/main/drivers/adl/...
+//depot/main/drivers/inc/... //chanchen_oglp_sync_only/main/drivers/inc/...
+//depot/main/drivers/pxproxy/... //chanchen_oglp_sync_only/main/drivers/pxproxy/...
+-//depot/stg/make/... //chanchen_oglp_sync_only/make/...
+-//depot/main/make/cmake/... //chanchen_oglp_sync_only/main/make/cmake/...
+//depot/stg/oglp/drivers/oglp/... //chanchen_oglp_sync_only/main/drivers/oglp/...
+-//depot/stg/sc_prm/... //chanchen_oglp_sync_only/sc_prm/...
+//depot/main/cmake/... //chanchen_oglp_sync_only/main/cmake/...
+
+.................................................................................................................................................................................................
+
+D:\work\dev\sync_oglp
+//depot/stg/pal/tools/internal/teamcity/... //chanchen_oglp_sync/depot/stg/pal/tools/internal/teamcity/...
+
+D:\work\dev\sync_oglp\depot\stg\pal\tools\internal\teamcity
+.................................................................................................................................................................................................
+
+sudo apt install cmake ninja-build g++ libx11-dev default-jdk libboost1.65-all-dev libxcb-dri3-dev libx11-xcb-dev libxcb-dri2-0-dev* libxcb-present-dev libxcb-shm0-dev libxshmfence-dev libssl-dev libgl1-mesa-dev
+
+apt list cmake ninja-build g++ libx11-dev default-jdk libboost1.65-all-dev libxcb-dri3-dev libx11-xcb-dev libxcb-dri2-0-dev libxcb-present-dev libxcb-shm0-dev libxshmfence-dev libssl-dev libgl1-mesa-dev
+sudo apt install libxcb-present-dev libxcb-shm0-dev libxshmfence-dev libssl-dev libgl1-mesa-dev
+sudo apt install libssl-dev:i386 libx11-dev:i386 libxcb1-dev:i386 libxcb-dri3-dev:i386 libxcb-dri2-0-dev:i386 libxcb-present-dev:i386 libxshmfence-dev:i386 libxrandr-dev:i386
+sudo apt list libssl-dev:i386 libx11-dev:i386 libxcb1-dev:i386 libxcb-dri3-dev:i386 libxcb-dri2-0-dev:i386 libxcb-present-dev:i386 libxshmfence-dev:i386 libxrandr-dev:i386
+
+libudev-dev
+chmod +x /home/ubuntu/oglp_dev/main/drivers/oglp/tools/glslc/glslc
+
+.................................................................................................................................................................................................
+
+MH37W-N47XK-V7XM9-C7227-GCQG9
+
+Windows 10 Pro(win10专业版激活密钥)
+http://tieba.baidu.com/p/5723053542?traceid=
+
+.................................................................................................................................................................................................
+
+10/21/2019 11:30:27 AM
+======================
+
+SWDEV-77148 - add navi21 lite in cmake.
+    OGLP needs add Navi21 lite, Navi21 build support, therefore add Navi21 lite in cmakelist
+
+ReviewBoardURL = http://dxreview2.amd.com/r/18211/
+
+
+SWDEV-77148 - [PAL] Add `CWP_CALL` macro definition.
+
+    Library `PAL` depends on library `CWPACK`. Library `CWPACK` defines `CWP_CALL` macro to specify the call convention, so that the library `PAL` should define `CWP_CALL` macro for consistency. Otherwise, there will be a link error when library `PAL` is built for Windows 32 bit architecture.
+
+ReviewBoardURL = http://dxreview2.amd.com/r/18211/
+
+.................................................................................................................................................................................................
+
+cmake -G"Visual Studio 15" -DCMAKE_BUILD_TYPE=Debug -DTARGET_ARCHITECTURE_BITS=32 -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
+
+10/11/2019 2:07:35 PM
+=====================
+
+在 OGLP 测试机上进行 CTS 测试
+http://ci-gfx.amd.com/job/openglp/job/oglp_win-osdb/175/
+.................................................................................................................................................................................................
+
+10/10/2019 2:45:22 PM
+=====================
+
+Server:
+shswp4p1:1666
+
+Workspace name:
+chanchen_oglp_sync
+
+Workspace root:
+D:\work\dev\sync_oglp
+
+Workspace mappings:
+//depot/stg/pal/... //chanchen_oglp_sync/main/drivers/oglp/icd/imported/pal_stg/...
+//depot/stg/sc/... //chanchen_oglp_sync/main/drivers/oglp/icd/imported/sc_stg/...
+
+Local directories:
+D:/work/dev/sync_oglp/main/drivers/oglp/icd/imported/pal_stg
+D:/work/dev/sync_oglp/main/drivers/oglp/icd/imported/sc_stg
+
+CMake 不能访问不在 CMAKE_SOURCE_DIR 目录下的文件：
+cd D:/work/dev/oglp_dev/main/drivers/oglp
+
+cd D:/work/dev/sync_oglp/main/drivers/oglp
+mkdir build_pal_sc_stg
+cd build_pal_sc_stg
+
+cmake -GNinja -D
+
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DTARGET_ARCHITECTURE_BITS=32 -DOGLP_SC_DIR=../../icd/imported/sc_stg  -DCMAKE_TOOLCHAIN_FILE=..\..\cmake\targets\win\Toolchain-ninja.cmake ..
+
+== SUCCESS ==
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DTARGET_ARCHITECTURE_BITS=64 -DOGLP_SC_DIR=../icd/imported/sc_stg -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
+setupBuildEnv.bat
+ninja
+
+
+== ??????? ==
+cd D:/work/dev/oglp_dev/main/drivers/oglp
+mkdir build_pal_sc_stg
+cd build_pal_sc_stg
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DTARGET_ARCHITECTURE_BITS=64 -DOGLP_PAL_DIR=../icd/imported/pal_stg -DOGLP_SC_DIR=../icd/imported/sc_stg -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
+setupBuildEnv.bat
+ninja
+
+== ??????? ==
+cd D:/work/dev/oglp_dev/main/drivers/oglp
+mkdir build_pal_stg
+cd build_pal_stg
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DTARGET_ARCHITECTURE_BITS=64 -DOGLP_PAL_DIR=../icd/imported/pal_stg -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
+setupBuildEnv.bat
+ninja
+.................................................................................................................................................................................................
+
+
+cmake -G"Visual Studio 15 2017 Win64" -DTARGET_ARCHITECTURE_BITS=64
+-DWIN_VC_DIR="C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023"
+-DWIN_WDK_INCLUDE="C:/Program Files (x86)/Windows Kits/10/Include/10.0.17763.0"
+-DBOOST_DIR=D:/work/temp/006/boost_1_70_0_install
+-DSC_BUILD_SP3=0
+-DPAL_BUILD_NAVI14_LITE=1 ..
+
+
+cmake -G"Visual Studio 15 2017 Win64" -DTARGET_ARCHITECTURE_BITS=64 -DWIN_VC_DIR="C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023" -DWIN_WDK_INCLUDE="C:/Program Files (x86)/Windows Kits/10/Include/10.0.17763.0" -DBOOST_DIR=D:/work/temp/006/boost_1_70_0_install -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 ..
+.................................................................................................................................................................................................
+
+cmake -G"Visual Studio 15 2017 Win64" -DTARGET_ARCHITECTURE_BITS=64 -DOGLP_PAL_DIR=../icd/imported/jacob/pal -DOGLP_SC_DIR=../icd/imported/jacob/sc -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 ..
+
+cmake -G"Visual Studio 15 2017 Win64" -DTARGET_ARCHITECTURE_BITS=64 -DBOOST_DIR=D:/dev/p4/oglp_dk/win/boost/1.70.0 -DOGLP_PAL_DIR=../icd/imported/jacob/pal -DOGLP_SC_DIR=../icd/imported/jacob/sc -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 ..
+/* cmake -G"Visual Studio 15 2017 Win64" -DTARGET_ARCHITECTURE_BITS=64 -DWIN_WDK_INCLUDE="C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0" -DBOOST_DIR=D:/dev/p4/oglp_dk/win/boost/1.70.0 -DOGLP_PAL_DIR=../icd/imported/jacob/pal -DOGLP_SC_DIR=../icd/imported/jacob/sc -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 .. */
+
+cmake -G"Visual Studio 15 2017 Win64" -DTARGET_ARCHITECTURE_BITS=64 -DWIN_WDK_INCLUDE="C:/Program Files (x86)/Windows Kits/10/Include/10.0.17763.0" -DBOOST_DIR=D:/dev/p4/oglp_dk/win/boost/1.70.0 -DOGLP_PAL_DIR=../icd/imported/jacob/pal -DOGLP_SC_DIR=../icd/imported/jacob/sc -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 ..
+
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\km
+-DWIN_WDK_INCLUDE="C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0"
+
+-DOGLP_BOOST_DIR=D:/dev/p4/oglp_dk/win/boost/1.70.0
+
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0
+-DWIN_VC_INCLUDE="C:/Program Files (x86)/Windows Kits/10/Include/10.0.18362.0"
+
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023
+
+-DWIN_VC_DIR="C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023"
+
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\jacob\pal\src\core\os\wddm\wddmThunks.h:90
+
+cmake -G"Visual Studio 15 2017 Win64" -DTARGET_ARCHITECTURE_BITS=64
+-DWIN_VC_DIR="C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023"
+-DWIN_WDK_INCLUDE="C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0"
+-DBOOST_DIR=D:/dev/p4/oglp_dk/win/boost/1.70.0
+-DOGLP_PAL_DIR=../icd/imported/jacob/pal
+-DOGLP_SC_DIR=../icd/imported/jacob/sc
+-DSC_BUILD_SP3=0
+-DPAL_BUILD_NAVI14_LITE=1 ..
+
+
+cmake -G"Visual Studio 15 2017 Win64" -DTARGET_ARCHITECTURE_BITS=64
+-DWIN_VC_DIR="C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023"
+-DWIN_WDK_INCLUDE="C:/Program Files (x86)/Windows Kits/10/Include/10.0.17763.0"
+-DBOOST_DIR=D:/work/temp/006/boost_1_70_0_install
+-DOGLP_PAL_DIR=../icd/imported/jacob/pal
+-DOGLP_SC_DIR=../icd/imported/jacob/sc
+-DSC_BUILD_SP3=0
+-DPAL_BUILD_NAVI14_LITE=1 ..
+
+D:\work\temp\006\boost_1_70_0-bin-msvc-all-32-64\boost_1_70_0
+
+mklink /d D:\work\temp\007\include D:\dev\p4\oglp_dk\win\boost\1.70.0\include
+
+https://nchc.dl.sourceforge.net/project/boost/boost-binaries/1.70.0/boost_1_70_0-msvc-14.1-64.exe
+
+................................................................................................................................................................................
+
+cmake_fix48 基于 cmake_fix46 ，并且使用了未 sanitized 的 gpuopen 的代码。
+
+//depot/stg/pal/shared/gpuopen/
+
+小于 CL 2005995 的最大的 CL 2005190 。
+
+workspace root:
+D:\work\dev\sync_oglp
+
+mapping:
+ //chanchen_oglp_sync/main/drivers/oglp/icd/imported/pal_stg/...
+
+local folder:
+D:\work\dev\sync_oglp\main\drivers\oglp\icd\imported\pal_stg\...
+
+mklink D:\study\ogl\tutorial02_red_triangle\atio6axx.dll D:\work\dev\oglp_dev\main\drivers\oglp\build_vs2017_x64_jacob\Debug\atio6axx.dll
+mklink D:\study\ogl\tutorial02_red_triangle\atio6axx.dll D:\work\dev\oglp_dev\main\drivers\oglp\build_vs2017_x64_jacob\Release\atio6axx.dll
+
+................................................................................................................................................................................
+
+cd ${OGLP_SRC_CL2006224}
+mkdir build
+cd build
+cmake -G"Visual Studio 15 2017 Win64" -DTARGET_ARCHITECTURE_BITS=64 ..
+cmake --build . --target glapi
+
+
+cmake -G"Visual Studio 15 2017 Win64" -DTARGET_ARCHITECTURE_BITS=64 -DOGLP_PAL_DIR=../icd/imported/jacob/pal -DOGLP_SC_DIR=../icd/imported/jacob/sc -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 ..
+
+main/drivers/oglp/test/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/external/kc-cts/src/GTF_ES/glsl/GTF/GL3Tests/fragment_coord_conventions/fragment_coord_conventions_32_no_origin_upper_left_pixel_center_integer_multisample.frag
+................................................................................................................................................................................
+
+//depot/stg/xgl/codeSanitizerConfig/...	//chanchen_oglp_sync/depot/stg/xgl/codeSanitizerConfig/...
+//depot/stg/xgl/codeSanitizerConfig/...	//chanchen_oglp_sync/depot/stg/xgl/codeSanitizerConfig/...
+
+
+
+
+
+
+
+    OPENSOURCE = $(DK_ROOT)/codeSanitizer/codeSanitizer.py --config-path codeSanitizerConfig/$(CS_CUST_CONFIG) --in-place -l $(DEPTH)/logfile.txt --strip-code --license-code --format-whitespace -d --keyword-checker
+
+    codeSanitizer.py --config-path codeSanitizerConfig/$(CS_CUST_CONFIG) --in-place -l $(DEPTH)/logfile.txt --strip-code --license-code --format-whitespace -d --keyword-checker
+0001-CMake-config-successfully.patch
+0002-fix-build-error-of-OGLP-main-drivers-oglp-icd-import.patch
+0003-Fix-build-error-of-cross-platform.patch
+0004-Add-DD_PLATFORM_WINDOWS_UM-1-macro.patch
+0005-Add-files-of-WinPipeMsgTransport-but-still-cannot-be.patch
+0006-messageChannel.cpp-is-built-successfully.patch
+0007-Skip-gpuopen-target.patch
+0008-Add-gpuopen-inc.patch
+0009-Change-to-PUBLIC-for-gpuopen.patch
+0010-Skip-code-by-define-macro-SCPC_BUILD_VAN_GOGH_LITE.patch
+0011-Skip-static_assert.patch
+0012-Remove-.pixelShaderInvokeMask-property.patch
+................................................................................................................................................................................
+
+下载 sdk 18362
+https://developer.microsoft.com/en-us/windows/downloads/sdk-archive
+
+https://docs.microsoft.com/en-us/windows-hardware/drivers/other-wdk-downloads
+Windows 10, version 1709	WDK for Windows 10, version 1709
+Windows 10, version 1709	EWDK for Visual Studio with Build Tools 15.6 (Recommended) 
+
+https://developer.microsoft.com/en-us/windows/hardware/license-terms-EWDK
+EWDK for Windows 10, version 1709 with Visual Studio Build Tools 15.6
+
+D:\work\temp\004
+C:\Program Files (x86)\Windows Kits\10
+
+cd D:\work\dev\oglp_dev\main\drivers\oglp\build_vs2017_x64
+cmake -G"Visual Studio 15 2017 Win64" -DTARGET_ARCHITECTURE_BITS=64 -DOGLP_PAL_DIR=../icd/imported/pal -DOGLP_SC_DIR=../icd/imported/sc -DPAL_BUILD_GPUOPEN=0 ..
+
+cd D:\work\dev\oglp_dev\main\drivers\oglp\build_vs2017_x86
+
+
+..........................................................
+
+mkdir D:\work\dev\oglp_dev\main\drivers\oglp\build_vs2017_x64_jacob
+cd D:\work\dev\oglp_dev\main\drivers\oglp\build_vs2017_x64_jacob
+cmake -G"Visual Studio 15 2017 Win64" -DTARGET_ARCHITECTURE_BITS=64 -DOGLP_PAL_DIR=../icd/imported/jacob/pal -DOGLP_SC_DIR=../icd/imported/jacob/sc -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 ..
+
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\jacob\pal\shared\gpuopen\core\CMakeLists.txt:102
+
+copy d:\work\dev\sync_oglp\depot\stg\xgl\icd\imported\sc\Chip\sp3\CMakeLists.txt D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\jacob\sc\Chip\sp3
+D:\work\temp\004\vk\drivers\xgl\icd\imported\sc\Chip\sp3
+
+g_palEventTracing64.h
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\jacob\pal\src\util\win\winSystemEvent.cpp
+
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\pal
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\jacob\pal
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\jacob\pal
+
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\pal\shared\gpuopen\src\ddSocket.h
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\jacob\pal\shared\gpuopen\src\ddSocket.h
+
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\pal\shared\gpuopen\src\messageChannel.cpp
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\jacob\pal\shared\gpuopen\src\messageChannel.cpp
+
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\jacob\pal\shared\gpuopen\src\messageChannel.cpp:21
+
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\pal\shared\gpuopen\core\CMakeLists.txt
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\jacob\pal\shared\gpuopen\core\CMakeLists.txt
+
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\pal\shared\gpuopen\src\win\ddWinPipeMsgTransport.h
+
+git grep -n ddWinPipeMsgTransport.h -- '*.h'
+
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\jacob\pal\shared\gpuopen\src\win\ddWinKmIoCtlDevice.h
+
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\imported\jacob\pal\shared\gpuopen\inc\winKernel\ddIoCtlDefines.h
+
+d:\dev\p4\oglp_dk\depot\dk\lnx\codeSanitizer
+[‎9/‎30/‎2019 3:16 PM]  Yu, Evelyn:  
+D:\perforce\evelyn-dbg1666\main\PerfTool\GFXBench\Windows\gfxbench_gles-cmdline-vs2017>testfw_app.exe --gfx egl -w 1920 -h 1080 --gl_api gles -t gl_manhattan_off 
+ 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+62a60000 62a80000   atiglpxx 
+
+62a67440 8d442418        lea     eax,[esp+18h]
+62a67444 50              push    eax
+62a67445 ff1558b0a762    call    dword ptr [atiglpxx!DllMain+0x133ec (62a7b058)]
+
+62a67440 - 62a60000 = 7440
+7440 - 1000 + 400 = 6840 (文件跳转位置)
+
+17b60 (文件修补代码起始位置)
+
+17b60 - 400 + 1000 = 18760
+
+18760 + 62a60000 = 62a78760
+
+0:000>  u 62a67440 L4
+atiglpxx+0x7440:
+62a67440 e9 1b 13 01 00      jmp     atiglpxx!DllMain+0x10af4 (62a78760)
+62a67445 ff 15 58 b0 a7 62   call    dword ptr [atiglpxx!DllMain+0x133ec (62a7b058)]
+
+0:000>  u 62a78760 L14
+atiglpxx!DllMain+0x10af4:
+62a78760 8d 44 24 18     lea     eax,[esp+18h]
+62a78764 51              push    ecx
+62a78765 52              push    edx
+62a78766 8b c8           mov     ecx,eax
+62a78768 8a 11           mov     dl,byte ptr [ecx]
+62a7876a 20 d2           and     dl,dl
+62a7876c 74 0b           je      atiglpxx!DllMain+0x10b0d (62a78779)
+62a7876e 80 fa 5c        cmp     dl,5Ch
+62a78771 75 03           jne     atiglpxx!DllMain+0x10b0a (62a78776)
+62a78773 8b c1           mov     eax,ecx
+62a78775 40              inc     eax
+62a78776 41              inc     ecx
+62a78777 eb ef           jmp     atiglpxx!DllMain+0x10afc (62a78768)
+62a78779 5a              pop     edx
+62a7877a 59              pop     ecx
+62a7877b 50              push    eax
+62a7877c e9 c4 ec fe ff      jmp     atiglpxx+0x7445 (62a67445)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+75c959e0          KERNEL32!LoadLibraryWStub (<no parameter info>)
+75c95980          KERNEL32!LoadLibraryAStub (<no parameter info>)
+75c959a0          KERNEL32!LoadLibraryExAStub (<no parameter info>)
+75c959c0          KERNEL32!LoadLibraryExWStub (<no parameter info>)
+windbg> .hh bu
+
+bu KERNEL32!LoadLibraryWStub ".echo **** LoadLibraryWStub ****;du rcx;k;g;"
+bu KERNEL32!LoadLibraryAStub ".echo **** LoadLibraryAStub ****;dc rcx;k;g;"
+bu KERNEL32!LoadLibraryExAStub ".echo **** LoadLibraryExAStub ****;dc rcx;k;g;"
+bu KERNEL32!LoadLibraryExWStub ".echo **** LoadLibraryExWStub ****;du rcx;k;g;"
+
+32 位的 LoadLibraray 系列函数，参数在 ebx 中。
+
+bu KERNEL32!LoadLibraryWStub ".echo **** LoadLibraryWStub ****;du ebx;k;"
+bu KERNEL32!LoadLibraryAStub ".echo **** LoadLibraryAStub ****;dc ebx;k;"
+bu KERNEL32!LoadLibraryExAStub ".echo **** LoadLibraryExAStub ****;dc ebx;k;"
+bu KERNEL32!LoadLibraryExWStub ".echo **** LoadLibraryExWStub ****;du ebx;k;"
+
+68db0000 68e8f000   OPENGL32 
+
+68dced78 0f8433010000    je      OPENGL32!pgldrvLoadAndAllocDriverInfo+0x16b (68dceeb1)
+68dced7e 8d7704          lea     esi,[edi+4]
+68dced81 56              push    esi
+68dced82 ff158451e868    call    dword ptr [OPENGL32!_imp__LoadLibraryW (68e85184)]
+
+1ed7e - 1000 + 400 = (文件位置) 1e17e
+
+b4620 (文件修补代码起始位置)
+
+jmp 68dced82
+
+68e65220 e95d9bf6ff      jmp     OPENGL32!pgldrvLoadAndAllocDriverInfo+0x3c (68dced82)
+68e65225 e90ac01997      jmp     00001234
+68e6522a e995ce1d97      jmp     000420c4
+68e6522f 0000            add     byte ptr [eax],al
+68e65231 0000            add     byte ptr [eax],al
+68e65233 0000            add     byte ptr [eax],al
+68e65235 0000            add     byte ptr [eax],al
+68e65237 0000            add     byte ptr [eax],al
+
+0:000> u 68dced78 L4
+OPENGL32!pgldrvLoadAndAllocDriverInfo+0x32:
+68dced78 0f8433010000    je      OPENGL32!pgldrvLoadAndAllocDriverInfo+0x16b (68dceeb1)
+68dced7e 8d7704          lea     esi,[edi+4]
+68dced81 56              push    esi
+68dced82 ff158451e868    call    dword ptr [OPENGL32!_imp__LoadLibraryW (68e85184)]
+
+68dced78 - 68db0000 - 1000 + 400 = (文件位置)
+
+0:000> u 68e65226 L 13
+OPENGL32!ext-ms-win-dx-ddraw-l1-1-0_NULL_THUNK_DATA_DLB+0x21aa:
+
+685c5220 0f 84 8b 9c f6 ff    je      OPENGL32!pgldrvLoadAndAllocDriverInfo+0x16b (6852eeb1)
+68e65226 8d 77 04          lea     esi,[edi+4]
+68e65229 50                push    eax
+68e6522a 52                push    edx
+68e6522b 8b c6             mov     eax,esi
+68e6522d 8a 10             mov     dl,byte ptr [eax]
+68e6522f 20 d2             and     dl,dl
+68e65231 74 0d             je      OPENGL32!ext-ms-win-dx-ddraw-l1-1-0_NULL_THUNK_DATA_DLB+0x21c4 (68e65240)
+68e65233 80 fa 5c          cmp     dl,5Ch
+68e65236 75 04             jne     OPENGL32!ext-ms-win-dx-ddraw-l1-1-0_NULL_THUNK_DATA_DLB+0x21c0 (68e6523c)
+68e65238 8b f0             mov     esi,eax
+68e6523a 46                inc     esi
+68e6523b 46                inc     esi
+68e6523c 40                inc     eax
+68e6523d 40                inc     eax
+68e6523e eb ed             jmp     OPENGL32!ext-ms-win-dx-ddraw-l1-1-0_NULL_THUNK_DATA_DLB+0x21b1 (68e6522d)
+68e65240 5a                pop     edx
+68e65241 58                pop     eax
+68e65242 56                push    esi
+68e65243 e9 3a 9b f6 ff      jmp     OPENGL32!pgldrvLoadAndAllocDriverInfo+0x3c (68dced82)
+
+OPENGL32!pgldrvLoadAndAllocDriverInfo+0x32:
+68dced78 e9 a3 64 09 00      jmp     OPENGL32!ext-ms-win-dx-ddraw-l1-1-0_NULL_THUNK_DATA_DLB+0x21a4 (68e65220)
+68dced7d 90              nop
+68dced7e 90              nop
+68dced7f 90              nop
+68dced80 90              nop
+68dced81 90              nop
+68dced82 ff158451e868    call    dword ptr [OPENGL32!_imp__LoadLibraryW (68e85184)]
+68dced88 8903            mov     dword ptr [ebx],eax
+
+68510000 685ef000
+
+6852ed78
+
+1ed78 - 1000 + 400 = 1e178
+
+6852ed78 0f8433010000    je      OPENGL32!pgldrvLoadAndAllocDriverInfo+0x16b (6852eeb1)
+6852ed7e 8d7704          lea     esi,[edi+4]
+6852ed81 56              push    esi
+6852ed82 ff1584515e68    call    dword ptr [OPENGL32!_imp__LoadLibraryW (685e5184)]
+
+-------------------------------------------------------------------------------------------------------------------------
+
+修改顺序：
+
+00007ff8`fd790000 00007ff8`fd7b9000   atig6pxx   (export symbols)       D:\study\ogl\tutorial02_red_triangle\atig6pxx.dll
+
+00007ff8`fd799ea9 448935b46c0100  mov     dword ptr [atig6pxx!DllMain+0x15f6c (00007ff8`fd7b0b64)],r14d
+00007ff8`fd799eb0 488d4d70        lea     rcx,[rbp+70h]
+00007ff8`fd799eb4 ff15f6910100    call    qword ptr [atig6pxx!DllMain+0x184b8 (00007ff8`fd7b30b0)]
+
+<出发地址>
+9eb0 - 1000 + 400 = 92b0
+9ea9 - 1000 + 400 = 92a9
+
+文件中的位置，及内容：
+
+0:000> ? 00007ff8`fd7ae510 - 00007ff8`fd799ea9 - 5
+Evaluate expression: 83554 = 00000000`00014662
+
+92a9 : e9 62 46 01 00  JMP XX XX XX XX
+       00 00 00 00 00
+       00
+92b4 :       
+
+1d938 + 5 - 92b4 = FFFFFFFF e9 FF FE B9 77
+
+<返回地址>
+9eb4 - 1000 + 400 = 92b4
+
+<程序地址>
+1d910 (文件) -> 
+1d910 - 400 + 1000 = 1e510 (VA)
+00007ff8`fd799eb0
+00007ff8`fd7ae510
+
+ae517 - 99eb0 = 14667
+ae517 - 99eb4 = 14667
+
+92b4 - 1d93d = 
+
+eb 00007ff8`fd7ae510 44 89 35 67 47 01 00
+
+00007ff8`fd7ae510 4489354d260000  mov     dword ptr [atig6pxx!DllMain+0x15f6c (00007ff8`fd7b0b64)],r14d
+1d910 : 44 89 35 4d 26 00 00
+        48 8d 4d 70          lea rcx,[rbp+70h]
+
+指令分析：
+00007FF7EF8B1A60 44 89 35 CC B5 00 00 mov         dword ptr [mydata4 (07FF7EF8BD033h)],r14d  
+
+44 89 35 为机器码： move dword ptr [xx xx xx xx], r14d
+cc b5 00 00 为跳转地址的偏移：
+00007FF7EF8B1A60 + b5cc + 7 = 7FF7EF8BD033
+
+00007ff8`fd7ae510 4489354d260000  mov     dword ptr [atig6pxx!DllMain+0x15f6c (00007ff8`fd7b0b64)],r14d
+00007ff8`fd7ae517 0000            add     byte ptr [rax],al
+00007ff8`fd7ae519 0000            add     byte ptr [rax],al
+
+opengl32.dll (x64)
+------------------
+
+日志 log3.txt (D:\study\ogl\tutorial02_red_triangle\log3.txt) 中，找到 LoadLibraryWStub 调用处，从此处进行修改。
+
+用 dumpbin /headers 命令导入 opengl32.dll 的文件名，存入文件 opengl32_x64_headers.txt (D:\study\ogl\tutorial02_red_triangle\opengl32_x64_headers.txt) 。
+
+00007ff8`d7cc0000 00007ff8`d7dde000   OPENGL32   (pdb symbols) 
+
+OPENGL32!pgldrvLoadAndAllocDriverInfo+0x39:
+
+00007ff8`d7ce6bdb 498d5f04        lea     rbx,[r15+4]
+00007ff8`d7ce6bdf 488bcb          mov     rcx,rbx
+00007ff8`d7ce6be2 ff15804c0b00    call    qword ptr [OPENGL32!_imp_LoadLibraryW (00007ff8`d7d9b868)]
+
+? 00007ff8`d7ce6bdb - 00007ff8`d7cc0000
+
+0:000> ? 00007ff8`d7ce6bdb - 00007ff8`d7cc0000
+Evaluate expression: 158683 = 00000000`00026bdb
+
+180000000 image base (0000000180000000 to 000000018011DFFF)
+
+SECTION HEADER #1
+   .text name
+   D8870 virtual size
+    1000 virtual address (0000000180001000 to 00000001800D986F)
+   D8A00 size of raw data
+     400 file pointer to raw data (00000400 to 000D8DFF)
+
+文件中的位置为：
+
+26bdb - 1000 + 400 = 25fdb
+
+跳转到：
+d8c70
+
+25fdb + 5 = 25fe0
+d8c70 - 25fe0 = b2c90
+
+从 d8c70 写入如下字节：
+00007ff8`d7ce6bdb 498d5f04        lea     rbx,[r15+4]
+00007ff8`d7ce6bdf 488bcb          mov     rcx,rbx
+
+d8c70 + 7 = d8c77
+
+jmp <return>
+
+e9 xx xx xx xx
+
+计算跳转：
+
+d8c77 + 5 - 25fe2 = b2c9a
+FFFFFFFFFFF4D366
+
+返回到：
+25fdb + 7 = 25fe2
+
+跳转指令为：
+e9 66 d3 f4 ff
+
+JMP 示例：
+00007ff8`d7ce6eef e9db000000      jmp     OPENGL32!LoadAvailableDrivers+0x18f (00007ff8`d7ce6fcf)
+
+Patch 了跳转指令，还未 Path 替换指令
+opengl32 - Copy - Patch_Step1.dll
+
+00007ff6`6aa91610 50              push    rax
+00007ff6`6aa91611 52              push    rdx
+00007ff6`6aa91612 488bc1          mov     rax,rcx
+00007ff6`6aa91615 8a10            mov     dl,byte ptr [rax]
+00007ff6`6aa91617 22d2            and     dl,dl
+00007ff6`6aa91619 7410            je      hello!func+0x1b (00007ff6`6aa9162b)
+00007ff6`6aa9161b 80fa5c          cmp     dl,5Ch
+00007ff6`6aa9161e 7506            jne     hello!func+0x16 (00007ff6`6aa91626)
+00007ff6`6aa91620 488bc8          mov     rcx,rax
+00007ff6`6aa91623 48ffc1          inc     rcx
+00007ff6`6aa91623 48ffc1          inc     rcx
+00007ff6`6aa91626 48ffc0          inc     rax
+00007ff6`6aa91626 48ffc0          inc     rax
+00007ff6`6aa91629 ebf0            jmp     hello!func+0x5 (00007ff6`6aa91615) *
+00007ff6`6aa9162b 5a              pop     rdx
+00007ff6`6aa9162c 58              pop     rax
+
+d8c90 + 9 = d8c99 <end>
+25fe2 <return> - d8c99 <end> = fff4d349
+fff4d349 + 6 = fff4d34f
+
+25fe2 <return> - d8c9f <end> = fff4d343
+
+跳转返回指令为：
+e9 49 d3 f4 ff
+e9 4f d3 f4 ff
+e9 43 d3 f4 ff
+
+
+00007ff7`0aef1a60 50              push    rax
+00007ff7`0aef1a61 52              push    rdx
+00007ff7`0aef1a62 488bc1          mov     rax,rcx
+00007ff7`0aef1a65 8a10            mov     dl,byte ptr [rax]
+00007ff7`0aef1a67 22d2            and     dl,dl
+00007ff7`0aef1a69 7416            je      hello!func+0x21 (00007ff7`0aef1a81)
+00007ff7`0aef1a6b 80fa5c          cmp     dl,5Ch
+00007ff7`0aef1a6e 7509            jne     hello!func+0x19 (00007ff7`0aef1a79)
+00007ff7`0aef1a70 488bc8          mov     rcx,rax
+00007ff7`0aef1a73 48ffc1          inc     rcx
+00007ff7`0aef1a76 48ffc1          inc     rcx
+00007ff7`0aef1a79 48ffc0          inc     rax
+00007ff7`0aef1a7c 48ffc0          inc     rax
+00007ff7`0aef1a7f ebe4            jmp     hello!func+0x5 (00007ff7`0aef1a65)
+00007ff7`0aef1a81 5a              pop     rdx
+00007ff7`0aef1a82 58              pop     rax
+
+00007ff7`0aef1a83 488bc1          mov     rax,rcx
+00007ff7`0aef1a86 c3              ret
+
+
+
+atig6pxx.dll (x64)
+------------------
+
+opengl32.dll (x86)
+------------------
+
+atig6pxx.dll (x86)
+------------------
+
+cc int 3
+
+D:\work\dev\apple_dev\microbench\Version.h
+D:\work\dev\apple_dev\microbench\Version.rc
+
+D:\work\dev\oglp_dev\main\drivers\oglp\icd\glapi\common
+
+
+if not exist D:\work\dev\oglp_dev\main\drivers\oglp\icd\res mkdir D:\work\dev\oglp_dev\main\drivers\oglp\icd\res
+copy D:\work\dev\apple_dev\microbench\Version.h D:\work\dev\oglp_dev\main\drivers\oglp\icd\res
+copy D:\work\dev\apple_dev\microbench\Version.rc D:\work\dev\oglp_dev\main\drivers\oglp\icd\res
+
+
+
+
+
+macro 参数传递、变量覆盖、代码展开
+
+list 使用方法
+
+Overlay build 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DIR:
+D:\work\dev\sync_oglp\main\drivers\oglp\build_pal
+
+CMD:
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DTARGET_ARCHITECTURE_BITS=32 -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake -DOGLP_USE_STG_PAL=1 ..
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DTARGET_ARCHITECTURE_BITS=32 -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake -DOGLP_USE_STG_PAL=1 -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
+
+OUTPUT:
+pal.lib(computePipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_context_init
+pal.lib(graphicsPipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_context_init
+pal.lib(pipelineBuilder.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_context_init
+pal.lib(gpuProfilerPipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_context_init
+pal.lib(relocatableShader.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_context_init
+pal.lib(pipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_context_init
+pal.lib(gfx9RelocatablePs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_unsigned
+pal.lib(pipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_unsigned
+pal.lib(computePipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_unsigned
+pal.lib(graphicsPipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_unsigned
+pal.lib(relocatableShader.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_unsigned
+pal.lib(gfx6RelocatableCs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_unsigned
+pal.lib(gfx6RelocatablePs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_unsigned
+pal.lib(gfx9RelocatableCs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_unsigned
+pal.lib(pipelineBuilder.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_unsigned
+pal.lib(gfx6GraphicsPipelineBuilder.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_unsigned
+pal.lib(gfx9GraphicsPipelineBuilder.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_unsigned
+pal.lib(gpuProfilerPipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_unsigned
+pal.lib(pipelineBuilder.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_array_size
+pal.lib(gfx6RelocatableCs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_array_size
+pal.lib(gfx9RelocatableCs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_array_size
+pal.lib(computePipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_map_size
+pal.lib(graphicsPipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_map_size
+pal.lib(pipelineBuilder.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_map_size
+pal.lib(gpuProfilerPipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_map_size
+pal.lib(relocatableShader.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_map_size
+pal.lib(pipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_map_size
+pal.lib(gfx9RelocatableGs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_str
+pal.lib(gfx9RelocatableHs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_str
+pal.lib(gfx9RelocatablePs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_str
+pal.lib(gfx6RelocatableCs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_str
+pal.lib(gfx6RelocatablePs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_str
+pal.lib(gfx9RelocatableCs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_str
+pal.lib(gfx9RelocatableVs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_str
+pal.lib(pipelineBuilder.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_str
+pal.lib(gfx6GraphicsPipelineBuilder.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_str
+pal.lib(gfx9GraphicsPipelineBuilder.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_str
+pal.lib(relocatableShader.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_str
+pal.lib(pipelineBuilder.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_insert
+pal.lib(relocatableShader.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_insert
+pal.lib(gfx6GraphicsPipelineBuilder.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_boolean
+pal.lib(gfx9GraphicsPipelineBuilder.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_boolean
+pal.lib(relocatableShader.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_boolean
+pal.lib(gpuProfilerPipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_unpack_next
+pal.lib(pipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_unpack_next
+pal.lib(computePipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_unpack_next
+pal.lib(graphicsPipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_unpack_next
+pal.lib(gfx6ComputePipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_unpack_next
+pal.lib(gfx6GraphicsPipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_unpack_next
+pal.lib(gfx9ComputePipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_unpack_next
+pal.lib(gfx9GraphicsPipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_unpack_next
+pal.lib(gpuProfilerPipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_unpack_context_init
+pal.lib(pipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_unpack_context_init
+pal.lib(computePipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_unpack_context_init
+pal.lib(graphicsPipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_unpack_context_init
+pal.lib(gpuProfilerPipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_skip_items
+pal.lib(pipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_skip_items
+pal.lib(computePipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_skip_items
+pal.lib(graphicsPipeline.cpp.obj) : error LNK2001: unresolved external symbol _cw_skip_items
+pal.lib(gfx9RelocatableCs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_signed
+pal.lib(gfx9RelocatableVs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_signed
+pal.lib(gfx9RelocatableGs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_signed
+pal.lib(gfx9RelocatableHs.cpp.obj) : error LNK2001: unresolved external symbol _cw_pack_signed
+atioglxx.dll : fatal error LNK1120: 11 unresolved externals
+ninja: build stopped: subcommand failed.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DIR:
+D:\work\dev\sync_oglp\main\drivers\oglp\build_ninja
+
+CMD:
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DTARGET_ARCHITECTURE_BITS=32 -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+\
+
+D:\work\dev\oglp_dev\main\drivers\oglp\build_ninja_vs>"d:\dev\p4\oglp_dk\win\vc\14.14.26428\bin\Hostx64\x64\cl.exe"
+Microsoft (R) C/C++ Optimizing Compiler Version 19.14.26428.1 for x64
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+usage: cl [ option... ] filename... [ /link linkoption... ]
+
+D:\work\dev\oglp_dev\main\drivers\oglp\build_ninja_vs>"d:\dev\p4\oglp_dk\win\vc\14.14.26428\bin\Hostx64\x64\link.exe"
+Microsoft (R) Incremental Linker Version 14.14.26428.1
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+usage: LINK [options] [files] [@commandfile]
+
+Visual Studio 2017 bundled CL and LINK version:
+
+D:\work\dev\oglp_dev\main\drivers\oglp\build_ninja_vs>"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64\cl.exe"
+Microsoft (R) C/C++ Optimizing Compiler Version 19.16.27030.1 for x64
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+usage: cl [ option... ] filename... [ /link linkoption... ]
+
+D:\work\dev\oglp_dev\main\drivers\oglp\build_ninja_vs>"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64\link.exe"
+Microsoft (R) Incremental Linker Version 14.16.27030.1
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+REPLACE
+-------
+
+rename "d:\dev\p4\oglp_dk\win\vc\14.14.26428\bin\Hostx64\x64\cl.exe" "cl.exe.14.14.26428" 
+mklink "d:\dev\p4\oglp_dk\win\vc\14.14.26428\bin\Hostx64\x64\cl.exe" "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64\cl.exe"
+
+rename "d:\dev\p4\oglp_dk\win\vc\14.14.26428\bin\Hostx64\x64\link.exe" "link.exe.14.14.26428"
+mklink "d:\dev\p4\oglp_dk\win\vc\14.14.26428\bin\Hostx64\x64\link.exe" "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64\link.exe"
+
+RESTORE
+-------
+
+rename "d:\dev\p4\oglp_dk\win\vc\14.14.26428\bin\Hostx64\x64\cl.exe" "cl.exe.link" 
+rename "d:\dev\p4\oglp_dk\win\vc\14.14.26428\bin\Hostx64\x64\cl.exe.14.14.26428"  "cl.exe"
+
+rename "d:\dev\p4\oglp_dk\win\vc\14.14.26428\bin\Hostx64\x64\link.exe" "link.exe.link"
+rename "d:\dev\p4\oglp_dk\win\vc\14.14.26428\bin\Hostx64\x64\link.exe.14.14.26428" "link.exe"
+
+CLEAN
+-----
+
+del  "d:\dev\p4\oglp_dk\win\vc\14.14.26428\bin\Hostx64\x64\cl.exe.link"
+del "d:\dev\p4\oglp_dk\win\vc\14.14.26428\bin\Hostx64\x64\link.exe.link"
+
+CMake 变量
+
+变量是 CMake 语言的基本单元。它们的值总是字符串类型，尽量一些命令会把字符串解释成其它类型的值。
+set() 和 unset() 命令可以明确的设置和删除一个变量，但是其它命令也拥有一些语义可以修改变量。
+
+
+
+7/24/2019 10:32:49 AM
+=====================
+
+DK:
+---
+
+Server:
+shswp4p1:1665
+
+Workspace name:
+chanchen_dk_oglp2
+
+Workspace root:
+d:\dev\p4\oglp_dk2
+
+//depot/dk/win/python/3.6/... //chanchen_dk_oglp2/win/python/3.6/...
+//depot/dk.pre/win/vc/14.14.26428/... //chanchen_dk_oglp2/win/vc/14.14.26428/...
+//depot/dk.pre/win/ms_wdk/n18351/... //chanchen_dk_oglp2/win/ms_wdk/n18351/...
+//depot/dk.pre/win/ms_sdk/n18351/... //chanchen_dk_oglp2/win/ms_sdk/n18351/...
+//depot/dk/win/java/jdk1.6.0_23/... //chanchen_dk_oglp2/win/java/...
+//depot/dk/win/boost/1.70.0/... //chanchen_dk_oglp2/win/boost/1.70.0/...
+//depot/dk/win/bin/find_dk_root.exe //chanchen_dk_oglp2/win/bin/find_dk_root.exe
+//depot/dk/win/perl/5.16.1/... //chanchen_dk_oglp2/win/perl/5.16.1/...
+//depot/dk/win/cmake/cmake-3.12.1-win64-x64/... //chanchen_dk_oglp2/win/cmake/cmake-3.12.1-win64-x64/...
+//depot/dk/win/ninja/1.7.2/... //chanchen_dk_oglp2/win/ninja/1.7.2/...
+
+OGLP:
+---
+
+Server:
+shswp4p1:1666
+
+Workspace name:
+chanchen_oglp_sync2
+
+Workspace root:
+D:\work\dev\sync_oglp2
+
+//depot/main/drivers/adl/... //chanchen_oglp_sync2/main/drivers/adl/...
+//depot/main/drivers/inc/... //chanchen_oglp_sync2/main/drivers/inc/...
+//depot/main/drivers/pxproxy/... //chanchen_oglp_sync2/main/drivers/pxproxy/...
+//depot/stg/make/cmake/... //chanchen_oglp_sync2/main/make/cmake/...
+//depot/stg/oglp/drivers/oglp/... //chanchen_oglp_sync2/main/drivers/oglp/...
+
+Environment Variable:
+---------------------
+
+Set DK_ROOT=d:/dev/p4/oglp_dk2/win
+Set PATH=%DK_ROOT%\bin;%PATH%
+Set PATH=%DK_ROOT%\python\3.6;%PATH%
+Set PATH=%DK_ROOT%\perl\5.16.1\bin;%PATH%
+Set PATH=%DK_ROOT%\cmake\cmake-3.12.1-win64-x64\bin;%PATH%
+Set PATH=%DK_ROOT%\ninja\1.7.2;%PATH%
+
+//depot/main/drivers/adl/...
+//depot/main/drivers/inc/...
+//depot/main/drivers/pxproxy/...
+//depot/stg/make/cmake/...
+//depot/stg/oglp/drivers/oglp/...
+
+p4 -c chanchen_oglp_sync2 -m 100 //depot/main/drivers/adl/...  //depot/main/drivers/inc/...  //depot/main/drivers/pxproxy/...  //depot/stg/make/cmake/...  //depot/stg/oglp/drivers/oglp/...
+
+
+4/22/2019 1:43:08 PM
+
+Tutorial: How to run local webgl apps with Chrome
+http://voxelent.com/local-chrome/
+
+start chrome --allow-file-access-from-files
+
+4/19/2019 5:47:41 PM
+157794
+157979
+DXGI_FORMAT_R32G8X24_TYPELESS
+HitmanPro_DX12_Scene1_3840x2160_Ultra.zip.xml
+
+        desc.Format = DXGI_FORMAT_R24G8_TYPELESS;
+        pOptimizedClearValue[0].Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+
+RenderFrame_1_2.cpp - RenderFrame_1_24.cpp: (10530) Crash, cannot generate log
+RenderFrame_1_2.cpp - RenderFrame_1_2.cpp: (9862) Crash, HitmanPro_DX12_Scene1_3840x2160_Ultra_2019.03.14_07.35.41_frame3.rdc
+RenderFrame_1_2.cpp - RenderFrame_1_2.cpp: (5891) Generated the LOG, HitmanPro_DX12_Scene1_3840x2160_Ultra_2019.03.14_08.17.23_frame3
+
+
+
+HitmanPro_DX12_Scene1_3840x2160_Ultra_2019.03.14_09.42.33_frame3.rdc
+
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_2.cpp(622):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(1, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_2.cpp(5263):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(1, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_2.cpp(5891):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(1, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_2.cpp(9862):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(1, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_21.cpp(1451):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(5, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_21.cpp(1471):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(4, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_23.cpp(15504):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(52)->ExecuteCommandLists(1, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_23.cpp(15620):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(2, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_23.cpp(15641):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(1, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_24.cpp(10510):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(4, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_24.cpp(10530):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(4, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_27.cpp(1616):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(2, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_27.cpp(5013):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(10, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_27.cpp(6905):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(1, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_27.cpp(10913):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(1, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_27.cpp(13466):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(2, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_29.cpp(857):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(1, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_29.cpp(880):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(7, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_30.cpp(3529):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(1, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_30.cpp(3552):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(7, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_30.cpp(7949):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(4, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_30.cpp(7970):        CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(1, ppCommandLists));
+  D:\work\dev\apple_dev\ShaderBench\build\shaderbench\HitmanPro_DX12_Scene1_3840x2160_Ultra\src\RenderFrame_1_39.cpp(3886):    //    CALL_API_VOID(GetHandle<ID3D12CommandQueue *>(17)->ExecuteCommandLists(1, ppCommandLists));
+
+
+
+
+
+[17:21:43.022] <thread 1068> [GAL] ERROR: (vulkandevice.cpp, line 78: VlkDebugReportCallback): [Validation] Code 0 :  [ VUID-vkCreateDevice-ppEnabledExtensionNames-01387 ] Object: 0x1d5022e7690 (Type = 1) | Missing required extensions for device extension VK_KHR_device_group, VK_KHR_device_group_creation. The Vulkan spec states: All required extensions for each extension in the VkDeviceCreateInfo::ppEnabledExtensionNames list must also be present in that list. (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VUID-vkCreateDevice-ppEnabledExtensionNames-01387)
+[17:21:43.028] <thread 1068> [GAL] ERROR: (vulkandevice.cpp, line 78: VlkDebugReportCallback): [Validation] Code 0 :  [ VUID-vkCreateDevice-ppEnabledExtensionNames-01387 ] Object: 0x1d5022e7690 (Type = 1) | Missing required extensions for device extension VK_KHR_external_fence, VK_KHR_external_fence_capabilities. The Vulkan spec states: All required extensions for each extension in the VkDeviceCreateInfo::ppEnabledExtensionNames list must also be present in that list. (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VUID-vkCreateDevice-ppEnabledExtensionNames-01387)
+[17:21:43.032] <thread 1068> [GAL] ERROR: (vulkandevice.cpp, line 78: VlkDebugReportCallback): [Validation] Code 0 :  [ VUID-vkCreateDevice-ppEnabledExtensionNames-01387 ] Object: 0x1d5022e7690 (Type = 1) | Missing required extensions for device extension VK_KHR_external_memory, VK_KHR_external_memory_capabilities. The Vulkan spec states: All required extensions for each extension in the VkDeviceCreateInfo::ppEnabledExtensionNames list must also be present in that list. (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VUID-vkCreateDevice-ppEnabledExtensionNames-01387)
+[17:21:43.037] <thread 1068> [GAL] ERROR: (vulkandevice.cpp, line 78: VlkDebugReportCallback): [Validation] Code 0 :  [ VUID-vkCreateDevice-ppEnabledExtensionNames-01387 ] Object: 0x1d5022e7690 (Type = 1) | Missing required extensions for device extension VK_KHR_external_semaphore, VK_KHR_external_semaphore_capabilities. The Vulkan spec states: All required extensions for each extension in the VkDeviceCreateInfo::ppEnabledExtensionNames list must also be present in that list. (https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VUID-vkCreateDevice-ppEnabledExtensionNames-01387)
+[17:21:43.062] <thread 1068> [GAL] ERROR: (vulkandevice.cpp, line 78: VlkDebugReportCallback): [Validation] Code 0 :  [ VUID_Undefined ] Object: VK_NULL_HANDLE (Type = 0) | Device Extension VK_AMD_calibrated_timestamps is not supported by this layer.  Using this extension may adversely affect validation results and/or produce undefined behavior.
+[17:21:43.066] <thread 1068> [GAL] ERROR: (vulkandevice.cpp, line 78: VlkDebugReportCallback): [Validation] Code 0 :  [ VUID_Undefined ] Object: VK_NULL_HANDLE (Type = 0) | Device Extension VK_AMD_gpa_interface is not supported by this layer.  Using this extension may adversely affect validation results and/or produce undefined behavior.
+
+
+Microbench
+-configfile Microbench_no_validate.json -Global EnableDumpImage=1 DumpImageFileType=DDS DumpFolder=Golden4 TestCaseId=0-5 -Tests CSAlu,CSFillRate,CsMandelbrot
+-configfile Microbench_no_validate.json -Global VerificationMode=1 VerificationRef=Golden_Image GoldenImageFolder=Golden4 -Tests CSAlu -CSAlu TestCaseId=0-5
+
+-configfile Microbench_no_validate.json -Global EnableDumpImage=1 DumpImageFileType=DDS DumpFolder=Golden4 TestCaseId=0-10 -Tests CSAlu,CSFillRate,CsMandelbrot
+-configfile Microbench_no_validate.json -Global VerificationMode=1 VerificationRef=Golden_Image GoldenImageFolder=Golden4_C TestCaseId=0-10 -Tests CSAlu,CSFillRate,CsMandelbrot
+
+-configfile Microbench_no_validate.json -Global VerificationMode=1 VerificationRef=Golden_Image GoldenImageFolder=Golden4_C -Tests CSAlu -CSAlu TestCaseId=0-1
+
+-configfile ShaderBench_validate_debug_false.json -Global VerificationMode=1 VerificationRef=Golden_Image GoldenImageFolder=Dump WarmupFrames=0 TestFrames=1  TestCaseId=0-160,163-258,260-
+
+-configfile ShaderBench_validate_debug_false.json -Global EnableDumpImage=1 DumpImageFileType=DDS WarmupFrames=0 TestFrames=1 TestCaseId=161
+
+
+D:\work\dev\apple_dev\framework\src\GalBaseTest.cpp:194
+void GalBaseTest::DestroyDevice()
+
+!!! CRASH
+-Global VerificationMode=1 GoldenImageFolder=Golden3 WarmupFrames=0 TestFrames=1  TestCaseId=1
+
+D:\work\dev\apple_dev\framework\src\GalBaseTest.cpp:399
+int32_t GalBaseTest::OnGetVerificationData(VerificationDataList &verificationDataList, std::string& reason)  获取 ImageView 和 BufferView 的数据。
+
+D:\work\dev\apple_dev\common\src\DumpFile.cpp:105
+std::string GenerateBufferFileFullPath(const std::string& dumpFolder, const std::string& dumpFileNamePrefix, uint32_t idx, DumpFileNaming naming) 生成 Buffer 文件名。
+
+D:\work\dev\apple_dev\api\galu\src\galuResourceUtil.cpp:321
+void galuResourceUtil::DumpToBufferFile(uint32_t idx, gal::IBuffer* pSrcBuffer, gal::ResourceState currentState) 输出 Buffer 内容到文件。
+
+
+-Global VerificationMode=0 DumpImageFolder=Golden3 WarmupFrames=0 TestFrames=1 EnableDumpImage=1 DumpImageFileType=DDS TestCaseId=0-160,162-
+-Global VerificationMode=1 GoldenImageFolder=Golden3 VerificationRef=GOLDEN_IMAGE  WarmupFrames=0 TestFrames=1 EnableDumpImage=0 TestCaseId=0
+
+161,162
+259
+
+160,258 R32_SFLOAT
+
+
+--------------------------------------------------------------------------------
+
+-Global VerificationMode=0 DumpImageFolder=Golden3 WarmupFrames=0 TestFrames=1 EnableDumpImage=1 DumpImageFileType=DDS TestCaseId=0
+-Global VerificationMode=1 GoldenImageFolder=Golden3 VerificationRef=GOLDEN_IMAGE  WarmupFrames=0 TestFrames=1 EnableDumpImage=0 TestCaseId=0
+
+--------------------------------------------------------------------------------
+
+-Global VerificationMode=1 GoldenImageFolder=Dump2 VerificationRef=GOLDEN_IMAGE  WarmupFrames=0 TestFrames=1 EnableDumpImage=0 TestCaseId=0-1
+
+--------------------------------------------------------------------------------
+
+
+
+在 TestProxy::OnVerifyResult 中，调用 OnGetVerificationData 时，竟然调用的是 GalBaseTest::OnGetVerificationData 。
+当前 API 为 Vulkan ，BaseTest 所指为 vulkan::BaseTest
+
+ 	shaderbench.exe!GalBaseTest::OnGetVerificationData(std::vector<VerificationData,std::allocator<VerificationData> > & verificationDataList, std::basic_string<char,std::char_traits<char>,std::allocator<char> > & reason) Line 407	C++
+ 	shaderbench.exe!TestProxy::OnVerifyResult() Line 2447	C++ 
+>	shaderbench.exe!TestContext::RunTestCase(unsigned int testCaseId, unsigned int frameIdx) Line 332	C++
+ 	shaderbench.exe!ShaderTestScheduler::TickState() Line 80	C++
+ 	shaderbench.exe!TestScheduler::Tick() Line 47	C++
+ 	shaderbench.exe!TestContainer::Tick() Line 2844	C++
+ 	shaderbench.exe!BenchApp::Process() Line 505	C++
+ 	shaderbench.exe!main(int argc, const char * * argv) Line 104	C++
+
+--------------------------------------------------------------------------------
 
 -Global VerificationMode=1 -Tests PrimSetup -PrimSetup VertexCount=100000
 -Global VerificationMode=2 -Tests PrimSetup -PrimSetup VertexCount=100000
@@ -340,3 +1417,461 @@ d:\work\dev\dk_upgrade_dev\framework\src\GllBaseTest.cpp:239
         pResourceUtil->SetDumpFolder(GetCurDumpFolder());
         pResourceUtil->SetDumpFileNamePrefix(GetCurDumpFileNamePrefix());
         pResourceUtil->SetImagePresentOrDumpType(m_pTestHelper->GetDumpImageFileType(), m_pTestHelper->GetDepthPresentOrDumpType());
+
+12/3/2018 7:33:26 PM
+====================
+\\gfxbench\Archive\Release\FrameBench\18.10.26\RunAllTests.py
+\\oglserver\Incoming\Rocky\WeeklyTestRawData\2018-12-03-man00001_ShaderBench_weekly\NV1080GTX_win_result\1\001
+
+12/4/2018 10:48:30 AM
+---------------------
+RefApi 必须在 VerificationMode 之后设置，如果 RefApi 为 GOLDEN_IMAGE 设置 VerificationMode 为 NONE 。
+
+12/5/2018 2:22:34 PM
+--------------------
+Rename `RefApi`
+
+12/5/2018 2:27:36 PM
+--------------------
+TestProxy 的初始化
+
+command backup:
+-Global EnableGoldenImageVerify=1 GoldenImageFolder=./Dump/ EnableDumpImage=1 DumpImageFileType=DDS Api=D3D12 -Tests PrimSetup -PrimSetup TestCaseId=0-9 VertexCount=100000
+
+-Global  Api=D3D11,D3D12 RefApi=Vulkan VerificationMode=1 -Tests PrimSetup -PrimSetup TestCaseId=0-9 VertexCount=100000
+
+12/5/2018 2:47:30 PM
+--------------------
+创建一个 DummyTest : GoldenImageTest
++		&m_pWholeBaseTests[0]	0x0000022a502d9ff8 {0x0000000000000000 <NULL>}	BaseTest * *
+
+void TestContainer::InitProxyBaseTests(const ApiList& halApis, const ApiList& refApis)
+
+12/5/2018 3:24:44 PM
+--------------------
+BaseTest 有 OnGetVerificationData 方法
+
+12/5/2018 4:09:52 PM
+--------------------
+查找 HAL 和 REF 的窗口创建过程
+
+12/5/2018 4:19:57 PM
+--------------------
+d:\work\dev\dk_upgrade_dev\api\gll\include\Device.h:15
+gll::DeviceCreateInfo.hWindows 指定的窗口句柄用在 D3D11 的 Swapchain 的创建过程中。
+
+d:\work\dev\dk_upgrade_dev\api\gll\src\dx11\Dx11Device.cpp:211
+swapChainDesc.OutputWindow = static_cast<HWND>(m_hWnd);
+
+d:\work\dev\dk_upgrade_dev\api\gal\include\Device.h:18
+gal::DeviceCreateInfo.hWindows 指定的窗口句柄用在 D3D12 的 Swapchain 的创建过程中。
+
+D:\work\dev\dk_upgrade_dev\api\gal\src\dx12\Dx12SwapChain.cpp:30
+
+gal::DeviceCreateInfo.hWindows 指定的窗口句柄及 gal::DeviceCreateInfo.hInstance 指定的实例句柄用在 Vulkan 的 vkCreateWin32SurfaceKHR 的创建过程中。
+d:\work\dev\dk_upgrade_dev\api\gal\src\vulkan\VulkanDevice.cpp:320
+
+d:\work\dev\dk_upgrade_dev\framework\src\BaseTest.cpp:1860
+                if (m_pRefTests[i]->InitDevice())
+在 TestProxy::InitDevice 中，设置多个子窗口，并调整大小。
+
+如果 
+
+12/6/2018 10:47:35 AM
+---------------------
+添加 DummyTest ，用于生成 GoldenImage 。
+BenchApp::LoadTestContainers 根据配置文件中，读取的 Tests 信息，初始化 TestContainters 。
+
+12/6/2018 2:11:06 PM
+--------------------
+TestHelper.m_apiList
+TestHelper.m_wholeApiList 所有待测试的 api 列表，是 apiList 和 refApiList 的并集。
+
+TestContainer.m_pWholeBaseTests 所有 API 的测试集合，通过索引访问 API 对应的测试。
+
+d:\work\dev\dk_upgrade_dev\framework\src\TestContext.cpp:529
+m_pTestProxy->SetTestHelper(...)
+
+12/6/2018 5:29:36 PM
+--------------------
+Golden Image string used in test result
+
+12/6/2018 7:41:37 PM
+--------------------
+-Global  Api=D3D11,D3D12,Vulkan VerificationGoldenRef=GOLDEN_IMAGE VerificationMode=1 -Tests PrimSetup -PrimSetup TestCaseId=0-9 VertexCount=100000
+
+-Global Api=D3D11 EnableDumpImage=1 DumpImageFileType=DDS -Tests PrimSetup -PrimSetup VertexCount=100000
+
+-Global VerificationGoldenRef=GOLDEN_IMAGE VerificationMode=1 -Tests PrimSetup -PrimSetup VertexCount=100000
+
+-Global VerificationGoldenRef=GOLDEN_IMAGE VerificationMode=2 -Tests PrimSetup -PrimSetup VertexCount=100000
+
+-Global VerificationGoldenRef=GOLDEN_IMAGE VerificationMode=1 -Tests PrimSetup -PrimSetup VertexCount=100000
+
+12/7/2018 4:52:50 PM
+--------------------
+FileFormat
+
+12/11/2018 1:30:18 PM
+---------------------
+把测试跑起来。
+-Global Api=D3D11 EnableDumpImage=true -Tests PrimSetup -PrimSetup TestCaseId=0-5 VertexCount=100000
+-Global Api=D3D11 VerificationMode=1 VerificationGoldenRef=GOLDEN_IMAGE -Tests PrimSetup -PrimSetup TestCaseId=0-5 VertexCount=100000
+
+        "VerificationRegionSize": {
+            "desc": ["Specify square region size for quality verification\r\n",
+                     "Default five regions are located in left-top, left-bottom, right-top, right-bottom and center."],
+            "val": 2 },
+
+-Global Api=D3D11 VerificationMode=1 VerificationGoldenRef=GOLDEN_IMAGE VerificationRegionSize=1024 -Tests PrimSetup -PrimSetup TestCaseId=0-5 VertexCount=100000
+
+12/11/2018 1:54:42 PM
+---------------------
+VerificationSize 根据配置文件自动获取。
+Format 根据配置文件自动获取。
+DDS 类型根据配置文件自动获取。
+
+-Global Api=D3D11 EnableDumpImage=1 VerificationMode=1 VerificationGoldenRef=GOLDEN_IMAGE VerificationRegionSize=1024 -Tests PrimSetup -PrimSetup TestCaseId=0-5 VertexCount=100000
+
+GetTestName 最终从 TestHelper 中获取。BenchApp.GetCurrentTest() => TestContainer.GetTestName => TestHelper.GetTestName 。
+GetCurrentApiName 最终从 TestHelper 中获取。
+GetTestCaseName
+m_pTestHelper->GetDumpImageFileType()
+??? m_pTestHelper->GetDepthPresentOrDumpType()
+
+BaseTest::GetCurrentTestCaseId
+
+-Global Api=D3D11 EnableDumpImage=1 VerificationMode=1 VerificationGoldenRef=GOLDEN_IMAGE VerificationRegionSize=1024 -Tests PrimSetup -PrimSetup TestCaseId=0-5 VertexCount=100000
+-Global Api=D3D11 DumpImageFileType=DDS VerificationMode=1 VerificationGoldenRef=GOLDEN_IMAGE VerificationRegionSize=1024 -Tests PrimSetup -PrimSetup TestCaseId=0-5 VertexCount=100000
+-Global VerificationMode=1 VerificationGoldenRef=GOLDEN_IMAGE DumpImageFileType=DDS VerificationRegionSize=1024 -Tests PrimSetup -PrimSetup TestCaseId=0-5 VertexCount=100000
+
+-Global Api=D3D11 EnableDumpImage=1 -Tests PrimSetup -PrimSetup TestCaseId=0-5 VertexCount=100000
+
+std::string GenerateImageFileFullPath(const std::string& dumpFolder, const std::string& dumpImageFileNamePrefix, const void* /*pImageView*/, uint32_t viewIdx, ImageViewType type, GfxFormat format,
+    uint32_t levelCount, uint32_t layerCount, uint32_t srcLevelOffset, uint32_t srcSliceOffset, ImageFileType imageFileType, DumpFileNaming naming)
+
+-Global VerificationMode=1 VerificationGoldenRef=GOLDEN_IMAGE DumpImageFileType=DDS VerificationRegionSize=1024 -Tests PrimSetup -PrimSetup TestCaseId=0-500 VertexCount=100000
+
+DUMP:
+-Global Api=D3D11 EnableDumpImage=1 DumpImageFileType=DDS TestCaseId=0-2
+
+-Global Api=D3D11 EnableDumpImage=1 DumpImageFileType=DDS -Tests PrimSetup -PrimSetup VertexCount=100000
+
+TEST:
+-Global VerificationMode=1 VerificationGoldenRef=GOLDEN_IMAGE DumpImageFileType=DDS VerificationRegionSize=1024 TestCaseId=0-2
+-Global GoldenImageFolder=./Golden1/ VerificationMode=2 VerificationGoldenRef=GOLDEN_IMAGE DumpImageFileType=DDS VerificationRegionSize=3024 TestCaseId=0-2
+
+-Global VerificationMode=1 VerificationGoldenRef=GOLDEN_IMAGE DumpImageFileType=DDS VerificationRegionSize=1024 -Tests PrimSetup -PrimSetup VertexCount=100000
+
+-Global GoldenImageFolder=./Golden1/ VerificationMode=2 VerificationGoldenRef=GOLDEN_IMAGE DumpImageFileType=DDS VerificationRegionSize=3024 TestCaseId=0-2
+-Global VerificationMode=1 VerificationGoldenRef=GOLDEN_IMAGE DumpImageFileType=DDS VerificationRegionSize=1024  TestCaseId=0-2 -Tests PrimSetup
+
+-Global VerificationMode=1 VerificationGoldenRef=GOLDEN_IMAGE VerificationRegionSize=1024 -Tests PrimSetup -PrimSetup VertexCount=100000
+
+
+goldmap_d11:
+============
+
+-Global Api=D3D11 EnableDumpImage=1 DumpImageFileType=DDS -Tests PrimSetup -PrimSetup VertexCount=100000
+
+-Global VerificationMode=1 VerificationGoldenRef=GOLDEN_IMAGE VerificationRegionSize=1024 -Tests PrimSetup -PrimSetup VertexCount=100000
+-Global VerificationMode=2 VerificationGoldenRef=GOLDEN_IMAGE VerificationRegionSize=1024 -Tests PrimSetup -PrimSetup VertexCount=100000
+
+
+        uint32_t levelCount;
+        uint32_t sliceCount;
+        uint32_t levelOffset;
+        uint32_t sliceOffset;
+        ImageViewType viewType;
+        GfxFormat format;
+
+        lhs.levelCount == rhs.levelCount &&
+        lhs.sliceCount == rhs.sliceCount &&
+        lhs.levelOffset == rhs.levelOffset &&
+        lhs.sliceOffset == rhs.sliceOffset &&
+        lhs.viewType == rhs.viewType &&
+        lhs.format == rhs.format;
+
+
+
+-Global Api=D3D11 EnableDumpImage=1 DumpImageFileType=DDS -Tests PrimSetup -PrimSetup VertexCount=100000
+
+-Global VerificationMode=1 VerificationGoldenRef=GOLDEN_IMAGE VerificationRegionSize=1024  -Tests PrimSetup -PrimSetup VertexCount=100000
+-Global VerificationMode=2 VerificationGoldenRef=GOLDEN_IMAGE VerificationRegionSize=1024  -Tests PrimSetup -PrimSetup VertexCount=100000
+
+1719107 fail
+1718576 fail
+
+
+D:\work\dev\dk_upgrade_dev\tests\Alu\Alu_gal.cpp(27):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\Alu\Alu_gal.cpp(33):        UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\Alu\Alu_gll.cpp(27):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\Alu\Alu_gll.cpp(33):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\AsyncCompute\AsyncCompute_gal.cpp(193):        RegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\AsyncCompute\AsyncCompute_gal.cpp(406):        UnRegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+
+  D:\work\dev\dk_upgrade_dev\tests\Branching\Branching_gal.cpp(51):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\Branching\Branching_gal.cpp(57):        UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\Branching\Branching_gll.cpp(51):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\Branching\Branching_gll.cpp(57):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\CbUpdate\CbUpdate_gal.cpp(41):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\CbUpdate\CbUpdate_gal.cpp(48):        UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\CbUpdate\CbUpdate_gll.cpp(41):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\CbUpdate\CbUpdate_gll.cpp(48):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\CoherencyStall\CoherencyStall_gal.cpp(57):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\CoherencyStall\CoherencyStall_gal.cpp(117):            UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\CoherencyStall\CoherencyStall_gll.cpp(75):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\CoherencyStall\CoherencyStall_gll.cpp(92):            UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\ColorClear\ColorClear_gal.cpp(218):        RegisterFramebuffer(m_pFramebuffer[SAMPLE_PASS]);
+  D:\work\dev\dk_upgrade_dev\tests\ColorClear\ColorClear_gal.cpp(247):        UnRegisterFramebuffer(m_pFramebuffer[SAMPLE_PASS]);
+  D:\work\dev\dk_upgrade_dev\tests\ColorClear\ColorClear_gll.cpp(163):        RegisterFramebuffer(m_pFramebuffer[SAMPLE_PASS]);
+  D:\work\dev\dk_upgrade_dev\tests\ColorClear\ColorClear_gll.cpp(182):        UnRegisterFramebuffer(m_pFramebuffer[SAMPLE_PASS]);
+
+  D:\work\dev\dk_upgrade_dev\tests\CSAlu\CSAlu_gal.cpp(247):        RegisterFramebuffer(m_visual.pFramebuffer, AttachmentIndex::ColorAttachment0, FOR_PRESENT | FOR_DUMP);
+  D:\work\dev\dk_upgrade_dev\tests\CSAlu\CSAlu_gal.cpp(309):        UnRegisterFramebuffer(m_visual.pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\CSAlu\CSAlu_gll.cpp(179):        RegisterFramebuffer(m_visual.pFramebuffer, AttachmentIndex::ColorAttachment0, FOR_PRESENT | FOR_DUMP);
+  D:\work\dev\dk_upgrade_dev\tests\CSAlu\CSAlu_gll.cpp(229):        UnRegisterFramebuffer(m_visual.pFramebuffer, AttachmentIndex::ColorAttachment0);
+
+  D:\work\dev\dk_upgrade_dev\tests\CSFillRate\CSFillRate_gal.cpp(426):        RegisterFramebuffer(m_visual.pFramebuffer, AttachmentIndex::ColorAttachment0, FOR_PRESENT | FOR_DUMP);
+  D:\work\dev\dk_upgrade_dev\tests\CSFillRate\CSFillRate_gal.cpp(484):        UnRegisterFramebuffer(m_visual.pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\CSFillRate\CSFillRate_gll.cpp(287):        RegisterFramebuffer(m_visual.pFramebuffer, AttachmentIndex::ColorAttachment0, FOR_PRESENT | FOR_DUMP);
+  D:\work\dev\dk_upgrade_dev\tests\CSFillRate\CSFillRate_gll.cpp(338):        UnRegisterFramebuffer(m_visual.pFramebuffer, AttachmentIndex::ColorAttachment0);
+
+  D:\work\dev\dk_upgrade_dev\tests\CSLatency\CSLatency_gal.cpp(401):        RegisterFramebuffer(m_visual.pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\CSLatency\CSLatency_gal.cpp(459):        UnRegisterFramebuffer(m_visual.pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\CSLatency\CSLatency_gll.cpp(296):        RegisterFramebuffer(m_visual.pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\CSLatency\CSLatency_gll.cpp(347):        UnRegisterFramebuffer(m_visual.pFramebuffer, AttachmentIndex::ColorAttachment0);
+
+  D:\work\dev\dk_upgrade_dev\tests\CsMandelbrot\CsMandelbrot_gal.cpp(81):        RegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\CsMandelbrot\CsMandelbrot_gal.cpp(118):        UnRegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\CsMandelbrot\CsMandelbrot_gll.cpp(74):        RegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\CsMandelbrot\CsMandelbrot_gll.cpp(94):        UnRegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+
+  D:\work\dev\dk_upgrade_dev\tests\DepthClear\DepthClear_gal.cpp(167):        RegisterFramebuffer(m_pFramebuffer[DepthClearHelper::Z_AS_TEX_PASS], AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\DepthClear\DepthClear_gal.cpp(388):        UnRegisterFramebuffer(m_pFramebuffer[DepthClearHelper::Z_AS_TEX_PASS]);
+  D:\work\dev\dk_upgrade_dev\tests\DepthClear\DepthClear_gll.cpp(139):        RegisterFramebuffer(m_pFramebuffer[DepthClearHelper::Z_AS_TEX_PASS], AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\DepthClear\DepthClear_gll.cpp(149):        UnRegisterFramebuffer(m_pFramebuffer[DepthClearHelper::Z_AS_TEX_PASS]);
+
+  D:\work\dev\dk_upgrade_dev\tests\DepthOp\DepthOp_gal.cpp(217):        RegisterFramebuffer(m_pFramebuffer[DepthOpHelper::PASS0_DEPTH_OP], AttachmentIndex::DepthStencilAttachment, RegisterPurposeBits::FOR_DUMP | RegisterPurposeBits::FOR_VERIFY, ResourceState::DEPTH_STENCIL_TARGET);
+  D:\work\dev\dk_upgrade_dev\tests\DepthOp\DepthOp_gal.cpp(221):            RegisterFramebuffer(m_pFramebuffer[DepthOpHelper::PASS1_DEPTH_AS_TEXTURE], AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\DepthOp\DepthOp_gal.cpp(225):            RegisterFramebuffer(m_pFramebuffer[DepthOpHelper::PASS0_DEPTH_OP], AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\DepthOp\DepthOp_gal.cpp(241):        UnRegisterFramebuffer(m_pFramebuffer[DepthOpHelper::PASS0_DEPTH_OP], AttachmentIndex::DepthStencilAttachment, RegisterPurposeBits::FOR_DUMP | RegisterPurposeBits::FOR_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\DepthOp\DepthOp_gal.cpp(247):            UnRegisterFramebuffer(m_pFramebuffer[DepthOpHelper::PASS1_DEPTH_AS_TEXTURE], AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\DepthOp\DepthOp_gal.cpp(251):            UnRegisterFramebuffer(m_pFramebuffer[DepthOpHelper::PASS0_DEPTH_OP], AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\DepthOp\DepthOp_gll.cpp(169):        RegisterFramebuffer(m_pFramebuffer[DepthOpHelper::PASS0_DEPTH_OP], AttachmentIndex::DepthStencilAttachment, RegisterPurposeBits::FOR_DUMP | RegisterPurposeBits::FOR_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\DepthOp\DepthOp_gll.cpp(173):            RegisterFramebuffer(m_pFramebuffer[DepthOpHelper::PASS1_DEPTH_AS_TEXTURE], AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\DepthOp\DepthOp_gll.cpp(177):            RegisterFramebuffer(m_pFramebuffer[DepthOpHelper::PASS0_DEPTH_OP], AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\DepthOp\DepthOp_gll.cpp(190):        UnRegisterFramebuffer(m_pFramebuffer[DepthOpHelper::PASS0_DEPTH_OP], AttachmentIndex::DepthStencilAttachment, RegisterPurposeBits::FOR_DUMP | RegisterPurposeBits::FOR_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\DepthOp\DepthOp_gll.cpp(193):            UnRegisterFramebuffer(m_pFramebuffer[DepthOpHelper::PASS1_DEPTH_AS_TEXTURE], AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\DepthOp\DepthOp_gll.cpp(197):            UnRegisterFramebuffer(m_pFramebuffer[DepthOpHelper::PASS0_DEPTH_OP], AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gal.cpp(116):                RegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gal.cpp(118):                RegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gal.cpp(227):            RegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gal.cpp(229):            RegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gal.cpp(324):            UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gal.cpp(325):            UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gal.cpp(349):                UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gal.cpp(350):                UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gll.cpp(123):                RegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gll.cpp(125):                RegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gll.cpp(205):            RegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gll.cpp(207):            RegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gll.cpp(242):            UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gll.cpp(243):            UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gll.cpp(261):                UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\Fillrate\Fillrate_gll.cpp(262):                UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+
+  D:\work\dev\dk_upgrade_dev\tests\GSAluHeavy\GSAluHeavy_gal.cpp(79):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\GSAluHeavy\GSAluHeavy_gal.cpp(115):        UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\GSAluHeavy\GSAluHeavy_gll.cpp(73):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\GSAluHeavy\GSAluHeavy_gll.cpp(85):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\GSPointAmpl\GSPointAmpl_gal.cpp(80):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\GSPointAmpl\GSPointAmpl_gal.cpp(116):        UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\GSPointAmpl\GSPointAmpl_gll.cpp(75):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\GSPointAmpl\GSPointAmpl_gll.cpp(87):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\GSPointSprites\GSPointSprites_gal.cpp(77):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\GSPointSprites\GSPointSprites_gal.cpp(113):        UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\GSPointSprites\GSPointSprites_gll.cpp(72):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\GSPointSprites\GSPointSprites_gll.cpp(84):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\GSTriAmpl\GSTriAmpl_gal.cpp(80):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\GSTriAmpl\GSTriAmpl_gal.cpp(116):        UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\GSTriAmpl\GSTriAmpl_gll.cpp(71):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\GSTriAmpl\GSTriAmpl_gll.cpp(87):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\HWContextRoll\HWContextRoll_gal.cpp(97):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\HWContextRoll\HWContextRoll_gal.cpp(104):        UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\HWContextRoll\HWContextRoll_gll.cpp(77):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\HWContextRoll\HWContextRoll_gll.cpp(84):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\Interpolation\Interpolation_gal.cpp(37):        RegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\Interpolation\Interpolation_gal.cpp(49):        UnRegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\Interpolation\Interpolation_gll.cpp(34):        RegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\Interpolation\Interpolation_gll.cpp(44):        UnRegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+
+  D:\work\dev\dk_upgrade_dev\tests\LightProbeSampling\LightProbeSampling_gal.cpp(277):            RegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\LightProbeSampling\LightProbeSampling_gal.cpp(279):            RegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\LightProbeSampling\LightProbeSampling_gal.cpp(383):            UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\LightProbeSampling\LightProbeSampling_gal.cpp(384):            UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\LightProbeSampling\LightProbeSampling_gll.cpp(251):            RegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\LightProbeSampling\LightProbeSampling_gll.cpp(253):            RegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\LightProbeSampling\LightProbeSampling_gll.cpp(275):            UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\LightProbeSampling\LightProbeSampling_gll.cpp(276):            UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+
+  D:\work\dev\dk_upgrade_dev\tests\MultipleRT\MultipleRT_gal.cpp(291):            RegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\MultipleRT\MultipleRT_gal.cpp(293):            RegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\MultipleRT\MultipleRT_gal.cpp(349):            UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\MultipleRT\MultipleRT_gal.cpp(350):            UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\MultipleRT\MultipleRT_gll.cpp(222):            RegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\MultipleRT\MultipleRT_gll.cpp(224):            RegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\MultipleRT\MultipleRT_gll.cpp(247):            UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\MultipleRT\MultipleRT_gll.cpp(248):            UnRegisterFramebuffer(pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+
+  D:\work\dev\dk_upgrade_dev\tests\NonuniformResource\NonuniformResource_gal.cpp(60):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\NonuniformResource\NonuniformResource_gal.cpp(193):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\PrimFilter\PrimFilter_gal.cpp(107):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\PrimFilter\PrimFilter_gal.cpp(227):        UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\PrimFilter\PrimFilter_gll.cpp(96):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\PrimFilter\PrimFilter_gll.cpp(117):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\PrimSetup\PrimSetup_gal.cpp(80):        RegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\PrimSetup\PrimSetup_gal.cpp(99):        UnRegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\PrimSetup\PrimSetup_gll.cpp(78):        RegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\PrimSetup\PrimSetup_gll.cpp(89):        UnRegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+
+  D:\work\dev\dk_upgrade_dev\tests\PSPostProcess\PSPostProcess_gal.cpp(148):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\PSPostProcess\PSPostProcess_gal.cpp(158):        UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\PSPostProcess\PSPostProcess_gll.cpp(87):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\PSPostProcess\PSPostProcess_gll.cpp(97):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\QuadTess\QuadTess_gal.cpp(121):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\QuadTess\QuadTess_gal.cpp(143):        UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\QuadTess\QuadTess_gll.cpp(97):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\QuadTess\QuadTess_gll.cpp(111):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\RasterizeOrder\RasterizeOrder_gal.cpp(58):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\RasterizeOrder\RasterizeOrder_gal.cpp(108):        UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\RasterizeOrder\RasterizeOrder_gll.cpp(64):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\RasterizeOrder\RasterizeOrder_gll.cpp(93):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\ResCopy\ResCopy_gal.cpp(61):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\ResCopy\ResCopy_gal.cpp(73):        UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\ResCopy\ResCopy_gll.cpp(45):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\ResCopy\ResCopy_gll.cpp(53):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\ShaderCompile\ShaderCompile_gal.cpp(93):        RegisterFramebuffer(m_pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\ShaderCompile\ShaderCompile_gal.cpp(94):        RegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\ShaderCompile\ShaderCompile_gal.cpp(195):        UnRegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\ShaderCompile\ShaderCompile_gal.cpp(196):        UnRegisterFramebuffer(m_pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\ShaderCompile\ShaderCompile_gll.cpp(289):        RegisterFramebuffer(m_pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\ShaderCompile\ShaderCompile_gll.cpp(290):        RegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\ShaderCompile\ShaderCompile_gll.cpp(440):        UnRegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\ShaderCompile\ShaderCompile_gll.cpp(441):        UnRegisterFramebuffer(m_pFramebuffer, AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+
+  D:\work\dev\dk_upgrade_dev\tests\SmallBatch\SmallBatch_gal.cpp(421):        RegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\SmallBatch\SmallBatch_gal.cpp(509):        UnRegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\SmallBatch\SmallBatch_gll.cpp(124):        RegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\SmallBatch\SmallBatch_gll.cpp(198):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\TexDimension\TexDimension_gal.cpp(232):                RegisterFramebuffer(pFramebuffer[iMipLevel], AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP);
+  D:\work\dev\dk_upgrade_dev\tests\TexDimension\TexDimension_gal.cpp(324):            RegisterFramebuffer(pFramebuffer[0], AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\TexDimension\TexDimension_gal.cpp(326):            RegisterFramebuffer(pFramebuffer[0], AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\TexDimension\TexDimension_gal.cpp(380):            UnRegisterFramebuffer(pFramebuffer[0], AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\TexDimension\TexDimension_gal.cpp(381):            UnRegisterFramebuffer(pFramebuffer[0], AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\TexDimension\TexDimension_gal.cpp(418):                UnRegisterFramebuffer(pFramebuffer[iMipLevel], AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP);
+  D:\work\dev\dk_upgrade_dev\tests\TexDimension\TexDimension_gll.cpp(212):                RegisterFramebuffer(pFramebuffer[iMipLevel], AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP);
+  D:\work\dev\dk_upgrade_dev\tests\TexDimension\TexDimension_gll.cpp(262):            RegisterFramebuffer(pFramebuffer[0], AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\TexDimension\TexDimension_gll.cpp(264):            RegisterFramebuffer(pFramebuffer[0], AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\TexDimension\TexDimension_gll.cpp(295):            UnRegisterFramebuffer(pFramebuffer[0], AttachmentIndex::ColorAttachment0, RegisterPurposeBits::FOR_PRESENT);
+  D:\work\dev\dk_upgrade_dev\tests\TexDimension\TexDimension_gll.cpp(296):            UnRegisterFramebuffer(pFramebuffer[0], AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP_VERIFY);
+  D:\work\dev\dk_upgrade_dev\tests\TexDimension\TexDimension_gll.cpp(322):                UnRegisterFramebuffer(pFramebuffer[iMipLevel], AttachmentIndex::AllAttachments, RegisterPurposeBits::FOR_DUMP);
+
+  D:\work\dev\dk_upgrade_dev\tests\TexFetch\TexFetch_gal.cpp(86):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\TexFetch\TexFetch_gal.cpp(210):        UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\TexFetch\TexFetch_gll.cpp(88):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\TexFetch\TexFetch_gll.cpp(159):        UnRegisterFramebuffer(m_pFramebuffer);
+
+  D:\work\dev\dk_upgrade_dev\tests\TriSizeFill\TriSizeFill_gal.cpp(81):        RegisterFramebuffer(m_ppFramebuffers[TriSizeFillHelper::UNORM_RT]);
+  D:\work\dev\dk_upgrade_dev\tests\TriSizeFill\TriSizeFill_gal.cpp(87):        UnRegisterFramebuffer(m_ppFramebuffers[TriSizeFillHelper::UNORM_RT]);
+  D:\work\dev\dk_upgrade_dev\tests\TriSizeFill\TriSizeFill_gll.cpp(113):        RegisterFramebuffer(m_ppFramebuffers[TriSizeFillHelper::UNORM_RT]);
+  D:\work\dev\dk_upgrade_dev\tests\TriSizeFill\TriSizeFill_gll.cpp(119):        UnRegisterFramebuffer(m_ppFramebuffers[TriSizeFillHelper::UNORM_RT]);
+
+  D:\work\dev\dk_upgrade_dev\tests\UnigineTess\UnigineTess_gal.cpp(123):        RegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\UnigineTess\UnigineTess_gal.cpp(151):        UnRegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\UnigineTess\UnigineTess_gll.cpp(88):        RegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+  D:\work\dev\dk_upgrade_dev\tests\UnigineTess\UnigineTess_gll.cpp(97):        UnRegisterFramebuffer(m_pFramebuffer, AttachmentIndex::ColorAttachment0);
+
+  D:\work\dev\dk_upgrade_dev\tests\VertexFetch\VertexFetch_gal.cpp(25):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\VertexFetch\VertexFetch_gal.cpp(32):        UnRegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\VertexFetch\VertexFetch_gll.cpp(25):        RegisterFramebuffer(m_pFramebuffer);
+  D:\work\dev\dk_upgrade_dev\tests\VertexFetch\VertexFetch_gll.cpp(32):        UnRegisterFramebuffer(m_pFramebuffer);
+
+25.20.14011.1000 -> 24.20.11016.4
+24.20.11016.4 -> 23.20.15033.1003
+23.20.15033.1003 -> 22.19.677.257
+
+
+1/3/2019 10:32:27 AM
+--------------------
+Radeon GPU Profiler 1.11.17 版本可用
+D:\Temp\RGP\RadeonGPUProfiler_1.11.17
+
+
+1/3/2019 10:42:54 AM
+--------------------
+
+SWDEV-132027 - ShaderBench development - Add D3D12 support in copyPipelines.py.
+
+The workflow of adding a D3D12 game shaders into shaderbench:
+
+1. Build a DXCP driver with DXC_DEBUG_PRINTS=1 (its value is 1 by default in debug driver. To enable it in release driver, you need to modify Makefile.dxc explicitly).
+2. Open DXCP Control Panel.
+
+3. In DXCP Control Panel, set DXC=>Debug=>DxInputShaderDump as 4. The following is the option's description:
+
+'DxInputShaderDump' - Dump DXBC or DXIL shaders.
+Files are written to the directory specified by DxShaderDumpingDirectory.
+0 - Disable dumping 
+1 - Print to debug output 
+2 - Write readable text to a file 
+3 - Write hex codes to a file 
+4 - Write a raw binary file 
+
+Scrambled Registry Key: 
+
+
+Default Value: DxShaderDumpModeDisable
+
+4.  In DXCP Control Panel, set Pal_Platform=>GPU Profiler=>GpuProfileMode as 1. The following is the option's description:
+
+'GpuProfilerMode' - Enables and sets the SQTT mode for the GPU performance profiler layer.  Actual capture of performance data must be specified via frame number with GpuProfilerConfig.StartFrame or by holding shift-F11.
+Valid values for this setting are:
+    GpuProfilerDisabled [0] - GPU Profiler Disabled
+    GpuProfilerCounterAndTimingOnly [1] - Traces are disabled but perf counter and timing operations are enabled.
+    GpuProfilerTraceEnabledTtv [2] - Traces (Spm and/or Sqtt) are output in format (.csv, .out) for Thread trace viewer.
+    GpuProfilerTraceEnabledRgp [3] - Trace data (Spm and/or Sqtt) is output as .rgp file for Radeon Gpu Profiler.
+Scrambled Registry Key: 
+
+
+Default Value: GpuProfilerDisabled
+
+5. Create a folder "C:\dx12Dump\asmBytecodeDir", which is the default value of option "DXC=>Debug=>DxShaderDumpingDirectory". If you'd like to dump shader into another directory, you can change it in DXCP Control Panel.
+
+6. Run the game, for the frames you're interested, hold "Shift+F11", the frames will be profiled until you release the "Shift+F11". The profiler file are output to "C:\PalLog".
+
+7. Use //depot/stg/pal/tools/gpuProfilerTools/timingReport.py to generate a profile report.
+
+8. Use //depot/stg/PerfTools/Microbench/tools/CopyPipelines/copyPipelines.py to add top shaders to ShaderBench.
+
+by wangfeng
+
+ReviewBoardURL = http://ocltc.amd.com/reviews/r/16394/diff/

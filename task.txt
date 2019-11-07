@@ -1,0 +1,19 @@
+TASKS
+=====
+
+WORKING TASK
+------------
+
+给 glslc 添加说明文件、替换代码库、port 到 stg/oglp
+
+PENDING TASK
+------------
+
+将 sandbox 中的内容（如：codeSanitizeConfig），导入到 stg/oglp 中。
+给 Dmytro 建立代码映射
+使用申请好的 Windows 虚拟机
+申请 Linux 虚拟机
+
+FINISHED TASK
+-------------
+

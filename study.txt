@@ -111,3 +111,54 @@ EXPAND( F(1, 2, 3) )
 
 __VA_ARGS__ expansion using MSVC
 https://stackoverflow.com/questions/32399191/va-args-expansion-using-msvc
+
+12/20/2018 3:58:12 PM
+---------------------
+Python:
+
+    __getattr__
+    __getattribute__
+
+Difference between __getattr__ vs __getattribute__
+https://stackoverflow.com/questions/3278077/difference-between-getattr-vs-getattribute
+
+OpenGL:
+
+
+Texture Unit 0 GL_TEXTURE0 默认活动。如果需要使用其他 Texture Unit ，使用如下方法：
+
+glActiveTexture(GL_TEXTURE2)
+glBindTexture(GL_TEXTURE_2D, 2)
+
+glUniform1i(glGetUniformLocation(progID, "texture1"), 2)
+
+2 对应着 GL_TEXTURE2 。
+
+#version 330 core
+out vec4 FragColor;
+
+in vec2 TexCoord;
+
+// texture sampler
+uniform sampler2D texture1;
+
+void main()
+{
+	FragColor = texture(texture1, TexCoord);
+}
+
+stb_image.h 是一个单文件图形加载库。
+
+官方网站：
+https://github.com/nothings/stb
+
+使用示例：
+
+    // The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
+    unsigned char *data = stbi_load(FileSystem::getPath("resources/textures/container.jpg").c_str(), &width, &height, &nrChannels, 0);
+    if (data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+
