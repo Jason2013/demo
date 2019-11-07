@@ -1,19 +1,153 @@
 TASKS
 =====
 
+
 WORKING TASK
 ------------
-
-给 glslc 添加说明文件、替换代码库、port 到 stg/oglp
-
 PENDING TASK
 ------------
 
 将 sandbox 中的内容（如：codeSanitizeConfig），导入到 stg/oglp 中。
-给 Dmytro 建立代码映射
+
+建立一个 Jenkins job，用来测试 sanitize 之后的 OGLP 代码。
+>   From: He, Jacob <Jacob.He@amd.com> 
+>   Sent: Thursday, November 7, 2019 10:34 AM
+>   To: Chen, Chang <Chang.Chen@amd.com>
+>   Cc: Jian, Dimple <Dimple.Jian@amd.com>; Deng, Hui <Hui.Deng@amd.com>; Zhou, Jin <Jin.Zhou@amd.com>; Li, Ruoyu <Ruoyu.Li@amd.com>; Wei, DongLin <DongLin.Wei@amd.com>; Jin, Jian-Rong <Jian-Rong.Jin@amd.com>
+>   Subject: RE: review OGLP sanitized package (staging)
+>   
+>   Hi Chang,
+>     Please set up a Jenkins precheck-in for sanitized build of stg/oglp when you have time. Stg/oglp sanitized build was broken by CL# 2025851.
+>   
+>   Thanks
+>   Jacob
+
+记录 OGLP 远程机器的 IP 地址，以备以后使用。
+记录 工作用机 远程机器的 IP 地址，以备以后使用。
 使用申请好的 Windows 虚拟机
 申请 Linux 虚拟机
+
 
 FINISHED TASK
 -------------
 
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+给 Dmytro 建立代码映射
+
+D:\work\temp\009\git_map\OGLP_SRC
+d:\work\dev\sync_oglp\
+
+..........................................................................................................................................
+#//depot/main/cmake/... //chanchen_oglp_sync/main/cmake/...
+//depot/main/cmake/AmdConfigHelper.cmake //chanchen_oglp_sync/main/cmake/AmdConfigHelper.cmake
+#//depot/main/drivers/adl/... //chanchen_oglp_sync/main/drivers/adl/...
+#//depot/main/drivers/inc/... //chanchen_oglp_sync/main/drivers/inc/...
+-//depot/main/drivers/inc/... //chanchen_oglp_sync/main/drivers/inc/...
+-//depot/main/drivers/inc/... //chanchen_oglp_sync/main/drivers/inc/...
+//depot/main/drivers/inc/shared/... //chanchen_oglp_sync/main/drivers/inc/shared/...
+#
+#asic_reg/atishareioctldef.h
+#asic_reg/cwddeci.h
+#asic_reg/cwddedi.h
+#asic_reg/cwddepm.h
+#asic_reg/cwddeva.h
+
+//depot/main/drivers/inc/shared/asic_reg/atishareioctldef.h... //chanchen_oglp_sync/main/drivers/inc/shared/asic_reg/atishareioctldef.h...
+//depot/main/drivers/inc/shared/asic_reg/cwddeci.h... //chanchen_oglp_sync/main/drivers/inc/shared/asic_reg/cwddeci.h...
+//depot/main/drivers/inc/shared/asic_reg/cwddedi.h... //chanchen_oglp_sync/main/drivers/inc/shared/asic_reg/cwddedi.h...
+//depot/main/drivers/inc/shared/asic_reg/cwddepm.h... //chanchen_oglp_sync/main/drivers/inc/shared/asic_reg/cwddepm.h...
+//depot/main/drivers/inc/shared/asic_reg/cwddeva.h... //chanchen_oglp_sync/main/drivers/inc/shared/asic_reg/cwddeva.h...
+
+#//depot/main/drivers/pxproxy/... //chanchen_oglp_sync/main/drivers/pxproxy/...
+//depot/main/drivers/pxproxy/inc/... //chanchen_oglp_sync/main/drivers/pxproxy/inc/...
+-//depot/stg/make/... //chanchen_oglp_sync/make/...
+//depot/stg/make/cmake/... //chanchen_oglp_sync/main/make/cmake/...
+//depot/stg/oglp/drivers/oglp/... //chanchen_oglp_sync/main/drivers/oglp/...
+
+..........................................................................................................................................
+//depot/main/cmake/AmdConfigHelper.cmake //chanchen_oglp_sync3/main/cmake/AmdConfigHelper.cmake
+-//depot/main/drivers/inc/... //chanchen_oglp_sync3/main/drivers/inc/...
+//depot/main/drivers/inc/shared/... //chanchen_oglp_sync3/main/drivers/inc/shared/...
+//depot/main/drivers/inc/asic_reg/atishareioctldef.h... //chanchen_oglp_sync3/main/drivers/inc/asic_reg/atishareioctldef.h...
+//depot/main/drivers/inc/asic_reg/cwddeci.h... //chanchen_oglp_sync3/main/drivers/inc/asic_reg/cwddeci.h...
+//depot/main/drivers/inc/asic_reg/cwddedi.h... //chanchen_oglp_sync3/main/drivers/inc/asic_reg/cwddedi.h...
+//depot/main/drivers/inc/asic_reg/cwddepm.h... //chanchen_oglp_sync3/main/drivers/inc/asic_reg/cwddepm.h...
+//depot/main/drivers/inc/asic_reg/cwddeva.h... //chanchen_oglp_sync3/main/drivers/inc/asic_reg/cwddeva.h...
+//depot/main/drivers/pxproxy/inc/... //chanchen_oglp_sync3/main/drivers/pxproxy/inc/...
+//depot/stg/oglp/drivers/oglp/... //chanchen_oglp_sync3/main/drivers/oglp/...
+-//depot/stg/oglp/drivers/oglp/build/... //chanchen_oglp_sync3/main/drivers/oglp/build/...
+-//depot/stg/oglp/drivers/oglp/doc/... //chanchen_oglp_sync3/main/drivers/oglp/doc/...
+-//depot/stg/oglp/drivers/oglp/test/... //chanchen_oglp_sync3/main/drivers/oglp/test/...
+-//depot/stg/oglp/drivers/oglp/tools/... //chanchen_oglp_sync3/main/drivers/oglp/tools/...
+//depot/stg/oglp/drivers/oglp/tools/glslc/... //chanchen_oglp_sync3/main/drivers/oglp/tools/glslc/...
+//depot/stg/oglp/drivers/oglp/tools/oglpanel/... //chanchen_oglp_sync3/main/drivers/oglp/tools/oglpanel/...
+
+..........................................................................................................................................
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+SWDEV-1 - Integrate `//depot/stg/oglp/drivers/oglp/codeSanitizerConfig/...` CL 2026375 to `//depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/codeSanitizerConfig/customerSS/...`.
+
+[OGLP][Sanitization] - Remove `glslc` binary files after sanitization. Keep `README.txt` file after sanitization.
+
+给 glslc 添加说明文件、替换代码库、port 到 stg/oglp
+*	Update the binary in perforce with the latest downloaded version for both Linux and Window (Chang)
+*	Add a readme under the folder to note where the files are gotten (Chang)
+CL 2026362
+
+-	Modify the sanitization config to remove the binaries during sanitization (Chang)
+-	Update the build instruction doc under \\oglserver\pub\OGLP\CustomerSS_Delivery\2019-10-31  (Chang)
+准备工作：
+
+perforce 里的两个目录，映射到 git 中的两个分支：
+
+Double Command Favoriates:
+Oglp [STAGING and SANDBOX]
+
+perforce:
+D:\work\dev\chanchen_oglp_sync_only2\
+git:
+master
+
+（注意：之前的同步失败的 git 代码库分支为： oglserver/master）
+
+
+perforce:
+d:\work\dev\chanchen_oglp_sync_only2\depot\stg\sandbox\pal\mariner\csim717_lsa\oglp\
+git:
+master_sandbox
+
+> SWDEV-190425 - [OGLP] OpenGL on PAL general development
+> 
+> Initial base of oglp fetch from orlgitlabp01.
+> Note: Haven't include imported code(PAL/BIL/SPIV/SC)
+> 
+> Last commitID:
+> 
+> d2c96fc6bb64ef580a0c6649e24457c3f89ce816 
+
+D:\work\dev\chanchen_oglp_sync_only2_rel\013\install_zip\install\bin
+
+\tools\glslc\glslc.exe
+
+
+d:\work\dev\sync_oglp\main\drivers\oglp\tools\glslc\
+//depot/stg/oglp/drivers/oglp/...
+//depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/tools/glslc/...
+2026362
+2026375
+
+//depot/stg/oglp/drivers/oglp/codeSanitizerConfig/customerSS/
+
+//depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/codeSanitizerConfig/customerSS/...
+
+2026375
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+在 gitee 上，建立 notebook 代码库。
+https://gitee.com/chenchang/notebook
+
+替换 //depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/cmake/AmdConfigHelper.cmake 权限
+CL 2026466
