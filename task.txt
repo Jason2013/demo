@@ -4,8 +4,40 @@ TASKS
 
 WORKING TASK
 ------------
+
+
+
 PENDING TASK
 ------------
+
+* 请假，休陪产假
+
+* Win7 OS Update
+
+* Karen 的需求： def 文件不要做为源文件，做为 link 的选项添加。
+
+准备 git 图形界面软件 (SourceTree, SmartGit, git)、PPT
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+测试 git-p4
+
+Workspace name: chanchen_oglp_sync4
+Workspace root: D:\work\dev\chanchen_oglp_sync4
+
+git root: D:\work\dev\chanchen_oglp_sync4
+
+export P4CLIENT=chanchen_oglp_sync4
+export P4PORT=shswp4p1:1666
+export P4USER=chanchen
+
+cd /d/work/dev/chanchen_oglp_sync4_git
+# ERROR: git p4 clone --use-client-spec //depot/main/... //depot/stg/...
+git p4 clone --use-client-spec //depot/main/...
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 将 sandbox 中的内容（如：codeSanitizeConfig），导入到 stg/oglp 中。
 
@@ -30,6 +62,257 @@ PENDING TASK
 
 FINISHED TASK
 -------------
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+11/19/2019 1:50:51 PM
+
+\\oglserver\pub\OGLP\Drivers\pxproxy_driver
+atig6pxx.dll
+atiglpxx.dll
+
+D:\work\dev\chanchen_oglp_sync_only2\depot\stg\oglp\drivers\oglp\tools\oglptestbot\tests\cts\VK-GL-CTS-opengl-cts-4.6.0.2\vk-gl-cts\prebuilt-binaries\scripts
+
+D:\work\dev\chanchen_oglp_sync_only2\depot\stg\oglp\drivers\oglp\tools\oglptestbot\tests\cts
+
+cd D:\work\dev\chanchen_oglp_sync_only2\depot\stg\oglp\drivers\oglp\tools\oglptestbot\tests\cts\VK-GL-CTS-opengl-cts-4.6.0.2\vk-gl-cts\prebuilt-binaries\scripts
+glcts --deqp-caselist-file=D:\work\dev\chanchen_oglp_sync_only2\depot\stg\oglp\drivers\oglp\tools\oglptestbot\tests\cts\passinglist.txt
+
+gfxbench Manhattan onscreen - OESP
+FPS - 469.15
+gfxbench Manhattan onscreen - OGLP
+FPS - 480.9
+gfxbench Manhattan offscreen - OGLP
+FPS - 535.67
+gfxbench gl_5_high onscreen - OGLP
+FPS - 242.66
+gfxbench gl_5_high offscreen - OGLP
+FPS - 181.47
+Unigine Heaven
+FPS - 124.0
+Unigine Valley
+FPS - 90.48
+None
++-------------+-----------------------------------------+
+| Description |            System Information           |
++-------------+-----------------------------------------+
+| OS Name     |         Microsoft Windows 10 Pro        |
+| OS Version  |             10.0.16299 16299            |
+| CPU         | Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz |
+| RAM         |                   16GB                  |
+| GPU         |              Radeon RX Vega             |
++-------------+-----------------------------------------+
+
+GL CTS result:
+Test run totals:
+  Passed:        4636/4636 (100.0%)
+  Failed:        0/4636 (0.0%)
+  Not supported: 0/4636 (0.0%)
+  Warnings:      0/4636 (0.0%)
+
+Radeon (TM) RX 480 Graphics
+22.19.677.257
+
+OGLP Test Machine
+.................
+10.67.246.169
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+11/14/2019 3:01:36 PM
+
+//depot/stg/pal_prm/codeSanitizerConfig/
+
+
+d:
+cd D:\work\temp\030
+set P4CLIENT=chanchen_oglp_sync_only2
+git p4 clone --use-client-spec //depot/stg/sandbox/pal/mariner/csim717_lsa/oglp@all 
+
+d:
+cd D:\work\temp\028
+set P4CLIENT=chanchen_oglp_sync4
+git p4 clone --use-client-spec //depot/stg/oglp@all 
+
+11/12/2019 11:12:29 PM
+
+set P4CLIENT=chanchen_oglp_sync_only2
+git p4 clone //depot/stg/sandbox/pal/mariner/csim717_lsa/oglp@all 
+
+//depot/stg/oglp/drivers/oglp/... //chanchen_oglp_sync4/main/drivers/oglp/...
+
+cd D:\work\temp\026
+set P4CLIENT=chanchen_oglp_sync4
+git p4 clone --use-client-spec //depot/stg/oglp@all 
+
+//depot/main/cmake/AmdConfigHelper.cmake //chanchen_oglp_sync4/main/cmake/AmdConfigHelper.cmake
+-//depot/main/drivers/inc/... //chanchen_oglp_sync4/main/drivers/inc/...
+//depot/main/drivers/inc/shared/... //chanchen_oglp_sync4/main/drivers/inc/shared/...
+//depot/main/drivers/inc/asic_reg/atishareioctldef.h... //chanchen_oglp_sync4/main/drivers/inc/asic_reg/atishareioctldef.h...
+//depot/main/drivers/inc/asic_reg/cwddeci.h... //chanchen_oglp_sync4/main/drivers/inc/asic_reg/cwddeci.h...
+//depot/main/drivers/inc/asic_reg/cwddedi.h... //chanchen_oglp_sync4/main/drivers/inc/asic_reg/cwddedi.h...
+//depot/main/drivers/inc/asic_reg/cwddepm.h... //chanchen_oglp_sync4/main/drivers/inc/asic_reg/cwddepm.h...
+//depot/main/drivers/inc/asic_reg/cwddeva.h... //chanchen_oglp_sync4/main/drivers/inc/asic_reg/cwddeva.h...
+//depot/main/drivers/pxproxy/inc/... //chanchen_oglp_sync4/main/drivers/pxproxy/inc/...
+//depot/stg/oglp/drivers/oglp/... //chanchen_oglp_sync4/main/drivers/oglp/...
+-//depot/stg/oglp/drivers/oglp/test/... //chanchen_oglp_sync4/main/drivers/oglp/test/...
+
+//depot/main/drivers/inc/shared/ 2019011
+//depot/main/drivers/inc/asic_reg/ 2026156
+//depot/main/drivers/pxproxy/inc/ 2011586
+
+git p4 clone --use-client-spec //depot/main/drivers/inc/shared@all drivers_inc_shared
+git p4 clone --use-client-spec //depot/main/drivers/inc/asic_reg@all drivers_inc_asic_reg
+git p4 clone --use-client-spec //depot/main/proxy/inc@all proxy_inc
+
+git p4 clone --use-client-spec //depot/main/drivers/inc/shared drv
+git p4 clone --use-client-spec //depot/main/drivers/inc/asic_reg drv
+
+
+git p4 clone --use-client-spec //depot/main/drivers/inc/shared@2026156 //depot/main/drivers/inc/asic_reg@2026156 //depot/main/drivers/pxproxy/inc@2026156 mixed
+git p4 clone --use-client-spec //depot/main/drivers/inc/shared@2026155,2026156 //depot/main/drivers/inc/asic_reg@2026155,2026156 //depot/main/drivers/pxproxy/inc@2026155,2026156 mixed2
+
+git p4 clone --use-client-spec //depot/main/drivers/inc/asic_reg@2026156 asic_reg
+
+
+-//depot/main/drivers/inc/...
+//depot/main/drivers/inc/shared/...
+
+//depot/main/drivers/inc/asic_reg/atishareioctldef.h
+//depot/main/drivers/inc/asic_reg/cwddeci.h
+//depot/main/drivers/inc/asic_reg/cwddedi.h
+//depot/main/drivers/inc/asic_reg/cwddepm.h
+//depot/main/drivers/inc/asic_reg/cwddeva.h
+
+//depot/main/drivers/pxproxy/inc/...
+
+
+
+git p4 clone --use-client-spec //depot/main/drivers/inc/asic_reg/atishareioctldef.h@all //depot/main/drivers/inc/asic_reg/cwddeci.h@all //depot/main/drivers/inc/asic_reg/cwddedi.h@all //depot/main/drivers/inc/asic_reg/cwddepm.h@all //depot/main/drivers/inc/asic_reg/cwddeva.h@all asic_reg3
+git p4 clone --use-client-spec //depot/main/drivers/inc/asic_reg/atishareioctldef@all asic_reg4
+
+
+//depot/main/cmake/AmdConfigHelper.cmake //chanchen_oglp_sync5/main/cmake/AmdConfigHelper.cmake
+-//depot/main/drivers/inc/... //chanchen_oglp_sync5/main/drivers/inc/...
+//depot/main/drivers/inc/shared/... //chanchen_oglp_sync5/main/drivers/inc/shared/...
+//depot/main/drivers/inc/asic_reg/atishareioctldef.h //chanchen_oglp_sync5/main/drivers/inc/asic_reg/atishareioctldef.h
+//depot/main/drivers/inc/asic_reg/cwddeci.h //chanchen_oglp_sync5/main/drivers/inc/asic_reg/cwddeci.h
+//depot/main/drivers/inc/asic_reg/cwddedi.h //chanchen_oglp_sync5/main/drivers/inc/asic_reg/cwddedi.h
+//depot/main/drivers/inc/asic_reg/cwddepm.h //chanchen_oglp_sync5/main/drivers/inc/asic_reg/cwddepm.h
+//depot/main/drivers/inc/asic_reg/cwddeva.h //chanchen_oglp_sync5/main/drivers/inc/asic_reg/cwddeva.h
+//depot/main/drivers/pxproxy/inc/... //chanchen_oglp_sync5/main/drivers/pxproxy/inc/...
+//depot/stg/oglp/drivers/oglp/... //chanchen_oglp_sync5/main/drivers/oglp/...
+-//depot/stg/oglp/drivers/oglp/test/... //chanchen_oglp_sync5/main/drivers/oglp/test/...
+
+D:\work\temp\026\oglp
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+11/19/2019 1:52:18 PM
+
+cd D:\work\dev\chanchen_oglp_sync_only2\depot\stg\sandbox\pal\mariner\csim717_lsa\oglp\main\drivers\oglp\build64
+copy ati* d:\work\temp\031\2019-11-15
+copy lib* d:\work\temp\031\2019-11-15
+
+cd D:\work\dev\chanchen_oglp_sync_only2\depot\stg\sandbox\pal\mariner\csim717_lsa\oglp\main\drivers\oglp\build32
+copy ati* \\oglserver\Incoming\Chang\2019-11-15\x86\
+copy lib* \\oglserver\Incoming\Chang\2019-11-15\x86\
+
+D:\work\temp\028\overlay>dir
+11/16/2019  07:03 PM             3,711 0001-SWDEV-190425-OGLP-Integrate-CL-2018539-into-OGLP.patch
+git am --directory=depot/stg/sandbox/pal/mariner/csim717_lsa/oglp /D/work/temp/028/overlay/0002-SWDEV-190425-OGLP-Integrate-CL-2018539-into-OGLP.patch
+
+
+Sandbox
+
+Git: D:\work\temp\030\oglp
+D:\work\temp\030\oglp\depot\stg\sandbox\pal\mariner\csim717_lsa\oglp
+
+D:\work\dev\chanchen_oglp_sync_only2
+ //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/...
+
+
+D:\work\temp\030\oglp\depot\stg\sandbox\pal\mariner\csim717_lsa\xgl\icd\imported\pal
+D:\work\temp\030\oglp\depot\stg\sandbox\pal\mariner\csim717_lsa\xgl\icd\imported\sc
+
+//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/... D:/work/temp/030/oglp/depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/...
+//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/... D:/work/temp/030/oglp/depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/...
+
+//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/... //chanchen_oglp_sync_only2/main/drivers/oglp/icd/imported/pal/...
+//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/... //chanchen_oglp_sync_only2/main/drivers/oglp/icd/imported/sc/...
+
+
+//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/pal/...
+-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/doc/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/pal/doc/...
+-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/tools/internal/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/pal/tools/internal/...
+
+//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/sc/...
+-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/Docs/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/sc/Docs/...
+-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/HSAIL/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/sc/HSAIL/...
+-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/Src/Dev/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/sc/Src/Dev/...
+
+
+D:\work\temp\009\OGLP_SRC\main\drivers\oglp\icd\imported\pal D:\work\dev\chanchen_oglp_sync_only2\depot\stg\sandbox\pal\mariner\csim717_lsa\oglp\main\drivers\oglp\icd\imported\pal
+D:\work\temp\009\OGLP_SRC\main\drivers\oglp\icd\imported\sc d:\work\dev\chanchen_oglp_sync_only2\main\drivers\oglp\icd\imported\sc
+
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
+cmake -GNinja -DTARGET_ARCHITECTURE_BITS=32 -DCMAKE_BUILD_TYPE=Release -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
+
+D:\work\temp\028\oglp_dis
+D:\work\temp\030
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+11/14/2019 3:00:27 PM
+
+oglp_lnx_dbg_Debug.zip 323.23MB
+oglp_lnx_Release.zip 27.21MB
+oglp_pal_sc_stg_win_Release.zip 136.46MB
+oglp_pal_stg_win_Release.zip 136.57MB
+oglp_sc_stg_win_Release.zip 136.57MB
+oglp_win_dbg_Debug.zip 114.04MB
+oglp_win_Release.zip 136.68MB
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+11/11/2019 5:20:51 PM
+
+> From: Wei, DongLin <DongLin.Wei@amd.com> 
+> Sent: Monday, November 11, 2019 11:35 AM
+> To: dl.SRDC_SW_OpenGL_Shader <dl.SRDC_SW_OpenGL_Shader@amd.com>
+> Subject: FW: Projects to fill Clarity timesheet
+> 
+> Hi All,
+> 
+> Please self-book your weekly Clarity timesheets using the following project code.
+
+http://amdclarity.amd.com/niku/app?action=timeadmin.editTimesheet&id&resid=5662185&tpid=5113337
+Selfbook Project List 
+Add `spg02.004_Mariner_M0` project
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+11/11/2019 5:08:37 PM
+
+周瑾的 BUG
+
+d:
+cd D:\work\dev\chanchen_oglp_sync4_2\main\drivers\oglp\build
+cmake -G"Visual Studio 15 Win64" -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
+
+d:
+cd D:\work\dev\chanchen_oglp_sync4_2\main\drivers\oglp\build_bugfix
+cmake -G"Visual Studio 15 Win64" -DOGLP_CHECKED=1 -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
+
+CL 2025119
+
+SWDEV-77148 - Fix OGLP_DEVELOPER build
+
+RGP event for GenerateMipmaps was referenced in context.cpp:1338, but was never defined. 
+
+ReviewBoardURL = http://dxreview2.amd.com/r/20712/diff/
+
+//depot/stg/oglp/drivers/oglp/icd/glcore/
+//depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/glcore/
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+周报
+在 Double Command 新建 `Asus - Weekly Report` 目录收藏
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -66,6 +349,7 @@ d:\work\dev\sync_oglp\
 //depot/stg/oglp/drivers/oglp/... //chanchen_oglp_sync/main/drivers/oglp/...
 
 ..........................................................................................................................................
+
 //depot/main/cmake/AmdConfigHelper.cmake //chanchen_oglp_sync3/main/cmake/AmdConfigHelper.cmake
 -//depot/main/drivers/inc/... //chanchen_oglp_sync3/main/drivers/inc/...
 //depot/main/drivers/inc/shared/... //chanchen_oglp_sync3/main/drivers/inc/shared/...
