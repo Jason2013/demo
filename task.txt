@@ -18,6 +18,9 @@ PENDING TASK
 
 * Oglp Panel 单独构建
 
+* Deng Hui 的需求： 在 Jenkins 上运行 gfxbench
+D:\work\temp\032\oglp_linux_driver_v4.tar\oglp_linux_driver_v4\libs\install
+
 准备 git 图形界面软件 (SourceTree, SmartGit, git)、PPT
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
