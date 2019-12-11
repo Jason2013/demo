@@ -3,15 +3,16 @@
 include_once __dir__ . "/../configuration/swtErrorMsg.php";
 include_once __dir__ . "/../configuration/swtUIStrings.php";
 
-$db_server = "127.0.0.1";
-$db_username = "root";
-$db_password = "dgxqh523120";
-$db_dbname = "db_mis";
+//$db_server = "127.0.0.1";
+//$db_username = "root";
+//$db_password = "dgxqh523120";
+//$db_dbname = "db_mis";
 
-//$db_server = "Srdcvmysqldp1";
-//$db_username = "davychen";
-//$db_password = "davychen7$";
-//$db_dbname = "db_gfxbench";
+//$db_server = "ATLVMYSQLDP21";
+$db_server = "Srdcvmysqldp1";
+$db_username = "davychen";
+$db_password = "davychen7$";
+$db_dbname = "db_gfxbench";
 
 
 $db_table_surname = "mis_table";
