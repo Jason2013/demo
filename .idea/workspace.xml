@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0c7bb7f9-b3df-45ee-9a4b-ad84563598c2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/tmpFiles/placeHolder.txt" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Grapher" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/error09.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/error10.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/error11.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/subPages/compileReportBatchID.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="828">
+              <caret line="65" selection-start-line="65" selection-end-line="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/phplibs/getInfo/swtGetLeftBarBatchList.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/phplibs/userManage/swtLogOut.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+              <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/subPages/userLogOut.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/phplibs/generalLibs/swtHtmlTemple.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/phplibs/userManage/swtUserManager.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5895">
+              <caret line="393" selection-start-line="393" selection-end-line="393" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/error05.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>reportFolder</find>
+      <find>$batchID</find>
+      <find>global</find>
+      <find>$_SESSION</find>
+      <find>$userChecker</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/error06.php" />
+        <option value="$PROJECT_DIR$/phplibs/createReport/swtClassGenReportPerFrame.php" />
+        <option value="$PROJECT_DIR$/phplibs/generalLibs/swtHtmlTemple.php" />
+      </list>
+    </option>
+  </component>
+  <component name="PhpServers">
+    <servers>
+      <server host="localhost" id="146235ef-da2b-44f0-a703-b6e6e8d9e8ad" name="localhost" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$/config/siteInfo.php" remote-root="D:/work/dev/grapher/config/siteInfo.php" />
+          <mapping local-root="$PROJECT_DIR$/error01.php" remote-root="D:/work/dev/grapher/error01.php" />
+          <mapping local-root="$PROJECT_DIR$/error02.php" remote-root="D:/work/dev/grapher/error02.php" />
+          <mapping local-root="$PROJECT_DIR$/error03.php" remote-root="D:/work/dev/grapher/error03.php" />
+          <mapping local-root="$PROJECT_DIR$/error05.php" remote-root="D:/work/dev/grapher/error05.php" />
+          <mapping local-root="$PROJECT_DIR$/error06.php" remote-root="D:/work/dev/grapher/error06.php" />
+          <mapping local-root="$PROJECT_DIR$/error10.php" remote-root="D:/work/dev/grapher/error10.php" />
+          <mapping local-root="$PROJECT_DIR$/error11.php" remote-root="d:/work/dev/grapher/error11.php" />
+          <mapping local-root="$PROJECT_DIR$/index.php" remote-root="D:/work/dev/grapher/index.php" />
+          <mapping local-root="$PROJECT_DIR$/jslibs/uploadify/check-exists.php" remote-root="D:/work/dev/grapher/jslibs/uploadify/check-exists.php" />
+          <mapping local-root="$PROJECT_DIR$/jslibs/uploadify/index.php" remote-root="D:/work/dev/grapher/jslibs/uploadify/index.php" />
+          <mapping local-root="$PROJECT_DIR$/jslibs/uploadify/uploadify - Copy.php" remote-root="D:/work/dev/grapher/jslibs/uploadify/uploadify - Copy.php" />
+          <mapping local-root="$PROJECT_DIR$/jslibs/uploadify/uploadify.php" remote-root="D:/work/dev/grapher/jslibs/uploadify/uploadify.php" />
+          <mapping local-root="$PROJECT_DIR$/phpinfo.php" remote-root="D:/work/dev/grapher/phpinfo.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/configuration/swtConfig.php" remote-root="D:/work/dev/grapher/phplibs/configuration/swtConfig.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/configuration/swtErrorMsg.php" remote-root="D:/work/dev/grapher/phplibs/configuration/swtErrorMsg.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/configuration/swtMISConst.php" remote-root="D:/work/dev/grapher/phplibs/configuration/swtMISConst.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/configuration/swtStrManager.php" remote-root="D:/work/dev/grapher/phplibs/configuration/swtStrManager.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/configuration/swtUIStrings.php" remote-root="D:/work/dev/grapher/phplibs/configuration/swtUIStrings.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtClassGenFlatData.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtClassGenFlatData.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtClassGenFlatDataNoise.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtClassGenFlatDataNoise.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtClassGenFlatDataPerFrame.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtClassGenFlatDataPerFrame.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtClassGenFlatDataShaderBench.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtClassGenFlatDataShaderBench.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtClassGenFlatDataVer3.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtClassGenFlatDataVer3.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtClassGenFlatDataVer4.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtClassGenFlatDataVer4.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtClassGenReport.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtClassGenReport.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtClassGenReportNoise.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtClassGenReportPerFrame.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtClassGenReportPerFrame.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtClassGenReportPerFrameTemplate.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtClassGenReportPerFrameTemplate.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtClassGenReportShaderBench.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtClassGenReportShaderBench.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtClassGenReportShaderBenchTemplate.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtClassGenReportShaderBenchTemplate.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtClassGenReportVer3.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtClassGenReportVer3.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtClassGenReportVer4.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtClassGenReportVer4.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtClassUserTemplate.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtClassUserTemplate.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtCompileReportAddition.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtCompileReportAddition.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtCompileReportAdditionNoise.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionPerFrame.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtCompileReportAdditionPerFrame.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionPerFrameTemplate.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtCompileReportAdditionPerFrameTemplate.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionShaderBench.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtCompileReportAdditionShaderBench.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionShaderBenchTemplate.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtCompileReportAdditionShaderBenchTemplate.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionVer3.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtCompileReportAdditionVer3.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionVer4.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtCompileReportAdditionVer4.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtGenTempFlatData.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtGenTempFlatData.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtGenTempFlatDataNoise.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtGenTempFlatDataNoise.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtGenTempFlatDataPerFrame.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtGenTempFlatDataPerFrame.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtGenTempFlatDataShaderBench.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtGenTempFlatDataShaderBench.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtGenTempFlatDataVer3.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtGenTempFlatDataVer3.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtGenTempFlatDataVer4.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtGenTempFlatDataVer4.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtMoveReportToFolder.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtMoveReportToFolder.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtXLSX2XLSM.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtXLSX2XLSM.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtXLSXBatchReport.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtXLSXBatchReport.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/createReport/swtZipBatchReport.php" remote-root="D:/work/dev/grapher/phplibs/createReport/swtZipBatchReport.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/addAditionalGpuInfo.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/addAditionalGpuInfo.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/code01.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/code01.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/create01.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/create01.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/delBatch.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/delBatch.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/dodb.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/dodb.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/dopdo.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/dopdo.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/genfuncs.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/genfuncs.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/setBatchLogPath.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/setBatchLogPath.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/setBatchTime.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/setBatchTime.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/swtCommonLib.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/swtCommonLib.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/swtExcelGenFuncs.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/swtExcelGenFuncs.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/swtHtmlTemple.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/swtHtmlTemple.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/swtReplaceJsonMachineInfoNames.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/swtReplaceJsonMachineInfoNames.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/swtReplaceMachineInfoNames.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/swtReplaceMachineInfoNames.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetBatchIDList.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetBatchIDList.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetBatchIDListOutUser.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetBatchIDListOutUser.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetBatchMachinesInfo.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetBatchMachinesInfo.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetBatchMachinesInfoPerFrame.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetBatchMachinesInfoPerFrame.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetBatchMachinesInfoShaderBench.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetBatchMachinesInfoShaderBench.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetBatchMachinesInfoTemplate.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetBatchMachinesInfoTemplate.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetFolderAllFileNames.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetFolderAllFileNames.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetFolderAllFileNamesVer3.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetFolderAllFileNamesVer3.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetFolderAllFileNamesVer3a.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetFolderAllFileNamesVer3a.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetHistoryReportInfo.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetHistoryReportInfo.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetLeftBarBatchList.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetLeftBarBatchList.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetMachineListHtml.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetMachineListHtml.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetReportBatchList.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetReportBatchList.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetSkynetResults.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetSkynetResults.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetTaskStateListHtml.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetTaskStateListHtml.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetTaskStateListHtml2.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetTaskStateListHtml2.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetTestData.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetTestData.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetTestData2.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetTestData2.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetTestDataBatch.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetTestDataBatch.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetTestList.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetTestList.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetTestList2.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetTestList2.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetTestListBatch.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetTestListBatch.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetUserTemplateInfo.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetUserTemplateInfo.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtListCards.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtListCards.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/importResult/convertComaToSplit.php" remote-root="D:/work/dev/grapher/phplibs/importResult/convertComaToSplit.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/importResult/swtCalcNoiseAverage.php" remote-root="D:/work/dev/grapher/phplibs/importResult/swtCalcNoiseAverage.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/importResult/swtCalcNoiseAveragePerFrame.php" remote-root="D:/work/dev/grapher/phplibs/importResult/swtCalcNoiseAveragePerFrame.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/importResult/swtCalcNoiseAverageShaderBench.php" remote-root="D:/work/dev/grapher/phplibs/importResult/swtCalcNoiseAverageShaderBench.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/importResult/swtCalcNoiseAverageSkynet.php" remote-root="D:/work/dev/grapher/phplibs/importResult/swtCalcNoiseAverageSkynet.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/importResult/swtCalcNoiseAverageskipNoise.php" remote-root="D:/work/dev/grapher/phplibs/importResult/swtCalcNoiseAverageskipNoise.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/importResult/swtGetSourceDirInfo.php" remote-root="D:/work/dev/grapher/phplibs/importResult/swtGetSourceDirInfo.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/importResult/swtParseBenchLogManual.php" remote-root="D:/work/dev/grapher/phplibs/importResult/swtParseBenchLogManual.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/importResult/swtParseBenchLogManualPerFrame.php" remote-root="D:/work/dev/grapher/phplibs/importResult/swtParseBenchLogManualPerFrame.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/importResult/swtParseBenchLogManualShaderBench.php" remote-root="D:/work/dev/grapher/phplibs/importResult/swtParseBenchLogManualShaderBench.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/importResult/swtParseBenchLogManualSkipNoise.php" remote-root="D:/work/dev/grapher/phplibs/importResult/swtParseBenchLogManualSkipNoise.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/importResult/swtParseBenchLogManualSkynet.php" remote-root="D:/work/dev/grapher/phplibs/importResult/swtParseBenchLogManualSkynet.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/importResult/swtParseBenchLogManualVer2.php" remote-root="D:/work/dev/grapher/phplibs/importResult/swtParseBenchLogManualVer2.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/importResult/swtParseBenchLogManualVer3.php" remote-root="D:/work/dev/grapher/phplibs/importResult/swtParseBenchLogManualVer3.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/server/swtCheckNeedGenerateReport.php" remote-root="D:/work/dev/grapher/phplibs/server/swtCheckNeedGenerateReport.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/server/swtGetAvailableMachine.php" remote-root="D:/work/dev/grapher/phplibs/server/swtGetAvailableMachine.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/server/swtGetLogFilesFromClient.php" remote-root="D:/work/dev/grapher/phplibs/server/swtGetLogFilesFromClient.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/server/swtGetNextTask.php" remote-root="D:/work/dev/grapher/phplibs/server/swtGetNextTask.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/server/swtGetResultFile.php" remote-root="D:/work/dev/grapher/phplibs/server/swtGetResultFile.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/server/swtGetResultFileSkynet.php" remote-root="D:/work/dev/grapher/phplibs/server/swtGetResultFileSkynet.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/server/swtHeartBeat.php" remote-root="D:/work/dev/grapher/phplibs/server/swtHeartBeat.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/server/swtHeartBeatFuncs.php" remote-root="D:/work/dev/grapher/phplibs/server/swtHeartBeatFuncs.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/server/swtReorganizeSkynetResult.php" remote-root="D:/work/dev/grapher/phplibs/server/swtReorganizeSkynetResult.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/server/swtStartBench.php" remote-root="D:/work/dev/grapher/phplibs/server/swtStartBench.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/server/test01.php" remote-root="D:/work/dev/grapher/phplibs/server/test01.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/userManage/swtLogIn.php" remote-root="D:/work/dev/grapher/phplibs/userManage/swtLogIn.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/userManage/swtLogOut.php" remote-root="D:/work/dev/grapher/phplibs/userManage/swtLogOut.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/userManage/swtUserManager.php" remote-root="D:/work/dev/grapher/phplibs/userManage/swtUserManager.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/batchList.php" remote-root="D:/work/dev/grapher/subPages/batchList.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/batchListOutUser.php" remote-root="D:/work/dev/grapher/subPages/batchListOutUser.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/compileReportAll.php" remote-root="D:/work/dev/grapher/subPages/compileReportAll.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/compileReportBatchID.php" remote-root="D:/work/dev/grapher/subPages/compileReportBatchID.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/compileReportPerFrame.php" remote-root="D:/work/dev/grapher/subPages/compileReportPerFrame.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/compileReportPerFrameOutUser.php" remote-root="D:/work/dev/grapher/subPages/compileReportPerFrameOutUser.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/compileReportShaderBench.php" remote-root="D:/work/dev/grapher/subPages/compileReportShaderBench.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/compileReportShaderBenchOutUser.php" remote-root="D:/work/dev/grapher/subPages/compileReportShaderBenchOutUser.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/compileReportUserTemplate.php" remote-root="D:/work/dev/grapher/subPages/compileReportUserTemplate.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/convertPage01.php" remote-root="D:/work/dev/grapher/subPages/convertPage01.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/delBatches.php" remote-root="D:/work/dev/grapher/subPages/delBatches.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/drawGraph2.php" remote-root="D:/work/dev/grapher/subPages/drawGraph2.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/drawGraphBatch2.php" remote-root="D:/work/dev/grapher/subPages/drawGraphBatch2.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/editBatchTime.php" remote-root="D:/work/dev/grapher/subPages/editBatchTime.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/genAllReports.php" remote-root="D:/work/dev/grapher/subPages/genAllReports.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/genReportOutUser.php" remote-root="D:/work/dev/grapher/subPages/genReportOutUser.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/genReportOutUserVer3.php" remote-root="D:/work/dev/grapher/subPages/genReportOutUserVer3.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/genReportOutUserVer3a.php" remote-root="D:/work/dev/grapher/subPages/genReportOutUserVer3a.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/genReportOutUserVer4.php" remote-root="D:/work/dev/grapher/subPages/genReportOutUserVer4.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/helpForOutUser.php" remote-root="D:/work/dev/grapher/subPages/helpForOutUser.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/importLogFiles2.php" remote-root="D:/work/dev/grapher/subPages/importLogFiles2.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/importLogFiles3.php" remote-root="D:/work/dev/grapher/subPages/importLogFiles3.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/importLogFiles3OutUser.php" remote-root="D:/work/dev/grapher/subPages/importLogFiles3OutUser.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/importLogFiles4.php" remote-root="D:/work/dev/grapher/subPages/importLogFiles4.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/importLogFiles4OutUser.php" remote-root="D:/work/dev/grapher/subPages/importLogFiles4OutUser.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/importLogFilesOutUser.php" remote-root="D:/work/dev/grapher/subPages/importLogFilesOutUser.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/importLogFilesSkynet.php" remote-root="D:/work/dev/grapher/subPages/importLogFilesSkynet.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/newTask.php" remote-root="D:/work/dev/grapher/subPages/newTask.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/sepCrossAPI.php" remote-root="D:/work/dev/grapher/subPages/sepCrossAPI.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/sepCrossASIC.php" remote-root="D:/work/dev/grapher/subPages/sepCrossASIC.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/sepCrossBuild.php" remote-root="D:/work/dev/grapher/subPages/sepCrossBuild.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/sepStartPage.php" remote-root="D:/work/dev/grapher/subPages/sepStartPage.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/setBatchLogPath.php" remote-root="D:/work/dev/grapher/subPages/setBatchLogPath.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/userLogIn.php" remote-root="D:/work/dev/grapher/subPages/userLogIn.php" />
+          <mapping local-root="$PROJECT_DIR$/subPages/userLogOut.php" remote-root="D:/work/dev/grapher/subPages/userLogOut.php" />
+          <mapping local-root="$PROJECT_DIR$/tests/TrueTest.php" remote-root="D:/work/dev/grapher/tests/TrueTest.php" />
+        </path_mappings>
+      </server>
+    </servers>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit-mock-objects" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/Grapher.iml" />
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+        <option value="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" />
+        <option value="$PROJECT_DIR$/.idea/php.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="205" />
+    <option name="y" value="68" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Grapher" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Grapher" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Grapher" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Grapher" type="462c0819:PsiDirectoryNode" />
+              <item name="subPages" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js.buildTools.grunt.grunt-cli.package" value="" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="PHP Web Page.web_page_error12.php">
+    <configuration name="05_test" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request" server_name="localhost" url="/Grapher/error05.php">
+      <method v="2" />
+    </configuration>
+    <configuration name="Unnamed" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request" nameIsGenerated="true" server_name="localhost" url="">
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request" server_name="localhost" url="http://localhost/Grapher/phpinfo.php">
+      <method v="2" />
+    </configuration>
+    <configuration name="index.php" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request" server_name="localhost" url="http://localhost/Grapher/index.php">
+      <method v="2" />
+    </configuration>
+    <configuration name="error03.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/error03.php">
+      <method v="2" />
+    </configuration>
+    <configuration name="web_page_error12.php" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="localhost" start_url="/Grapher/error12.php">
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="js.build_tools.grunt">
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="PHP HTTP Request.index.php" />
+      <item itemvalue="PHP HTTP Request.Unnamed" />
+      <item itemvalue="PHP HTTP Request.05_test" />
+      <item itemvalue="PHP Script.error03.php" />
+      <item itemvalue="PHP Web Page.web_page_error12.php" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0c7bb7f9-b3df-45ee-9a4b-ad84563598c2" name="Default Changelist" comment="" />
+      <created>1563340868631</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1563340868631</updated>
+      <workItem from="1563340874073" duration="17826000" />
+      <workItem from="1563506475448" duration="8612000" />
+      <workItem from="1565837338490" duration="4538000" />
+      <workItem from="1576054596818" duration="1190000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="32166000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49840257" visible="true" weight="0.17537314" />
+      <window_info id="Structure" order="1" sideWeight="0.50159746" side_tool="true" weight="0.1705757" />
+      <window_info id="Favorites" order="2" sideWeight="0.50159746" side_tool="true" weight="0.1705757" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.7228145" weight="0.33269414" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32981783" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="PHP-CGI Server" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="12" sideWeight="0.2771855" side_tool="true" visible="true" weight="0.33269414" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/error05.php</url>
+          <line>3</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint type="php">
+          <url>file://$PROJECT_DIR$/index.php</url>
+          <line>72</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportPerFrame.php</url>
+          <line>17</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportPerFrame.php</url>
+          <line>28</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint type="php">
+          <url>file://$PROJECT_DIR$/subPages/compileReportPerFrame.php</url>
+          <line>10</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportPerFrame.php</url>
+          <line>4050</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportPerFrame.php</url>
+          <line>4051</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionPerFrame.php</url>
+          <line>759</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint type="php">
+          <condition expression="$batchID != 1079" language="PHP" />
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionPerFrame.php</url>
+          <line>19</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <condition expression="$i == 2" language="PHP" />
+          <url>file://$PROJECT_DIR$/error06.php</url>
+          <line>3</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/error06.php</url>
+          <line>1</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <condition expression="$batchID != 1079" language="PHP" />
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionPerFrame.php</url>
+          <line>20</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <condition expression="$batchID != 1079" language="PHP" />
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionPerFrame.php</url>
+          <line>103</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionPerFrame.php</url>
+          <line>96</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint type="php">
+          <url>file://$PROJECT_DIR$/subPages/compileReportBatchID.php</url>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint type="php">
+          <url>file://$PROJECT_DIR$/phplibs/generalLibs/swtHtmlTemple.php</url>
+          <line>7</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint type="php">
+          <url>file://$PROJECT_DIR$/phplibs/generalLibs/swtHtmlTemple.php</url>
+          <line>87</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint type="php">
+          <url>file://$PROJECT_DIR$/phplibs/generalLibs/swtHtmlTemple.php</url>
+          <line>142</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/subPages/userLogIn.php</url>
+          <line>5</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/subPages/userLogIn.php</url>
+          <line>3</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/error10.php</url>
+          <line>2</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/error10.php</url>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/subPages/compileReportBatchID.php</url>
+          <line>3</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="breakpointCondition">
+      <expression>
+        <expression-string>$batchID != 1079</expression-string>
+        <language-id>PHP</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>$i == 2</expression-string>
+        <language-id>PHP</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>$i !== 2</expression-string>
+        <language-id>PHP</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>$i === 2</expression-string>
+        <language-id>PHP</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+    <expressions id="breakpointLogExpression">
+      <expression>
+        <expression-string>$i</expression-string>
+        <language-id>PHP</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://D:/work/dev/grapher/error05.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/work/dev/grapher/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportPerFrame.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60765">
+          <caret line="4051" selection-start-line="4051" selection-end-line="4051" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/error06.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionPerFrame.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11385">
+          <caret line="759" selection-start-line="759" selection-end-line="759" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/subPages/compileReportPerFrame.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtClassGenFlatDataVer3.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding>
+            <element signature="n#getReportFolder#0;n#CGenReportFlatData#0;n#!!top" />
+            <element signature="n#getConnectValues#0;n#CGenReportFlatData#0;n#!!top" />
+            <element signature="n#setConnectValues#0;n#CGenReportFlatData#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/subPages/userLogIn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phplibs/getInfo/swtGetHistoryReportInfo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/error09.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/error10.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phplibs/getInfo/swtGetLeftBarBatchList.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phplibs/userManage/swtLogOut.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/subPages/userLogOut.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phplibs/generalLibs/swtHtmlTemple.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phplibs/userManage/swtUserManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5895">
+          <caret line="393" selection-start-line="393" selection-end-line="393" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/error05.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/error11.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/subPages/compileReportBatchID.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="828">
+          <caret line="65" selection-start-line="65" selection-end-line="65" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
