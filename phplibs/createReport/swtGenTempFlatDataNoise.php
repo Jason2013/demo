@@ -166,7 +166,7 @@ $returnMsg["machineIDCardNameDict"] = $machineIDCardNameDict;
 $returnMsg["machineIDSysNameDict"] = $machineIDSysNameDict;
 $returnMsg["machineIDCardNameSysNameDict"] = $machineIDCardNameSysNameDict;
 
-$returnMsg["pathName"] = $pathName;
+//$returnMsg["pathName"] = $pathName;
 
 $batchPathName = $logStoreDir . "/batch" . $batchID;
 
