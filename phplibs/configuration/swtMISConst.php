@@ -118,15 +118,15 @@ function ReplaceOldCardName($cardName)
         "GTX2070" => "RTX2070"
     ];
 
-    foreach ($OldCardNameMatchMap as $key => $val)
+    $key = strtoupper($cardName);
+    if (array_key_exists($key, $OldCardNameMatchMap))
     {
-        if (strtolower($cardName) == strtolower($key))
-        {
-            return $val;
-        }
+        return $OldCardNameMatchMap[$key];
     }
-
-    return $cardName;
+    else
+    {
+        return $cardName;
+    }
 }
 
 //$swtUmdNameList = array("DX11", "DX12", "Vulkan");
