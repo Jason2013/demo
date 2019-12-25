@@ -346,11 +346,11 @@ class CGenReportFlatData
         global $returnMsg;
         global $allFileList;
         global $allRunLogFileList;
-        global $allFolderList;
+//        global $allFolderList;
         global $cardNameList;
         global $machineIDList;
-        global $resultFileName1;
-        global $resultFileName2;
+//        global $resultFileName1;
+//        global $resultFileName2;
         global $machineInfoFileName;
         global $resultFileName1;
         global $resultFileName2;
