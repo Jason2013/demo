@@ -338,11 +338,11 @@ if ($fileID <= count($uniqueCardNameList))
     
 
     // get cur machineID start pos of each test
-    $testStartPosList = $flatDataGen->getTestStartPos($curCardNameList);
+//    $testStartPosList = $flatDataGen->getTestStartPos($curCardNameList);
     if ($curPairMachineID != -1)
     {
         // get compare machineID to cur machineID start pos of each test
-        $pairTestStartPosList = $flatDataGen->getTestStartPos($pairCardNameList);
+//        $pairTestStartPosList = $flatDataGen->getTestStartPos($pairCardNameList);
     }
     
     
