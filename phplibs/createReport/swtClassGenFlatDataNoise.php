@@ -425,8 +425,8 @@ class CGenReportFlatData
             $cardName = "";
             $curMachineID = -1;
             
-            $returnMsg["tmp---004:"] .= $crossType . ",";
-            $returnMsg["tmp---005:"] .= $t2 . ",";
+//            $returnMsg["tmp---004:"] .= $crossType . ",";
+//            $returnMsg["tmp---005:"] .= $t2 . ",";
             
             if ((file_exists($t1) == false) && 
                 (file_exists($t3) == true))
@@ -473,7 +473,7 @@ class CGenReportFlatData
                 
                 $cardName = $obj["videoCardName"] . "_" . $obj["systemName"];
                 
-                $returnMsg["tmp---003:"] .= $cardName . "," . $machineFolderPath . ",";
+//                $returnMsg["tmp---003:"] .= $cardName . "," . $machineFolderPath . ",";
                 
                 $obj2 = $clientCmdParser->updateMachineInfo3($obj["machineInfo"], $tmpMachineName);
                 $curMachineID = $obj2["machineID"];
