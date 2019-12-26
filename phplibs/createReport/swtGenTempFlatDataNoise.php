@@ -307,7 +307,7 @@ if ($fileID <= count($uniqueCardNameList))
     $returnMsg["curPairMachineID"] = $curPairMachineID;
     $returnMsg["cardSysNameMachineIDDict"] = $cardSysNameMachineIDDict;
 
-    $returnMsg["curPairMachineID"] = $curPairMachineID;
+//    $returnMsg["curPairMachineID"] = $curPairMachineID;
 
     if ($curPairMachineID != -1)
     {
