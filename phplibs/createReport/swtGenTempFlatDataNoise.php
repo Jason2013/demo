@@ -389,7 +389,7 @@ else
 
 
 $valueSet = array();
-$valueSet["allFileList"] = $valueSet;
+$valueSet["allFileList"] = $allFileList;
 $valueSet["cardNameList"] = $cardNameList;
 $valueSet["machineIDList"] = $machineIDList;
 $valueSet["cardSysNameMachineIDDict"] = $cardSysNameMachineIDDict;
