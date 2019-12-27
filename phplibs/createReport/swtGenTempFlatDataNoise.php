@@ -9,7 +9,7 @@ include_once "../configuration/swtConfig.php";
 include_once "../server/swtHeartBeatFuncs.php";
 include_once "../generalLibs/genfuncs.php";
 include_once "../generalLibs/code01.php";
-include_once "../configuration/swtConfig.php";
+//include_once "../configuration/swtConfig.php";
 include_once "swtClassGenReportNoise.php";
 include_once "swtClassGenFlatDataNoise.php";
 
