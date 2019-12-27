@@ -4,8 +4,15 @@
 //    echo $i . "<br />";
 //}
 
-if (!file_exists("welcome.txt")) {
-    die("file not found");
-} else {
-    $file = fopen("welcome.txt", "r");
+
+//error handler function
+function customError($errno, $errstr)
+{
+    echo "<b>Error:</b> [$errno] $errstr";
 }
+
+//set error handler
+set_error_handler("customError");
+
+//trigger error
+$file = fopen("welcome.txt", "r");
