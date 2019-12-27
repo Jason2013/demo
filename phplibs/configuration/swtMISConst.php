@@ -180,4 +180,10 @@ $swtNoiseDataExpireDayNum = 200;
 
 $swtMicrobenchDocsTestNameUrl = "http://gfxbench/docs/Microbench/%s/%s.html";
 
+function microtime_float()
+{
+    list($usec, $sec) = explode(" ", microtime());
+    return ((float)$usec + (float)$sec);
+}
+
 ?>
