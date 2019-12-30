@@ -22,6 +22,12 @@ try {
 
     $conn = new MyPDO();
 
+    $stmt = $conn->getConn()->query("select schema_name, default_character_set_name from information_schema.schemata");
+    while ($row = $stmt->fetch())
+    {
+        echo $row[0] . ", " . $row[1] . "</br>";
+    }
+
     echo "No exception";
 } catch (Exception $e) {
     echo "Exception: " . $e->getMessage() . " [CODE]: " . $e->getCode() . " [TRACE]: " . $e->getTraceAsString();
