@@ -2,6 +2,8 @@
 
 class MyPDO
 {
+    private $conn = null;
+
     function __construct()
     {
         echo "<p>MyPDO::__construct()</p>";
@@ -11,5 +13,9 @@ class MyPDO
     function __destruct()
     {
         echo "<p>MyPDO::__destruct()</p>";
+    }
+
+    function getConn() {
+        return $this->conn;
     }
 }
