@@ -5,8 +5,7 @@ class MyPDO
     function __construct()
     {
         echo "<p>MyPDO::__construct()</p>";
-        $conn = new PDO("mysql:host=localhost;dbname=db_mis", "root", "dgxqh523120");
-        return $conn;
+        $this->conn = new PDO("mysql:host=localhost;dbname=db_mis;charset=utf8", "root", "dgxqh523120");
     }
 
     function __destruct()
