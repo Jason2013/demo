@@ -1,5 +1,7 @@
 <?php
 
+include_once "error14.php";
+
 class customException extends Exception
 {
     public function errorMessage()
@@ -10,14 +12,17 @@ class customException extends Exception
     }
 }
 
-$email = "abc@aa...com";
+$email = "abc@abc.com";
 
 try {
 //trigger exception
     if (filter_var($email, FILTER_VALIDATE_EMAIL) === FALSE) {
         throw new customException($email);
     }
+
+    $conn = new MyPDO();
+
     echo "No exception";
 } catch (Exception $e) {
-    echo "Exception: " . $e->errorMessage();
+    echo "Exception: " . $e->getMessage() . " [CODE]: " . $e->getCode() . " [TRACE]: " . $e->getTraceAsString();
 }
