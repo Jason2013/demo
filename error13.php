@@ -31,7 +31,7 @@ try {
         echo $row[0] . ", " . $row[1] . "</br>";
     }
 
-    echo "<h1>PDO::prepare and PDOStatement::execute</h1>";
+    echo "<h1>PDO::prepare (positional placeholders) and PDOStatement::execute</h1>";
 
     $stmt = $conn->prepare("select schema_name, default_character_set_name from information_schema.schemata where schema_name = ?");
     $stmt->execute(["db_mis"]);
@@ -39,6 +39,19 @@ try {
     {
         echo $row[0] . ", " . $row[1] . "</br>";
     }
+
+    echo "<h1>PDO::prepare (named placeholders) and PDOStatement::execute</h1>";
+
+    $stmt = $conn->prepare("select schema_name, default_character_set_name from information_schema.schemata where schema_name = :schema_name");
+    $stmt->execute(["schema_name" => "db_mis"]);
+    echo "<table border='1'>";
+    while ($row = $stmt->fetch())
+    {
+        echo "<tr>";
+        echo "<td>$row[0]</td><td>$row[1]</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
 
     echo "No exception";
 } catch (Exception $e) {
