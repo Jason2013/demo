@@ -28,6 +28,13 @@ try {
         echo $row[0] . ", " . $row[1] . "</br>";
     }
 
+    $stmt = $conn->getConn()->prepare("select schema_name, default_character_set_name from information_schema.schemata where schema_name = ?");
+    $stmt->execute(["db_mis"]);
+    while ($row = $stmt->fetch())
+    {
+        echo $row[0] . ", " . $row[1] . "</br>";
+    }
+
     echo "No exception";
 } catch (Exception $e) {
     echo "Exception: " . $e->getMessage() . " [CODE]: " . $e->getCode() . " [TRACE]: " . $e->getTraceAsString();
