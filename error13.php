@@ -20,15 +20,16 @@ try {
         throw new customException($email);
     }
 
-    $conn = new MyPDO();
+    $pdoObj = new MyPDO();
+    $conn = $pdoObj->getConn();
 
-    $stmt = $conn->getConn()->query("select schema_name, default_character_set_name from information_schema.schemata");
+    $stmt = $conn->query("select schema_name, default_character_set_name from information_schema.schemata");
     while ($row = $stmt->fetch())
     {
         echo $row[0] . ", " . $row[1] . "</br>";
     }
 
-    $stmt = $conn->getConn()->prepare("select schema_name, default_character_set_name from information_schema.schemata where schema_name = ?");
+    $stmt = $conn->prepare("select schema_name, default_character_set_name from information_schema.schemata where schema_name = ?");
     $stmt->execute(["db_mis"]);
     while ($row = $stmt->fetch())
     {
