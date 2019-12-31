@@ -871,7 +871,7 @@ ss:Bold="1"/>
 </Style>
 </Styles>
  <Worksheet ss:Name="D3D11">
-  <Table ss:ExpandedRowCount="0000001168" x:FullColumns="1"
+  <Table ss:ExpandedRowCount="0000001204" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s63" ss:DefaultRowHeight="15">
    <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="60"/>
    <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="60"/>
@@ -24039,3 +24039,724 @@ ss:Bold="1"/>
  <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
  <Cell ss:StyleID="s121"><Data ss:Type="Number">426.71933333333</Data></Cell>
 <Cell ss:StyleID="s130" ><Data ss:Type="Number">1.3320261998015E-16</Data></Cell></Row>
+<Row ss:StyleID="Default" ss:Height="3"> <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+<Cell ss:StyleID="s129"><Data ss:Type="String">Dec 16</Data></Cell>
+<Cell ss:StyleID="s129"/>
+<Cell ss:StyleID="s129"><Data ss:Type="String">Dec 9</Data></Cell>
+<Cell ss:StyleID="s129"/>
+<Cell ss:StyleID="s129"><Data ss:Type="String">Dec 2</Data></Cell>
+<Cell ss:StyleID="s129"/>
+<Cell ss:StyleID="s129"><Data ss:Type="String">Nov 25</Data></Cell>
+<Cell ss:StyleID="s117"/>
+</Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s119" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s120"><Data ss:Type="String">TestCaseID</Data></Cell>
+ <Cell ss:StyleID="s120"><Data ss:Type="String">RtFormat</Data></Cell>
+ <Cell ss:StyleID="s120"><Data ss:Type="String">KernelType-Filter-Taps-KernelSize</Data></Cell>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+<Cell ss:StyleID="s121"><Data ss:Type="String">GPix/s</Data></Cell>
+ <Cell ss:StyleID="s122"/>
+<Cell ss:StyleID="s121"><Data ss:Type="String">GPix/s</Data></Cell>
+ <Cell ss:StyleID="s122"/>
+<Cell ss:StyleID="s121"><Data ss:Type="String">GPix/s</Data></Cell>
+ <Cell ss:StyleID="s122"/>
+<Cell ss:StyleID="s121"><Data ss:Type="String">GPix/s</Data></Cell>
+<Cell ss:StyleID="s127"><Data ss:Type="String">Variation</Data></Cell>
+</Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">0</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">KernReduction-FilterBILIN-Taps1-KernSize2</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">70.297333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">70.661333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">70.458666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">71.152</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.001622819652212</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">KernReduction-FilterBILIN-Taps4-KernSize4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.678</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.751</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.718666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.776</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">2</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">KernReduction-FilterBILIN-Taps16-KernSize8</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.4336666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.4353333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.4303333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.424</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0013559094557748</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">3</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DHoriz-FilterBILIN-Taps4-KernSize8</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">59.105</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">59.076666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">58.766</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">58.878333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DHoriz-FilterBILIN-Taps16-KernSize32</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15.175333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15.171666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15.175</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15.173666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00029633039501013</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">5</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DVert-FilterBILIN-Taps4-KernSize8</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">58.653</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">58.653333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">58.681</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">58.709666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00067512283679343</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">6</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DVert-FilterBILIN-Taps16-KernSize32</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15.172</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15.175333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15.167666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15.177</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0007591683163358</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">7</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DDiag-FilterBILIN-Taps4-KernSize8</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">58.878666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">58.878666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">58.653666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">59.197666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0024459565391136</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">8</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DDiag-FilterBILIN-Taps16-KernSize32</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15.183</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15.432333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15.175666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15.308333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0006201869148313</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">9</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DHoriz-FilterBILIN-Taps8-KernSize32</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.021666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.546</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.007</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.262666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00069089431793052</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">10</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DVert-FilterBILIN-Taps8-KernSize32</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">29.985</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.463</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">29.999666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.262</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0010376087501153</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">11</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DDiag-FilterBILIN-Taps8-KernSize32</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">29.977666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.494</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">29.992333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.269666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00091530875773108</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">12</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">KernStochastic-FilterPOINT-Taps8-KernSize4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">29.970333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.513666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">29.999666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.269333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00034603884254658</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">13</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">KernStochastic-FilterBILIN-Taps8-KernSize16</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">29.941</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.494</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">29.985</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.262666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0011998880986213</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">14</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern3DMVLentucular-FilterBILIN-Taps32-KernSize512</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6.6043333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6.562</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6.4533333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6.527</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.034547867336453</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">15</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern3DMVLentucular-FilterBILIN-Taps95-KernSize512</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.0946666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.1326666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.0953333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.1716666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00045009979706342</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R8G8B8A8_UNORM</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern3DMVLentucular-FilterBILIN-Taps186-KernSize512</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1.111</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1.142</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1.1266666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1.1686666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00073492041487644</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">17</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">KernReduction-FilterBILIN-Taps1-KernSize2</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">47.664333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">54.832666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">54.139666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">55.351666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00055384500984586</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">18</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">KernReduction-FilterBILIN-Taps4-KernSize4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7.5893333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8.3553333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8.302</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8.3613333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0043199444152975</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">19</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">KernReduction-FilterBILIN-Taps16-KernSize8</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1.7056666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1.795</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1.7973333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1.8003333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.006229187981438</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">20</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DHoriz-FilterBILIN-Taps4-KernSize8</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">52.400333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">55.526333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">55.702333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">55.958666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0012054924418928</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">21</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DHoriz-FilterBILIN-Taps16-KernSize32</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">16.658666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17.639333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17.637</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17.777333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00036787210482737</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">22</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DVert-FilterBILIN-Taps4-KernSize8</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">52.422666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">55.676666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">55.829333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">56.237333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00060248943636975</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">23</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DVert-FilterBILIN-Taps16-KernSize32</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">16.690666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17.672666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17.675333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17.811</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00031828921254407</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">24</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DDiag-FilterBILIN-Taps4-KernSize8</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">52.445</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">55.576333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">55.853666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">55.905</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0010430979296817</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">25</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DDiag-FilterBILIN-Taps16-KernSize32</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17.649666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17.647</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17.632</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17.795333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0007260716080281</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">26</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DHoriz-FilterBILIN-Taps8-KernSize32</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.257333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.458666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.410666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.623666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0051979535364983</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">27</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DVert-FilterBILIN-Taps8-KernSize32</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.42</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.295</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.343</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.662666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00068792564924184</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">28</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern1DDiag-FilterBILIN-Taps8-KernSize32</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.391333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.429666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.410666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.633</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0024692522788968</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">29</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">KernStochastic-FilterPOINT-Taps8-KernSize4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.391</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.468333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.295</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.643</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">30</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">KernStochastic-FilterBILIN-Taps8-KernSize16</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.575</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.574666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.536</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">34.809666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0021025513477741</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">31</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern3DMVLentucular-FilterBILIN-Taps32-KernSize512</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.5996666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.6003333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.5963333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.6353333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00051243335110264</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">32</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern3DMVLentucular-FilterBILIN-Taps95-KernSize512</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1.548</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1.5463333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1.5473333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1.5616666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/PSPostProcess/PSPostProcess.html"><Data ss:Type="String">PSPostProcess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">33</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">R16G16B16A16_SFLOAT</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Kern3DMVLentucular-FilterBILIN-Taps186-KernSize512</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">0.836</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">0.836</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">0.836</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">0.84333333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
