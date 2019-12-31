@@ -871,7 +871,7 @@ ss:Bold="1"/>
 </Style>
 </Styles>
  <Worksheet ss:Name="D3D11">
-  <Table ss:ExpandedRowCount="0000000872" x:FullColumns="1"
+  <Table ss:ExpandedRowCount="0000000976" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s63" ss:DefaultRowHeight="15">
    <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="60"/>
    <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="60"/>
@@ -18116,3 +18116,2084 @@ ss:Bold="1"/>
  <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
  <Cell ss:StyleID="s121"><Data ss:Type="Number">16837.700666667</Data></Cell>
 <Cell ss:StyleID="s130" ><Data ss:Type="Number">4.9009557590387E-5</Data></Cell></Row>
+<Row ss:StyleID="Default" ss:Height="3"> <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+<Cell ss:StyleID="s129"><Data ss:Type="String">Dec 16</Data></Cell>
+<Cell ss:StyleID="s129"/>
+<Cell ss:StyleID="s129"><Data ss:Type="String">Dec 9</Data></Cell>
+<Cell ss:StyleID="s129"/>
+<Cell ss:StyleID="s129"><Data ss:Type="String">Dec 2</Data></Cell>
+<Cell ss:StyleID="s129"/>
+<Cell ss:StyleID="s129"><Data ss:Type="String">Nov 25</Data></Cell>
+<Cell ss:StyleID="s117"/>
+</Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s119" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s120"><Data ss:Type="String">TestCaseID</Data></Cell>
+ <Cell ss:StyleID="s120"><Data ss:Type="String">HsDsComplexity</Data></Cell>
+ <Cell ss:StyleID="s120"><Data ss:Type="String">CpPerPatch</Data></Cell>
+ <Cell ss:StyleID="s120"><Data ss:Type="String">TessFactor</Data></Cell>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+<Cell ss:StyleID="s121"><Data ss:Type="String">MPrim/s</Data></Cell>
+ <Cell ss:StyleID="s122"/>
+<Cell ss:StyleID="s121"><Data ss:Type="String">MPrim/s</Data></Cell>
+ <Cell ss:StyleID="s122"/>
+<Cell ss:StyleID="s121"><Data ss:Type="String">MPrim/s</Data></Cell>
+ <Cell ss:StyleID="s122"/>
+<Cell ss:StyleID="s121"><Data ss:Type="String">MPrim/s</Data></Cell>
+<Cell ss:StyleID="s127"><Data ss:Type="String">Variation</Data></Cell>
+</Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">0</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess0.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3491.5956666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3505.0236666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3490.5653333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3490.569</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00083382917105778</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess1.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2366.3076666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2366.3086666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2369.62</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2361.1216666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00028228797775144</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">2</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess2.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6445.7323333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6427.3796666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6412.5956666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6437.8766666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00096215566436958</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">3</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess3.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">11149.304333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">11094.793333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">11134.17</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">11116.767</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0005329180325475</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess4.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12930.135333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12881.820333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12925.728</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12928.374666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0002892563280691</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">5</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess5.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">9079.9836666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">9054.4563333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">9077.4796666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">9075.811</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">7.5040491543309E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">6</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess6.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">11821.243666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">11816.009</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">11816.332333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">11823.865</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00010371297964102</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">7</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess7.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">9978.23</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">9912.3093333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">9975.497</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">9987.323</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00052557836172363</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">8</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess8.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">13632.245666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">13627.103</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">14558.616666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">13621.723333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00011650643793352</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">9</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess9.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">13160.246333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12828.273333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">14798.546666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12974.378333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.035454496919896</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">10</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess10.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15178.837</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15670.423</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">16069.906</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">14531.096333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0029735183664932</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">11</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess11.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17359.425</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">16578.333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17423.56</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17363.259333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0034012557640514</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">12</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess12.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17065.337333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">16292.956333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17094.761</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17047.905333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0029714201297134</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">13</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess13.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">16883.002</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">16905.806333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">16891.687666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">16909.384666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00013747059569277</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">14</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess14.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17875.529333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17904.183666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17896.045</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17979.626333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00059349963373885</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">15</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess15.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17187.545333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17166.630333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17186.991</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17276.421666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00015064418631647</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess16.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">18251.233666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">18258.923333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">18253.868666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">18351.837333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00020005209106794</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">17</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess0.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2844.0573333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2849.491</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2852.9036666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2869.3773333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0012153349410642</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">18</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess1.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2378.3673333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2382.6403333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2372.6896666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2390.7666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0012291142479851</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">19</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess2.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6435.576</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6448.624</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6433.8373333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6466.1113333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00068767067844542</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">20</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess3.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">11081.684666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">11109.209</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">11088.550666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">11168.185333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00077289792155916</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">21</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess4.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12798.623333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12836.508666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12799.484333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12853.825333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00018976072878011</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">22</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess5.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">9785.273</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">9819.4366666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">9787.8443333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">9838.8923333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">4.6392425997977E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">23</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess6.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12154.017333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12193.717333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12161.937333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12215.594333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">6.9362477412722E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">24</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess7.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">10339.940666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">10332.261666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">10342.869</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">10397.901333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00013239932616492</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">25</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess8.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">14072.231333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">14087.817</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">14069.897</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">14117.032</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">6.898564321285E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">26</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess9.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">13436.284333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">13449.941333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">13434.976</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">13473.038333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00018768797588775</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">27</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess10.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">14238.095666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">14283.116666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">14243.537333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">14310.038333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00012175335735062</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">28</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess11.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15779.311333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15821.354333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15782.418</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15853.529</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">6.1870809310659E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">29</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess12.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15462.064333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15508.564666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15463.038666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15522.603</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">3.820122926782E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">30</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess13.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15329.662666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15313.942333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15335.963</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15323.383333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00011978979677873</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">31</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess14.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">16455.848333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">16496.149666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">16518.203666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">16547.653666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">4.9787834728385E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">32</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess15.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15964.107</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15973.705666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15962.397333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">15989.635666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">3.0343498311049E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">33</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess16.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17123.121333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17162.492666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17124.658333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">17201.009333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">4.122270232301E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">34</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess0.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">654.54633333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">655.47866666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">654.65433333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">659.20033333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00026757261677966</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">35</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess1.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">516.181</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">516.53733333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">516.47033333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">519.273</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00038058387138514</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">36</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess2.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2021.6313333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2022.9133333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2019.4983333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2032.0226666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00041825876825135</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">37</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess3.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4479.4046666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4480.8966666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4479.5926666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4509.804</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00015574412169728</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">38</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess4.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5165.9923333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5174.791</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5164.0403333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5198.4116666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00034347062515143</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">39</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess5.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3425.2943333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3433.3166666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3426.472</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3441.0653333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">9.0146903269445E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">40</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess6.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4867.476</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4879.6653333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4868.1916666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4885.4846666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">8.4557646004838E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">41</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess7.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5075.527</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5081.4226666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5075.5266666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5086.857</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">3.6779666472688E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">42</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess8.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6621.2333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6636.3853333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6620.8893333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6641.4583333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00014102048844168</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">43</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess9.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5820.643</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5833.4333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5822.8116666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5838.925</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">9.1847693175627E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">44</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess10.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6188.5343333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6206.7403333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6188.951</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6218.786</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">9.5132363006851E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">45</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess11.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7434.0163333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7452.733</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7435.5433333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7470.0546666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">5.8148640813077E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">46</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess12.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7314.8046666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7335.0813333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7316.7306666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7349.9903333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00013575942176926</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">47</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess13.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7091.835</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7113.2696666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7094.747</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7126.9966666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">6.1963759832803E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">48</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess14.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8161.7193333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8185.2263333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8164.3626666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8201.1313333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">2.2554551381092E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">49</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess15.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7820.9896666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7851.341</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7502.8896666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7508.178</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">8.9022295674994E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">50</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">SimpleHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess16.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8824.648</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8861.8386666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8100.0803333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8809.2683333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00015765778710675</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">51</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess0.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2227.5323333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2228.7886666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2226.6946666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2244.406</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00070300789876146</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">52</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess1.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1630.275</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1630.2746666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1630.0506666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1641.3413333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00058380685925816</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">53</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess2.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3500.1016666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3504.7606666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3498.809</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3524.046</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00052230103743486</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">54</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess3.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6371.981</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6378.0793333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6373.8846666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6415.3026666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00036825798811777</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">55</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess4.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6432.606</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6450.3316666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6436.9733333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6455.3966666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00012692882303423</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">56</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess5.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3721.74</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3731.772</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3722.5816666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3735.3053333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00014539629811864</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">57</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess6.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5342.5273333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5356.0763333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5343.1296666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5362.75</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00012397191635855</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">58</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess7.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5529.323</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5527.5336666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5529.7973333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5556.7923333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00019418938735385</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">59</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess8.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7201.3333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7216.8186666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7201.4693333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7232.18</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00026822042536339</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">60</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess9.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6180.0273333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6194.3836666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6179.5893333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6202.399</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00033915373922446</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">61</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess10.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6568.4143333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6581.875</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6568.0133333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6596.211</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00045061382016994</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">62</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess11.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7917.412</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7934.542</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7916.1443333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7953.698</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00022885913200523</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">63</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess12.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7409.501</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7427.7876666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7410.4663333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7442.9613333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00015570679710427</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">64</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess13.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7149.9736666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7164.118</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7148.673</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7178.8916666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00019202490456497</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">65</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess14.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8264.3666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8283.7606666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8263.337</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8290.8273333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00030154732830571</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">66</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess15.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7511.5373333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7529.2703333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7503.4836666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7529.8013333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0002401131667394</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">67</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess16.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8508.9933333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8527.7943333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8448.755</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8532.639</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">8.9686456517904E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">68</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess0.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2098.3836666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2100.973</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2096.5393333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2098.0153333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00024891358874626</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">69</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess1.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1552.345</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1556.601</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1549.9253333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1554.573</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00036805109637273</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">70</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess2.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3407.1763333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3408.883</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3409.124</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3411.0756666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00036416119789151</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">71</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess3.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6299.217</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6306.2486666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6299.9556666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6312.1833333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00036174723790949</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">72</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess4.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6353.074</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6357.7323333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6355.1903333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6362.609</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00021579872837357</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">73</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess5.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3709.027</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3716.379</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3708.5656666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3718.1396666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00010989942133203</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">74</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess6.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5307.7186666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5315.2756666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5308.309</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5316.5263333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00018908154785955</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">75</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess7.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5481.4233333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5480.5496666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5480.4466666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5480.602</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00010016132307499</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">76</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess8.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7143.3953333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7153.304</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7144.1303333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7153.17</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00029922088218211</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">77</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess9.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6135.878</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6147.0846666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6138.9583333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6149.315</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">5.8943662394238E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">78</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess10.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6516.1723333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6525.9783333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6517.6326666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6528.0506666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00013404323928852</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">79</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess11.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7842.6996666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7850.5936666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7845.0026666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7851.747</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0001423312338648</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">80</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess12.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7339.051</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7366.836</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7357.8396666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7368.1003333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0014692844689674</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">81</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess13.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7095.599</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7109.8276666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7101.2103333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7113.8183333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0014401667788324</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">82</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess14.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8192.4653333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8214.449</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8204.04</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8214.8533333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0013034952576147</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">83</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess15.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7438.6303333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7456.8443333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7465.329</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7476.437</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00011303675070291</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">84</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess16.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8417.7683333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8388.716</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8440.729</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">8464.9906666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">5.4585101106995E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">85</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess0.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">563.1</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">566.43266666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">565.06766666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">565.76266666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00026621672458096</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">86</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess1.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">393.969</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">395.82033333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">395.428</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">395.886</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00016825499893827</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">87</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess2.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1549.9473333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1557.211</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1555.5913333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">1557.769</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00019966124346796</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">88</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess3.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3486.705</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3502.472</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3503.27</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3501.903</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">4.5832994918736E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">89</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess4.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4256.364</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4275.2803333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4274.23</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4273.277</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.001010996180757</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">90</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess5.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2973.054</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2988.3536666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2984.4763333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2987.3683333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00034197221352671</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">91</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess6.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4189.0003333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4205.3606666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4205.197</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4207.3433333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00069778939496125</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">92</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess7.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4425.9753333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4444.0253333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4441.4996666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4447.8366666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00086941367813248</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">93</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess8.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5742.102</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5768.3173333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5763.9776666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5767.1913333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00055225747122543</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">94</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess9.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5009.1633333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5032.7613333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5031.5063333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5035.85</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00040845243122158</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">95</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess10.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5281.317</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5307.2783333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5299.5903333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5308.576</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00027596727105574</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">96</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess11.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6383.351</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6403.0606666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6420.5256666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6420.7283333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00073238299413644</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">97</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess12.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6043.8096666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6070.0256666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6058.5876666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6070.4526666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00064088250165046</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">98</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess13.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5919.2553333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5936.6376666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5917.7656666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">5935.3753333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00014723245360453</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">99</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess14.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6786.566</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6786.4106666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6790.261</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6769.4026666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00032277803235508</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">100</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess15.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6337.6756666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6284.478</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6340.6223333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6358.522</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0012340657208847</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/QuadTess/QuadTess.html"><Data ss:Type="String">QuadTess</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">101</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HeavyHsDs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">CP16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">Tess16.0</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7119.881</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7157.501</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7167.9516666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">7183.941</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.001065646606429</Data></Cell></Row>
