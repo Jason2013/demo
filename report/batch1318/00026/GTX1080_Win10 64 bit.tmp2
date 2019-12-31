@@ -871,7 +871,7 @@ ss:Bold="1"/>
 </Style>
 </Styles>
  <Worksheet ss:Name="D3D11">
-  <Table ss:ExpandedRowCount="0000000976" x:FullColumns="1"
+  <Table ss:ExpandedRowCount="0000001038" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s63" ss:DefaultRowHeight="15">
    <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="60"/>
    <Column ss:StyleID="s63" ss:AutoFitWidth="0" ss:Width="60"/>
@@ -20197,3 +20197,1244 @@ ss:Bold="1"/>
  <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
  <Cell ss:StyleID="s121"><Data ss:Type="Number">7183.941</Data></Cell>
 <Cell ss:StyleID="s130" ><Data ss:Type="Number">0.001065646606429</Data></Cell></Row>
+<Row ss:StyleID="Default" ss:Height="3"> <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+ <Cell ss:StyleID="s117"/>
+<Cell ss:StyleID="s129"><Data ss:Type="String">Dec 16</Data></Cell>
+<Cell ss:StyleID="s129"/>
+<Cell ss:StyleID="s129"><Data ss:Type="String">Dec 9</Data></Cell>
+<Cell ss:StyleID="s129"/>
+<Cell ss:StyleID="s129"><Data ss:Type="String">Dec 2</Data></Cell>
+<Cell ss:StyleID="s129"/>
+<Cell ss:StyleID="s129"><Data ss:Type="String">Nov 25</Data></Cell>
+<Cell ss:StyleID="s117"/>
+</Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s119" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s120"><Data ss:Type="String">TestCaseID</Data></Cell>
+ <Cell ss:StyleID="s120"><Data ss:Type="String">PsComplexity</Data></Cell>
+ <Cell ss:StyleID="s120"><Data ss:Type="String">TriCount</Data></Cell>
+ <Cell ss:StyleID="s120"><Data ss:Type="String">DrawLayers</Data></Cell>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+ <Cell ss:StyleID="s120"/>
+<Cell ss:StyleID="s121"><Data ss:Type="String">GPix/s</Data></Cell>
+ <Cell ss:StyleID="s122"/>
+<Cell ss:StyleID="s121"><Data ss:Type="String">GPix/s</Data></Cell>
+ <Cell ss:StyleID="s122"/>
+<Cell ss:StyleID="s121"><Data ss:Type="String">GPix/s</Data></Cell>
+ <Cell ss:StyleID="s122"/>
+<Cell ss:StyleID="s121"><Data ss:Type="String">GPix/s</Data></Cell>
+<Cell ss:StyleID="s127"><Data ss:Type="String">Variation</Data></Cell>
+</Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">0</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount2</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">82.116666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">82.713666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">82.403</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">82.936666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0013075245679419</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">1</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount2</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">83.848</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">84.129666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">84.152333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">84.163666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00016554290950014</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">2</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount8</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">81.593</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">81.658666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">82.204666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">81.55</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">3</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount8</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">83.122</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">83.557</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">83.528666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">83.54</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00025082001188799</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">4</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount32</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">80.969333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">81.355666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">81.398666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">81.119</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00037260883952726</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">5</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount32</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">82.342333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">82.53</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">82.736</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">82.702333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00024776471799603</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">6</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount128</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">79.461333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">79.461</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">79.441</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">79.708666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00096754361157966</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">7</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount128</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">79.766</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">79.906</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">79.932</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">79.833</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00054961538040729</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">8</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount512</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">76.627</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">76.685</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">76.379</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">76.474333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00035066044194722</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">9</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount512</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">77.614333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">77.949333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">77.994</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">77.994</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00023531096115068</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">10</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount2048</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">70.313333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">70.104666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">70.685333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">70.394</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00085650408485076</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">11</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount2048</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">72.248</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">72.554666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">72.598</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">72.576333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0002182644257283</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">12</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount8192</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">67.457</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">67.176333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">67.471666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">67.264666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0010772521117537</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">13</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount8192</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">70.885</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">71.040666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">71.214</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">71.181</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">7.9803262319145E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">14</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount32768</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">53.866</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">53.969666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">54.381</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">54.218</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00042442179233608</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">15</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount32768</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">55.811</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">55.833666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">55.971</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">56.019666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00058280467890886</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">16</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount131072</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12.760333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12.756666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12.799</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">12.804666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00054420382581435</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">17</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount131072</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">19.422666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">19.44</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">19.438666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">19.432</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00015915457018422</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">18</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount524288</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.107</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.2536666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.125</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.1426666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">1.4293183451885E-16</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">19</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">LowPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount524288</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6.539</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6.6246666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6.534</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6.5496666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00043254735047351</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">20</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount2</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.156666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.241333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.267</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.340333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0052136648045382</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">21</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount2</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.848666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.744</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.868666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.909666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">2.9602779025283E-5</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">22</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount8</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.152666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.042333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.105333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.146333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00065383877752369</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">23</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount8</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.589333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.489666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.625</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.666666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00024016137676732</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">24</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount32</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.026666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.945333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.014</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.099</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00056216052651277</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">25</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount32</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.394666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.293666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.426666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.462</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00037357963318101</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">26</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount128</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.53</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.536</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.533</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.649</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00048139333300682</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">27</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount128</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.084</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.963333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.11</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">31.144666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00016404000494122</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">28</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount512</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">29.617666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">29.637666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">29.657666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">29.738</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00050104845732958</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">29</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount512</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.099333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">29.981333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.127333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">30.130666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00026762599334635</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">30</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount2048</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">27.922</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">27.886333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">28.005666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">28.054333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00025324360045355</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">31</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount2048</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">28.443333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">28.373</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">28.485333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">28.531666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00014448409710465</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">32</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount8192</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">27.977666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">27.825666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">27.916666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">28.010666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00021904109600337</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">33</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount8192</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">28.441333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">28.348</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">28.489666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">28.500333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00023204479247599</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">34</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount32768</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">25.147</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">25.093666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">25.145</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">25.177666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00038962735002711</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">35</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount32768</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">25.552333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">25.485</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">25.593333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">25.638333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.0002175056681129</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">36</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount131072</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">14.61</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">14.592666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">14.614</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">14.679</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00031116088745117</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">37</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount131072</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">19.014</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">18.992333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">19.054666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">19.103333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00011361349003204</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">38</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount524288</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.5723333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.573</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.575</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.593</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00013195983599636</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">39</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">MedPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount524288</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6.8543333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6.859</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6.856</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">6.886</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00029978184131541</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">40</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount2</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.477</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.4716666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.4843333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.4896666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00036475165554068</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">41</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount2</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.492</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.481</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.4933333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.5023333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">42</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount8</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.4406666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.433</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.443</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.4506666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00010615624999042</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">43</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount8</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.456</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.446</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.457</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.4643333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">44</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount32</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.4323333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.4243333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.4326666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.445</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00010635583683329</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">45</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount32</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.428</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.4186666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.429</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.439</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">46</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount128</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.3623333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.3576666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.363</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.3776666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00010806247133595</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">47</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount128</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.385</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.3763333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.3863333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.3946666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">48</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount512</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.2356666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.228</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.2373333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.247</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00011129405543183</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">49</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount512</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.252</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.242</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.253</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.262</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">50</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount2048</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.0063333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.9956666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.007</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.0153333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00011766482755407</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">51</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount2048</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.022</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.0113333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.023</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.031</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">52</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount8192</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.0033333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.9943333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.0063333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.0113333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00011775300269545</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">53</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount8192</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.022</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.011</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.023</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">4.03</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">54</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount32768</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.5526666666667</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.541</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.553</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.5563333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0.00013269033236751</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">55</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount32768</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.546</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.5353333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.547</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">3.552</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">56</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount131072</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.926</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.921</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.928</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.9343333333333</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">57</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount131072</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.927</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.92</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.929</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.9346666666667</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">58</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount524288</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers1</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.198</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.1963333333333</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.201</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.208</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
+<Row ss:StyleID="Default">
+ <Cell ss:StyleID="s125" ss:HRef="http://gfxbench/docs/Microbench/TriSizeFill/TriSizeFill.html"><Data ss:Type="String">TriSizeFill</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="Number">59</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">HighPs</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">TriCount524288</Data></Cell>
+ <Cell ss:StyleID="s123"><Data ss:Type="String">DrawLayers4</Data></Cell>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s123"/>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.205</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC12=&quot;&quot;,RC14=&quot;&quot;,RC12=0,RC14=0),&quot;&quot;,(RC12-RC14)/RC14)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.202</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC14=&quot;&quot;,RC16=&quot;&quot;,RC14=0,RC16=0),&quot;&quot;,(RC14-RC16)/RC16)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.209</Data></Cell>
+ <Cell ss:StyleID="s122" ss:Formula="=IF(OR(RC16=&quot;&quot;,RC18=&quot;&quot;,RC16=0,RC18=0),&quot;&quot;,(RC16-RC18)/RC18)"><Data ss:Type="Number"></Data></Cell>
+ <Cell ss:StyleID="s121"><Data ss:Type="Number">2.215</Data></Cell>
+<Cell ss:StyleID="s130" ><Data ss:Type="Number">0</Data></Cell></Row>
