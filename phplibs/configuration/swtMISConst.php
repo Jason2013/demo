@@ -187,24 +187,31 @@ function microtime_float()
 }
 
 
-function _getIDNum()
+function _getIDNum($inc)
 {
     $filename = "my_test_config.txt";
     $json = file_get_contents($filename);
     if (!$json) {
-        $result["id"] = 0;
+        $result["id"] = 1;
+        $json = json_encode($result);
+        file_put_contents($filename, $json);
     } else {
         $result = json_decode($json, true);
     }
-    $result["id"] += 1;
-    $json = json_encode($result);
-    file_put_contents($filename, $json);
-    return $result["id"];
+
+    $retval = $result["id"];
+
+    if ($inc) {
+        $result["id"] += 1;
+        $json = json_encode($result);
+        file_put_contents($filename, $json);
+    }
+    return $retval;
 }
 
-function _getID()
+function _getID($inc = true)
 {
-    $id = _getIDNum();
+    $id = _getIDNum($inc);
     return sprintf("%05d", $id);
 }
 
@@ -217,7 +224,7 @@ function _logMsg($handle, $op, $msg = null)
 
     $id = _getID();
     $filename = $fileHandles[$handle];
-    $opstr= sprintf("%-6s", $op);
+    $opstr = sprintf("%-6s", $op);
     $logmsg = "[$id] [$opstr] $filename\n";
     if ($msg) {
         $logmsg .= ">>> begin\n$msg<<< end\n";
@@ -247,6 +254,10 @@ function _fclose($handle)
 {
     fclose($handle);
     _logMsg($handle, "fclose");
+
+    global $fileHandles;
+    $filename = $fileHandles[$handle];
+    copy($filename, $filename . "." . _getID(false));
 }
 
 ?>
