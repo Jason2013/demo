@@ -190,12 +190,12 @@ function microtime_float()
 function _getIDNum($inc)
 {
     $filename = "my_test_config.txt";
-    $json = file_get_contents($filename);
-    if (!$json) {
+    if (!file_exists($filename)) {
         $result["id"] = 1;
         $json = json_encode($result);
         file_put_contents($filename, $json);
     } else {
+        $json = file_get_contents($filename);
         $result = json_decode($json, true);
     }
 
@@ -223,7 +223,7 @@ function _logMsg($handle, $op, $msg = null)
     global $logfile;
 
     $id = _getID();
-    $filename = $fileHandles[$handle];
+    $filename = $fileHandles[(int)$handle];
     $opstr = sprintf("%-6s", $op);
     $logmsg = "[$id] [$opstr] $filename\n";
     if ($msg) {
@@ -237,7 +237,7 @@ function _fopen($filename, $mode)
     $handle = fopen($filename, $mode);
 
     global $fileHandles;
-    $fileHandles[$handle] = $filename;
+    $fileHandles[(int)$handle] = $filename;
 
     _logMsg($handle, "fopen");
     return $handle;
@@ -256,7 +256,7 @@ function _fclose($handle)
     _logMsg($handle, "fclose");
 
     global $fileHandles;
-    $filename = $fileHandles[$handle];
+    $filename = $fileHandles[(int)$handle];
     copy($filename, $filename . "." . _getID(false));
 }
 
