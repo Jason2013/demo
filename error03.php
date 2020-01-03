@@ -28,10 +28,11 @@ function _getIDNum()
     if (!$json) {
         $result["id"] = 0;
     } else {
-        $result = json_decode($json);
+        $result = json_decode($json, true);
     }
-    ++$result["id"];
-    file_put_contents($filename, json_encode($result));
+    $result["id"] += 1;
+    $json = json_encode($result);
+    file_put_contents($filename, $json);
     return $result["id"];
 }
 
