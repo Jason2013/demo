@@ -552,8 +552,8 @@ if (($subTestNum == 0) ||
         $returnMsg["resultPos"] = $resultPos;
         if ($resultIDList[0][$resultPos] != PHP_INT_MAX)
         {
-            $fileHandle = _fopen($xmlFileName, "r+");
-            $tempFileHandle = _fopen($tmpFileName, "r+");
+            $fileHandle = fopen($xmlFileName, "r+");
+            $tempFileHandle = fopen($tmpFileName, "r+");
         
             $returnMsg["checkNeedCreateReportFile"] = "1";
             $returnMsg["returnLine"] = "line: " . __LINE__;
@@ -604,8 +604,8 @@ if (($subTestNum == 0) ||
             $firstSubTestPos = $returnSet["firstSubTestPos"];
             $sheetLinePos = $returnSet["sheetLinePos"];
         
-            _fclose($tempFileHandle);
-            _fclose($fileHandle);
+            fclose($tempFileHandle);
+            fclose($fileHandle);
         }
         
         
@@ -669,8 +669,8 @@ else
     $tempFileLineNumPos = $returnSet["tempFileLineNumPos"];
     
     
-    $fileHandle = _fopen($xmlFileName, "r+");
-    $tempFileHandle = _fopen($tmpFileName, "r+");
+    $fileHandle = fopen($xmlFileName, "r+");
+    $tempFileHandle = fopen($tmpFileName, "r+");
 
     fseek($fileHandle, 0, SEEK_END);
     fseek($tempFileHandle, 0, SEEK_END);
@@ -743,9 +743,9 @@ else
     fseek($fileHandle, $lineNumPos, SEEK_SET);
     $t1 = sprintf("%010d", $n1);
     //$t1 = "1234567890";
-    _fwrite($fileHandle, $t1);
+    fwrite($fileHandle, $t1);
     
-    _fclose($fileHandle);
+    fclose($fileHandle);
     
     $returnMsg["returnLine"] = "line: " . __LINE__;
     $returnSet = $xmlWriter->writeReportCompareData($db, $tempFileHandle, $reportFolder,
@@ -758,7 +758,7 @@ else
     }
     $sheetLinePos = $returnSet["sheetLinePos"];
 
-    _fclose($tempFileHandle);
+    fclose($tempFileHandle);
 }
 
 
