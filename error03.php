@@ -50,7 +50,6 @@ function _logMsg($handle, $op, $msg = null)
     global $logfile;
 
     $id = _getID();
-//    $op = "fwrite";
     $filename = $fileHandles[$handle];
     $logmsg = "$id $filename $op\n";
     if ($msg) {
@@ -74,19 +73,12 @@ function _fwrite($handle, $str)
     fwrite($handle, $str);
 
     _logMsg($handle, "fwrite", $str);
-
-//    global $fileHandles;
-//    $id = _getID();
-//    $op = "fwrite";
-//    $filename = $fileHandles[$handle];
-//    $msg = "$id $filename $op\n>>> begin\n$str<<< end\n";
-//    file_put_contents($msg, FILE_APPEND);
 }
 
 function _fclose($handle)
 {
     fclose($handle);
-    _logMsg($handle, "fclose");//, "");
+    _logMsg($handle, "fclose");
 }
 
 
@@ -95,24 +87,3 @@ $filename = "my_test2.txt";
 $myhandle = _fopen($filename, "w");
 _fwrite($myhandle, "hello, world!\n");
 _fclose($myhandle);
-
-//    "my_test1.txt", "w")
-
-//
-//$time_start = microtime_float();
-//
-//// Sleep for a while
-////usleep(1000000);
-//
-//$time_end = microtime_float();
-//$time = $time_end - $time_start;
-//
-//echo "\nDid nothing in type($time) seconds\n";
-//
-//echo 1+2;
-//echo $g_var;
-//
-//for ($i=0; $i<5; ++$i){
-//    $num12["key"] = 10;
-//
-//}
