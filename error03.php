@@ -23,13 +23,15 @@ file_put_contents("my_test_config.json", json_encode($myvar));
 
 function _getIDNum()
 {
-    const $filename = "my_test_config.json";
-    $result = file_get_contents($filename);
-    if (!$result) {
+    $filename = "my_test_config.txt";
+    $json = file_get_contents($filename);
+    if (!$json) {
         $result["id"] = 0;
+    } else {
+        $result = json_decode($json);
     }
     ++$result["id"];
-    file_put_contents($filename);
+    file_put_contents($filename, json_encode($result));
     return $result["id"];
 }
 
@@ -40,6 +42,21 @@ function _getID()
 }
 
 $logfile = "my_test_file_operation.txt";
+
+function _logMsg($handle, $op, $msg = null)
+{
+    global $fileHandles;
+    global $logfile;
+
+    $id = _getID();
+//    $op = "fwrite";
+    $filename = $fileHandles[$handle];
+    $logmsg = "$id $filename $op\n";
+    if ($msg) {
+        $logmsg .= ">>> begin\n$msg<<< end\n";
+    }
+    file_put_contents($logfile, $logmsg, FILE_APPEND);
+}
 
 function _fopen($filename, $mode)
 {
@@ -54,11 +71,21 @@ function _fopen($filename, $mode)
 function _fwrite($handle, $str)
 {
     fwrite($handle, $str);
+
+    _logMsg($handle, "fwrite", $str);
+
+//    global $fileHandles;
+//    $id = _getID();
+//    $op = "fwrite";
+//    $filename = $fileHandles[$handle];
+//    $msg = "$id $filename $op\n>>> begin\n$str<<< end\n";
+//    file_put_contents($msg, FILE_APPEND);
 }
 
 function _fclose($handle)
 {
     fclose($handle);
+    _logMsg($handle, "fclose");//, "");
 }
 
 
