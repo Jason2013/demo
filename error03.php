@@ -51,7 +51,7 @@ function _logMsg($handle, $op, $msg = null)
 
     $id = _getID();
     $filename = $fileHandles[$handle];
-    $logmsg = "$id $filename $op\n";
+    $logmsg = "[$id] [$op] $filename\n";
     if ($msg) {
         $logmsg .= ">>> begin\n$msg<<< end\n";
     }
