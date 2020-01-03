@@ -201,7 +201,10 @@ if (count($allFileList) == 0)
 //    $returnMsg["tmp---003:"] = "";
 //    $returnMsg["tmp---004:"] = "";
 //    $returnMsg["tmp---005:"] = "";
+    $beforeGetAll = microtime_float();
     $tmpResult = $flatDataGen->getAllFileList($batchPathName);
+    $afterGetAll = microtime_float();
+    $returnMsg["GetAllSecs"] = $afterGetAll - $beforeGetAll;
     if ($tmpResult === false)
     {
         // "run.log" file missing
