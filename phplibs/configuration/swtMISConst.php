@@ -186,4 +186,67 @@ function microtime_float()
     return ((float)$usec + (float)$sec);
 }
 
+
+function _getIDNum()
+{
+    $filename = "my_test_config.txt";
+    $json = file_get_contents($filename);
+    if (!$json) {
+        $result["id"] = 0;
+    } else {
+        $result = json_decode($json, true);
+    }
+    $result["id"] += 1;
+    $json = json_encode($result);
+    file_put_contents($filename, $json);
+    return $result["id"];
+}
+
+function _getID()
+{
+    $id = _getIDNum();
+    return sprintf("%05d", $id);
+}
+
+$logfile = "my_test_file_operation.txt";
+
+function _logMsg($handle, $op, $msg = null)
+{
+    global $fileHandles;
+    global $logfile;
+
+    $id = _getID();
+    $filename = $fileHandles[$handle];
+    $opstr= sprintf("%-6s", $op);
+    $logmsg = "[$id] [$opstr] $filename\n";
+    if ($msg) {
+        $logmsg .= ">>> begin\n$msg<<< end\n";
+    }
+    file_put_contents($logfile, $logmsg, FILE_APPEND);
+}
+
+function _fopen($filename, $mode)
+{
+    $handle = fopen($filename, $mode);
+
+    global $fileHandles;
+    $fileHandles[$handle] = $filename;
+
+    _logMsg($handle, "fopen");
+    return $handle;
+}
+
+function _fwrite($handle, $str)
+{
+    fwrite($handle, $str);
+
+    _logMsg($handle, "fwrite", $str);
+}
+
+function _fclose($handle)
+{
+    fclose($handle);
+    _logMsg($handle, "fclose");
+}
+
 ?>
