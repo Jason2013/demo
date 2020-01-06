@@ -8,6 +8,8 @@
 //    $g_var = "tom";
 //}
 
+error_reporting(E_STRICT);
+
 function microtime_float()
 {
     global $g_var;
