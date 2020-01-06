@@ -22,25 +22,31 @@ $myvar["name"] = "Alice";
 $myvar["count"] = 1;
 
 file_put_contents("my_test_config.json", json_encode($myvar));
-
-function _getIDNum()
+function _getIDNum($inc)
 {
     $filename = "my_test_config.txt";
     $json = file_get_contents($filename);
     if (!$json) {
-        $result["id"] = 0;
+        $result["id"] = 1;
+        $json = json_encode($result);
+        file_put_contents($filename, $json);
     } else {
         $result = json_decode($json, true);
     }
-    $result["id"] += 1;
-    $json = json_encode($result);
-    file_put_contents($filename, $json);
-    return $result["id"];
+
+    $retval = $result["id"];
+
+    if ($inc) {
+        $result["id"] += 1;
+        $json = json_encode($result);
+        file_put_contents($filename, $json);
+    }
+    return $retval;
 }
 
-function _getID()
+function _getID($inc = true)
 {
-    $id = _getIDNum();
+    $id = _getIDNum($inc);
     return sprintf("%05d", $id);
 }
 
@@ -52,8 +58,9 @@ function _logMsg($handle, $op, $msg = null)
     global $logfile;
 
     $id = _getID();
-    $filename = $fileHandles[$handle];
-    $logmsg = "[$id] [$op] $filename\n";
+    $filename = $fileHandles[(int)$handle];
+    $opstr = sprintf("%-6s", $op);
+    $logmsg = "[$id] [$opstr] $filename\n";
     if ($msg) {
         $logmsg .= ">>> begin\n$msg<<< end\n";
     }
@@ -65,8 +72,9 @@ function _fopen($filename, $mode)
     $handle = fopen($filename, $mode);
 
     global $fileHandles;
-    $fileHandles[$handle] = $filename;
+    $fileHandles[(int)$handle] = $filename;
 
+    _logMsg($handle, "fopen");
     return $handle;
 }
 
@@ -81,9 +89,11 @@ function _fclose($handle)
 {
     fclose($handle);
     _logMsg($handle, "fclose");
+
+    global $fileHandles;
+    $filename = $fileHandles[$handle];
+    copy($filename, $filename . "." . _getID(false));
 }
-
-
 $filename = "my_test2.txt";
 
 $myhandle = _fopen($filename, "w");
