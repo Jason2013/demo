@@ -23,7 +23,7 @@ $html1->outPageBodyStart();
         <p><div id="cardChoice"></div></p>
         
         <p>Batch ID:&nbsp&nbsp&nbsp
-           <input id="inputBatchID" type="text" name="foldername" size="16" 
+           <input id="inputBatchID" type="text" name="foldername" size="16" value="1318"
             oninput="swtGetCardChoiceCode('cardChoice', 'reportList', 'inputBatchID');" />
         </p>
         
