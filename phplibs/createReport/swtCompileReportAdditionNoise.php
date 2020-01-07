@@ -11,8 +11,13 @@ include_once "../configuration/swtConfig.php";
 include_once __DIR__ . "/../userManage/swtUserManager.php";
 
 $userChecker = new CUserManger();
-$userInfo["isManager"] = $userChecker->isManager();
-$userInfo["userID"] = $userChecker->getUserID();
+if ($userChecker->isManager()) {
+    $userInfo["isManager"] = true;
+    $userInfo["userID"] = -1;
+} else {
+    $userInfo["isManager"] = false;
+    $userInfo["userID"] = $userChecker->getUserID();
+}
 $xmlWriter = new CGenReport($userInfo);
 // get xml code template pieces
 $returnSet = $xmlWriter->getXMLCodePiece();
