@@ -4076,7 +4076,7 @@ class CGenReport
             $returnMsg["genXmlHead"] = 1;
             
             // create tmp file
-            $tempFileHandle = fopen($_tmpFileName, "w+");
+            $tempFileHandle = fopen(__DIR__ . "/" . $_tmpFileName, "w+");
             $xmlSection = "";
             $t1 = "";
             //if (($_cmpMachineID != -1) ||
