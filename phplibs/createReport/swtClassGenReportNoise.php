@@ -4060,7 +4060,7 @@ class CGenReport
                 $fileHandle = fopen(__DIR__ . "/" . $tmpFileName1, "w");
                 
                 // report head
-                $t1 = file_get_contents($templateFileName0);
+                $t1 = file_get_contents(__DIR__ . "/" . $templateFileName0);
                 fwrite($fileHandle, $t1);
                 // style end tag
                 $this->writeAdditionalStyles($fileHandle);
