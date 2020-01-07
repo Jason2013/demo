@@ -8,7 +8,7 @@ include_once __DIR__ . "/../configuration/swtConfig.php";
 include_once __DIR__ . "/../server/swtHeartBeatFuncs.php";
 include_once __DIR__ . "/../generalLibs/genfuncs.php";
 include_once __DIR__ . "/../generalLibs/code01.php";
-include_once __DIR__ . "/../userManage/swtUserManager.php";
+//include_once __DIR__ . "/../userManage/swtUserManager.php";
 
 class CGenReport
 {
@@ -4028,10 +4028,10 @@ class CGenReport
         global $colSysNameList;
 
         $tempFileLineNumPos = $_tempFileLineNumPos;
-        if (file_exists($_xmlFileName)    == false)
+        if (!is_file(__DIR__ . "/" . $_xmlFileName))
         {
             // copy file template to modify
-            $xmlSection = file_get_contents($reportTemplateDir . "/sectionHead001.txt");
+            $xmlSection = file_get_contents(__DIR__ . "/" . $reportTemplateDir . "/sectionHead001.txt");
             
             if (strlen($xmlSection) == 0)
             {
@@ -4041,7 +4041,7 @@ class CGenReport
                 return null;
             }
 
-            $fileHandle = fopen($_xmlFileName, "w+");
+            $fileHandle = fopen(__DIR__ . "/" .$_xmlFileName, "w+");
             
             // append styles
             fseek($fileHandle, 0, SEEK_SET);
@@ -4053,11 +4053,11 @@ class CGenReport
             fclose($fileHandle);
             
             // write flatdata head
-            if (file_exists($tmpFileName1) == false)
+            if (file_exists(__DIR__ . "/" . $tmpFileName1) == false)
             {
                 $templateFileName0 = $reportTemplateDir . "/sectionHead001.txt";
                 
-                $fileHandle = fopen($tmpFileName1, "w");
+                $fileHandle = fopen(__DIR__ . "/" . $tmpFileName1, "w");
                 
                 // report head
                 $t1 = file_get_contents($templateFileName0);
