@@ -8,9 +8,12 @@ include_once "../generalLibs/genfuncs.php";
 include_once "../generalLibs/code01.php";
 include_once "swtClassGenReportNoise.php";
 include_once "../configuration/swtConfig.php";
+include_once __DIR__ . "/../userManage/swtUserManager.php";
 
-
-$xmlWriter = new CGenReport();
+$userChecker = new CUserManger();
+$userInfo["isManager"] = $userChecker->isManager();
+$userInfo["userID"] = $userChecker->getUserID();
+$xmlWriter = new CGenReport($userInfo);
 // get xml code template pieces
 $returnSet = $xmlWriter->getXMLCodePiece();
 $appendStyleList = $returnSet["appendStyleList"];

@@ -13,9 +13,13 @@ include_once __DIR__ . "/../userManage/swtUserManager.php";
 class CGenReport
 {
 	//public $dbResult = null;
+    // $userInfo["isManager"];
+    // $userInfo["userID"];
+    private $userInfo;
 
-	public function __construct()
+	public function __construct($userInfo)
 	{
+	    $this->userInfo = $userInfo;
         //global $db_dbname;
 
         //$this->dbResult = null;
@@ -485,13 +489,11 @@ class CGenReport
         {
             $b1 = $this->checkBatchValid($_db, $_batchID);
         }
-        
-        $userChecker = new CUserManger();
 
         $params1 = array();
         $sql1 = "";
         
-        if ($userChecker->isManager())
+        if ($this->userInfo["isManager"])
         {
             // manager login
             if ($b1 == false)
@@ -601,7 +603,7 @@ class CGenReport
         else
         {
             // outside user
-            $userID = $userChecker->getUserID();
+            $userID = $this->userInfo["userID"];
             if ($b1 == false)
             {
                 // if not assign current batch id
