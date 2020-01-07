@@ -51,14 +51,6 @@ foreach ($tmpMachineIDPair as $tmpVal)
     }
 }
 
-$xmlWriter = new CGenReport();
-// get xml code template pieces
-$returnSet = $xmlWriter->getXMLCodePiece();
-$appendStyleList = $returnSet["appendStyleList"];
-$allStylesEndTag = $returnSet["allStylesEndTag"];
-$allSheetsEndTag = $returnSet["allSheetsEndTag"];
-
-
 $flatDataGen = new CGenReportFlatData();
 
 $db = new CPdoMySQL();
