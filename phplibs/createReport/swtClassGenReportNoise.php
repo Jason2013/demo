@@ -1,14 +1,14 @@
 <?php
 
 //include_once "swtExcelGenFuncs.php";
-include_once "../generalLibs/dopdo.php";
-include_once "../generalLibs/dodb.php";
-include_once "../configuration/swtMISConst.php";
-include_once "../configuration/swtConfig.php";
-include_once "../server/swtHeartBeatFuncs.php";
-include_once "../generalLibs/genfuncs.php";
-include_once "../generalLibs/code01.php";
-include_once "../userManage/swtUserManager.php";
+include_once __DIR__ . "/../generalLibs/dopdo.php";
+include_once __DIR__ . "/../generalLibs/dodb.php";
+include_once __DIR__ . "/../configuration/swtMISConst.php";
+include_once __DIR__ . "/../configuration/swtConfig.php";
+include_once __DIR__ . "/../server/swtHeartBeatFuncs.php";
+include_once __DIR__ . "/../generalLibs/genfuncs.php";
+include_once __DIR__ . "/../generalLibs/code01.php";
+include_once __DIR__ . "/../userManage/swtUserManager.php";
 
 class CGenReport
 {
