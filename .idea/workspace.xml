@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0c7bb7f9-b3df-45ee-9a4b-ad84563598c2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/CGenReportTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/CGenReportTest.php" afterDir="false" />
-    </list>
+    <list default="true" id="0c7bb7f9-b3df-45ee-9a4b-ad84563598c2" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/CGenReportTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="149" selection-start-line="149" selection-end-line="155" selection-end-column="38" />
+            <state relative-caret-position="430">
+              <caret line="160" column="40" selection-start-line="160" selection-start-column="40" selection-end-line="160" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -46,11 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://D:/work/dev/grapher/phplibs/createReport/swtClassGenReportNoise.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="4029" selection-start-line="4029" selection-end-line="4029" />
+            <state relative-caret-position="401">
+              <caret line="4078" column="52" selection-start-line="4078" selection-start-column="52" selection-end-line="4078" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -88,8 +85,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://D:/work/dev/grapher/tests/CGenReportTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="501">
-              <caret line="164" selection-start-line="164" selection-end-line="164" />
+            <state relative-caret-position="-2458">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
         </entry>
@@ -172,8 +169,8 @@
         <option value="D:/work/dev/grapher/error03.php" />
         <option value="$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php" />
         <option value="D:/work/dev/grapher/tests/CGenReportTest.php" />
-        <option value="D:/work/dev/grapher/phplibs/createReport/swtClassGenReportNoise.php" />
         <option value="$PROJECT_DIR$/tests/CGenReportTest.php" />
+        <option value="D:/work/dev/grapher/phplibs/createReport/swtClassGenReportNoise.php" />
       </list>
     </option>
   </component>
@@ -497,26 +494,11 @@
       <workItem from="1563506475448" duration="8612000" />
       <workItem from="1565837338490" duration="4538000" />
       <workItem from="1576054596818" duration="1190000" />
-      <workItem from="1577941430351" duration="53897000" />
+      <workItem from="1577941430351" duration="54085000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CGenReportTest - 2020.01.07 at 17h 11m 59s.xml">
-      <configuration name="CGenReportTest" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="CGenReportTest - 2020.01.07 at 17h 15m 05s.xml">
-      <configuration name="CGenReportTest" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="CGenReportTest - 2020.01.07 at 17h 15m 52s.xml">
-      <configuration name="CGenReportTest" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="CGenReportTest - 2020.01.07 at 17h 30m 33s.xml">
-      <configuration name="CGenReportTest" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="CGenReportTest - 2020.01.07 at 17h 31m 25s.xml">
-      <configuration name="CGenReportTest" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
     <history-entry file="CGenReportTest - 2020.01.07 at 17h 41m 32s.xml">
       <configuration name="CGenReportTest" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
@@ -532,9 +514,24 @@
     <history-entry file="CGenReportTest - 2020.01.07 at 18h 15m 44s.xml">
       <configuration name="CGenReportTest" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="CGenReportTest - 2020.01.07 at 18h 18m 25s.xml">
+      <configuration name="CGenReportTest" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="CGenReportTest - 2020.01.07 at 18h 18m 39s.xml">
+      <configuration name="CGenReportTest" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="CGenReportTest - 2020.01.07 at 18h 18m 56s.xml">
+      <configuration name="CGenReportTest" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="CGenReportTest - 2020.01.07 at 18h 19m 01s.xml">
+      <configuration name="CGenReportTest" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="CGenReportTest - 2020.01.07 at 18h 19m 47s.xml">
+      <configuration name="CGenReportTest" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="138851000" />
+    <option name="totallyTimeSpent" value="139039000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
@@ -760,7 +757,7 @@
           <line>772</line>
           <option name="timeStamp" value="141" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
+        <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
           <line>4029</line>
           <option name="timeStamp" value="142" />
@@ -876,11 +873,6 @@
           <option name="timeStamp" value="175" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://D:/work/dev/grapher/tests/CGenReportTest.php</url>
-          <line>8</line>
-          <option name="timeStamp" value="177" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/tests/EmailTest.php</url>
           <line>7</line>
           <option name="timeStamp" value="178" />
@@ -916,24 +908,9 @@
           <option name="timeStamp" value="185" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://D:/work/dev/grapher/tests/CGenReportTest.php</url>
-          <line>158</line>
-          <option name="timeStamp" value="188" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://D:/work/dev/grapher/tests/CGenReportTest.php</url>
-          <line>164</line>
-          <option name="timeStamp" value="190" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
           <line>27</line>
           <option name="timeStamp" value="192" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://D:/work/dev/grapher/tests/CGenReportTest.php</url>
-          <line>151</line>
-          <option name="timeStamp" value="195" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1374,24 +1351,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/work/dev/grapher/phplibs/createReport/swtClassGenReportNoise.php">
+    <entry file="file://$PROJECT_DIR$/tests/CGenReportTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="4029" selection-start-line="4029" selection-end-line="4029" />
+        <state relative-caret-position="430">
+          <caret line="160" column="40" selection-start-line="160" selection-start-column="40" selection-end-line="160" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://D:/work/dev/grapher/tests/CGenReportTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="164" selection-start-line="164" selection-end-line="164" />
+        <state relative-caret-position="-2458">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/CGenReportTest.php">
+    <entry file="file://D:/work/dev/grapher/phplibs/createReport/swtClassGenReportNoise.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="149" selection-start-line="149" selection-end-line="155" selection-end-column="38" />
+        <state relative-caret-position="401">
+          <caret line="4078" column="52" selection-start-line="4078" selection-start-column="52" selection-end-line="4078" selection-end-column="52" />
         </state>
       </provider>
     </entry>
