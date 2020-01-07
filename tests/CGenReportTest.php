@@ -148,6 +148,10 @@ final class CGenReportTest extends TestCase
             "<Style ss:ID=\"s%d\">\n<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>\n<Borders>\n<Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\"  ss:Color=\"#000000\"/>\n<Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\"  ss:Color=\"#000000\"/>\n<Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\"  ss:Color=\"#000000\"/>\n<Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"3\"  ss:Color=\"#000000\"/>\n</Borders>\n<Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"14\" ss:Color=\"#FFFFFF\" ss:Bold=\"1\"/>\n<Interior ss:Color=\"#800000\" ss:Pattern=\"Solid\"/>\n</Style>\n",
             "<Style ss:ID=\"s%d\">\n<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>\n<Interior/>\n<NumberFormat ss:Format=\"Percent\"/>\n</Style>\n"];
 
+        $folder = __DIR__ . "/../report/batch1318/00005";
+        if (!is_dir($folder)) {
+            mkdir($folder, 0777, true);
+        }
 
         $userInfo["isManager"] = true;
         $report = new CGenReport($userInfo);
