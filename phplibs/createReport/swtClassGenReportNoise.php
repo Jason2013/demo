@@ -4484,14 +4484,14 @@ class CGenReport
 
                     $t1 = json_encode($tmpObj);
                     
-                    if (file_exists($_jsonFileName) == false)
+                    if (file_exists(__DIR__ . "/" . $_jsonFileName) == false)
                     {
-                        file_put_contents($_jsonFileName, $t1);
+                        file_put_contents(__DIR__ . "/" . $_jsonFileName, $t1);
                     }
                     
-                    if (file_exists($_jsonFileName2) == false)
+                    if (file_exists(__DIR__ . "/" . $_jsonFileName2) == false)
                     {
-                        file_put_contents($_jsonFileName2, $t1);
+                        file_put_contents(__DIR__ . "/" . $_jsonFileName2, $t1);
                     }
                 }
             }
