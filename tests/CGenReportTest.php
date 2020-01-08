@@ -160,6 +160,13 @@ final class CGenReportTest extends TestCase
             mkdir($folder, 0777, true);
         }
 
+        $target_file1 = __DIR__ . "/../report/batch1318/00005/GTX1080_Win10 64 bit.tmp1";
+        $target_file2 = __DIR__ . "/../report/batch1318/00005/GTX1080_Win10 64 bit.tmp2";
+        $target_file3 = __DIR__ . "/../report/batch1318/00005/GTX1080_Win10 64 bit.tmp";
+        if (is_file($target_file1)) unlink($target_file1);
+        if (is_file($target_file2)) unlink($target_file2);
+        if (is_file($target_file3)) unlink($target_file3);
+
         $userInfo["isManager"] = true;
         $report = new CGenReport($userInfo);
         $resultSet = $report->checkNeedCreateReportFile($_xmlFileName, $_tmpFileName, $_jsonFileName, $_jsonFileName2,
@@ -177,8 +184,10 @@ final class CGenReportTest extends TestCase
 
         $expected_file1 = __DIR__ . "/data/GTX1080_Win10 64 bit.tmp1";
         $expected_file2 = __DIR__ . "/data/GTX1080_Win10 64 bit.tmp2";
+        $expected_file3 = __DIR__ . "/data/GTX1080_Win10 64 bit.tmp";
 
         $this->assertTrue(static::FilesAreEqual($target_file1, $expected_file1));
         $this->assertTrue(static::FilesAreEqual($target_file2, $expected_file2));
+        $this->assertTrue(static::FilesAreEqual($target_file3, $expected_file3));
     }
 }
