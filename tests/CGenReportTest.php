@@ -167,8 +167,7 @@ final class CGenReportTest extends TestCase
         if (is_file($target_file2)) unlink($target_file2);
         if (is_file($target_file3)) unlink($target_file3);
 
-        $userInfo["isManager"] = true;
-        $report = new CGenReport($userInfo);
+        $report = new CGenReport();
         $resultSet = $report->checkNeedCreateReportFile($_xmlFileName, $_tmpFileName, $_jsonFileName, $_jsonFileName2,
             $_umdNum, $_startResultID, $_cmpMachineID, $_resultPos,
             $_tempFileLineNumPos,
