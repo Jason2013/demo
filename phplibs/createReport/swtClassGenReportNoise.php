@@ -13,13 +13,9 @@ include_once __DIR__ . "/../generalLibs/code01.php";
 class CGenReport
 {
 	//public $dbResult = null;
-    // $userInfo["isManager"];
-    // $userInfo["userID"];
-    private $userInfo;
 
-	public function __construct($userInfo)
+	public function __construct()
 	{
-	    $this->userInfo = $userInfo;
         //global $db_dbname;
 
         //$this->dbResult = null;
@@ -471,7 +467,7 @@ class CGenReport
         return $returnSet;
     }
 
-	public function getBatchID($_db, $_batchID)
+	public function getBatchID($_db, $_batchID, $userInfo)
 	{
         global $returnMsg;
         global $historyBatchMaxNum;
@@ -493,7 +489,7 @@ class CGenReport
         $params1 = array();
         $sql1 = "";
         
-        if ($this->userInfo["isManager"])
+        if (userInfo["isManager"])
         {
             // manager login
             if ($b1 == false)
@@ -603,7 +599,7 @@ class CGenReport
         else
         {
             // outside user
-            $userID = $this->userInfo["userID"];
+            $userID = userInfo["userID"];
             if ($b1 == false)
             {
                 // if not assign current batch id
