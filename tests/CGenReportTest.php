@@ -4,6 +4,13 @@ use PHPUnit\Framework\TestCase;
 
 final class CGenReportTest extends TestCase
 {
+    static public function FilesAreEqual($file1, $file2)
+    {
+        $str1 = file_get_contents($file1);
+        $str2 = file_get_contents($file2);
+        return $str1 == $str2;
+    }
+
     public function testCheckNeedCreateReportFile()
     {
         global $returnMsg;
@@ -116,7 +123,7 @@ final class CGenReportTest extends TestCase
         $_cmpSysName = "";
 
         global $startStyleID;
-        $startStyleID =117;
+        $startStyleID = 117;
 
         global $allStylesEndTag;
         $allStylesEndTag = "</Styles>\n";
@@ -162,6 +169,16 @@ final class CGenReportTest extends TestCase
             $_cmpCardName, $_cmpSysName);
 
         $this->assertTrue(!is_null($resultSet));
-        $this->assertTrue($returnMsg["errorCode"] == 0);
+//        $this->assertTrue($returnMsg["errorCode"] == 0);
+
+
+        $target_file1 = __DIR__ . "/../report/batch1318/00005/GTX1080_Win10 64 bit.tmp1";
+        $target_file2 = __DIR__ . "/../report/batch1318/00005/GTX1080_Win10 64 bit.tmp2";
+
+        $expected_file1 = __DIR__ . "/data/GTX1080_Win10 64 bit.tmp1";
+        $expected_file2 = __DIR__ . "/data/GTX1080_Win10 64 bit.tmp2";
+
+        $this->assertTrue(static::FilesAreEqual($target_file1, $expected_file1));
+        $this->assertTrue(static::FilesAreEqual($target_file2, $expected_file2));
     }
 }
