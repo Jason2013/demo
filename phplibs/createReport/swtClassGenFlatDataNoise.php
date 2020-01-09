@@ -346,11 +346,11 @@ class CGenReportFlatData
         global $returnMsg;
         global $allFileList;
         global $allRunLogFileList;
-        global $allFolderList;
+//        global $allFolderList;
         global $cardNameList;
         global $machineIDList;
-        global $resultFileName1;
-        global $resultFileName2;
+//        global $resultFileName1;
+//        global $resultFileName2;
         global $machineInfoFileName;
         global $resultFileName1;
         global $resultFileName2;
@@ -404,7 +404,7 @@ class CGenReportFlatData
                     $t2 = basename($tmpSrcFolder);
                     if (strlen($t2) > 1)
                     {
-                        copy($tmpSrcPath, $tmpDestPath);
+                        if (!is_file($tmpDestPath)) copy($tmpSrcPath, $tmpDestPath);
                     }
                     //else
                     //{
@@ -425,8 +425,8 @@ class CGenReportFlatData
             $cardName = "";
             $curMachineID = -1;
             
-            $returnMsg["tmp---004:"] .= $crossType . ",";
-            $returnMsg["tmp---005:"] .= $t2 . ",";
+//            $returnMsg["tmp---004:"] .= $crossType . ",";
+//            $returnMsg["tmp---005:"] .= $t2 . ",";
             
             if ((file_exists($t1) == false) && 
                 (file_exists($t3) == true))
@@ -440,24 +440,9 @@ class CGenReportFlatData
                 // use json
                 $t2 = file_get_contents($t1);
                 $obj = json_decode($t2);
-                
-                $properCardName = $obj->videoCardName;
-                
-                for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
-                {
-                    if (strtolower($properCardName) == strtolower($swtOldCardNameMatchList[$i]))
-                    {
-                        // cardName match
-                        $tmpCheck = $i % 2;
-                        if ($tmpCheck == 1)
-                        {
-                            // old cardName used
-                            $properCardName = $swtOldCardNameMatchList[$i - 1];
-                            $obj->videoCardName = $properCardName;
-                        }
-                    }
-                }
-                
+
+                $obj->videoCardName = ReplaceOldCardName($obj->videoCardName);
+
                 $cardName = $obj->videoCardName . "_" . $obj->systemName;
                 
                 if (count($machineIDPair) >= 2)
@@ -488,7 +473,7 @@ class CGenReportFlatData
                 
                 $cardName = $obj["videoCardName"] . "_" . $obj["systemName"];
                 
-                $returnMsg["tmp---003:"] .= $cardName . "," . $machineFolderPath . ",";
+//                $returnMsg["tmp---003:"] .= $cardName . "," . $machineFolderPath . ",";
                 
                 $obj2 = $clientCmdParser->updateMachineInfo3($obj["machineInfo"], $tmpMachineName);
                 $curMachineID = $obj2["machineID"];

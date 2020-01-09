@@ -1,14 +1,14 @@
 <?php
 
 //include_once "swtExcelGenFuncs.php";
-include_once "../generalLibs/dopdo.php";
-include_once "../generalLibs/dodb.php";
-include_once "../configuration/swtMISConst.php";
-include_once "../configuration/swtConfig.php";
-include_once "../server/swtHeartBeatFuncs.php";
-include_once "../generalLibs/genfuncs.php";
-include_once "../generalLibs/code01.php";
-include_once "../userManage/swtUserManager.php";
+include_once __DIR__ . "/../generalLibs/dopdo.php";
+include_once __DIR__ . "/../generalLibs/dodb.php";
+include_once __DIR__ . "/../configuration/swtMISConst.php";
+include_once __DIR__ . "/../configuration/swtConfig.php";
+include_once __DIR__ . "/../server/swtHeartBeatFuncs.php";
+include_once __DIR__ . "/../generalLibs/genfuncs.php";
+include_once __DIR__ . "/../generalLibs/code01.php";
+//include_once __DIR__ . "/../userManage/swtUserManager.php";
 
 class CGenReport
 {
@@ -467,7 +467,7 @@ class CGenReport
         return $returnSet;
     }
 
-	public function getBatchID($_db, $_batchID)
+	public function getBatchID($_db, $_batchID, $userInfo)
 	{
         global $returnMsg;
         global $historyBatchMaxNum;
@@ -485,13 +485,11 @@ class CGenReport
         {
             $b1 = $this->checkBatchValid($_db, $_batchID);
         }
-        
-        $userChecker = new CUserManger();
 
         $params1 = array();
         $sql1 = "";
         
-        if ($userChecker->isManager())
+        if ($userInfo["isManager"])
         {
             // manager login
             if ($b1 == false)
@@ -601,7 +599,7 @@ class CGenReport
         else
         {
             // outside user
-            $userID = $userChecker->getUserID();
+            $userID = $userInfo["userID"];
             if ($b1 == false)
             {
                 // if not assign current batch id
@@ -1170,11 +1168,7 @@ class CGenReport
         global $selectedCardIDList;
         global $selectedSysIDList;
         global $umdNameList;
-        global $crossType;
-        global $machineIDBatchPairList;
-        global $swtOldUmdNameMatchList;
-        global $swtOldCardNameMatchList;
-        
+
         $db = $_db;
 
         $resultIDList = array();
@@ -1191,15 +1185,6 @@ class CGenReport
         $resultTimeList = array();
         $machineNameList = array();
         $sysMemNameList = array();
-        
-        $cardNameListFlat = array();
-        $driverNameListFlat = array();
-        
-        $umdIndexListFlat = array();
-        $tmpCardIDListFlat = array();
-        $tmpSysIDListFlat = array();
-        $cardIndexListFlat = array();
-        $curCardIDListFlat = array();
 
         foreach ($_batchIDList as $tmpBatchID)
         {
@@ -1245,38 +1230,12 @@ class CGenReport
 
             $umdIndex = 0;
             $cardIndex = -1;
-            $cardIndexBackUp = -1;
             $curCardID = -1;
             $curSysID = -1;
             $umdNum = count($umdNameList);
             while ($row1 = $db->fetchRow())
             {
-                $tmpMachineID = intval($row1[1]);
-                
-                $properCardName = $row1[20];
-                
-                for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
-                {
-                    if (strtolower($properCardName) == strtolower($swtOldCardNameMatchList[$i]))
-                    {
-                        // cardName match
-                        $tmpCheck = $i % 2;
-                        if ($tmpCheck == 1)
-                        {
-                            // old cardName used
-                            $properCardName = $swtOldCardNameMatchList[$i - 1];
-                        }
-                    }
-                }
-                
-                array_push($cardNameListFlat, $properCardName);
-                array_push($driverNameListFlat, $row1[21]);
-                
-                array_push($umdIndexListFlat, $umdIndex);
-                array_push($tmpCardIDListFlat, $row1[10]);
-                array_push($tmpSysIDListFlat, $row1[12]);
-                array_push($cardIndexListFlat, $cardIndex);
-                array_push($curCardIDListFlat, $curCardID);
+                $properCardName = ReplaceOldCardName($row1[20]);
                 
                 $tmpCardID = intval($row1[10]);
                 $tmpSysID = intval($row1[12]);
@@ -1288,7 +1247,6 @@ class CGenReport
                     // skip unselected cards
                     continue;
                 }
-                $tmpDriverName = $row1[21];
                 
                 if ($umdIndex == 0)
                 {
@@ -1352,21 +1310,12 @@ class CGenReport
                     }
                 }
 
+                $tmpDriverName = $row1[21];
                 $tmpIndex = array_search($tmpDriverName, $umdNameList);
                 if ($tmpIndex === false)
                 {
-                    $tmpCount = intval(count($swtOldUmdNameMatchList) / 2);
-                    for ($j = 0; $j < $tmpCount; $j++)
-                    {
-                        if (strcmp($swtOldUmdNameMatchList[$j * 2 + 1], $tmpDriverName) == 0)
-                        {
-                            $tmpIndex = array_search($swtOldUmdNameMatchList[$j * 2], $umdNameList);
-                            if ($tmpIndex !== false)
-                            {
-                                break;
-                            }
-                        }
-                    }
+                    $tmpDriverName = ReplaceOldUmdName($tmpDriverName);
+                    $tmpIndex = array_search($tmpDriverName, $umdNameList);
                 }
                 if ($tmpIndex !== false)
                 {
@@ -1387,7 +1336,6 @@ class CGenReport
                         if (count($arr4) > 0)
                         {
                             $cardIndex = intval($arr4[0] / $umdNum);
-                            $returnMsg["cardIndex"] = $cardIndex;
                             
                             $curCardNum = intval(count($tmpResultIDList) / $umdNum);
                             
@@ -1419,16 +1367,12 @@ class CGenReport
                     }
                     
                     $n1 = $cardIndex * $umdNum + $tmpIndex;
-                    
-                    //if ($tmpIndex == 0)
-                    {
-                        for ($j = 0; $j < $umdNum; $j++)
-                        {
-                            $tmpCardNameList[$n1 - $tmpIndex + $j] = $properCardName;
-                            $tmpSysNameList[$n1 - $tmpIndex + $j] = $row1[23];
-                        }
+
+                    for ($j = 0; $j < $umdNum; $j++) {
+                        $tmpCardNameList[$n1 - $tmpIndex + $j] = $properCardName;
+                        $tmpSysNameList[$n1 - $tmpIndex + $j] = $row1[23];
                     }
-                    
+
                     $tmpResultIDList[$n1] = $row1[0];
                     $tmpMachineIDList[$n1] = $row1[1];
                     $tmpCardNameList[$n1] = $properCardName;
@@ -1473,206 +1417,6 @@ class CGenReport
             array_push($sysMemNameList, $tmpSysMemNameList);
         }
         
-        
-        //$crossBuildResultIDList = array();
-        //$crossBuildMachineIDList = array();
-        //$crossBuildCardNameList = array();
-        //$crossBuildDriverNameList = array();
-        //$crossBuildChangeListNumList = array();
-        //$crossBuildCpuNameList = array();
-        //$crossBuildSysNameList = array();
-        //$crossBuildMainLineNameList = array();
-        //$crossBuildSClockNameList = array();
-        //$crossBuildMClockNameList = array();
-        //$crossBuildGpuMemNameList = array();
-        //$crossBuildResultTimeList = array();
-        //$crossBuildMachineNameList = array();
-        //$crossBuildSysMemNameList = array();
-        //
-        //if ($crossType == 2)
-        //{
-        //    // cross build
-        //
-        //    for ($i = 0; $i < (count($machineIDBatchPairList) / 2); $i++)
-        //    {
-        //        $tmpMachineID = $machineIDBatchPairList[$i * 2];
-        //        $tmpBatchID = $machineIDBatchPairList[$i * 2 + 1];
-        //        
-        //        $tmpResultIDList = array();
-        //        $tmpMachineIDList = array();
-        //        $tmpCardNameList = array();
-        //        $tmpDriverNameList = array();
-        //        $tmpChangeListNumList = array();
-        //        $tmpCpuNameList = array();
-        //        $tmpSysNameList = array();
-        //        $tmpMainLineNameList = array();
-        //        $tmpSClockNameList = array();
-        //        $tmpMClockNameList = array();
-        //        $tmpGpuMemNameList = array();
-        //        $tmpResultTimeList = array();
-        //        $tmpMachineNameList = array();
-        //        $tmpSysMemNameList = array();
-        //        
-        //        $params1 = array($tmpBatchID, $tmpMachineID);
-        //        $sql1 = "SELECT t0.*, " .
-        //                "t1.*, " .
-        //                "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.card_id) AS cardName, " .
-        //                "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t0.umd_id) AS umdName, " .
-        //                "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.cpu_id) AS cpuName, " .
-        //                "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.sys_id) AS sysName, " .
-        //                "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.ml_id) AS mlName, " .
-        //                "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.s_clock_id) AS sClockName, " .
-        //                "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.m_clock_id) AS mClockName, " .
-        //                "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.gpu_mem_id) AS gpuMemName, " .
-        //                "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.name_id) AS machineName, " .
-        //                "(SELECT t2.env_name FROM mis_table_environment_info t2 WHERE t2.env_id=t1.mem_id) AS sysMemName " .
-        //                "FROM mis_table_result_list t0 " .
-        //                "LEFT JOIN mis_table_machine_info t1 " .
-        //                "USING (machine_id) " .
-        //                "WHERE batch_id = ? AND machine_id = ? ORDER BY t0.umd_id ASC";
-        //        if ($db->QueryDB($sql1, $params1) == null)
-        //        {
-        //            $returnMsg["errorCode"] = 0;
-        //            $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . $db->getError()[2];
-        //            echo json_encode($returnMsg);
-        //            return null;
-        //        }
-        //
-        //        $umdIndex = 0;
-        //        $cardIndex = -1;
-        //        $curCardID = -1;
-        //        $curSysID = -1;
-        //        $umdNum = count($umdNameList);
-        //        while ($row1 = $db->fetchRow())
-        //        {
-        //            $tmpMachineID = intval($row1[1]);
-        //            
-        //            $tmpCardID = intval($row1[10]);
-        //            $tmpSysID = intval($row1[12]);
-        //            $tmpKeys1 = array_keys($selectedCardIDList, $tmpCardID);
-        //            $tmpKeys2 = array_keys($selectedSysIDList, $tmpSysID);
-        //            $tmpKeys3 = array_intersect($tmpKeys1, $tmpKeys2);
-        //            if (count($tmpKeys3) == 0)
-        //            {
-        //                // skip unselected cards
-        //                continue;
-        //            }
-        //            $tmpDriverName = $row1[21];
-        //            
-        //            if ($umdIndex == 0)
-        //            {
-        //                $curCardID = $tmpCardID;
-        //                $curSysID = $tmpSysID;
-        //                $cardIndex++;
-        //                // hold enough space
-        //                for ($j = 0; $j < $umdNum; $j++)
-        //                {
-        //                    array_push($tmpResultIDList, PHP_INT_MAX);
-        //                    array_push($tmpMachineIDList, PHP_INT_MAX);
-        //                    array_push($tmpCardNameList, $row1[20]);
-        //                    array_push($tmpDriverNameList, $umdNameList[$j]);
-        //                    array_push($tmpChangeListNumList, PHP_INT_MAX);
-        //                    array_push($tmpCpuNameList, "");
-        //                    array_push($tmpSysNameList, $row1[23]);
-        //                    array_push($tmpMainLineNameList, "");
-        //                    array_push($tmpSClockNameList, "");
-        //                    array_push($tmpMClockNameList, "");
-        //                    array_push($tmpGpuMemNameList, "");
-        //                    array_push($tmpResultTimeList, "");
-        //                    array_push($tmpMachineNameList, "");
-        //                    array_push($tmpSysMemNameList, "");
-        //                }
-        //            }
-        //            else
-        //            {
-        //                if (($curCardID != $tmpCardID) ||
-        //                    ($curSysID  != $tmpSysID))
-        //                {
-        //                    // next card
-        //                    // e.g. tmpCardNameList:   jan26, jan31
-        //                    //      tmpDriverNameList: DX12, DX12
-        //                    $curCardID = $tmpCardID;
-        //                    $curSysID = $tmpSysID;
-        //                    $cardIndex++;
-        //                    // hold enough space
-        //                    for ($j = 0; $j < $umdNum; $j++)
-        //                    {
-        //                        array_push($tmpResultIDList, PHP_INT_MAX);
-        //                        array_push($tmpMachineIDList, PHP_INT_MAX);
-        //                        array_push($tmpCardNameList, $row1[20]);
-        //                        array_push($tmpDriverNameList, $umdNameList[$j]);
-        //                        array_push($tmpChangeListNumList, PHP_INT_MAX);
-        //                        array_push($tmpCpuNameList, "");
-        //                        array_push($tmpSysNameList, $row1[23]);
-        //                        array_push($tmpMainLineNameList, "");
-        //                        array_push($tmpSClockNameList, "");
-        //                        array_push($tmpMClockNameList, "");
-        //                        array_push($tmpGpuMemNameList, "");
-        //                        array_push($tmpResultTimeList, "");
-        //                        array_push($tmpMachineNameList, "");
-        //                        array_push($tmpSysMemNameList, "");
-        //                    }
-        //                    $umdIndex = 0;
-        //                }
-        //            }
-        //
-        //            $tmpIndex = array_search($tmpDriverName, $umdNameList);
-        //            if ($tmpIndex !== false)
-        //            {
-        //                $n1 = $cardIndex * $umdNum + $tmpIndex;
-        //                $tmpResultIDList[$n1] = $row1[0];
-        //                $tmpMachineIDList[$n1] = $row1[1];
-        //                $tmpCardNameList[$n1] = $row1[20];
-        //                $tmpDriverNameList[$n1] = $row1[21];
-        //                $tmpChangeListNumList[$n1] = $row1[4];
-        //                $tmpCpuNameList[$n1] = $row1[22];
-        //                $tmpSysNameList[$n1] = $row1[23];
-        //                $tmpMainLineNameList[$n1] = $row1[24];
-        //                $tmpSClockNameList[$n1] = $row1[25];
-        //                $tmpMClockNameList[$n1] = $row1[26];
-        //                $tmpGpuMemNameList[$n1] = $row1[27];
-        //                $tmpResultTimeList[$n1] = $row1[7];
-        //                $tmpMachineNameList[$n1] = $row1[28];
-        //                $tmpSysMemNameList[$n1] = $row1[29];
-        //            }
-        //            if ($umdIndex != $tmpIndex)
-        //            {
-        //                $umdIndex = $tmpIndex;
-        //            }
-        //            
-        //            $umdIndex++;
-        //            if ($umdIndex >= count($umdNameList))
-        //            {
-        //                $umdIndex = 0;
-        //            }
-        //        }
-        //        array_push($crossBuildResultIDList, $tmpResultIDList);
-        //        array_push($crossBuildMachineIDList, $tmpMachineIDList);
-        //        array_push($crossBuildCardNameList, $tmpCardNameList);
-        //        array_push($crossBuildDriverNameList, $tmpDriverNameList);
-        //        array_push($crossBuildChangeListNumList, $tmpChangeListNumList);
-        //        array_push($crossBuildCpuNameList, $tmpCpuNameList);
-        //        array_push($crossBuildSysNameList, $tmpSysNameList);
-        //        array_push($crossBuildMainLineNameList, $tmpMainLineNameList);
-        //        array_push($crossBuildSClockNameList, $tmpSClockNameList);
-        //        array_push($crossBuildMClockNameList, $tmpMClockNameList);
-        //        array_push($crossBuildGpuMemNameList, $tmpGpuMemNameList);
-        //        array_push($crossBuildResultTimeList, $tmpResultTimeList);
-        //        array_push($crossBuildMachineNameList, $tmpMachineNameList);
-        //        array_push($crossBuildSysMemNameList, $tmpSysMemNameList);
-        //    }
-        //    
-        //}
-        
-        $returnMsg["cardNameListFlat"] = $cardNameListFlat;
-        $returnMsg["driverNameListFlat"] = $driverNameListFlat;
-        
-        $returnMsg["umdIndexListFlat"] = $umdIndexListFlat;
-        $returnMsg["tmpCardIDListFlat"] = $tmpCardIDListFlat;
-        $returnMsg["tmpSysIDListFlat"] = $tmpSysIDListFlat;
-        $returnMsg["cardIndexListFlat"] = $cardIndexListFlat;
-        $returnMsg["curCardIDListFlat"] = $curCardIDListFlat;
-        
         $returnSet = array();
         $returnSet["resultIDList"] = $resultIDList;
         $returnSet["machineIDList"] = $machineIDList;
@@ -1688,22 +1432,7 @@ class CGenReport
         $returnSet["resultTimeList"] = $resultTimeList;
         $returnSet["machineNameList"] = $machineNameList;
         $returnSet["sysMemNameList"] = $sysMemNameList;
-        
-        //$returnSet["crossBuildResultIDList"] =      $crossBuildResultIDList;
-        //$returnSet["crossBuildMachineIDList"] =     $crossBuildMachineIDList;
-        //$returnSet["crossBuildCardNameList"] =      $crossBuildCardNameList;
-        //$returnSet["crossBuildDriverNameList"] =    $crossBuildDriverNameList;
-        //$returnSet["crossBuildChangeListNumList"] = $crossBuildChangeListNumList;
-        //$returnSet["crossBuildCpuNameList"] =       $crossBuildCpuNameList;
-        //$returnSet["crossBuildSysNameList"] =       $crossBuildSysNameList;
-        //$returnSet["crossBuildMainLineNameList"] =  $crossBuildMainLineNameList;
-        //$returnSet["crossBuildSClockNameList"] =    $crossBuildSClockNameList;
-        //$returnSet["crossBuildMClockNameList"] =    $crossBuildMClockNameList;
-        //$returnSet["crossBuildGpuMemNameList"] =    $crossBuildGpuMemNameList;
-        //$returnSet["crossBuildResultTimeList"] =    $crossBuildResultTimeList;
-        //$returnSet["crossBuildMachineNameList"] =   $crossBuildMachineNameList;
-        //$returnSet["crossBuildSysMemNameList"] =    $crossBuildSysMemNameList;
-        
+
         return $returnSet;
     }
     
@@ -4026,10 +3755,10 @@ class CGenReport
         global $colSysNameList;
 
         $tempFileLineNumPos = $_tempFileLineNumPos;
-        if (file_exists($_xmlFileName)    == false)
+        if (!is_file(__DIR__ . "/" . $_xmlFileName))
         {
             // copy file template to modify
-            $xmlSection = file_get_contents($reportTemplateDir . "/sectionHead001.txt");
+            $xmlSection = file_get_contents(__DIR__ . "/" . $reportTemplateDir . "/sectionHead001.txt");
             
             if (strlen($xmlSection) == 0)
             {
@@ -4039,7 +3768,7 @@ class CGenReport
                 return null;
             }
 
-            $fileHandle = fopen($_xmlFileName, "w+");
+            $fileHandle = fopen(__DIR__ . "/" .$_xmlFileName, "w+");
             
             // append styles
             fseek($fileHandle, 0, SEEK_SET);
@@ -4051,14 +3780,14 @@ class CGenReport
             fclose($fileHandle);
             
             // write flatdata head
-            if (file_exists($tmpFileName1) == false)
+            if (file_exists(__DIR__ . "/" . $tmpFileName1) == false)
             {
                 $templateFileName0 = $reportTemplateDir . "/sectionHead001.txt";
                 
-                $fileHandle = fopen($tmpFileName1, "w");
+                $fileHandle = fopen(__DIR__ . "/" . $tmpFileName1, "w");
                 
                 // report head
-                $t1 = file_get_contents($templateFileName0);
+                $t1 = file_get_contents(__DIR__ . "/" . $templateFileName0);
                 fwrite($fileHandle, $t1);
                 // style end tag
                 $this->writeAdditionalStyles($fileHandle);
@@ -4074,7 +3803,7 @@ class CGenReport
             $returnMsg["genXmlHead"] = 1;
             
             // create tmp file
-            $tempFileHandle = fopen($_tmpFileName, "w+");
+            $tempFileHandle = fopen(__DIR__ . "/" . $_tmpFileName, "w+");
             $xmlSection = "";
             $t1 = "";
             //if (($_cmpMachineID != -1) ||
@@ -4482,20 +4211,20 @@ class CGenReport
 
                     $t1 = json_encode($tmpObj);
                     
-                    if (file_exists($_jsonFileName) == false)
+                    if (file_exists(__DIR__ . "/" . $_jsonFileName) == false)
                     {
-                        file_put_contents($_jsonFileName, $t1);
+                        file_put_contents(__DIR__ . "/" . $_jsonFileName, $t1);
                     }
                     
-                    if (file_exists($_jsonFileName2) == false)
+                    if (file_exists(__DIR__ . "/" . $_jsonFileName2) == false)
                     {
-                        file_put_contents($_jsonFileName2, $t1);
+                        file_put_contents(__DIR__ . "/" . $_jsonFileName2, $t1);
                     }
                 }
             }
         }
         $returnSet = array();
-        $returnSet["tempFileLineNumPos"] = $tempFileLineNumPos;
+//        $returnSet["tempFileLineNumPos"] = $tempFileLineNumPos;
         $returnSet["tempFileLineNumPos"] = $tempFileLineNumPos;
         return $returnSet;
     }
@@ -5127,35 +4856,35 @@ class CGenReport
                                    $_isCompStandard, $_cmpMachineID,
                                    $_lineNum, $_sheetLinePos, $_tempLineNum)
 	{
-        global $returnMsg;
+//        global $returnMsg;
         global $startStyleID;
         global $graphCells;
         global $unitNameList;
         global $testNameList;
-        global $subjectNameList;
+//        global $subjectNameList;
         global $subjectNameFilterNumMax;
         global $subjectFilterNameList;
         global $startGraphDataLinePos;
         global $dataColumnNum;
         global $graphDataColumnNum;
-        global $crossType;
+//        global $crossType;
         //global $resultNoiseNum;
         global $historyBatchMaxNum;
-        global $tableName01;
-        global $resultIDList;
-        global $resultPos;
+//        global $tableName01;
+//        global $resultIDList;
+//        global $resultPos;
         global $batchDateTextList;
         global $swtMicrobenchDocsTestNameUrl;
         global $tmpFileName1;
         global $reportTemplateDir;
         global $subTestNumList;
-        global $colMachineIDList;
-        global $colStartResultIDPosList;
+//        global $colMachineIDList;
+//        global $colStartResultIDPosList;
         global $colMachineNum;
-        global $colCardNameList;
-        global $colSysNameList;
+//        global $colCardNameList;
+//        global $colSysNameList;
 
-        $db = $_db;
+//        $db = $_db;
         $lineNum = $_lineNum;
         $sheetLinePos = $_sheetLinePos;
         $tempLineNum = $_tempLineNum;
@@ -5202,28 +4931,28 @@ class CGenReport
                         
             $tmpCode4 = "<Cell ss:StyleID=\"s" . ($startStyleID + 10) . "\"><Data ss:Type=\"String\">Variation</Data></Cell>\n";
                         
-            $ordinalNumberList = array("1st", 
-                                       "2nd",
-                                       "3rd",
-                                       "4th",
-                                       "5th",
-                                       "6th",
-                                       "7th",
-                                       "8th",
-                                       "9th",
-                                       "10th",
-                                       "11th",
-                                       "12th",
-                                       "13th",
-                                       "14th",
-                                       "15th");
-                                       
-            $ordinalNameList = array("Current", 
-                                     "Previous1",
-                                     "Previous2",
-                                     "Previous3",
-                                     "Previous4",
-                                     "Previous5");
+//            $ordinalNumberList = array("1st",
+//                                       "2nd",
+//                                       "3rd",
+//                                       "4th",
+//                                       "5th",
+//                                       "6th",
+//                                       "7th",
+//                                       "8th",
+//                                       "9th",
+//                                       "10th",
+//                                       "11th",
+//                                       "12th",
+//                                       "13th",
+//                                       "14th",
+//                                       "15th");
+//
+//            $ordinalNameList = array("Current",
+//                                     "Previous1",
+//                                     "Previous2",
+//                                     "Previous3",
+//                                     "Previous4",
+//                                     "Previous5");
                                        
             $tmpCode5 = "";
             $tmpCode6 = "";

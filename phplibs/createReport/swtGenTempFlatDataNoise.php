@@ -9,7 +9,7 @@ include_once "../configuration/swtConfig.php";
 include_once "../server/swtHeartBeatFuncs.php";
 include_once "../generalLibs/genfuncs.php";
 include_once "../generalLibs/code01.php";
-include_once "../configuration/swtConfig.php";
+//include_once "../configuration/swtConfig.php";
 include_once "swtClassGenReportNoise.php";
 include_once "swtClassGenFlatDataNoise.php";
 
@@ -51,14 +51,6 @@ foreach ($tmpMachineIDPair as $tmpVal)
     }
 }
 
-$xmlWriter = new CGenReport();
-// get xml code template pieces
-$returnSet = $xmlWriter->getXMLCodePiece();
-$appendStyleList = $returnSet["appendStyleList"];
-$allStylesEndTag = $returnSet["allStylesEndTag"];
-$allSheetsEndTag = $returnSet["allSheetsEndTag"];
-
-
 $flatDataGen = new CGenReportFlatData();
 
 $db = new CPdoMySQL();
@@ -80,8 +72,8 @@ if ($returnSet == false)
 }
 $batchID = $returnSet["batchID"];
 $pathName = $returnSet["pathName"];
-$returnMsg["batchID"] = $batchID;
-$returnMsg["pathName"] = $pathName;
+//$returnMsg["batchID"] = $batchID;
+//$returnMsg["pathName"] = $pathName;
 $returnSet = $flatDataGen->getReportFolder($batchID,
                                            $reportType,
                                            $curReportFolder);
@@ -108,7 +100,7 @@ if ($returnSet["parseFinished"] == 1)
 $reportFolder = $returnSet["reportFolder"];
 $curReportFolder = $returnSet["curReportFolder"];
 
-$returnMsg["reportFolder"] = $reportFolder;
+//$returnMsg["reportFolder"] = $reportFolder;
 $returnMsg["curReportFolder"] = $curReportFolder;
 
 $returnSet = $flatDataGen->getConnectValues($reportFolder);
@@ -147,7 +139,7 @@ $templateFileName4 = $reportTemplateDir . "/sectionSheet005B.txt";
 
 $outFileNameLater = ".tmp1";
 
-$returnMsg["machineIDPair"] = $machineIDPair;
+//$returnMsg["machineIDPair"] = $machineIDPair;
 
 
 $returnSet = $flatDataGen->getMachineIDInfo($db, $machineIDPair);
@@ -162,11 +154,11 @@ if ($returnSet == false)
 $machineIDCardNameDict = $returnSet["machineIDCardNameDict"];
 $machineIDSysNameDict = $returnSet["machineIDSysNameDict"];
 $machineIDCardNameSysNameDict = $returnSet["machineIDCardNameSysNameDict"];
-$returnMsg["machineIDCardNameDict"] = $machineIDCardNameDict;
-$returnMsg["machineIDSysNameDict"] = $machineIDSysNameDict;
-$returnMsg["machineIDCardNameSysNameDict"] = $machineIDCardNameSysNameDict;
+//$returnMsg["machineIDCardNameDict"] = $machineIDCardNameDict;
+//$returnMsg["machineIDSysNameDict"] = $machineIDSysNameDict;
+//$returnMsg["machineIDCardNameSysNameDict"] = $machineIDCardNameSysNameDict;
 
-$returnMsg["pathName"] = $pathName;
+//$returnMsg["pathName"] = $pathName;
 
 $batchPathName = $logStoreDir . "/batch" . $batchID;
 
@@ -175,7 +167,7 @@ if (file_exists($batchPathName) == false)
     $batchPathName = $logStoreDir . "/" . $pathName;
 }
 
-$returnMsg["batchPathName"] = $batchPathName;
+//$returnMsg["batchPathName"] = $batchPathName;
 
 if (file_exists($batchPathName) == false)
 {
@@ -198,9 +190,9 @@ if (count($allFileList) == 0)
     // $allFileList
     // $allFolderList
     // $cardNameList
-    $returnMsg["tmp---003:"] = "";
-    $returnMsg["tmp---004:"] = "";
-    $returnMsg["tmp---005:"] = "";
+//    $returnMsg["tmp---003:"] = "";
+//    $returnMsg["tmp---004:"] = "";
+//    $returnMsg["tmp---005:"] = "";
     $tmpResult = $flatDataGen->getAllFileList($batchPathName);
     if ($tmpResult === false)
     {
@@ -240,18 +232,18 @@ while (($crossType >= 10) &&
 {
     $curMachineID = $uniqueMachineIDList[$fileID];
     
-    $returnMsg["tmpEnter1"] = "2";
+//    $returnMsg["tmpEnter1"] = "2";
     
     $tmpPos = array_search($curMachineID, $machineIDListLimit);
     
-    $returnMsg["tmpEnter_curMachineID"] = $curMachineID;
-    $returnMsg["tmpEnter_machineIDListLimit"] = $machineIDListLimit;
-    $returnMsg["tmpEnter_machineIDPair"] = $machineIDPair;
+//    $returnMsg["tmpEnter_curMachineID"] = $curMachineID;
+//    $returnMsg["tmpEnter_machineIDListLimit"] = $machineIDListLimit;
+//    $returnMsg["tmpEnter_machineIDPair"] = $machineIDPair;
     
     if (($tmpPos === false) &&
         ($fileID <=  count($uniqueCardNameList)))
     {
-        $returnMsg["tmpEnter3"] = "1";
+//        $returnMsg["tmpEnter3"] = "1";
         $fileID++;
     }
     else
@@ -303,11 +295,11 @@ if ($fileID <= count($uniqueCardNameList))
     $curMachineID = $returnSet["curMachineID"];
     $curPairMachineID = $returnSet["curPairMachineID"];
     
-    $returnMsg["curMachineID"] = $curMachineID;
-    $returnMsg["curPairMachineID"] = $curPairMachineID;
-    $returnMsg["cardSysNameMachineIDDict"] = $cardSysNameMachineIDDict;
+//    $returnMsg["curMachineID"] = $curMachineID;
+//    $returnMsg["curPairMachineID"] = $curPairMachineID;
+//    $returnMsg["cardSysNameMachineIDDict"] = $cardSysNameMachineIDDict;
 
-    $returnMsg["curPairMachineID"] = $curPairMachineID;
+//    $returnMsg["curPairMachineID"] = $curPairMachineID;
 
     if ($curPairMachineID != -1)
     {
@@ -328,33 +320,33 @@ if ($fileID <= count($uniqueCardNameList))
     $testStartPosList = array();
     $pairTestStartPosList = array();
     
-    $returnMsg["cardNameList"] = $cardNameList;
-    $returnMsg["machineIDListNew"] = $machineIDList;
-    $returnMsg["machineIDCardNameSysNameDict"] = $machineIDCardNameSysNameDict;
-    $returnMsg["curPairMachineID"] = $curPairMachineID;
-    $returnMsg["curCardNameList"] = $curCardNameList;
-    $returnMsg["pairCardNameList"] = $pairCardNameList;
-    $returnMsg["tmpCardName"] = $tmpCardName;
+//    $returnMsg["cardNameList"] = $cardNameList;
+//    $returnMsg["machineIDListNew"] = $machineIDList;
+//    $returnMsg["machineIDCardNameSysNameDict"] = $machineIDCardNameSysNameDict;
+//    $returnMsg["curPairMachineID"] = $curPairMachineID;
+//    $returnMsg["curCardNameList"] = $curCardNameList;
+//    $returnMsg["pairCardNameList"] = $pairCardNameList;
+//    $returnMsg["tmpCardName"] = $tmpCardName;
     
 
     // get cur machineID start pos of each test
-    $testStartPosList = $flatDataGen->getTestStartPos($curCardNameList);
+//    $testStartPosList = $flatDataGen->getTestStartPos($curCardNameList);
     if ($curPairMachineID != -1)
     {
         // get compare machineID to cur machineID start pos of each test
-        $pairTestStartPosList = $flatDataGen->getTestStartPos($pairCardNameList);
+//        $pairTestStartPosList = $flatDataGen->getTestStartPos($pairCardNameList);
     }
     
     
-    $returnMsg["testStartPosList"] = $testStartPosList;
-    $returnMsg["pairTestStartPosList"] = $pairTestStartPosList;
+//    $returnMsg["testStartPosList"] = $testStartPosList;
+//    $returnMsg["pairTestStartPosList"] = $pairTestStartPosList;
     
     $tmpFileName = sprintf($reportFolder . "/" . $tmpCardName . $outFileNameLater, $batchID);
     // open dest file
     //$fileHandle = fopen($tmpFileName, "r+");
     //fseek($fileHandle, 0, SEEK_END);
     
-    $returnMsg["tmpStr1"] = "";
+//    $returnMsg["tmpStr1"] = "";
     
     // write result file lines to tmp file
     //$flatDataGen->dumpLines($visitedTestNameList,
@@ -389,7 +381,7 @@ else
 
 
 $valueSet = array();
-$valueSet["allFileList"] = $valueSet;
+$valueSet["allFileList"] = $allFileList;
 $valueSet["cardNameList"] = $cardNameList;
 $valueSet["machineIDList"] = $machineIDList;
 $valueSet["cardSysNameMachineIDDict"] = $cardSysNameMachineIDDict;
@@ -399,14 +391,14 @@ $valueSet["rowNum"] =    $rowNum;
 
 $flatDataGen->setConnectValues($valueSet, $reportFolder);
 
-$returnMsg["cardSysNameMachineIDDictNew"] = $cardSysNameMachineIDDictNew;
-$returnMsg["valueSet"] = $valueSet;
+//$returnMsg["cardSysNameMachineIDDictNew"] = $cardSysNameMachineIDDictNew;
+//$returnMsg["valueSet"] = $valueSet;
 $returnMsg["fileID"] = $fileID;
 $returnMsg["fileNum"] = count($allFileList);
-$returnMsg["curReportFolder"] = $curReportFolder;
-$returnMsg["uniqueCardNameList"] = $uniqueCardNameList;
-$returnMsg["uniqueMachineIDList"] = $uniqueMachineIDList;
-$returnMsg["crossType"] = $crossType;
+//$returnMsg["curReportFolder"] = $curReportFolder;
+//$returnMsg["uniqueCardNameList"] = $uniqueCardNameList;
+//$returnMsg["uniqueMachineIDList"] = $uniqueMachineIDList;
+//$returnMsg["crossType"] = $crossType;
 
 echo json_encode($returnMsg);
 return;

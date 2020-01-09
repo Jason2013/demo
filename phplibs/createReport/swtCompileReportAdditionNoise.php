@@ -8,7 +8,7 @@ include_once "../generalLibs/genfuncs.php";
 include_once "../generalLibs/code01.php";
 include_once "swtClassGenReportNoise.php";
 include_once "../configuration/swtConfig.php";
-
+include_once __DIR__ . "/../userManage/swtUserManager.php";
 
 $xmlWriter = new CGenReport();
 // get xml code template pieces
@@ -84,7 +84,15 @@ if ($db->getError() != null)
     return;
 }
 
-$returnSet = $xmlWriter->getBatchID($db, $batchID);
+$userChecker = new CUserManger();
+if ($userChecker->isManager()) {
+    $userInfo["isManager"] = true;
+    $userInfo["userID"] = -1;
+} else {
+    $userInfo["isManager"] = false;
+    $userInfo["userID"] = $userChecker->getUserID();
+}
+$returnSet = $xmlWriter->getBatchID($db, $batchID, $userInfo);
 $returnMsg["returnLine"] = "line: " . __LINE__;
 if ($returnSet === null)
 {
