@@ -1265,7 +1265,6 @@ class CGenReport
                     // skip unselected cards
                     continue;
                 }
-                $tmpDriverName = $row1[21];
                 
                 if ($umdIndex == 0)
                 {
@@ -1329,6 +1328,7 @@ class CGenReport
                     }
                 }
 
+                $tmpDriverName = $row1[21];
                 $tmpIndex = array_search($tmpDriverName, $umdNameList);
                 if ($tmpIndex === false)
                 {
