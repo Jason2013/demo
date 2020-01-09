@@ -111,6 +111,29 @@ $swtPreSheetNameShort_pf = array("ExecTime", "RecoTime");
 $swtOldUmdNameMatchList = array("D3D11", "DX11", "D3D12", "DX12");
 $swtOldCardNameMatchList = array("GTX1080", "GTX 1080", "RTX2070", "GTX2070");
 
+function ReplaceName($name, $nameMap)
+{
+    $key = strtoupper($name);
+    if (array_key_exists($key, $nameMap))
+    {
+        return $nameMap[$key];
+    }
+    else
+    {
+        return $name;
+    }
+}
+
+function ReplaceOldUmdName($umdName)
+{
+    $OldUmdNameMatchMap = [
+        "DX11" => "D3D11",
+        "DX12" => "D3D12"
+    ];
+
+    return ReplaceName($umdName, $OldUmdNameMatchMap);
+}
+
 function ReplaceOldCardName($cardName)
 {
     $OldCardNameMatchMap = [
@@ -118,15 +141,7 @@ function ReplaceOldCardName($cardName)
         "GTX2070" => "RTX2070"
     ];
 
-    $key = strtoupper($cardName);
-    if (array_key_exists($key, $OldCardNameMatchMap))
-    {
-        return $OldCardNameMatchMap[$key];
-    }
-    else
-    {
-        return $cardName;
-    }
+    return ReplaceName($cardName, $OldCardNameMatchMap);
 }
 
 //$swtUmdNameList = array("DX11", "DX12", "Vulkan");
