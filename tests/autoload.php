@@ -8,7 +8,8 @@ spl_autoload_register(
         if ($classes === null) {
             $classes = array(
                 'cgenreport' => '/../phplibs/createReport/swtClassGenReportNoise.php',
-                'email' => '/../src/Email.php'
+                'email' => '/../src/Email.php',
+                'cpdomysql' => '/../phplibs/generalLibs/dopdo.php'
             );
         }
         $cn = strtolower($class);
