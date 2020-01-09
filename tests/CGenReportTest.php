@@ -189,4 +189,40 @@ final class CGenReportTest extends TestCase
         $this->assertTrue(static::FilesAreEqual($target_file2, $expected_file2));
         $this->assertTrue(static::FilesAreEqual($target_file3, $expected_file3));
     }
+
+    public function testGetBatchInfo()
+    {
+        global $db_server;
+        global $db_dbname;
+        global $db_username;
+        global $db_password;
+        $db_server = "Srdcvmysqldp1";
+        $db_username = "davychen";
+        $db_password = "davychen7$";
+        $db_dbname = "db_gfxbench";
+
+        $db = new CPdoMySQL();
+
+        global $returnMsg;
+        $returnMsg["errorCode"] = 1;
+        $returnMsg["errorMsg"] = "compile report success";
+
+        global $selectedCardIDList;
+        $selectedCardIDList = [88, 33, 11, 33, 1084];
+
+        global $selectedSysIDList;
+        $selectedSysIDList = [4, 4, 4, 1091, 4];
+
+        global $umdNameList;
+        $umdNameList = ["D3D11", "D3D12", "Vulkan", "OpenGL", "Metal"];
+
+        $batchIDList = [1318, 1305, 1289, 1275];
+
+        $report = new CGenReport();
+        $resultSet = $report->getBatchInfo($db, $batchIDList);
+        $this->assertTrue(!is_null($resultSet));
+
+        $json = file_get_contents(__DIR__ . '/data/getBatchInfo_ResultSet.json');
+        $this->assertEquals($json, json_encode($resultSet));
+    }
 }
