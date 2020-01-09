@@ -1185,15 +1185,6 @@ class CGenReport
         $resultTimeList = array();
         $machineNameList = array();
         $sysMemNameList = array();
-        
-        $cardNameListFlat = array();
-        $driverNameListFlat = array();
-        
-        $umdIndexListFlat = array();
-        $tmpCardIDListFlat = array();
-        $tmpSysIDListFlat = array();
-        $cardIndexListFlat = array();
-        $curCardIDListFlat = array();
 
         foreach ($_batchIDList as $tmpBatchID)
         {
@@ -1245,15 +1236,6 @@ class CGenReport
             while ($row1 = $db->fetchRow())
             {
                 $properCardName = ReplaceOldCardName($row1[20]);
-
-                array_push($cardNameListFlat, $properCardName);
-                array_push($driverNameListFlat, $row1[21]);
-                
-                array_push($umdIndexListFlat, $umdIndex);
-                array_push($tmpCardIDListFlat, $row1[10]);
-                array_push($tmpSysIDListFlat, $row1[12]);
-                array_push($cardIndexListFlat, $cardIndex);
-                array_push($curCardIDListFlat, $curCardID);
                 
                 $tmpCardID = intval($row1[10]);
                 $tmpSysID = intval($row1[12]);
@@ -1435,15 +1417,6 @@ class CGenReport
             array_push($machineNameList, $tmpMachineNameList);
             array_push($sysMemNameList, $tmpSysMemNameList);
         }
-
-        $returnMsg["cardNameListFlat"] = $cardNameListFlat;
-        $returnMsg["driverNameListFlat"] = $driverNameListFlat;
-        
-        $returnMsg["umdIndexListFlat"] = $umdIndexListFlat;
-        $returnMsg["tmpCardIDListFlat"] = $tmpCardIDListFlat;
-        $returnMsg["tmpSysIDListFlat"] = $tmpSysIDListFlat;
-        $returnMsg["cardIndexListFlat"] = $cardIndexListFlat;
-        $returnMsg["curCardIDListFlat"] = $curCardIDListFlat;
         
         $returnSet = array();
         $returnSet["resultIDList"] = $resultIDList;
