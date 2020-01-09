@@ -1336,7 +1336,6 @@ class CGenReport
                         if (count($arr4) > 0)
                         {
                             $cardIndex = intval($arr4[0] / $umdNum);
-                            $returnMsg["cardIndex"] = $cardIndex;
                             
                             $curCardNum = intval(count($tmpResultIDList) / $umdNum);
                             
