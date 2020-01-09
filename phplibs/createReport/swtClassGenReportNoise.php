@@ -1168,9 +1168,7 @@ class CGenReport
         global $selectedCardIDList;
         global $selectedSysIDList;
         global $umdNameList;
-        global $swtOldUmdNameMatchList;
-        global $swtOldCardNameMatchList;
-        
+
         $db = $_db;
 
         $resultIDList = array();
@@ -1246,22 +1244,8 @@ class CGenReport
             $umdNum = count($umdNameList);
             while ($row1 = $db->fetchRow())
             {
-                $properCardName = $row1[20];
-                
-                for ($i = 0; $i < count($swtOldCardNameMatchList); $i++)
-                {
-                    if (strtolower($properCardName) == strtolower($swtOldCardNameMatchList[$i]))
-                    {
-                        // cardName match
-                        $tmpCheck = $i % 2;
-                        if ($tmpCheck == 1)
-                        {
-                            // old cardName used
-                            $properCardName = $swtOldCardNameMatchList[$i - 1];
-                        }
-                    }
-                }
-                
+                $properCardName = ReplaceOldCardName($row1[20]);
+
                 array_push($cardNameListFlat, $properCardName);
                 array_push($driverNameListFlat, $row1[21]);
                 
@@ -1348,18 +1332,8 @@ class CGenReport
                 $tmpIndex = array_search($tmpDriverName, $umdNameList);
                 if ($tmpIndex === false)
                 {
-                    $tmpCount = intval(count($swtOldUmdNameMatchList) / 2);
-                    for ($j = 0; $j < $tmpCount; $j++)
-                    {
-                        if (strcmp($swtOldUmdNameMatchList[$j * 2 + 1], $tmpDriverName) == 0)
-                        {
-                            $tmpIndex = array_search($swtOldUmdNameMatchList[$j * 2], $umdNameList);
-                            if ($tmpIndex !== false)
-                            {
-                                break;
-                            }
-                        }
-                    }
+                    $tmpDriverName = ReplaceOldUmdName($tmpDriverName);
+                    $tmpIndex = array_search($tmpDriverName, $umdNameList);
                 }
                 if ($tmpIndex !== false)
                 {
