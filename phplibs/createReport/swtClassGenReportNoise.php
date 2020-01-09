@@ -489,7 +489,7 @@ class CGenReport
         $params1 = array();
         $sql1 = "";
         
-        if (userInfo["isManager"])
+        if ($userInfo["isManager"])
         {
             // manager login
             if ($b1 == false)
@@ -599,7 +599,7 @@ class CGenReport
         else
         {
             // outside user
-            $userID = userInfo["userID"];
+            $userID = $userInfo["userID"];
             if ($b1 == false)
             {
                 // if not assign current batch id
