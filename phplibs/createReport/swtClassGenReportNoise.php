@@ -1044,7 +1044,7 @@ class CGenReport
             return null;
         }
         
-        $returnMsg["checkedMachineIDListString"] = $checkedMachineIDListString;
+//        $returnMsg["checkedMachineIDListString"] = $checkedMachineIDListString;
         
         $params1 = array();
         $sql1 = "SELECT card_id, sys_id " .
@@ -1493,11 +1493,11 @@ class CGenReport
                                     array_push($machineIDPairList, $cmpMachineID);
                                 }
                             }
-                            $returnMsg["machineIDPairList"] = $machineIDPairList;
-                            $returnMsg["curCardName"] = $curCardName;
-                            $returnMsg["tmpList"] = $tmpList;
-                            $returnMsg["cardNameList[0]"] = $cardNameList[0];
-                            $returnMsg["machineIDList[0]"] = $machineIDList[0];
+//                            $returnMsg["machineIDPairList"] = $machineIDPairList;
+//                            $returnMsg["curCardName"] = $curCardName;
+//                            $returnMsg["tmpList"] = $tmpList;
+//                            $returnMsg["cardNameList[0]"] = $cardNameList[0];
+//                            $returnMsg["machineIDList[0]"] = $machineIDList[0];
                             
                             break;
                         }
@@ -1592,8 +1592,8 @@ class CGenReport
             }
         }
         
-        $returnMsg["machineIDPairList"] = $machineIDPairList;
-        $returnMsg["cmpMachineID"] = $cmpMachineID;
+//        $returnMsg["machineIDPairList"] = $machineIDPairList;
+//        $returnMsg["cmpMachineID"] = $cmpMachineID;
         
         $tmpOrderIndex = -1;
         $tmpKey = -1;
@@ -4539,13 +4539,13 @@ class CGenReport
             }
             array_push($graphCells, $t1);
             
-            $returnMsg["testNameList"] = $testNameList;
-            $returnMsg["subTestNumList"] = $subTestNumList;
+//            $returnMsg["testNameList"] = $testNameList;
+//            $returnMsg["subTestNumList"] = $subTestNumList;
             $n1 = -1;
             
-            $returnMsg["subTestNumList"] = $subTestNumList;
-            $returnMsg["subTestNumMap"] = $subTestNumMap;
-            $returnMsg["cmpSubTestNumList"] = $cmpSubTestNumList;
+//            $returnMsg["subTestNumList"] = $subTestNumList;
+//            $returnMsg["subTestNumMap"] = $subTestNumMap;
+//            $returnMsg["cmpSubTestNumList"] = $cmpSubTestNumList;
             
             for ($i = 0; $i < count($testNameList); $i++)
             {
@@ -4836,7 +4836,7 @@ class CGenReport
                 array_push($graphCells, $t1);
                 $n1 = $n2 + 2;
             }
-            $returnMsg["graphCells"] = $graphCells;
+//            $returnMsg["graphCells"] = $graphCells;
         }
 
         $returnSet = array();
@@ -5186,11 +5186,11 @@ class CGenReport
             $cardNameKeys = array_keys($cardNameList[$i], $cardNameList[0][$_resultPos]);
             $sysNameKeys = array_keys($sysNameList[$i], $sysNameList[0][$_resultPos]);
             $driverNameKeys = array_keys($driverNameList[$i], $driverNameList[0][$_resultPos]);
-            $returnMsg["enter01"] = 1;
+//            $returnMsg["enter01"] = 1;
 			$tmpMachineNum = intval(count($driverNameList[$i]) / $reportUmdNum);
             if (count($driverNameKeys) < $tmpMachineNum)
             {
-                $returnMsg["enter02"] = 2;
+//                $returnMsg["enter02"] = 2;
                 $tmpCount = intval(count($swtOldUmdNameMatchList) / 2);
                 for ($j = 0; $j < $tmpCount; $j++)
                 {
@@ -5208,8 +5208,8 @@ class CGenReport
 								}
 							}
 							
-							$returnMsg["enter03"] = 3;
-							$returnMsg["driverNameKeys"] = $driverNameKeys;
+//							$returnMsg["enter03"] = 3;
+//							$returnMsg["driverNameKeys"] = $driverNameKeys;
                             //break;
 							if (count($driverNameKeys) >= $tmpMachineNum)
 							{
@@ -5596,7 +5596,7 @@ class CGenReport
         }
         
         
-        $returnMsg["dataNum"] = $dataNum;
+//        $returnMsg["dataNum"] = $dataNum;
         
         fwrite($_fileHandle, $t1);
 
@@ -6131,13 +6131,13 @@ class CGenReport
                 }
             }
             
-            $returnMsg["dataIndexList"] = $dataIndexList;
-            $returnMsg["umdOrder"] = $umdOrder;
-            $returnMsg["resultIDList[0]"] = $resultIDList[0];
-            $returnMsg["driverNameList[0]"] = $driverNameList[0];
-            $returnMsg["umdNameList"] = $umdNameList;
-            $returnMsg["_startResultID"] = $_startResultID;
-            $returnMsg["_cmpStartResultID"] = $_cmpStartResultID;
+//            $returnMsg["dataIndexList"] = $dataIndexList;
+//            $returnMsg["umdOrder"] = $umdOrder;
+//            $returnMsg["resultIDList[0]"] = $resultIDList[0];
+//            $returnMsg["driverNameList[0]"] = $driverNameList[0];
+//            $returnMsg["umdNameList"] = $umdNameList;
+//            $returnMsg["_startResultID"] = $_startResultID;
+//            $returnMsg["_cmpStartResultID"] = $_cmpStartResultID;
             
             array_push($params1, $resultIDList[0][$_resultPos]);
             $t4 = implode(",", $selectKeyList);
@@ -6154,11 +6154,11 @@ class CGenReport
                 return null;
             }
             
-            $returnMsg["umdNameList"] = $umdNameList;
-            $returnMsg["umdName"] = $umdNameList[1];
-            $returnMsg["sql1"] = $sql1;
-            $returnMsg["params1"] = $params1;
-            $returnMsg["tmp002"] = "";
+//            $returnMsg["umdNameList"] = $umdNameList;
+//            $returnMsg["umdName"] = $umdNameList[1];
+//            $returnMsg["sql1"] = $sql1;
+//            $returnMsg["params1"] = $params1;
+//            $returnMsg["tmp002"] = "";
             
             
             $summaryJson = array();
