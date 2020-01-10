@@ -62,7 +62,7 @@ $colMachineIDOrderIndexList = explode(",", $colMachineIDOrderIndexList);
 $returnSet = $xmlWriter->checkInputMachineID($machineIDPair, $checkedMachineIDList);
 if ($returnSet == null)
 {
-    $returnMsg["returnLine"] = "line: " . __LINE__;
+//    $returnMsg["returnLine"] = "line: " . __LINE__;
     echo json_encode($returnMsg);
     return;
 }
@@ -79,7 +79,7 @@ if ($db->getError() != null)
 {
     $returnMsg["errorCode"] = 0;
     $returnMsg["errorMsg"] = "can't reach mysql server, line: " . __LINE__;
-    $returnMsg["returnLine"] = "line: " . __LINE__;
+//    $returnMsg["returnLine"] = "line: " . __LINE__;
     echo json_encode($returnMsg);
     return;
 }
@@ -528,7 +528,7 @@ if (($subTestNum == 0) ||
     $nextSubTestPos = 0;
     $subTestNum = 0;
     
-    $returnMsg["returnLine2"] = "line: " . __LINE__;
+//    $returnMsg["returnLine2"] = "line: " . __LINE__;
     
     if ($curTestPos < count($testNameList))
     {
@@ -564,7 +564,7 @@ if (($subTestNum == 0) ||
             $tempFileHandle = fopen($tmpFileName, "r+");
         
             $returnMsg["checkNeedCreateReportFile"] = "1";
-            $returnMsg["returnLine"] = "line: " . __LINE__;
+//            $returnMsg["returnLine"] = "line: " . __LINE__;
             $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $tmpFileName, $jsonFileName, $jsonFileName2,
                                                                $umdNum, $startResultID, $cmpMachineID, $resultPos,
                                                                $tempFileLineNumPos,
@@ -587,7 +587,7 @@ if (($subTestNum == 0) ||
             fseek($fileHandle, 0, SEEK_END);
             fseek($tempFileHandle, 0, SEEK_END);
             
-            $returnMsg["returnLine"] = "line: " . __LINE__;
+//            $returnMsg["returnLine"] = "line: " . __LINE__;
             $returnSet = $xmlWriter->checkStartSheet($fileHandle, $tempFileHandle,
                                                      $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
                                                      $lineNumPos, $resultPos, $umdNum,
@@ -601,7 +601,7 @@ if (($subTestNum == 0) ||
             
             //$fileHandle = fopen($xmlFileName, "r+");
             fseek($fileHandle, 0, SEEK_END);
-            $returnMsg["returnLine"] = "line: " . __LINE__;
+//            $returnMsg["returnLine"] = "line: " . __LINE__;
             $returnSet = $xmlWriter->checkShiftAPI($fileHandle, $resultPos, $tmpUmdName,
                                                    $firstTestPos, $firstSubTestPos, $sheetLinePos);
             if ($returnSet === null)
@@ -619,7 +619,7 @@ if (($subTestNum == 0) ||
         
         
         $returnMsg["checkShiftCard"] = "1";
-        $returnMsg["returnLine"] = "line: " . __LINE__;
+//        $returnMsg["returnLine"] = "line: " . __LINE__;
         $returnSet = $xmlWriter->checkShiftCard($xmlFileName, $tmpFileName, $tmpFileName1, 
                                                 $jsonFileName, $jsonFileName2,
                                                 $allSheetsEndTag,
@@ -639,7 +639,7 @@ if (($subTestNum == 0) ||
         $resultPos++;
         $curTestPos = 0;
         
-        $returnMsg["returnLine"] = "line: " . __LINE__;
+//        $returnMsg["returnLine"] = "line: " . __LINE__;
         $returnSet = $xmlWriter->checkAllReportsFinished($db, $resultPos, $reportFolder, $batchID);
         if ($returnSet === null)
         {
@@ -664,7 +664,7 @@ else
     
     //$returnMsg["returnLine2"] = "line: " . __LINE__;
     
-    $returnMsg["returnLine"] = "line: " . __LINE__;
+//    $returnMsg["returnLine"] = "line: " . __LINE__;
     $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $tmpFileName, $jsonFileName, $jsonFileName2,
                                                        $umdNum, $startResultID, $cmpMachineID, $resultPos,
                                                        $tempFileLineNumPos,
@@ -689,7 +689,7 @@ else
         $firstSubTestPos = $nextSubTestPos;
     }
     
-    $returnMsg["returnLine"] = "line: " . __LINE__;
+//    $returnMsg["returnLine"] = "line: " . __LINE__;
     $returnSet = $xmlWriter->checkStartSheet($fileHandle, $tempFileHandle,
                                              $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
                                              $lineNumPos, $resultPos, $umdNum,
@@ -725,7 +725,7 @@ else
     $returnSet = $xmlWriter->getHistoryResultIDList($resultPos);
     $historyResultIDList = $returnSet["historyResultIDList"];
     
-    $returnMsg["returnLine"] = "line: " . __LINE__;
+//    $returnMsg["returnLine"] = "line: " . __LINE__;
     $returnSet = $xmlWriter->writeReportData($db, $fileHandle, $tempFileHandle,
                                              $resultPos, $nextSubTestPos,
                                              $isCompStandard,
