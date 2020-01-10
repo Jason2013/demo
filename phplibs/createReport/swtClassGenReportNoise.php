@@ -1327,12 +1327,7 @@ class CGenReport
                         $arr1 = array_keys($cardNameList[0], $properCardName);
                         $arr2 = array_keys($sysNameList[0], $row1[23]);
                         $arr3 = array_intersect($arr1, $arr2);
-                        
-                        $arr4 = array();
-                        foreach ($arr3 as $tmpName)
-                        {
-                            $arr4 []= $tmpName;
-                        }
+                        $arr4 = array_values($arr3);
                         if (count($arr4) > 0)
                         {
                             $cardIndex = intval($arr4[0] / $umdNum);
