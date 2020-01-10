@@ -72,7 +72,7 @@ $machineIDBatchPairMap = $returnSet["machineIDBatchPairMap"];
 $checkedMachineIDList = $returnSet["checkedMachineIDList"];
 $checkedMachineIDListString = $returnSet["checkedMachineIDListString"];
 
-$returnMsg["machineIDBatchPairList"] = $machineIDBatchPairList;
+//$returnMsg["machineIDBatchPairList"] = $machineIDBatchPairList;
 
 $db = new CPdoMySQL();
 if ($db->getError() != null)
@@ -93,7 +93,7 @@ if ($userChecker->isManager()) {
     $userInfo["userID"] = $userChecker->getUserID();
 }
 $returnSet = $xmlWriter->getBatchID($db, $batchID, $userInfo);
-$returnMsg["returnLine"] = "line: " . __LINE__;
+//$returnMsg["returnLine"] = "line: " . __LINE__;
 if ($returnSet === null)
 {
     return;
@@ -101,33 +101,33 @@ if ($returnSet === null)
 $batchID = $returnSet["batchID"];
 $batchIDList = $returnSet["batchIDList"];
 $batchDateTextList = $returnSet["batchDateTextList"];
-$returnMsg["batchID"] = $batchID;
-$returnMsg["batchIDList"] = $batchIDList;
-$returnMsg["batchDateTextList"] = $batchDateTextList;
+/* $returnMsg["batchID"] = $batchID; */
+/* $returnMsg["batchIDList"] = $batchIDList; */
+//$returnMsg["batchDateTextList"] = $batchDateTextList;
 
 // set up folder for report xml
 $returnSet = $xmlWriter->prepareReportFolder($reportType, $batchID, $curReportFolder);
 $reportFolder = $returnSet["reportFolder"];
 $curReportFolder = $returnSet["curReportFolder"];
 
-$returnMsg["returnLine"] = "line: " . __LINE__;
+//$returnMsg["returnLine"] = "line: " . __LINE__;
 if ($xmlWriter->checkSkipReportGen($reportType, $reportFolder) == true)
 {
     // skip generate
     return;
 }
 
-$returnMsg["reportType"] = $reportType;
+//$returnMsg["reportType"] = $reportType;
 
 // check if batch id valid
-$returnMsg["returnLine"] = "line: " . __LINE__;
+//$returnMsg["returnLine"] = "line: " . __LINE__;
 $returnSet = $xmlWriter->checkBatchNum($db, $batchID);
 if ($returnSet == false)
 {
     return;
 }
 
-$returnMsg["returnLine"] = "line: " . __LINE__;
+//$returnMsg["returnLine"] = "line: " . __LINE__;
 $returnSet = $xmlWriter->getTestTitleInfo($db, $batchID);
 if ($returnSet === null)
 {
@@ -141,7 +141,7 @@ $subjectNameFilterNumMax = $returnSet["subjectNameFilterNumMax"];
 $subjectNameFilterNumList = $returnSet["subjectNameFilterNumList"];
 $subjectFilterNameList = $returnSet["subjectFilterNameList"];
 
-$returnMsg["returnLine"] = "line: " . __LINE__;
+//$returnMsg["returnLine"] = "line: " . __LINE__;
 if ($curTestPos >= count($testNameList))
 {
     $returnMsg["errorCode"] = 0;
@@ -150,7 +150,7 @@ if ($curTestPos >= count($testNameList))
     return;
 }
 
-$returnMsg["returnLine"] = "line: " . __LINE__;
+//$returnMsg["returnLine"] = "line: " . __LINE__;
 $returnSet = $xmlWriter->getSelectedMachineInfo($db, $batchID, $checkedMachineIDListString);
 if ($returnSet === null)
 {
@@ -159,13 +159,13 @@ if ($returnSet === null)
 $selectedCardIDList = $returnSet["selectedCardIDList"];
 $selectedSysIDList = $returnSet["selectedSysIDList"];
 
-$returnMsg["selectedCardIDList"] = $selectedCardIDList;
-$returnMsg["selectedSysIDList"] = $selectedSysIDList;
+//$returnMsg["selectedCardIDList"] = $selectedCardIDList;
+//$returnMsg["selectedSysIDList"] = $selectedSysIDList;
 
 $testName = $testNameList[$curTestPos];
 $tableName01 = $db_mis_table_name_string001 . $testName;
 
-$returnMsg["returnLine"] = "line: " . __LINE__;
+//$returnMsg["returnLine"] = "line: " . __LINE__;
 $returnSet = $xmlWriter->getBatchInfo($db, $batchIDList);
 if ($returnSet === null)
 {
@@ -186,7 +186,7 @@ $resultTimeList = $returnSet["resultTimeList"];
 $machineNameList = $returnSet["machineNameList"];
 $sysMemNameList = $returnSet["sysMemNameList"];
 
-$returnMsg["changeListNumList"] = $changeListNumList;
+//$returnMsg["changeListNumList"] = $changeListNumList;
 
 //$crossBuildResultIDList =      $returnSet["crossBuildResultIDList"];
 //$crossBuildMachineIDList =     $returnSet["crossBuildMachineIDList"];
@@ -208,24 +208,24 @@ $returnMsg["changeListNumList"] = $changeListNumList;
 //$returnMsg["crossBuildDriverNameList"] = $crossBuildDriverNameList;
 //$returnMsg["crossBuildSysNameList"] = $crossBuildSysNameList;
 
-$returnMsg["checkedMachineIDList"] = $checkedMachineIDList;
-$returnMsg["cardNameList"] = $cardNameList[0];
-$returnMsg["cardNameListAll"] = $cardNameList;
-$returnMsg["sysNameList"] = $sysNameList[0];
-$returnMsg["sysNameListAll"] = $sysNameList;
-$returnMsg["mainLineNameList"] = $mainLineNameList;
-$returnMsg["gpuMemNameList"] = $gpuMemNameList;
+//$returnMsg["checkedMachineIDList"] = $checkedMachineIDList;
+//$returnMsg["cardNameList"] = $cardNameList[0];
+//$returnMsg["cardNameListAll"] = $cardNameList;
+//$returnMsg["sysNameList"] = $sysNameList[0];
+//$returnMsg["sysNameListAll"] = $sysNameList;
+//$returnMsg["mainLineNameList"] = $mainLineNameList;
+//$returnMsg["gpuMemNameList"] = $gpuMemNameList;
 
 $returnSet = $xmlWriter->getBatchEnvironmentInfo($db, $batchID);
 $envDefaultInfo = $returnSet["envDefaultInfo"];
 $logFileFolder = $returnSet["logFileFolder"];
 
-for ($i = 0; $i < count($machineIDList); $i++)
-{
-    $returnMsg["machineIDList_" . $i] = $machineIDList[$i];
-}
+/* for ($i = 0; $i < count($machineIDList); $i++) */
+/* { */
+/*     $returnMsg["machineIDList_" . $i] = $machineIDList[$i]; */
+/* } */
 
-$returnMsg["returnLine"] = "line: " . __LINE__;
+//$returnMsg["returnLine"] = "line: " . __LINE__;
 if ($resultPos >= count($resultIDList[0]))
 {
     $returnMsg["errorCode"] = 0;
@@ -263,15 +263,15 @@ $colCardNameList = $returnSet["colCardNameList"];
 $colSysNameList = $returnSet["colSysNameList"];
 $colMachineNum = count($colMachineIDList);
 
-$returnMsg["curMachineID"] = $curMachineID;
-$returnMsg["cmpMachineID"] = $cmpMachineID;
-$returnMsg["curMachineName"] = $curMachineName;
-$returnMsg["cmpMachineName"] = $cmpMachineName;
-$returnMsg["colMachineIDList"] = $colMachineIDList;
-$returnMsg["colStartResultIDPosList"] = $colStartResultIDPosList;
+//$returnMsg["curMachineID"] = $curMachineID;
+//$returnMsg["cmpMachineID"] = $cmpMachineID;
+//$returnMsg["curMachineName"] = $curMachineName;
+//$returnMsg["cmpMachineName"] = $cmpMachineName;
+//$returnMsg["colMachineIDList"] = $colMachineIDList;
+//$returnMsg["colStartResultIDPosList"] = $colStartResultIDPosList;
 
 // get subtest num of current test
-$returnMsg["returnLine"] = "line: " . __LINE__;
+//$returnMsg["returnLine"] = "line: " . __LINE__;
 
 //umdNameList
 
@@ -280,8 +280,8 @@ $startResultID = intval($resultPos / $umdNum) * $umdNum;
 
 $cardStandardResultPos = $xmlWriter->getStandardResultID($startResultID, $resultPos);
 $cardStandardResultID = $resultIDList[0][$cardStandardResultPos];
-$returnMsg["cardStandardResultPos"] = $cardStandardResultPos;
-$returnMsg["cardStandardResultID"] = $cardStandardResultID;
+//$returnMsg["cardStandardResultPos"] = $cardStandardResultPos;
+//$returnMsg["cardStandardResultID"] = $cardStandardResultID;
 
 //$returnSet = $xmlWriter->getSubTestNum($db, $resultPos, $tableName01, $subTestNum);
 $returnSet = $xmlWriter->getSubTestNum($db, $resultPos, $tableName01, $subTestNum);
@@ -395,13 +395,13 @@ for ($i = 0; $i < $reportUmdNum; $i++)
 //    }
 //}
 
-$returnMsg["resultUmdOrder"] = $resultUmdOrder;
-$returnMsg["resultIDList[0]"] = $resultIDList[0];
-$returnMsg["startResultID"] = $startResultID;
-$returnMsg["resultIDListAll"] = $resultIDList;
+//$returnMsg["resultUmdOrder"] = $resultUmdOrder;
+//$returnMsg["resultIDList[0]"] = $resultIDList[0];
+//$returnMsg["startResultID"] = $startResultID;
+//$returnMsg["resultIDListAll"] = $resultIDList;
 //$returnMsg["validUmdNum"] = $validUmdNum;
 
-$returnMsg["returnLine"] = "line: " . __LINE__;
+//$returnMsg["returnLine"] = "line: " . __LINE__;
 $returnSet = $xmlWriter->checkReportDataColumnNum();
 if ($returnSet === null)
 {
@@ -414,9 +414,9 @@ if ($returnSet === null)
 }
 $dataColumnNum = $returnSet["dataColumnNum"];
 $graphDataColumnNum = $returnSet["graphDataColumnNum"];
-$returnMsg["dataColumnNum"] = $dataColumnNum;
-$returnMsg["graphDataColumnNum"] = $graphDataColumnNum;
-$returnMsg["reportUmdNum"] = $reportUmdNum;
+//$returnMsg["dataColumnNum"] = $dataColumnNum;
+//$returnMsg["graphDataColumnNum"] = $graphDataColumnNum;
+//$returnMsg["reportUmdNum"] = $reportUmdNum;
 
 $tmpUmdName = "";
 $tmpCardName = "";
@@ -428,13 +428,13 @@ if ($resultPos < count($resultIDList[0]))
     $tmpSysName = $sysNameList[0][$resultPos];
 }
 
-$returnMsg["uniqueUmdNameList"] = $uniqueUmdNameList;
-$returnMsg["umdStandardOrder"] = $umdStandardOrder;
-$returnMsg["tmpUmdName"] = $tmpUmdName;
-$returnMsg["tmpCardName"] = $tmpCardName;
-$returnMsg["tmpSysName"] = $tmpSysName;
-$returnMsg["driverNameList[0]"] = $driverNameList[0];
-$returnMsg["driverNameList"] = $driverNameList;
+//$returnMsg["uniqueUmdNameList"] = $uniqueUmdNameList;
+//$returnMsg["umdStandardOrder"] = $umdStandardOrder;
+//$returnMsg["tmpUmdName"] = $tmpUmdName;
+//$returnMsg["tmpCardName"] = $tmpCardName;
+//$returnMsg["tmpSysName"] = $tmpSysName;
+//$returnMsg["driverNameList[0]"] = $driverNameList[0];
+//$returnMsg["driverNameList"] = $driverNameList;
 
 $isCompStandard = false;
 for ($i = 0; $i < count($umdStandardOrder); $i++)
@@ -490,12 +490,12 @@ for ($i = 0; $i < $reportUmdNum; $i++)
     $swtReportUmdInfo[$i] = $driverNameList[0][$startResultID + $i];
 }
 
-$returnMsg["swtReportInfo"] = $swtReportInfo;
-$returnMsg["swtReportUmdInfo"] = $swtReportUmdInfo;
-$returnMsg["startResultID"] = $startResultID;
+//$returnMsg["swtReportInfo"] = $swtReportInfo;
+//$returnMsg["swtReportUmdInfo"] = $swtReportUmdInfo;
+//$returnMsg["startResultID"] = $startResultID;
 
 // get subtest num of all tests
-$returnMsg["returnLine"] = "line: " . __LINE__;
+//$returnMsg["returnLine"] = "line: " . __LINE__;
 $returnSet = $xmlWriter->getSubTestNumList($db, $isCompStandard, $resultPos, $cmpStartResultID, $umdNum);
 if ($returnSet === null)
 {
@@ -508,14 +508,14 @@ $cmpSubTestNumList = $returnSet["cmpSubTestNumList"];
 $skipTestNameList = $returnSet["skipTestNameList"];
 $subTestUmdDataMaskList = $returnSet["subTestUmdDataMaskList"];
 
-$returnMsg["skipTestNameList"] = $skipTestNameList;
-$returnMsg["subTestNumList"] = $subTestNumList;
+//$returnMsg["skipTestNameList"] = $skipTestNameList;
+//$returnMsg["subTestNumList"] = $subTestNumList;
 
 //$allUmdTestCaseNumList = $xmlWriter->getAllUmdTestCaseNumList($db);
 //$returnMsg["allUmdTestCaseNumList"] = $allUmdTestCaseNumList;
 
 $standardUmdTestCaseNumList = $xmlWriter->getStandardUmdTestCaseNumList($db);
-$returnMsg["standardUmdTestCaseNumList"] = $standardUmdTestCaseNumList;
+//$returnMsg["standardUmdTestCaseNumList"] = $standardUmdTestCaseNumList;
 
 // generate seperate cards report
 if (($subTestNum == 0) ||
@@ -755,7 +755,7 @@ else
     
     fclose($fileHandle);
     
-    $returnMsg["returnLine"] = "line: " . __LINE__;
+    /* $returnMsg["returnLine"] = "line: " . __LINE__; */
     $returnSet = $xmlWriter->writeReportCompareData($db, $tempFileHandle, $reportFolder,
                                                     $isCompStandard, $umdNum, $tempFileLineNumPos,
                                                     $startResultID, $cmpStartResultID, $historyStartResultID, $tempLineNum,
@@ -770,33 +770,33 @@ else
 }
 
 
-$returnMsg["isCompStandard"] = $isCompStandard;
+//$returnMsg["isCompStandard"] = $isCompStandard;
 $returnMsg["sheetLinePos"] = $sheetLinePos;
 $returnMsg["tempFileLineNumPos"] = $tempFileLineNumPos;
 $returnMsg["lineNumPos"] = $lineNumPos;
 $returnMsg["resultPos"] = $resultPos;
 $returnMsg["resultNum"] = count($resultIDList[0]);
-$returnMsg["resultIDList"] = $resultIDList;
-$returnMsg["cardNameList"] = $cardNameList;
-$returnMsg["sysNameList"] = $sysNameList;
-$returnMsg["machineIDList"] = $machineIDList;
-$returnMsg["driverNameList"] = $driverNameList;
+//$returnMsg["resultIDList"] = $resultIDList;
+//$returnMsg["cardNameList"] = $cardNameList;
+//$returnMsg["sysNameList"] = $sysNameList;
+//$returnMsg["machineIDList"] = $machineIDList;
+//$returnMsg["driverNameList"] = $driverNameList;
 $returnMsg["curTestPos"] = $curTestPos;
 $returnMsg["firstTestPos"] = $firstTestPos;
 $returnMsg["firstSubTestPos"] = $firstSubTestPos;
-$returnMsg["tmpUmdName"] = $tmpUmdName;
+//$returnMsg["tmpUmdName"] = $tmpUmdName;
 $returnMsg["testNum"] = count($testNameList);
 $returnMsg["nextSubTestPos"] = $nextSubTestPos;
 $returnMsg["subTestNum"] = $subTestNum;
 $returnMsg["compileFinished"] = $compileFinished;
 $returnMsg["reportToken"] = $reportToken;
 $returnMsg["curReportFolder"] = $curReportFolder;
-$returnMsg["batchID"] = $batchID;
-$returnMsg["uniqueUmdNameList"] = $uniqueUmdNameList;
-$returnMsg["subTestUmdDataMaskList"] = $subTestUmdDataMaskList;
-$returnMsg["crossType"] = $crossType;
+//$returnMsg["batchID"] = $batchID;
+//$returnMsg["uniqueUmdNameList"] = $uniqueUmdNameList;
+//$returnMsg["subTestUmdDataMaskList"] = $subTestUmdDataMaskList;
+//$returnMsg["crossType"] = $crossType;
 
-$returnMsg["returnLine"] = "line: " . __LINE__;
+//$returnMsg["returnLine"] = "line: " . __LINE__;
 
 $t1 = json_encode($returnMsg);
 echo $t1;
