@@ -5234,8 +5234,8 @@ class CGenReport
             }
             else
             {
-                $returnMsg["commonKeys"] = $commonKeys;
-                $returnMsg["resultIDList"] = $resultIDList;
+//                $returnMsg["commonKeys"] = $commonKeys;
+//                $returnMsg["resultIDList"] = $resultIDList;
                 array_push($historyResultIDList, $resultIDList[$i][$commonKeys[0]]);
             }
         }
