@@ -212,8 +212,8 @@ $colMachineNum = count($colMachineIDList);
 $reportUmdNum = count($umdNameList);
 $startResultID = intval($resultPos / $umdNum) * $umdNum;
 
-$cardStandardResultPos = $xmlWriter->getStandardResultID($startResultID, $resultPos);
-$cardStandardResultID = $resultIDList[0][$cardStandardResultPos];
+$cardStandardResultPos = $xmlWriter->getStandardResultID($startResultID);
+//$cardStandardResultID = $resultIDList[0][$cardStandardResultPos];
 
 $returnSet = $xmlWriter->getSubTestNum($db, $resultPos, $tableName01, $subTestNum);
 if ($returnSet === null)
