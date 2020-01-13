@@ -719,10 +719,9 @@ class CGenReport
         return intval($tmpNoiseNum) + 1;
     }
     
-	public function getStandardResultID($_startResultID, $_resultPos)
+	public function getStandardResultID($_startResultID)
 	{
         global $resultIDList;
-        global $cardNameList;
         global $driverNameList;
         global $umdStandardOrder;
         global $reportUmdNum;
