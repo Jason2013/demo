@@ -1,10 +1,7 @@
 <?php
 
-//include_once "swtExcelGenFuncs.php";
 include_once "../generalLibs/dopdo.php";
 include_once "../configuration/swtMISConst.php";
-include_once "../server/swtHeartBeatFuncs.php";
-include_once "../generalLibs/genfuncs.php";
 include_once "../generalLibs/code01.php";
 include_once "swtClassGenReportNoise.php";
 include_once "../configuration/swtConfig.php";
