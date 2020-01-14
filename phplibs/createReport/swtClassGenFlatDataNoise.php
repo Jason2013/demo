@@ -404,7 +404,7 @@ class CGenReportFlatData
                     $t2 = basename($tmpSrcFolder);
                     if (strlen($t2) > 1)
                     {
-                        if (!is_file($tmpDestPath)) copy($tmpSrcPath, $tmpDestPath);
+                        if (!file_exists($tmpDestPath)) copy($tmpSrcPath, $tmpDestPath);
                     }
                     //else
                     //{

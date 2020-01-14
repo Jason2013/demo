@@ -3691,7 +3691,7 @@ class CGenReport
         global $colSysNameList;
 
         $tempFileLineNumPos = $_tempFileLineNumPos;
-        if (!is_file(__DIR__ . "/" . $_xmlFileName))
+        if (!file_exists(__DIR__ . "/" . $_xmlFileName))
         {
             // copy file template to modify
             $xmlSection = file_get_contents(__DIR__ . "/" . $reportTemplateDir . "/sectionHead001.txt");
