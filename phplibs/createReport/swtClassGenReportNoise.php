@@ -3671,10 +3671,9 @@ class CGenReport
     }
     
 	public function checkNeedCreateReportFile($_xmlFileName, $_tmpFileName, $_jsonFileName, $_jsonFileName2,
-                                              $_umdNum, $_startResultID, $_cmpMachineID, $_resultPos,
+                                              $_cmpMachineID,
                                               $_tempFileLineNumPos,
-                                              $_curCardName, $_tmpSysName,
-                                              $_cmpCardName, $_cmpSysName)
+                                              $_curCardName, $_tmpSysName)
 	{
         global $returnMsg;
         global $tempFileStartSheetLineNum;

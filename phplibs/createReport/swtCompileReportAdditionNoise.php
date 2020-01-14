@@ -378,10 +378,10 @@ if (($subTestNum == 0) ||
         
             $returnMsg["checkNeedCreateReportFile"] = "1";
             $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $tmpFileName, $jsonFileName, $jsonFileName2,
-                                                               $umdNum, $startResultID, $cmpMachineID, $resultPos,
-                                                               $tempFileLineNumPos,
-                                                               $curCardName, $tmpSysName,
-                                                               $cmpCardName, $cmpSysName);
+                $cmpMachineID,
+                $tempFileLineNumPos,
+                $curCardName, $tmpSysName);
+
             if ($returnSet === null)
             {
                 return;
@@ -469,12 +469,12 @@ else
     $alarmFileName = $returnSet["alarmFileName"];
     
     //$returnMsg["returnLine2"] = "line: " . __LINE__;
-    
+
     $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $tmpFileName, $jsonFileName, $jsonFileName2,
-                                                       $umdNum, $startResultID, $cmpMachineID, $resultPos,
-                                                       $tempFileLineNumPos,
-                                                       $curCardName, $tmpSysName,
-                                                       $cmpCardName, $cmpSysName);
+        $cmpMachineID,
+        $tempFileLineNumPos,
+        $curCardName, $tmpSysName);
+
     if ($returnSet === null)
     {
         return;
