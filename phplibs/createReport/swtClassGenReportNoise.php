@@ -3686,8 +3686,6 @@ class CGenReport
         global $subjectNameFilterNumMax;
         global $swtReportInfo;
         global $swtReportUmdInfo;
-        global $curMachineName;
-        global $cmpMachineName;
         global $tmpFileName1;
         global $colMachineNum;
         global $colCardNameList;
@@ -4030,74 +4028,66 @@ class CGenReport
             fclose($tempFileHandle);
             
             // create summary sheet temp file
-            //if ($_cmpMachineID != -1)
-            {
-                if ((file_exists($_jsonFileName) == false) ||
-                    (file_exists($_jsonFileName2) == false))
-                {
-                    $sectionPosList = array(0,
-                                            $reportUmdNum * 2,
-                                            $reportUmdNum * 2 + $reportUmdNum * 2,
-                                            $reportUmdNum * 2 + $reportUmdNum * 2 + 1,
-                                            $reportUmdNum * 2 + $reportUmdNum * 2 + 1 + $reportUmdNum * 8,
-                                            $reportUmdNum * 2 + $reportUmdNum * 2 + 1 + $reportUmdNum * 8 + $reportUmdNum * 2,
-                                            $reportUmdNum * 2 + $reportUmdNum * 2 + 1 + 
-                                            $reportUmdNum * 8 + $reportUmdNum * 2 + $reportUmdNum * 4
-                                            );
-                                   
-                    $tmpObj = array();
-                    
-                    foreach ($testNameList as $tmpName)
-                    {
-                        $tmpObj[$tmpName] = array_fill(0, $sectionPosList[6], -1);
+            if ((file_exists($_jsonFileName) == false) ||
+                (file_exists($_jsonFileName2) == false)) {
+                $sectionPosList = array(0,
+                    $reportUmdNum * 2,
+                    $reportUmdNum * 2 + $reportUmdNum * 2,
+                    $reportUmdNum * 2 + $reportUmdNum * 2 + 1,
+                    $reportUmdNum * 2 + $reportUmdNum * 2 + 1 + $reportUmdNum * 8,
+                    $reportUmdNum * 2 + $reportUmdNum * 2 + 1 + $reportUmdNum * 8 + $reportUmdNum * 2,
+                    $reportUmdNum * 2 + $reportUmdNum * 2 + 1 +
+                    $reportUmdNum * 8 + $reportUmdNum * 2 + $reportUmdNum * 4
+                );
 
-                        for ($i = 0; $i < $reportUmdNum; $i++)
-                        {
-                            $j = $i * 2;
-                            
-                            $tmpObj[$tmpName][$j] =     -1;
-                            $tmpObj[$tmpName][$j + 1] = -1;
-                            
-                            $tmpPos = $sectionPosList[1];
-                            $tmpObj[$tmpName][$tmpPos + $j] =     0;
-                            $tmpObj[$tmpName][$tmpPos + $j + 1] = 0;
-                            
-                            $tmpPos2 = $sectionPosList[2];
-                            $tmpObj[$tmpName][$tmpPos2] = 0;
-                            
-                            $tmpPos3 = $sectionPosList[3];
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4] =     -1;
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 1] = "";
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 2] = 0;
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 3] = 0;
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 4] = -1;
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 5] = "";
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 6] = 0;
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 7] = 0;
-                            
-                            $tmpPos4 = $sectionPosList[4];
-                            $tmpObj[$tmpName][$tmpPos4 + $j] =     "";
-                            $tmpObj[$tmpName][$tmpPos4 + $j + 1] = "";
-                            
-                            $tmpPos5 = $sectionPosList[5];
-                            $tmpObj[$tmpName][$tmpPos5 + $i * 4] =     0;
-                            $tmpObj[$tmpName][$tmpPos5 + $i * 4 + 1] = 0;
-                            $tmpObj[$tmpName][$tmpPos5 + $i * 4 + 2] = 0;
-                            $tmpObj[$tmpName][$tmpPos5 + $i * 4 + 3] = 0;
-                        }
-                    }
+                $tmpObj = array();
 
-                    $t1 = json_encode($tmpObj);
-                    
-                    if (file_exists(__DIR__ . "/" . $_jsonFileName) == false)
-                    {
-                        file_put_contents(__DIR__ . "/" . $_jsonFileName, $t1);
+                foreach ($testNameList as $tmpName) {
+                    $tmpObj[$tmpName] = array_fill(0, $sectionPosList[6], -1);
+
+                    for ($i = 0; $i < $reportUmdNum; $i++) {
+                        $j = $i * 2;
+
+                        $tmpObj[$tmpName][$j] = -1;
+                        $tmpObj[$tmpName][$j + 1] = -1;
+
+                        $tmpPos = $sectionPosList[1];
+                        $tmpObj[$tmpName][$tmpPos + $j] = 0;
+                        $tmpObj[$tmpName][$tmpPos + $j + 1] = 0;
+
+                        $tmpPos2 = $sectionPosList[2];
+                        $tmpObj[$tmpName][$tmpPos2] = 0;
+
+                        $tmpPos3 = $sectionPosList[3];
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4] = -1;
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 1] = "";
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 2] = 0;
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 3] = 0;
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 4] = -1;
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 5] = "";
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 6] = 0;
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 7] = 0;
+
+                        $tmpPos4 = $sectionPosList[4];
+                        $tmpObj[$tmpName][$tmpPos4 + $j] = "";
+                        $tmpObj[$tmpName][$tmpPos4 + $j + 1] = "";
+
+                        $tmpPos5 = $sectionPosList[5];
+                        $tmpObj[$tmpName][$tmpPos5 + $i * 4] = 0;
+                        $tmpObj[$tmpName][$tmpPos5 + $i * 4 + 1] = 0;
+                        $tmpObj[$tmpName][$tmpPos5 + $i * 4 + 2] = 0;
+                        $tmpObj[$tmpName][$tmpPos5 + $i * 4 + 3] = 0;
                     }
-                    
-                    if (file_exists(__DIR__ . "/" . $_jsonFileName2) == false)
-                    {
-                        file_put_contents(__DIR__ . "/" . $_jsonFileName2, $t1);
-                    }
+                }
+
+                $t1 = json_encode($tmpObj);
+
+                if (file_exists(__DIR__ . "/" . $_jsonFileName) == false) {
+                    file_put_contents(__DIR__ . "/" . $_jsonFileName, $t1);
+                }
+
+                if (file_exists(__DIR__ . "/" . $_jsonFileName2) == false) {
+                    file_put_contents(__DIR__ . "/" . $_jsonFileName2, $t1);
                 }
             }
         }
