@@ -1702,19 +1702,19 @@ class CGenReport
 	public function getHistoryNachineInfo($_startResultID,
                                           $_resultPos)
 	{
-        global $returnMsg;
+//        global $returnMsg;
         global $resultIDList;
         global $cardNameList;
         global $sysNameList;
-        global $machineIDPairList;
-        global $machineIDList;
-        global $resultTimeList;
-        global $crossBuildResultTimeList;
-        global $umdNameList;
+//        global $machineIDPairList;
+//        global $machineIDList;
+//        global $resultTimeList;
+//        global $crossBuildResultTimeList;
+//        global $umdNameList;
         global $umdNum;
-        global $crossType;
-        global $machineIDBatchPairList;
-        global $machineNameList;
+//        global $crossType;
+//        global $machineIDBatchPairList;
+//        global $machineNameList;
         
         $returnSet = array();
         
@@ -1820,7 +1820,6 @@ class CGenReport
         global $resultIDList;
         global $testNameList;
         global $db_mis_table_name_string001;
-        global $subTestUmdDataMaskList;
         global $cardStandardResultPos;
         
         $db = $_db;
@@ -1828,48 +1827,9 @@ class CGenReport
         $subTestNumList = array();
         $subTestNumMap = array();
         $cmpSubTestNumList = array();
-        if (count($subTestUmdDataMaskList) == 0)
-        {
-            $subTestUmdDataMaskList = array_fill(0, count($testNameList), 0);
-        }
         $skipTestNameList = array();
         
         $tmpStartResultID = intval($_resultPos / $_umdNum) * $_umdNum;
-        for ($j = 0; $j < $_umdNum; $j++)
-        {
-            for ($i = 0; $i < count($testNameList); $i++)
-            {
-                $tmpTableName = $db_mis_table_name_string001 . $testNameList[$i];
-                $params1 = array($resultIDList[0][$tmpStartResultID + $j]);
-                $sql1 = "SELECT COUNT(*) FROM " . $tmpTableName . " WHERE (result_id=? AND data_value>0.0)";
-                if ($db->QueryDB($sql1, $params1) == null)
-                {
-                    $returnMsg["errorCode"] = 0;
-                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-                    echo json_encode($returnMsg);
-                    return null;
-                }
-                $row1 = $db->fetchRow();
-                if ($row1 == false)
-                {
-                    $returnMsg["errorCode"] = 0;
-                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-                    echo json_encode($returnMsg);
-                    return null;
-                }
-                $tmpSubTestNum = intval($row1[0]);
-                
-                $tmpMask = ($tmpSubTestNum == 0) ? 0 : 1;
-                // set mask for present of DX11, DX12, Vulkan
-                
-                for ($l = 0; $l < $j; $l++)
-                {
-                    $tmpMask *= 10;
-                }
-                // set mask to skip blank data column in average data for graph
-                $subTestUmdDataMaskList[$i] |= $tmpMask;
-            }
-        }
         
         if ($_isCompStandard)
         {
@@ -1947,7 +1907,6 @@ class CGenReport
         $returnSet["subTestNumMap"] = $subTestNumMap;
         $returnSet["cmpSubTestNumList"] = $cmpSubTestNumList;
         $returnSet["skipTestNameList"] = $skipTestNameList;
-        $returnSet["subTestUmdDataMaskList"] = $subTestUmdDataMaskList;
         return $returnSet;
     }
     
@@ -3627,12 +3586,12 @@ class CGenReport
     
 	public function checkReportDataColumnNum()
     {
-        global $umdNameList;
+//        global $umdNameList;
         global $resultUmdOrder;
         //global $validUmdNum;
         global $reportUmdNum;
         global $cmpMachineID;
-        global $crossType;
+//        global $crossType;
         global $colMachineNum;
         
         $dataColumnNum = 0;
@@ -4360,7 +4319,7 @@ class CGenReport
 	{
         global $returnMsg;
         global $testNameList;
-        global $subTestUmdDataMaskList;
+//        global $subTestUmdDataMaskList;
         global $umdNum;
         global $reportUmdNum;
         global $subTestNumList;
@@ -5877,7 +5836,7 @@ class CGenReport
         global $jsonFileName;
         global $jsonFileName2;
         global $reportTemplateDir;
-        global $subTestUmdDataMaskList;
+//        global $subTestUmdDataMaskList;
         global $dataColumnNum;
         global $cmpMachineID;
         global $curMachineID;
@@ -6017,7 +5976,7 @@ class CGenReport
         $tmpJson["cmpBatchTime"] = $cmpBatchTime;
         // use DX11, DX12, vulkan mask of Alu as overall mask
         // subTestUmdDataMaskList[0]
-        $tmpMask = $subTestUmdDataMaskList[0];
+//        $tmpMask = $subTestUmdDataMaskList[0];
         $dropArea = array();
 
         $tmpJson["dropArea"] = $dropArea;

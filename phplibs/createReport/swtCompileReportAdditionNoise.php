@@ -44,8 +44,6 @@ $historyBatchMaxNum = 4;
 $startGraphDataLinePos = 2;
 $maxSubTestNumOnce = 3000;
 
-$subTestUmdDataMaskList = array();
-
 $returnMsg = array();
 $returnMsg["errorCode"] = 1;
 $returnMsg["errorMsg"] = "compile report success";
@@ -330,7 +328,6 @@ $subTestNumMap = $returnSet["subTestNumMap"];
 $cmpSubTestNumList = $returnSet["cmpSubTestNumList"];
 // skip these test in report compare sheet and graph
 $skipTestNameList = $returnSet["skipTestNameList"];
-$subTestUmdDataMaskList = $returnSet["subTestUmdDataMaskList"];
 
 $standardUmdTestCaseNumList = $xmlWriter->getStandardUmdTestCaseNumList($db);
 
