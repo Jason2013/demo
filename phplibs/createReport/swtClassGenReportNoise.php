@@ -2057,7 +2057,7 @@ class CGenReport
     public function getStandardUmdTestCaseNumList($_db)
     {
         //global $resultPos;
-        global $reportUmdNum;
+//        global $reportUmdNum;
         global $testNameList;
         global $db_mis_table_name_string001;
         global $resultIDList;
@@ -2065,8 +2065,8 @@ class CGenReport
         
         $db = $_db;
         
-        $subTestNumList = array();
-        $subTestNumMap = array();
+//        $subTestNumList = array();
+//        $subTestNumMap = array();
         
         $tmpTestCaseList = array();
         for ($i = 0; $i < count($testNameList); $i++)
@@ -4319,14 +4319,12 @@ class CGenReport
 	{
         global $returnMsg;
         global $testNameList;
-//        global $subTestUmdDataMaskList;
         global $umdNum;
         global $reportUmdNum;
         global $subTestNumList;
         global $subTestNumMap;
         global $cmpSubTestNumList;
         global $umdOrder;
-        //global $validUmdNum;
         global $resultUmdOrder;
         global $umdNameList;
         global $resultIDList;
@@ -4380,8 +4378,6 @@ class CGenReport
                 $tmpAverageDataCode = "";
                 $tmpAverageDataCode2 = "";
                 
-                //$graphDataColumnNum = intval($dataColumnNum / 3);
-                
                 $isFirstColumn = true;
                 for ($i = 0; $i < $reportUmdNum; $i++)
                 {
@@ -4402,34 +4398,12 @@ class CGenReport
 
                     if ($isFirstColumn)
                     {
-                        //$tmpAverageDataCode = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $colMachineNum + 1) . 
-                        //                      "\" ss:StyleID=\"Default\"/>\n";
                         $tmpAverageDataCode = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1) . 
                                               "\" ss:StyleID=\"Default\"/>\n";
-
-                                               
-                        //for ($j = 1; $j < $colMachineNum; $j++)
-                        //{
-                        //    $tmpAverageDataCode2 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
-                        //                            $colCardNameList[$j - 1] . "/" . $colCardNameList[$j] . "</Data></Cell>\n";
-                        //}
-                                              
                         $isFirstColumn = false;
                     }
                     else
                     {
-                                               
-                        //for ($j = 1; $j < $colMachineNum; $j++)
-                        //{
-                        //    $tmpAverageDataCode2 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
-                        //                            $colCardNameList[$j - 1] . "/" . $colCardNameList[$j] . "</Data></Cell>\n";
-                        //}
-                        
-                        //for ($j = 1; $j < $colMachineNum; $j++)
-                        //{
-                        //    $tmpAverageDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
-                        //                           $colCardNameList[0] . "/" . $colCardNameList[$j] . "</Data></Cell>\n";
-                        //}
                     }
                     for ($j = 1; $j < $colMachineNum; $j++)
                     {
@@ -4437,8 +4411,6 @@ class CGenReport
                                                $colCardNameList[0] . "/" . $colCardNameList[$j] . "</Data></Cell>\n";
                     }
                 }
-
-                //$t1 = $tmpAverageDataCode . $tmpAverageDataCode2;
                 $t1 = $tmpAverageDataCode;
             }
             else
@@ -4459,9 +4431,6 @@ class CGenReport
                     }
                     if ($isFirstColumn)
                     {
-                        //$tmpAverageDataCode = " <Cell ss:Index=\"" . 
-                        //                      ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum + 1) . 
-                        //                      "\" ss:StyleID=\"Default\"/>\n";
                         $tmpAverageDataCode = " <Cell ss:Index=\"" . 
                                               ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1) . 
                                               "\" ss:StyleID=\"Default\"/>\n";
@@ -4470,12 +4439,6 @@ class CGenReport
                     }
                     else
                     {
-                        //$tmpAverageDataCode2 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . $tmpReportUmdInfo[$i - 1] . "/" . ($tmpReportUmdInfo[$i]) . 
-                        //                       "</Data></Cell>\n";
-                        
-                        //$tmpAverageDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . 
-                        //                       $tmpReportUmdInfo[$i] . "/" . ($tmpReportUmdInfo[$i - 1]) . 
-                        //                       "</Data></Cell>\n";
                     }
                     if ($columnIndex == ($graphDataColumnNum - 1))
                     {
@@ -4491,19 +4454,10 @@ class CGenReport
                     }
                     $columnIndex++;
                 }
-                
-                //$t1 = $tmpAverageDataCode . $tmpAverageDataCode2;
                 $t1 = $tmpAverageDataCode;
             }
             array_push($graphCells, $t1);
-            
-//            $returnMsg["testNameList"] = $testNameList;
-//            $returnMsg["subTestNumList"] = $subTestNumList;
             $n1 = -1;
-            
-//            $returnMsg["subTestNumList"] = $subTestNumList;
-//            $returnMsg["subTestNumMap"] = $subTestNumMap;
-//            $returnMsg["cmpSubTestNumList"] = $cmpSubTestNumList;
             
             for ($i = 0; $i < count($testNameList); $i++)
             {
@@ -4550,13 +4504,6 @@ class CGenReport
                     $tmpColumnNum = 0;
                     for ($k = 0; $k < $reportUmdNum; $k++)
                     {
-                        //if (($resultUmdOrder[$k] == -1) ||
-                        //    ($resultUmdOrder[$reportUmdNum + $k] == -1))
-                        //{
-                        //    // absent api
-                        //    continue;
-                        //}
-                        
                         $tmpSkip = false;
                         for ($j = 0; $j < $colMachineNum; $j++)
                         {
@@ -4570,52 +4517,8 @@ class CGenReport
                         {
                             continue;
                         }
-                        
-                        //$tmpIndexCode = "";
-                        //if ($isFirstColumn)
-                        //{
-                        //    //$tmpIndexCode = "ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + 2 + $graphDataColumnNum) . "\"";
-                        //    $isFirstColumn = false;
-                        //    
-                        //                    
-                        //    $tmpValHas[$k] = " <Cell ss:StyleID=\"Default\" " .
-                        //                     "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) .
-                        //                     ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) . 
-                        //                     ")\">" .
-                        //                     "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                        //}
-                        //else
-                        //{
-                        //                    
-                        //    $tmpValHas[$k] = " <Cell ss:StyleID=\"Default\" " .
-                        //                     "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) .
-                        //                     ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) . 
-                        //                     ")+RC" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $colMachineNum + 2) . "\">" .
-                        //                     "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                        //                    
-                        //    $tmpValHas2[$k] = " <Cell ss:StyleID=\"Default\" " .
-                        //                      "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) .
-                        //                      ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) . 
-                        //                      ")\">" .
-                        //                      "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                        //}
-                                        
-                                                         
-                        //for ($j = 1; $j < $colMachineNum; $j++)
                         for ($j = 0; $j < ($colMachineNum - 1); $j++)
                         {
-                            //$tmpValHas[$reportUmdNum * $j + $k] = " <Cell ss:StyleID=\"Default\" " .
-                            //                                 "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $j +  $tmpColumnNum) .
-                            //                                 ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $j + $tmpColumnNum) . 
-                            //                                 ")+RC" . (($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $colMachineNum + 2)) . "\">" .
-                            //                                 "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                                                             
-                            //$tmpValHas2[$reportUmdNum * $j + $k] = " <Cell ss:StyleID=\"Default\" " .
-                            //                                 "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $j +  $tmpColumnNum) .
-                            //                                 ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $j + $tmpColumnNum) . 
-                            //                                 ")\">" .
-                            //                                 "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                            
                             $tmpValHas[$colMachineNum * $k + $j] = " <Cell ss:StyleID=\"Default\" " .
                                                              "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . 
                                                              ($subjectNameFilterNumMax + 3 + ($colMachineNum * 2 - 1) * $k + $j * 2 + 1) .
@@ -4635,14 +4538,8 @@ class CGenReport
                         
                         for ($j = 0; $j < $colMachineNum; $j++)
                         {
-                            //$tmpVal[$reportUmdNum * $k + $j] = "";
-                            //$tmpVal[$colMachineNum * $k + $j] = "";
-                            
-                            //if ($resultUmdOrder[$reportUmdNum * $k + $j] != -1)
                             if ($resultUmdOrder[$reportUmdNum * $j + $k] != -1)
                             {
-                                //$tmpVal[$reportUmdNum * $k + $j] = $tmpValHas[$reportUmdNum * $k + $j];
-                                //$tmpVal2[$reportUmdNum * $k + $j] = $tmpValHas2[$reportUmdNum * $k + $j];
                                 $tmpVal[$colMachineNum * $k + $j] = $tmpValHas[$colMachineNum * $k + $j];
                             }
                         }
@@ -4650,7 +4547,6 @@ class CGenReport
                     
                     $returnMsg["tmpValHas_2"] = $tmpVal;
                         
-                    //$t1 = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $colMachineNum + 1) . 
                     $t1 = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1) . 
                           "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
                           $testNameList[$i] . "</Data></Cell>\n";
@@ -4659,27 +4555,11 @@ class CGenReport
                     
                     for ($k = 0; $k < $reportUmdNum; $k++)
                     {
-                        //$t1 .= $tmpVal[$k];
-                        //$t1 .= $tmpVal[$reportUmdNum + $k];
-                        
                         for ($j = 0; $j < $colMachineNum; $j++)
                         {
-                            //$t1 .= $tmpVal[$reportUmdNum * $j + $k];
                             $t1 .= $tmpVal[$colMachineNum * $k + $j];
                         }
                     }
-                          
-                    //for ($k = 0; $k < $reportUmdNum; $k++)
-                    //{
-                    //    //$t1 .= $tmpVal2[$k];
-                    //    //$t1 .= $tmpVal2[$reportUmdNum + $k];
-                    //    
-                    //    for ($j = 0; $j < $colMachineNum; $j++)
-                    //    {
-                    //        $t1 .= $tmpVal2[$reportUmdNum * $j + $k];
-                    //    }
-                    //}
-
                 }
                 else
                 {
@@ -4883,29 +4763,6 @@ class CGenReport
             $tmpCode3 = "<Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n";
                         
             $tmpCode4 = "<Cell ss:StyleID=\"s" . ($startStyleID + 10) . "\"><Data ss:Type=\"String\">Variation</Data></Cell>\n";
-                        
-//            $ordinalNumberList = array("1st",
-//                                       "2nd",
-//                                       "3rd",
-//                                       "4th",
-//                                       "5th",
-//                                       "6th",
-//                                       "7th",
-//                                       "8th",
-//                                       "9th",
-//                                       "10th",
-//                                       "11th",
-//                                       "12th",
-//                                       "13th",
-//                                       "14th",
-//                                       "15th");
-//
-//            $ordinalNameList = array("Current",
-//                                     "Previous1",
-//                                     "Previous2",
-//                                     "Previous3",
-//                                     "Previous4",
-//                                     "Previous5");
                                        
             $tmpCode5 = "";
             $tmpCode6 = "";
