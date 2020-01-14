@@ -514,7 +514,7 @@ else
                                                     $tmpSysName, $cmpSysName);
     $graphCells = $returnSet["graphCells"];
     
-    $returnSet = $xmlWriter->checkStartTest($db, $fileHandle, $tempFileHandle,
+    $returnSet = $xmlWriter->checkStartTest($fileHandle, $tempFileHandle,
                                             $nextSubTestPos, $firstSubTestPos, $curTestPos, 
                                             $isCompStandard, $cmpMachineID,
                                             $lineNum, $sheetLinePos, $tempLineNum);

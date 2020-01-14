@@ -4597,40 +4597,28 @@ class CGenReport
         return $returnSet;
     }
     
-	public function checkStartTest($_db, $_fileHandle, $_tempFileHandle,
+	public function checkStartTest($_fileHandle, $_tempFileHandle,
                                    $_nextSubTestPos, $_firstSubTestPos, $_curTestPos, 
                                    $_isCompStandard, $_cmpMachineID,
                                    $_lineNum, $_sheetLinePos, $_tempLineNum)
 	{
-//        global $returnMsg;
         global $startStyleID;
         global $graphCells;
         global $unitNameList;
         global $testNameList;
-//        global $subjectNameList;
         global $subjectNameFilterNumMax;
         global $subjectFilterNameList;
         global $startGraphDataLinePos;
         global $dataColumnNum;
         global $graphDataColumnNum;
-//        global $crossType;
-        //global $resultNoiseNum;
         global $historyBatchMaxNum;
-//        global $tableName01;
-//        global $resultIDList;
-//        global $resultPos;
         global $batchDateTextList;
         global $swtMicrobenchDocsTestNameUrl;
         global $tmpFileName1;
         global $reportTemplateDir;
         global $subTestNumList;
-//        global $colMachineIDList;
-//        global $colStartResultIDPosList;
         global $colMachineNum;
-//        global $colCardNameList;
-//        global $colSysNameList;
 
-//        $db = $_db;
         $lineNum = $_lineNum;
         $sheetLinePos = $_sheetLinePos;
         $tempLineNum = $_tempLineNum;
