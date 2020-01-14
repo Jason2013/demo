@@ -3678,31 +3678,17 @@ class CGenReport
 	{
         global $returnMsg;
         global $tempFileStartSheetLineNum;
-        global $startStyleID;
-        global $allStylesEndTag;
-        global $appendStyleList;
-        global $changeListNumList;
-        global $resultIDList;
+
         global $reportTemplateDir;
-        global $umdNameList;
         global $resultUmdOrder;
-        //global $validUmdNum;
         global $reportUmdNum;
-        global $driverNameList;
         global $testNameList;
-        global $subTestNumList;
         global $subjectNameFilterNumMax;
-        global $checkNeedCreateReportFile;
         global $swtReportInfo;
         global $swtReportUmdInfo;
-        global $crossType;
-        global $curResultTime;
-        global $cmpBatchTime;
         global $curMachineName;
         global $cmpMachineName;
         global $tmpFileName1;
-        global $colMachineIDList;
-        global $colStartResultIDPosList;
         global $colMachineNum;
         global $colCardNameList;
         global $colSysNameList;
@@ -3757,44 +3743,13 @@ class CGenReport
             
             // create tmp file
             $tempFileHandle = fopen(__DIR__ . "/" . $_tmpFileName, "w+");
-            $xmlSection = "";
-            $t1 = "";
-            //if (($_cmpMachineID != -1) ||
-            //    ($crossType == 2))
             if ($_cmpMachineID != -1)
             {
                 // if comparison with other card
                 // $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet002A1.txt");
                 //$xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet002A2a.txt");
                 // this sheet max 34 columns
-                
-                $curCardTitle = $_curCardName;
-                $cmpCardTitle = $_cmpCardName;
-                if ($_curCardName == $_cmpCardName)
-                {
-                    $curCardTitle .= "&#10;" . $_tmpSysName;
-                    $cmpCardTitle .= "&#10;" . $_cmpSysName;
-                }
-                
-                $curCardTitle2 = $_curCardName . " - " . $_tmpSysName;
-                $cmpCardTitle2 = $_cmpCardName . " - " . $_cmpSysName;
-                
-                $curCardTitle3 = $_curCardName;
-                $cmpCardTitle3 = $_cmpCardName;
-                
-                if ((strlen($curMachineName) > 0) &&
-                    (strlen($cmpMachineName) > 0) &&
-                    (strcmp($curMachineName, $cmpMachineName) != 0))
-                {
-                    $curCardTitle = $curMachineName;
-                    $cmpCardTitle = $cmpMachineName;
-                    
-                    $curCardTitle2 = $curMachineName;
-                    $cmpCardTitle2 = $cmpMachineName;
-                    
-                    $curCardTitle3 = $curMachineName;
-                    $cmpCardTitle3 = $cmpMachineName;
-                }
+
                 
                 $cardTitleList = $colCardNameList;
                 $hasRepeat = false;
@@ -3838,13 +3793,6 @@ class CGenReport
                 $curFirstRowAPIColumnID = 0;
                 for ($i = 0; $i < $reportUmdNum; $i++)
                 {
-                    //if (($resultUmdOrder[$i] == -1) ||
-                    //    ($resultUmdOrder[$reportUmdNum + $i] == -1))
-                    //{
-                    //    // absent api
-                    //    continue;
-                    //}
-                    
                     $tmpSkip = false;
                     for ($j = 0; $j < $colMachineNum; $j++)
                     {
@@ -3876,13 +3824,6 @@ class CGenReport
                 $curFirstRowAPIColumnID = 0;
                 for ($i = 0; $i < $reportUmdNum; $i++)
                 {
-                    //if (($resultUmdOrder[$i] == -1) ||
-                    //    ($resultUmdOrder[$reportUmdNum + $i] == -1))
-                    //{
-                    //    // absent api
-                    //    continue;
-                    //}
-                    
                     $tmpSkip = false;
                     for ($j = 0; $j < $colMachineNum; $j++)
                     {
@@ -3896,11 +3837,7 @@ class CGenReport
                     {
                         continue;
                     }
-                    
-                    //$t1 .= "    <Cell ss:StyleID=\"s87\"><Data ss:Type=\"String\">" . ($curCardTitle) . "</Data></Cell>" .
-                    //       "    <Cell ss:StyleID=\"s87\"><Data ss:Type=\"String\">" . ($cmpCardTitle3 . "&#10;vs&#10;" . $curCardTitle3) . "</Data></Cell>" .
-                    //       "    <Cell ss:StyleID=\"s87\"><Data ss:Type=\"String\">" . ($cmpCardTitle) . "</Data></Cell>";
-                           
+
                     for ($j = 0; $j < $colMachineNum; $j++)
                     {
                         if ($j == 0)
@@ -3928,13 +3865,6 @@ class CGenReport
                 $curFirstRowAPIColumnID = 0;
                 for ($i = 0; $i < $reportUmdNum; $i++)
                 {
-                    //if (($resultUmdOrder[$i] == -1) ||
-                    //    ($resultUmdOrder[$reportUmdNum + $i] == -1))
-                    //{
-                    //    // absent api
-                    //    continue;
-                    //}
-                    
                     $tmpSkip = false;
                     for ($j = 0; $j < $colMachineNum; $j++)
                     {
@@ -3948,11 +3878,7 @@ class CGenReport
                     {
                         continue;
                     }
-                    
-                    //$t1 .= "    <Cell ss:StyleID=\"s88\" ><Data ss:Type=\"String\">" . ($tmpReportInfo[$i]) . "</Data></Cell>" .
-                    //       "    <Cell ss:StyleID=\"s88\"/>" .
-                    //       "    <Cell ss:StyleID=\"s88\"/>";
-                           
+
                     for ($j = 0; $j < $colMachineNum; $j++)
                     {
                         if ($j == 0)
@@ -3973,7 +3899,6 @@ class CGenReport
             }
             else
             {
-                //$xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet002Aa.txt");
                 // this sheet max 21 columns
                 
                 $reportAPIComparisonHead = " <Worksheet ss:Name=\"Cross-API_Comparison\">" .
@@ -4177,7 +4102,6 @@ class CGenReport
             }
         }
         $returnSet = array();
-//        $returnSet["tempFileLineNumPos"] = $tempFileLineNumPos;
         $returnSet["tempFileLineNumPos"] = $tempFileLineNumPos;
         return $returnSet;
     }
