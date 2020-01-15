@@ -35,6 +35,32 @@ final class CGenReportTest extends TestCase
         unlink($target_file);
     }
 
+    public function testCreateXmlFile()
+    {
+        global $startStyleID;
+        global $allStylesEndTag;
+        global $appendStyleList;
+        global $reportTemplateDir;
+
+        $report = new CGenReport();
+
+        $returnSet = $report->getXMLCodePiece();
+        $appendStyleList = $returnSet["appendStyleList"];
+        $allStylesEndTag = $returnSet["allStylesEndTag"];
+
+        $expected_file = __DIR__ . "/data/XmlFile.xml";
+        $target_file = __DIR__ . "/data/XmlFile.xml.1";
+
+        $startStyleID = 117;
+
+        $reportTemplateDir = "../../template/temple/fileSections";
+
+        CGenReport::createXmlFile($target_file);
+
+        $this->assertTrue(self::FilesAreEqual($expected_file, $target_file));
+        unlink($target_file);
+    }
+
     public function testCheckNeedCreateReportFile()
     {
         global $returnMsg;
