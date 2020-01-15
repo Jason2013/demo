@@ -3341,21 +3341,10 @@ class CGenReport
                                        "   <FrozenNoSplit/>\n" .
                                        "   <SplitHorizontal>4</SplitHorizontal>\n" .
                                        "   <TopRowBottomPane>4</TopRowBottomPane>\n";
-                                       //"   <SplitVertical>" . $n2 . "</SplitVertical>\n".
-                                       //"   <LeftColumnRightPane>" . $n2 . "</LeftColumnRightPane>\n";
-                    
-                    
+
                     $xmlSection = sprintf($xmlSection,
                                           $freezePanesCode,
                                           $t1);
-                                          
-                    $returnMsg["tmp_ConditionalFormatting0"] = $xmlSection;
-                    $returnMsg["tmp_cmpMachineID0"] = $cmpMachineID;
-                    
-                    //$xmlSection = sprintf($xmlSection,
-                    //                      $subjectNameFilterNumMax + 4, $subjectNameFilterNumMax + 4,
-                    //                      $subjectNameFilterNumMax + 7, $subjectNameFilterNumMax + 7,
-                    //                      $subjectNameFilterNumMax + 10, $subjectNameFilterNumMax + 10);
                 }
                 else
                 {
@@ -3383,14 +3372,6 @@ class CGenReport
                     $xmlSection = sprintf($xmlSection,
                                           $freezePanesCode,
                                           $t1);
-                                          
-                    $returnMsg["tmp_ConditionalFormatting"] = $xmlSection;
-                    $returnMsg["tmp_cmpMachineID"] = $cmpMachineID;
-                    
-                    //$xmlSection = sprintf($xmlSection,
-                    //                      $subjectNameFilterNumMax + 4, $subjectNameFilterNumMax + 4,
-                    //                      $subjectNameFilterNumMax + 6, $subjectNameFilterNumMax + 6,
-                    //                      $subjectNameFilterNumMax + 8, $subjectNameFilterNumMax + 8);
                 }
                 if (strlen($xmlSection) == 0)
                 {
