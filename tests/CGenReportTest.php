@@ -28,10 +28,11 @@ final class CGenReportTest extends TestCase
 
         $startStyleID = 117;
         $file = fopen($target_file, "w");
-        $report->writeAdditionalStyles($file);
+        fwrite($file, $report->additionalStylesWithEndTag());
         fclose($file);
 
         $this->assertTrue(self::FilesAreEqual($expected_file, $target_file));
+        unlink($target_file);
     }
 
     public function testCheckNeedCreateReportFile()
