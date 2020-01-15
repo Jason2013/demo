@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../phplibs/generalLibs/utils.php';
+
 use PHPUnit\Framework\TestCase;
 
 final class CGenReportTest extends TestCase
@@ -274,5 +276,41 @@ final class CGenReportTest extends TestCase
 
         $json = file_get_contents(__DIR__ . '/data/getBatchInfo_ResultSet.json');
         $this->assertEquals($json, json_encode($resultSet));
+    }
+
+    public function testSaveAndLoadVars()
+    {
+        global $db_server;
+        global $db_dbname;
+        global $db_username;
+        global $db_password;
+        $db_server = "Srdcvmysqldp1";
+        $db_username = 1;
+        $db_password = ["davychen7$", "xx"];
+        $db_dbname = ["db_gfxbench", ["yy", "zz"]];
+
+        $filename = __DIR__ . '/data/saveAndLoadVars.txt';
+
+        $args = [$db_server, $db_username, $db_password, $db_dbname];
+        $globals = ["db_server", "db_dbname", "db_username", "db_password"];
+        $savedGlobals = [];
+        foreach ($globals as $key) {
+            $savedGlobals[$key] = $GLOBALS[$key];
+        }
+
+        Utilities\saveFuncVars($filename, $args, $globals);
+
+        $db_server = "";
+        $db_dbname = "";
+        $db_username = "";
+        $db_password = "";
+
+        $resultSet = Utilities\loadFuncVars($filename);
+
+        $this->assertEquals($args, $resultSet);
+
+        foreach ($globals as $key) {
+            $this->assertEquals($GLOBALS[$key], $savedGlobals[$key]);
+        }
     }
 }
