@@ -392,15 +392,15 @@ class CGenReport
         global $allStylesEndTag;
         global $appendStyleList;
         
-        $t3 = "";
-        $n1 = $startStyleID;
+        $styles = "";
+        $styleID = $startStyleID;
         foreach ($appendStyleList as $tmpStyle)
         {
-            $t3 .= sprintf($tmpStyle, $n1);
-            $n1++;
+            $styles .= sprintf($tmpStyle, $styleID);
+            $styleID++;
         }
 
-        fwrite($_fileHandle, $t3);
+        fwrite($_fileHandle, $styles);
         fwrite($_fileHandle, $allStylesEndTag);
     }
 
