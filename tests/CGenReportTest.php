@@ -11,6 +11,29 @@ final class CGenReportTest extends TestCase
         return $str1 == $str2;
     }
 
+    public function testAdditionalStyles()
+    {
+        global $startStyleID;
+        global $allStylesEndTag;
+        global $appendStyleList;
+
+        $report = new CGenReport();
+
+        $returnSet = $report->getXMLCodePiece();
+        $appendStyleList = $returnSet["appendStyleList"];
+        $allStylesEndTag = $returnSet["allStylesEndTag"];
+
+        $expected_file = __DIR__ . "/data/additionalStylesWithEndTag.txt";
+        $target_file = __DIR__ . "/data/additionalStylesWithEndTag.1.txt";
+
+        $startStyleID = 117;
+        $file = fopen($target_file, "w");
+        $report->writeAdditionalStyles($file);
+        fclose($file);
+
+        $this->assertTrue(self::FilesAreEqual($expected_file, $target_file));
+    }
+
     public function testCheckNeedCreateReportFile()
     {
         global $returnMsg;
