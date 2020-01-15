@@ -3705,7 +3705,6 @@ class CGenReport
         global $returnMsg;
         global $tempFileStartSheetLineNum;
 
-        global $reportTemplateDir;
         global $resultUmdOrder;
         global $reportUmdNum;
         global $testNameList;
@@ -3720,42 +3719,12 @@ class CGenReport
         $tempFileLineNumPos = $_tempFileLineNumPos;
         if (!file_exists(__DIR__ . "/" . $_xmlFileName))
         {
-            // copy file template to modify
-            $xmlSection = file_get_contents(__DIR__ . "/" . $reportTemplateDir . "/sectionHead001.txt");
-            
-            if (strlen($xmlSection) == 0)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "template file missing, line: " . __LINE__;
-                echo json_encode($returnMsg);
-                return null;
-            }
+            self::createXmlFile(__DIR__ . "/" . $_xmlFileName);
 
-            $fileHandle = fopen(__DIR__ . "/" .$_xmlFileName, "w+");
-            
-            // append styles
-            fseek($fileHandle, 0, SEEK_SET);
-            fwrite($fileHandle, $xmlSection);
-            
-            // write additional styles
-            $this->writeAdditionalStyles($fileHandle);
-            
-            fclose($fileHandle);
-            
             // write flatdata head
-            if (file_exists(__DIR__ . "/" . $tmpFileName1) == false)
+            if (!file_exists(__DIR__ . "/" . $tmpFileName1))
             {
-                $templateFileName0 = $reportTemplateDir . "/sectionHead001.txt";
-                
-                $fileHandle = fopen(__DIR__ . "/" . $tmpFileName1, "w");
-                
-                // report head
-                $t1 = file_get_contents(__DIR__ . "/" . $templateFileName0);
-                fwrite($fileHandle, $t1);
-                // style end tag
-                $this->writeAdditionalStyles($fileHandle);
-                
-                fclose($fileHandle);
+                self::createXmlFile(__DIR__ . "/" . $tmpFileName1);
             }
             
             // feed report head info
