@@ -386,7 +386,7 @@ class CGenReport
         return $returnSet;
     }
 
-    public function additionalStyles()
+    public static function additionalStyles()
     {
         global $startStyleID;
         global $appendStyleList;
@@ -403,10 +403,22 @@ class CGenReport
         return implode($styles);
     }
 
-    public function additionalStylesWithEndTag()
+    public static function additionalStylesWithEndTag()
     {
         global $allStylesEndTag;
-        return $this->additionalStyles() . $allStylesEndTag;
+        return self::additionalStyles() . $allStylesEndTag;
+    }
+
+    public static function createXmlFile($filename)
+    {
+        global $reportTemplateDir;
+
+        // copy file template to modify
+        $xmlSection = file_get_contents(__DIR__ . "/" . $reportTemplateDir . "/sectionHead001.txt");
+        $fileHandle = fopen($filename, "w");
+        fwrite($fileHandle, $xmlSection);
+        fwrite($fileHandle, self::additionalStylesWithEndTag());
+        fclose($fileHandle);
     }
 
 	public function writeAdditionalStyles($_fileHandle)
