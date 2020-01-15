@@ -24,6 +24,17 @@ class CGenReport
 	{
         //$this->clearResult();
     }
+
+    private static function setCompileSuccessMsg($msg)
+    {
+        global $returnMsg;
+        global $batchID;
+
+        $returnMsg["errorCode"] = 1;
+        $returnMsg["compileFinished"] = 1;
+        $returnMsg["errorMsg"] = $msg;
+        $returnMsg["batchID"] = $batchID;
+    }
     
 	public function getXMLCodePiece()
 	{
@@ -1036,9 +1047,7 @@ class CGenReport
         
         if (strlen($checkedMachineIDListString) == 0)
         {
-            $returnMsg["errorCode"] = 1;
-            $returnMsg["compileFinished"] = 1;
-            $returnMsg["errorMsg"] = "no machine selected";
+            self::setCompileSuccessMsg("no machine selected");
             echo json_encode($returnMsg);
             return null;
         }
@@ -3495,9 +3504,7 @@ class CGenReport
         if ($b1 == true)
         {
             // skip report
-            $returnMsg["errorCode"] = 1;
-            $returnMsg["compileFinished"] = 1;
-            $returnMsg["errorMsg"] = "report finished";
+            self::setCompileSuccessMsg("report finished");
             echo json_encode($returnMsg);
             return true;
         }
@@ -3561,9 +3568,7 @@ class CGenReport
             }
             //*/
             
-            $returnMsg["errorCode"] = 1;
-            $returnMsg["compileFinished"] = 1;
-            $returnMsg["errorMsg"] = "report finished";
+            self::setCompileSuccessMsg("report finished");
             echo json_encode($returnMsg);
             return null;
         }
