@@ -385,7 +385,30 @@ class CGenReport
         $returnSet["allSheetsEndTag"] = $allSheetsEndTag;
         return $returnSet;
     }
-    
+
+    public function additionalStyles()
+    {
+        global $startStyleID;
+        global $appendStyleList;
+
+        $styles = array();
+        $styleID = $startStyleID;
+
+        foreach ($appendStyleList as $styleFormat)
+        {
+            array_push($styles, sprintf($styleFormat, $styleID));
+            $styleID++;
+        }
+
+        return implode($styles);
+    }
+
+    public function additionalStylesWithEndTag()
+    {
+        global $allStylesEndTag;
+        return $this->additionalStyles() . $allStylesEndTag;
+    }
+
 	public function writeAdditionalStyles($_fileHandle)
 	{
         global $startStyleID;
