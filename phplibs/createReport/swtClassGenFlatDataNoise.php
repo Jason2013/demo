@@ -288,6 +288,7 @@ class CGenReportFlatData
         
         if (file_exists($tmpFileName))
         {
+            copy($tmpFileName, $tmpFileName . '.org');
             unlink($tmpFileName);
         }
 

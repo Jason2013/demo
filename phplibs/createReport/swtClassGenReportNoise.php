@@ -3190,6 +3190,7 @@ class CGenReport
             $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet004B.txt");
             fwrite($_fileHandle, $xmlSection);
             
+            copy($_tmpJsonFileName, $_tmpJsonFileName . '.org');
             unlink($_tmpJsonFileName);
             
             // generate alarm cases INI files for Rocky
@@ -3444,6 +3445,7 @@ class CGenReport
                 $n1 = strlen($_tmpFileName1) - strlen(".tmp1");
                 $t1 = substr($_tmpFileName1, 0, $n1);
                 $t1 .= "(FlatData).xml";
+                copy($_tmpFileName1, $_tmpFileName1 . '.org');
                 rename($_tmpFileName1, $t1);
             }
 
@@ -3538,23 +3540,27 @@ class CGenReport
             foreach ($oldReportList as $tmpPath)
             {
                 $newPath = substr($tmpPath, 0, strlen($tmpPath) - strlen("tmp2")) . "xml";
+                copy($tmpPath, $tmpPath . '.org');
                 rename($tmpPath, $newPath);
             }
             // clear tmp files
             $oldReportList = glob($_reportFolder . "/*.tmp");
             foreach ($oldReportList as $tmpPath)
             {
+                copy($tmpPath, $tmpPath . '.org');
                 unlink($tmpPath);
             }
             $oldReportList = glob($_reportFolder . "/*.tmp1");
             foreach ($oldReportList as $tmpPath)
             {
+                copy($tmpPath, $tmpPath . '.org');
                 unlink($tmpPath);
             }
             // del runlog.txt list json
             $tmpJsonPath = $reportFolder . "/" . $swtTempReportConfigJsonName2;
             if (file_exists($tmpJsonPath))
             {
+                copy($tmpJsonPath, $tmpJsonPath . '.org');
                 unlink($tmpJsonPath);
             }
             
