@@ -1,11 +1,15 @@
 <?php
 
+use Utilities\ReportCache;
+
 include_once "../generalLibs/dopdo.php";
 include_once "../configuration/swtMISConst.php";
 include_once "../generalLibs/code01.php";
 include_once "swtClassGenReportNoise.php";
 include_once "../configuration/swtConfig.php";
 include_once __DIR__ . "/../userManage/swtUserManager.php";
+include_once __DIR__ . "/../generalLibs/reportcache.php";
+
 
 $xmlWriter = new CGenReport();
 // get xml code template pieces
@@ -39,6 +43,9 @@ $crossType = intval($_POST["crossType"]);
 $returnSet = $xmlWriter->prepareReportFolder($reportType, $batchID, $curReportFolder);
 $reportFolder = $returnSet["reportFolder"];
 $curReportFolder = $returnSet["curReportFolder"];
+
+$cacheFileName = __DIR__ . '/' . $reportFolder . '/CompileReportAdditionNoise.txt';
+$cache = new ReportCache($cacheFileName);
 
 // default values
 $startStyleID = $swtStartStyleID;
