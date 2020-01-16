@@ -298,7 +298,7 @@ final class CGenReportTest extends TestCase
             $savedGlobals[$key] = $GLOBALS[$key];
         }
 
-        Utilities\saveFuncVars($filename, $args, $globals);
+        Utilities\saveFuncVars($filename, $args);
 
         $db_server = "";
         $db_dbname = "";

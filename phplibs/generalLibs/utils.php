@@ -1,14 +1,17 @@
 <?php
 namespace Utilities {
 
-    function saveFuncVars($filename, $args, $globals)
+    function saveFuncVars($filename, $args)
     {
         $values = Array();
         $values["args"] = $args;
 
         $global_vars = Array();
-        foreach ($globals as $gvar_name) {
-            $global_vars[$gvar_name] = $GLOBALS[$gvar_name];
+        foreach ($GLOBALS as $key => $val) {
+            if ($key == "GLOBALS") {
+                continue;
+            }
+            $global_vars[$key] = $GLOBALS[$key];
         }
         $values["globals"] = $global_vars;
 
@@ -20,8 +23,8 @@ namespace Utilities {
         $str = file_get_contents($filename);
         $values = unserialize($str);
 
-        foreach ($values["globals"] as $key => $value) {
-            $GLOBALS[$key] = $value;
+        foreach ($values["globals"] as $key => $val){
+            $GLOBALS[$key] = $val;
         }
 
         return $values["args"];
