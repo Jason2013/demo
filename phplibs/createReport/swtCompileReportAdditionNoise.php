@@ -132,7 +132,14 @@ if ($returnSet == false)
     return;
 }
 
-$returnSet = $xmlWriter->getTestTitleInfo($db, $batchID);
+$cacheName = "getTestTitleInfo";
+$cacheKey = $batchID;
+if ($cache->hasValue($cacheName, $cacheKey)) {
+    $returnSet = $cache->getValue($cacheName, $cacheKey);
+} else {
+    $returnSet = $xmlWriter->getTestTitleInfo($db, $batchID);
+    $cache->setValue($cacheName, $returnSet, $cacheKey);
+}
 if ($returnSet === null)
 {
     return;
