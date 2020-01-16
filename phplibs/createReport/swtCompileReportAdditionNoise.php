@@ -179,7 +179,14 @@ $selectedSysIDList = $returnSet["selectedSysIDList"];
 $testName = $testNameList[$curTestPos];
 $tableName01 = $db_mis_table_name_string001 . $testName;
 
-$returnSet = $xmlWriter->getBatchInfo($db, $batchIDList);
+$cacheName = "getBatchInfo";
+$cacheKey = [$selectedCardIDList, $selectedSysIDList, $umdNameList, $batchIDList];
+if ($cache->hasValue($cacheName, $cacheKey)) {
+    $returnSet = $cache->getValue($cacheName, $cacheKey);
+} else {
+    $returnSet = $xmlWriter->getBatchInfo($db, $batchIDList);
+    $cache->setValue($cacheName, $returnSet, $cacheKey);
+}
 if ($returnSet === null)
 {
     return;
@@ -364,7 +371,12 @@ $cmpSubTestNumList = $returnSet["cmpSubTestNumList"];
 // skip these test in report compare sheet and graph
 $skipTestNameList = $returnSet["skipTestNameList"];
 
-$standardUmdTestCaseNumList = $xmlWriter->getStandardUmdTestCaseNumList($db);
+if (!isset($reportCache["standardUmdTestCaseNumList"])) {
+    $standardUmdTestCaseNumList = $xmlWriter->getStandardUmdTestCaseNumList($db);
+    $reportCache["standardUmdTestCaseNumList"] = $standardUmdTestCaseNumList;
+} else {
+    $standardUmdTestCaseNumList = $reportCache["standardUmdTestCaseNumList"];
+}
 
 // generate seperate cards report
 if (($subTestNum == 0) ||
