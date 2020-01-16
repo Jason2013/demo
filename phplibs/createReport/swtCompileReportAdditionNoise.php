@@ -99,7 +99,7 @@ if ($userChecker->isManager()) {
 
 $cacheKey = [$historyBatchMaxNum, $batchID, $userInfo];
 if ($cache->hasValue("getBatchID", $cacheKey)) {
-    $returnSet = $cache->hasValue("getBatchID", $cacheKey);
+    $returnSet = $cache->getValue("getBatchID", $cacheKey);
 } else {
     $returnSet = $xmlWriter->getBatchID($db, $batchID, $userInfo);
     $cache->setValue("getBatchID", $returnSet, $cacheKey);
