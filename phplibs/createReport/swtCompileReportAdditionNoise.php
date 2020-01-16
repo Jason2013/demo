@@ -119,7 +119,14 @@ if ($xmlWriter->checkSkipReportGen($reportType, $reportFolder) == true)
 }
 
 // check if batch id valid
-$returnSet = $xmlWriter->checkBatchNum($db, $batchID);
+$cacheName = "checkBatchNum";
+$cacheKey = $batchID;
+if ($cache->hasValue($cacheName, $cacheKey)) {
+    $returnSet = $cache->getValue($cacheName, $cacheKey);
+} else {
+    $returnSet = $xmlWriter->checkBatchNum($db, $batchID);
+    $cache->setValue($cacheName, $returnSet, $cacheKey);
+}
 if ($returnSet == false)
 {
     return;
