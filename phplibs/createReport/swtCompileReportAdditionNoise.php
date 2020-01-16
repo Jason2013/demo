@@ -96,7 +96,14 @@ if ($userChecker->isManager()) {
     $userInfo["isManager"] = false;
     $userInfo["userID"] = $userChecker->getUserID();
 }
-$returnSet = $xmlWriter->getBatchID($db, $batchID, $userInfo);
+
+$cacheKey = [$historyBatchMaxNum, $batchID, $userInfo];
+if ($cache->hasValue("getBatchID", $cacheKey)) {
+    $returnSet = $cache->hasValue("getBatchID", $cacheKey);
+} else {
+    $returnSet = $xmlWriter->getBatchID($db, $batchID, $userInfo);
+    $cache->setValue("getBatchID", $returnSet, $cacheKey);
+}
 if ($returnSet === null)
 {
     return;
