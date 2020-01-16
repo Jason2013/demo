@@ -35,6 +35,11 @@ $curReportFolder = intval($_POST["curReportFolder"]);
 $reportType = intval($_POST["reportType"]);
 $crossType = intval($_POST["crossType"]);
 
+// set up folder for report xml
+$returnSet = $xmlWriter->prepareReportFolder($reportType, $batchID, $curReportFolder);
+$reportFolder = $returnSet["reportFolder"];
+$curReportFolder = $returnSet["curReportFolder"];
+
 // default values
 $startStyleID = $swtStartStyleID;
 $startSheetLineNum = 11;
@@ -92,11 +97,6 @@ if ($returnSet === null)
 $batchID = $returnSet["batchID"];
 $batchIDList = $returnSet["batchIDList"];
 $batchDateTextList = $returnSet["batchDateTextList"];
-
-// set up folder for report xml
-$returnSet = $xmlWriter->prepareReportFolder($reportType, $batchID, $curReportFolder);
-$reportFolder = $returnSet["reportFolder"];
-$curReportFolder = $returnSet["curReportFolder"];
 
 if ($xmlWriter->checkSkipReportGen($reportType, $reportFolder) == true)
 {
