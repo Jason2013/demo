@@ -160,7 +160,14 @@ if ($curTestPos >= count($testNameList))
     return;
 }
 
-$returnSet = $xmlWriter->getSelectedMachineInfo($db, $batchID, $checkedMachineIDListString);
+$cacheName = "getSelectedMachineInfo";
+$cacheKey = [$swtOldCardNameMatchList, $batchID, $checkedMachineIDListString];
+if ($cache->hasValue($cacheName, $cacheKey)) {
+    $returnSet = $cache->getValue($cacheName, $cacheKey);
+} else {
+    $returnSet = $xmlWriter->getSelectedMachineInfo($db, $batchID, $checkedMachineIDListString);
+    $cache->setValue($cacheName, $returnSet, $cacheKey);
+}
 if ($returnSet === null)
 {
     return;
