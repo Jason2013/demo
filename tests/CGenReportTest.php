@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../phplibs/generalLibs/utils.php';
+require_once __DIR__ . '/../phplibs/generalLibs/reportcache.php';
 
 use PHPUnit\Framework\TestCase;
 
@@ -312,5 +313,23 @@ final class CGenReportTest extends TestCase
         foreach ($globals as $key) {
             $this->assertEquals($GLOBALS[$key], $savedGlobals[$key]);
         }
+    }
+
+    public function testReportCache()
+    {
+        $db_server = "Srdcvmysqldp1";
+
+        $filename = __DIR__ . '/data/reportCache.txt';
+
+        $cache = new Utilities\ReportCache($filename);
+
+        $cache->setValue("db_server", $db_server);
+        $this->assertTrue($cache->hasValue("db_server"));
+        $this->assertEquals($db_server, $cache->getValue("db_server"));
+
+        $keys = [1, 2, 3];
+        $cache->setValue("db_server", $db_server, $keys);
+        $this->assertTrue($cache->hasValue("db_server"), $keys);
+        $this->assertEquals($db_server, $cache->getValue("db_server", $keys));
     }
 }
