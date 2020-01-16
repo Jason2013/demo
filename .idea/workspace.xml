@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" description="[GOOD]" line="340" />
-    <bookmark url="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" line="209" mnemonic="A" />
-    <bookmark url="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" line="449" />
-    <bookmark url="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" line="151" mnemonic="C" />
-    <bookmark url="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" line="224" mnemonic="D" />
+    <bookmark url="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" description="[GOOD]" line="396" />
+    <bookmark url="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" line="251" mnemonic="A" />
+    <bookmark url="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" line="505" />
+    <bookmark url="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" line="193" mnemonic="C" />
+    <bookmark url="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" line="273" mnemonic="D" />
     <bookmark url="file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php" line="29" mnemonic="S" />
-    <bookmark url="file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php" line="1072" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php" line="1084" mnemonic="1" />
     <bookmark url="file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php" line="366" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/tests/CGenReportTest.php" line="283" mnemonic="F" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c7bb7f9-b3df-45ee-9a4b-ad84563598c2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php" beforeDir="false" afterPath="$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" beforeDir="false" afterPath="$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/CGenReportTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/CGenReportTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tmpFiles/placeHolder.txt" beforeDir="false" />
     </list>
@@ -31,11 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="11" selection-start-line="11" selection-end-line="14" selection-end-column="49" />
+            <state relative-caret-position="113">
+              <caret line="379" selection-start-line="379" selection-end-line="379" />
             </state>
           </provider>
         </entry>
@@ -44,7 +45,6 @@
         <entry file="file://$PROJECT_DIR$/error31.php">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="1646" selection-start-column="1646" selection-end-column="1646" />
               <folding>
                 <element signature="n#Style#0;n#Format#0;n#Value1#0;n#Qualifier#0;n#Condition#0;n#Range#0;n#ConditionalFormatting#0;n#ProtectScenarios#0;n#ProtectObjects#0;n#NumberofCopies#0;n#VerticalResolution#0;n#PaperSizeIndex#0;n#FitHeight#0;n#FitWidth#0;n#Print#0;n#TopRowBottomPane#0;n#SplitHorizontal#0;n#PageMargins#0;n#Footer#0;n#Header#0;n#PageSetup#0;n#WorksheetOptions#0;n#!!top" expanded="true" />
                 <element signature="n#Style#0;n#Format#0;n#Value2#0;n#Value1#0;n#Qualifier#0;n#Condition#0;n#Value1#0;n#Qualifier#0;n#Condition#0;n#Range#0;n#ConditionalFormatting#0;n#ProtectScenarios#0;n#ProtectObjects#0;n#NumberofCopies#0;n#VerticalResolution#0;n#PaperSizeIndex#0;n#FitHeight#0;n#FitWidth#0;n#Print#0;n#TopRowBottomPane#0;n#SplitHorizontal#0;n#PageMargins#0;n#Footer#0;n#Header#0;n#PageSetup#0;n#WorksheetOptions#0;n#!!top" expanded="true" />
@@ -54,11 +54,65 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/phplibs/generalLibs/utils.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19">
+              <caret line="1" column="19" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/phplibs/generalLibs/reportcache.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="67">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/CGenReportTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="32" selection-start-line="32" selection-end-line="32" />
+            <state relative-caret-position="-228">
+              <caret line="3" column="64" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="64" />
               <folding>
+                <element signature="n#testAdditionalStyles#0;n#CGenReportTest#0;n#!!top" />
+                <element signature="n#testCreateXmlFile#0;n#CGenReportTest#0;n#!!top" />
+                <element signature="n#testCheckNeedCreateReportFile#0;n#CGenReportTest#0;n#!!top" />
+                <element signature="n#testGetBatchInfo#0;n#CGenReportTest#0;n#!!top" />
+                <element signature="n#testSaveAndLoadVars#0;n#CGenReportTest#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtGenTempFlatDataNoise.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="2104" selection-start-line="2104" selection-end-line="2107" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://D:/work/dev/grapher/tests/CGenReportTest.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1197">
+              <caret line="320" selection-start-line="320" selection-end-line="320" />
+              <folding>
+                <element signature="n#testAdditionalStyles#0;n#CGenReportTest#0;n#!!top" />
+                <element signature="n#testCreateXmlFile#0;n#CGenReportTest#0;n#!!top" />
                 <element signature="n#testCheckNeedCreateReportFile#0;n#CGenReportTest#0;n#!!top" />
                 <element signature="n#testGetBatchInfo#0;n#CGenReportTest#0;n#!!top" />
               </folding>
@@ -67,59 +121,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php">
+        <entry file="file://D:/work/dev/grapher/phplibs/generalLibs/reportcache.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="396" column="37" selection-start-line="396" selection-start-column="37" selection-end-line="396" selection-end-column="37" />
+            <state relative-caret-position="361">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="phar://D:/study/php_study/phpunit_phar/phpunit-5.7.27.phar/phpunit/Framework/TestCase.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="1055" lean-forward="true" selection-start-line="1055" selection-end-line="1055" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/phplibs/getInfo/swtGetTestData2.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtClassGenFlatDataNoise.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="290" column="54" selection-start-line="290" selection-start-column="54" selection-end-line="290" selection-end-column="54" />
-              <folding>
-                <element signature="n#addLinesToFlatData#0;n#CGenReportFlatData#0;n#!!top" />
-                <element signature="n#dumpLines#0;n#CGenReportFlatData#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://D:/work/dev/grapher/tests/CGenReportTest.php">
+        <entry file="file://D:/work/dev/grapher/phplibs/generalLibs/utils.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="169">
-              <caret line="13" column="40" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://D:/work/dev/grapher/phplibs/createReport/swtClassGenReportNoise.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="25" selection-start-line="25" selection-end-line="25" />
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -128,26 +142,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>$resultIDList</find>
-      <find>$_startResultID</find>
-      <find>$i</find>
-      <find>$cardStandardResultID</find>
-      <find>$cardStandardResultPos</find>
-      <find>$curResultTestCaseNum</find>
-      <find>$_tableName01</find>
-      <find>$testName</find>
-      <find>$tableName01</find>
-      <find>$subTestNum</find>
-      <find>$standardTestCaseNum</find>
-      <find>$historyStartResultID</find>
-      <find>$umdNameList</find>
-      <find>$colMachineNum</find>
-      <find>$reportUmdNum</find>
-      <find>$colStartResultIDPosList</find>
-      <find>$cmpMachineID</find>
-      <find>$startResultID</find>
       <find>$swtUmdStandardOrder</find>
-      <find>$testNameList</find>
       <find>$subTestNumList</find>
       <find>$umdNum</find>
       <find>$subTestNumMap</find>
@@ -156,8 +151,27 @@
       <find>$sheetLinePos</find>
       <find>checkNeedCreateReportFile</find>
       <find>$tmpResultIDList</find>
+      <find>$colCardNameList</find>
+      <find>$tempFileStartSheetLineNum</find>
+      <find>$curFirstRowAPIColumnID</find>
+      <find>$tempFileHandle</find>
+      <find>$tmpPos</find>
+      <find>$testNameList</find>
+      <find>$subTestNum</find>
       <find>$nextSubTestPos</find>
       <find>setCompileSuccessMsg</find>
+      <find>return</find>
+      <find>$historyBatchMaxNum</find>
+      <find>$allReportsDir</find>
+      <find>prepareReportFolder</find>
+      <find>downloadReportDir</find>
+      <find>$reportFolder</find>
+      <find>$downloadReportDir</find>
+      <find>getTestTitleInfo</find>
+      <find>getSelectedMachineInfo</find>
+      <find>$fileID</find>
+      <find>$curReportFolder</find>
+      <find>getBatchInfo</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -177,7 +191,6 @@
         <option value="$PROJECT_DIR$/error03.php" />
         <option value="D:/work/dev/grapher/phplibs/userManage/swtUserManager.php" />
         <option value="$PROJECT_DIR$/error10.php" />
-        <option value="$PROJECT_DIR$/phplibs/createReport/swtGenTempFlatDataNoise.php" />
         <option value="$PROJECT_DIR$/tests/EmailTest.php" />
         <option value="D:/work/dev/grapher/tests/EmailTest.php" />
         <option value="$PROJECT_DIR$/tests/UtilitiesTest.php" />
@@ -186,17 +199,21 @@
         <option value="D:/work/dev/grapher/error03.php" />
         <option value="$PROJECT_DIR$/phplibs/configuration/swtMISConst.php" />
         <option value="$PROJECT_DIR$/tests/autoload.php" />
-        <option value="$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" />
         <option value="$PROJECT_DIR$/phplibs/createReport/swtClassGenFlatDataNoise.php" />
         <option value="$PROJECT_DIR$/error31.php" />
-        <option value="D:/work/dev/grapher/phplibs/createReport/swtClassGenReportNoise.php" />
         <option value="$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php" />
+        <option value="D:/work/dev/grapher/phplibs/createReport/swtClassGenReportNoise.php" />
+        <option value="$PROJECT_DIR$/phplibs/generalLibs/utils.php" />
+        <option value="D:/work/dev/grapher/phplibs/generalLibs/utils.php" />
+        <option value="$PROJECT_DIR$/phplibs/createReport/swtGenTempFlatDataNoise.php" />
         <option value="$PROJECT_DIR$/tests/CGenReportTest.php" />
         <option value="D:/work/dev/grapher/tests/CGenReportTest.php" />
+        <option value="$PROJECT_DIR$/phplibs/generalLibs/reportcache.php" />
+        <option value="$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" />
       </list>
     </option>
   </component>
-  <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpDebugGeneral" break_at_first_line="true" listening_started="true" />
   <component name="PhpServers">
     <servers>
       <server host="localhost" id="146235ef-da2b-44f0-a703-b6e6e8d9e8ad" name="localhost" use_path_mappings="true">
@@ -261,6 +278,7 @@
           <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/dodb.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/dodb.php" />
           <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/dopdo.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/dopdo.php" />
           <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/genfuncs.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/genfuncs.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/reportcache.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/reportcache.php" />
           <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/setBatchLogPath.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/setBatchLogPath.php" />
           <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/setBatchTime.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/setBatchTime.php" />
           <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/swtCommonLib.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/swtCommonLib.php" />
@@ -268,6 +286,7 @@
           <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/swtHtmlTemple.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/swtHtmlTemple.php" />
           <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/swtReplaceJsonMachineInfoNames.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/swtReplaceJsonMachineInfoNames.php" />
           <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/swtReplaceMachineInfoNames.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/swtReplaceMachineInfoNames.php" />
+          <mapping local-root="$PROJECT_DIR$/phplibs/generalLibs/utils.php" remote-root="D:/work/dev/grapher/phplibs/generalLibs/utils.php" />
           <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetBatchIDList.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetBatchIDList.php" />
           <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetBatchIDListOutUser.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetBatchIDListOutUser.php" />
           <mapping local-root="$PROJECT_DIR$/phplibs/getInfo/swtGetBatchMachinesInfo.php" remote-root="D:/work/dev/grapher/phplibs/getInfo/swtGetBatchMachinesInfo.php" />
@@ -415,6 +434,17 @@
             <path>
               <item name="Grapher" type="b2602c69:ProjectViewProjectNode" />
               <item name="Grapher" type="462c0819:PsiDirectoryNode" />
+              <item name="phplibs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Grapher" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Grapher" type="462c0819:PsiDirectoryNode" />
+              <item name="phplibs" type="462c0819:PsiDirectoryNode" />
+              <item name="generalLibs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Grapher" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Grapher" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -428,13 +458,14 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary" value="PHPUnit" />
     <property name="js.buildTools.grunt.grunt-cli.package" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/phplibs/generalLibs" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="settings.php.debug.servers" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\wamp64\www\Grapher\phplibs\generalLibs" />
       <recent name="D:\wamp64\www\Grapher\tests" />
       <recent name="D:\wamp64\www\Grapher" />
     </key>
@@ -451,26 +482,30 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="PHPUnit.CGenReportTest.testAdditionalStyle">
+  <component name="RunManager" selected="PHPUnit.CGenReportTest.testReportCache">
     <configuration name="CGenReportTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <CommandLine workingDirectory="$PROJECT_DIR$/tests" />
       <TestRunner class="CGenReportTest" file="$PROJECT_DIR$/tests/CGenReportTest.php" scope="Class" />
-      <method v="2" />
-    </configuration>
-    <configuration name="CGenReportTest.testAdditionalStyle" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="CGenReportTest" file="$PROJECT_DIR$/tests/CGenReportTest.php" method="testAdditionalStyle" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="CGenReportTest.testCheckNeedCreateReportFile" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="CGenReportTest" file="$PROJECT_DIR$/tests/CGenReportTest.php" method="testCheckNeedCreateReportFile" scope="Method" />
       <method v="2" />
     </configuration>
-    <configuration name="CGenReportTest.testGetBatchInfo (1)" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="CGenReportTest" file="D:/work/dev/grapher/tests/CGenReportTest.php" method="testGetBatchInfo" scope="Method" />
+    <configuration name="CGenReportTest.testCreateXmlFile" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="CGenReportTest" file="$PROJECT_DIR$/tests/CGenReportTest.php" method="testCreateXmlFile" scope="Method" />
       <method v="2" />
     </configuration>
-    <configuration name="CGenReportTest.testGetBatchInfo" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="CGenReportTest" file="$PROJECT_DIR$/tests/CGenReportTest.php" method="testGetBatchInfo" scope="Method" />
+    <configuration name="CGenReportTest.testReportCache" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="CGenReportTest" file="$PROJECT_DIR$/tests/CGenReportTest.php" method="testReportCache" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="CGenReportTest.testSaveAndLoadVars (1)" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="CGenReportTest" file="$PROJECT_DIR$/tests/CGenReportTest.php" method="testReportCache" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="CGenReportTest.testSaveAndLoadVars" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="CGenReportTest" file="$PROJECT_DIR$/tests/CGenReportTest.php" method="testSaveAndLoadVars" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="EmailTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -479,10 +514,6 @@
     </configuration>
     <configuration name="UtilitiesTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner class="UtilitiesTest" file="$PROJECT_DIR$/tests/UtilitiesTest.php" scope="Class" />
-      <method v="2" />
-    </configuration>
-    <configuration name="UtilitiesTest.testReplaceOldCardName" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="UtilitiesTest" file="$PROJECT_DIR$/tests/UtilitiesTest.php" method="testReplaceOldCardName" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="05_test" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request" server_name="localhost" url="/Grapher/error05.php">
@@ -498,6 +529,9 @@
       <method v="2" />
     </configuration>
     <configuration name="error03.php [PHP Script]" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/error03.php">
+      <method v="2" />
+    </configuration>
+    <configuration name="reportcache.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/phplibs/generalLibs/reportcache.php">
       <method v="2" />
     </configuration>
     <configuration name="error13.php [PHP Web Page]" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="localhost" start_url="/Grapher/error13.php">
@@ -516,24 +550,25 @@
       <item itemvalue="PHP HTTP Request.Unnamed" />
       <item itemvalue="PHP HTTP Request.index.php" />
       <item itemvalue="PHP Script.error03.php [PHP Script]" />
+      <item itemvalue="PHP Script.reportcache.php" />
       <item itemvalue="PHP Web Page.web_page_error12.php" />
       <item itemvalue="PHP Web Page.error13.php [PHP Web Page]" />
       <item itemvalue="PHPUnit.EmailTest" />
       <item itemvalue="PHPUnit.UtilitiesTest" />
       <item itemvalue="PHPUnit.CGenReportTest" />
-      <item itemvalue="PHPUnit.UtilitiesTest.testReplaceOldCardName" />
-      <item itemvalue="PHPUnit.CGenReportTest.testGetBatchInfo" />
-      <item itemvalue="PHPUnit.CGenReportTest.testGetBatchInfo (1)" />
       <item itemvalue="PHPUnit.CGenReportTest.testCheckNeedCreateReportFile" />
-      <item itemvalue="PHPUnit.CGenReportTest.testAdditionalStyle" />
+      <item itemvalue="PHPUnit.CGenReportTest.testCreateXmlFile" />
+      <item itemvalue="PHPUnit.CGenReportTest.testSaveAndLoadVars" />
+      <item itemvalue="PHPUnit.CGenReportTest.testReportCache" />
+      <item itemvalue="PHPUnit.CGenReportTest.testSaveAndLoadVars (1)" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="PHPUnit.CGenReportTest.testAdditionalStyle" />
+        <item itemvalue="PHPUnit.CGenReportTest.testReportCache" />
+        <item itemvalue="PHPUnit.CGenReportTest.testSaveAndLoadVars" />
+        <item itemvalue="PHPUnit.CGenReportTest.testSaveAndLoadVars (1)" />
         <item itemvalue="PHPUnit.CGenReportTest.testCheckNeedCreateReportFile" />
-        <item itemvalue="PHPUnit.CGenReportTest.testGetBatchInfo" />
-        <item itemvalue="PHPUnit.CGenReportTest.testGetBatchInfo (1)" />
-        <item itemvalue="PHPUnit.UtilitiesTest.testReplaceOldCardName" />
+        <item itemvalue="PHPUnit.CGenReportTest.testCreateXmlFile" />
       </list>
     </recent_temporary>
   </component>
@@ -552,56 +587,56 @@
       <workItem from="1565837338490" duration="4538000" />
       <workItem from="1576054596818" duration="1190000" />
       <workItem from="1577941430351" duration="90179000" />
-      <workItem from="1578624418062" duration="50664000" />
+      <workItem from="1578624418062" duration="79632000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CGenReportTest_testGetBatchInfo - 2020.01.10 at 11h 02m 14s.xml">
-      <configuration name="CGenReportTest.testGetBatchInfo" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="CGenReportTest_testReportCache - 2020.01.16 at 15h 27m 53s.xml">
+      <configuration name="CGenReportTest.testReportCache" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="CGenReportTest_testGetBatchInfo - 2020.01.10 at 11h 02m 22s.xml">
-      <configuration name="CGenReportTest.testGetBatchInfo" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="CGenReportTest_testReportCache - 2020.01.16 at 15h 29m 05s.xml">
+      <configuration name="CGenReportTest.testReportCache" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="CGenReportTest_testGetBatchInfo - 2020.01.10 at 11h 24m 56s.xml">
-      <configuration name="CGenReportTest.testGetBatchInfo" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="CGenReportTest_testReportCache - 2020.01.16 at 15h 32m 14s.xml">
+      <configuration name="CGenReportTest.testReportCache" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="CGenReportTest_testGetBatchInfo - 2020.01.10 at 11h 24m 59s.xml">
-      <configuration name="CGenReportTest.testGetBatchInfo" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="CGenReportTest_testReportCache - 2020.01.16 at 15h 33m 59s.xml">
+      <configuration name="CGenReportTest.testReportCache" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="CGenReportTest_testGetBatchInfo - 2020.01.10 at 11h 25m 04s.xml">
-      <configuration name="CGenReportTest.testGetBatchInfo" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="CGenReportTest_testReportCache - 2020.01.16 at 15h 35m 47s.xml">
+      <configuration name="CGenReportTest.testReportCache" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="CGenReportTest_testCheckNeedCreateReportFile - 2020.01.15 at 14h 11m 21s.xml">
-      <configuration name="CGenReportTest.testCheckNeedCreateReportFile" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="CGenReportTest_testSaveAndLoadVars - 2020.01.16 at 15h 37m 17s.xml">
+      <configuration name="CGenReportTest.testSaveAndLoadVars" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="CGenReportTest_testCheckNeedCreateReportFile - 2020.01.15 at 14h 20m 44s.xml">
-      <configuration name="CGenReportTest.testCheckNeedCreateReportFile" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="CGenReportTest_testReportCache - 2020.01.16 at 15h 38m 49s.xml">
+      <configuration name="CGenReportTest.testReportCache" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="CGenReportTest_testCheckNeedCreateReportFile - 2020.01.15 at 14h 33m 21s.xml">
-      <configuration name="CGenReportTest.testCheckNeedCreateReportFile" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="CGenReportTest_testReportCache - 2020.01.16 at 15h 52m 13s.xml">
+      <configuration name="CGenReportTest.testReportCache" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="CGenReportTest_testAdditionalStyle - 2020.01.15 at 15h 08m 40s.xml">
-      <configuration name="CGenReportTest.testAdditionalStyle" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="CGenReportTest_testReportCache - 2020.01.16 at 15h 53m 17s.xml">
+      <configuration name="CGenReportTest.testReportCache" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="CGenReportTest_testAdditionalStyle - 2020.01.15 at 15h 15m 29s.xml">
-      <configuration name="CGenReportTest.testAdditionalStyle" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="CGenReportTest_testReportCache - 2020.01.16 at 15h 57m 21s.xml">
+      <configuration name="CGenReportTest.testReportCache" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="225797000" />
+    <option name="totallyTimeSpent" value="254765000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6511025" visible="true" weight="0.17291667" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6506365" visible="true" weight="0.17291667" />
       <window_info id="Structure" order="1" sideWeight="0.50159746" side_tool="true" weight="0.1705757" />
-      <window_info id="Favorites" order="2" sideWeight="0.34889755" side_tool="true" visible="true" weight="0.17291667" />
+      <window_info id="Favorites" order="2" sideWeight="0.3493635" side_tool="true" visible="true" weight="0.17291667" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49947917" weight="0.32957748" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49791667" weight="0.19624414" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.71510416" visible="true" weight="0.27605635" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49635416" weight="0.19624414" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.7135417" visible="true" weight="0.33615023" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -610,7 +645,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="PHP-CGI Server" order="10" />
       <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.28489584" side_tool="true" visible="true" weight="0.27605635" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.28645834" side_tool="true" visible="true" weight="0.33615023" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -737,32 +772,32 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>3456</line>
+          <line>3468</line>
           <option name="timeStamp" value="118" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>3251</line>
+          <line>3263</line>
           <option name="timeStamp" value="120" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>1955</line>
+          <line>1967</line>
           <option name="timeStamp" value="121" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>3591</line>
+          <line>3603</line>
           <option name="timeStamp" value="123" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>3527</line>
+          <line>3539</line>
           <option name="timeStamp" value="124" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>1069</line>
+          <line>1081</line>
           <option name="timeStamp" value="125" />
         </line-breakpoint>
         <line-breakpoint type="php">
@@ -787,87 +822,77 @@
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>363</line>
+          <line>419</line>
           <option name="timeStamp" value="132" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>489</line>
+          <line>545</line>
           <option name="timeStamp" value="138" />
         </line-breakpoint>
         <line-breakpoint log-message="true" suspend="NONE" type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>490</line>
+          <line>546</line>
           <option name="timeStamp" value="139" />
         </line-breakpoint>
         <line-breakpoint type="php">
-          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>554</line>
-          <option name="timeStamp" value="140" />
-        </line-breakpoint>
-        <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>3772</line>
+          <line>3753</line>
           <option name="timeStamp" value="142" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>4036</line>
+          <line>4017</line>
           <option name="timeStamp" value="143" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>4779</line>
+          <line>4760</line>
           <option name="timeStamp" value="144" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>5081</line>
+          <line>5062</line>
           <option name="timeStamp" value="145" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>5209</line>
+          <line>5190</line>
           <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>5286</line>
+          <line>5267</line>
           <option name="timeStamp" value="147" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>5328</line>
+          <line>5309</line>
           <option name="timeStamp" value="148" />
         </line-breakpoint>
         <line-breakpoint type="php">
-          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>579</line>
-          <option name="timeStamp" value="149" />
-        </line-breakpoint>
-        <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>6421</line>
+          <line>6402</line>
           <option name="timeStamp" value="150" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>6527</line>
+          <line>6508</line>
           <option name="timeStamp" value="151" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>3732</line>
+          <line>3750</line>
           <option name="timeStamp" value="153" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>4843</line>
+          <line>4824</line>
           <option name="timeStamp" value="154" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>6423</line>
+          <line>6404</line>
           <option name="timeStamp" value="156" />
         </line-breakpoint>
         <line-breakpoint type="php">
@@ -892,12 +917,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/tests/CGenReportTest.php</url>
-          <line>191</line>
+          <line>167</line>
           <option name="timeStamp" value="198" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/tests/CGenReportTest.php</url>
-          <line>193</line>
+          <line>169</line>
           <option name="timeStamp" value="200" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -932,17 +957,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>1462</line>
+          <line>1474</line>
           <option name="timeStamp" value="218" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>1371</line>
+          <line>1383</line>
           <option name="timeStamp" value="219" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/tests/CGenReportTest.php</url>
-          <line>221</line>
+          <line>197</line>
           <option name="timeStamp" value="221" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -952,139 +977,284 @@
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>449</line>
+          <line>505</line>
           <option name="timeStamp" value="242" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>340</line>
+          <line>396</line>
           <option name="timeStamp" value="243" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>209</line>
+          <line>251</line>
           <option name="timeStamp" value="244" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>463</line>
+          <line>519</line>
           <option name="timeStamp" value="245" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>170</line>
+          <line>212</line>
           <option name="timeStamp" value="247" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>185</line>
+          <line>227</line>
           <option name="timeStamp" value="248" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>187</line>
+          <line>229</line>
           <option name="timeStamp" value="249" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>224</line>
+          <line>273</line>
           <option name="timeStamp" value="253" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>264</line>
+          <line>313</line>
           <option name="timeStamp" value="254" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>335</line>
+          <line>391</line>
           <option name="timeStamp" value="256" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>372</line>
+          <line>428</line>
           <option name="timeStamp" value="257" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>380</line>
+          <line>436</line>
           <option name="timeStamp" value="259" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>405</line>
+          <line>461</line>
           <option name="timeStamp" value="260" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>416</line>
+          <line>472</line>
           <option name="timeStamp" value="261" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>452</line>
+          <line>508</line>
           <option name="timeStamp" value="263" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>473</line>
+          <line>529</line>
           <option name="timeStamp" value="264" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>498</line>
+          <line>554</line>
           <option name="timeStamp" value="265" />
-        </line-breakpoint>
-        <line-breakpoint type="php">
-          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>524</line>
-          <option name="timeStamp" value="266" />
-        </line-breakpoint>
-        <line-breakpoint type="php">
-          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>528</line>
-          <option name="timeStamp" value="267" />
-        </line-breakpoint>
-        <line-breakpoint type="php">
-          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>557</line>
-          <option name="timeStamp" value="268" />
-        </line-breakpoint>
-        <line-breakpoint type="php">
-          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>570</line>
-          <option name="timeStamp" value="269" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <condition expression="$resultPos &gt;=15" language="PHP" />
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
-          <line>210</line>
+          <line>252</line>
           <option name="timeStamp" value="271" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>1865</line>
+          <line>1877</line>
           <option name="timeStamp" value="279" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>1864</line>
+          <line>1876</line>
           <option name="timeStamp" value="284" />
         </line-breakpoint>
         <line-breakpoint type="php">
           <url>file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php</url>
-          <line>2129</line>
+          <line>2141</line>
           <option name="timeStamp" value="287" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://D:/work/dev/grapher/tests/CGenReportTest.php</url>
-          <line>193</line>
+          <line>175</line>
           <option name="timeStamp" value="298" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/tests/CGenReportTest.php</url>
-          <line>19</line>
+          <line>18</line>
           <option name="timeStamp" value="299" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/tests/CGenReportTest.php</url>
+          <line>53</line>
+          <option name="timeStamp" value="300" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/tests/CGenReportTest.php</url>
+          <line>283</line>
+          <option name="timeStamp" value="301" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://D:/work/dev/grapher/tests/CGenReportTest.php</url>
+          <line>303</line>
+          <option name="timeStamp" value="302" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://D:/work/dev/grapher/tests/CGenReportTest.php</url>
+          <line>283</line>
+          <option name="timeStamp" value="303" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/tests/CGenReportTest.php</url>
+          <line>310</line>
+          <option name="timeStamp" value="304" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://D:/work/dev/grapher/tests/CGenReportTest.php</url>
+          <line>310</line>
+          <option name="timeStamp" value="305" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://D:/work/dev/grapher/tests/CGenReportTest.php</url>
+          <line>308</line>
+          <option name="timeStamp" value="306" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://D:/work/dev/grapher/phplibs/generalLibs/utils.php</url>
+          <line>11</line>
+          <option name="timeStamp" value="308" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>435</line>
+          <option name="timeStamp" value="311" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>455</line>
+          <option name="timeStamp" value="312" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>468</line>
+          <option name="timeStamp" value="313" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>485</line>
+          <option name="timeStamp" value="314" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>504</line>
+          <option name="timeStamp" value="315" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>528</line>
+          <option name="timeStamp" value="316" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>552</line>
+          <option name="timeStamp" value="317" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>567</line>
+          <option name="timeStamp" value="318" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>572</line>
+          <option name="timeStamp" value="319" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>580</line>
+          <option name="timeStamp" value="320" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>583</line>
+          <option name="timeStamp" value="321" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>610</line>
+          <option name="timeStamp" value="322" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtGenTempFlatDataNoise.php</url>
+          <line>236</line>
+          <option name="timeStamp" value="324" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/tests/CGenReportTest.php</url>
+          <line>324</line>
+          <option name="timeStamp" value="330" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://D:/work/dev/grapher/tests/CGenReportTest.php</url>
+          <line>325</line>
+          <option name="timeStamp" value="331" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://D:/work/dev/grapher/tests/CGenReportTest.php</url>
+          <line>327</line>
+          <option name="timeStamp" value="332" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/generalLibs/reportcache.php</url>
+          <line>11</line>
+          <option name="timeStamp" value="333" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://D:/work/dev/grapher/phplibs/generalLibs/reportcache.php</url>
+          <line>19</line>
+          <option name="timeStamp" value="335" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>68</line>
+          <option name="timeStamp" value="338" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>47</line>
+          <option name="timeStamp" value="339" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>42</line>
+          <option name="timeStamp" value="340" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/generalLibs/reportcache.php</url>
+          <line>19</line>
+          <option name="timeStamp" value="342" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>139</line>
+          <option name="timeStamp" value="343" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>264</line>
+          <option name="timeStamp" value="348" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php</url>
+          <line>297</line>
+          <option name="timeStamp" value="349" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1125,6 +1295,11 @@
     </expressions>
     <expressions id="watch">
       <expression>
+        <expression-string>$global_vars</expression-string>
+        <language-id>PHP</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>$returnMsg</expression-string>
         <language-id>PHP</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -1161,7 +1336,22 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>$batchDateTextList</expression-string>
+        <language-id>PHP</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>$this-&gt;values</expression-string>
+        <language-id>PHP</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>$t1</expression-string>
+        <language-id>PHP</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>$reportTemplateDir</expression-string>
         <language-id>PHP</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -1190,48 +1380,9 @@
         <language-id>PHP</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>$changeListNumList</expression-string>
-        <language-id>PHP</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>$umdNameList</expression-string>
-        <language-id>PHP</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>$arr4 == $arr3</expression-string>
-        <language-id>PHP</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/error05.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/phplibs/configuration/swtConfig.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/phplibs/generalLibs/create01.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-74">
-          <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/error14.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/error12.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
@@ -1263,13 +1414,6 @@
     <entry file="file://$PROJECT_DIR$/phplibs/generalLibs/genfuncs.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionPerFrame.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="507" selection-start-line="507" selection-end-line="507" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/error03.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
@@ -1294,13 +1438,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="phar://D:/study/php_study/phpunit_phar/phpunit-5.7.27.phar/phpunit/Framework/TestResult.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="742" selection-start-line="742" selection-end-line="742" />
         </state>
       </provider>
     </entry>
@@ -1329,13 +1466,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/phplibs/generalLibs/dopdo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
         </state>
       </provider>
     </entry>
@@ -1444,13 +1574,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/work/dev/grapher/tests/autoload.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/work/dev/grapher/phplibs/generalLibs/dopdo.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
@@ -1482,13 +1605,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtGenTempFlatDataNoise.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/phplibs/getInfo/swtGetTestData2.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
@@ -1496,10 +1612,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtXLSXBatchReport.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="phar://D:/study/php_study/phpunit_phar/phpunit-5.7.27.phar/phpunit/Framework/TestResult.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="716" selection-start-line="716" selection-end-line="716" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionPerFrame.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/work/dev/grapher/phplibs/createReport/swtClassGenReportNoise.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="phar://D:/study/php_study/phpunit_phar/phpunit-5.7.27.phar/phpunit/Framework/TestCase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="1065" selection-start-line="1065" selection-end-line="1065" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtClassGenFlatDataNoise.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="290" column="54" selection-start-line="290" selection-start-column="54" selection-end-line="290" selection-end-column="54" />
+        <state relative-caret-position="1508">
+          <caret line="294" selection-start-line="294" selection-end-line="294" />
           <folding>
             <element signature="n#addLinesToFlatData#0;n#CGenReportFlatData#0;n#!!top" />
             <element signature="n#dumpLines#0;n#CGenReportFlatData#0;n#!!top" />
@@ -1507,10 +1650,78 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://D:/work/dev/grapher/tests/autoload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phplibs/generalLibs/dopdo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="98" selection-start-line="98" selection-end-line="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/work/dev/grapher/phplibs/generalLibs/utils.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/work/dev/grapher/phplibs/generalLibs/reportcache.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/work/dev/grapher/tests/CGenReportTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1197">
+          <caret line="320" selection-start-line="320" selection-end-line="320" />
+          <folding>
+            <element signature="n#testAdditionalStyles#0;n#CGenReportTest#0;n#!!top" />
+            <element signature="n#testCreateXmlFile#0;n#CGenReportTest#0;n#!!top" />
+            <element signature="n#testCheckNeedCreateReportFile#0;n#CGenReportTest#0;n#!!top" />
+            <element signature="n#testGetBatchInfo#0;n#CGenReportTest#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/CGenReportTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-228">
+          <caret line="3" column="64" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="64" />
+          <folding>
+            <element signature="n#testAdditionalStyles#0;n#CGenReportTest#0;n#!!top" />
+            <element signature="n#testCreateXmlFile#0;n#CGenReportTest#0;n#!!top" />
+            <element signature="n#testCheckNeedCreateReportFile#0;n#CGenReportTest#0;n#!!top" />
+            <element signature="n#testGetBatchInfo#0;n#CGenReportTest#0;n#!!top" />
+            <element signature="n#testSaveAndLoadVars#0;n#CGenReportTest#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phplibs/generalLibs/utils.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="19" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtGenTempFlatDataNoise.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/error31.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="1646" selection-start-column="1646" selection-end-column="1646" />
           <folding>
             <element signature="n#Style#0;n#Format#0;n#Value1#0;n#Qualifier#0;n#Condition#0;n#Range#0;n#ConditionalFormatting#0;n#ProtectScenarios#0;n#ProtectObjects#0;n#NumberofCopies#0;n#VerticalResolution#0;n#PaperSizeIndex#0;n#FitHeight#0;n#FitWidth#0;n#Print#0;n#TopRowBottomPane#0;n#SplitHorizontal#0;n#PageMargins#0;n#Footer#0;n#Header#0;n#PageSetup#0;n#WorksheetOptions#0;n#!!top" expanded="true" />
             <element signature="n#Style#0;n#Format#0;n#Value2#0;n#Value1#0;n#Qualifier#0;n#Condition#0;n#Value1#0;n#Qualifier#0;n#Condition#0;n#Range#0;n#ConditionalFormatting#0;n#ProtectScenarios#0;n#ProtectObjects#0;n#NumberofCopies#0;n#VerticalResolution#0;n#PaperSizeIndex#0;n#FitHeight#0;n#FitWidth#0;n#Print#0;n#TopRowBottomPane#0;n#SplitHorizontal#0;n#PageMargins#0;n#Footer#0;n#Header#0;n#PageSetup#0;n#WorksheetOptions#0;n#!!top" expanded="true" />
@@ -1518,52 +1729,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="phar://D:/study/php_study/phpunit_phar/phpunit-5.7.27.phar/phpunit/Framework/TestCase.php">
+    <entry file="file://$PROJECT_DIR$/phplibs/generalLibs/reportcache.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="1055" lean-forward="true" selection-start-line="1055" selection-end-line="1055" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtXLSXBatchReport.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="11" selection-start-line="11" selection-end-line="14" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/work/dev/grapher/phplibs/createReport/swtClassGenReportNoise.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="67">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="396" column="37" selection-start-line="396" selection-start-column="37" selection-end-line="396" selection-end-column="37" />
+        <state relative-caret-position="208">
+          <caret line="2104" selection-start-line="2104" selection-end-line="2107" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/CGenReportTest.php">
+    <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-          <folding>
-            <element signature="n#testCheckNeedCreateReportFile#0;n#CGenReportTest#0;n#!!top" />
-            <element signature="n#testGetBatchInfo#0;n#CGenReportTest#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/work/dev/grapher/tests/CGenReportTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="13" column="40" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+        <state relative-caret-position="113">
+          <caret line="379" selection-start-line="379" selection-end-line="379" />
         </state>
       </provider>
     </entry>
