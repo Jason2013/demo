@@ -125,14 +125,10 @@ if ($returnSet == false)
     return;
 }
 
-$cacheName = "getTestTitleInfo";
-$cacheKey = $batchID;
-if ($cache->hasValue($cacheName, $cacheKey)) {
-    $returnSet = $cache->getValue($cacheName, $cacheKey);
-} else {
-    $returnSet = $xmlWriter->getTestTitleInfo($db, $batchID);
-    $cache->setValue($cacheName, $returnSet, $cacheKey);
-}
+$returnSet = $cache->getCachedValue("getTestTitleInfo", $batchID, function () {
+    global $xmlWriter, $db, $batchID;
+    return $xmlWriter->getTestTitleInfo($db, $batchID);
+});
 if ($returnSet === null)
 {
     return;
