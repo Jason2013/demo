@@ -166,14 +166,12 @@ $selectedSysIDList = $returnSet["selectedSysIDList"];
 $testName = $testNameList[$curTestPos];
 $tableName01 = $db_mis_table_name_string001 . $testName;
 
-$cacheName = "getBatchInfo";
-$cacheKey = [$selectedCardIDList, $selectedSysIDList, $umdNameList, $batchIDList];
-if ($cache->hasValue($cacheName, $cacheKey)) {
-    $returnSet = $cache->getValue($cacheName, $cacheKey);
-} else {
-    $returnSet = $xmlWriter->getBatchInfo($db, $batchIDList);
-    $cache->setValue($cacheName, $returnSet, $cacheKey);
-}
+$returnSet = $cache->getCachedValue("getBatchInfo",
+    [$selectedCardIDList, $selectedSysIDList, $umdNameList, $batchIDList],
+    function () {
+        global $xmlWriter, $db, $batchIDList;
+        return $xmlWriter->getBatchInfo($db, $batchIDList);
+    });
 if ($returnSet === null)
 {
     return;
