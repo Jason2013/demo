@@ -24,6 +24,17 @@ class CGenReport
 	{
         //$this->clearResult();
     }
+
+    private static function setCompileSuccessMsg($msg)
+    {
+        global $returnMsg;
+        global $batchID;
+
+        $returnMsg["errorCode"] = 1;
+        $returnMsg["compileFinished"] = 1;
+        $returnMsg["errorMsg"] = $msg;
+        $returnMsg["batchID"] = $batchID;
+    }
     
 	public function getXMLCodePiece()
 	{
@@ -374,22 +385,57 @@ class CGenReport
         $returnSet["allSheetsEndTag"] = $allSheetsEndTag;
         return $returnSet;
     }
-    
+
+    public static function additionalStyles()
+    {
+        global $startStyleID;
+        global $appendStyleList;
+
+        $styles = array();
+        $styleID = $startStyleID;
+
+        foreach ($appendStyleList as $styleFormat)
+        {
+            array_push($styles, sprintf($styleFormat, $styleID));
+            $styleID++;
+        }
+
+        return implode($styles);
+    }
+
+    public static function additionalStylesWithEndTag()
+    {
+        global $allStylesEndTag;
+        return self::additionalStyles() . $allStylesEndTag;
+    }
+
+    public static function createXmlFile($filename)
+    {
+        global $reportTemplateDir;
+
+        // copy file template to modify
+        $xmlSection = file_get_contents(__DIR__ . "/" . $reportTemplateDir . "/sectionHead001.txt");
+        $fileHandle = fopen($filename, "w");
+        fwrite($fileHandle, $xmlSection);
+        fwrite($fileHandle, self::additionalStylesWithEndTag());
+        fclose($fileHandle);
+    }
+
 	public function writeAdditionalStyles($_fileHandle)
 	{
         global $startStyleID;
         global $allStylesEndTag;
         global $appendStyleList;
         
-        $t3 = "";
-        $n1 = $startStyleID;
+        $styles = "";
+        $styleID = $startStyleID;
         foreach ($appendStyleList as $tmpStyle)
         {
-            $t3 .= sprintf($tmpStyle, $n1);
-            $n1++;
+            $styles .= sprintf($tmpStyle, $styleID);
+            $styleID++;
         }
 
-        fwrite($_fileHandle, $t3);
+        fwrite($_fileHandle, $styles);
         fwrite($_fileHandle, $allStylesEndTag);
     }
 
@@ -719,10 +765,9 @@ class CGenReport
         return intval($tmpNoiseNum) + 1;
     }
     
-	public function getStandardResultID($_startResultID, $_resultPos)
+	public function getStandardResultID($_startResultID)
 	{
         global $resultIDList;
-        global $cardNameList;
         global $driverNameList;
         global $umdStandardOrder;
         global $reportUmdNum;
@@ -1037,14 +1082,12 @@ class CGenReport
         
         if (strlen($checkedMachineIDListString) == 0)
         {
-            $returnMsg["errorCode"] = 1;
-            $returnMsg["compileFinished"] = 1;
-            $returnMsg["errorMsg"] = "no machine selected";
+            self::setCompileSuccessMsg("no machine selected");
             echo json_encode($returnMsg);
             return null;
         }
         
-        $returnMsg["checkedMachineIDListString"] = $checkedMachineIDListString;
+//        $returnMsg["checkedMachineIDListString"] = $checkedMachineIDListString;
         
         $params1 = array();
         $sql1 = "SELECT card_id, sys_id " .
@@ -1327,12 +1370,7 @@ class CGenReport
                         $arr1 = array_keys($cardNameList[0], $properCardName);
                         $arr2 = array_keys($sysNameList[0], $row1[23]);
                         $arr3 = array_intersect($arr1, $arr2);
-                        
-                        $arr4 = array();
-                        foreach ($arr3 as $tmpName)
-                        {
-                            $arr4 []= $tmpName;
-                        }
+                        $arr4 = array_values($arr3);
                         if (count($arr4) > 0)
                         {
                             $cardIndex = intval($arr4[0] / $umdNum);
@@ -1498,11 +1536,11 @@ class CGenReport
                                     array_push($machineIDPairList, $cmpMachineID);
                                 }
                             }
-                            $returnMsg["machineIDPairList"] = $machineIDPairList;
-                            $returnMsg["curCardName"] = $curCardName;
-                            $returnMsg["tmpList"] = $tmpList;
-                            $returnMsg["cardNameList[0]"] = $cardNameList[0];
-                            $returnMsg["machineIDList[0]"] = $machineIDList[0];
+//                            $returnMsg["machineIDPairList"] = $machineIDPairList;
+//                            $returnMsg["curCardName"] = $curCardName;
+//                            $returnMsg["tmpList"] = $tmpList;
+//                            $returnMsg["cardNameList[0]"] = $cardNameList[0];
+//                            $returnMsg["machineIDList[0]"] = $machineIDList[0];
                             
                             break;
                         }
@@ -1597,8 +1635,8 @@ class CGenReport
             }
         }
         
-        $returnMsg["machineIDPairList"] = $machineIDPairList;
-        $returnMsg["cmpMachineID"] = $cmpMachineID;
+//        $returnMsg["machineIDPairList"] = $machineIDPairList;
+//        $returnMsg["cmpMachineID"] = $cmpMachineID;
         
         $tmpOrderIndex = -1;
         $tmpKey = -1;
@@ -1708,19 +1746,19 @@ class CGenReport
 	public function getHistoryNachineInfo($_startResultID,
                                           $_resultPos)
 	{
-        global $returnMsg;
+//        global $returnMsg;
         global $resultIDList;
         global $cardNameList;
         global $sysNameList;
-        global $machineIDPairList;
-        global $machineIDList;
-        global $resultTimeList;
-        global $crossBuildResultTimeList;
-        global $umdNameList;
+//        global $machineIDPairList;
+//        global $machineIDList;
+//        global $resultTimeList;
+//        global $crossBuildResultTimeList;
+//        global $umdNameList;
         global $umdNum;
-        global $crossType;
-        global $machineIDBatchPairList;
-        global $machineNameList;
+//        global $crossType;
+//        global $machineIDBatchPairList;
+//        global $machineNameList;
         
         $returnSet = array();
         
@@ -1826,7 +1864,6 @@ class CGenReport
         global $resultIDList;
         global $testNameList;
         global $db_mis_table_name_string001;
-        global $subTestUmdDataMaskList;
         global $cardStandardResultPos;
         
         $db = $_db;
@@ -1834,48 +1871,9 @@ class CGenReport
         $subTestNumList = array();
         $subTestNumMap = array();
         $cmpSubTestNumList = array();
-        if (count($subTestUmdDataMaskList) == 0)
-        {
-            $subTestUmdDataMaskList = array_fill(0, count($testNameList), 0);
-        }
         $skipTestNameList = array();
         
         $tmpStartResultID = intval($_resultPos / $_umdNum) * $_umdNum;
-        for ($j = 0; $j < $_umdNum; $j++)
-        {
-            for ($i = 0; $i < count($testNameList); $i++)
-            {
-                $tmpTableName = $db_mis_table_name_string001 . $testNameList[$i];
-                $params1 = array($resultIDList[0][$tmpStartResultID + $j]);
-                $sql1 = "SELECT COUNT(*) FROM " . $tmpTableName . " WHERE (result_id=? AND data_value>0.0)";
-                if ($db->QueryDB($sql1, $params1) == null)
-                {
-                    $returnMsg["errorCode"] = 0;
-                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-                    echo json_encode($returnMsg);
-                    return null;
-                }
-                $row1 = $db->fetchRow();
-                if ($row1 == false)
-                {
-                    $returnMsg["errorCode"] = 0;
-                    $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__ . ", error: " . $db->getError()[2];
-                    echo json_encode($returnMsg);
-                    return null;
-                }
-                $tmpSubTestNum = intval($row1[0]);
-                
-                $tmpMask = ($tmpSubTestNum == 0) ? 0 : 1;
-                // set mask for present of DX11, DX12, Vulkan
-                
-                for ($l = 0; $l < $j; $l++)
-                {
-                    $tmpMask *= 10;
-                }
-                // set mask to skip blank data column in average data for graph
-                $subTestUmdDataMaskList[$i] |= $tmpMask;
-            }
-        }
         
         if ($_isCompStandard)
         {
@@ -1953,7 +1951,6 @@ class CGenReport
         $returnSet["subTestNumMap"] = $subTestNumMap;
         $returnSet["cmpSubTestNumList"] = $cmpSubTestNumList;
         $returnSet["skipTestNameList"] = $skipTestNameList;
-        $returnSet["subTestUmdDataMaskList"] = $subTestUmdDataMaskList;
         return $returnSet;
     }
     
@@ -2104,7 +2101,7 @@ class CGenReport
     public function getStandardUmdTestCaseNumList($_db)
     {
         //global $resultPos;
-        global $reportUmdNum;
+//        global $reportUmdNum;
         global $testNameList;
         global $db_mis_table_name_string001;
         global $resultIDList;
@@ -2112,8 +2109,8 @@ class CGenReport
         
         $db = $_db;
         
-        $subTestNumList = array();
-        $subTestNumMap = array();
+//        $subTestNumList = array();
+//        $subTestNumMap = array();
         
         $tmpTestCaseList = array();
         for ($i = 0; $i < count($testNameList); $i++)
@@ -3388,21 +3385,10 @@ class CGenReport
                                        "   <FrozenNoSplit/>\n" .
                                        "   <SplitHorizontal>4</SplitHorizontal>\n" .
                                        "   <TopRowBottomPane>4</TopRowBottomPane>\n";
-                                       //"   <SplitVertical>" . $n2 . "</SplitVertical>\n".
-                                       //"   <LeftColumnRightPane>" . $n2 . "</LeftColumnRightPane>\n";
-                    
-                    
+
                     $xmlSection = sprintf($xmlSection,
                                           $freezePanesCode,
                                           $t1);
-                                          
-                    $returnMsg["tmp_ConditionalFormatting0"] = $xmlSection;
-                    $returnMsg["tmp_cmpMachineID0"] = $cmpMachineID;
-                    
-                    //$xmlSection = sprintf($xmlSection,
-                    //                      $subjectNameFilterNumMax + 4, $subjectNameFilterNumMax + 4,
-                    //                      $subjectNameFilterNumMax + 7, $subjectNameFilterNumMax + 7,
-                    //                      $subjectNameFilterNumMax + 10, $subjectNameFilterNumMax + 10);
                 }
                 else
                 {
@@ -3430,14 +3416,6 @@ class CGenReport
                     $xmlSection = sprintf($xmlSection,
                                           $freezePanesCode,
                                           $t1);
-                                          
-                    $returnMsg["tmp_ConditionalFormatting"] = $xmlSection;
-                    $returnMsg["tmp_cmpMachineID"] = $cmpMachineID;
-                    
-                    //$xmlSection = sprintf($xmlSection,
-                    //                      $subjectNameFilterNumMax + 4, $subjectNameFilterNumMax + 4,
-                    //                      $subjectNameFilterNumMax + 6, $subjectNameFilterNumMax + 6,
-                    //                      $subjectNameFilterNumMax + 8, $subjectNameFilterNumMax + 8);
                 }
                 if (strlen($xmlSection) == 0)
                 {
@@ -3559,9 +3537,7 @@ class CGenReport
         if ($b1 == true)
         {
             // skip report
-            $returnMsg["errorCode"] = 1;
-            $returnMsg["compileFinished"] = 1;
-            $returnMsg["errorMsg"] = "report finished";
+            self::setCompileSuccessMsg("report finished");
             echo json_encode($returnMsg);
             return true;
         }
@@ -3621,9 +3597,7 @@ class CGenReport
             }
             //*/
             
-            $returnMsg["errorCode"] = 1;
-            $returnMsg["compileFinished"] = 1;
-            $returnMsg["errorMsg"] = "report finished";
+            self::setCompileSuccessMsg("report finished");
             echo json_encode($returnMsg);
             return null;
         }
@@ -3633,12 +3607,12 @@ class CGenReport
     
 	public function checkReportDataColumnNum()
     {
-        global $umdNameList;
+//        global $umdNameList;
         global $resultUmdOrder;
         //global $validUmdNum;
         global $reportUmdNum;
         global $cmpMachineID;
-        global $crossType;
+//        global $crossType;
         global $colMachineNum;
         
         $dataColumnNum = 0;
@@ -3718,81 +3692,33 @@ class CGenReport
     }
     
 	public function checkNeedCreateReportFile($_xmlFileName, $_tmpFileName, $_jsonFileName, $_jsonFileName2,
-                                              $_umdNum, $_startResultID, $_cmpMachineID, $_resultPos,
+                                              $_cmpMachineID,
                                               $_tempFileLineNumPos,
-                                              $_curCardName, $_tmpSysName,
-                                              $_cmpCardName, $_cmpSysName)
+                                              $_curCardName, $_tmpSysName)
 	{
         global $returnMsg;
         global $tempFileStartSheetLineNum;
-        global $startStyleID;
-        global $allStylesEndTag;
-        global $appendStyleList;
-        global $changeListNumList;
-        global $resultIDList;
-        global $reportTemplateDir;
-        global $umdNameList;
+
         global $resultUmdOrder;
-        //global $validUmdNum;
         global $reportUmdNum;
-        global $driverNameList;
         global $testNameList;
-        global $subTestNumList;
         global $subjectNameFilterNumMax;
-        global $checkNeedCreateReportFile;
         global $swtReportInfo;
         global $swtReportUmdInfo;
-        global $crossType;
-        global $curResultTime;
-        global $cmpBatchTime;
-        global $curMachineName;
-        global $cmpMachineName;
         global $tmpFileName1;
-        global $colMachineIDList;
-        global $colStartResultIDPosList;
         global $colMachineNum;
         global $colCardNameList;
         global $colSysNameList;
 
         $tempFileLineNumPos = $_tempFileLineNumPos;
-        if (!is_file(__DIR__ . "/" . $_xmlFileName))
+        if (!file_exists(__DIR__ . "/" . $_xmlFileName))
         {
-            // copy file template to modify
-            $xmlSection = file_get_contents(__DIR__ . "/" . $reportTemplateDir . "/sectionHead001.txt");
-            
-            if (strlen($xmlSection) == 0)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "template file missing, line: " . __LINE__;
-                echo json_encode($returnMsg);
-                return null;
-            }
+            self::createXmlFile(__DIR__ . "/" . $_xmlFileName);
 
-            $fileHandle = fopen(__DIR__ . "/" .$_xmlFileName, "w+");
-            
-            // append styles
-            fseek($fileHandle, 0, SEEK_SET);
-            fwrite($fileHandle, $xmlSection);
-            
-            // write additional styles
-            $this->writeAdditionalStyles($fileHandle);
-            
-            fclose($fileHandle);
-            
             // write flatdata head
-            if (file_exists(__DIR__ . "/" . $tmpFileName1) == false)
+            if (!file_exists(__DIR__ . "/" . $tmpFileName1))
             {
-                $templateFileName0 = $reportTemplateDir . "/sectionHead001.txt";
-                
-                $fileHandle = fopen(__DIR__ . "/" . $tmpFileName1, "w");
-                
-                // report head
-                $t1 = file_get_contents(__DIR__ . "/" . $templateFileName0);
-                fwrite($fileHandle, $t1);
-                // style end tag
-                $this->writeAdditionalStyles($fileHandle);
-                
-                fclose($fileHandle);
+                self::createXmlFile(__DIR__ . "/" . $tmpFileName1);
             }
             
             // feed report head info
@@ -3804,44 +3730,13 @@ class CGenReport
             
             // create tmp file
             $tempFileHandle = fopen(__DIR__ . "/" . $_tmpFileName, "w+");
-            $xmlSection = "";
-            $t1 = "";
-            //if (($_cmpMachineID != -1) ||
-            //    ($crossType == 2))
             if ($_cmpMachineID != -1)
             {
                 // if comparison with other card
                 // $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet002A1.txt");
                 //$xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet002A2a.txt");
                 // this sheet max 34 columns
-                
-                $curCardTitle = $_curCardName;
-                $cmpCardTitle = $_cmpCardName;
-                if ($_curCardName == $_cmpCardName)
-                {
-                    $curCardTitle .= "&#10;" . $_tmpSysName;
-                    $cmpCardTitle .= "&#10;" . $_cmpSysName;
-                }
-                
-                $curCardTitle2 = $_curCardName . " - " . $_tmpSysName;
-                $cmpCardTitle2 = $_cmpCardName . " - " . $_cmpSysName;
-                
-                $curCardTitle3 = $_curCardName;
-                $cmpCardTitle3 = $_cmpCardName;
-                
-                if ((strlen($curMachineName) > 0) &&
-                    (strlen($cmpMachineName) > 0) &&
-                    (strcmp($curMachineName, $cmpMachineName) != 0))
-                {
-                    $curCardTitle = $curMachineName;
-                    $cmpCardTitle = $cmpMachineName;
-                    
-                    $curCardTitle2 = $curMachineName;
-                    $cmpCardTitle2 = $cmpMachineName;
-                    
-                    $curCardTitle3 = $curMachineName;
-                    $cmpCardTitle3 = $cmpMachineName;
-                }
+
                 
                 $cardTitleList = $colCardNameList;
                 $hasRepeat = false;
@@ -3885,13 +3780,6 @@ class CGenReport
                 $curFirstRowAPIColumnID = 0;
                 for ($i = 0; $i < $reportUmdNum; $i++)
                 {
-                    //if (($resultUmdOrder[$i] == -1) ||
-                    //    ($resultUmdOrder[$reportUmdNum + $i] == -1))
-                    //{
-                    //    // absent api
-                    //    continue;
-                    //}
-                    
                     $tmpSkip = false;
                     for ($j = 0; $j < $colMachineNum; $j++)
                     {
@@ -3923,13 +3811,6 @@ class CGenReport
                 $curFirstRowAPIColumnID = 0;
                 for ($i = 0; $i < $reportUmdNum; $i++)
                 {
-                    //if (($resultUmdOrder[$i] == -1) ||
-                    //    ($resultUmdOrder[$reportUmdNum + $i] == -1))
-                    //{
-                    //    // absent api
-                    //    continue;
-                    //}
-                    
                     $tmpSkip = false;
                     for ($j = 0; $j < $colMachineNum; $j++)
                     {
@@ -3943,11 +3824,7 @@ class CGenReport
                     {
                         continue;
                     }
-                    
-                    //$t1 .= "    <Cell ss:StyleID=\"s87\"><Data ss:Type=\"String\">" . ($curCardTitle) . "</Data></Cell>" .
-                    //       "    <Cell ss:StyleID=\"s87\"><Data ss:Type=\"String\">" . ($cmpCardTitle3 . "&#10;vs&#10;" . $curCardTitle3) . "</Data></Cell>" .
-                    //       "    <Cell ss:StyleID=\"s87\"><Data ss:Type=\"String\">" . ($cmpCardTitle) . "</Data></Cell>";
-                           
+
                     for ($j = 0; $j < $colMachineNum; $j++)
                     {
                         if ($j == 0)
@@ -3975,13 +3852,6 @@ class CGenReport
                 $curFirstRowAPIColumnID = 0;
                 for ($i = 0; $i < $reportUmdNum; $i++)
                 {
-                    //if (($resultUmdOrder[$i] == -1) ||
-                    //    ($resultUmdOrder[$reportUmdNum + $i] == -1))
-                    //{
-                    //    // absent api
-                    //    continue;
-                    //}
-                    
                     $tmpSkip = false;
                     for ($j = 0; $j < $colMachineNum; $j++)
                     {
@@ -3995,11 +3865,7 @@ class CGenReport
                     {
                         continue;
                     }
-                    
-                    //$t1 .= "    <Cell ss:StyleID=\"s88\" ><Data ss:Type=\"String\">" . ($tmpReportInfo[$i]) . "</Data></Cell>" .
-                    //       "    <Cell ss:StyleID=\"s88\"/>" .
-                    //       "    <Cell ss:StyleID=\"s88\"/>";
-                           
+
                     for ($j = 0; $j < $colMachineNum; $j++)
                     {
                         if ($j == 0)
@@ -4020,7 +3886,6 @@ class CGenReport
             }
             else
             {
-                //$xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet002Aa.txt");
                 // this sheet max 21 columns
                 
                 $reportAPIComparisonHead = " <Worksheet ss:Name=\"Cross-API_Comparison\">" .
@@ -4152,79 +4017,70 @@ class CGenReport
             fclose($tempFileHandle);
             
             // create summary sheet temp file
-            //if ($_cmpMachineID != -1)
-            {
-                if ((file_exists($_jsonFileName) == false) ||
-                    (file_exists($_jsonFileName2) == false))
-                {
-                    $sectionPosList = array(0,
-                                            $reportUmdNum * 2,
-                                            $reportUmdNum * 2 + $reportUmdNum * 2,
-                                            $reportUmdNum * 2 + $reportUmdNum * 2 + 1,
-                                            $reportUmdNum * 2 + $reportUmdNum * 2 + 1 + $reportUmdNum * 8,
-                                            $reportUmdNum * 2 + $reportUmdNum * 2 + 1 + $reportUmdNum * 8 + $reportUmdNum * 2,
-                                            $reportUmdNum * 2 + $reportUmdNum * 2 + 1 + 
-                                            $reportUmdNum * 8 + $reportUmdNum * 2 + $reportUmdNum * 4
-                                            );
-                                   
-                    $tmpObj = array();
-                    
-                    foreach ($testNameList as $tmpName)
-                    {
-                        $tmpObj[$tmpName] = array_fill(0, $sectionPosList[6], -1);
+            if ((file_exists($_jsonFileName) == false) ||
+                (file_exists($_jsonFileName2) == false)) {
+                $sectionPosList = array(0,
+                    $reportUmdNum * 2,
+                    $reportUmdNum * 2 + $reportUmdNum * 2,
+                    $reportUmdNum * 2 + $reportUmdNum * 2 + 1,
+                    $reportUmdNum * 2 + $reportUmdNum * 2 + 1 + $reportUmdNum * 8,
+                    $reportUmdNum * 2 + $reportUmdNum * 2 + 1 + $reportUmdNum * 8 + $reportUmdNum * 2,
+                    $reportUmdNum * 2 + $reportUmdNum * 2 + 1 +
+                    $reportUmdNum * 8 + $reportUmdNum * 2 + $reportUmdNum * 4
+                );
 
-                        for ($i = 0; $i < $reportUmdNum; $i++)
-                        {
-                            $j = $i * 2;
-                            
-                            $tmpObj[$tmpName][$j] =     -1;
-                            $tmpObj[$tmpName][$j + 1] = -1;
-                            
-                            $tmpPos = $sectionPosList[1];
-                            $tmpObj[$tmpName][$tmpPos + $j] =     0;
-                            $tmpObj[$tmpName][$tmpPos + $j + 1] = 0;
-                            
-                            $tmpPos2 = $sectionPosList[2];
-                            $tmpObj[$tmpName][$tmpPos2] = 0;
-                            
-                            $tmpPos3 = $sectionPosList[3];
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4] =     -1;
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 1] = "";
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 2] = 0;
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 3] = 0;
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 4] = -1;
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 5] = "";
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 6] = 0;
-                            $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 7] = 0;
-                            
-                            $tmpPos4 = $sectionPosList[4];
-                            $tmpObj[$tmpName][$tmpPos4 + $j] =     "";
-                            $tmpObj[$tmpName][$tmpPos4 + $j + 1] = "";
-                            
-                            $tmpPos5 = $sectionPosList[5];
-                            $tmpObj[$tmpName][$tmpPos5 + $i * 4] =     0;
-                            $tmpObj[$tmpName][$tmpPos5 + $i * 4 + 1] = 0;
-                            $tmpObj[$tmpName][$tmpPos5 + $i * 4 + 2] = 0;
-                            $tmpObj[$tmpName][$tmpPos5 + $i * 4 + 3] = 0;
-                        }
-                    }
+                $tmpObj = array();
 
-                    $t1 = json_encode($tmpObj);
-                    
-                    if (file_exists(__DIR__ . "/" . $_jsonFileName) == false)
-                    {
-                        file_put_contents(__DIR__ . "/" . $_jsonFileName, $t1);
+                foreach ($testNameList as $tmpName) {
+                    $tmpObj[$tmpName] = array_fill(0, $sectionPosList[6], -1);
+
+                    for ($i = 0; $i < $reportUmdNum; $i++) {
+                        $j = $i * 2;
+
+                        $tmpObj[$tmpName][$j] = -1;
+                        $tmpObj[$tmpName][$j + 1] = -1;
+
+                        $tmpPos = $sectionPosList[1];
+                        $tmpObj[$tmpName][$tmpPos + $j] = 0;
+                        $tmpObj[$tmpName][$tmpPos + $j + 1] = 0;
+
+                        $tmpPos2 = $sectionPosList[2];
+                        $tmpObj[$tmpName][$tmpPos2] = 0;
+
+                        $tmpPos3 = $sectionPosList[3];
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4] = -1;
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 1] = "";
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 2] = 0;
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 3] = 0;
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 4] = -1;
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 5] = "";
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 6] = 0;
+                        $tmpObj[$tmpName][$tmpPos3 + $j * 4 + 7] = 0;
+
+                        $tmpPos4 = $sectionPosList[4];
+                        $tmpObj[$tmpName][$tmpPos4 + $j] = "";
+                        $tmpObj[$tmpName][$tmpPos4 + $j + 1] = "";
+
+                        $tmpPos5 = $sectionPosList[5];
+                        $tmpObj[$tmpName][$tmpPos5 + $i * 4] = 0;
+                        $tmpObj[$tmpName][$tmpPos5 + $i * 4 + 1] = 0;
+                        $tmpObj[$tmpName][$tmpPos5 + $i * 4 + 2] = 0;
+                        $tmpObj[$tmpName][$tmpPos5 + $i * 4 + 3] = 0;
                     }
-                    
-                    if (file_exists(__DIR__ . "/" . $_jsonFileName2) == false)
-                    {
-                        file_put_contents(__DIR__ . "/" . $_jsonFileName2, $t1);
-                    }
+                }
+
+                $t1 = json_encode($tmpObj);
+
+                if (file_exists(__DIR__ . "/" . $_jsonFileName) == false) {
+                    file_put_contents(__DIR__ . "/" . $_jsonFileName, $t1);
+                }
+
+                if (file_exists(__DIR__ . "/" . $_jsonFileName2) == false) {
+                    file_put_contents(__DIR__ . "/" . $_jsonFileName2, $t1);
                 }
             }
         }
         $returnSet = array();
-//        $returnSet["tempFileLineNumPos"] = $tempFileLineNumPos;
         $returnSet["tempFileLineNumPos"] = $tempFileLineNumPos;
         return $returnSet;
     }
@@ -4366,14 +4222,12 @@ class CGenReport
 	{
         global $returnMsg;
         global $testNameList;
-        global $subTestUmdDataMaskList;
         global $umdNum;
         global $reportUmdNum;
         global $subTestNumList;
         global $subTestNumMap;
         global $cmpSubTestNumList;
         global $umdOrder;
-        //global $validUmdNum;
         global $resultUmdOrder;
         global $umdNameList;
         global $resultIDList;
@@ -4427,8 +4281,6 @@ class CGenReport
                 $tmpAverageDataCode = "";
                 $tmpAverageDataCode2 = "";
                 
-                //$graphDataColumnNum = intval($dataColumnNum / 3);
-                
                 $isFirstColumn = true;
                 for ($i = 0; $i < $reportUmdNum; $i++)
                 {
@@ -4449,34 +4301,12 @@ class CGenReport
 
                     if ($isFirstColumn)
                     {
-                        //$tmpAverageDataCode = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $colMachineNum + 1) . 
-                        //                      "\" ss:StyleID=\"Default\"/>\n";
                         $tmpAverageDataCode = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1) . 
                                               "\" ss:StyleID=\"Default\"/>\n";
-
-                                               
-                        //for ($j = 1; $j < $colMachineNum; $j++)
-                        //{
-                        //    $tmpAverageDataCode2 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
-                        //                            $colCardNameList[$j - 1] . "/" . $colCardNameList[$j] . "</Data></Cell>\n";
-                        //}
-                                              
                         $isFirstColumn = false;
                     }
                     else
                     {
-                                               
-                        //for ($j = 1; $j < $colMachineNum; $j++)
-                        //{
-                        //    $tmpAverageDataCode2 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
-                        //                            $colCardNameList[$j - 1] . "/" . $colCardNameList[$j] . "</Data></Cell>\n";
-                        //}
-                        
-                        //for ($j = 1; $j < $colMachineNum; $j++)
-                        //{
-                        //    $tmpAverageDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . ($tmpReportUmdInfo[$i]) . "-" . 
-                        //                           $colCardNameList[0] . "/" . $colCardNameList[$j] . "</Data></Cell>\n";
-                        //}
                     }
                     for ($j = 1; $j < $colMachineNum; $j++)
                     {
@@ -4484,8 +4314,6 @@ class CGenReport
                                                $colCardNameList[0] . "/" . $colCardNameList[$j] . "</Data></Cell>\n";
                     }
                 }
-
-                //$t1 = $tmpAverageDataCode . $tmpAverageDataCode2;
                 $t1 = $tmpAverageDataCode;
             }
             else
@@ -4506,9 +4334,6 @@ class CGenReport
                     }
                     if ($isFirstColumn)
                     {
-                        //$tmpAverageDataCode = " <Cell ss:Index=\"" . 
-                        //                      ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum + 1) . 
-                        //                      "\" ss:StyleID=\"Default\"/>\n";
                         $tmpAverageDataCode = " <Cell ss:Index=\"" . 
                                               ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1) . 
                                               "\" ss:StyleID=\"Default\"/>\n";
@@ -4517,12 +4342,6 @@ class CGenReport
                     }
                     else
                     {
-                        //$tmpAverageDataCode2 .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . $tmpReportUmdInfo[$i - 1] . "/" . ($tmpReportUmdInfo[$i]) . 
-                        //                       "</Data></Cell>\n";
-                        
-                        //$tmpAverageDataCode .= " <Cell ss:StyleID=\"Default\"><Data ss:Type=\"String\">" . 
-                        //                       $tmpReportUmdInfo[$i] . "/" . ($tmpReportUmdInfo[$i - 1]) . 
-                        //                       "</Data></Cell>\n";
                     }
                     if ($columnIndex == ($graphDataColumnNum - 1))
                     {
@@ -4538,19 +4357,10 @@ class CGenReport
                     }
                     $columnIndex++;
                 }
-                
-                //$t1 = $tmpAverageDataCode . $tmpAverageDataCode2;
                 $t1 = $tmpAverageDataCode;
             }
             array_push($graphCells, $t1);
-            
-            $returnMsg["testNameList"] = $testNameList;
-            $returnMsg["subTestNumList"] = $subTestNumList;
             $n1 = -1;
-            
-            $returnMsg["subTestNumList"] = $subTestNumList;
-            $returnMsg["subTestNumMap"] = $subTestNumMap;
-            $returnMsg["cmpSubTestNumList"] = $cmpSubTestNumList;
             
             for ($i = 0; $i < count($testNameList); $i++)
             {
@@ -4597,13 +4407,6 @@ class CGenReport
                     $tmpColumnNum = 0;
                     for ($k = 0; $k < $reportUmdNum; $k++)
                     {
-                        //if (($resultUmdOrder[$k] == -1) ||
-                        //    ($resultUmdOrder[$reportUmdNum + $k] == -1))
-                        //{
-                        //    // absent api
-                        //    continue;
-                        //}
-                        
                         $tmpSkip = false;
                         for ($j = 0; $j < $colMachineNum; $j++)
                         {
@@ -4617,52 +4420,8 @@ class CGenReport
                         {
                             continue;
                         }
-                        
-                        //$tmpIndexCode = "";
-                        //if ($isFirstColumn)
-                        //{
-                        //    //$tmpIndexCode = "ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + 2 + $graphDataColumnNum) . "\"";
-                        //    $isFirstColumn = false;
-                        //    
-                        //                    
-                        //    $tmpValHas[$k] = " <Cell ss:StyleID=\"Default\" " .
-                        //                     "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) .
-                        //                     ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) . 
-                        //                     ")\">" .
-                        //                     "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                        //}
-                        //else
-                        //{
-                        //                    
-                        //    $tmpValHas[$k] = " <Cell ss:StyleID=\"Default\" " .
-                        //                     "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) .
-                        //                     ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) . 
-                        //                     ")+RC" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $colMachineNum + 2) . "\">" .
-                        //                     "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                        //                    
-                        //    $tmpValHas2[$k] = " <Cell ss:StyleID=\"Default\" " .
-                        //                      "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) .
-                        //                      ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $tmpColumnNum) . 
-                        //                      ")\">" .
-                        //                      "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                        //}
-                                        
-                                                         
-                        //for ($j = 1; $j < $colMachineNum; $j++)
                         for ($j = 0; $j < ($colMachineNum - 1); $j++)
                         {
-                            //$tmpValHas[$reportUmdNum * $j + $k] = " <Cell ss:StyleID=\"Default\" " .
-                            //                                 "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $j +  $tmpColumnNum) .
-                            //                                 ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $j + $tmpColumnNum) . 
-                            //                                 ")+RC" . (($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $colMachineNum + 2)) . "\">" .
-                            //                                 "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                                                             
-                            //$tmpValHas2[$reportUmdNum * $j + $k] = " <Cell ss:StyleID=\"Default\" " .
-                            //                                 "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $j +  $tmpColumnNum) .
-                            //                                 ":R[" . $n2 . "]C" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $j + $tmpColumnNum) . 
-                            //                                 ")\">" .
-                            //                                 "<Data ss:Type=\"Number\"></Data></Cell>\n";
-                            
                             $tmpValHas[$colMachineNum * $k + $j] = " <Cell ss:StyleID=\"Default\" " .
                                                              "ss:Formula=\"=AVERAGE(R[" . $n1 . "]C" . 
                                                              ($subjectNameFilterNumMax + 3 + ($colMachineNum * 2 - 1) * $k + $j * 2 + 1) .
@@ -4682,14 +4441,8 @@ class CGenReport
                         
                         for ($j = 0; $j < $colMachineNum; $j++)
                         {
-                            //$tmpVal[$reportUmdNum * $k + $j] = "";
-                            //$tmpVal[$colMachineNum * $k + $j] = "";
-                            
-                            //if ($resultUmdOrder[$reportUmdNum * $k + $j] != -1)
                             if ($resultUmdOrder[$reportUmdNum * $j + $k] != -1)
                             {
-                                //$tmpVal[$reportUmdNum * $k + $j] = $tmpValHas[$reportUmdNum * $k + $j];
-                                //$tmpVal2[$reportUmdNum * $k + $j] = $tmpValHas2[$reportUmdNum * $k + $j];
                                 $tmpVal[$colMachineNum * $k + $j] = $tmpValHas[$colMachineNum * $k + $j];
                             }
                         }
@@ -4697,7 +4450,6 @@ class CGenReport
                     
                     $returnMsg["tmpValHas_2"] = $tmpVal;
                         
-                    //$t1 = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1 + $graphDataColumnNum * $colMachineNum + 1) . 
                     $t1 = " <Cell ss:Index=\"" . ($subjectNameFilterNumMax + 3 + $dataColumnNum + 1) . 
                           "\" ss:StyleID=\"Default\"><Data ss:Type=\"String\">" .
                           $testNameList[$i] . "</Data></Cell>\n";
@@ -4706,27 +4458,11 @@ class CGenReport
                     
                     for ($k = 0; $k < $reportUmdNum; $k++)
                     {
-                        //$t1 .= $tmpVal[$k];
-                        //$t1 .= $tmpVal[$reportUmdNum + $k];
-                        
                         for ($j = 0; $j < $colMachineNum; $j++)
                         {
-                            //$t1 .= $tmpVal[$reportUmdNum * $j + $k];
                             $t1 .= $tmpVal[$colMachineNum * $k + $j];
                         }
                     }
-                          
-                    //for ($k = 0; $k < $reportUmdNum; $k++)
-                    //{
-                    //    //$t1 .= $tmpVal2[$k];
-                    //    //$t1 .= $tmpVal2[$reportUmdNum + $k];
-                    //    
-                    //    for ($j = 0; $j < $colMachineNum; $j++)
-                    //    {
-                    //        $t1 .= $tmpVal2[$reportUmdNum * $j + $k];
-                    //    }
-                    //}
-
                 }
                 else
                 {
@@ -4841,7 +4577,7 @@ class CGenReport
                 array_push($graphCells, $t1);
                 $n1 = $n2 + 2;
             }
-            $returnMsg["graphCells"] = $graphCells;
+//            $returnMsg["graphCells"] = $graphCells;
         }
 
         $returnSet = array();
@@ -4851,40 +4587,28 @@ class CGenReport
         return $returnSet;
     }
     
-	public function checkStartTest($_db, $_fileHandle, $_tempFileHandle,
+	public function checkStartTest($_fileHandle, $_tempFileHandle,
                                    $_nextSubTestPos, $_firstSubTestPos, $_curTestPos, 
                                    $_isCompStandard, $_cmpMachineID,
                                    $_lineNum, $_sheetLinePos, $_tempLineNum)
 	{
-//        global $returnMsg;
         global $startStyleID;
         global $graphCells;
         global $unitNameList;
         global $testNameList;
-//        global $subjectNameList;
         global $subjectNameFilterNumMax;
         global $subjectFilterNameList;
         global $startGraphDataLinePos;
         global $dataColumnNum;
         global $graphDataColumnNum;
-//        global $crossType;
-        //global $resultNoiseNum;
         global $historyBatchMaxNum;
-//        global $tableName01;
-//        global $resultIDList;
-//        global $resultPos;
         global $batchDateTextList;
         global $swtMicrobenchDocsTestNameUrl;
         global $tmpFileName1;
         global $reportTemplateDir;
         global $subTestNumList;
-//        global $colMachineIDList;
-//        global $colStartResultIDPosList;
         global $colMachineNum;
-//        global $colCardNameList;
-//        global $colSysNameList;
 
-//        $db = $_db;
         $lineNum = $_lineNum;
         $sheetLinePos = $_sheetLinePos;
         $tempLineNum = $_tempLineNum;
@@ -4930,29 +4654,6 @@ class CGenReport
             $tmpCode3 = "<Cell ss:StyleID=\"s" . ($startStyleID + 0) . "\"/>\n";
                         
             $tmpCode4 = "<Cell ss:StyleID=\"s" . ($startStyleID + 10) . "\"><Data ss:Type=\"String\">Variation</Data></Cell>\n";
-                        
-//            $ordinalNumberList = array("1st",
-//                                       "2nd",
-//                                       "3rd",
-//                                       "4th",
-//                                       "5th",
-//                                       "6th",
-//                                       "7th",
-//                                       "8th",
-//                                       "9th",
-//                                       "10th",
-//                                       "11th",
-//                                       "12th",
-//                                       "13th",
-//                                       "14th",
-//                                       "15th");
-//
-//            $ordinalNameList = array("Current",
-//                                     "Previous1",
-//                                     "Previous2",
-//                                     "Previous3",
-//                                     "Previous4",
-//                                     "Previous5");
                                        
             $tmpCode5 = "";
             $tmpCode6 = "";
@@ -5191,11 +4892,11 @@ class CGenReport
             $cardNameKeys = array_keys($cardNameList[$i], $cardNameList[0][$_resultPos]);
             $sysNameKeys = array_keys($sysNameList[$i], $sysNameList[0][$_resultPos]);
             $driverNameKeys = array_keys($driverNameList[$i], $driverNameList[0][$_resultPos]);
-            $returnMsg["enter01"] = 1;
+//            $returnMsg["enter01"] = 1;
 			$tmpMachineNum = intval(count($driverNameList[$i]) / $reportUmdNum);
             if (count($driverNameKeys) < $tmpMachineNum)
             {
-                $returnMsg["enter02"] = 2;
+//                $returnMsg["enter02"] = 2;
                 $tmpCount = intval(count($swtOldUmdNameMatchList) / 2);
                 for ($j = 0; $j < $tmpCount; $j++)
                 {
@@ -5213,8 +4914,8 @@ class CGenReport
 								}
 							}
 							
-							$returnMsg["enter03"] = 3;
-							$returnMsg["driverNameKeys"] = $driverNameKeys;
+//							$returnMsg["enter03"] = 3;
+//							$returnMsg["driverNameKeys"] = $driverNameKeys;
                             //break;
 							if (count($driverNameKeys) >= $tmpMachineNum)
 							{
@@ -5239,8 +4940,8 @@ class CGenReport
             }
             else
             {
-                $returnMsg["commonKeys"] = $commonKeys;
-                $returnMsg["resultIDList"] = $resultIDList;
+//                $returnMsg["commonKeys"] = $commonKeys;
+//                $returnMsg["resultIDList"] = $resultIDList;
                 array_push($historyResultIDList, $resultIDList[$i][$commonKeys[0]]);
             }
         }
@@ -5601,7 +5302,7 @@ class CGenReport
         }
         
         
-        $returnMsg["dataNum"] = $dataNum;
+//        $returnMsg["dataNum"] = $dataNum;
         
         fwrite($_fileHandle, $t1);
 
@@ -5883,7 +5584,7 @@ class CGenReport
         global $jsonFileName;
         global $jsonFileName2;
         global $reportTemplateDir;
-        global $subTestUmdDataMaskList;
+//        global $subTestUmdDataMaskList;
         global $dataColumnNum;
         global $cmpMachineID;
         global $curMachineID;
@@ -6023,7 +5724,7 @@ class CGenReport
         $tmpJson["cmpBatchTime"] = $cmpBatchTime;
         // use DX11, DX12, vulkan mask of Alu as overall mask
         // subTestUmdDataMaskList[0]
-        $tmpMask = $subTestUmdDataMaskList[0];
+//        $tmpMask = $subTestUmdDataMaskList[0];
         $dropArea = array();
 
         $tmpJson["dropArea"] = $dropArea;
@@ -6136,13 +5837,13 @@ class CGenReport
                 }
             }
             
-            $returnMsg["dataIndexList"] = $dataIndexList;
-            $returnMsg["umdOrder"] = $umdOrder;
-            $returnMsg["resultIDList[0]"] = $resultIDList[0];
-            $returnMsg["driverNameList[0]"] = $driverNameList[0];
-            $returnMsg["umdNameList"] = $umdNameList;
-            $returnMsg["_startResultID"] = $_startResultID;
-            $returnMsg["_cmpStartResultID"] = $_cmpStartResultID;
+//            $returnMsg["dataIndexList"] = $dataIndexList;
+//            $returnMsg["umdOrder"] = $umdOrder;
+//            $returnMsg["resultIDList[0]"] = $resultIDList[0];
+//            $returnMsg["driverNameList[0]"] = $driverNameList[0];
+//            $returnMsg["umdNameList"] = $umdNameList;
+//            $returnMsg["_startResultID"] = $_startResultID;
+//            $returnMsg["_cmpStartResultID"] = $_cmpStartResultID;
             
             array_push($params1, $resultIDList[0][$_resultPos]);
             $t4 = implode(",", $selectKeyList);
@@ -6159,11 +5860,11 @@ class CGenReport
                 return null;
             }
             
-            $returnMsg["umdNameList"] = $umdNameList;
-            $returnMsg["umdName"] = $umdNameList[1];
-            $returnMsg["sql1"] = $sql1;
-            $returnMsg["params1"] = $params1;
-            $returnMsg["tmp002"] = "";
+//            $returnMsg["umdNameList"] = $umdNameList;
+//            $returnMsg["umdName"] = $umdNameList[1];
+//            $returnMsg["sql1"] = $sql1;
+//            $returnMsg["params1"] = $params1;
+//            $returnMsg["tmp002"] = "";
             
             
             $summaryJson = array();
