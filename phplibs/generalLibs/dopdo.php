@@ -13,37 +13,30 @@ class CPdoMySQL
 	public $dbUN = "";
 	public $dbPW = "";
     public $hasResult = false;
-    
-	public function __construct()
-	{
+
+    public function __construct()
+    {
         global $db_server;
         global $db_dbname;
         global $db_username;
         global $db_password;
 
         $this->dbResult = null;
-        $dsn = "mysql:dbname=" . $db_dbname . ";host=" . $db_server;
-        
+        $dsn = "mysql:dbname=$db_dbname;host=$db_server;charset=utf8";
+
         $this->dbError = null;
-        try
-        {
-            $this->dbHandle = new PDO($dsn, $db_username, $db_password, array(PDO::MYSQL_ATTR_LOCAL_INFILE => true));
-                                                                              // PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true)
-                                                                              // PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET utf8, NAMES utf8;"
-        }
-        catch (PDOException $e)
-        {
+        try {
+            $this->dbHandle = new PDO($dsn, $db_username, $db_password, array(
+                PDO::MYSQL_ATTR_LOCAL_INFILE => true,
+                PDO::ATTR_PERSISTENT => true,
+                PDO::ATTR_EMULATE_PREPARES => false
+            ));
+            // PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true)
+            // PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET utf8, NAMES utf8;"
+        } catch (PDOException $e) {
             $this->dbError = $e->getMessage();
         }
-        if ($this->dbHandle != null)
-        {
-            $this->dbHandle->exec("SET NAMES utf8");
-            //$this->dbHandle->query("SET NAMES utf8");
-            // PDO::MYSQL_ATTR_USE_BUFFERED_QUERY
-            //$this->dbHandle->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
-            $this->dbHandle->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        }
-	}
+    }
 	public function __destruct()
 	{
         $this->clearResult();
