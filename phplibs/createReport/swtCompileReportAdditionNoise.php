@@ -245,14 +245,12 @@ $colMachineNum = count($colMachineIDList);
 $reportUmdNum = count($umdNameList);
 $startResultID = intval($resultPos / $umdNum) * $umdNum;
 
-$cacheName = "getStandardResultID";
-$cacheKey = [$resultIDList, $driverNameList, $umdStandardOrder, $reportUmdNum, $uniqueUmdNameList, $startResultID];
-if ($cache->hasValue($cacheName, $cacheKey)) {
-    $cardStandardResultPos = $cache->getValue($cacheName, $cacheKey);
-} else {
-    $cardStandardResultPos = $xmlWriter->getStandardResultID($startResultID);
-    $cache->setValue($cacheName, $cardStandardResultPos, $cacheKey);
-}
+$cardStandardResultPos = $cache->getCachedValue("getStandardResultID",
+    [$resultIDList, $driverNameList, $umdStandardOrder, $reportUmdNum, $uniqueUmdNameList, $startResultID],
+    function () {
+        global $xmlWriter, $startResultID;
+        $xmlWriter->getStandardResultID($startResultID);
+    });
 //$cardStandardResultID = $resultIDList[0][$cardStandardResultPos];
 
 $returnSet = $xmlWriter->getSubTestNum($db, $resultPos, $tableName01, $subTestNum);
