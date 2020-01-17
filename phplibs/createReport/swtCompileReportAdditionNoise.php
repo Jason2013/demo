@@ -361,14 +361,12 @@ $cmpSubTestNumList = $returnSet["cmpSubTestNumList"];
 // skip these test in report compare sheet and graph
 $skipTestNameList = $returnSet["skipTestNameList"];
 
-$cacheName = "getStandardUmdTestCaseNumList";
-$cacheKey = [$testNameList, $db_mis_table_name_string001, $resultIDList, $cardStandardResultPos];
-if ($cache->hasValue($cacheName, $cacheKey)) {
-    $standardUmdTestCaseNumList = $cache->getValue($cacheName, $cacheKey);
-} else {
-    $standardUmdTestCaseNumList = $xmlWriter->getStandardUmdTestCaseNumList($db);
-    $cache->setValue($cacheName, $standardUmdTestCaseNumList, $cacheKey);
-}
+$standardUmdTestCaseNumList = $cache->getCachedValue("getStandardUmdTestCaseNumList",
+    [$testNameList, $db_mis_table_name_string001, $resultIDList, $cardStandardResultPos],
+    function () {
+        global $xmlWriter, $db;
+        return $xmlWriter->getStandardUmdTestCaseNumList($db);
+    });
 
 // generate seperate cards report
 if (($subTestNum == 0) ||
