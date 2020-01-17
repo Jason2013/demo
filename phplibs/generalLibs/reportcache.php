@@ -6,6 +6,7 @@ namespace Utilities {
     {
         private $cacheFileName;
         private $values;
+        private $dirty;
 
         public function __construct($cacheFileName)
         {
@@ -13,11 +14,14 @@ namespace Utilities {
             if (file_exists($this->cacheFileName)) {
                 $this->values = unserialize(file_get_contents($this->cacheFileName));
             }
+            $this->dirty = false;
         }
 
         public function __destruct()
         {
-            file_put_contents($this->cacheFileName, serialize($this->values));
+            if ($this->dirty) {
+                file_put_contents($this->cacheFileName, serialize($this->values));
+            }
         }
 
         private static function cacheID($name, $key = null)
