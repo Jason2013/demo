@@ -46,6 +46,20 @@ namespace Utilities {
         public function setValue($name, $value, $key = null)
         {
             $this->values[self::cacheID($name, $key)] = $value;
+            $this->dirty = true;
+        }
+
+        public function getCachedValue($name, $key, $func)
+        {
+            $cacheID = self::cacheID($name, $key);
+            if (isset($this->values[$cacheID])) {
+                return $this->values[$cacheID];
+            }
+            else {
+                $ret = $func();
+                $this->values[$cacheID] = $ret;
+                return $ret;
+            }
         }
     }
 
