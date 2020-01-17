@@ -58,6 +58,7 @@ namespace Utilities {
             else {
                 $ret = $func();
                 $this->values[$cacheID] = $ret;
+                $this->dirty = true;
                 return $ret;
             }
         }
