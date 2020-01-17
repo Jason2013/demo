@@ -320,6 +320,9 @@ final class CGenReportTest extends TestCase
         $db_server = "Srdcvmysqldp1";
 
         $filename = __DIR__ . '/data/reportCache.txt';
+        if (file_exists($filename)) {
+            unlink($filename);
+        }
 
         $cache = new Utilities\ReportCache($filename);
 
@@ -331,5 +334,12 @@ final class CGenReportTest extends TestCase
         $cache->setValue("db_server", $db_server, $keys);
         $this->assertTrue($cache->hasValue("db_server"), $keys);
         $this->assertEquals($db_server, $cache->getValue("db_server", $keys));
+
+        $keys = [3, 5];
+        $ret  =$cache->getCachedValue("sum", $keys, function (){ return 3+5;});
+        $this->assertEquals(8, $ret);
+        $ret  =$cache->getCachedValue("sum", $keys, function (){ return 3+5;});
+        $this->assertEquals(8, $ret);
+
     }
 }
