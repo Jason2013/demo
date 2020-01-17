@@ -241,7 +241,7 @@ $cardStandardResultPos = $cache->getCachedValue("getStandardResultID",
     [$resultIDList, $driverNameList, $umdStandardOrder, $reportUmdNum, $uniqueUmdNameList, $startResultID],
     function () {
         global $xmlWriter, $startResultID;
-        $xmlWriter->getStandardResultID($startResultID);
+        return $xmlWriter->getStandardResultID($startResultID);
     });
 //$cardStandardResultID = $resultIDList[0][$cardStandardResultPos];
 
