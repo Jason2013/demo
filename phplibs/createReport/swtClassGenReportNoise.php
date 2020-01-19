@@ -4084,28 +4084,17 @@ class CGenReport
         $returnSet["tempFileLineNumPos"] = $tempFileLineNumPos;
         return $returnSet;
     }
-    
-	public function checkStartSheet($_fileHandle, $_tempFileHandle,
+
+    public function checkStartSheet($_fileHandle, $_tempFileHandle,
                                     $_curTestPos, $_nextSubTestPos, $_firstTestPos, $_firstSubTestPos,
-                                    $_lineNumPos, $_resultPos, $_umdNum,
-                                    $_tmpUmdName, $_tmpCardName, $_tmpSysName)
-	{
+                                    $_lineNumPos,
+                                    $_tmpUmdName)
+    {
         global $returnMsg;
         global $historyBatchMaxNum;
-        global $resultIDList;
-        global $mainLineNameList;
-        global $sClockNameList;
-        global $mClockNameList;
-        global $gpuMemNameList;
-        global $cpuNameList;
-        global $cardNameList;
-        global $sysNameList;
-        global $resultTimeList;
-        global $changeListNumList;
         global $startSheetLineNum;
         global $reportTemplateDir;
         global $subjectNameFilterNumMax;
-        //global $resultNoiseNum;
 
         $lineNumPos = $_lineNumPos;
         
@@ -4222,32 +4211,32 @@ class CGenReport
 	{
         global $returnMsg;
         global $testNameList;
-        global $umdNum;
+//        global $umdNum;
         global $reportUmdNum;
         global $subTestNumList;
         global $subTestNumMap;
         global $cmpSubTestNumList;
-        global $umdOrder;
+//        global $umdOrder;
         global $resultUmdOrder;
         global $umdNameList;
-        global $resultIDList;
+//        global $resultIDList;
         global $subjectNameFilterNumMax;
-        global $driverNameList;
-        global $startResultID;
+//        global $driverNameList;
+//        global $startResultID;
         global $dataColumnNum;
         global $graphDataColumnNum;
-        global $swtReportInfo;
+//        global $swtReportInfo;
         global $swtReportUmdInfo;
-        global $crossType;
-        global $curResultTime;
-        global $cmpBatchTime;
+//        global $crossType;
+//        global $curResultTime;
+//        global $cmpBatchTime;
         global $curMachineName;
         global $cmpMachineName;
-        global $colMachineIDList;
-        global $colStartResultIDPosList;
+//        global $colMachineIDList;
+//        global $colStartResultIDPosList;
         global $colMachineNum;
         global $colCardNameList;
-        global $colSysNameList;
+//        global $colSysNameList;
 
         $graphCells = $_graphCells;
 

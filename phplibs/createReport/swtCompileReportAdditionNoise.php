@@ -433,11 +433,11 @@ if (($subTestNum == 0) ||
 
             fseek($fileHandle, 0, SEEK_END);
             fseek($tempFileHandle, 0, SEEK_END);
-            
+
             $returnSet = $xmlWriter->checkStartSheet($fileHandle, $tempFileHandle,
-                                                     $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
-                                                     $lineNumPos, $resultPos, $umdNum,
-                                                     $tmpUmdName, $tmpCardName, $tmpSysName);
+                $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
+                $lineNumPos,
+                $tmpUmdName);
             if ($returnSet === null)
             {
                 return;
@@ -530,11 +530,11 @@ else
         $firstTestPos = $curTestPos;
         $firstSubTestPos = $nextSubTestPos;
     }
-    
+
     $returnSet = $xmlWriter->checkStartSheet($fileHandle, $tempFileHandle,
-                                             $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
-                                             $lineNumPos, $resultPos, $umdNum,
-                                             $tmpUmdName, $tmpCardName, $tmpSysName);
+        $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
+        $lineNumPos,
+        $tmpUmdName);
     if ($returnSet === null)
     {
         return;
