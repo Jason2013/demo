@@ -169,6 +169,7 @@ if ($fileID < count($oldReportXLSXList))
         try
         {
             $excel = new COM("Excel.Application");
+            $excel->Visible = 1;
             
             $workBook = $excel->WorkBooks->Open("" . __dir__ . "/" . $tmpPath);
             
@@ -187,7 +188,8 @@ if ($fileID < count($oldReportXLSXList))
 
             $excel->WorkBooks->Close();
             $excel->Quit();
-            
+            $excel = null;
+
             unlink($tmpVBAPath);
 
         }
@@ -198,6 +200,12 @@ if ($fileID < count($oldReportXLSXList))
             
             echo json_encode($returnMsg);
             return;
+        }
+        finally
+        {
+            if (isset($excel)) {
+                $excel->Quit();
+            }
         }
     }
     else
@@ -231,6 +239,7 @@ if ($fileID < count($oldReportXLSXList))
         
                 // add graph
                 $excel = new COM("Excel.Application");
+                $excel->Visible = 1;
                 
                 $workBook = $excel->WorkBooks->Open("" . __dir__ . "/" . $tmpPath);
                 
@@ -466,6 +475,7 @@ if ($fileID < count($oldReportXLSXList))
 
                 $excel->WorkBooks->Close();
                 $excel->Quit();
+                $excel = null;
                 
                 
                 if ((strlen($vulkanReportName) > 0) &&
@@ -489,6 +499,12 @@ if ($fileID < count($oldReportXLSXList))
             
             echo json_encode($returnMsg);
             return;
+        }
+        finally
+        {
+            if (isset($excel)) {
+                $excel->Quit();
+            }
         }
     }
     
