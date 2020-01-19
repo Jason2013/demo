@@ -436,13 +436,13 @@ if (($subTestNum == 0) ||
 
             $returnSet = $xmlWriter->checkStartSheet($fileHandle, $tempFileHandle,
                 $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
-                $lineNumPos,
+//                $lineNumPos,
                 $tmpUmdName);
-            if ($returnSet === null)
-            {
-                return;
-            }
-            $lineNumPos = $returnSet["lineNumPos"];
+//            if ($returnSet === null)
+//            {
+//                return;
+//            }
+//            $lineNumPos = $returnSet["lineNumPos"];
             
             
             //$fileHandle = fopen($xmlFileName, "r+");
@@ -533,13 +533,13 @@ else
 
     $returnSet = $xmlWriter->checkStartSheet($fileHandle, $tempFileHandle,
         $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
-        $lineNumPos,
+//        $lineNumPos,
         $tmpUmdName);
-    if ($returnSet === null)
-    {
-        return;
-    }
-    $lineNumPos = $returnSet["lineNumPos"];
+//    if ($returnSet === null)
+//    {
+//        return;
+//    }
+//    $lineNumPos = $returnSet["lineNumPos"];
     
     $lineNum = 0;
     $tempLineNum = 0;
@@ -578,16 +578,16 @@ else
     $standardTestCaseIDList = $returnSet["standardTestCaseIDList"];
 
     
-    fseek($fileHandle, $lineNumPos, SEEK_SET);
-    // line num is 10 digis number, like: 0000000011
-    $t1 = fread($fileHandle, 10);
-    $n1 = intval($t1);
-    $n1 += $lineNum;
-    
-    fseek($fileHandle, $lineNumPos, SEEK_SET);
-    $t1 = sprintf("%010d", $n1);
-    fwrite($fileHandle, $t1);
-    fclose($fileHandle);
+//    fseek($fileHandle, $lineNumPos, SEEK_SET);
+//    // line num is 10 digis number, like: 0000000011
+//    $t1 = fread($fileHandle, 10);
+//    $n1 = intval($t1);
+//    $n1 += $lineNum;
+//
+//    fseek($fileHandle, $lineNumPos, SEEK_SET);
+//    $t1 = sprintf("%010d", $n1);
+//    fwrite($fileHandle, $t1);
+//    fclose($fileHandle);
     
     $returnSet = $xmlWriter->writeReportCompareData($db, $tempFileHandle, $reportFolder,
                                                     $isCompStandard, $umdNum, $tempFileLineNumPos,

@@ -2381,7 +2381,7 @@ class CGenReport
         }
         
         $tmpDestFileHandle = fopen($tmpSrcPath, "r");
-        fseek($tmpDestFileHandle, 0, SEEK_SET);
+//        fseek($tmpDestFileHandle, 0, SEEK_SET);
         
         //if ($cmpStartResultID != -1)
         
@@ -3286,18 +3286,18 @@ class CGenReport
         global $cardNameList;
         global $sysNameList;
         global $reportTemplateDir;
-        global $cmpStartResultID;
+//        global $cmpStartResultID;
         global $subjectNameFilterNumMax;
         global $dataColumnNum;
         global $graphDataColumnNum;
         global $cmpMachineID;
-        global $reportUmdNum;
-        global $startResultID;
-        global $driverNameList;
-        global $swtReportInfo;
-        global $swtReportUmdInfo;
-        global $resultUmdOrder;
-        global $crossType;
+//        global $reportUmdNum;
+//        global $startResultID;
+//        global $driverNameList;
+//        global $swtReportInfo;
+//        global $swtReportUmdInfo;
+//        global $resultUmdOrder;
+//        global $crossType;
         global $colMachineNum;
 
         $sheetLinePos = $_sheetLinePos;
@@ -3766,7 +3766,7 @@ class CGenReport
                 
                 // sheet head, comparison
                 $reportCardComparisonHead = " <Worksheet ss:Name=\"Cross-API_Comparison\">" .
-                                            "  <Table ss:ExpandedRowCount=\"%010d\" x:FullColumns=\"1\"" .
+                                            "  <Table x:FullColumns=\"1\"" .
                                             "   x:FullRows=\"1\" ss:StyleID=\"s63\" ss:DefaultRowHeight=\"15\">" .
                                             "   <Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"60\"/>" .
                                             "   <Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"60\"/>" .
@@ -3774,8 +3774,8 @@ class CGenReport
                                             "\" ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"60\"" .
                                             "  ss:Span=\"11\"/>";
                                         
-                $t1 = sprintf($reportCardComparisonHead,
-                              $tempFileStartSheetLineNum);
+                $t1 = $reportCardComparisonHead;//sprintf($reportCardComparisonHead,
+//                              $tempFileStartSheetLineNum);
                 // first row
                 $t1 .= "   <Row ss:StyleID=\"Default\">" .
                        "    <Cell ss:StyleID=\"s84\"/>" .
@@ -3895,12 +3895,12 @@ class CGenReport
                 // this sheet max 21 columns
                 
                 $reportAPIComparisonHead = " <Worksheet ss:Name=\"Cross-API_Comparison\">" .
-                                           "  <Table ss:ExpandedRowCount=\"%010d\" x:FullColumns=\"1\"" .
+                                           "  <Table x:FullColumns=\"1\"" .
                                            "   x:FullRows=\"1\" ss:StyleID=\"s63\" ss:DefaultRowHeight=\"15\">" .
                                            "   <Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"60\"/>" .
                                            "   <Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"60\"/>";
                 
-                $t1 = sprintf($reportAPIComparisonHead, $tempFileStartSheetLineNum);
+                $t1 = $reportAPIComparisonHead;//sprintf($reportAPIComparisonHead, $tempFileStartSheetLineNum);
                 
                 $t1 .= "   <Row ss:StyleID=\"Default\">" .
                        "    <Cell ss:StyleID=\"s84\"/>" .
@@ -4007,19 +4007,19 @@ class CGenReport
                 
             }
 
-            $t2 = sprintf("\"%010d\"", $tempFileStartSheetLineNum);
-            $n1 = strpos($t1, $t2);
-            if ($n1 === false)
-            {
-                fclose($tempFileHandle);
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "template file content invalid, line: " . __LINE__;
-                echo json_encode($returnMsg);
-                return null;
-            }
-            // line num pos - strlen("\"")
-            $tempFileLineNumPos = 0 + $n1 + 1;
-            fwrite($tempFileHandle, $t1);
+//            $t2 = sprintf("\"%010d\"", $tempFileStartSheetLineNum);
+//            $n1 = strpos($t1, $t2);
+//            if ($n1 === false)
+//            {
+//                fclose($tempFileHandle);
+//                $returnMsg["errorCode"] = 0;
+//                $returnMsg["errorMsg"] = "template file content invalid, line: " . __LINE__;
+//                echo json_encode($returnMsg);
+//                return null;
+//            }
+//            // line num pos - strlen("\"")
+//            $tempFileLineNumPos = 0 + $n1 + 1;
+//            fwrite($tempFileHandle, $t1);
             fclose($tempFileHandle);
             
             // create summary sheet temp file
@@ -4093,16 +4093,16 @@ class CGenReport
 
     public function checkStartSheet($_fileHandle, $_tempFileHandle,
                                     $_curTestPos, $_nextSubTestPos, $_firstTestPos, $_firstSubTestPos,
-                                    $_lineNumPos,
+//                                    $_lineNumPos,
                                     $_tmpUmdName)
     {
         global $returnMsg;
         global $historyBatchMaxNum;
-        global $startSheetLineNum;
+//        global $startSheetLineNum;
         global $reportTemplateDir;
         global $subjectNameFilterNumMax;
 
-        $lineNumPos = $_lineNumPos;
+//        $lineNumPos = $_lineNumPos;
         
         if (($_curTestPos     == $_firstTestPos) &&
             ($_nextSubTestPos == $_firstSubTestPos))
@@ -4146,26 +4146,26 @@ class CGenReport
                   "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"100\"/>\n";
                   
             
-            $t1 = sprintf($xmlSection, $_tmpUmdName, $startSheetLineNum, $t3);
-                          
-            $t2 = sprintf("\"%010d\"", $startSheetLineNum);
-            $n1 = strpos($t1, $t2);
-            if ($n1 === false)
-            {
-                fclose($_fileHandle);
-                fclose($_tempFileHandle);
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "template file content invalid, line: " . __LINE__;
-                echo json_encode($returnMsg);
-                return null;
-            }
+            $t1 = sprintf($xmlSection, $_tmpUmdName, $t3);
+
+//            $t2 = sprintf("\"%010d\"", $startSheetLineNum);
+//            $n1 = strpos($t1, $t2);
+//            if ($n1 === false)
+//            {
+//                fclose($_fileHandle);
+//                fclose($_tempFileHandle);
+//                $returnMsg["errorCode"] = 0;
+//                $returnMsg["errorMsg"] = "template file content invalid, line: " . __LINE__;
+//                echo json_encode($returnMsg);
+//                return null;
+//            }
             // line num pos - strlen("\"")
-            $lineNumPos = ftell($_fileHandle) + $n1 + 1;
+//            $lineNumPos = ftell($_fileHandle) + $n1 + 1;
             fwrite($_fileHandle, $t1);
         }
 
         $returnSet = array();
-        $returnSet["lineNumPos"] = $lineNumPos;
+//        $returnSet["lineNumPos"] = $lineNumPos;
         return $returnSet;
     }
     
@@ -6380,16 +6380,16 @@ class CGenReport
             
             fwrite($tempFileHandle, $t1);
             
-            fseek($tempFileHandle, $_tempFileLineNumPos, SEEK_SET);
-            // line num is 10 digis number, like: 0000000011
-            $t1 = fread($tempFileHandle, 10);
-            $n1 = intval($t1);
-            $n1 += $_tempLineNum;
-            //$sheetLinePos = $n1;
-            fseek($tempFileHandle, $_tempFileLineNumPos, SEEK_SET);
-            $t1 = sprintf("%010d", $n1);
-            //$t1 = "1234567890";
-            fwrite($tempFileHandle, $t1);
+//            fseek($tempFileHandle, $_tempFileLineNumPos, SEEK_SET);
+//            // line num is 10 digis number, like: 0000000011
+//            $t1 = fread($tempFileHandle, 10);
+//            $n1 = intval($t1);
+//            $n1 += $_tempLineNum;
+//            //$sheetLinePos = $n1;
+//            fseek($tempFileHandle, $_tempFileLineNumPos, SEEK_SET);
+//            $t1 = sprintf("%010d", $n1);
+//            //$t1 = "1234567890";
+//            fwrite($tempFileHandle, $t1);
             
             // write flatdata sheet
             if (file_exists($tmpFileName1))
