@@ -354,7 +354,6 @@ class CGenReport
                             "<NumberFormat ss:Format=\"Percent\"/>\n" .
                             "</Style>\n";
 
-
         $appendStyleList = array($styleBlackBar, $styleBlank,
                                  $styleA, $styleB,
                                  $styleData, $styleRate,
@@ -437,7 +436,6 @@ class CGenReport
         global $colMachineIDOrderList;
         global $colMachineIDOrderIndexList;
 
-
         $machineIDPairList = array();
         if (strlen($_machineIDPair) > 0)
         {
@@ -451,7 +449,6 @@ class CGenReport
         $machineIDBatchPairMap = array();
 
         $checkedMachineIDList = explode(",", $_checkedMachineIDList);
-
 
 
         foreach ($colMachineIDOrderList as $tmpID)
@@ -643,7 +640,6 @@ class CGenReport
                         "ORDER BY t0.insert_time DESC LIMIT " . $historyBatchMaxNum . "";
             }
         }
-
 
         if ($db->QueryDB($sql1, $params1) == null)
         {
@@ -1056,7 +1052,6 @@ class CGenReport
             echo json_encode($returnMsg);
             return null;
         }
-
 
         $params1 = array();
         $sql1 = "SELECT card_id, sys_id " .
@@ -1563,7 +1558,6 @@ class CGenReport
             }
         }
 
-
         $tmpOrderIndex = -1;
         $tmpKey = -1;
         foreach ($colMachineIDOrderIndexList as $k => $v)
@@ -1765,7 +1759,6 @@ class CGenReport
             $subTestNum = $standardTestCaseNum;
         }
 
-
         $returnSet = array();
         $returnSet["subTestNum"] = $subTestNum;
         $returnSet["standardTestCaseNum"] = $standardTestCaseNum;
@@ -1817,7 +1810,6 @@ class CGenReport
                 $tmpSubTestNum = intval($row1[0]);
                 array_push($subTestNumList, $tmpSubTestNum);
                 $subTestNumMap[$testNameList[$i]] = intval($tmpSubTestNum);
-
 
                 if ($_cmpStartResultID != -1)
                 {
@@ -1959,7 +1951,6 @@ class CGenReport
         return $returnSet;
     }
 
-
     public function getStandardUmdTestCaseNumList($_db)
     {
         global $testNameList;
@@ -1968,7 +1959,6 @@ class CGenReport
         global $cardStandardResultPos;
 
         $db = $_db;
-
 
         $tmpTestCaseList = array();
         for ($i = 0; $i < count($testNameList); $i++)
@@ -2034,7 +2024,6 @@ class CGenReport
         global $db;
         global $historyBatchMaxNum;
         global $batchDateTextList;
-
 
         $allDataList = array();
 
@@ -2201,7 +2190,6 @@ class CGenReport
             fwrite($_fileHandle, $xmlSection);
         }
 
-
         return;
 
         $tmpJsonPath = $reportFolder . "/" . $swtTempReportConfigJsonName2;
@@ -2309,7 +2297,6 @@ class CGenReport
         }
 
         fclose($tmpDestFileHandle);
-
 
         if ($hasLines > 0)
         {
@@ -3469,7 +3456,6 @@ class CGenReport
             if ($_cmpMachineID != -1)
             {
 
-
                 $cardTitleList = $colCardNameList;
                 $hasRepeat = false;
 
@@ -3630,7 +3616,6 @@ class CGenReport
                        "    <Cell ss:StyleID=\"s84\"/>" .
                        "    <Cell ss:StyleID=\"s84\" ss:MergeAcross=\"" . ($subjectNameFilterNumMax - 0) .
                        "\" ><Data ss:Type=\"String\">" . ($_curCardName . " - " . $_tmpSysName) . "</Data></Cell>";
-
 
                 $curFirstRowAPIColumnID = 0;
                 for ($i = 0; $i < $reportUmdNum; $i++)
@@ -3812,7 +3797,6 @@ class CGenReport
         global $reportTemplateDir;
         global $subjectNameFilterNumMax;
 
-
         if (($_curTestPos     == $_firstTestPos) &&
             ($_nextSubTestPos == $_firstSubTestPos))
         {
@@ -3849,7 +3833,6 @@ class CGenReport
 
             $t3 = $tmpCode .
                   "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"100\"/>\n";
-
 
             $t1 = sprintf($xmlSection, $_tmpUmdName, $t3);
             fwrite($_fileHandle, $t1);
@@ -4066,7 +4049,6 @@ class CGenReport
                     $tmpValHas2 = array_fill(0, $reportUmdNum * $colMachineNum, "");
                     $startIndex = -1;
 
-
                     $isFirstColumn = true;
                     $tmpColumnNum = 0;
                     for ($k = 0; $k < $reportUmdNum; $k++)
@@ -4141,7 +4123,6 @@ class CGenReport
                     $tmpValHas2 = array_fill(0, $reportUmdNum, "");
                     $startIndex = -1;
 
-
                     $isFirstColumn = true;
                     $tmpColumnNum = 0;
                     for ($k = 0; $k < $reportUmdNum; $k++)
@@ -4163,7 +4144,6 @@ class CGenReport
                         $tmpColumnNum++;
                     }
 
-
                     for ($j = 0; $j < $reportUmdNum; $j++)
                     {
                         $tmpVal[$j] = "";
@@ -4174,7 +4154,6 @@ class CGenReport
                         if ($resultUmdOrder[$j] != -1)
                         {
                             $tmpVal[$j] = $tmpValHas[$j];
-
 
                         }
                         else
@@ -4192,7 +4171,6 @@ class CGenReport
                     {
                         $t1 .= $tmpVal[$k];
                     }
-
 
                 }
                 array_push($graphCells, $t1);
@@ -4583,7 +4561,6 @@ class CGenReport
             }
         }
 
-
         $returnArr = array($arrKeyList[$dataIndex - 2],
                            $arrKeyList[$dataIndex - 1],
                            $arrKeyList[$dataIndex - 0]);
@@ -4672,7 +4649,6 @@ class CGenReport
         $t2 = "t" . (3);
         array_push($tmpList, $t2 . ".data_value2");
 
-
         $noiseResultIDList []= $resultIDList[0][$cardStandardResultPos];
 
         $t3 = implode(",", $tmpList);
@@ -4728,7 +4704,6 @@ class CGenReport
             $testCaseID = $row1[3];
 
 
-
             for ($i = 0; $i < $historyBatchMaxNum; $i++)
             {
                 $n1 = 6 + $i;
@@ -4751,7 +4726,6 @@ class CGenReport
                 $tmpData2 = $row1[$n1];
             }
 
-
             $dataNum++;
 
             if ((strlen($subTestName) == 0) ||
@@ -4760,7 +4734,6 @@ class CGenReport
                 // if invalid subtest
                 continue;
             }
-
 
             $tmpList = array_fill(0, ($subjectNameFilterNumMax + 1), " <Cell ss:StyleID=\"s" . ($startStyleID + 6) . "\"/>\n");
 
@@ -4824,11 +4797,9 @@ class CGenReport
         }
 
 
-
         fwrite($_fileHandle, $t1);
 
         $nextSubTestPos += $dataNum;
-
 
         $returnSet = array();
         $returnSet["nextSubTestPos"] = $nextSubTestPos;
@@ -5125,12 +5096,10 @@ class CGenReport
         $reportUmdNumn = count($umdNameList);
         $sheetLinePos = $_sheetLinePos;
 
-
         $graphDataArea = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum] .
                          graphDataStartLineID . ":" .
                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + $graphDataColumnNum] .
                          (intval(graphDataStartLineID) + count($graphCells) - 1);
-
 
 
         $graphDataAreaNoBlank = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + 1] .
@@ -5138,22 +5107,18 @@ class CGenReport
                          $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + $graphDataColumnNum] .
                          (intval(graphDataStartLineID) + count($graphCells) - 1);
 
-
         if ($_cmpStartResultID != -1)
         {
-
 
             $graphDataArea = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum] .
                                     graphDataStartLineIDCompare . ":" .
                                     $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + ($colMachineNum - 1) * $graphDataColumnNum] .
                                     (intval(graphDataStartLineIDCompare) + count($graphCells) - 1);
 
-
             $graphDataAreaNoBlank = "" . $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + 1] .
                                     graphDataStartLineIDCompare . ":" .
                                     $swtSheetColumnIDList[$subjectNameFilterNumMax + 3 + $dataColumnNum + ($colMachineNum - 1) * $graphDataColumnNum] .
                                     (intval(graphDataStartLineIDCompare) + count($graphCells) - 1);
-
 
         }
 
@@ -5207,7 +5172,6 @@ class CGenReport
 
         $tmpJson["dropArea"] = $dropArea;
         $t1 = json_encode($tmpJson);
-
 
         if ($_isCompStandard)
         {
@@ -5292,7 +5256,6 @@ class CGenReport
                 }
             }
 
-
             array_push($params1, $resultIDList[0][$_resultPos]);
             $t4 = implode(",", $selectKeyList);
             $t1 = implode(",", $standardSubTestIDList);
@@ -5307,7 +5270,6 @@ class CGenReport
                 echo json_encode($returnMsg);
                 return null;
             }
-
 
 
             $summaryJson = array();
@@ -5341,7 +5303,6 @@ class CGenReport
                     {
                         $umdData[$j] = "" . $row1[$dataIndexList[$j]];
                     }
-
 
                     $f1 = floatval($umdData[$j]);
                     $testDataValList[$j] []= $f1;
@@ -5502,7 +5463,6 @@ class CGenReport
                                                 "<Data ss:Type=\"Number\"></Data></Cell>\n";
                         }
 
-
                     }
                 }
 
@@ -5536,7 +5496,6 @@ class CGenReport
                         {
                             continue;
                         }
-
 
                         for ($k = 0; $k < $colMachineNum; $k++)
                         {
@@ -5584,7 +5543,6 @@ class CGenReport
                         }
 
                     }
-
 
                     $rateVal = array_fill(0, $reportUmdNumn, -1);
                     $summaryDataVal = array_fill(0, $reportUmdNumn * 2, -1);
@@ -5694,7 +5652,6 @@ class CGenReport
                                                                $summaryDataVal2,
                                                                $cmpPartName2,
                                                                $n1);
-
 
                 $t1 .= $t3;
                 if (count($graphCells) > 0)
@@ -5840,6 +5797,5 @@ class CGenReport
         return $returnSet;
     }
 }
-
 
 ?>
