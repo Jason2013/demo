@@ -1428,68 +1428,51 @@ class CGenReport
 
 	public function checkDefaultMachinePair($_resultPos)
 	{
-        global $returnMsg;
         global $cardNameList;
         global $sysNameList;
         global $machineIDPairList;
         global $machineIDList;
-        global $reportType;
         global $ubuntuCheckWord;
 
-        {
-            // if gen all reports
-            {
-                $curSysNameFlat = strtolower($sysNameList[0][$_resultPos]);
-                $curCardName = $cardNameList[0][$_resultPos];
-                $curSysName = $sysNameList[0][$_resultPos];
-                $curMachineID = $machineIDList[0][$_resultPos];
+        $curSysNameFlat = strtolower($sysNameList[0][$_resultPos]);
+        $curCardName = $cardNameList[0][$_resultPos];
+        $curSysName = $sysNameList[0][$_resultPos];
+        $curMachineID = $machineIDList[0][$_resultPos];
 
-                if (($curMachineID != PHP_INT_MAX) &&
-                    (strstr($curSysNameFlat, $ubuntuCheckWord) !== false))
-                {
-                    // if cur machine is ubuntu, cmp it with win
-                    $tmpList = array_keys($cardNameList[0], $curCardName);
+        if (($curMachineID != PHP_INT_MAX) &&
+            (strstr($curSysNameFlat, $ubuntuCheckWord) !== false)) {
+            // if cur machine is ubuntu, cmp it with win
+            $tmpList = array_keys($cardNameList[0], $curCardName);
 
-                    foreach ($tmpList as $k)
-                    {
-                        $tmpID = intval($k);
-                        if ($sysNameList[0][$tmpID] != $curSysName)
-                        {
-                            // win pos
-                            $cmpMachineID = $machineIDList[0][$tmpID];
-                            if ($cmpMachineID == PHP_INT_MAX)
-                            {
-                                continue;
+            foreach ($tmpList as $k) {
+                $tmpID = intval($k);
+                if ($sysNameList[0][$tmpID] != $curSysName) {
+                    // win pos
+                    $cmpMachineID = $machineIDList[0][$tmpID];
+                    if ($cmpMachineID == PHP_INT_MAX) {
+                        continue;
+                    }
+
+                    if (count($machineIDPairList) == 0) {
+                        $machineIDPairList = array($curMachineID, $cmpMachineID);
+                    } else {
+                        $tmpList2 = array_keys($machineIDPairList, $curMachineID);
+                        $b1 = false;
+                        foreach ($tmpList2 as $k2) {
+                            $tmpID2 = intval($k2);
+                            if (($tmpID2 % 2) == 0) {
+                                $b1 = true;
+                                break;
                             }
+                        }
 
-                            if (count($machineIDPairList) == 0)
-                            {
-                                $machineIDPairList = array($curMachineID, $cmpMachineID);
-                            }
-                            else
-                            {
-                                $tmpList2 = array_keys($machineIDPairList, $curMachineID);
-                                $b1 = false;
-                                foreach ($tmpList2 as $k2)
-                                {
-                                    $tmpID2 = intval($k2);
-                                    if (($tmpID2 % 2) == 0)
-                                    {
-                                        $b1 = true;
-                                        break;
-                                    }
-                                }
-
-                                if ($b1 == false)
-                                {
-                                    array_push($machineIDPairList, $curMachineID);
-                                    array_push($machineIDPairList, $cmpMachineID);
-                                }
-                            }
-
-                            break;
+                        if ($b1 == false) {
+                            array_push($machineIDPairList, $curMachineID);
+                            array_push($machineIDPairList, $cmpMachineID);
                         }
                     }
+
+                    break;
                 }
             }
         }
@@ -1922,7 +1905,6 @@ class CGenReport
         global $driverNameList;
         global $reportTemplateDir;
         global $subjectNameFilterNumMax;
-        //global $resultNoiseNum;
         global $historyBatchMaxNum;
 
         $firstTestPos = $_firstTestPos;
@@ -3317,14 +3299,6 @@ class CGenReport
                 }
             }
         }
-        /*
-        for ($i = 0; $i < count($oldReportList); $i++)
-        {
-            foreach ($oldReportList[$i] as $tmpPath)
-            {
-            }
-        }
-        //*/
 
         if ($b1 == true)
         {
@@ -3375,20 +3349,6 @@ class CGenReport
 
             // end of generating reports
 
-            /*
-            $params1 = array($_batchID);
-            $sql1 = "UPDATE mis_table_report_info " .
-                    "SET gen_percent = \"100\", report_state=\"1\", finish_time=NOW() " .
-                    "WHERE batch_id=?";
-            if ($db->QueryDB($sql1, $params1) == null)
-            {
-                $returnMsg["errorCode"] = 0;
-                $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
-                echo json_encode($returnMsg);
-                return null;
-            }
-            //*/
-
             self::setCompileSuccessMsg("report finished");
             echo json_encode($returnMsg);
             return null;
@@ -3399,14 +3359,10 @@ class CGenReport
 
 	public function checkReportDataColumnNum()
     {
-//        global $umdNameList;
         global $resultUmdOrder;
         global $reportUmdNum;
         global $cmpMachineID;
         global $colMachineNum;
-
-        $dataColumnNum = 0;
-        $graphDataColumnNum = 0;
 
         if ($cmpMachineID != -1)
         {
@@ -3544,7 +3500,7 @@ class CGenReport
                                             "\" ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"60\"" .
                                             "  ss:Span=\"11\"/>";
 
-                $t1 = $reportCardComparisonHead;//sprintf($reportCardComparisonHead,
+                $t1 = $reportCardComparisonHead;
                 // first row
                 $t1 .= "   <Row ss:StyleID=\"Default\">" .
                        "    <Cell ss:StyleID=\"s84\"/>" .
@@ -3668,7 +3624,7 @@ class CGenReport
                                            "   <Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"60\"/>" .
                                            "   <Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"60\"/>";
 
-                $t1 = $reportAPIComparisonHead;//sprintf($reportAPIComparisonHead, $tempFileStartSheetLineNum);
+                $t1 = $reportAPIComparisonHead;
 
                 $t1 .= "   <Row ss:StyleID=\"Default\">" .
                        "    <Cell ss:StyleID=\"s84\"/>" .
@@ -3896,8 +3852,6 @@ class CGenReport
 
 
             $t1 = sprintf($xmlSection, $_tmpUmdName, $t3);
-
-            // line num pos - strlen("\"")
             fwrite($_fileHandle, $t1);
         }
 
@@ -4093,13 +4047,6 @@ class CGenReport
                 if (intval($subTestNumMap[$testNameList[$i]]) == 0)
                 {
                     continue;
-                }
-                if ($_cmpStartResultID != -1)
-                {
-                    if (intval($cmpSubTestNumList[$i]) == 0)
-                    {
-                        // skip blank test in graph
-                    }
                 }
 
                 $n2 = $n1 + $subTestNumList[$i] - 1;
@@ -5389,9 +5336,6 @@ class CGenReport
 
                 for ($j = 0; $j < $umdNum; $j++)
                 {
-                    if ($j >= count($resultIDList[0]))
-                    {
-                    }
                     $umdData[$j] = "";
                     if ($dataIndexList[$j] != -1)
                     {
@@ -5561,14 +5505,6 @@ class CGenReport
 
                     }
                 }
-
-                //*/
-
-                $summaryDataVal = array_fill(0, $reportUmdNumn * 2, -1);
-                $cmpPartName = array_fill(0, $reportUmdNumn * 2, "");
-                // for summary sheet2, cur & last batch
-                $summaryDataVal2 = array_fill(0, $reportUmdNumn * 2, -1);
-                $cmpPartName2 = array_fill(0, $reportUmdNumn * 2, "");
 
                 if ($_cmpStartResultID != -1)
                 {
