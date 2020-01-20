@@ -11,12 +11,12 @@ include_once __DIR__ . "/../generalLibs/code01.php";
 class CGenReport
 {
 
-	public function __construct()
-	{
+    public function __construct()
+    {
 
-	}
-	public function __destruct()
-	{
+    }
+    public function __destruct()
+    {
     }
 
     private static function setCompileSuccessMsg($msg)
@@ -30,8 +30,8 @@ class CGenReport
         $returnMsg["batchID"] = $batchID;
     }
 
-	public function getXMLCodePiece()
-	{
+    public function getXMLCodePiece()
+    {
         $styleBlackBar = "<Style ss:ID=\"s%d\">\n" .
                          "<Interior ss:Color=\"#000000\" ss:Pattern=\"Solid\"/>\n" .
                          "</Style>\n";
@@ -412,8 +412,8 @@ class CGenReport
         fclose($fileHandle);
     }
 
-	public function writeAdditionalStyles($_fileHandle)
-	{
+    public function writeAdditionalStyles($_fileHandle)
+    {
         global $startStyleID;
         global $allStylesEndTag;
         global $appendStyleList;
@@ -430,8 +430,8 @@ class CGenReport
         fwrite($_fileHandle, $allStylesEndTag);
     }
 
-	public function checkInputMachineID($_machineIDPair, $_checkedMachineIDList)
-	{
+    public function checkInputMachineID($_machineIDPair, $_checkedMachineIDList)
+    {
         global $returnMsg;
         global $crossType;
         global $colMachineIDOrderList;
@@ -483,8 +483,8 @@ class CGenReport
         return $returnSet;
     }
 
-	public function getBatchID($_db, $_batchID, $userInfo)
-	{
+    public function getBatchID($_db, $_batchID, $userInfo)
+    {
         global $returnMsg;
         global $historyBatchMaxNum;
         $db = $_db;
@@ -674,8 +674,8 @@ class CGenReport
         return $returnSet;
     }
 
-	public function getNoiseNum($_db, $_resultPos)
-	{
+    public function getNoiseNum($_db, $_resultPos)
+    {
         global $resultIDList;
         global $dataTables;
 
@@ -735,8 +735,8 @@ class CGenReport
         return intval($tmpNoiseNum) + 1;
     }
 
-	public function getStandardResultID($_startResultID)
-	{
+    public function getStandardResultID($_startResultID)
+    {
         global $resultIDList;
         global $driverNameList;
         global $umdStandardOrder;
@@ -808,8 +808,8 @@ class CGenReport
         return $tmpCardStandardResultPos;
     }
 
-	public function prepareReportFolder($_reportType, $_batchID, $_curReportFolder)
-	{
+    public function prepareReportFolder($_reportType, $_batchID, $_curReportFolder)
+    {
         global $allReportsDir;
         global $downloadReportDir;
 
@@ -833,8 +833,8 @@ class CGenReport
         return $returnSet;
     }
 
-	public function checkBatchNum($_db, $_batchID)
-	{
+    public function checkBatchNum($_db, $_batchID)
+    {
         global $returnMsg;
         $db = $_db;
 
@@ -850,8 +850,8 @@ class CGenReport
         return true;
     }
 
-	public function checkBatchValid($_db, $_batchID)
-	{
+    public function checkBatchValid($_db, $_batchID)
+    {
         global $returnMsg;
         $db = $_db;
         $params1 = array($_batchID);
@@ -883,8 +883,8 @@ class CGenReport
         return true;
     }
 
-	public function getTestTitleInfo($_db, $_batchID)
-	{
+    public function getTestTitleInfo($_db, $_batchID)
+    {
         global $returnMsg;
         $db = $_db;
         $params1 = array($_batchID);
@@ -935,8 +935,8 @@ class CGenReport
         return $returnSet;
     }
 
-	public function getBatchEnvironmentInfo($_db, $_batchID)
-	{
+    public function getBatchEnvironmentInfo($_db, $_batchID)
+    {
         global $returnMsg;
         global $logStoreDir;
 
@@ -1020,8 +1020,8 @@ class CGenReport
         return $returnSet;
     }
 
-	public function getSelectedMachineInfo($_db, $_batchID, $_checkedMachineIDListString)
-	{
+    public function getSelectedMachineInfo($_db, $_batchID, $_checkedMachineIDListString)
+    {
         global $returnMsg;
         global $swtOldCardNameMatchList;
 
@@ -1157,8 +1157,8 @@ class CGenReport
         return $returnSet;
     }
 
-	public function getBatchInfo($_db, $_batchIDList)
-	{
+    public function getBatchInfo($_db, $_batchIDList)
+    {
         global $returnMsg;
         global $selectedCardIDList;
         global $selectedSysIDList;
@@ -1426,8 +1426,8 @@ class CGenReport
         return $returnSet;
     }
 
-	public function checkDefaultMachinePair($_resultPos)
-	{
+    public function checkDefaultMachinePair($_resultPos)
+    {
         global $cardNameList;
         global $sysNameList;
         global $machineIDPairList;
@@ -1478,8 +1478,8 @@ class CGenReport
         }
     }
 
-	public function getCompareMachineInfo($_resultPos)
-	{
+    public function getCompareMachineInfo($_resultPos)
+    {
         global $returnMsg;
         global $cardNameList;
         global $sysNameList;
@@ -1669,9 +1669,9 @@ class CGenReport
         return $returnSet;
     }
 
-	public function getHistoryNachineInfo($_startResultID,
+    public function getHistoryNachineInfo($_startResultID,
                                           $_resultPos)
-	{
+    {
         global $resultIDList;
         global $cardNameList;
         global $sysNameList;
@@ -1710,8 +1710,8 @@ class CGenReport
         return $returnSet;
     }
 
-	public function getSubTestNum($_db, $_resultPos, $_tableName01, $_subTestNum)
-	{
+    public function getSubTestNum($_db, $_resultPos, $_tableName01, $_subTestNum)
+    {
         global $returnMsg;
         global $resultIDList;
         global $cardStandardResultPos;
@@ -1773,10 +1773,10 @@ class CGenReport
         return $returnSet;
     }
 
-	public function getSubTestNumList($_db, $_isCompStandard,
+    public function getSubTestNumList($_db, $_isCompStandard,
                                       $_resultPos, $_cmpStartResultID,
                                       $_umdNum)
-	{
+    {
         global $returnMsg;
         global $resultIDList;
         global $testNameList;
@@ -1866,8 +1866,8 @@ class CGenReport
         return $returnSet;
     }
 
-	public function getReportFileNames($_reportFolder, $_tmpCardName, $_tmpSysName, $_batchID)
-	{
+    public function getReportFileNames($_reportFolder, $_tmpCardName, $_tmpSysName, $_batchID)
+    {
         global $returnMsg;
 
         // main xml file
@@ -1894,13 +1894,13 @@ class CGenReport
         return $returnSet;
     }
 
-	public function checkShiftAPI($_fileHandle,
+    public function checkShiftAPI($_fileHandle,
                                   $_resultPos,
                                   $_tmpUmdName,
                                   $_firstTestPos,
                                   $_firstSubTestPos,
                                   $_sheetLinePos)
-	{
+    {
         global $returnMsg;
         global $driverNameList;
         global $reportTemplateDir;
@@ -3065,7 +3065,7 @@ class CGenReport
         }
     }
 
-	public function checkShiftCard($_xmlFileName,
+    public function checkShiftCard($_xmlFileName,
                                    $_tmpFileName,
                                    $_tmpFileName1,
                                    $_jsonFileName,
@@ -3078,7 +3078,7 @@ class CGenReport
                                    $_tmpSysName,
                                    $_cmpMachineID,
                                    $_cmpCardName)
-	{
+    {
         global $returnMsg;
         global $cardNameList;
         global $sysNameList;
@@ -3259,8 +3259,8 @@ class CGenReport
         return $returnSet;
     }
 
-	public function checkSkipReportGen($_reportType, $_reportFolder)
-	{
+    public function checkSkipReportGen($_reportType, $_reportFolder)
+    {
         global $returnMsg;
 
         $b1 = false;
@@ -3311,8 +3311,8 @@ class CGenReport
         return false;
     }
 
-	public function checkAllReportsFinished($_db, $_resultPos, $_reportFolder, $_batchID)
-	{
+    public function checkAllReportsFinished($_db, $_resultPos, $_reportFolder, $_batchID)
+    {
         global $returnMsg;
         global $resultIDList;
         global $swtTempReportConfigJsonName2;
@@ -3357,7 +3357,7 @@ class CGenReport
         return true;
     }
 
-	public function checkReportDataColumnNum()
+    public function checkReportDataColumnNum()
     {
         global $resultUmdOrder;
         global $reportUmdNum;
@@ -3427,11 +3427,11 @@ class CGenReport
         return $returnSet;
     }
 
-	public function checkNeedCreateReportFile($_xmlFileName, $_tmpFileName, $_jsonFileName, $_jsonFileName2,
+    public function checkNeedCreateReportFile($_xmlFileName, $_tmpFileName, $_jsonFileName, $_jsonFileName2,
                                               $_cmpMachineID,
                                               $_tempFileLineNumPos,
                                               $_curCardName, $_tmpSysName)
-	{
+    {
         global $returnMsg;
         global $tempFileStartSheetLineNum;
 
@@ -3859,8 +3859,8 @@ class CGenReport
         return $returnSet;
     }
 
-	public function testTempChange1($_curTestName)
-	{
+    public function testTempChange1($_curTestName)
+    {
         global $cmpCardName;
 
         $t1 = strtolower($cmpCardName);
@@ -3880,8 +3880,8 @@ class CGenReport
         return false;
     }
 
-	public function testTempChange2($_curTestName)
-	{
+    public function testTempChange2($_curTestName)
+    {
         global $curCardName;
 
         $t1 = strtolower($curCardName);
@@ -3901,10 +3901,10 @@ class CGenReport
         return false;
     }
 
-	public function genAverageDataForGraph($_isCompStandard, $_cmpStartResultID,
+    public function genAverageDataForGraph($_isCompStandard, $_cmpStartResultID,
                                            $_curCardName, $_cmpCardName, $_graphCells,
                                            $_tmpSysName, $_cmpSysName)
-	{
+    {
         global $returnMsg;
         global $testNameList;
         global $reportUmdNum;
@@ -4206,11 +4206,11 @@ class CGenReport
         return $returnSet;
     }
 
-	public function checkStartTest($_fileHandle, $_tempFileHandle,
+    public function checkStartTest($_fileHandle, $_tempFileHandle,
                                    $_nextSubTestPos, $_firstSubTestPos, $_curTestPos,
                                    $_isCompStandard, $_cmpMachineID,
                                    $_lineNum, $_sheetLinePos, $_tempLineNum)
-	{
+    {
         global $startStyleID;
         global $graphCells;
         global $unitNameList;
@@ -4471,15 +4471,15 @@ class CGenReport
         return $returnSet;
     }
 
-	public function getHistoryResultIDList($_resultPos)
-	{
+    public function getHistoryResultIDList($_resultPos)
+    {
         global $returnMsg;
         global $resultIDList;
         global $cardNameList;
         global $sysNameList;
         global $driverNameList;
         global $swtOldUmdNameMatchList;
-		global $reportUmdNum;
+        global $reportUmdNum;
 
         $historyResultIDList = array();
         for ($i = 1; $i < count($resultIDList); $i++)
@@ -4487,7 +4487,7 @@ class CGenReport
             $cardNameKeys = array_keys($cardNameList[$i], $cardNameList[0][$_resultPos]);
             $sysNameKeys = array_keys($sysNameList[$i], $sysNameList[0][$_resultPos]);
             $driverNameKeys = array_keys($driverNameList[$i], $driverNameList[0][$_resultPos]);
-			$tmpMachineNum = intval(count($driverNameList[$i]) / $reportUmdNum);
+            $tmpMachineNum = intval(count($driverNameList[$i]) / $reportUmdNum);
             if (count($driverNameKeys) < $tmpMachineNum)
             {
                 $tmpCount = intval(count($swtOldUmdNameMatchList) / 2);
@@ -4498,19 +4498,19 @@ class CGenReport
                         $tmpKeys = array_keys($driverNameList[$i], $swtOldUmdNameMatchList[$j * 2 + 1]);
                         if (count($tmpKeys) > 0)
                         {
-							foreach ($tmpKeys as $tmpVal)
-							{
-								$tmpPos = array_search($tmpVal, $driverNameKeys);
-								if ($tmpPos === false)
-								{
-									array_push($driverNameKeys, $tmpVal);
-								}
-							}
+                            foreach ($tmpKeys as $tmpVal)
+                            {
+                                $tmpPos = array_search($tmpVal, $driverNameKeys);
+                                if ($tmpPos === false)
+                                {
+                                    array_push($driverNameKeys, $tmpVal);
+                                }
+                            }
 
-							if (count($driverNameKeys) >= $tmpMachineNum)
-							{
-								break;
-							}
+                            if (count($driverNameKeys) >= $tmpMachineNum)
+                            {
+                                break;
+                            }
                         }
                     }
                 }
@@ -4610,11 +4610,11 @@ class CGenReport
         }
     }
 
-	public function writeReportData($_db, $_fileHandle, $_tempFileHandle,
+    public function writeReportData($_db, $_fileHandle, $_tempFileHandle,
                                     $_resultPos, $_nextSubTestPos,
                                     $_isCompStandard,
                                     $_lineNum)
-	{
+    {
         global $returnMsg;
         global $startStyleID;
         global $resultIDList;
@@ -5061,11 +5061,11 @@ class CGenReport
         return $summaryJson;
     }
 
-	public function writeReportCompareData($_db, $_tempFileHandle, $reportFolder,
+    public function writeReportCompareData($_db, $_tempFileHandle, $reportFolder,
                                            $_isCompStandard, $_umdNum, $_tempFileLineNumPos,
                                            $_startResultID, $_cmpStartResultID, $_historyStartResultID, $_tempLineNum,
                                            $_resultPos, $_sheetLinePos, $_startGraphDataLinePos)
-	{
+    {
         global $returnMsg;
         global $resultIDList;
         global $cardNameList;
