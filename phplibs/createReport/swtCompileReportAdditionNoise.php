@@ -9,6 +9,7 @@ include_once "swtClassGenReportNoise.php";
 include_once "../configuration/swtConfig.php";
 include_once __DIR__ . "/../userManage/swtUserManager.php";
 include_once __DIR__ . "/../generalLibs/reportcache.php";
+include_once __DIR__ . "/../generalLibs/utils.php";
 
 
 $xmlWriter = new CGenReport();
@@ -45,6 +46,11 @@ $curReportFolder = $returnSet["curReportFolder"];
 
 $cacheFileName = __DIR__ . '/' . $reportFolder . '/CompileReportAdditionNoise.txt';
 $cache = new ReportCache($cacheFileName);
+
+$headers = ["batchID", "resultPos", "curTestPos", "firstTestPos", "firstSubTestPos", "nextSubTestPos", "subTestNum", "lineNumPos", "sheetLinePos", "machineIDPair", "checkedMachineIDList", "colMachineIDOrderList", "colMachineIDOrderIndexList", "tempFileLineNumPos", "forceGenReport", "reportToken", "curReportFolder", "reportType", "crossType"];
+$values = [$batchID, $resultPos, $curTestPos, $firstTestPos, $firstSubTestPos, $nextSubTestPos, $subTestNum, $lineNumPos, $sheetLinePos, $machineIDPair, $checkedMachineIDList, $colMachineIDOrderList, $colMachineIDOrderIndexList, $tempFileLineNumPos, $forceGenReport, $reportToken, $curReportFolder, $reportType, $crossType];
+$postFileName = __DIR__ . '/' . $reportFolder . '/CompileReportAdditionNoise_POST.csv';
+Utilities\SaveVarsToFile($postFileName, $headers, $values);
 
 // default values
 $startStyleID = $swtStartStyleID;
