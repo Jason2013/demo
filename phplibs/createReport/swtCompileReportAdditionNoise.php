@@ -31,7 +31,6 @@ $machineIDPair = cleanText($_POST["machineIDPair"], 256);
 $checkedMachineIDList = cleanText($_POST["machineIDList"], 256);
 $colMachineIDOrderList = cleanText($_POST["colMachineIDOrderList"], 256);
 $colMachineIDOrderIndexList = cleanText($_POST["colMachineIDOrderIndexList"], 256);
-//$subTestUmdDataMaskList = cleanText($_POST["subTestUmdDataMaskList"], 1024);
 $tempFileLineNumPos = intval($_POST["tempFileLineNumPos"]);
 $forceGenReport = intval($_POST["forceGenReport"]);
 $reportToken = intval($_POST["reportToken"]);
@@ -229,11 +228,7 @@ $colCardNameList = $returnSet["colCardNameList"];
 $colSysNameList = $returnSet["colSysNameList"];
 $colMachineNum = count($colMachineIDList);
 
-
 // get subtest num of current test
-
-//umdNameList
-
 $reportUmdNum = count($umdNameList);
 $startResultID = intval($resultPos / $umdNum) * $umdNum;
 
@@ -243,7 +238,6 @@ $cardStandardResultPos = $cache->getCachedValue("getStandardResultID",
         global $xmlWriter, $startResultID;
         return $xmlWriter->getStandardResultID($startResultID);
     });
-//$cardStandardResultID = $resultIDList[0][$cardStandardResultPos];
 
 $returnSet = $xmlWriter->getSubTestNum($db, $resultPos, $tableName01, $subTestNum);
 if ($returnSet === null)
@@ -436,16 +430,8 @@ if (($subTestNum == 0) ||
 
             $returnSet = $xmlWriter->checkStartSheet($fileHandle, $tempFileHandle,
                 $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
-//                $lineNumPos,
                 $tmpUmdName);
-//            if ($returnSet === null)
-//            {
-//                return;
-//            }
-//            $lineNumPos = $returnSet["lineNumPos"];
-            
-            
-            //$fileHandle = fopen($xmlFileName, "r+");
+
             fseek($fileHandle, 0, SEEK_END);
             $returnSet = $xmlWriter->checkShiftAPI($fileHandle, $resultPos, $tmpUmdName,
                                                    $firstTestPos, $firstSubTestPos, $sheetLinePos);
@@ -460,9 +446,7 @@ if (($subTestNum == 0) ||
             fclose($tempFileHandle);
             fclose($fileHandle);
         }
-        
-        
-        
+
         $returnMsg["checkShiftCard"] = "1";
         $returnSet = $xmlWriter->checkShiftCard($xmlFileName, $tmpFileName, $tmpFileName1, 
                                                 $jsonFileName, $jsonFileName2,
@@ -475,11 +459,7 @@ if (($subTestNum == 0) ||
             return;
         }
         $sheetLinePos = $returnSet["sheetLinePos"];
-        
-        
-            
-        
-        
+
         $resultPos++;
         $curTestPos = 0;
         
@@ -504,8 +484,6 @@ else
     $jsonFileName2 = $returnSet["jsonFileName2"];
     // alarm ini
     $alarmFileName = $returnSet["alarmFileName"];
-    
-    //$returnMsg["returnLine2"] = "line: " . __LINE__;
 
     $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $tmpFileName, $jsonFileName, $jsonFileName2,
         $cmpMachineID,
@@ -533,14 +511,8 @@ else
 
     $returnSet = $xmlWriter->checkStartSheet($fileHandle, $tempFileHandle,
         $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
-//        $lineNumPos,
         $tmpUmdName);
-//    if ($returnSet === null)
-//    {
-//        return;
-//    }
-//    $lineNumPos = $returnSet["lineNumPos"];
-    
+
     $lineNum = 0;
     $tempLineNum = 0;
     
