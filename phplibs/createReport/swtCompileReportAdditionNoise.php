@@ -577,18 +577,6 @@ else
     $standardSubTestFilterNameList = $returnSet["standardSubTestFilterNameList"];
     $standardTestCaseIDList = $returnSet["standardTestCaseIDList"];
 
-    
-//    fseek($fileHandle, $lineNumPos, SEEK_SET);
-//    // line num is 10 digis number, like: 0000000011
-//    $t1 = fread($fileHandle, 10);
-//    $n1 = intval($t1);
-//    $n1 += $lineNum;
-//
-//    fseek($fileHandle, $lineNumPos, SEEK_SET);
-//    $t1 = sprintf("%010d", $n1);
-//    fwrite($fileHandle, $t1);
-//    fclose($fileHandle);
-    
     $returnSet = $xmlWriter->writeReportCompareData($db, $tempFileHandle, $reportFolder,
                                                     $isCompStandard, $umdNum, $tempFileLineNumPos,
                                                     $startResultID, $cmpStartResultID, $historyStartResultID, $tempLineNum,

@@ -2381,10 +2381,7 @@ class CGenReport
         }
         
         $tmpDestFileHandle = fopen($tmpSrcPath, "r");
-//        fseek($tmpDestFileHandle, 0, SEEK_SET);
-        
-        //if ($cmpStartResultID != -1)
-        
+
         $sheetCode = "<Worksheet ss:Name=\"Statistics\">\n" .
                      "<Table x:FullColumns=\"1\" " .
                      "x:FullRows=\"1\" ss:DefaultRowHeight=\"15\">\n";
@@ -3335,9 +3332,8 @@ class CGenReport
                 return null;
             }
 
-            $_fileHandle = fopen($_xmlFileName, "r+");
-            fseek($_fileHandle, 0, SEEK_END);
-            
+            $_fileHandle = fopen($_xmlFileName, "a+");
+
             $sheetLinePos = 0;
             $tmpFileHandle = fopen($_tmpFileName, "r");
             if ($tmpFileHandle !== false)
@@ -4007,18 +4003,6 @@ class CGenReport
                 
             }
 
-//            $t2 = sprintf("\"%010d\"", $tempFileStartSheetLineNum);
-//            $n1 = strpos($t1, $t2);
-//            if ($n1 === false)
-//            {
-//                fclose($tempFileHandle);
-//                $returnMsg["errorCode"] = 0;
-//                $returnMsg["errorMsg"] = "template file content invalid, line: " . __LINE__;
-//                echo json_encode($returnMsg);
-//                return null;
-//            }
-//            // line num pos - strlen("\"")
-//            $tempFileLineNumPos = 0 + $n1 + 1;
             fwrite($tempFileHandle, $t1);
             fclose($tempFileHandle);
             
@@ -6379,18 +6363,7 @@ class CGenReport
             }
             
             fwrite($tempFileHandle, $t1);
-            
-//            fseek($tempFileHandle, $_tempFileLineNumPos, SEEK_SET);
-//            // line num is 10 digis number, like: 0000000011
-//            $t1 = fread($tempFileHandle, 10);
-//            $n1 = intval($t1);
-//            $n1 += $_tempLineNum;
-//            //$sheetLinePos = $n1;
-//            fseek($tempFileHandle, $_tempFileLineNumPos, SEEK_SET);
-//            $t1 = sprintf("%010d", $n1);
-//            //$t1 = "1234567890";
-//            fwrite($tempFileHandle, $t1);
-            
+
             // write flatdata sheet
             if (file_exists($tmpFileName1))
             {
