@@ -1858,21 +1858,21 @@ class CGenReport
         return $returnSet;
     }
 
-    public function getReportFileNames($_reportFolder, $_tmpCardName, $_tmpSysName, $_batchID)
+    public function getReportFileNames($_reportFolder, $_tmpCardName, $_tmpSysName)
     {
-        global $returnMsg;
+        $fileBaseName = $_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName;
 
         // main xml file
-        $xmlFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . ".tmp2", $_batchID);
+        $xmlFileName = $fileBaseName . ".tmp2";
         // comparison sheet
-        $tmpFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . ".tmp", $_batchID);
+        $tmpFileName = $fileBaseName . ".tmp";
         // flat data
-        $tmpFileName1 = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . ".tmp1", $_batchID);
+        $tmpFileName1 = $fileBaseName . ".tmp1";
         // summary data
-        $jsonFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . ".json", $_batchID);
-        $jsonFileName2 = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . "_2.json", $_batchID);
+        $jsonFileName = $fileBaseName . ".json";
+        $jsonFileName2 = $fileBaseName . "_2.json";
         // alarm data file
-        $alarmFileName = sprintf($_reportFolder . "/" . $_tmpCardName . "_" . $_tmpSysName . ".ini", $_batchID);
+        $alarmFileName = $fileBaseName . ".ini";
 
         $returnSet = array();
         $returnSet["xmlFileName"] = $xmlFileName;

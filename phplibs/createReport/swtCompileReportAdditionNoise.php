@@ -362,7 +362,7 @@ $standardUmdTestCaseNumList = $cache->getCachedValue("getStandardUmdTestCaseNumL
         return $xmlWriter->getStandardUmdTestCaseNumList($db);
     });
 
-$returnSet = $xmlWriter->getReportFileNames($reportFolder, $tmpCardName, $tmpSysName, $batchID);
+$returnSet = $xmlWriter->getReportFileNames($reportFolder, $tmpCardName, $tmpSysName);
 // main xml file
 $xmlFileName = $returnSet["xmlFileName"];
 // comparison sheet
