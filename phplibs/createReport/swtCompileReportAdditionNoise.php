@@ -362,6 +362,19 @@ $standardUmdTestCaseNumList = $cache->getCachedValue("getStandardUmdTestCaseNumL
         return $xmlWriter->getStandardUmdTestCaseNumList($db);
     });
 
+$returnSet = $xmlWriter->getReportFileNames($reportFolder, $tmpCardName, $tmpSysName, $batchID);
+// main xml file
+$xmlFileName = $returnSet["xmlFileName"];
+// comparison sheet
+$tmpFileName = $returnSet["tmpFileName"];
+// flatData
+$tmpFileName1 = $returnSet["tmpFileName1"];
+// summary
+$jsonFileName = $returnSet["jsonFileName"];
+$jsonFileName2 = $returnSet["jsonFileName2"];
+// alarm ini
+$alarmFileName = $returnSet["alarmFileName"];
+
 // generate seperate cards report
 if (($subTestNum == 0) ||
     ($resultIDList[0][$resultPos] == PHP_INT_MAX) ||
@@ -387,19 +400,6 @@ if (($subTestNum == 0) ||
     // if cur test finished
     if ($curTestPos >= count($testNameList))
     {
-        $returnSet = $xmlWriter->getReportFileNames($reportFolder, $tmpCardName, $tmpSysName, $batchID);
-        // main xml file
-        $xmlFileName = $returnSet["xmlFileName"];
-        // comparison sheet
-        $tmpFileName = $returnSet["tmpFileName"];
-        // flatData
-        $tmpFileName1 = $returnSet["tmpFileName1"];
-        // summary
-        $jsonFileName = $returnSet["jsonFileName"];
-        $jsonFileName2 = $returnSet["jsonFileName2"];
-        // alarm ini
-        $alarmFileName = $returnSet["alarmFileName"];
-
         $returnMsg["checkShiftCard"] = "0";
         $returnMsg["resultPos"] = $resultPos;
         if ($resultIDList[0][$resultPos] != PHP_INT_MAX)
@@ -474,17 +474,6 @@ if (($subTestNum == 0) ||
 else
 {
     // if cur test in process
-    $returnSet = $xmlWriter->getReportFileNames($reportFolder, $tmpCardName, $tmpSysName, $batchID);
-    $xmlFileName = $returnSet["xmlFileName"];
-    $tmpFileName = $returnSet["tmpFileName"];
-    // flatData
-    $tmpFileName1 = $returnSet["tmpFileName1"];
-    // summary
-    $jsonFileName = $returnSet["jsonFileName"];
-    $jsonFileName2 = $returnSet["jsonFileName2"];
-    // alarm ini
-    $alarmFileName = $returnSet["alarmFileName"];
-
     $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $tmpFileName, $jsonFileName, $jsonFileName2,
         $cmpMachineID,
         $tempFileLineNumPos,
