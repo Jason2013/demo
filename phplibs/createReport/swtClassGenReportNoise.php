@@ -4013,7 +4013,7 @@ class CGenReport
 //            }
 //            // line num pos - strlen("\"")
 //            $tempFileLineNumPos = 0 + $n1 + 1;
-//            fwrite($tempFileHandle, $t1);
+            fwrite($tempFileHandle, $t1);
             fclose($tempFileHandle);
             
             // create summary sheet temp file
