@@ -413,8 +413,8 @@ if (($subTestNum == 0) ||
         $returnMsg["resultPos"] = $resultPos;
         if ($resultIDList[0][$resultPos] != PHP_INT_MAX)
         {
-            $fileHandle = fopen($xmlFileName, "r+");
-            $tempFileHandle = fopen($tmpFileName, "r+");
+            $fileHandle = _fopen($xmlFileName, "r+");
+            $tempFileHandle = _fopen($tmpFileName, "r+");
         
             $returnMsg["checkNeedCreateReportFile"] = "1";
             $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $tmpFileName, $jsonFileName, $jsonFileName2,
@@ -452,8 +452,8 @@ if (($subTestNum == 0) ||
             $firstSubTestPos = $returnSet["firstSubTestPos"];
             $sheetLinePos = $returnSet["sheetLinePos"];
         
-            fclose($tempFileHandle);
-            fclose($fileHandle);
+            _fclose($tempFileHandle);
+            _fclose($fileHandle);
         }
 
         $returnMsg["checkShiftCard"] = "1";
@@ -495,8 +495,8 @@ else
     $tempFileLineNumPos = $returnSet["tempFileLineNumPos"];
     
     
-    $fileHandle = fopen($xmlFileName, "r+");
-    $tempFileHandle = fopen($tmpFileName, "r+");
+    $fileHandle = _fopen($xmlFileName, "r+");
+    $tempFileHandle = _fopen($tmpFileName, "r+");
 
     fseek($fileHandle, 0, SEEK_END);
     fseek($tempFileHandle, 0, SEEK_END);
@@ -557,7 +557,7 @@ else
     }
     $sheetLinePos = $returnSet["sheetLinePos"];
 
-    fclose($tempFileHandle);
+    _fclose($tempFileHandle);
 }
 
 $returnMsg["sheetLinePos"] = $sheetLinePos;

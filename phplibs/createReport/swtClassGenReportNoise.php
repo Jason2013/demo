@@ -405,10 +405,10 @@ class CGenReport
 
         // copy file template to modify
         $xmlSection = file_get_contents(__DIR__ . "/" . $reportTemplateDir . "/sectionHead001.txt");
-        $fileHandle = fopen($filename, "w");
-        fwrite($fileHandle, $xmlSection);
-        fwrite($fileHandle, self::additionalStylesWithEndTag());
-        fclose($fileHandle);
+        $fileHandle = _fopen($filename, "w");
+        _fwrite($fileHandle, $xmlSection);
+        _fwrite($fileHandle, self::additionalStylesWithEndTag());
+        _fclose($fileHandle);
     }
 
     public function writeAdditionalStyles($_fileHandle)
@@ -425,8 +425,8 @@ class CGenReport
             $styleID++;
         }
 
-        fwrite($_fileHandle, $styles);
-        fwrite($_fileHandle, $allStylesEndTag);
+        _fwrite($_fileHandle, $styles);
+        _fwrite($_fileHandle, $allStylesEndTag);
     }
 
     public function checkInputMachineID($_machineIDPair, $_checkedMachineIDList)
@@ -1941,7 +1941,7 @@ class CGenReport
             $xmlSection = sprintf($xmlSection,
                                   $t1);
 
-            fwrite($_fileHandle, $xmlSection);
+            _fwrite($_fileHandle, $xmlSection);
         }
 
         $returnSet = array();
@@ -2185,9 +2185,9 @@ class CGenReport
 
         if ($hasLines > 0)
         {
-            fwrite($_fileHandle, $sheetCode);
+            _fwrite($_fileHandle, $sheetCode);
             $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet004B.txt");
-            fwrite($_fileHandle, $xmlSection);
+            _fwrite($_fileHandle, $xmlSection);
         }
 
         return;
@@ -2223,7 +2223,7 @@ class CGenReport
             return;
         }
 
-        $tmpDestFileHandle = fopen($tmpSrcPath, "r");
+        $tmpDestFileHandle = _fopen($tmpSrcPath, "r");
 
         $sheetCode = "<Worksheet ss:Name=\"Statistics\">\n" .
                      "<Table x:FullColumns=\"1\" " .
@@ -2296,13 +2296,13 @@ class CGenReport
             }
         }
 
-        fclose($tmpDestFileHandle);
+        _fclose($tmpDestFileHandle);
 
         if ($hasLines > 0)
         {
-            fwrite($_fileHandle, $sheetCode);
+            _fwrite($_fileHandle, $sheetCode);
             $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet004B.txt");
-            fwrite($_fileHandle, $xmlSection);
+            _fwrite($_fileHandle, $xmlSection);
         }
     }
 
@@ -2508,9 +2508,9 @@ class CGenReport
                           "</Row>\n";
         }
 
-        fwrite($_fileHandle, $sheetCode);
+        _fwrite($_fileHandle, $sheetCode);
         $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet004B.txt");
-        fwrite($_fileHandle, $xmlSection);
+        _fwrite($_fileHandle, $xmlSection);
     }
 
     public function writeSummaryVariance($_fileHandle)
@@ -2604,12 +2604,12 @@ class CGenReport
             $showRowNum++;
         }
 
-        fwrite($_fileHandle, $sheetCode);
+        _fwrite($_fileHandle, $sheetCode);
         $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet004Ba.txt");
         $t1 = "R2C4:R" . (2 + $showRowNum - 1) . "C" . (4 + count($tmpUmdNameList) - 1);
         $t2 = sprintf($xmlSection, $t1);
 
-        fwrite($_fileHandle, $t2);
+        _fwrite($_fileHandle, $t2);
     }
 
     public function writeSummaryIntoReport($_tmpJsonFileName,
@@ -2734,7 +2734,7 @@ class CGenReport
 
             $t1 = $summarySheetHeadCode . $summarySheetHeadCode2;
 
-            fwrite($_fileHandle, $t1);
+            _fwrite($_fileHandle, $t1);
             $t1 = file_get_contents($_tmpJsonFileName);
             $summaryJson = json_decode($t1, true);
 
@@ -3015,9 +3015,9 @@ class CGenReport
                 $t1 .= $t4;
             }
 
-            fwrite($_fileHandle, $t1);
+            _fwrite($_fileHandle, $t1);
             $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet004B.txt");
-            fwrite($_fileHandle, $xmlSection);
+            _fwrite($_fileHandle, $xmlSection);
 
             copy($_tmpJsonFileName, $_tmpJsonFileName . '.org');
             unlink($_tmpJsonFileName);
@@ -3112,17 +3112,17 @@ class CGenReport
                 return null;
             }
 
-            $_fileHandle = fopen($_xmlFileName, "a+");
+            $_fileHandle = _fopen($_xmlFileName, "a+");
 
             $sheetLinePos = 0;
-            $tmpFileHandle = fopen($_tmpFileName, "r");
+            $tmpFileHandle = _fopen($_tmpFileName, "r");
             if ($tmpFileHandle !== false)
             {
                 while (!feof($tmpFileHandle))
                 {
                     $str = fread($tmpFileHandle, 8192);
                     if ($str !== false) {
-                        fwrite($_fileHandle, $str);
+                        _fwrite($_fileHandle, $str);
                     }
                 }
                 $xmlSection = "";
@@ -3190,7 +3190,7 @@ class CGenReport
                     echo json_encode($returnMsg);
                     return null;
                 }
-                fwrite($_fileHandle, $xmlSection);
+                _fwrite($_fileHandle, $xmlSection);
 
             }
 
@@ -3218,16 +3218,16 @@ class CGenReport
             if (file_exists($_tmpFileName1))
             {
                 // write sheet end
-                $fileHandle = fopen($_tmpFileName1, "r+");
+                $fileHandle = _fopen($_tmpFileName1, "r+");
                 fseek($fileHandle, 0, SEEK_END);
                 $templateFileName4 = $reportTemplateDir . "/sectionSheet005B.txt";
 
                 $t1 = file_get_contents($templateFileName4);
-                fwrite($fileHandle, $t1);
+                _fwrite($fileHandle, $t1);
                 // write report end
-                fwrite($fileHandle, $_allSheetsEndTag);
+                _fwrite($fileHandle, $_allSheetsEndTag);
 
-                fclose($fileHandle);
+                _fclose($fileHandle);
 
                 // *.tmp1
                 $n1 = strlen($_tmpFileName1) - strlen(".tmp1");
@@ -3238,8 +3238,8 @@ class CGenReport
             }
 
             // end this xml
-            fwrite($_fileHandle, $_allSheetsEndTag);
-            fclose($_fileHandle);
+            _fwrite($_fileHandle, $_allSheetsEndTag);
+            _fclose($_fileHandle);
         }
 
         $returnSet = array();
@@ -3458,7 +3458,7 @@ class CGenReport
             $returnMsg["genXmlHead"] = 1;
 
             // create tmp file
-            $tempFileHandle = fopen(__DIR__ . "/" . $_tmpFileName, "w+");
+            $tempFileHandle = _fopen(__DIR__ . "/" . $_tmpFileName, "w+");
             if ($_cmpMachineID != -1)
             {
 
@@ -3722,8 +3722,8 @@ class CGenReport
 
             }
 
-            fwrite($tempFileHandle, $t1);
-            fclose($tempFileHandle);
+            _fwrite($tempFileHandle, $t1);
+            _fclose($tempFileHandle);
 
             // create summary sheet temp file
             if ((file_exists($_jsonFileName) == false) ||
@@ -3810,8 +3810,8 @@ class CGenReport
             $xmlSection = file_get_contents($reportTemplateDir . "/sectionSheet001Ab.txt");
             if (strlen($xmlSection) == 0)
             {
-                fclose($_fileHandle);
-                fclose($_tempFileHandle);
+                _fclose($_fileHandle);
+                _fclose($_tempFileHandle);
                 $returnMsg["errorCode"] = 0;
                 $returnMsg["errorMsg"] = "template file missing, line: " . __LINE__;
                 echo json_encode($returnMsg);
@@ -3841,7 +3841,7 @@ class CGenReport
                   "<Column ss:StyleID=\"s63\" ss:AutoFitWidth=\"0\" ss:Width=\"100\"/>\n";
 
             $t1 = sprintf($xmlSection, $_tmpUmdName, $t3);
-            fwrite($_fileHandle, $t1);
+            _fwrite($_fileHandle, $t1);
         }
 
         $returnSet = array();
@@ -4296,7 +4296,7 @@ class CGenReport
                    $tmpCode6 .
                    $tmpCode4 .
                    "</Row>\n";
-            fwrite($_fileHandle, $t1);
+            _fwrite($_fileHandle, $t1);
 
             $lineNum += 2;
 
@@ -4392,7 +4392,7 @@ class CGenReport
                 $t1 .= "</Row>\n";
                 $sheetLinePos++;
 
-                fwrite($_tempFileHandle, $t1);
+                _fwrite($_tempFileHandle, $t1);
                 $tempLineNum += 2;
 
                 // write flatdata new sheet
@@ -4409,7 +4409,7 @@ class CGenReport
                         }
                     }
 
-                    $fileHandle = fopen($tmpFileName1, "r+");
+                    $fileHandle = _fopen($tmpFileName1, "r+");
                     fseek($fileHandle, 0, SEEK_END);
 
                     if ($_curTestPos > $tmpStartTestPos)
@@ -4418,7 +4418,7 @@ class CGenReport
                         $templateFileName4 = $reportTemplateDir . "/sectionSheet005B.txt";
 
                         $t1 = file_get_contents($templateFileName4);
-                        fwrite($fileHandle, $t1);
+                        _fwrite($fileHandle, $t1);
                     }
 
                     // write sheet head
@@ -4426,7 +4426,7 @@ class CGenReport
 
                     $t1 = file_get_contents($templateFileName3);
                     $t1 = sprintf($t1, $testNameList[$_curTestPos]);
-                    fwrite($fileHandle, $t1);
+                    _fwrite($fileHandle, $t1);
 
                     $t1 = "";
                     $t1 .= "<Row>\n" . $tmpCodeFlatData;
@@ -4441,9 +4441,9 @@ class CGenReport
                            "OS</Data></Cell>\n";
 
                     $t1 .= "</Row>\n";
-                    fwrite($fileHandle, $t1);
+                    _fwrite($fileHandle, $t1);
 
-                    fclose($fileHandle);
+                    _fclose($fileHandle);
                 }
             }
         }
@@ -4676,8 +4676,8 @@ class CGenReport
                 "WHERE (t0.result_id=?) ORDER BY t0.data_id ASC LIMIT " . $nextSubTestPos . ", " . $maxSubTestNumOnce;
         if ($db->QueryDB($sql1, $params1) == null)
         {
-            fclose($_fileHandle);
-            fclose($_tempFileHandle);
+            _fclose($_fileHandle);
+            _fclose($_tempFileHandle);
             $returnMsg["errorCode"] = 0;
             $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
             echo json_encode($returnMsg);
@@ -4803,7 +4803,7 @@ class CGenReport
         }
 
 
-        fwrite($_fileHandle, $t1);
+        _fwrite($_fileHandle, $t1);
 
         $nextSubTestPos += $dataNum;
 
@@ -5270,7 +5270,7 @@ class CGenReport
                     "WHERE t0.result_id=? AND t0.sub_id IN (" . $t1 . ") ORDER BY t0.data_id ASC";
             if ($db->QueryDB($sql1, $params1) == null)
             {
-                fclose($tempFileHandle);
+                _fclose($tempFileHandle);
                 $returnMsg["errorCode"] = 0;
                 $returnMsg["errorMsg"] = "query mysql table failed #3, line: " . __LINE__;
                 echo json_encode($returnMsg);
@@ -5678,7 +5678,7 @@ class CGenReport
                 $sheetLinePos++;
             }
 
-            fwrite($tempFileHandle, $t1);
+            _fwrite($tempFileHandle, $t1);
 
             // write flatdata sheet
             if (file_exists($tmpFileName1))
@@ -5781,11 +5781,11 @@ class CGenReport
                     }
                 }
 
-                $fileHandle = fopen($tmpFileName1, "r+");
+                $fileHandle = _fopen($tmpFileName1, "r+");
                 fseek($fileHandle, 0, SEEK_END);
-                fwrite($fileHandle, $t1);
+                _fwrite($fileHandle, $t1);
 
-                fclose($fileHandle);
+                _fclose($fileHandle);
             }
 
             {
