@@ -202,6 +202,7 @@ function microtime_float()
 }
 
 $configFilename = "my_test_config.txt";
+$logFileOperationEnable = true;
 
 function _getIDNum($inc)
 {
