@@ -242,7 +242,7 @@ function _logMsg($handle, $op, $msg = null)
     $filename = $fileHandles[(int)$handle];
     $opstr = sprintf("%-6s", $op);
     $logmsg = "[$id] [$opstr] $filename\n";
-    $logmsg .= var_dump(debug_backtrace(), true) . "\n";
+    $logmsg .= var_export(debug_backtrace(), true) . "\n";
     if ($msg) {
         $logmsg .= ">>> begin\n$msg<<< end\n";
     }
