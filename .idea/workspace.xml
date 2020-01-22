@@ -16,7 +16,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0c7bb7f9-b3df-45ee-9a4b-ad84563598c2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phplibs/configuration/swtMISConst.php" beforeDir="false" afterPath="$PROJECT_DIR$/phplibs/configuration/swtMISConst.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,8 +37,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1111">
-              <caret line="459" column="89" selection-start-line="459" selection-start-column="76" selection-end-line="459" selection-end-column="89" />
+            <state relative-caret-position="580">
+              <caret line="526" column="44" selection-start-line="526" selection-start-column="44" selection-end-line="526" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -65,17 +64,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10">
-              <caret line="4399" column="17" lean-forward="true" selection-start-line="4399" selection-start-column="17" selection-end-line="4399" selection-end-column="17" />
+            <state relative-caret-position="181">
+              <caret line="4195" column="35" selection-start-line="4195" selection-start-column="35" selection-end-line="4195" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/phplibs/configuration/swtMISConst.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="204" column="31" selection-start-line="204" selection-start-column="31" selection-end-line="204" selection-end-column="31" />
+            <state relative-caret-position="3591">
+              <caret line="189" column="8" selection-start-line="189" selection-start-column="8" selection-end-line="189" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -110,8 +109,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/error31.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+            <state relative-caret-position="190">
+              <caret line="10" column="289" selection-start-line="10" selection-start-column="289" selection-end-line="10" selection-end-column="289" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#th#0;n#tr#0;n#table#0;n#font#0;n#!!top" expanded="true" />
               </folding>
@@ -119,11 +118,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/CGenReportTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-929">
-              <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+            <state relative-caret-position="532">
+              <caret line="251" column="8" lean-forward="true" selection-start-line="251" selection-start-column="8" selection-end-line="251" selection-end-column="18" />
               <folding>
                 <element signature="n#testAdditionalStyles#0;n#CGenReportTest#0;n#!!top" />
                 <element signature="n#testCreateXmlFile#0;n#CGenReportTest#0;n#!!top" />
@@ -138,9 +137,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>$historyBatchMaxNum</find>
-      <find>fwrite</find>
-      <find>$startSheetLineNum,</find>
       <find>$startSheetLineNum</find>
       <find>checkStartSheet</find>
       <find>$summaryJson</find>
@@ -168,6 +164,9 @@
       <find>$tmpFileName1</find>
       <find>$_fileHandle</find>
       <find>$_tempFileHandle</find>
+      <find>$_lineNum</find>
+      <find>$lineNum</find>
+      <find>checkStart</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -206,10 +205,10 @@
         <option value="$PROJECT_DIR$/phplibs/createReport/swtXLSXBatchReport.php" />
         <option value="D:/work/dev/grapher/error04.php" />
         <option value="$PROJECT_DIR$/phplibs/generalLibs/utils.php" />
-        <option value="$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" />
-        <option value="$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php" />
-        <option value="$PROJECT_DIR$/error31.php" />
         <option value="$PROJECT_DIR$/phplibs/configuration/swtMISConst.php" />
+        <option value="$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php" />
+        <option value="$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php" />
+        <option value="$PROJECT_DIR$/error31.php" />
       </list>
     </option>
   </component>
@@ -577,6 +576,9 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -593,7 +595,7 @@
       <workItem from="1576054596818" duration="1190000" />
       <workItem from="1577941430351" duration="90179000" />
       <workItem from="1578624418062" duration="87077000" />
-      <workItem from="1579242924587" duration="46556000" />
+      <workItem from="1579242924587" duration="47914000" />
     </task>
     <servers />
   </component>
@@ -630,7 +632,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="308766000" />
+    <option name="totallyTimeSpent" value="310124000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -645,8 +647,8 @@
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.34935522" visible="true" weight="0.17697228" />
-      <window_info active="true" id="Structure" order="1" sideWeight="0.6506448" side_tool="true" visible="true" weight="0.17697228" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.34935522" visible="true" weight="0.17697228" />
+      <window_info id="Structure" order="1" sideWeight="0.6506448" side_tool="true" weight="0.17697228" />
       <window_info id="Favorites" order="2" sideWeight="0.3915592" side_tool="true" weight="0.17697228" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49947917" weight="0.32957748" />
@@ -1647,37 +1649,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/CGenReportTest.php">
+    <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-929">
-          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
-          <folding>
-            <element signature="n#testAdditionalStyles#0;n#CGenReportTest#0;n#!!top" />
-            <element signature="n#testCreateXmlFile#0;n#CGenReportTest#0;n#!!top" />
-            <element signature="n#testCheckNeedCreateReportFile#0;n#CGenReportTest#0;n#!!top" />
-            <element signature="n#testSaveAndLoadVars#0;n#CGenReportTest#0;n#!!top" />
-          </folding>
+        <state relative-caret-position="181">
+          <caret line="4195" column="35" selection-start-line="4195" selection-start-column="35" selection-end-line="4195" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtCompileReportAdditionNoise.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1111">
-          <caret line="459" column="89" selection-start-line="459" selection-start-column="76" selection-end-line="459" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/phplibs/createReport/swtClassGenReportNoise.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10">
-          <caret line="4399" column="17" lean-forward="true" selection-start-line="4399" selection-start-column="17" selection-end-line="4399" selection-end-column="17" />
+        <state relative-caret-position="580">
+          <caret line="526" column="44" selection-start-line="526" selection-start-column="44" selection-end-line="526" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/error31.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+        <state relative-caret-position="190">
+          <caret line="10" column="289" selection-start-line="10" selection-start-column="289" selection-end-line="10" selection-end-column="289" />
           <folding>
             <element signature="n#style#0;n#span#0;n#th#0;n#tr#0;n#table#0;n#font#0;n#!!top" expanded="true" />
           </folding>
@@ -1686,8 +1675,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/phplibs/configuration/swtMISConst.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="204" column="31" selection-start-line="204" selection-start-column="31" selection-end-line="204" selection-end-column="31" />
+        <state relative-caret-position="3591">
+          <caret line="189" column="8" selection-start-line="189" selection-start-column="8" selection-end-line="189" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/CGenReportTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="251" column="8" lean-forward="true" selection-start-line="251" selection-start-column="8" selection-end-line="251" selection-end-column="18" />
+          <folding>
+            <element signature="n#testAdditionalStyles#0;n#CGenReportTest#0;n#!!top" />
+            <element signature="n#testCreateXmlFile#0;n#CGenReportTest#0;n#!!top" />
+            <element signature="n#testCheckNeedCreateReportFile#0;n#CGenReportTest#0;n#!!top" />
+            <element signature="n#testSaveAndLoadVars#0;n#CGenReportTest#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
