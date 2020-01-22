@@ -4601,19 +4601,19 @@ class CGenReport
         global $returnMsg;
         global $startStyleID;
         global $resultIDList;
-        global $historyResultIDList;
+//        global $historyResultIDList;
         global $tableName01;
         global $testName;
         global $maxSubTestNumOnce;
-        global $subTestNumList;
-        global $cmpSubTestNumList;
-        global $skipTestNameList;
+//        global $subTestNumList;
+//        global $cmpSubTestNumList;
+//        global $skipTestNameList;
         global $subjectNameFilterNumMax;
         global $historyBatchMaxNum;
-        global $subTestNum;
+//        global $subTestNum;
         global $cardStandardResultPos;
-        global $db_username;
-        global $db_password;
+//        global $db_username;
+//        global $db_password;
         global $swtMicrobenchDocsTestNameUrl;
 
         $db = $_db;
@@ -4694,7 +4694,7 @@ class CGenReport
                              "", "", "", "", "",
                              "", "", "", "", "");
 
-        $testAverageData = "";
+//        $testAverageData = "";
         while ($row1 = $db->fetchRow())
         {
             $tmpDataListXML = array("", "", "", "", "",
@@ -4704,7 +4704,7 @@ class CGenReport
 
             $subTestID = $row1[1];
             $subTestName = $row1[4];
-            $subTestFilterName = $row1[5];
+//            $subTestFilterName = $row1[5];
             $subTestFilterNameList = explode("|", str_replace("\"", "", $row1[5]));
             $dataValue = "" . $row1[2];
             $testCaseID = $row1[3];
