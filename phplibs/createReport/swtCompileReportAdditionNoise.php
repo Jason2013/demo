@@ -472,7 +472,7 @@ if (($subTestNum == 0) ||
         $resultPos++;
         $curTestPos = 0;
         
-        $returnSet = $xmlWriter->checkAllReportsFinished($db, $resultPos, $reportFolder, $batchID);
+        $returnSet = $xmlWriter->checkAllReportsFinished($resultPos, $reportFolder);
         if ($returnSet === null)
         {
             // all task finished
