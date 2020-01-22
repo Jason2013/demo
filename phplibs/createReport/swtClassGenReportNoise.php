@@ -5048,21 +5048,21 @@ class CGenReport
         global $cardNameList;
         global $sysNameList;
         global $driverNameList;
-        global $driver2NameList;
+//        global $driver2NameList;
         global $umdNameList;
         global $umdOrder;
         global $resultUmdOrder;
         global $tableName01;
         global $testName;
-        global $testNameList;
-        global $subTestNumList;
-        global $subTestNum;
+//        global $testNameList;
+//        global $subTestNumList;
+//        global $subTestNum;
         global $startStyleID;
         global $standardSubTestIDList;
-        global $standardSubTestNameList;
+//        global $standardSubTestNameList;
         global $standardSubTestFilterNameList;
         global $subjectNameFilterNumMax;
-        global $dataColumnNum;
+//        global $dataColumnNum;
         global $swtSheetColumnIDList;
         global $standardTestCaseIDList;
         global $graphCells;
@@ -5074,24 +5074,24 @@ class CGenReport
         global $curMachineName;
         global $cmpMachineName;
         global $swtTempVBAConfigJsonName;
-        global $graphDataStartCloumnIDCompareList;
+//        global $graphDataStartCloumnIDCompareList;
         global $jsonFileName;
         global $jsonFileName2;
         global $reportTemplateDir;
         global $dataColumnNum;
         global $cmpMachineID;
-        global $curMachineID;
+//        global $curMachineID;
         global $crossType;
-        global $machineIDBatchPairList;
+//        global $machineIDBatchPairList;
         global $curResultTime;
         global $cmpBatchTime;
         global $batchIDList;
         global $swtMicrobenchDocsTestNameUrl;
         global $tmpFileName1;
-        global $colMachineIDList;
+//        global $colMachineIDList;
         global $colStartResultIDPosList;
         global $colMachineNum;
-        global $reportUmdNum;
+//        global $reportUmdNum;
         global $graphDataColumnNum;
         global $colCardNameList;
         global $colSysNameList;
@@ -5278,9 +5278,9 @@ class CGenReport
             }
 
 
-            $summaryJson = array();
-            $summaryJson2 = array();
-            $variationJson = array();
+//            $summaryJson = array();
+//            $summaryJson2 = array();
+//            $variationJson = array();
             {
                 $t1 = file_get_contents($jsonFileName);
                 $summaryJson = json_decode($t1, true);
