@@ -47,6 +47,7 @@ $curReportFolder = $returnSet["curReportFolder"];
 $cacheFileName = __DIR__ . '/' . $reportFolder . '/CompileReportAdditionNoise.txt';
 $cache = new ReportCache($cacheFileName);
 
+$configFilename = __DIR__ . '/' . $reportFolder . '/my_test_config.txt';
 $logfile = __DIR__ . '/' . $reportFolder . '/test_file_operations.txt';
 
 $headers = ["batchID", "resultPos", "curTestPos", "firstTestPos", "firstSubTestPos", "nextSubTestPos", "subTestNum", "lineNumPos", "sheetLinePos", "machineIDPair", "checkedMachineIDList", "colMachineIDOrderList", "colMachineIDOrderIndexList", "tempFileLineNumPos", "forceGenReport", "reportToken", "curReportFolder", "reportType", "crossType"];

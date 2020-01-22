@@ -201,16 +201,17 @@ function microtime_float()
     return ((float)$usec + (float)$sec);
 }
 
+$configFilename = "my_test_config.txt";
 
 function _getIDNum($inc)
 {
-    $filename = "my_test_config.txt";
-    if (!file_exists($filename)) {
+    global $configFilename;
+    if (!file_exists($configFilename)) {
         $result["id"] = 1;
         $json = json_encode($result);
-        file_put_contents($filename, $json);
+        file_put_contents($configFilename, $json);
     } else {
-        $json = file_get_contents($filename);
+        $json = file_get_contents($configFilename);
         $result = json_decode($json, true);
     }
 
@@ -219,7 +220,7 @@ function _getIDNum($inc)
     if ($inc) {
         $result["id"] += 1;
         $json = json_encode($result);
-        file_put_contents($filename, $json);
+        file_put_contents($configFilename, $json);
     }
     return $retval;
 }
