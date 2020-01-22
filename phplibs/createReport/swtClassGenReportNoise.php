@@ -3298,15 +3298,15 @@ class CGenReport
         return false;
     }
 
-    public function checkAllReportsFinished($_db, $_resultPos, $_reportFolder, $_batchID)
+    public function checkAllReportsFinished($_resultPos, $_reportFolder)
     {
         global $returnMsg;
         global $resultIDList;
         global $swtTempReportConfigJsonName2;
         global $reportFolder;
 
-        $db = $_db;
-
+//        $db = $_db;
+//
         if ($_resultPos >= count($resultIDList[0]))
         {
             // rename final report files
