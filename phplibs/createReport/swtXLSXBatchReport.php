@@ -120,6 +120,7 @@ if ($fileID < count($oldReportXMLList))
     try
     {
         $excel = new COM("Excel.Application");
+        $excel->Visible = 1;
         
         $workBook = $excel->WorkBooks->Open("" . __dir__ . "/" . $tmpPath);
 
