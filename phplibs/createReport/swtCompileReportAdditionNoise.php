@@ -525,7 +525,7 @@ else
                                             $nextSubTestPos, $firstSubTestPos, $curTestPos, 
                                             $isCompStandard, $cmpMachineID,
                                             $sheetLinePos, $tempLineNum);
-    $lineNum = $returnSet["lineNum"];
+//    $lineNum = $returnSet["lineNum"];
     $sheetLinePos = $returnSet["sheetLinePos"];
     $tempLineNum = $returnSet["tempLineNum"];
     
@@ -541,7 +541,7 @@ else
         return;
     }
     $nextSubTestPos = $returnSet["nextSubTestPos"];
-    $lineNum = $returnSet["lineNum"];
+//    $lineNum = $returnSet["lineNum"];
     $standardSubTestIDList = $returnSet["standardSubTestIDList"];
     $standardSubTestNameList = $returnSet["standardSubTestNameList"];
     $standardSubTestFilterNameList = $returnSet["standardSubTestFilterNameList"];
