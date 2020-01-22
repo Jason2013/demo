@@ -4193,7 +4193,7 @@ class CGenReport
     public function checkStartTest($_fileHandle, $_tempFileHandle,
                                    $_nextSubTestPos, $_firstSubTestPos, $_curTestPos,
                                    $_isCompStandard, $_cmpMachineID,
-                                   $_lineNum, $_sheetLinePos, $_tempLineNum)
+                                   $_sheetLinePos, $_tempLineNum)
     {
         global $startStyleID;
         global $graphCells;
@@ -4212,7 +4212,7 @@ class CGenReport
         global $subTestNumList;
         global $colMachineNum;
 
-        $lineNum = $_lineNum;
+//        $lineNum = $_lineNum;
         $sheetLinePos = $_sheetLinePos;
         $tempLineNum = $_tempLineNum;
         if ($_nextSubTestPos == $_firstSubTestPos)
@@ -4298,7 +4298,7 @@ class CGenReport
                    "</Row>\n";
             _fwrite($_fileHandle, $t1);
 
-            $lineNum += 2;
+//            $lineNum += 2;
 
             if ($_isCompStandard)
             {
@@ -4449,7 +4449,7 @@ class CGenReport
         }
 
         $returnSet = array();
-        $returnSet["lineNum"] = $lineNum;
+//        $returnSet["lineNum"] = $lineNum;
         $returnSet["sheetLinePos"] = $sheetLinePos;
         $returnSet["tempLineNum"] = $tempLineNum;
         return $returnSet;

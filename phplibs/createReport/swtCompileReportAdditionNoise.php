@@ -524,7 +524,7 @@ else
     $returnSet = $xmlWriter->checkStartTest($fileHandle, $tempFileHandle,
                                             $nextSubTestPos, $firstSubTestPos, $curTestPos, 
                                             $isCompStandard, $cmpMachineID,
-                                            $lineNum, $sheetLinePos, $tempLineNum);
+                                            $sheetLinePos, $tempLineNum);
     $lineNum = $returnSet["lineNum"];
     $sheetLinePos = $returnSet["sheetLinePos"];
     $tempLineNum = $returnSet["tempLineNum"];
