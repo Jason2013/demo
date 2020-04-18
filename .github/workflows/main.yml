@@ -1,0 +1,16 @@
+name: GitHub Actions Study
+on: push
+jobs:
+  job_id_Study:
+    name: Study
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Step 1
+        run: cd
+        shell: cmd
+      - name: Step 2
+        run: |
+          set
+          cd
+        shell: cmd
