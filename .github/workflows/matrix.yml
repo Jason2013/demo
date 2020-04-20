@@ -16,6 +16,8 @@ jobs:
                     - Debug
                     - Release
                 include:
+                    - visualstudio: "Visual Studio 16 2019"
+                      vsid: vs2019
                     - architecture: x64
                       platform: x64
                       triplet: x64-windows
@@ -29,4 +31,5 @@ jobs:
               echo architecture = ${{ matrix.architecture }}
               echo config = ${{ matrix.config }}
               echo triplet = ${{ matrix.triplet }}
+              echo vsid = ${{ matrix.vsid }}
             shell: cmd
