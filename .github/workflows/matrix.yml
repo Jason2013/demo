@@ -22,11 +22,11 @@ jobs:
                     - architecture: x86
                       platform: Win32
                       triplet: x86-windows
-            steps:
-              - name: echo var
-                run: |
-                  echo visualstudio = ${{ matrix.visualstudio }}
-                  echo architecture = ${{ matrix.architecture }}
-                  echo config = ${{ matrix.config }}
-                  echo triplet = ${{ matrix.triplet }}
-                shell: cmd
+        steps:
+          - name: echo var
+            run: |
+              echo visualstudio = ${{ matrix.visualstudio }}
+              echo architecture = ${{ matrix.architecture }}
+              echo config = ${{ matrix.config }}
+              echo triplet = ${{ matrix.triplet }}
+            shell: cmd
