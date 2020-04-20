@@ -1,0 +1,32 @@
+name: Matrix Check
+on: push
+jobs:
+    build:
+        name: test build
+        runs-on: windows-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                visualstudio: ["Visual Studio 16 2019"]
+                #, "Visual Studio 15 2017"]
+                architecture:
+                    - x64
+                    - x86
+                config:
+                    - Debug
+                    - Release
+                include:
+                    - architecture: x64
+                      platform: x64
+                      triplet: x64-windows
+                    - architecture: x86
+                      platform: Win32
+                      triplet: x86-windows
+            steps:
+              - name: echo var
+                run: |
+                  echo visualstudio = ${{ matrix.visualstudio }}
+                  echo architecture = ${{ matrix.architecture }}
+                  echo config = ${{ matrix.config }}
+                  echo triplet = ${{ matrix.triplet }}
+                shell: cmd
