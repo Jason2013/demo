@@ -4,72 +4,213 @@ TASKS
 
 WORKING TASK
 ------------
+https://web.microsoftstream.com/video/9d2473fb-8a92-42f5-960b-4f10d7aa4fc8
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+1. replace driver
+2. replace glcts
+3. set /etc/amd/amdPalSettings.cfg always to ON
+./glcts --deqp-surface-width=16 --deqp-surface-height=16 --deqp-surface-type=pbuffer  -n dEQP-GLES2.functional.dither.disabled.gradient_alpha 
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+./glcts --deqp-surface-width=16 --deqp-surface-height=16 --deqp-surface-type=fbo  -n dEQP-GLES2.functional.dither.disabled.gradient_alpha 
+ 
+
+Add OGLP PAL SC Overlay build for Linux Pre Check-in
+http://ontrack-internal.amd.com/browse/LCSPPT-4739
+
+Add OGLP PAL Overlay build for Linux Pre Check-in 
+http://ontrack-internal.amd.com/browse/LCSPPT-4820
+
+Add OGLP PAL Overlay build for Windows Pre Check-in
+http://ontrack-internal.amd.com/browse/LCSPPT-4822
+
+Add OGLP SC Overlay build for Linux Pre Check-in
+http://ontrack-internal.amd.com/browse/LCSPPT-4821
+
+Add OGLP SC Overlay build for Windows Pre Check-in
+http://ontrack-internal.amd.com/browse/LCSPPT-4823
 
 
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+- oglp_android_lnx-osdb
++ oglp_lnx-osdb
+- oglp_lnx_dbg-osdb
++ oglp_pal_sc_stg_lnx-osdb
++ oglp_pal_sc_stg_win-osdb
++ oglp_pal_stg_lnx-osdb
+  oglp_pal_stg_win-osdb
+  oglp_sc_stg_lnx-osdb
+  oglp_sc_stg_win-osdb
+  oglp_win-osdb
+  oglp_win_dbg-osdb
 
-PENDING TASK
-------------
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-* 请假，休陪产假
+glcts.exe --deqp-log-images=disable --deqp-watchdog=disable --deqp-log-shader-sources=disable --deqp-caselist-file=..\passinglist.txt --deqp-log-filename=test-result-orl-oglp-win-test-03.log  2>&1
+glcts.exe --deqp-gl-context-type=egl --deqp-log-images=disable --deqp-watchdog=disable --deqp-log-shader-sources=disable --deqp-caselist-file=..\passinglist-es.txt --deqp-log-filename=test-result-orl-oglp-win-test-03.log  2>&1 
 
-* Win7 OS Update
+E:\work\cts_4.6.0.2_patched.tar\cts_4.6.0.2_patched\cts_4.6.0.2\build\external\openglcts\modules
+E:\work\cts_4.6.0.2_patched.tar\cts_4.6.0.2_patched\cts_4.6.0.2\tools
 
-* Karen 的需求： def 文件不要做为源文件，做为 link 的选项添加。
+PermissionError: [Errno 13] Permission denied: '.\\deqpVkPerTestResultInfo.py'
+PermissionError: [Errno 13] Permission denied: '.\\runPerTestInfo.bat'
+PermissionError: [Errno 13] Permission denied: '.\\deqpVkFixRunErrors.py'
+PermissionError: [Errno 13] Permission denied: '.\\deqpVkGenResults.py'
+PermissionError: [Errno 13] Permission denied: '.\\deqpVkDetailedAssertions.py'
+PermissionError: [Errno 13] Permission denied: '.\\runPost.bat'
+PermissionError: [Errno 13] Permission denied: '.\\runInit.bat'
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+3/13/2020 3:46:46 PM
 
-* Oglp Panel 单独构建
+参考页面：
 
-* Deng Hui 的需求： 在 Jenkins 上运行 gfxbench
-D:\work\temp\032\oglp_linux_driver_v4.tar\oglp_linux_driver_v4\libs\install
+15. How to run cSim on OGLP
+http://confluence.amd.com/display/OGL/15.+How+to+run+cSim+on+OGLP
 
-准备 git 图形界面软件 (SourceTree, SmartGit, git)、PPT
+Setting up Mariner CSim Linux farm using HTCondor 
+http://confluence.amd.com/pages/viewpage.action?spaceKey=ASPT&title=Setting+up+Mariner+CSim+Linux+farm+using+HTCondor
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+fl-oglps12
+admin/admin
+cycle 5
+
+[Yesterday 11:29 AM] Yao, Rocky
+\\oglserver\Incoming\Rocky\WeeklyTestRawData\2020-02-25-man00001_Shaderbench_Navi10
+
+E:\work\grapher\2020-02-25-man00001_Shaderbench_Navi10
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+d:\work\dev\microbench\doc\sphinx>git init --separate-git-dir e:\work\microbench\doc .
+Initialized empty Git repository in e:/work/microbench/doc/
+
+git worktree add e:\work\microbench\doc_ps
+cd e:\work\microbench\doc_ps
+
+set DK_ROOT=D:\dev\p4\vk_drv_dk\win
+
+build.bat
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+邮件：
+From: Le, Min <Min.Le@amd.com> 
+Sent: Friday, February 28, 2020 1:14 PM
+To: Chen, Chang <Chang.Chen@amd.com>; Jin, Jason(Yong) <JasonYong.Jin@amd.com>; Wei, DongLin <DongLin.Wei@amd.com>; Liu, Gang <Gang.Liu@amd.com>
+Subject: 回复: 回复: Meeting minutes to OGLP Android CI Feb.25th
+
+工作目录：
+E:\work\oglp_android
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-测试 git-p4
+Android OGLP build
+------------------
 
-Workspace name: chanchen_oglp_sync4
-Workspace root: D:\work\dev\chanchen_oglp_sync4
+1. copy all materials into `D:\work\android` folder.
+2. 
+VM checkpoint
+Ubuntu 18.04.2 - (2/27/2020 - 3:37:42 PM)
 
-git root: D:\work\dev\chanchen_oglp_sync4
+3.
 
-export P4CLIENT=chanchen_oglp_sync4
-export P4PORT=shswp4p1:1666
-export P4USER=chanchen
-
-cd /d/work/dev/chanchen_oglp_sync4_git
-# ERROR: git p4 clone --use-client-spec //depot/main/... //depot/stg/...
-git p4 clone --use-client-spec //depot/main/...
-
+# mkdir -p ~/work/oglp-code/oglp-code
+# mkdir -p ~/work/oglp-code/oglp-dk
+# cd ~/work/oglp-code
 
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-将 sandbox 中的内容（如：codeSanitizeConfig），导入到 stg/oglp 中。
+[4:03 PM] Zhao, Jun (SRDC CQE)
+    
+http://ci-gfx.amd.com/job/openglp/job/oglp_pal_sc_stg_win-osdb/  這裏，我們這次測試，SC 2076440 這個link裏面沒有,也沒看到build fail，我們能自己下一job讓系統build嗎
 
-建立一个 Jenkins job，用来测试 sanitize 之后的 OGLP 代码。
->   From: He, Jacob <Jacob.He@amd.com> 
->   Sent: Thursday, November 7, 2019 10:34 AM
->   To: Chen, Chang <Chang.Chen@amd.com>
->   Cc: Jian, Dimple <Dimple.Jian@amd.com>; Deng, Hui <Hui.Deng@amd.com>; Zhou, Jin <Jin.Zhou@amd.com>; Li, Ruoyu <Ruoyu.Li@amd.com>; Wei, DongLin <DongLin.Wei@amd.com>; Jin, Jian-Rong <Jian-Rong.Jin@amd.com>
->   Subject: RE: review OGLP sanitized package (staging)
->   
->   Hi Chang,
->     Please set up a Jenkins precheck-in for sanitized build of stg/oglp when you have time. Stg/oglp sanitized build was broken by CL# 2025851.
->   
->   Thanks
->   Jacob
-
-记录 OGLP 远程机器的 IP 地址，以备以后使用。
-记录 工作用机 远程机器的 IP 地址，以备以后使用。
-使用申请好的 Windows 虚拟机
-申请 Linux 虚拟机
-
-
-FINISHED TASK
--------------
+1. Can I trigger a job manually?
+2. Can I retrigger a job manually?
+3. Can I cancel a pre check-in job manually?
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-11/19/2019 1:50:51 PM
+
+添加旅居地信息
+D:\work\temp\001\陈畅487989.jpg
+
+- make for oglp
+
+如果想要支持 make 进行构建，需要添加以下映到 workspace 中：
+- //depot/main/make/...            //<OGLP-client>/main/make/...
+
+Code mappings:
+==============
+//depot/main/make/...            //<OGLP-client>/make/...
+
+DK mappings:
+============
+//depot/dk/win/gnu/... //tlottes_dk3/win/gnu/...
+//depot/dk/win/cmake/cmake-3.15.1-win64-x64/... //chanchen_dk_oglp/win/cmake/cmake-3.15.1-win64-x64/...
+set path=d:\dev\p4\oglp_dk\win\gnu\cw1.3.12\bin;%path%
+
+- study: vcpkg, github actions
+
+- Jenkins build for performance test
+
+- OGLP Panel
+
+cmake -DBUILD_OGL_PANEL=1
+
+
+cd <OGLP-client>/main/drivers/oglp
+mkdir build
+cd build
+
+cd D:\work\dev\oglp_dev\main\drivers\oglp\build_x86_oglpanel
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_OGL_PANEL=1 -DTARGET_ARCHITECTURE_BITS=64 -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
+setupBuildEnv.bat
+ninja
+
+mkdir D:\work\dev\oglp_dev\main\drivers\oglp\build_x86_oglpanel_dbg
+cd D:\work\dev\oglp_dev\main\drivers\oglp\build_x86_oglpanel_dbg
+cmake -GNinja -DCMAKE_BUILD_TYPE=Debug -DBUILD_OGL_PANEL=1 -DTARGET_ARCHITECTURE_BITS=64 -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
+setupBuildEnv.bat
+ninja
+
+https://social.msdn.microsoft.com/Forums/en-US/a28331ae-19a3-4a34-b3ba-1e8fd4430375/missing-apimswincore-dlls
+Missing api-ms-win-core-* DLLs
+
+Enable OGLP Panel build with OGLP Windows 64bit Release build
+http://ontrack-internal.amd.com/browse/LCSPPT-4636
+
+oglp_win-osdb fail log:
+=======================
+file:///D:/docs/oglp_win-osdb%20[openglp]%20[Jenkins].html
+
+- Overlay build CTS
+http://ontrack-internal.amd.com/browse/LCSPPT-4637
+http://ontrack-internal.amd.com/browse/LCSPPT-4638
+http://ontrack-internal.amd.com/browse/LCSPPT-4639
+
+
+- Linux build CTS 
+- Jenkins build for Android
+
+*Timesheet
+*Password change
+Office out
+Dmytro email
+
+D:
+cd D:\study\php_study\phpunit_phar
+php phpab.phar -o src/autoload5.php d:\work\dev\grapher\phplibs\server
+php phpab.phar -o src/autoload7.php D:\wamp64\www\Grapher\phplibs\createReport\swtClassGenReportNoise.php
+
+Help -> Edit Custom VM Options
+C:\Users\chanchen\.PhpStorm2019.1\config\phpstorm64.exe.vmoptions
 
 \\oglserver\pub\OGLP\Drivers\pxproxy_driver
 atig6pxx.dll
@@ -120,6 +261,106 @@ Radeon (TM) RX 480 Graphics
 OGLP Test Machine
 .................
 10.67.246.169
+
+cd D:\work\dev\chanchen_oglp_sync_only2\depot\stg\sandbox\pal\mariner\csim717_lsa\oglp\main\drivers\oglp\build64
+copy ati* d:\work\temp\031\2019-11-15
+copy lib* d:\work\temp\031\2019-11-15
+
+cd D:\work\dev\chanchen_oglp_sync_only2\depot\stg\sandbox\pal\mariner\csim717_lsa\oglp\main\drivers\oglp\build32
+copy ati* \\oglserver\Incoming\Chang\2019-11-15\x86\
+copy lib* \\oglserver\Incoming\Chang\2019-11-15\x86\
+
+D:\work\temp\028\overlay>dir
+11/16/2019  07:03 PM             3,711 0001-SWDEV-190425-OGLP-Integrate-CL-2018539-into-OGLP.patch
+git am --directory=depot/stg/sandbox/pal/mariner/csim717_lsa/oglp /D/work/temp/028/overlay/0002-SWDEV-190425-OGLP-Integrate-CL-2018539-into-OGLP.patch
+
+
+Sandbox
+
+Git: D:\work\temp\030\oglp
+D:\work\temp\030\oglp\depot\stg\sandbox\pal\mariner\csim717_lsa\oglp
+
+D:\work\dev\chanchen_oglp_sync_only2
+ //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/...
+
+
+D:\work\temp\030\oglp\depot\stg\sandbox\pal\mariner\csim717_lsa\xgl\icd\imported\pal
+D:\work\temp\030\oglp\depot\stg\sandbox\pal\mariner\csim717_lsa\xgl\icd\imported\sc
+
+//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/... D:/work/temp/030/oglp/depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/...
+//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/... D:/work/temp/030/oglp/depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/...
+
+//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/... //chanchen_oglp_sync_only2/main/drivers/oglp/icd/imported/pal/...
+//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/... //chanchen_oglp_sync_only2/main/drivers/oglp/icd/imported/sc/...
+
+
+//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/pal/...
+-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/doc/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/pal/doc/...
+-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/tools/internal/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/pal/tools/internal/...
+
+//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/sc/...
+-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/Docs/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/sc/Docs/...
+-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/HSAIL/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/sc/HSAIL/...
+-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/Src/Dev/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/sc/Src/Dev/...
+
+
+D:\work\temp\009\OGLP_SRC\main\drivers\oglp\icd\imported\pal D:\work\dev\chanchen_oglp_sync_only2\depot\stg\sandbox\pal\mariner\csim717_lsa\oglp\main\drivers\oglp\icd\imported\pal
+D:\work\temp\009\OGLP_SRC\main\drivers\oglp\icd\imported\sc d:\work\dev\chanchen_oglp_sync_only2\main\drivers\oglp\icd\imported\sc
+
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
+cmake -GNinja -DTARGET_ARCHITECTURE_BITS=32 -DCMAKE_BUILD_TYPE=Release -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
+
+D:\work\temp\028\oglp_dis
+D:\work\temp\030
+
+
+PENDING TASK
+------------
+
+准备 git 图形界面软件 (SourceTree, SmartGit, git)、PPT
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+测试 git-p4
+
+Workspace name: chanchen_oglp_sync4
+Workspace root: D:\work\dev\chanchen_oglp_sync4
+
+git root: D:\work\dev\chanchen_oglp_sync4
+
+export P4CLIENT=chanchen_oglp_sync4
+export P4PORT=shswp4p1:1666
+export P4USER=chanchen
+
+cd /d/work/dev/chanchen_oglp_sync4_git
+# ERROR: git p4 clone --use-client-spec //depot/main/... //depot/stg/...
+git p4 clone --use-client-spec //depot/main/...
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+将 sandbox 中的内容（如：codeSanitizeConfig），导入到 stg/oglp 中。
+
+建立一个 Jenkins job，用来测试 sanitize 之后的 OGLP 代码。
+>   From: He, Jacob <Jacob.He@amd.com> 
+>   Sent: Thursday, November 7, 2019 10:34 AM
+>   To: Chen, Chang <Chang.Chen@amd.com>
+>   Cc: Jian, Dimple <Dimple.Jian@amd.com>; Deng, Hui <Hui.Deng@amd.com>; Zhou, Jin <Jin.Zhou@amd.com>; Li, Ruoyu <Ruoyu.Li@amd.com>; Wei, DongLin <DongLin.Wei@amd.com>; Jin, Jian-Rong <Jian-Rong.Jin@amd.com>
+>   Subject: RE: review OGLP sanitized package (staging)
+>   
+>   Hi Chang,
+>     Please set up a Jenkins precheck-in for sanitized build of stg/oglp when you have time. Stg/oglp sanitized build was broken by CL# 2025851.
+>   
+>   Thanks
+>   Jacob
+
+记录 OGLP 远程机器的 IP 地址，以备以后使用。
+记录 工作用机 远程机器的 IP 地址，以备以后使用。
+使用申请好的 Windows 虚拟机
+申请 Linux 虚拟机
+
+
+FINISHED TASK
+-------------
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 11/14/2019 3:01:36 PM
@@ -208,60 +449,6 @@ git p4 clone --use-client-spec //depot/main/drivers/inc/asic_reg/atishareioctlde
 -//depot/stg/oglp/drivers/oglp/test/... //chanchen_oglp_sync5/main/drivers/oglp/test/...
 
 D:\work\temp\026\oglp
-
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-11/19/2019 1:52:18 PM
-
-cd D:\work\dev\chanchen_oglp_sync_only2\depot\stg\sandbox\pal\mariner\csim717_lsa\oglp\main\drivers\oglp\build64
-copy ati* d:\work\temp\031\2019-11-15
-copy lib* d:\work\temp\031\2019-11-15
-
-cd D:\work\dev\chanchen_oglp_sync_only2\depot\stg\sandbox\pal\mariner\csim717_lsa\oglp\main\drivers\oglp\build32
-copy ati* \\oglserver\Incoming\Chang\2019-11-15\x86\
-copy lib* \\oglserver\Incoming\Chang\2019-11-15\x86\
-
-D:\work\temp\028\overlay>dir
-11/16/2019  07:03 PM             3,711 0001-SWDEV-190425-OGLP-Integrate-CL-2018539-into-OGLP.patch
-git am --directory=depot/stg/sandbox/pal/mariner/csim717_lsa/oglp /D/work/temp/028/overlay/0002-SWDEV-190425-OGLP-Integrate-CL-2018539-into-OGLP.patch
-
-
-Sandbox
-
-Git: D:\work\temp\030\oglp
-D:\work\temp\030\oglp\depot\stg\sandbox\pal\mariner\csim717_lsa\oglp
-
-D:\work\dev\chanchen_oglp_sync_only2
- //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/...
-
-
-D:\work\temp\030\oglp\depot\stg\sandbox\pal\mariner\csim717_lsa\xgl\icd\imported\pal
-D:\work\temp\030\oglp\depot\stg\sandbox\pal\mariner\csim717_lsa\xgl\icd\imported\sc
-
-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/... D:/work/temp/030/oglp/depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/...
-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/... D:/work/temp/030/oglp/depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/...
-
-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/... //chanchen_oglp_sync_only2/main/drivers/oglp/icd/imported/pal/...
-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/... //chanchen_oglp_sync_only2/main/drivers/oglp/icd/imported/sc/...
-
-
-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/pal/...
--//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/doc/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/pal/doc/...
--//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/pal/tools/internal/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/pal/tools/internal/...
-
-//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/sc/...
--//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/Docs/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/sc/Docs/...
--//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/HSAIL/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/sc/HSAIL/...
--//depot/stg/sandbox/pal/mariner/csim717_lsa/xgl/icd/imported/sc/Src/Dev/... //chanchen_oglp_sync_only2/depot/stg/sandbox/pal/mariner/csim717_lsa/oglp/main/drivers/oglp/icd/imported/sc/Src/Dev/...
-
-
-D:\work\temp\009\OGLP_SRC\main\drivers\oglp\icd\imported\pal D:\work\dev\chanchen_oglp_sync_only2\depot\stg\sandbox\pal\mariner\csim717_lsa\oglp\main\drivers\oglp\icd\imported\pal
-D:\work\temp\009\OGLP_SRC\main\drivers\oglp\icd\imported\sc d:\work\dev\chanchen_oglp_sync_only2\main\drivers\oglp\icd\imported\sc
-
-cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
-cmake -GNinja -DTARGET_ARCHITECTURE_BITS=32 -DCMAKE_BUILD_TYPE=Release -DSC_BUILD_SP3=0 -DPAL_BUILD_NAVI14_LITE=1 -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
-
-D:\work\temp\028\oglp_dis
-D:\work\temp\030
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 11/14/2019 3:00:27 PM
