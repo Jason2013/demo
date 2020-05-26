@@ -250,32 +250,44 @@ function _logMsg($handle, $op, $msg = null)
     file_put_contents($logfile, $logmsg, FILE_APPEND);
 }
 
+$hijack_file_api = true;
+
 function _fopen($filename, $mode)
 {
+    global $hijack_file_api;
     $handle = fopen($filename, $mode);
 
-    global $fileHandles;
-    $fileHandles[(int)$handle] = $filename;
+    if ($hijack_file_api) {
+        global $fileHandles;
+        $fileHandles[(int)$handle] = $filename;
 
-    _logMsg($handle, "fopen");
+        _logMsg($handle, "fopen");
+    }
     return $handle;
 }
 
 function _fwrite($handle, $str)
 {
+    global $hijack_file_api;
     fwrite($handle, $str);
 
-    _logMsg($handle, "fwrite", $str);
+    if ($hijack_file_api) {
+        _logMsg($handle, "fwrite", $str);
+    }
 }
 
 function _fclose($handle)
 {
+    global $hijack_file_api;
     fclose($handle);
-    _logMsg($handle, "fclose");
 
-    global $fileHandles;
-    $filename = $fileHandles[(int)$handle];
-    copy($filename, $filename . "." . _getID(false));
+    if ($hijack_file_api) {
+        _logMsg($handle, "fclose");
+
+        global $fileHandles;
+        $filename = $fileHandles[(int)$handle];
+        copy($filename, $filename . "." . _getID(false));
+    }
 }
 
 ?>
