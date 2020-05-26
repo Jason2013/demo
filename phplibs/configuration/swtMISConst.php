@@ -250,7 +250,7 @@ function _logMsg($handle, $op, $msg = null)
     file_put_contents($logfile, $logmsg, FILE_APPEND);
 }
 
-$hijack_file_api = true;
+$hijack_file_api = false;
 
 function _fopen($filename, $mode)
 {
