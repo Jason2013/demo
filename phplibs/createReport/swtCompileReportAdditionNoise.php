@@ -31,7 +31,6 @@ $machineIDPair = cleanText($_POST["machineIDPair"], 256);
 $checkedMachineIDList = cleanText($_POST["machineIDList"], 256);
 $colMachineIDOrderList = cleanText($_POST["colMachineIDOrderList"], 256);
 $colMachineIDOrderIndexList = cleanText($_POST["colMachineIDOrderIndexList"], 256);
-//$subTestUmdDataMaskList = cleanText($_POST["subTestUmdDataMaskList"], 1024);
 $tempFileLineNumPos = intval($_POST["tempFileLineNumPos"]);
 $forceGenReport = intval($_POST["forceGenReport"]);
 $reportToken = intval($_POST["reportToken"]);
@@ -229,11 +228,7 @@ $colCardNameList = $returnSet["colCardNameList"];
 $colSysNameList = $returnSet["colSysNameList"];
 $colMachineNum = count($colMachineIDList);
 
-
 // get subtest num of current test
-
-//umdNameList
-
 $reportUmdNum = count($umdNameList);
 $startResultID = intval($resultPos / $umdNum) * $umdNum;
 
@@ -243,7 +238,6 @@ $cardStandardResultPos = $cache->getCachedValue("getStandardResultID",
         global $xmlWriter, $startResultID;
         return $xmlWriter->getStandardResultID($startResultID);
     });
-//$cardStandardResultID = $resultIDList[0][$cardStandardResultPos];
 
 $returnSet = $xmlWriter->getSubTestNum($db, $resultPos, $tableName01, $subTestNum);
 if ($returnSet === null)
@@ -368,6 +362,19 @@ $standardUmdTestCaseNumList = $cache->getCachedValue("getStandardUmdTestCaseNumL
         return $xmlWriter->getStandardUmdTestCaseNumList($db);
     });
 
+$returnSet = $xmlWriter->getReportFileNames($reportFolder, $tmpCardName, $tmpSysName);
+// main xml file
+$xmlFileName = $returnSet["xmlFileName"];
+// comparison sheet
+$tmpFileName = $returnSet["tmpFileName"];
+// flatData
+$tmpFileName1 = $returnSet["tmpFileName1"];
+// summary
+$jsonFileName = $returnSet["jsonFileName"];
+$jsonFileName2 = $returnSet["jsonFileName2"];
+// alarm ini
+$alarmFileName = $returnSet["alarmFileName"];
+
 // generate seperate cards report
 if (($subTestNum == 0) ||
     ($resultIDList[0][$resultPos] == PHP_INT_MAX) ||
@@ -393,19 +400,6 @@ if (($subTestNum == 0) ||
     // if cur test finished
     if ($curTestPos >= count($testNameList))
     {
-        $returnSet = $xmlWriter->getReportFileNames($reportFolder, $tmpCardName, $tmpSysName, $batchID);
-        // main xml file
-        $xmlFileName = $returnSet["xmlFileName"];
-        // comparison sheet
-        $tmpFileName = $returnSet["tmpFileName"];
-        // flatData
-        $tmpFileName1 = $returnSet["tmpFileName1"];
-        // summary
-        $jsonFileName = $returnSet["jsonFileName"];
-        $jsonFileName2 = $returnSet["jsonFileName2"];
-        // alarm ini
-        $alarmFileName = $returnSet["alarmFileName"];
-
         $returnMsg["checkShiftCard"] = "0";
         $returnMsg["resultPos"] = $resultPos;
         if ($resultIDList[0][$resultPos] != PHP_INT_MAX)
@@ -433,19 +427,11 @@ if (($subTestNum == 0) ||
 
             fseek($fileHandle, 0, SEEK_END);
             fseek($tempFileHandle, 0, SEEK_END);
-            
+
             $returnSet = $xmlWriter->checkStartSheet($fileHandle, $tempFileHandle,
-                                                     $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
-                                                     $lineNumPos, $resultPos, $umdNum,
-                                                     $tmpUmdName, $tmpCardName, $tmpSysName);
-            if ($returnSet === null)
-            {
-                return;
-            }
-            $lineNumPos = $returnSet["lineNumPos"];
-            
-            
-            //$fileHandle = fopen($xmlFileName, "r+");
+                $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
+                $tmpUmdName);
+
             fseek($fileHandle, 0, SEEK_END);
             $returnSet = $xmlWriter->checkShiftAPI($fileHandle, $resultPos, $tmpUmdName,
                                                    $firstTestPos, $firstSubTestPos, $sheetLinePos);
@@ -460,9 +446,7 @@ if (($subTestNum == 0) ||
             fclose($tempFileHandle);
             fclose($fileHandle);
         }
-        
-        
-        
+
         $returnMsg["checkShiftCard"] = "1";
         $returnSet = $xmlWriter->checkShiftCard($xmlFileName, $tmpFileName, $tmpFileName1, 
                                                 $jsonFileName, $jsonFileName2,
@@ -475,15 +459,11 @@ if (($subTestNum == 0) ||
             return;
         }
         $sheetLinePos = $returnSet["sheetLinePos"];
-        
-        
-            
-        
-        
+
         $resultPos++;
         $curTestPos = 0;
         
-        $returnSet = $xmlWriter->checkAllReportsFinished($db, $resultPos, $reportFolder, $batchID);
+        $returnSet = $xmlWriter->checkAllReportsFinished($resultPos, $reportFolder);
         if ($returnSet === null)
         {
             // all task finished
@@ -494,19 +474,6 @@ if (($subTestNum == 0) ||
 else
 {
     // if cur test in process
-    $returnSet = $xmlWriter->getReportFileNames($reportFolder, $tmpCardName, $tmpSysName, $batchID);
-    $xmlFileName = $returnSet["xmlFileName"];
-    $tmpFileName = $returnSet["tmpFileName"];
-    // flatData
-    $tmpFileName1 = $returnSet["tmpFileName1"];
-    // summary
-    $jsonFileName = $returnSet["jsonFileName"];
-    $jsonFileName2 = $returnSet["jsonFileName2"];
-    // alarm ini
-    $alarmFileName = $returnSet["alarmFileName"];
-    
-    //$returnMsg["returnLine2"] = "line: " . __LINE__;
-
     $returnSet = $xmlWriter->checkNeedCreateReportFile($xmlFileName, $tmpFileName, $jsonFileName, $jsonFileName2,
         $cmpMachineID,
         $tempFileLineNumPos,
@@ -530,17 +497,11 @@ else
         $firstTestPos = $curTestPos;
         $firstSubTestPos = $nextSubTestPos;
     }
-    
+
     $returnSet = $xmlWriter->checkStartSheet($fileHandle, $tempFileHandle,
-                                             $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
-                                             $lineNumPos, $resultPos, $umdNum,
-                                             $tmpUmdName, $tmpCardName, $tmpSysName);
-    if ($returnSet === null)
-    {
-        return;
-    }
-    $lineNumPos = $returnSet["lineNumPos"];
-    
+        $curTestPos, $nextSubTestPos, $firstTestPos, $firstSubTestPos,
+        $tmpUmdName);
+
     $lineNum = 0;
     $tempLineNum = 0;
     
@@ -554,8 +515,8 @@ else
     $returnSet = $xmlWriter->checkStartTest($fileHandle, $tempFileHandle,
                                             $nextSubTestPos, $firstSubTestPos, $curTestPos, 
                                             $isCompStandard, $cmpMachineID,
-                                            $lineNum, $sheetLinePos, $tempLineNum);
-    $lineNum = $returnSet["lineNum"];
+                                            $sheetLinePos, $tempLineNum);
+//    $lineNum = $returnSet["lineNum"];
     $sheetLinePos = $returnSet["sheetLinePos"];
     $tempLineNum = $returnSet["tempLineNum"];
     
@@ -571,24 +532,12 @@ else
         return;
     }
     $nextSubTestPos = $returnSet["nextSubTestPos"];
-    $lineNum = $returnSet["lineNum"];
+//    $lineNum = $returnSet["lineNum"];
     $standardSubTestIDList = $returnSet["standardSubTestIDList"];
     $standardSubTestNameList = $returnSet["standardSubTestNameList"];
     $standardSubTestFilterNameList = $returnSet["standardSubTestFilterNameList"];
     $standardTestCaseIDList = $returnSet["standardTestCaseIDList"];
 
-    
-    fseek($fileHandle, $lineNumPos, SEEK_SET);
-    // line num is 10 digis number, like: 0000000011
-    $t1 = fread($fileHandle, 10);
-    $n1 = intval($t1);
-    $n1 += $lineNum;
-    
-    fseek($fileHandle, $lineNumPos, SEEK_SET);
-    $t1 = sprintf("%010d", $n1);
-    fwrite($fileHandle, $t1);
-    fclose($fileHandle);
-    
     $returnSet = $xmlWriter->writeReportCompareData($db, $tempFileHandle, $reportFolder,
                                                     $isCompStandard, $umdNum, $tempFileLineNumPos,
                                                     $startResultID, $cmpStartResultID, $historyStartResultID, $tempLineNum,
