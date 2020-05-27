@@ -3657,7 +3657,7 @@ class CGenReport
                        "    <Cell ss:StyleID=\"s89\" ss:MergeAcross=\"" . ($subjectNameFilterNumMax - 0) .
                        "\" ><Data ss:Type=\"String\">API</Data></Cell>";
 
-                $curFirstRowAPIColumnID = 0;
+//                $curFirstRowAPIColumnID = 0;
                 $tmpAPIList = array();
                 $tmpCLList = array();
                 for ($i = 0; $i < $reportUmdNum; $i++)
@@ -3669,7 +3669,7 @@ class CGenReport
                     }
                     array_push($tmpAPIList, $tmpReportUmdInfo[$i]);
                     array_push($tmpCLList, $tmpReportInfo[$i]);
-                    $curFirstRowAPIColumnID++;
+//                    $curFirstRowAPIColumnID++;
                 }
                 if (count($tmpAPIList) == 1)
                 {
