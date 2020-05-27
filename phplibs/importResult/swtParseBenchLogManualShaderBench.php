@@ -549,7 +549,7 @@ function swtFeedData($_db, $_subTestList, $_dataList, $_testName, $_noiseDataID,
 function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID, $_noiseDataNum)
 {
     global $returnMsg;
-    global $globalResultIDList;
+//    global $globalResultIDList;
     global $changeListJsonTag;
     global $db_mis_table_create_string004;
     global $db_mis_table_create_string003;
@@ -558,7 +558,7 @@ function swtParseLogFile($_pathName, $_machineID, $_compilerName, $_noiseDataID,
     global $batchID;
     global $curTestID;
     global $nextSubTestID;
-    global $swtOldUmdNameMatchList;
+//    global $swtOldUmdNameMatchList;
     
     $returnMsg["checkIn"] = "checkIn";
     
@@ -1400,10 +1400,10 @@ if ($resultFileNum == 0)
                 }
             }
         }
-        if ($breakToEnd)
-        {
-            break;
-        }
+//        if ($breakToEnd)
+//        {
+//            break;
+//        }
     }
 }
 

@@ -411,24 +411,24 @@ class CGenReport
         fclose($fileHandle);
     }
 
-    public function writeAdditionalStyles($_fileHandle)
-    {
-        global $startStyleID;
-        global $allStylesEndTag;
-        global $appendStyleList;
-
-        $styles = "";
-        $styleID = $startStyleID;
-        foreach ($appendStyleList as $tmpStyle)
-        {
-            $styles .= sprintf($tmpStyle, $styleID);
-            $styleID++;
-        }
-
-        fwrite($_fileHandle, $styles);
-        fwrite($_fileHandle, $allStylesEndTag);
-    }
-
+//    public function writeAdditionalStyles($_fileHandle)
+//    {
+//        global $startStyleID;
+//        global $allStylesEndTag;
+//        global $appendStyleList;
+//
+//        $styles = "";
+//        $styleID = $startStyleID;
+//        foreach ($appendStyleList as $tmpStyle)
+//        {
+//            $styles .= sprintf($tmpStyle, $styleID);
+//            $styleID++;
+//        }
+//
+//        fwrite($_fileHandle, $styles);
+//        fwrite($_fileHandle, $allStylesEndTag);
+//    }
+//
     public function checkInputMachineID($_machineIDPair, $_checkedMachineIDList)
     {
         global $returnMsg;
@@ -1481,11 +1481,11 @@ class CGenReport
         global $machineIDPairList;
         global $machineIDList;
         global $resultTimeList;
-        global $crossBuildResultTimeList;
+//        global $crossBuildResultTimeList;
         global $umdNameList;
         global $umdNum;
         global $crossType;
-        global $machineIDBatchPairList;
+//        global $machineIDBatchPairList;
         global $machineNameList;
         global $colMachineIDOrderList;
         global $colMachineIDOrderIndexList;
@@ -3420,7 +3420,7 @@ class CGenReport
                                               $_curCardName, $_tmpSysName)
     {
         global $returnMsg;
-        global $tempFileStartSheetLineNum;
+//        global $tempFileStartSheetLineNum;
 
         global $resultUmdOrder;
         global $reportUmdNum;
@@ -3651,7 +3651,7 @@ class CGenReport
                        "    <Cell ss:StyleID=\"s89\" ss:MergeAcross=\"" . ($subjectNameFilterNumMax - 0) .
                        "\" ><Data ss:Type=\"String\">API</Data></Cell>";
 
-                $curFirstRowAPIColumnID = 0;
+//                $curFirstRowAPIColumnID = 0;
                 $tmpAPIList = array();
                 $tmpCLList = array();
                 for ($i = 0; $i < $reportUmdNum; $i++)
@@ -3663,7 +3663,7 @@ class CGenReport
                     }
                     array_push($tmpAPIList, $tmpReportUmdInfo[$i]);
                     array_push($tmpCLList, $tmpReportInfo[$i]);
-                    $curFirstRowAPIColumnID++;
+//                    $curFirstRowAPIColumnID++;
                 }
                 if (count($tmpAPIList) == 1)
                 {
