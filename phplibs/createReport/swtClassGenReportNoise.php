@@ -3420,7 +3420,7 @@ class CGenReport
                                               $_curCardName, $_tmpSysName)
     {
         global $returnMsg;
-        global $tempFileStartSheetLineNum;
+//        global $tempFileStartSheetLineNum;
 
         global $resultUmdOrder;
         global $reportUmdNum;
