@@ -411,24 +411,24 @@ class CGenReport
         _fclose($fileHandle);
     }
 
-    public function writeAdditionalStyles($_fileHandle)
-    {
-        global $startStyleID;
-        global $allStylesEndTag;
-        global $appendStyleList;
-
-        $styles = "";
-        $styleID = $startStyleID;
-        foreach ($appendStyleList as $tmpStyle)
-        {
-            $styles .= sprintf($tmpStyle, $styleID);
-            $styleID++;
-        }
-
-        _fwrite($_fileHandle, $styles);
-        _fwrite($_fileHandle, $allStylesEndTag);
-    }
-
+//    public function writeAdditionalStyles($_fileHandle)
+//    {
+//        global $startStyleID;
+//        global $allStylesEndTag;
+//        global $appendStyleList;
+//
+//        $styles = "";
+//        $styleID = $startStyleID;
+//        foreach ($appendStyleList as $tmpStyle)
+//        {
+//            $styles .= sprintf($tmpStyle, $styleID);
+//            $styleID++;
+//        }
+//
+//        _fwrite($_fileHandle, $styles);
+//        _fwrite($_fileHandle, $allStylesEndTag);
+//    }
+//
     public function checkInputMachineID($_machineIDPair, $_checkedMachineIDList)
     {
         global $returnMsg;
@@ -1481,11 +1481,11 @@ class CGenReport
         global $machineIDPairList;
         global $machineIDList;
         global $resultTimeList;
-        global $crossBuildResultTimeList;
+//        global $crossBuildResultTimeList;
         global $umdNameList;
         global $umdNum;
         global $crossType;
-        global $machineIDBatchPairList;
+//        global $machineIDBatchPairList;
         global $machineNameList;
         global $colMachineIDOrderList;
         global $colMachineIDOrderIndexList;
