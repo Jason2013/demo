@@ -30,14 +30,14 @@
    <Condition>
     <Qualifier>LessOrEqual</Qualifier>
     <Value1>-0.03</Value1>
-    <Format Style='color:windowtext;font-weight:700;background:lime;mso-pattern:
+    <Format Style='color:windowtext;font-weight:700;background:red;mso-pattern:
      black none'/>
    </Condition>
    <Condition>
     <Qualifier>Between</Qualifier>
     <Value1>0.03</Value1>
     <Value2>1000</Value2>
-    <Format Style='background:red;mso-pattern:black none'/>
+    <Format Style='background:lime;mso-pattern:black none'/>
    </Condition>
   </ConditionalFormatting>
  </Worksheet>
