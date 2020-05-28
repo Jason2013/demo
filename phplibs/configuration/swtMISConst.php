@@ -41,17 +41,23 @@ $swtClientMachineConfigurationNames = array("machineName",
 //$swtUmdStandardOrder = array("Vulkan", "D3D12", "D3D11", "OGL");
 
 $swtUmdNameList = array("D3D11", "D3D12", "Vulkan", "OpenGL", "Metal");
+//$swtUmdNameList = array("D3D11", "D3D12_FXC", "D3D12_DXC", "D3D12", "Vulkan", "OpenGL", "Metal");
 $swtUmdNameList_old =   array("DX11",  "DX12",  "Vulkan", "OpenGL", "OGL",    "D3D11_NATIVE", "Metal");
+//$swtUmdNameList_old =   array("DX11",  "D3D12_FXC", "D3D12_DXC", "DX12",  "Vulkan", "OpenGL", "OGL",    "D3D11_NATIVE", "Metal");
+
 $swtUmdNameList_final = array("D3D11", "D3D12", "Vulkan", "OpenGL", "OpenGL", "D3D11",        "Metal");
+//$swtUmdNameList_final = array("D3D11", "D3D12_FXC", "D3D12_DXC", "D3D12", "Vulkan", "OpenGL", "OpenGL", "D3D11",        "Metal");
+
 $swtUmdStandardOrder = array("Vulkan", "D3D11", "D3D12", "OpenGL", "Metal");
+//$swtUmdStandardOrder = array("Vulkan", "D3D11", "D3D12_FXC", "D3D12_DXC", "D3D12", "OpenGL", "Metal");
 //$swtUmdStandardOrder = array("D3D11", "D3D12", "Vulkan", "OpenGL", "Metal");
 
 //$swtUmdNameList_sb = array("SCPC", "LLPC", "RADV", "NVIDIA", "OPT1");
 //$swtUmdStandardOrder_sb = array("SCPC", "LLPC", "RADV", "NVIDIA", "OPT1");
 $swtUmdNameList_sb = array("RADV", "SCPC", "LLPC", "NVIDIA", "OPT1");
 $swtUmdStandardOrder_sb = array("RADV", "SCPC", "LLPC", "NVIDIA", "OPT1");
-$swtCardStandardOrder_sb = array("Navi10", "Vega10", "Ariel", "GTX1080", "RTX2070");
-
+//$swtCardStandardOrder_sb = array("Navi10", "Vega10", "Ariel", "GTX1080", "RTX2070");
+$swtCardStandardOrder_sb = array("Navi21", "Navi10", "RTX2080", "GTX1080", "Vega10");
 function ValueOrder($value, &$arr)
 {
     foreach ($arr as $key => $val)
@@ -91,13 +97,22 @@ function CmpCardUmd_SB($lhs, $rhs)
 //$swtPreSheetNameTitle_sb = array("Compile Time", "Execution Time");
 //$swtPreSheetNameShort_sb = array("compTime", "execTime");
 
-$swtPreSheetName_sb = array("ExecutionTime", "CompileTime");
-$swtPreSheetNameTitle_sb = array("ExecutionTime", "CompileTime");
-$swtPreSheetNameShort_sb = array("ExecTime", "CompTime");
+//$swtPreSheetName_sb = array("ExecutionTime", "CompileTime");
+//$swtPreSheetNameTitle_sb = array("ExecutionTime", "CompileTime");
+//$swtPreSheetNameShort_sb = array("ExecTime", "CompTime");
 
-$swtPreSheetName_pf = array("ExecutionTime", "RecordTime");
-$swtPreSheetNameTitle_pf = array("ExecutionTime", "RecordTime");
-$swtPreSheetNameShort_pf = array("ExecTime", "RecoTime");
+//$swtPreSheetName_pf = array("ExecutionTime", "RecordTime");
+//$swtPreSheetNameTitle_pf = array("ExecutionTime", "RecordTime");
+//$swtPreSheetNameShort_pf = array("ExecTime", "RecoTime");
+
+$swtPreSheetName_sb = array("ExecutionSpeed", "CompileSpeed");
+$swtPreSheetNameTitle_sb = array("ExecutionSpeed", "CompileSpeed");
+$swtPreSheetNameShort_sb = array("ExecSpeed", "CompSpeed");
+
+$swtPreSheetName_pf = array("ExecutionSpeed", "RecordSpeed");
+$swtPreSheetNameTitle_pf = array("ExecutionSpeed", "RecordSpeed");
+$swtPreSheetNameShort_pf = array("ExecSpeed", "RecoSpeed");
+
 
 //$swtUmdNameList = array("VG10_40CU_1600e_945m",
 //                        "VG10_64CU_1600e_945m",
