@@ -4,6 +4,221 @@ TASKS
 
 WORKING TASK
 ------------
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+workly report
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+6/15/2020 10:34:49 AM
+
+[6/12 9:29 PM] Zhao, Hongmei
+    Hi chang，为什么Linux只有36个testcases 啊
+
+http://ci-gfx.amd.com/job/openglp/job/oglp_lnx-osdb/1753/testReport/
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SmartGit 安装及使用（附录）：注册非商业许可证
+https://blog.csdn.net/guang_s/article/details/104925767
+https://blog.csdn.net/haha223545/article/details/86699820
+
+https://www.syntevo.com/cn/smartgit/register-non-commercial/
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//depot/stg/oglp/drivers/oglp/cmake/... //<OGLP-test-client>/main/drivers/oglp/cmake/...
+//depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //<OGLP-test-client>/main/drivers/oglp/test/cts/oglptest/...
+//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/... //<OGLP-test-client>/main/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
+
+//depot/stg/oglp/drivers/oglp/cmake/... //<OGLP-test-client>/cmake/...
+//depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //<OGLP-test-client>/test/cts/oglptest/...
+//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/... //<OGLP-test-client>/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
+
+//depot/stg/oglp/drivers/oglp/cmake/... //oglp_test/cmake/...
+//depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //oglp_test/test/cts/oglptest/...
+//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/... //oglp_test/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
+
+Workspace name: chanchen_oglp_sync4
+Workspace root: D:\work\dev\chanchen_oglp_sync4
+
+git root: D:\work\dev\chanchen_oglp_sync4
+
+export P4CLIENT=oglp_test
+export P4PORT=shswp4p1:1666
+export P4USER=chanchen
+
+//depot/stg/oglp/drivers/oglp/cmake/... //depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
+
+cd /e/work/dev/chanchen_oglp_sync4_git
+# ERROR: git p4 clone --use-client-spec //depot/main/... //depot/stg/...
+git p4 clone --use-client-spec --destination oglp_test_repo //depot/stg/oglp/drivers/oglp/cmake/... //depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
+git p4 clone --use-client-spec --destination oglp_test_repo //depot/stg/oglp/drivers/oglp/cmake@all //depot/stg/oglp/drivers/oglp/test/cts/oglptest@all //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1@all
+git p4 clone --use-client-spec //depot/stg/oglp/drivers/oglp/...
+git p4 sync
+
+git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/prebuilt-binaries/Windows/passinglist.txt' -- --all
+$ git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch Pods/' --tag-name-filter cat -- --all
+test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/prebuilt-binaries/Windows/passinglist.txt
+ 
+我就是使用这个命令，全量删除Pods目录的
+
+
+export P4CLIENT=oglp_test
+export P4PORT=shswp4p1:1666
+export P4USER=chanchen
+
+git p4 clone --use-client-spec --destination oglp_test_repo3 //depot/stg/oglp/drivers/oglp/cmake@all //depot/stg/oglp/drivers/oglp/test/cts/oglptest@all //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1@all
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+DK mappings:
+
+//depot/dk.pre/win/vc/14.14.26428/...           //<OGLP-dk-client>/win/vc/14.14.26428/...
+//depot/dk.pre/win/ms_sdk/n18351/...            //<OGLP-dk-client>/win/ms_sdk/n18351/...
+//depot/dk/win/bin/find_dk_root.exe             //<OGLP-dk-client>/win/bin/find_dk_root.exe
+//depot/dk/win/cmake/cmake-3.15.1-win64-x64/... //<OGLP-dk-client>/win/cmake/cmake-3.12.1-win64-x64/...
+//depot/dk/win/ninja/1.7.2/...                  //<OGLP-dk-client>/win/ninja/1.7.2/...
+
+OGLP-TEST mappings:
+
+//depot/stg/oglp/drivers/oglp/cmake/... //<OGLP-test-client>/main/drivers/oglp/cmake/...
+//depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //<OGLP-test-client>/main/drivers/oglp/test/cts/oglptest/...
+//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/... //<OGLP-test-client>/main/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
+
+Set environment variables:
+
+Set DK_ROOT=<YOUR_LOCAL_DK_ROOT>/win
+Set PATH=%DK_ROOT%\bin;%PATH%
+Set PATH=%DK_ROOT%\cmake\cmake-3.15.1-win64-x64\bin;%PATH%
+Set PATH=%DK_ROOT%\ninja\1.7.2;%PATH%
+
+
+Build command lines:
+
+cd <OGLP-test-client>\main\drivers\oglp\test\cts\VK-GL-CTS-opengl-es-cts-3.2.5.1\opengl-es-cts
+mkdir build
+cd build
+cmake -G"Ninja" -DCMAKE_BUILD_TYPE=Release -DTARGET_ARCHITECTURE_BITS=64 -DCMAKE_TOOLCHAIN_FILE=../../../../../cmake/targets/win/Toolchain-ninja.cmake ..
+cmake --build . --target glcts -j 8
+
+After build, the artifact files can be found at the following path:
+
+<OGLP-test-client>\main\drivers\oglp\test\cts\VK-GL-CTS-opengl-es-cts-3.2.5.1\opengl-es-cts\build\external\openglcts\modules
+
+Artifact file list:
+
+glcts.exe
+gles2/data
+gles2/shaders
+gles3/data
+gles3/graphicsfuzz
+gles3/shaders
+gles31/data
+gles31/graphicsfuzz
+gles31/shaders
+
+Pack the artifact files into the following ZIP package file:
+
+oglp_es_cts.zip
+
+
+
+2. glcts run in parallel script: add merge-logs path command line parameter
+
+run
+
+python d:\work\dev\sync_oglp\main\drivers\oglp\test\cts\run-cts-parallel.py 
+--glcts-dir=E:\work\oglp_test\main\drivers\oglp\test\cts\VK-GL-CTS-opengl-es-cts-3.2.5.1\opengl-es-cts\build\external\openglcts\modules
+--merge-testlogs-dir=D:\work\dev\sync_oglp\main\drivers\oglp\test\cts\VK-GL-CTS-opengl-es-cts-3.2.5.1\opengl-es-cts\VCBuild\executor\Release
+--test-list=d:\work\dev\sync_oglp\main\drivers\oglp\test\cts\passinglist40.txt
+--test-result=run-log.txt
+
+python d:\work\dev\sync_oglp\main\drivers\oglp\test\cts\run-cts-parallel.py --glcts-dir=E:\work\oglp_test\main\drivers\oglp\test\cts\VK-GL-CTS-opengl-es-cts-3.2.5.1\opengl-es-cts\build\external\openglcts\modules --merge-testlogs-dir=D:\work\dev\sync_oglp\main\drivers\oglp\test\cts\VK-GL-CTS-opengl-es-cts-3.2.5.1\opengl-es-cts\VCBuild\executor\Release --test-list=d:\work\dev\sync_oglp\main\drivers\oglp\test\cts\passinglist40.txt --test-result=run-log.txt
+
+copy D:\work\dev\sync_oglp\main\drivers\oglp\test\cts\VK-GL-CTS-opengl-es-cts-3.2.5.1\opengl-es-cts\VCBuild\executor\Release\merge-testlogs.exe d:\work\dev\sync_oglp\main\drivers\oglp\test\cts
+python d:\work\dev\sync_oglp\main\drivers\oglp\test\cts\run-cts-parallel.py --glcts-dir=E:\work\oglp_test\main\drivers\oglp\test\cts\VK-GL-CTS-opengl-es-cts-3.2.5.1\opengl-es-cts\build\external\openglcts\modules --merge-testlogs-dir=. --test-list=d:\work\dev\sync_oglp\main\drivers\oglp\test\cts\passinglist40.txt --test-result=run-log.txt
+
+python d:\work\dev\sync_oglp\main\drivers\oglp\test\cts\run-cts-parallel.py --log-dir=logs_interleaved --glcts-dir=E:\work\oglp_test\main\drivers\oglp\test\cts\VK-GL-CTS-opengl-es-cts-3.2.5.1\opengl-es-cts\build\external\openglcts\modules --merge-testlogs-dir=. --test-list=d:\work\dev\sync_oglp\main\drivers\oglp\test\cts\passinglist40.txt --test-result=run-log.txt
+
+3. Fix linux glcts run
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+d:
+cd d:\work\dev\sync_oglp\main\drivers\oglp\test\cts\VK-GL-CTS-opengl-es-cts-3.2.5.1\opengl-es-cts
+mkdir build_ninja5
+cd build_ninja5
+cmake -G"Ninja" -DTARGET_ARCHITECTURE_BITS=64 -DCMAKE_TOOLCHAIN_FILE=../../../../../cmake/targets/win/Toolchain-ninja.cmake ..
+cmake --build . --config Debug --target glcts -j 8
+
+d:\work\dev\sync_oglp\main\drivers\oglp\test\cts\VK-GL-CTS-opengl-es-cts-3.2.5.1\opengl-es-cts
+
+cmake -G"Ninja" -DTARGET_ARCHITECTURE_BITS=64 -DCMAKE_TOOLCHAIN_FILE=d:\work\dev\sync_oglp\main\drivers\oglp/cmake/targets/win/Toolchain-ninja.cmake d:\work\dev\sync_oglp\main\drivers\oglp\test\cts\VK-GL-CTS-opengl-es-cts-3.2.5.1\opengl-es-cts
+
+d:
+cd d:\work\dev\sync_oglp\main\drivers\oglp\test\cts\VK-GL-CTS-opengl-es-cts-3.2.5.1\opengl-es-cts
+mkdir build_ninja3
+cd build_ninja3
+cmake -G"Visual Studio 15 Win64" ..
+cmake --build . --config Debug --target glcts -j 8
+
+mkdir e:\work\temp\001
+mklink /j build_ninja7 e:\work\temp\001
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+microbench_static_lib
+
+set DK_ROOT=D:/dev/p4/microbench_dk/win
+set PATH=%DK_ROOT%\bin;%PATH%
+
+kdiff3 D:\work\dev\static_lib_d0 D:\work\dev\static_lib_d0_tianchen
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Python
+glcts
+merge-runlogs
+
+2. Verify linux driver
+
+ocltc-orl-lnx47
+ocltc/opencl
+
+http://atlartifactory.amd.com/artifactory/ogl-ci-local/openglp/oglp_lnx-osdb/2110757/oglp_lnx_Release.tar.gz
+E:\work\cSim\oglp_lnx_Release.tar.gz
+
+3. Parallel run script
+
+E:\study\oglp_run\split-run.py
+
+python split-run.py --glcts-dir=D:\work\dev\sync_oglp\main\drivers\oglp\test\cts\VK-GL-CTS-opengl-cts-4.6.0.2\vk-gl-cts\prebuilt-binaries\scripts --test-list=D:\work\dev\sync_oglp\main\drivers\oglp\test\cts\passinglist40.txt
+
+set path=E:\study\VK-GL-CTS\build\executor\Release;%path%
+merge-testlogs
+logs\testlist0.txt.qpa
+logs\testlist1.txt.qpa
+logs\testlist2.txt.qpa
+logs\testlist3.txt.qpa
+logs\testlist4.txt.qpa
+logs\testlist5.txt.qpa
+logs\testlist6.txt.qpa
+logs\testlist7.txt.qpa
+--dst=testresult.qpa
+
+merge-testlogs logs\testlist0.txt.qpa logs\testlist1.txt.qpa logs\testlist2.txt.qpa logs\testlist3.txt.qpa logs\testlist4.txt.qpa logs\testlist5.txt.qpa logs\testlist6.txt.qpa logs\testlist7.txt.qpa --dst=testresult.qpa
+
+4. Travel expension
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+1. Update timesheet
+
 https://web.microsoftstream.com/video/9d2473fb-8a92-42f5-960b-4f10d7aa4fc8
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
