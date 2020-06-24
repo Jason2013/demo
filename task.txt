@@ -7,6 +7,51 @@ WORKING TASK
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+//depot/stg/oglp/drivers/oglp/cmake/... //<OGLP-test-client>/main/drivers/oglp/cmake/...
+//depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //<OGLP-test-client>/main/drivers/oglp/test/cts/oglptest/...
+//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/... //<OGLP-test-client>/main/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
+
+//depot/stg/oglp/drivers/oglp/cmake/... //<OGLP-test-client>/cmake/...
+//depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //<OGLP-test-client>/test/cts/oglptest/...
+//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/... //<OGLP-test-client>/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
+
+//depot/stg/oglp/drivers/oglp/cmake/... //oglp_test/cmake/...
+//depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //oglp_test/test/cts/oglptest/...
+//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/... //oglp_test/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
+
+Workspace name: chanchen_oglp_sync4
+Workspace root: D:\work\dev\chanchen_oglp_sync4
+
+git root: D:\work\dev\chanchen_oglp_sync4
+
+export P4CLIENT=oglp_test
+export P4PORT=shswp4p1:1666
+export P4USER=chanchen
+
+//depot/stg/oglp/drivers/oglp/cmake/... //depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
+
+cd /e/work/dev/chanchen_oglp_sync4_git
+# ERROR: git p4 clone --use-client-spec //depot/main/... //depot/stg/...
+git p4 clone --use-client-spec --destination oglp_test_repo //depot/stg/oglp/drivers/oglp/cmake/... //depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
+git p4 clone --use-client-spec --destination oglp_test_repo //depot/stg/oglp/drivers/oglp/cmake@all //depot/stg/oglp/drivers/oglp/test/cts/oglptest@all //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1@all
+git p4 clone --use-client-spec //depot/stg/oglp/drivers/oglp/...
+git p4 sync
+
+git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/prebuilt-binaries/Windows/passinglist.txt' -- --all
+$ git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch Pods/' --tag-name-filter cat -- --all
+test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/prebuilt-binaries/Windows/passinglist.txt
+ 
+我就是使用这个命令，全量删除Pods目录的
+
+
+export P4CLIENT=oglp_test
+export P4PORT=shswp4p1:1666
+export P4USER=chanchen
+
+git p4 clone --use-client-spec --destination oglp_test_repo3 //depot/stg/oglp/drivers/oglp/cmake@all //depot/stg/oglp/drivers/oglp/test/cts/oglptest@all //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1@all
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 Enable GLC tool build with OGLP driver Windows 64bit Release build
 http://ontrack-internal.amd.com/browse/LCSPPT-5169
 
@@ -160,51 +205,6 @@ https://www.syntevo.com/cn/smartgit/register-non-commercial/
 ! workly report
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-//depot/stg/oglp/drivers/oglp/cmake/... //<OGLP-test-client>/main/drivers/oglp/cmake/...
-//depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //<OGLP-test-client>/main/drivers/oglp/test/cts/oglptest/...
-//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/... //<OGLP-test-client>/main/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
-
-//depot/stg/oglp/drivers/oglp/cmake/... //<OGLP-test-client>/cmake/...
-//depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //<OGLP-test-client>/test/cts/oglptest/...
-//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/... //<OGLP-test-client>/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
-
-//depot/stg/oglp/drivers/oglp/cmake/... //oglp_test/cmake/...
-//depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //oglp_test/test/cts/oglptest/...
-//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/... //oglp_test/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
-
-Workspace name: chanchen_oglp_sync4
-Workspace root: D:\work\dev\chanchen_oglp_sync4
-
-git root: D:\work\dev\chanchen_oglp_sync4
-
-export P4CLIENT=oglp_test
-export P4PORT=shswp4p1:1666
-export P4USER=chanchen
-
-//depot/stg/oglp/drivers/oglp/cmake/... //depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
-
-cd /e/work/dev/chanchen_oglp_sync4_git
-# ERROR: git p4 clone --use-client-spec //depot/main/... //depot/stg/...
-git p4 clone --use-client-spec --destination oglp_test_repo //depot/stg/oglp/drivers/oglp/cmake/... //depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
-git p4 clone --use-client-spec --destination oglp_test_repo //depot/stg/oglp/drivers/oglp/cmake@all //depot/stg/oglp/drivers/oglp/test/cts/oglptest@all //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1@all
-git p4 clone --use-client-spec //depot/stg/oglp/drivers/oglp/...
-git p4 sync
-
-git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/prebuilt-binaries/Windows/passinglist.txt' -- --all
-$ git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch Pods/' --tag-name-filter cat -- --all
-test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/prebuilt-binaries/Windows/passinglist.txt
- 
-我就是使用这个命令，全量删除Pods目录的
-
-
-export P4CLIENT=oglp_test
-export P4PORT=shswp4p1:1666
-export P4USER=chanchen
-
-git p4 clone --use-client-spec --destination oglp_test_repo3 //depot/stg/oglp/drivers/oglp/cmake@all //depot/stg/oglp/drivers/oglp/test/cts/oglptest@all //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1@all
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
