@@ -6,9 +6,119 @@ WORKING TASK
 ------------
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-workly report
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Enable GLC tool build with OGLP driver Windows 64bit Release build
+http://ontrack-internal.amd.com/browse/LCSPPT-5169
+
+cd <OGLP-client>/main/drivers/oglp
+mkdir build
+cd build
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DTARGET_ARCHITECTURE_BITS=64 -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
+setupBuildEnv.bat
+ninja
+
+cmake -G"Visual Studio 15 Win64" -DBUILD_GLC=ON -DTARGET_ARCHITECTURE_BITS=64 -DCMAKE_TOOLCHAIN_FILE=..\cmake\targets\win\Toolchain-ninja.cmake ..
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+6/16/2020 4:32:47 PM
+
+Workspace name:
+chanchen_ubuntu-vm3901
+
+Workspace root:
+/home/ubuntu/Perforce/ubuntu-vm_3901
+
+//depot/main/drivers/adl/... //chanchen_ubuntu-vm3901/main/drivers/adl/...
+//depot/main/drivers/inc/... //chanchen_ubuntu-vm3901/main/drivers/inc/...
+//depot/main/drivers/pxproxy/... //chanchen_ubuntu-vm3901/main/drivers/pxproxy/...
+//depot/main/cmake/... //chanchen_ubuntu-vm3901/main/cmake/...
+//depot/stg/oglp/drivers/oglp/... //chanchen_ubuntu-vm3901/main/drivers/oglp/...
+-//depot/stg/oglp/drivers/oglp/icd/imported/pal/... //chanchen_ubuntu-vm3901/main/drivers/oglp/icd/imported/pal/...
+-//depot/stg/oglp/drivers/oglp/icd/imported/sc/... //chanchen_ubuntu-vm3901/main/drivers/oglp/icd/imported/sc/...
+-//depot/stg/oglp/drivers/oglp/test/cts/... //chanchen_ubuntu-vm3901/main/drivers/oglp/test/cts/...
+//depot/stg/pal/... //chanchen_ubuntu-vm3901/main/drivers/oglp/icd/imported/pal/...
+//depot/stg/sc/... //chanchen_ubuntu-vm3901/main/drivers/oglp/icd/imported/sc/...
+-//depot/stg/pal/doc/... //chanchen_ubuntu-vm3901/main/drivers/oglp/icd/imported/pal/doc/...
+-//depot/stg/sc/Src/Dev/Shaders/... //chanchen_ubuntu-vm3901/main/drivers/oglp/icd/imported/sc/Src/Dev/Shaders/...
+
+...............................
+chanchen_ubuntu-vm3901
+//depot/main/drivers/inc/shared/* //chanchen_ubuntu-vm3901/main/drivers/inc/shared/*
+//depot/main/drivers/inc/asic_reg/* //chanchen_ubuntu-vm3901/main/drivers/inc/asic_reg/*
+
+//depot/main/drivers/inc/asic_reg/atishareioctldef.h... //chanchen_ubuntu-vm3901/main/drivers/inc/asic_reg/atishareioctldef.h...
+//depot/main/drivers/inc/asic_reg/cwddeci.h... //chanchen_ubuntu-vm3901/main/drivers/inc/asic_reg/cwddeci.h...
+//depot/main/drivers/inc/asic_reg/cwddedi.h... //chanchen_ubuntu-vm3901/main/drivers/inc/asic_reg/cwddedi.h...
+//depot/main/drivers/inc/asic_reg/cwddepm.h... //chanchen_ubuntu-vm3901/main/drivers/inc/asic_reg/cwddepm.h...
+//depot/main/drivers/inc/asic_reg/cwddeva.h... //chanchen_ubuntu-vm3901/main/drivers/inc/asic_reg/cwddeva.h...
+//depot/main/drivers/inc/asic_reg/ai_id.h... //chanchen_ubuntu-vm3901/main/drivers/inc/asic_reg/ai_id.h...
+//depot/main/drivers/inc/asic_reg/kv_id.h... //chanchen_ubuntu-vm3901/main/drivers/inc/asic_reg/kv_id.h...
+//depot/main/drivers/inc/asic_reg/rv_id.h... //chanchen_ubuntu-vm3901/main/drivers/inc/asic_reg/rv_id.h...
+//depot/main/drivers/inc/asic_reg/vi_id.h... //chanchen_ubuntu-vm3901/main/drivers/inc/asic_reg/vi_id.h...
+//depot/main/drivers/inc/asic_reg/component_types.h... //chanchen_ubuntu-vm3901/main/drivers/inc/asic_reg/component_types.h...
+
+//depot/main/drivers/pxproxy/inc/... //chanchen_ubuntu-vm3901/main/drivers/pxproxy/inc/...
+//depot/main/cmake/... //chanchen_ubuntu-vm3901/main/cmake/...
+//depot/stg/oglp/drivers/oglp/... //chanchen_ubuntu-vm3901/main/drivers/oglp/...
+-//depot/stg/oglp/drivers/oglp/icd/imported/pal/... //chanchen_ubuntu-vm3901/main/drivers/oglp/icd/imported/pal/...
+-//depot/stg/oglp/drivers/oglp/icd/imported/sc/... //chanchen_ubuntu-vm3901/main/drivers/oglp/icd/imported/sc/...
+-//depot/stg/oglp/drivers/oglp/test/cts/... //chanchen_ubuntu-vm3901/main/drivers/oglp/test/cts/...
+//depot/stg/pal/... //chanchen_ubuntu-vm3901/main/drivers/oglp/icd/imported/pal/...
+//depot/stg/sc/... //chanchen_ubuntu-vm3901/main/drivers/oglp/icd/imported/sc/...
+-//depot/stg/pal/doc/... //chanchen_ubuntu-vm3901/main/drivers/oglp/icd/imported/pal/doc/...
+-//depot/stg/sc/Src/Dev/Shaders/... //chanchen_ubuntu-vm3901/main/drivers/oglp/icd/imported/sc/Src/Dev/Shaders/...
+...............................
+//depot/main/cmake/AmdConfigHelper.cmake //chanchen_oglp_sync4/main/cmake/AmdConfigHelper.cmake
+-//depot/main/drivers/inc/... //chanchen_oglp_sync4/main/drivers/inc/...
+//depot/main/drivers/inc/shared/... //chanchen_oglp_sync4/main/drivers/inc/shared/...
+//depot/main/drivers/inc/asic_reg/atishareioctldef.h... //chanchen_oglp_sync4/main/drivers/inc/asic_reg/atishareioctldef.h...
+//depot/main/drivers/inc/asic_reg/cwddeci.h... //chanchen_oglp_sync4/main/drivers/inc/asic_reg/cwddeci.h...
+//depot/main/drivers/inc/asic_reg/cwddedi.h... //chanchen_oglp_sync4/main/drivers/inc/asic_reg/cwddedi.h...
+//depot/main/drivers/inc/asic_reg/cwddepm.h... //chanchen_oglp_sync4/main/drivers/inc/asic_reg/cwddepm.h...
+//depot/main/drivers/inc/asic_reg/cwddeva.h... //chanchen_oglp_sync4/main/drivers/inc/asic_reg/cwddeva.h...
+//depot/main/drivers/pxproxy/inc/... //chanchen_oglp_sync4/main/drivers/pxproxy/inc/...
+//depot/stg/oglp/drivers/oglp/... //chanchen_oglp_sync4/main/drivers/oglp/...
+-//depot/stg/oglp/drivers/oglp/test/... //chanchen_oglp_sync4/main/drivers/oglp/test/...
+...............................
+
+
+不使用 dtif 进行 build ：
+cd /home/ubuntu/Perforce/ubuntu-vm_3901/main/drivers/oglp/build64
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DBOOST_FROM_DK=OFF ..
+cmake --build .
+
+使用 dtif 进行 build ：
+cd /home/ubuntu/Perforce/ubuntu-vm_3901/main/drivers/oglp/build64_dtif
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DBOOST_FROM_DK=OFF -DPAL_BUILD_DTIF=ON ..
+cmake --build .
+
+build libdtif.so
+
+cd /home/ubuntu/Perforce/ubuntu-vm_3901/main/drivers/oglp/test/csim
+MOBILE0_CSIM_PKG_NAME=`ls -1 mobile0_csim_lsc_*.tar.gz`
+MOBILE0_CSIM_NAME=${MOBILE0_CSIM_PKG_NAME:0:-7}
+tar -xf ${MOBILE0_CSIM_PKG_NAME}
+source ${MOBILE0_CSIM_NAME}/setupCSimEnvironment.bash csim_rel
+cd /home/ubuntu/Perforce/ubuntu-vm_3901/main/drivers/oglp/icd/imported/pal/tools/dtif
+mkdir build
+cmake $DTIF_CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release ..
+cmake --build .
+
+Workspace name:
+chanchen_ubuntu_dk-vm3901
+
+Workspace root:
+/home/ubuntu/Perforce/ubuntu-vm-dk_3901
+
+export DK_ROOT=/home/ubuntu/Perforce/ubuntu-vm-dk_3901/lnx
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DPAL_BUILD_DTIF=ON ..
+cmake --build .
+
+6/19/2020 3:51:41 PM
+
+e:\work\oglp_dtif
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 6/15/2020 10:34:49 AM
 
@@ -17,8 +127,26 @@ workly report
 
 http://ci-gfx.amd.com/job/openglp/job/oglp_lnx-osdb/1753/testReport/
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2127731
+http://ci-gfx.amd.com/job/openglp/job/oglp_lnx-osdb/1733/testReport/
 
+2128359
+http://ci-gfx.amd.com/job/openglp/job/oglp_lnx-osdb/1738/testReport/
+
+2129288: 36
+http://ci-gfx.amd.com/job/openglp/job/oglp_lnx-osdb/1743/testReport/
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Study Jenkins:
+1. cli
+
+jenkins cli configuration
+https://www.decodingdevops.com/jenkins-cli-configuration-jenkins-cli-commands-examples/
+
+Jenkins CLI
+https://wiki.jenkins.io/display/JENKINS/Jenkins+CLI
+
+2. manage and assign roles
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -27,6 +155,11 @@ https://blog.csdn.net/guang_s/article/details/104925767
 https://blog.csdn.net/haha223545/article/details/86699820
 
 https://www.syntevo.com/cn/smartgit/register-non-commercial/
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! workly report
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
