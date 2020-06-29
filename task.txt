@@ -7,6 +7,11 @@ WORKING TASK
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+git clone --single-branch -b oglp-test ssh://chanchen@gerrit-git.amd.com:29418/vulkan/ec/vk-gl-cts
+
+gerrit-git:
+E:\work\gerrit\vk-gl-cts
+
 //depot/stg/oglp/drivers/oglp/cmake/... //<OGLP-test-client>/main/drivers/oglp/cmake/...
 //depot/stg/oglp/drivers/oglp/test/cts/oglptest/... //<OGLP-test-client>/main/drivers/oglp/test/cts/oglptest/...
 //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/... //<OGLP-test-client>/main/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
@@ -49,6 +54,49 @@ export P4PORT=shswp4p1:1666
 export P4USER=chanchen
 
 git p4 clone --use-client-spec --destination oglp_test_repo3 //depot/stg/oglp/drivers/oglp/cmake@all //depot/stg/oglp/drivers/oglp/test/cts/oglptest@all //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1@all
+
+//depot/stg/oglp/drivers/oglp/test/cts/oglptest@all
+//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-cts-4.6.0.2@all
+//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1@all
+
+e:
+cd e:\work\dev\oglp_test_git
+set P4CLIENT=oglp_test
+
+git p4 clone --use-client-spec --destination oglp_test_repo4 //depot/stg/oglp/drivers/oglp/test/cts/oglptest@all //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-cts-4.6.0.2@all //depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1@all
+
+-//depot/stg/oglp/drivers/oglp/cmake/...	//oglp_test/cmake/...
+//depot/stg/oglp/drivers/oglp/test/cts/oglptest/...	//oglp_test/test/cts/oglptest/...
+//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-cts-4.6.0.2/... //oglp_test/test/cts/VK-GL-CTS-opengl-cts-4.6.0.2/...
+//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...	//oglp_test/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/...
+-//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/external/...	//oglp_test/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/external/...
+-//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/imported_AMD/...	//oglp_test/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/imported_AMD/...
+-//depot/stg/oglp/drivers/oglp/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/prebuilt-binaries/...	//oglp_test/test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/prebuilt-binaries/...
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Move grapher to E disk
+
+Wamp64/bin/apache/apache2.4.23/conf/extra/httpd-vhosts.conf
+Wamp64/bin/apache/apache2.4.23/conf/httpd.conf
+Wamp64/bin/mysql/mysql5.7.14/my.ini
+Wamp64/bin/php/php5.6.25/phpForApache.ini
+
+mklink 
+
+mklink D:\wamp64\bin\apache\apache2.4.23\conf\httpd.conf
+
+
+del D:\wamp64\bin\apache\apache2.4.23\conf\extra\httpd-vhosts.conf
+mklink D:\wamp64\bin\apache\apache2.4.23\conf\extra\httpd-vhosts.conf E:\work\dev\grapher\Grapher_Config\Wamp64\bin\apache\apache2.4.23\conf\extra\httpd-vhosts.conf
+del D:\wamp64\bin\apache\apache2.4.23\conf\httpd.conf
+mklink D:\wamp64\bin\apache\apache2.4.23\conf\httpd.conf E:\work\dev\grapher\Grapher_Config\Wamp64\bin\apache\apache2.4.23\conf\httpd.conf
+del D:\wamp64\bin\mysql\mysql5.7.14\my.ini
+mklink D:\wamp64\bin\mysql\mysql5.7.14\my.ini E:\work\dev\grapher\Grapher_Config\Wamp64\bin\mysql\mysql5.7.14\my.ini
+del D:\wamp64\bin\php\php5.6.25\phpForApache.ini
+mklink D:\wamp64\bin\php\php5.6.25\phpForApache.ini E:\work\dev\grapher\Grapher_Config\Wamp64\bin\php\php5.6.25\phpForApache.ini
+del D:\wamp64\www\grapher
+mklink /d D:\wamp64\www\grapher E:\work\dev\grapher
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
