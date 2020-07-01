@@ -206,9 +206,10 @@ C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja
 
+SET PATH=C:\Python27;%PATH%
 SET PATH=%DK_ROOT%\vc\14.16.27023\bin\HostX64\x64;%DK_ROOT%\ms_sdk\n18362\10\bin\10.0.18362.0\x64;%PATH%
 SET LIB=%DK_ROOT%\vc\14.16.27023\atlmfc\lib\x64;%DK_ROOT%\vc\14.16.27023\lib\x64;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\ucrt\x64;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\um\x64
-SET INCLUDE=%DK_ROOT%\vc\14.16.27023\atlmfc\include;%DK_ROOT%\vc\14.16.27023\include;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\ucrt;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\shared;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\um;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\winrt;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\cppwinrt
+SET INCLUDE=%DK_ROOT%\vc\14.16.27023\atlmfc\include;%DK_ROOT%\vc\14.16.27023\include;%DK_ROOT%\ms_sdk\n18362\10\include\10.0.18362.0\ucrt;%DK_ROOT%\ms_sdk\n18362\10\include\10.0.18362.0\shared;%DK_ROOT%\ms_sdk\n18362\10\include\10.0.18362.0\um;%DK_ROOT%\ms_sdk\n18362\10\include\10.0.18362.0\winrt;%DK_ROOT%\ms_sdk\n18362\10\include\10.0.18362.0\cppwinrt
 
 Path=C:\Program Files (x86)\Common Files\Oracle\Java\javapath
 D:\dev\p4\vk_drv_dk\win\java\jdk1.8.0_162\bin
