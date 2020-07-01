@@ -5,6 +5,12 @@ TASKS
 WORKING TASK
 ------------
 
+mklink "C:\Program Files\Git\mingw64\libexec\git-core\git-filter-repo" E:\study\git-filter-repo\git-filter-repo
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+git clone --config core.autocrlf=false https://gitee.com/mirrors/LLVM.git llvm-project
+
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 17
@@ -94,6 +100,159 @@ git p4 sync
 
 git filter-branch --subdirectory-filter test/cts/VK-GL-CTS-opengl-cts-4.6.0.2/vk-gl-cts/
 
+git checkout -b gles32 p4/master
+git filter-branch -f --subdirectory-filter test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/
+
+git checkout -b common p4/master
+git filter-branch -f --subdirectory-filter test/cts/oglptest/
+
+git checkout -b common_2 p4/master
+git filter-branch -f --subdirectory-filter test/cts/
+
+git checkout -b common_31 p4/master
+git filter-branch -f --subdirectory-filter test/cts/oglptest/
+
+git format-patch -o ../oglp_test_repo5_gles32 5442ef..refs/heads/gles32
+git format-patch -o ../oglp_test_repo5_gl46 cb90d..refs/heads/gl46
+git am --directory=oglptest ../oglp_test_repo5_common_nf/*
+
+/e/work/dev/oglp_test_git/oglp_test_repo5
+
+git am --directory=oglptest /e/work/dev/oglp_test_git/oglp_test_repo5_common_nf/*
+git am /e/work/dev/oglp_test_git/oglp_test_repo5_gl46/*
+
+git am --directory=oglptest /e/work/dev/oglp_test_git/oglp_test_repo5_common_nf/*
+git am /e/work/dev/oglp_test_git/oglp_test_repo5_gles32/*
+
+
+git filter-repo --path README.md --path guides/ --path tools/releases
+
+
+
+test/cts/VK-GL-CTS-opengl-cts-4.6.0.2/vk-gl-cts/
+test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/
+test/cts/oglptest/
+
+git clone oglp_test_repo5 oglp_test_repo5_gles32_git
+git clone oglp_test_repo5 oglp_test_repo5_gl46_git
+
+cd oglp_test_repo5_gles32_git
+
+
+test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/
+test/cts/oglptest/
+test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/opengl-es-cts/==>main/
+test/cts/oglptest/==>main/oglptest/
+
+git filter-repo --force --paths-from-file ..\filter_repo_gles32.txt
+
+INCLUDE=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include
+C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt
+
+LIB=
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\lib\x64
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x64
+C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\lib\um\x64
+C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\ucrt\x64
+C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64
+
+SET LIB=%DK_ROOT%\vc\14.16.27023\atlmfc\lib\x64;%DK_ROOT%\vc\14.16.27023\lib\x64;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\ucrt\x64;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\um\x64
+
+INCLUDE=
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include
+C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt
+
+SET INCLUDE=%DK_ROOT%\vc\14.16.27023\atlmfc\include;%DK_ROOT%\vc\14.16.27023\include;%DK_ROOT%\ms_sdk\n18362\10\include\10.0.18362.0\ucrt;%DK_ROOT%\ms_sdk\n18362\10\include\10.0.18362.0\shared;%DK_ROOT%\ms_sdk\n18362\10\include\10.0.18362.0\um;%DK_ROOT%\ms_sdk\n18362\10\include\10.0.18362.0\winrt;%DK_ROOT%\ms_sdk\n18362\10\include\10.0.18362.0\cppwinrt
+
+d:\dev\p4\oglp_dk\win\ms_sdk\n18362\10\Lib\10.0.18362.0\ucrt
+
+LIBPATH=
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\lib\x64
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x64
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x86\store\references
+C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.18362.0
+C:\Program Files (x86)\Windows Kits\10\References\10.0.18362.0
+C:\WINDOWS\Microsoft.NET\Framework64\v4.0.30319
+
+Path=
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCPackages
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\bin\Roslyn
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Team Tools\Performance Tools\x64
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Team Tools\Performance Tools
+C:\Program Files (x86)\Microsoft Visual Studio\Shared\Common\VSPerfCollectionTools\\x64
+C:\Program Files (x86)\Microsoft Visual Studio\Shared\Common\VSPerfCollectionTools\
+C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\x64\
+C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x64
+C:\Program Files (x86)\Windows Kits\10\bin\x64
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\\MSBuild\15.0\bin
+C:\WINDOWS\Microsoft.NET\Framework64\v4.0.30319
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja
+
+SET PATH=%DK_ROOT%\vc\14.16.27023\bin\HostX64\x64;%DK_ROOT%\ms_sdk\n18362\10\bin\10.0.18362.0\x64;%PATH%
+SET LIB=%DK_ROOT%\vc\14.16.27023\atlmfc\lib\x64;%DK_ROOT%\vc\14.16.27023\lib\x64;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\ucrt\x64;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\um\x64
+SET INCLUDE=%DK_ROOT%\vc\14.16.27023\atlmfc\include;%DK_ROOT%\vc\14.16.27023\include;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\ucrt;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\shared;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\um;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\winrt;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\cppwinrt
+
+Path=C:\Program Files (x86)\Common Files\Oracle\Java\javapath
+D:\dev\p4\vk_drv_dk\win\java\jdk1.8.0_162\bin
+D:\app\Kindle Previewer 3\lib\fc\bin
+D:\VulkanSDK\1.1.82.0\Bin
+D:/dev/p4/oglp_dk/win\bin
+C:\Program Files (x86)\RBTools\bin
+C:\Program Files\Perforce
+C:\Program Files\Git\bin
+D:\app\curl-7.54.0-win64-mingw\bin
+C:\Program Files (x86)\GnuWin32\bin
+C:\Program Files (x86)\Intel\iCLS Client\
+C:\Program Files\Intel\iCLS Client\
+C:\Windows\system32
+C:\Windows
+C:\Windows\System32\Wbem
+C:\Windows\System32\WindowsPowerShell\v1.0\
+C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL
+C:\Program Files\Intel\Intel(R) Management Engine Components\DAL
+C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT
+C:\Program Files\Intel\Intel(R) Management Engine Components\IPT
+C:\Program Files\Microsoft SQL Server\110\Tools\Binn\
+C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\
+C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static
+C:\Program Files\Perforce\DVCS\
+C:\Program Files\doxygen\bin
+D:\app\cmake\cmake-3.15.2-win64-x64\bin
+C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common
+C:\WINDOWS\system32
+C:\WINDOWS
+C:\WINDOWS\System32\Wbem
+C:\WINDOWS\System32\WindowsPowerShell\v1.0\
+C:\Program Files\KDiff3
+C:\Program Files\LLVM\bin
+D:\app\ninja
+C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\
+D:\work\temp\006\aaa\boost_1_70_0
+C:\Program Files\nodejs\
+E:\condor\bin\
+D:\Ruby26-x64\bin
+C:\Users\chanchen\AppData\Local\Programs\Python\Python37\Scripts\
+C:\Users\chanchen\AppData\Local\Programs\Python\Python37\
+C:\Users\chanchen\AppData\Local\Microsoft\WindowsApps
+C:\Users\chanchen\AppData\Roaming\npm
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 Enable GLC tool build with OGLP driver Windows 64bit Release build
