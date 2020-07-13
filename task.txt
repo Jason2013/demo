@@ -5,6 +5,90 @@ TASKS
 WORKING TASK
 ------------
 
+set p4client=chanchen_microbench
+cd e:\work\dev
+git p4 clone --use-client-spec --destination microbench_git
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+cd /home/ubuntu/p4v-2015.2.1315639/bin
+./p4v &
+
+DK mappings:
+------------
+
+Workspace name:
+chanchen_ubuntu_dk-vm3901
+
+Workspace root:
+/home/ubuntu/Perforce/ubuntu-vm-dk_3901
+
+Code mappings:
+--------------
+
+Workspace name:
+chanchen_ubuntu-vm3901
+
+Workspace root:
+/home/ubuntu/Perforce/ubuntu-vm_3901
+
+export DK_ROOT=/home/ubuntu/Perforce/ubuntu-vm-dk_3901/lnx
+cd /home/ubuntu/Perforce/ubuntu-vm_3901
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Sync perforce to gerrit: OGLP-TEST
+
+cd e:\work\dev\
+
+打开 git bash 命令行窗口：
+
+set P4CLIENT=oglp_test
+cd e:\work\dev\oglp_test_git\oglp_test
+git p4 sync
+
+cd /e/work/dev/oglp_test_git
+rm -rf oglp_test_gl46_t oglp_test_gl46_m
+git init oglp_test_gl46_t
+git filter-repo --source oglp_test --target oglp_test_gl46_t \
+--path \
+test/cts/VK-GL-CTS-opengl-cts-4.6.0.2/vk-gl-cts/ \
+--path \
+test/cts/oglptest/ \
+--path-rename \
+test/cts/VK-GL-CTS-opengl-cts-4.6.0.2/vk-gl-cts/: \
+--path-rename \
+test/cts/oglptest/:oglptest/
+cd oglp_test_gl46_t
+git format-patch -o ../oglp_test_gl46_m cc721d9d
+cd /e/work/gerrit/vk-gl-cts
+git checkout oglp-test
+git am /e/work/dev/oglp_test_git/oglp_test_gl46_m/*
+git push origin oglp-test
+
+cd /e/work/dev/oglp_test_git
+rm -rf oglp_test_gles32_t oglp_test_gles32_m
+git init oglp_test_gles32_t
+git filter-repo --source oglp_test --target oglp_test_gles32_t \
+--path \
+test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/vk-gl-cts/ \
+--path \
+test/cts/oglptest/ \
+--path-rename \
+test/cts/VK-GL-CTS-opengl-es-cts-3.2.5.1/vk-gl-cts/: \
+--path-rename \
+test/cts/oglptest/:oglptest/
+cd oglp_test_gles32_t
+git format-patch -o ../oglp_test_gles32_m 3c895eb8
+cd /e/work/gerrit/vk-gl-cts
+git checkout oglp-es-test
+git am /e/work/dev/oglp_test_git/oglp_test_gles32_m/*
+git push origin oglp-es-test
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 mklink "C:\Program Files\Git\mingw64\libexec\git-core\git-filter-repo" E:\study\git-filter-repo\git-filter-repo
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -15,6 +99,20 @@ git clone --config core.autocrlf=false https://gitee.com/mirrors/LLVM.git llvm-p
 
 17
 E:\work\gerrit\vk-gl-cts
+
+git init /e/z3
+cd /e/work/dev/oglp_test_git
+
+
+git filter-repo --source oglp_test_repo5 --target /e/z3 \
+--path \
+test/cts/VK-GL-CTS-opengl-cts-4.6.0.2/vk-gl-cts/ \
+--path \
+test/cts/oglptest/ \
+--path-rename \
+test/cts/VK-GL-CTS-opengl-cts-4.6.0.2/vk-gl-cts/: \
+--path-rename \
+test/cts/oglptest/:oglptest/
 
 ----------------------
 
@@ -205,6 +303,11 @@ C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja
+
+SET PATH=C:\Python27;%PATH%
+SET PATH=%DK_ROOT%\vc\14.16.27023\bin\HostX64\x64;%DK_ROOT%\ms_sdk\n18362\10\bin\10.0.18362.0\x64;%PATH%
+SET LIB=%DK_ROOT%\vc\14.16.27023\atlmfc\lib\x64;%DK_ROOT%\vc\14.16.27023\lib\x64;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\ucrt\x64;%DK_ROOT%\ms_sdk\n18362\10\Lib\10.0.18362.0\um\x64
+SET INCLUDE=%DK_ROOT%\vc\14.16.27023\atlmfc\include;%DK_ROOT%\vc\14.16.27023\include;%DK_ROOT%\ms_sdk\n18362\10\include\10.0.18362.0\ucrt;%DK_ROOT%\ms_sdk\n18362\10\include\10.0.18362.0\shared;%DK_ROOT%\ms_sdk\n18362\10\include\10.0.18362.0\um;%DK_ROOT%\ms_sdk\n18362\10\include\10.0.18362.0\winrt;%DK_ROOT%\ms_sdk\n18362\10\include\10.0.18362.0\cppwinrt
 
 SET PATH=C:\Python27;%PATH%
 SET PATH=%DK_ROOT%\vc\14.16.27023\bin\HostX64\x64;%DK_ROOT%\ms_sdk\n18362\10\bin\10.0.18362.0\x64;%PATH%
