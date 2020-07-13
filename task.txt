@@ -5,6 +5,18 @@ TASKS
 WORKING TASK
 ------------
 
+gitee
+-----
+https://chenchang:619825546d543ed88421bdd6b9105acd@gitee.com/chenchang/notebook.git
+
+github
+------
+https://da816a287b7af80d29d3ecc1cee5973244095d87:x-oauth-basic@github.com/Jason2013/demo.git
+
+coding
+------
+https://GSRiVzlmGv:12322787dc2ec7f9b533c310ddada823768b7e1d@e.coding.net/jason2013/notebook.git
+
 set p4client=chanchen_microbench
 cd e:\work\dev
 git p4 clone --use-client-spec --destination microbench_git
