@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-05-16T07:15:15.004Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.42" etag="KdSNGrE8bINJjcXEDG-n" version="21.3.2" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2023-05-16T07:19:05.017Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.42" etag="zEfrLdJkcA4S8oJgz32x" version="21.3.2" type="github" pages="2">
   <diagram id="l1b3AVRnxOqJ_atooooH" name="Framebuffer">
     <mxGraphModel dx="1721" dy="1124" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -222,9 +222,6 @@
         </mxCell>
         <mxCell id="fDy1o5s9xfWsFGP3kAFm-39" value="vkCmdExecuteCommands" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="Ac81cKyPI2wEUSR9HQ3j-1">
           <mxGeometry x="330" y="849" width="160" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="fDy1o5s9xfWsFGP3kAFm-40" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="Ac81cKyPI2wEUSR9HQ3j-1">
-          <mxGeometry x="210" y="1890" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="fDy1o5s9xfWsFGP3kAFm-42" value="vkBeginCommandBuffer" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="Ac81cKyPI2wEUSR9HQ3j-1">
           <mxGeometry x="300" y="689" width="220" height="60" as="geometry" />
